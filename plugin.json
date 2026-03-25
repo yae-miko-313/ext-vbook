@@ -52,7 +52,7 @@
             "name": "nhieutruyen (qidian-vp)",
             "author": "B",
             "path": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/qidian-vp/plugin.zip",
-            "version": 11,
+            "version": 12,
             "source": "https://www.nhieutruyen.com",
             "icon": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/qidian-vp/icon.png",
             "description": "Truyện chữ tùm lum...nhieutruyen (qidian-vp)",
@@ -351,6 +351,17 @@
             "source": "https://truyendich.vn",
             "icon": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/tienhiepXYZ/icon.png",
             "description": "Đọc truyện trên trang truyendich.vn",
+            "type": "novel",
+            "locale": "vi_VN"
+        },
+                {
+            "name": "truyencodetheoyeucau",
+            "author": "B",
+            "path": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/truyencodetheoyeucau/plugin.zip",
+            "version": 1,
+            "source": "https://truyencodetheoyeucau",
+            "icon": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/truyencodetheoyeucau/icon.png",
+            "description": "Đọc truyện trên trang truyencodetheoyeucau",
             "type": "novel",
             "locale": "vi_VN"
         },
