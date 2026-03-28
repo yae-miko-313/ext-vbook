@@ -49,7 +49,9 @@ function execute(url) {
     }
     var descriptionHtml = descEl ? descEl.html() : '';
     if (descriptionHtml) {
-        descriptionHtml = descriptionHtml.trim();
+        descriptionHtml =
+            descriptionHtml.trim() +
+            '<div style="height:32px" aria-hidden="true"></div>';
     }
 
     var detail =

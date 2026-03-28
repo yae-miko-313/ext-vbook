@@ -4,8 +4,35 @@ This document provides instructions for AI agents on how to develop and test VBo
 
 ## 📚 Core References
 
-1. **Coding Rules**: Read VBOOK CTX, vbook_demo.md.
+1. **Coding Rules**: Read VBOOK CTX (below), [vbook_demo.md](./vbook_demo.md).
 2. **CLI Testing**: Read [README.md](../README.md) for `vbook` commands (`test-all`, `debug`, `install`, `build`).
+
+---
+
+## 🌐 Community references (learn, do not blindly copy)
+
+Large public extension collections document many real-site patterns. Use them to **spot ideas**, then **re-verify** against the live site and this repo’s rules.
+
+| Source | Role |
+|--------|------|
+| [Darkrai9x/vbook-extensions](https://github.com/Darkrai9x/vbook-extensions) | Broad catalog of extensions; upstream-style README for script contracts (`home` → `gen`, `search`, `page`, `toc`). |
+| [dat-bi/ext-vbook](https://github.com/dat-bi/ext-vbook) | Another maintained tree (often mirrors community patterns + tooling). |
+
+**Non-negotiables in *this* repo (always win over any external snippet):**
+
+- Entry point is **`function execute(...)`** in every script file; Rhino constraints in **VBOOK_CTX** below.
+- **`Response.success(data, next)`** — `next` must be a **string** or omitted; never pass a bare number.
+- After changing an extension: bump **`metadata.version`** in `extensions/<name>/plugin.json`, align **root `plugin.json`** `data[]` entry if you publish catalog, run **`vbook build`**, then commit (per project workflow).
+
+**Evolution habits (reference repos → better local extensions):**
+
+1. **Discover search URL from the site** — Inspect navbar HTML for `form[action]` and input `name` (e.g. `/tim-kiem/?tukhoa=` vs `/?s=`). Do not assume WordPress-style `s` or `paged` without checking.
+2. **List vs detail DOM** — List pages may use lazy covers (`data-image`, `data-desk-image`) with no `img[src]`; detail may use different sizes (`_cover_list` vs `_cover_large`). Prefer stable selectors scoped to **`#list-page`**, **`#list-chapter`**, etc., so pagination from sidebars does not pollute `page.js`.
+3. **TOC across many pages** — If `page.js` exists, scope max page to **`#list-chapter .pagination`**. If the app only calls **`toc` once** with the novel URL, **`toc.js` may need to loop** `trang-2`, `trang-3`, … and merge chapters (sync `fetch` only; cap pages to avoid runaway loops).
+4. **Rhino / jsoup quirks** — Community JS may use APIs not available on device (e.g. `element.className()` as a function). Prefer **`attr("class")`**, **`attr("href")`**, and patterns already proven in this repo.
+5. **Shared parsing** — When `gen.js` and `search.js` share the same card layout, use **`load('utils.js')`** and one `parseNovelRows` helper to avoid drift (see Pro Tips).
+
+When a fix proves generally useful, add a short note under **Common Issues** or **Guide Self-Evolution** so the next task inherits it—that is evolution, not copying noise.
 
 ---
 
@@ -49,6 +76,7 @@ When asked to create or fix an extension, follow these steps:
 - **Character Obfuscation**: Some sites replace characters (e.g., `đ**m` for `đám`). Use a `cleanContent` helper in `chap.js` with Regex replacements.
 - **Shared Utilities**: Use a `src/utils.js` for common parsing logic (e.g., `parseNovelList`). Both `gen.js` and `search.js` should `load('utils.js')` to maintain consistency.
 - **Jsoup API**: Remember that `.first()` returns a single `Element` (check for null), while `.select()` returns `Elements` (use `.size() > 0` or `.isEmpty()`).
+- **`TypeError: className is not a function` (Rhino)**: On the device, `Element` may not expose `className()` as a JS method. Use **`el.attr("class")`** and string checks instead.
 - **Redirects in Search**: Sites often redirect direct matches to the detail page. Detection: `if (doc.select("h1, .entry-title").size() > 0 && doc.select(".entry-content").size() > 0)`.
 
 ## 💡 Pro Tips for AI
@@ -64,6 +92,7 @@ When asked to create or fix an extension, follow these steps:
 1. **New Tips**: Any "Aha!" moments or shortcuts discovered.
 2. **Repeating Logic**: Common patterns for specific site types (e.g. Next.js, Cloudflare).
 3. **Hard-learned Lessons**: Bugs discovered during verification (like the `server` scope issue).
+4. **Community distillate**: If you validated a pattern from [Darkrai9x/vbook-extensions](https://github.com/Darkrai9x/vbook-extensions) or [dat-bi/ext-vbook](https://github.com/dat-bi/ext-vbook), add **one concrete rule** here (not a dump of their README) so future work inherits the lesson without re-browsing.
 
 This ensures every task makes the AI faster and better for the next one.
 

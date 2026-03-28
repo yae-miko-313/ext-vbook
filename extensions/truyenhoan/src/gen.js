@@ -1,5 +1,14 @@
 load('config.js');
 
+function normalizeCategoryInput(input) {
+    if (input === null || input === undefined) return '';
+    var s = String(input).trim();
+    if (!s) return '';
+    s = s.replace(/^\/+/, '');
+    s = s.replace(/\/+$/, '');
+    return s;
+}
+
 function normalizeLink(href) {
     if (!href) return '';
     if (href.indexOf('http') === 0) return href;
@@ -12,7 +21,12 @@ function pickCover(row) {
     if (lazy) {
         var u = lazy.attr('data-desk-image') || lazy.attr('data-image');
         if (u) {
-            if (u.indexOf('//') === 0) return 'https:' + u;
+            if (u.indexOf('//') === 0) u = 'https:' + u;
+            if (u.indexOf('_cover_list') >= 0) {
+                u = u.replace('_cover_list', '_cover_large');
+            } else if (u.indexOf('_cover_small') >= 0) {
+                u = u.replace('_cover_small', '_cover_large');
+            }
             return u;
         }
     }
@@ -47,29 +61,19 @@ function findNextPage(doc) {
     return null;
 }
 
-function execute(input, page) {
-    page = page || '1';
-
-    var categoryMap = {
-        'truyen-hot': 'truyen-hot',
-        'truyen-moi-cap-nhat': 'truyen-moi-cap-nhat',
-        'truyen-full': 'truyen-full',
-        'truyen-moi-dang': 'truyen-moi-dang'
-    };
-
-    var pathSuffix = categoryMap[input] || input;
-    var url = BASE_URL + '/' + pathSuffix + '/';
-    if (page !== '1') {
-        url = BASE_URL + '/' + pathSuffix + '/trang-' + page + '/';
-    }
-
-    var response = fetch(url);
-    if (!response.ok) return Response.error('HTTP Error: ' + response.status);
-    var doc = response.html();
-
+function parseNovelRows(doc) {
     var rows = doc.select('#list-page .list.list-truyen .row[itemscope]');
     if (rows.size() === 0) {
-        rows = doc.select('.list.list-truyen div.row[itemscope]');
+        rows = doc.select('#list-page .list-truyen .row[itemscope]');
+    }
+    if (rows.size() === 0) {
+        rows = doc.select('#list-page div.row[itemscope]');
+    }
+    if (rows.size() === 0) {
+        rows = doc.select('.col-truyen-main .list.list-truyen .row[itemscope]');
+    }
+    if (rows.size() === 0) {
+        rows = doc.select('.list.list-truyen .row[itemscope]');
     }
 
     var novels = [];
@@ -111,6 +115,35 @@ function execute(input, page) {
             host: BASE_URL
         });
     });
+    return novels;
+}
+
+function execute(input, page) {
+    page = page ? String(page) : '1';
+
+    var categoryMap = {
+        'truyen-hot': 'truyen-hot',
+        'truyen-moi-cap-nhat': 'truyen-moi-cap-nhat',
+        'truyen-full': 'truyen-full',
+        'truyen-moi-dang': 'truyen-moi-dang'
+    };
+
+    var raw = normalizeCategoryInput(input);
+    var pathSuffix = categoryMap[raw] || raw;
+    if (!pathSuffix) {
+        return Response.error('Thiếu danh mục (input).');
+    }
+
+    var url = BASE_URL + '/' + pathSuffix + '/';
+    if (page !== '1') {
+        url = BASE_URL + '/' + pathSuffix + '/trang-' + page + '/';
+    }
+
+    var response = fetch(url);
+    if (!response.ok) return Response.error('HTTP Error: ' + response.status);
+    var doc = response.html();
+
+    var novels = parseNovelRows(doc);
 
     if (novels.length === 0) {
         return Response.error('Không tìm thấy truyện trên trang (có thể cấu trúc trang đã đổi).');

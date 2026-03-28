@@ -3,6 +3,8 @@
 Personal development tool for VBook extensions.
 Lấy tool gốc từ lão B
 
+Developer / AI workflow, Rhino rules, and how to use [community extension repos](https://github.com/Darkrai9x/vbook-extensions) as reference without breaking local conventions: see [docs/AI_CODE_EXT_VBOOK.md](docs/AI_CODE_EXT_VBOOK.md).
+
 ## To Add New Extension
 
 1. Copy `extensions/vbook-ext-template/` folder with new name
