@@ -1,0 +1,11 @@
+﻿[DEBUG] Target: 192.168.0.101:8080
+[DEBUG] Local Server: http://192.168.0.104:8080
+[TEST] Sending request for page.js...
+[SERVER] Listening at http://192.168.0.104:8080
+[TCP] Connected to 192.168.0.101:8080
+[RESULT] {
+  "code": 0,
+  "data": [
+    "https://truyenhoan.com/cuu-co-nuong-mang-mot-than-phan-cot-tinh-tinh-ngong-cuong.22318/"
+  ]
+}

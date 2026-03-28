@@ -9,13 +9,14 @@ function execute(url) {
     var doc = response.html();
     
     var pageCount = 1;
-    var paginationText = doc.select(".pagination, .page-info, nav").text();
-    if (paginationText && paginationText.length > 0) {
-        var match = paginationText.match(/Last.*?trang-(\d+)|(?:Page\s+)?(\d+).*?(?:of|\/)\s*(\d+)/i);
-        if (match && (match[1] || match[3])) {
-            pageCount = parseInt(match[1] || match[3]);
+    doc.select(".pagination a, nav a, .page-numbers").forEach(function(a) {
+        var link = a.attr("href") || "";
+        var match = link.match(/trang-(\d+)/i);
+        if (match) {
+            var num = parseInt(match[1]);
+            if (num > pageCount) pageCount = num;
         }
-    }
+    });
     
     var pages = [];
     for (var i = 1; i <= pageCount; i++) {

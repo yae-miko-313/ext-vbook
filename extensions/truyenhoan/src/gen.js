@@ -25,8 +25,8 @@ function execute(input, page) {
     
     var novels = [];
     
-    doc.select(".novel-item, .truyen-item, [class*='novel'], [class*='truyen']").forEach(function(e) {
-        var titleEl = e.select("h3 a, h2 a, .truyen-title a, .novel-title a, .novel-name").first();
+    doc.select(".item, .novel-item, .truyen-item, [class*='novel'], [class*='truyen']").forEach(function(e) {
+        var titleEl = e.select("h3 a, h2 a, .truyen-title a, .novel-title a, .novel-name, h3.title").first();
         if (!titleEl || !titleEl.text()) {
             titleEl = e.select("a").first();
         }

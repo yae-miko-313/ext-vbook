@@ -8,7 +8,8 @@ function execute(url) {
     if (!response.ok) return Response.error("HTTP Error: " + response.status);
     var doc = response.html();
     
-    var name = doc.select("h1, .novel-title, .truyen-title").text().trim();
+    var nameEl = doc.select("h1, .novel-title, .truyen-title").first();
+    var name = nameEl ? nameEl.text().trim() : "";
     if (!name) {
         var titleEl = doc.select("title");
         var titleText = titleEl.text();
