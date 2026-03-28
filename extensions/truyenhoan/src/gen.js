@@ -1,7 +1,7 @@
 load('config.js');
 
 function execute(input, page) {
-    page = page || 1;
+    page = page || '1';
     
     var categoryMap = {
         "truyen-hot": "/truyen-hot/",
@@ -10,9 +10,12 @@ function execute(input, page) {
         "truyen-moi-dang": "/truyen-moi-dang/"
     };
     
-    var pathSuffix = categoryMap[input] || "/" + input + "/";
+    var pathSuffix = categoryMap[input] || input;
+    if (pathSuffix.charAt(0) !== '/') pathSuffix = '/' + pathSuffix;
+    if (pathSuffix.charAt(pathSuffix.length - 1) !== '/') pathSuffix = pathSuffix + '/';
+    
     var url = BASE_URL + pathSuffix;
-    if (page > 1) {
+    if (page !== '1') {
         url = BASE_URL + pathSuffix + "trang-" + page + "/";
     }
     

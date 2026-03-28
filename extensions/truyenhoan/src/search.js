@@ -22,9 +22,10 @@ function execute(query, page) {
             title.length < 200 &&
             title.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
             novels.push({
-                title: title,
-                input: link,
-                cover: ""
+                name: title,
+                link: link,
+                cover: "",
+                host: BASE_URL
             });
         }
     });

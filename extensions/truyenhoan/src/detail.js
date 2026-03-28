@@ -49,7 +49,7 @@ function execute(url) {
             genres.push({
                 title: genre,
                 input: genreLink,
-                script: "genre.js"
+                script: "gen.js"
             });
         }
     });
