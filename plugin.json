@@ -27,12 +27,12 @@
       "locale": "vi_VN"
     },
     {
-      "name": "TruyenMoiYY",
-      "author": "HieuDM",                                                                                                 
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook_ext-1/main/extensions/truyenmoi/plugin.zip",
+      "name": "TruyenMoiKK",
+      "author": "kychi",                                                                                                 
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/truyenmoi/plugin.zip",
       "version": 3,
       "source": "https://truyenmoikk.com/",
-      "icon": "https://raw.githubusercontent.com/kychitoge/vbook_ext-1/main/extensions/truyenmoi/icon.png",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/truyenmoi/icon.png",
       "description": "Fork từ ext TruyenMoi của HieuDM, fix lỗi title detail và search.",
       "type": "novel",
       "locale": "vi_VN"
