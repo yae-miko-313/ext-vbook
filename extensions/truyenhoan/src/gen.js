@@ -35,14 +35,20 @@ function execute(input, page) {
         
         var title = titleEl.text().trim();
         var link = titleEl.attr("href") || "";
-        var cover = e.select("img").attr("src") || "";
+        var cover = e.select("img").attr("data-src") || e.select("img").attr("data-original") || e.select("img").attr("src") || "";
+        
+        var author = e.select(".author, .tac-gia, a[href*='tac-gia']").text() || "";
+        var chapter = e.select(".chapter, .chuong, .novel-chapter").text() || "";
+        var desc = [];
+        if (author) desc.push(author);
+        if (chapter) desc.push(chapter);
         
         if (title && link && title.length > 2 && title.length < 200) {
             novels.push({
                 name: title,
                 link: link,
                 cover: cover,
-                description: "",
+                description: desc.join(" - "),
                 host: BASE_URL
             });
         }

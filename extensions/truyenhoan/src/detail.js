@@ -55,10 +55,9 @@ function execute(url) {
         }
     });
     
-    var detail = "";
+    var detail = "Tên truyện: " + name + "<br>";
     if (author) detail += "Tác giả: " + author + "<br>";
-    detail += "Trạng thái: " + (ongoing ? "Đang ra" : "Hoàn thành") + "<br>";
-    if (genresText.length > 0) detail += "Thể loại: " + genresText.join(", ");
+    detail += "Trạng thái: " + (ongoing ? "Đang ra" : "Hoàn thành");
     
     var suggests = [];
     if (author) {
@@ -74,7 +73,7 @@ function execute(url) {
         cover: cover,
         host: BASE_URL,
         author: author,
-        description: (genresText.length > 0 ? genresText.join(", ") + "<br>" : "") + (description ? description : ""),
+        description: description || "",
         detail: detail,
         ongoing: ongoing,
         genres: genres.slice(0, 5),

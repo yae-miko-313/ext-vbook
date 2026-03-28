@@ -9,34 +9,18 @@ function execute(url) {
     
     var chapters = [];
     
-    doc.select("a[href*='chuong']").forEach(function(a) {
+    doc.select(".list-chapter li a, #chapter-list li a, .chapter-list li a").forEach(function(a) {
         var chapterLink = a.attr("href") || "";
         var chapterTitle = a.text().trim();
         
-        if (chapterLink.match(/chuong-\d+/i) && chapterTitle.length > 0) {
-            var match = chapterTitle.match(/chuong[^0-9]*(\d+)/i) || chapterLink.match(/chuong-(\d+)/i);
-            var chapterNum = match ? parseInt(match[1]) : 0;
+        if (chapterLink && chapterTitle.length > 0) {
             chapters.push({
                 name: chapterTitle,
                 url: chapterLink,
-                host: BASE_URL,
-                number: chapterNum
+                host: BASE_URL
             });
         }
     });
     
-    if (chapters.length === 0) return Response.error("Không tìm thấy chương");
-    
-    chapters.sort(function(a, b) { return a.number - b.number; });
-    
-    var finalChapters = [];
-    for (var i = 0; i < chapters.length; i++) {
-        finalChapters.push({
-            name: chapters[i].name,
-            url: chapters[i].url,
-            host: chapters[i].host
-        });
-    }
-    
-    return Response.success(finalChapters);
+    return Response.success(chapters);
 }
