@@ -77,6 +77,7 @@ When asked to create or fix an extension, follow these steps:
 - **Shared Utilities**: Use a `src/utils.js` for common parsing logic (e.g., `parseNovelList`). Both `gen.js` and `search.js` should `load('utils.js')` to maintain consistency.
 - **Jsoup API**: Remember that `.first()` returns a single `Element` (check for null), while `.select()` returns `Elements` (use `.size() > 0` or `.isEmpty()`).
 - **`TypeError: className is not a function` (Rhino)**: On the device, `Element` may not expose `className()` as a JS method. Use **`el.attr("class")`** and string checks instead.
+- **TOC count doubled (e.g. 55 → 110)**: If `page.js` is present, the app usually calls **`toc` once per URL** returned by `page`. If `toc.js` also loops and fetches every TOC page internally, results merge twice. Fix: **`toc` parses only the requested URL** (detail or `.../trang-N/`); keep chapter links scoped to the real list (e.g. `#list-chapter ul.list-chapter`), not sidebar blocks like “chương mới nhất”.
 - **Redirects in Search**: Sites often redirect direct matches to the detail page. Detection: `if (doc.select("h1, .entry-title").size() > 0 && doc.select(".entry-content").size() > 0)`.
 
 ## 💡 Pro Tips for AI
