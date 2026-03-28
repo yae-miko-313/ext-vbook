@@ -1,81 +1,121 @@
 load('config.js');
 
+function normalizeLink(href) {
+    if (!href) return '';
+    if (href.indexOf('http') === 0) return href;
+    if (href.charAt(0) === '/') return BASE_URL + href;
+    return BASE_URL + '/' + href;
+}
+
+function pickCover(row) {
+    var lazy = row.select('div.lazyimg').first();
+    if (lazy) {
+        var u = lazy.attr('data-desk-image') || lazy.attr('data-image');
+        if (u) {
+            if (u.indexOf('//') === 0) return 'https:' + u;
+            return u;
+        }
+    }
+    var img = row.select('img').first();
+    if (img) {
+        var s = img.attr('data-src') || img.attr('src') || '';
+        if (s.indexOf('//') === 0) return 'https:' + s;
+        return s;
+    }
+    return '';
+}
+
+function findNextPage(doc) {
+    var lis = doc.select('ul.pagination > li');
+    var idx = -1;
+    for (var i = 0; i < lis.size(); i++) {
+        var cls = lis.get(i).attr('class') || '';
+        if (cls.indexOf('active') >= 0) {
+            idx = i;
+            break;
+        }
+    }
+    if (idx < 0) return null;
+    for (var j = idx + 1; j < lis.size(); j++) {
+        var a = lis.get(j).select("a[href*='trang-']").first();
+        if (a) {
+            var href = a.attr('href') || '';
+            var m = href.match(/trang-(\d+)\//);
+            if (m) return m[1];
+        }
+    }
+    return null;
+}
+
 function execute(input, page) {
     page = page || '1';
-    
+
     var categoryMap = {
-        "truyen-hot": "truyen-hot",
-        "truyen-moi-cap-nhat": "truyen-moi-cap-nhat",
-        "truyen-full": "truyen-full",
-        "truyen-moi-dang": "truyen-moi-dang"
+        'truyen-hot': 'truyen-hot',
+        'truyen-moi-cap-nhat': 'truyen-moi-cap-nhat',
+        'truyen-full': 'truyen-full',
+        'truyen-moi-dang': 'truyen-moi-dang'
     };
-    
+
     var pathSuffix = categoryMap[input] || input;
-    var url = BASE_URL + "/" + pathSuffix + "/";
+    var url = BASE_URL + '/' + pathSuffix + '/';
     if (page !== '1') {
-        url = BASE_URL + "/" + pathSuffix + "/trang-" + page + "/";
+        url = BASE_URL + '/' + pathSuffix + '/trang-' + page + '/';
     }
-    
+
     var response = fetch(url);
-    if (!response.ok) return Response.error("HTTP Error: " + response.status);
+    if (!response.ok) return Response.error('HTTP Error: ' + response.status);
     var doc = response.html();
-    
-    var novels = [];
-    
-    // Try multiple selectors for story containers
-    var storyElements = doc.select("div[class*='story'], div[class*='novel'], a[class*='story'], a[class*='novel'], li[class*='story'], li[class*='novel']");
-    
-    if (storyElements.size() === 0) {
-        storyElements = doc.select(".item, .novel-item, .truyen-item, .story-item, .post-item");
+
+    var rows = doc.select('#list-page .list.list-truyen .row[itemscope]');
+    if (rows.size() === 0) {
+        rows = doc.select('.list.list-truyen div.row[itemscope]');
     }
-    
-    storyElements.forEach(function(e) {
-        var link = e.select("a").first();
-        if (!link) link = e;
-        
-        var titleEl = link.select("h3, h2, h4, .truyen-title, .novel-title, .story-title, p").first();
-        if (!titleEl || !titleEl.text()) {
-            titleEl = link;
-        }
-        
-        var title = titleEl.text().trim();
-        var href = link.attr("href") || "";
-        
-        // Find cover image with multiple fallbacks
-        var cover = e.select("img").first();
-        var coverUrl = "";
-        if (cover) {
-            coverUrl = cover.attr("data-src") || cover.attr("data-original") || cover.attr("src") || "";
-        }
-        
-        // Clean up title
-        if (title.length > 200) title = title.substring(0, 200);
-        
-        // Extract description from multiple possible locations
-        var desc = [];
-        var author = e.select(".author, .tac-gia, [class*='author']").text().trim();
-        if (!author) {
-            author = e.select("a[href*='tac-gia']").text().trim();
-        }
-        if (author && author.length < 100) desc.push(author);
-        
-        var chapter = e.select(".chapter, .chuong, [class*='chapter'], .last-chapter").text().trim();
-        if (chapter && chapter.length < 200) desc.push(chapter);
-        
-        var status = e.select(".status, .trang-thai, [class*='status']").text().trim();
-        if (status && status.length < 50) desc.push(status);
-        
-        if (title && title.length > 2 && href && href.indexOf("/") >= 0) {
-            novels.push({
-                name: title,
-                link: href,
-                cover: coverUrl,
-                description: desc.join(" - ") || "",
-                host: BASE_URL
-            });
-        }
+
+    var novels = [];
+
+    rows.forEach(function(row) {
+        var titleA = row.select('h3.truyen-title a').first();
+        if (!titleA) return;
+
+        var name = titleA.text().trim();
+        var href = normalizeLink(titleA.attr('href'));
+        if (!name || !href) return;
+
+        var authorName = '';
+        var chapterInfo = '';
+        row.select('span.author').forEach(function(sp) {
+            var t = sp.text().trim().replace(/\s+/g, ' ');
+            if (sp.attr('itemprop') === 'author') {
+                authorName = t;
+            } else if (sp.select('.glyphicon-list').size() > 0) {
+                chapterInfo = t;
+            }
+        });
+
+        var badges = [];
+        if (row.select('.label-full').size() > 0) badges.push('Full');
+        if (row.select('.label-hot').size() > 0) badges.push('Hot');
+        if (row.select('.label-new').size() > 0) badges.push('New');
+
+        var parts = [];
+        if (authorName) parts.push(authorName);
+        if (chapterInfo) parts.push(chapterInfo);
+        if (badges.length > 0) parts.push(badges.join(', '));
+
+        novels.push({
+            name: name,
+            link: href,
+            cover: pickCover(row),
+            description: parts.join(' - '),
+            host: BASE_URL
+        });
     });
-    
-    var nextPage = String(parseInt(page) + 1);
+
+    if (novels.length === 0) {
+        return Response.error('Không tìm thấy truyện trên trang (có thể cấu trúc trang đã đổi).');
+    }
+
+    var nextPage = findNextPage(doc);
     return Response.success(novels, nextPage);
 }

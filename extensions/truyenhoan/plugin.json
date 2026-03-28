@@ -2,7 +2,7 @@
   "metadata": {
     "name": "Truyện Hoàn",
     "author": "kychi",
-    "version": 5,
+    "version": 6,
     "source": "https://truyenhoan.com/",
     "regexp": "truyenhoan\\.com/[a-z0-9\\-]+\\.\\d+/?$",
     "description": "Đọc truyện tiên hiệp, huyền huyễn, ngôn tình từ Truyện Hoàn - website truyện full online miễn phí",
