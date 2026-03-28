@@ -32,9 +32,10 @@ function execute(url) {
                 var chapterNum = match ? parseInt(match[1]) : 0;
                 
                 pageChapters.push({
-                    title: chapterTitle,
-                    input: chapterLink,
-                    number: chapterNum
+                    name: chapterTitle,
+                    url: chapterLink,
+                    number: chapterNum,
+                    host: BASE_URL
                 });
             }
         });
@@ -49,7 +50,13 @@ function execute(url) {
                     break;
                 }
             }
-            if (!exists) chapters.push(ch);
+            if (!exists) {
+                chapters.push({
+                    name: ch.name,
+                    url: ch.url,
+                    host: ch.host
+                });
+            }
         });
         
         var paginationText = doc.select(".pagination, .page-info, nav").text();
