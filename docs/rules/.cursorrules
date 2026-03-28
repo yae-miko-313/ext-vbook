@@ -1,0 +1,1 @@
+When asked to create, modify, test or debug a VBook extension, you MUST first read and rigidly follow `AI_CODE_EXT_VBOOK.md` located in this directory before writing any code. Follow its rules exactly, particularly the Rhino runtime constraints and the `function execute()` API requirements, to avoid compilation errors and runtime panics.

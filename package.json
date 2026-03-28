@@ -1,0 +1,22 @@
+{
+  "name": "vbook-ext",
+  "version": "1.0.0",
+  "description": "Jay20 personal VBook extension project",
+  "author": "jay20",
+  "main": "tools/cli/index.js",
+  "bin": {
+    "vbook": "./tools/cli/index.js"
+  },
+  "scripts": {
+    "start": "node tools/cli/index.js",
+    "test:all": "node tools/cli/index.js test-all --plugin extensions/ntruyen",
+    "build:ext": "node tools/cli/index.js build --plugin extensions/ntruyen",
+    "install:ext": "node tools/cli/index.js install --plugin extensions/ntruyen"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "dotenv": "^16.4.5",
+    "commander": "^12.1.0",
+    "string-argv": "^0.3.2"
+  }
+}
