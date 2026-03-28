@@ -39,6 +39,7 @@ function execute(input, page) {
                 name: title,
                 link: link,
                 cover: cover,
+                description: "",
                 host: BASE_URL
             });
         }

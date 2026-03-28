@@ -6,13 +6,10 @@ function execute(url) {
     
     var chapters = [];
     var currentPage = 1;
-    var totalPages = 76;
+    var maxPages = 20;
+    var foundChapters = false;
     
-    var pageUrl = url;
-    var fetchAttempts = 0;
-    var maxAttempts = Math.min(totalPages, 10);
-    
-    while (currentPage <= totalPages && fetchAttempts < maxAttempts) {
+    while (currentPage <= maxPages) {
         var pageUrl = url;
         if (currentPage > 1) {
             pageUrl = url + "trang-" + currentPage + "/";
@@ -27,7 +24,7 @@ function execute(url) {
             var chapterLink = a.attr("href") || "";
             var chapterTitle = a.text().trim();
             
-            if (chapterLink.match(/chuong-\d+/) && chapterTitle.length > 0) {
+            if (chapterLink.match(/chuong-\d+/i) && chapterTitle.length > 0) {
                 var match = chapterTitle.match(/chuong[^0-9]*(\d+)/i);
                 var chapterNum = match ? parseInt(match[1]) : 0;
                 
@@ -41,6 +38,7 @@ function execute(url) {
         });
         
         if (pageChapters.length === 0) break;
+        foundChapters = true;
         
         pageChapters.forEach(function(ch) {
             var exists = false;
@@ -59,15 +57,11 @@ function execute(url) {
             }
         });
         
-        var paginationText = doc.select(".pagination, .page-info, nav").text();
-        if (paginationText.indexOf("Last") >= 0 || paginationText.indexOf("Last »") >= 0) {
-            var match = paginationText.match(/trang-(\d+)/);
-            if (match) totalPages = parseInt(match[1]);
-            fetchAttempts = maxAttempts;
-        }
-        
         currentPage++;
-        fetchAttempts++;
+    }
+    
+    if (chapters.length === 0) {
+        return Response.error("Không tìm thấy danh sách chương");
     }
     
     chapters.sort(function(a, b) { return a.number - b.number; });
