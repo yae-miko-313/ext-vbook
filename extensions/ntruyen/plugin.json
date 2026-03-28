@@ -5,7 +5,7 @@
     "version": 1,
     "source": "https://ntruyen.biz/",
     "regexp": "ntruyen\\.biz/truyen/[^/]+/?$",
-    "description": "Doc truyen chu tu nTruyen.biz",
+    "description": "(fix ext lão B ) Đọc truyện từ ntruyen.biz, toàn đam với ngôn tình :)))",
     "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"

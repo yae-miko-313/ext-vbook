@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "Truyện Hoàn",
+    "author": "kychi",
+    "version": 1,
+    "source": "https://truyenhoan.com/",
+    "regexp": "truyenhoan\\.com/[a-z0-9\\-]+\\.\\d+/?$",
+    "description": "Đọc truyện tiên hiệp, huyền huyễn, ngôn tình từ Truyện Hoàn - website truyện full online miễn phí",
+    "locale": "vi_VN",
+    "language": "javascript",
+    "type": "novel"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "page": "page.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "gen": "gen.js"
+  }
+}
