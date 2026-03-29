@@ -36,6 +36,39 @@ npm install
 | `install` | Sideload trực tiếp extension test lên Mobile IP port VBook. | 🟢 Done |
 | `test-all`| 1-click test flow liên kết endpoint từ JS lên App (Home->Chap). | 🟢 (Local) |
 | `debug` | Sandbox mode run bất kỳ hàm `js` độc lập trên terminal . | 🟢 (Local) |
+| `inventory` | Quét toàn bộ ext + refs, dedupe theo domain và xuất báo cáo inventory. | 🟢 Done |
+| `sort` | Copy ext keepFlag vào nhóm type `extensions/{type}/{name}` (skip nếu đích tồn tại). | 🟢 Done |
+| `batch-fix` | Chạy lint -> fix(write+cleanup) -> lint lại trên toàn bộ ext đã sort. | 🟢 Done |
+| `build-catalog` | Build catalog từng type và mega catalog `extensions/plugin.json`. | 🟢 Done |
+| `ai-fix-queue` | Chạy vòng AI heuristic fix cho nhóm `needs_ai` với tối đa 2 attempts. | 🟢 Done |
+
+## Mass Migration Workflow
+
+Pipeline khuyến nghị cho hợp nhất hàng loạt extension:
+
+```bash
+npx vbook inventory
+npx vbook sort --overwrite-existing --cleanup-root
+npx vbook batch-fix
+npx vbook ai-fix-queue
+npx vbook build-catalog
+```
+
+**Chi tiết đầy đủ:** Xem [`docs/rules/CLI_WORKFLOW_PHASES.md`](docs/rules/CLI_WORKFLOW_PHASES.md#workflow--best-practices)
+
+Artifacts mặc định:
+- `tools/cli/reports/inventory.json`
+- `tools/cli/reports/sort-report.json`
+- `tools/cli/reports/fix-report.json`
+- `tools/cli/reports/ai-fix-report.json`
+
+Quy ước quan trọng:
+- Dedupe key ưu tiên domain từ `metadata.source`.
+- Rule thắng trùng lặp: version cao hơn -> trust repo cao hơn (`extensions` > `darkrai9x` > `dat-bi` > `others`).
+- `sort` giữ nguyên `metadata.author` và giữ tên folder ext gốc.
+- Nếu thư mục đích đã tồn tại, `sort` sẽ skip để tránh ghi đè.
+- Có thể dùng `--overwrite-existing --cleanup-root` để đồng bộ lại và dọn các ext top-level đã migrate khỏi `extensions/`.
+- `build-catalog` luôn tạo đủ 6 nhóm: `novel`, `comic`, `chinese_novel`, `translate`, `tts`, `_unknown`.
 
 ## File Structure
 
@@ -51,6 +84,23 @@ extensions/my-website/
 ```
 
 ## Docs
+- [`docs/rules/CLI_WORKFLOW_PHASES.md`](docs/rules/CLI_WORKFLOW_PHASES.md): Quy trình hợp lệ batch processing extension, cleanup rules, best practices.
 - [`docs/AI_CODE_EXT_VBOOK.md`](docs/AI_CODE_EXT_VBOOK.md): Dùng để nắm Rule viết code, Javascript API có sẵn, Rhino API.
 - [`docs/REFERENCE_REPOS.md`](docs/REFERENCE_REPOS.md): Các kho mở cộng đồng tham khảo pattern xử lý web.
 - [`docs/vbook_demo.md`](docs/vbook_demo.md): Tham khảo cách xử lý DOM, JS logic mẫu và config nâng cao.
+
+## Distribution & Catalogs
+
+**Root `plugin.json`:**
+- Metadata & personal extensions (3 by kychi)
+- Reference: `extensions/plugin.json` cho full community catalog (372+ entries)
+- Dùng để distribute bản cá nhân + link đến full catalog
+
+**`extensions/plugin.json` (Auto-generated):**
+- Mega catalog với 372+ community extensions
+- Được generate bởi `npx vbook build-catalog`
+- Tôn trọng tác quyền - giữ nguyên author info từ original sources
+
+**CLI Tools:**
+- Chỉ làm việc với `extensions/{type}/plugin.json` files
+- Không modify root `plugin.json` (personal distribution file)
