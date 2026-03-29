@@ -1,3 +1,6 @@
+<!-- AI: Đọc file này khi cần tham khảo các code snippets (fetch, Jsoup, regex, config JSON) chuyên sâu và cụ thể -->
+<!-- Liên quan: docs/AI_CODE_EXT_VBOOK.md -->
+
 =====================================
 # I. CẤU TRÚC TỔNG QUAN VÀ PLUGIN.JSON
 =====================================

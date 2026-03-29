@@ -1,209 +1,56 @@
 # VBook Extension Tool
 
-Personal development tool for VBook extensions.
-Lấy tool gốc từ lão B
+CLI tool hỗ trợ phát triển, kiểm thử và đóng gói extension cho hệ thống VBook.
 
-Developer / AI workflow, Rhino rules, and how to use [community extension repos](https://github.com/Darkrai9x/vbook-extensions) as reference without breaking local conventions: see [docs/AI_CODE_EXT_VBOOK.md](docs/AI_CODE_EXT_VBOOK.md).
+## Quick Start
 
-## To Add New Extension
-
-1. Copy `extensions/vbook-ext-template/` folder with new name
-2. Edit `plugin.json`
-3. Update src files (chap.js, config.js, etc.)
-4. Test with CLI from `tools/cli/`
-
-## .env Setup Guide
-
-Create a `.env` file in the root directory to configure the device connection:
+Setup file `.env` tại thư mục gốc của workspace:
 ```env
-# Mobile device's local IP address
 VBOOK_IP=192.168.1.100
-# Extension test server port on device (usually 8080)
-VBOOK_PORT=8080
-# Local HTTP server port to serve temporary files
 LOCAL_PORT=8080
-# Default author name used in scaffold
+VBOOK_PORT=8080
 VBOOK_AUTHOR=your_name
 ```
 
-## Quick Start (New Extension)
-
-Follow these 5 steps to create, develop, and test a new extension:
-
-1. **Scaffold**: `npx vbook scaffold` (Interactive extension generation)
-2. **Develop**: Update logic inside `extensions/[your-ext]/src/`
-3. **Fix**: `npx vbook fix --plugin extensions/[your-ext] --write` (Normalize formats)
-4. **Verify**: `npx vbook verify --mode offline --plugin extensions/[your-ext]`
-5. **Build/Install**: `npx vbook build --plugin extensions/[your-ext]` then `npx vbook install --plugin extensions/[your-ext]`
-
-## Quick Start (Existing)
-
 ```bash
 npm install
-npx vbook build --plugin extensions/[your-ext]
-npx vbook install --plugin extensions/[your-ext]
 ```
+
+**Workflow chuẩn 5 bước thiết kế Extension:**
+1. **Scaffold**: `npx vbook scaffold` - Khởi tạo bộ khung.
+2. **Lint**: `npx vbook lint --plugin extensions/[tên]` - Xác thực validate mã và metadata ban đầu.
+3. **Fix**: `npx vbook fix --plugin extensions/[tên] --write` - Tự động chữa lỗi sai format/Noise.
+4. **Verify Offline**: `npx vbook verify --mode offline --plugin extensions/[tên]` - Kiểm tra scripts an toàn.
+5. **Build**: `npx vbook build --plugin extensions/[tên]` - Xuất `plugin.zip` để test.
 
 ## CLI Commands
 
-### Lint (phase 1)
+| Command | Mô tả ngắn | Status |
+|---|---|---|
+| `lint` | Kiểm tra tính hợp lệ file `plugin.json` và cấu trúc mã nguồn. | 🟢 Done |
+| `health` | Report tổng quan về lỗi nhiều extension (top-rules list). | 🟢 Done |
+| `scaffold`| Generates mã lệnh ext mới thông qua menu tương tác. | 🟢 Done |
+| `fix` | Autofix file rác, metadata typo, rule case issues. | 🟢 Done |
+| `verify` | Offline check các script function và Online test kết nối ping. | 🟢 Done |
+| `build` | Đóng gói thư mục src/ icon.png thành `plugin.zip` . | 🟢 Done |
+| `install` | Sideload trực tiếp extension test lên Mobile IP port VBook. | 🟢 Done |
+| `test-all`| 1-click test flow liên kết endpoint từ JS lên App (Home->Chap). | 🟢 (Local) |
+| `debug` | Sandbox mode run bất kỳ hàm `js` độc lập trên terminal . | 🟢 (Local) |
 
-Validate extension structure + metadata rules.
+## File Structure
 
-```bash
-# Lint one extension
-npx vbook lint --plugin extensions/ntruyen
-
-# Lint all extensions/ (default when --plugin is omitted)
-npx vbook lint
-
-# JSON output for CI
-npx vbook lint --json
-
-# Fail when warnings exceed threshold
-npx vbook lint --max-warnings 0
-
-# Lint references corpus
-npx vbook lint --refs
-
-# Optional Rhino compatibility checks
-npx vbook lint --rhino
+Cấu trúc chuẩn của một VBook Extension:
+```
+extensions/my-website/
+├── plugin.json        # Config thông số script
+├── icon.png           # 64x64px
+├── src/               # Nơi chứa toàn bộ execute JS scripts
+│   ├── detail.js
+│   ├── toc.js
+│   └── chap.js
 ```
 
-Lint rules (current):
-
-- Error: missing `plugin.json`, `icon.png`, `src/detail.js`, `src/toc.js`, `src/chap.js`
-- Error: invalid `plugin.json` format or missing `metadata` / `script` object
-- Error: `metadata.version` must be integer >= 1
-- Error: `metadata.type` must be one of `novel|comic|chinese_novel|translate|tts`
-- Warning: `metadata.locale` should be one of `vi_VN|zh_CN|en_US`
-- Warning: detect `metadata.local` typo and suggest `metadata.locale`
-- Warning: locale format with `-` should be normalized to `_` (ex: `vi_VN`)
-- Warning: `metadata.author` should match workspace standard author
-- Error: each `script.*` must be filename only (no `src/` prefix) and file must exist in `src/`
-- Error: `script.detail`, `script.toc`, `script.chap` are required entries in `plugin.json`
-- Error: `metadata.regexp` must be valid JavaScript regex string
-- Error: `config` key type checks for common keys (`thread_num`, `delay`, `preload_size`, `max_length`, etc.)
-- Warning: unknown `config` keys (local scan profile)
-- Warning: unknown top-level keys in `plugin.json` (local scan profile)
-- Warning: `metadata.regexp` anchor/sanity checks for detail matching
-- Warning: noise files such as `plugin.zip` and `src/test.json`
-- Warning: version mismatch between extension `metadata.version` and root catalog `plugin.json`
-- Optional (`--rhino`): error on common unsupported syntax (`async/await`, `import/export`, `?.`, `??`)
-
-Scope behavior:
-
-- Local scan (`extensions/`): project-specific checks enabled (`author`, catalog sync, regexp heuristic)
-- References scan (`--refs`): project-specific checks relaxed to focus on ecosystem compatibility signals
-
-Exit code:
-
-- `0`: no lint errors
-- `1`: has lint errors or CLI runtime error
-
-### Health (phase 2)
-
-Summarize quality status and issue distribution from lint data.
-
-```bash
-# Health summary for local extensions/
-npx vbook health
-
-# Health summary for references/repos
-npx vbook health --refs
-
-# JSON output
-npx vbook health --json
-
-# CI strict mode
-npx vbook health --refs --strict-exit
-
-# Include Rhino compatibility checks in health scan
-npx vbook health --refs --rhino --json
-```
-
-Health output includes:
-
-- Global quality buckets (`clean`, `warnings-only`, `with-errors`)
-- Top lint rules by frequency
-- Scope-aware scan summary (`extensions` or `references`)
-- Exit code is `0` by default for analytics; use `--strict-exit` to fail on errors
-
-### Scaffold (phase 3)
-
-Generate a new extension from template (interactive-first, flags for CI).
-
-```bash
-# Interactive (if missing params)
-npx vbook scaffold
-
-# Non-interactive
-npx vbook scaffold --name MySite --source https://mysite.com --author kychi
-
-# Preview only
-npx vbook scaffold --name MySite --source https://mysite.com --author kychi --dry-run
-```
-
-Notes:
-
-- Uses `extensions/vbook-ext-template` as source of truth
-- Runs post-generate lint by default
-- Use `--skip-lint` to bypass lint gate
-
-### Fix (phase 4)
-
-Propose/apply safe autofixes for common metadata/script issues.
-
-```bash
-# Propose changes only (no write)
-npx vbook fix --plugin extensions/ntruyen
-
-# Apply changes
-npx vbook fix --plugin extensions/ntruyen --write
-
-# Apply changes and clean artifact noise files
-npx vbook fix --plugin extensions/ntruyen --write --cleanup-noise
-```
-
-Current safe autofixes:
-
-- `metadata.local` -> `metadata.locale` when `locale` is missing
-- Locale normalization (`vi-VN` -> `vi_VN`)
-- `script.*` normalization to filename-only (strip `src/` and path parts)
-
-### Verify (phase 4)
-
-Run regression verification workflow.
-
-```bash
-# Offline structure verification
-npx vbook verify --plugin extensions/ntruyen
-
-# Offline + Rhino checks
-npx vbook verify --plugin extensions/ntruyen --rhino
-
-# Device online verification (wraps one-click test)
-npx vbook verify --mode online --plugin extensions/ntruyen --ip 192.168.1.10 --port 8080
-```
-
-## CLI Phase Roadmap
-
-### Phase 1 (done)
-
-- `vbook lint`: structural + metadata validation, JSON/table output, CI-friendly exit codes
-
-### Phase 2 (done)
-
-- `vbook lint --refs`: scan the references corpus for ecosystem baselines
-- `vbook health`: quality distribution and top issue analytics
-
-### Phase 3 (done)
-
-- Rhino syntax compatibility checks (safe subset, low false-positive) as opt-in flag `--rhino`
-- `vbook scaffold`: template-based extension generator with lint gate
-
-### Phase 4 (done)
-
-- `vbook verify`: offline/online regression verification
-- Additional plugin.json config schema validation (done)
-- `vbook fix`: safe autofix pipeline with propose/write modes (done, expand rules next)
+## Docs
+- [`docs/AI_CODE_EXT_VBOOK.md`](docs/AI_CODE_EXT_VBOOK.md): Dùng để nắm Rule viết code, Javascript API có sẵn, Rhino API.
+- [`docs/REFERENCE_REPOS.md`](docs/REFERENCE_REPOS.md): Các kho mở cộng đồng tham khảo pattern xử lý web.
+- [`docs/vbook_demo.md`](docs/vbook_demo.md): Tham khảo cách xử lý DOM, JS logic mẫu và config nâng cao.
