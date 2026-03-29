@@ -226,10 +226,18 @@ program.command('verify')
                 console.log(`Mode: ${report.mode}`);
                 console.log(`Target: ${report.pluginRoot}`);
                 console.log(`Result: ${report.success ? 'PASS' : 'FAIL'}`);
+                if (report.mode === 'device-online') {
+                    if (report.success) {
+                        console.log(report.stdout);
+                    } else {
+                        console.log(report.stderr);
+                    }
+                }
 
                 if (report.mode === 'offline-structure' && Array.isArray(report.steps)) {
                     for (const step of report.steps) {
-                        console.log(`- ${step.id}: ${step.success ? 'ok' : 'failed'}`);
+                        const mark = step.success ? '[PASS]' : '[FAIL]';
+                        console.log(`- ${mark} ${step.id}`);
                     }
                 }
             }

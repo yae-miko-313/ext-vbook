@@ -27,12 +27,59 @@ function saveJson(filePath, data) {
     fs.writeFileSync(filePath, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
 }
 
-function applySafeFixes(pluginJson) {
+function applySafeFixes(pluginJson, pluginSourceDir) {
     const changes = [];
     const plugin = { ...pluginJson };
 
     if (plugin.metadata && typeof plugin.metadata === 'object' && !Array.isArray(plugin.metadata)) {
         plugin.metadata = { ...plugin.metadata };
+
+        if (typeof plugin.metadata.version === 'string' && /^\d+$/.test(plugin.metadata.version)) {
+            const oldVer = plugin.metadata.version;
+            const newVer = parseInt(oldVer, 10);
+            plugin.metadata.version = newVer;
+            changes.push({
+                field: 'metadata.version',
+                action: 'convert-type',
+                from: `"${oldVer}"`,
+                to: newVer
+            });
+        }
+
+        if (typeof plugin.metadata.type === 'string') {
+            const oldType = plugin.metadata.type;
+            const newType = oldType.toLowerCase();
+            if (oldType !== newType) {
+                plugin.metadata.type = newType;
+                changes.push({
+                    field: 'metadata.type',
+                    action: 'lowercase',
+                    from: oldType,
+                    to: newType
+                });
+            }
+        }
+
+        if (typeof plugin.metadata.regexp === 'string') {
+            const regexp = plugin.metadata.regexp;
+            if (regexp.trim() && !/\$\s*$/.test(regexp) && !/\[\^\/\]\+\/\?\$/.test(regexp)) {
+                changes.push({
+                    field: 'metadata.regexp',
+                    action: 'propose-warn',
+                    from: regexp,
+                    to: 'Needs end anchor ($ or [^/]+/?$)'
+                });
+            }
+        }
+
+        if (!plugin.metadata.description || (typeof plugin.metadata.description === 'string' && !plugin.metadata.description.trim())) {
+            changes.push({
+                field: 'metadata.description',
+                action: 'propose-warn',
+                from: plugin.metadata.description || '""',
+                to: 'Add a description'
+            });
+        }
 
         if (
             Object.prototype.hasOwnProperty.call(plugin.metadata, 'local') &&
@@ -76,6 +123,18 @@ function applySafeFixes(pluginJson) {
                     from: value,
                     to: normalized
                 });
+            }
+
+            if (pluginSourceDir) {
+                const absPath = path.join(pluginSourceDir, 'src', normalized);
+                if (!fs.existsSync(absPath)) {
+                    changes.push({
+                        field: `script.${key}`,
+                        action: 'propose-warn',
+                        from: normalized,
+                        to: `File missing: src/${normalized}`
+                    });
+                }
             }
         }
     }
@@ -137,7 +196,7 @@ function runFix(workspaceRoot, optionPluginPath, options = {}) {
             continue;
         }
 
-        const fixed = applySafeFixes(pluginData);
+        const fixed = applySafeFixes(pluginData, targetRoot);
         let cleanup = [];
 
         if (write) {
@@ -192,10 +251,14 @@ function printFixTableReport(report) {
     console.log(`Mode: ${report.mode}`);
     console.log(`Scope: ${report.scope}`);
 
+    let appliedCount = 0;
+    let proposedWarnCount = 0;
+
     for (const item of report.results) {
+        const isDirty = item.changes.length > 0 || item.cleanup.length > 0;
         const status = item.error
             ? 'error'
-            : item.changes.length || item.cleanup.length
+            : isDirty
                 ? (report.mode === 'write' ? 'updated' : 'proposed')
                 : 'clean';
 
@@ -208,9 +271,14 @@ function printFixTableReport(report) {
         }
 
         for (const change of item.changes) {
-            if (change.action === 'rename') {
+            if (change.action === 'propose-warn') {
+                proposedWarnCount++;
+                console.log(`  warning: ${change.field} (${change.to})`);
+            } else if (change.action === 'rename') {
+                if (report.mode === 'write') appliedCount++;
                 console.log(`  ${change.action}: ${change.from} -> ${change.field}`);
             } else {
+                if (report.mode === 'write') appliedCount++;
                 console.log(`  ${change.action}: ${change.field} (${change.from} -> ${change.to})`);
             }
         }
@@ -219,6 +287,11 @@ function printFixTableReport(report) {
             console.log(`  cleanup: removed ${filePath}`);
         }
     }
+
+    console.log('');
+    console.log(
+        `${appliedCount} fixes applied, ${proposedWarnCount} warnings proposed.`
+    );
 
     console.log('');
     console.log(

@@ -179,7 +179,7 @@ function scaffoldExtension(workspaceRoot, options = {}) {
     if (!config.skipLint) {
         lintReport = runLint(workspaceRoot, config.outputDir, {
             scanReferences: false,
-            enableRhinoChecks: false
+            enableRhinoChecks: true
         });
 
         if (lintReport.summary.counts.error > 0) {

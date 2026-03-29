@@ -70,7 +70,7 @@ function buildHealthReport(workspaceRoot, options = {}) {
             type: parsed.byType,
             locale: parsed.byLocale
         },
-        topIssues: topRuleCounts(lintReport, 15),
+        topIssues: topRuleCounts(lintReport, 5),
         scannedTargets: lintReport.scannedTargets
     };
 }

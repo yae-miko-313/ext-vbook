@@ -12,15 +12,37 @@ Developer / AI workflow, Rhino rules, and how to use [community extension repos]
 3. Update src files (chap.js, config.js, etc.)
 4. Test with CLI from `tools/cli/`
 
-## Quick Start
+## .env Setup Guide
+
+Create a `.env` file in the root directory to configure the device connection:
+```env
+# Mobile device's local IP address
+VBOOK_IP=192.168.1.100
+# Extension test server port on device (usually 8080)
+VBOOK_PORT=8080
+# Local HTTP server port to serve temporary files
+LOCAL_PORT=8080
+# Default author name used in scaffold
+VBOOK_AUTHOR=your_name
+```
+
+## Quick Start (New Extension)
+
+Follow these 5 steps to create, develop, and test a new extension:
+
+1. **Scaffold**: `npx vbook scaffold` (Interactive extension generation)
+2. **Develop**: Update logic inside `extensions/[your-ext]/src/`
+3. **Fix**: `npx vbook fix --plugin extensions/[your-ext] --write` (Normalize formats)
+4. **Verify**: `npx vbook verify --mode offline --plugin extensions/[your-ext]`
+5. **Build/Install**: `npx vbook build --plugin extensions/[your-ext]` then `npx vbook install --plugin extensions/[your-ext]`
+
+## Quick Start (Existing)
 
 ```bash
 npm install
 npx vbook build --plugin extensions/[your-ext]
 npx vbook install --plugin extensions/[your-ext]
 ```
-
-Setup `.env` with local device config before running commands.
 
 ## CLI Commands
 
@@ -170,7 +192,7 @@ npx vbook verify --mode online --plugin extensions/ntruyen --ip 192.168.1.10 --p
 
 - `vbook lint`: structural + metadata validation, JSON/table output, CI-friendly exit codes
 
-### Phase 2 (in progress)
+### Phase 2 (done)
 
 - `vbook lint --refs`: scan the references corpus for ecosystem baselines
 - `vbook health`: quality distribution and top issue analytics
@@ -180,7 +202,7 @@ npx vbook verify --mode online --plugin extensions/ntruyen --ip 192.168.1.10 --p
 - Rhino syntax compatibility checks (safe subset, low false-positive) as opt-in flag `--rhino`
 - `vbook scaffold`: template-based extension generator with lint gate
 
-### Phase 4 (in progress)
+### Phase 4 (done)
 
 - `vbook verify`: offline/online regression verification
 - Additional plugin.json config schema validation (done)

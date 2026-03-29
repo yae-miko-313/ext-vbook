@@ -209,7 +209,8 @@ function discoverTargets(workspaceRoot, optionPluginPath, options = {}) {
     if (scanReferences) {
         const refsRoot = path.join(workspaceRoot, 'references', 'repos');
         if (!fs.existsSync(refsRoot)) {
-            throw new Error('references/repos directory not found in workspace root.');
+            console.warn(`[WARN] references/repos directory not found. Skipping reference scan.`);
+            return [];
         }
         return collectPluginRootsRecursively(refsRoot);
     }
