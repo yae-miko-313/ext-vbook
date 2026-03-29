@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "name": "xklxsw",
+    "author": "Cá Mụp Cắn Cáp",
+    "version": 6,
+    "source": "https://www.kelexsw.com",
+    "regexp": "(www.)?(m.)?kelexsw.com/book/\\d+/?",
+    "description": "text",
+    "local": "vi-VN",
+    "language": "javascript",
+    "type": "chinese_novel"
+  },
+  "script": {
+    "home": "home.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}

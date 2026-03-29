@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "Template Novel",
+    "author": "kychi",
+    "version": 1,
+    "source": "https://example.com/",
+    "regexp": "example\\.com/novel/[^/]+/?$",
+    "description": "Starter template for a personal VBook novel extension",
+    "locale": "vi_VN",
+    "language": "javascript",
+    "type": "novel"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "page": "page.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}

@@ -10,6 +10,11 @@ const { getLocalIP, sendRequest } = require('./utils');
 const { runLint, printLintTableReport } = require('./lint');
 const { buildHealthReport, printHealthTableReport } = require('./health');
 const { runFix, printFixTableReport } = require('./fix');
+const { runInventory, printInventoryReport } = require('./inventory');
+const { runSort, printSortReport } = require('./sort');
+const { runBatchFix, printBatchFixReport } = require('./batch-fix');
+const { runBuildCatalog, printBuildCatalogReport } = require('./build-catalog');
+const { runAiFixQueue, printAiFixQueueReport } = require('./ai-fix-queue');
 const { scaffoldExtension, askIfMissing } = require('./scaffold');
 const { runOfflineVerify, runOnlineVerify } = require('./verify');
 
@@ -128,6 +133,151 @@ program.command('fix')
 
             const lintSnapshot = report.afterLint || report.beforeLint;
             if (lintSnapshot.summary.counts.error > 0) {
+                process.exitCode = 1;
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
+
+/**
+ * INVENTORY COMMAND
+ */
+program.command('inventory')
+    .description('Scan extensions and references, then build deduplicated inventory report')
+    .option('--out <path>', 'Output report path (default: tools/cli/reports/inventory.json)')
+    .option('--json', 'Output report as JSON')
+    .action(async (options) => {
+        try {
+            const report = runInventory(WORKSPACE_ROOT, {
+                out: options.out
+            });
+
+            if (options.json) {
+                console.log(JSON.stringify(report, null, 2));
+            } else {
+                printInventoryReport(report);
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
+
+/**
+ * SORT COMMAND
+ */
+program.command('sort')
+    .description('Copy keepFlag inventory items into grouped extensions folders by type')
+    .option('--inventory <path>', 'Inventory report path (default: tools/cli/reports/inventory.json)')
+    .option('--overwrite-existing', 'Overwrite destination folder if already exists')
+    .option('--cleanup-root', 'Remove migrated top-level folders under extensions/ (keeps vbook-ext-template)')
+    .option('--json', 'Output report as JSON')
+    .action(async (options) => {
+        try {
+            const report = runSort(WORKSPACE_ROOT, {
+                inventory: options.inventory,
+                overwriteExisting: Boolean(options.overwriteExisting),
+                cleanupRoot: Boolean(options.cleanupRoot)
+            });
+
+            if (options.json) {
+                console.log(JSON.stringify(report, null, 2));
+            } else {
+                printSortReport(report);
+            }
+
+            if (report.summary.errors > 0) {
+                process.exitCode = 1;
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
+
+/**
+ * BATCH-FIX COMMAND
+ */
+program.command('batch-fix')
+    .description('Run lint -> auto-fix -> lint for all plugins under target directory')
+    .option('--target <path>', 'Target directory under workspace (default: extensions)')
+    .option('--out <path>', 'Output report path (default: tools/cli/reports/fix-report.json)')
+    .option('--rhino', 'Enable Rhino compatibility checks')
+    .option('--json', 'Output report as JSON')
+    .action(async (options) => {
+        try {
+            const report = runBatchFix(WORKSPACE_ROOT, {
+                target: options.target,
+                out: options.out,
+                rhino: Boolean(options.rhino)
+            });
+
+            if (options.json) {
+                console.log(JSON.stringify(report, null, 2));
+            } else {
+                printBatchFixReport(report);
+            }
+
+            if (report.summary.needsAi > 0) {
+                process.exitCode = 1;
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
+
+/**
+ * BUILD-CATALOG COMMAND
+ */
+program.command('build-catalog')
+    .description('Build per-type plugin catalogs and mega catalog under extensions/')
+    .option('--json', 'Output report as JSON')
+    .action(async (options) => {
+        try {
+            const report = runBuildCatalog(WORKSPACE_ROOT);
+
+            if (options.json) {
+                console.log(JSON.stringify(report, null, 2));
+            } else {
+                printBuildCatalogReport(report);
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
+
+/**
+ * AI-FIX-QUEUE COMMAND
+ */
+program.command('ai-fix-queue')
+    .description('Run heuristic AI fix queue for needs_ai targets from fix report')
+    .option('--input <path>', 'Fix report path (default: tools/cli/reports/fix-report.json)')
+    .option('--max-attempts <n>', 'Max attempts per extension (default: 2)')
+    .option('--json', 'Output report as JSON')
+    .action(async (options) => {
+        try {
+            const maxAttempts =
+                options.maxAttempts !== undefined ? parseInt(options.maxAttempts, 10) : 2;
+            if (!Number.isInteger(maxAttempts) || maxAttempts < 1) {
+                throw new Error('--max-attempts must be an integer >= 1.');
+            }
+
+            const report = runAiFixQueue(WORKSPACE_ROOT, {
+                input: options.input,
+                maxAttempts
+            });
+
+            if (options.json) {
+                console.log(JSON.stringify(report, null, 2));
+            } else {
+                printAiFixQueueReport(report);
+            }
+
+            if (report.summary.needsHuman > 0) {
                 process.exitCode = 1;
             }
         } catch (error) {

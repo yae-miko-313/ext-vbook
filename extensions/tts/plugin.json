@@ -1,0 +1,92 @@
+[
+  {
+    "folder": "bing-tts",
+    "name": "Bing TTS",
+    "author": "vBook",
+    "source": "https://www.bing.com/translator",
+    "version": 1,
+    "type": "tts",
+    "locale": null,
+    "relativePath": "extensions/tts/bing-tts",
+    "metadata": {
+      "name": "Bing TTS",
+      "author": "vBook",
+      "version": 1,
+      "source": "https://www.bing.com/translator",
+      "description": "Nghe truyện bằng Bing TTS",
+      "type": "tts"
+    }
+  },
+  {
+    "folder": "gemini-tts",
+    "name": "Gemini TTS",
+    "author": "vBook",
+    "source": "https://gemini.google.com",
+    "version": 1,
+    "type": "tts",
+    "locale": null,
+    "relativePath": "extensions/tts/gemini-tts",
+    "metadata": {
+      "name": "Gemini TTS",
+      "author": "vBook",
+      "version": 1,
+      "source": "https://gemini.google.com",
+      "description": "Nghe truyện bằng Gemini TTS",
+      "type": "tts"
+    }
+  },
+  {
+    "folder": "google-tts",
+    "name": "Google TTS",
+    "author": "vBook",
+    "source": "https://www.google.com",
+    "version": 1,
+    "type": "tts",
+    "locale": null,
+    "relativePath": "extensions/tts/google-tts",
+    "metadata": {
+      "name": "Google TTS",
+      "author": "vBook",
+      "version": 1,
+      "source": "https://www.google.com",
+      "description": "Nghe truyện bằng Google TTS",
+      "type": "tts"
+    }
+  },
+  {
+    "folder": "tiktok-tts",
+    "name": "Tiktok TTS",
+    "author": "vBook",
+    "source": "https://www.tiktok.com",
+    "version": 1,
+    "type": "tts",
+    "locale": null,
+    "relativePath": "extensions/tts/tiktok-tts",
+    "metadata": {
+      "name": "Tiktok TTS",
+      "author": "vBook",
+      "version": 1,
+      "source": "https://www.tiktok.com",
+      "description": "Nghe truyện bằng Tiktok TTS",
+      "type": "tts"
+    }
+  },
+  {
+    "folder": "zalo-tts",
+    "name": "Zalo AI TTS",
+    "author": "vBook",
+    "source": "https://ai.zalo.cloud/docs/api/getting-started",
+    "version": 1,
+    "type": "tts",
+    "locale": null,
+    "relativePath": "extensions/tts/zalo-tts",
+    "metadata": {
+      "name": "Zalo AI TTS",
+      "author": "vBook",
+      "version": 1,
+      "source": "https://ai.zalo.cloud/docs/api/getting-started",
+      "description": "Nghe truyện bằng Zalo AI TTS",
+      "type": "tts"
+    }
+  }
+]

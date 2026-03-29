@@ -2,6 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const { runLint } = require('./lint');
 
+const REQUIRED_SCRIPT_KEYS_BY_TYPE = {
+    novel: new Set(['detail', 'toc', 'chap']),
+    comic: new Set(['detail', 'toc', 'chap']),
+    chinese_novel: new Set(['detail', 'toc', 'chap'])
+};
+
 function normalizeLocale(locale) {
     if (typeof locale !== 'string') return locale;
     const value = locale.trim().replace(/-/g, '_');
@@ -30,6 +36,10 @@ function saveJson(filePath, data) {
 function applySafeFixes(pluginJson, pluginSourceDir) {
     const changes = [];
     const plugin = { ...pluginJson };
+    const metadataType =
+        plugin.metadata && typeof plugin.metadata === 'object' && !Array.isArray(plugin.metadata)
+            ? plugin.metadata.type
+            : null;
 
     if (plugin.metadata && typeof plugin.metadata === 'object' && !Array.isArray(plugin.metadata)) {
         plugin.metadata = { ...plugin.metadata };
@@ -128,12 +138,23 @@ function applySafeFixes(pluginJson, pluginSourceDir) {
             if (pluginSourceDir) {
                 const absPath = path.join(pluginSourceDir, 'src', normalized);
                 if (!fs.existsSync(absPath)) {
-                    changes.push({
-                        field: `script.${key}`,
-                        action: 'propose-warn',
-                        from: normalized,
-                        to: `File missing: src/${normalized}`
-                    });
+                    const requiredKeys = REQUIRED_SCRIPT_KEYS_BY_TYPE[String(metadataType || '').toLowerCase()] || new Set();
+                    if (!requiredKeys.has(key)) {
+                        delete plugin.script[key];
+                        changes.push({
+                            field: `script.${key}`,
+                            action: 'remove-optional-missing',
+                            from: normalized,
+                            to: 'removed'
+                        });
+                    } else {
+                        changes.push({
+                            field: `script.${key}`,
+                            action: 'propose-warn',
+                            from: normalized,
+                            to: `File missing: src/${normalized}`
+                        });
+                    }
                 }
             }
         }

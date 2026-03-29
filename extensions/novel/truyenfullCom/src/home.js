@@ -1,0 +1,26 @@
+function execute() {
+    return Response.success([
+        { title: "Truyện mới cập nhật", input: "/truyen-moi-cap-nhat/", script: "gen.js" },
+        { title: "Truyện Hot", input: "/truyen-hot/", script: "gen.js" },
+        { title: "Truyện Full", input: "/truyen-full/", script: "gen.js" },
+        { title: "Tiên Hiệp Hay", input: "/truyen-tien-hiep/hay/", script: "gen.js" },
+        { title: "Kiếm Hiệp Hay", input: "/truyen-kiem-hiep/hay/", script: "gen.js" },
+        { title: "Truyện Teen Hay", input: "/truyen-teen/hay/", script: "gen.js" },
+        { title: "Ngôn Tình Hay", input: "/ngon-tinh/hay/", script: "gen.js" },
+        { title: "Ngôn Tình Sắc", input: "/tag/ngon-tinh-sac/", script: "gen.js" },
+        { title: "Ngôn Tình Ngược", input: "/tag/ngon-tinh-nguoc/", script: "gen.js" },
+        { title: "Ngôn Tình Sủng", input: "/tag/ngon-tinh-sung/", script: "gen.js" },
+        { title: "Ngôn Tình Tổng Tài", input: "/tag/ngon-tinh-tong-tai/", script: "gen.js" },
+        { title: "Ngôn Tình Xuyên Không", input: "/tag/ngon-tinh-xuyen-khong/", script: "gen.js" },
+        { title: "Ngôn Tình Cổ Đại", input: "/tag/ngon-tinh-co-dai/", script: "gen.js" },
+        { title: "Ngôn Tình Trọng Sinh", input: "/tag/ngon-tinh-trong-sinh/", script: "gen.js" },
+        { title: "Ngôn Tình Nữ Phụ", input: "/tag/ngon-tinh-nu-phu/", script: "gen.js" },
+        { title: "Đam Mỹ Hài", input: "/tag/dam-my-hai/", script: "gen.js" },
+        { title: "Đam Mỹ Hay", input: "/truyen-dam-my/hay/", script: "gen.js" },
+        { title: "Đam Mỹ H Văn", input: "/tag/dam-my-h-van/", script: "gen.js" },
+        { title: "Đam Mỹ Sắc", input: "/tag/dam-my-sac/", script: "gen.js" },
+        { title: "Đam Mỹ Trọng Sinh", input: "/tag/dam-my-trong-sinh/", script: "gen.js" },
+        { title: "Đam Mỹ Cổ Đại", input: "/tag/dam-my-co-dai/", script: "gen.js" },
+        { title: "Đam Mỹ Hiện Đại", input: "/tag/dam-my-hien-dai/", script: "gen.js" },
+    ]);
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "folder": "baidu-translate",
+    "name": "Baidu Translate",
+    "author": "vBook",
+    "source": "https://fanyi.baidu.com",
+    "version": 1,
+    "type": "translate",
+    "locale": null,
+    "relativePath": "extensions/translate/baidu-translate",
+    "metadata": {
+      "name": "Baidu Translate",
+      "author": "vBook",
+      "version": 1,
+      "source": "https://fanyi.baidu.com",
+      "description": "Dịch truyện bằng Baidu Translate",
+      "type": "translate"
+    }
+  },
+  {
+    "folder": "openai-translate",
+    "name": "OpenAI Translate",
+    "author": "vBook",
+    "source": "https://api.vectorengine.ai",
+    "version": 1,
+    "type": "translate",
+    "locale": null,
+    "relativePath": "extensions/translate/openai-translate",
+    "metadata": {
+      "name": "OpenAI Translate",
+      "author": "vBook",
+      "version": 1,
+      "source": "https://api.vectorengine.ai",
+      "description": "Dịch truyện bằng OpenAI Compatible API",
+      "type": "translate"
+    }
+  },
+  {
+    "folder": "xombot",
+    "name": "Xombot Dịch",
+    "author": "b3x0m",
+    "source": "https://xombot.b3x0m.us.kg/",
+    "version": 1,
+    "type": "translate",
+    "locale": null,
+    "relativePath": "extensions/translate/xombot",
+    "metadata": {
+      "name": "Xombot Dịch",
+      "author": "b3x0m",
+      "version": 1,
+      "source": "https://xombot.b3x0m.us.kg/",
+      "description": "Dịch truyện bằng Xombot",
+      "type": "translate"
+    }
+  }
+]

@@ -541,7 +541,12 @@ function validateExtension(targetRoot, workspaceRoot, catalogIndex, expectedAuth
             );
         }
 
-        if (typeof metadata.regexp !== 'string' || !metadata.regexp.trim()) {
+        const typeNeedsStrictDetailRegexp = ['novel', 'comic', 'chinese_novel'].includes(
+            String(metadata.type || '')
+        );
+        const hasRegexp = typeof metadata.regexp === 'string' && metadata.regexp.trim();
+
+        if (typeNeedsStrictDetailRegexp && !hasRegexp) {
             issues.push(
                 createIssue(
                     'error',
@@ -550,12 +555,9 @@ function validateExtension(targetRoot, workspaceRoot, catalogIndex, expectedAuth
                     path.relative(workspaceRoot, pluginJsonPath)
                 )
             );
-        } else {
+        } else if (hasRegexp) {
             try {
                 const compiledRegexp = new RegExp(metadata.regexp);
-                const typeNeedsStrictDetailRegexp = ['novel', 'comic', 'chinese_novel'].includes(
-                    String(metadata.type || '')
-                );
                 const looksAnchored = /\$\s*$/.test(metadata.regexp.trim());
                 if (enableProjectSpecificWarnings && typeNeedsStrictDetailRegexp && !looksAnchored) {
                     issues.push(

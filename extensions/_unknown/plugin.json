@@ -1,0 +1,87 @@
+[
+  {
+    "folder": "example",
+    "name": "<Tên của extension>",
+    "author": "mizhm",
+    "source": "<Địa chỉ trang nguồn>",
+    "version": 1,
+    "type": "novel",
+    "locale": "<Quốc gia áp dụng của extension _ Ex: vi_VN, en_US, zh_CN>",
+    "relativePath": "extensions/_unknown/example",
+    "metadata": {
+      "name": "<Tên của extension>",
+      "author": "mizhm",
+      "version": 1,
+      "source": "<Địa chỉ trang nguồn>",
+      "regexp": "<RegExp khớp với URL của trang truyện>",
+      "description": "<Mô tả về extension>",
+      "locale": "<Quốc gia áp dụng của extension _ Ex: vi_VN, en_US, zh_CN>",
+      "tag": "<Thêm nsfw nếu là trang 18+>",
+      "type": "novel"
+    }
+  },
+  {
+    "folder": "koanchay",
+    "name": "Koanchay",
+    "author": "vBook",
+    "source": "https://koanchay.net",
+    "version": 12,
+    "type": "novel",
+    "locale": "vi_VN",
+    "relativePath": "extensions/_unknown/koanchay",
+    "metadata": {
+      "name": "Koanchay",
+      "author": "vBook",
+      "version": 12,
+      "source": "https://koanchay.net",
+      "regexp": "(www.)?koanchay.(com|net|info|org)/truyen/[^/]+/?$",
+      "description": "Đọc truyện trên trang Koanchay",
+      "locale": "vi_VN",
+      "language": "javascript",
+      "tag": "nsfw",
+      "type": "novel"
+    }
+  },
+  {
+    "folder": "sstruyen.com",
+    "name": "SSTruyen",
+    "author": "HieuDM",
+    "source": "https://sstruyen.com.vn",
+    "version": 1,
+    "type": "novel",
+    "locale": "vi_VN",
+    "relativePath": "extensions/_unknown/sstruyen.com",
+    "metadata": {
+      "name": "SSTruyen",
+      "author": "HieuDM",
+      "version": 1,
+      "source": "https://sstruyen.com.vn",
+      "regexp": "sstruyen\\.com\\.vn/([^/]+)/?$",
+      "type": "novel",
+      "description": "Đọc truyện chữ online trên SSTruyen",
+      "locale": "vi_VN",
+      "language": "javascript"
+    }
+  },
+  {
+    "folder": "truyennhieu",
+    "name": "Truyện Nhiều",
+    "author": "Nhocconsr",
+    "source": "https://truyennhieu.com",
+    "version": 3,
+    "type": "novel",
+    "locale": "vi_VN",
+    "relativePath": "extensions/_unknown/truyennhieu",
+    "metadata": {
+      "name": "Truyện Nhiều",
+      "author": "Nhocconsr",
+      "version": 3,
+      "source": "https://truyennhieu.com",
+      "regexp": "(www.)?truyennhieu.com/[^/]+/?",
+      "description": "Đọc truyện trên trang Truyennhieu.com",
+      "language": "javascript",
+      "locale": "vi_VN",
+      "type": "novel"
+    }
+  }
+]

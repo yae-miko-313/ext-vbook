@@ -36,3 +36,20 @@ Dùng khi cần tham khảo pattern lập trình extension cho site type cụ th
 - **Non-negotiables của project luôn override references**: Repositories ngoài có quyền viết lỏng lẻo, nhưng ở codebase này, rules trong `AI_CODE_EXT_VBOOK.md` luôn có mức ưu tiên cao nhất.
 - **Tuân thủ RHINO Restrictions**: Copy paste JS snippets từ cộng đồng có thể kẹp ES6 advanced (e.g., async/await, optional chaining). Bạn bắt buộc refactor lại tất cả các snippet tương thích với `Rhino 1.7.14`.
 - **Merge Logic Utils**: Khi copy extraction function, nếu `gen.js` và `search.js` giống hệt nhau, chia function parse item HTML dùng chung ra file `load("utils.js")` thay vì copy rời rạc.
+
+## Dedup Priority cho Mass Migration
+
+Khi chạy `vbook inventory` để hợp nhất hàng loạt, rule chọn extension giữ lại được áp dụng theo thứ tự:
+
+1. `metadata.source` cùng domain sẽ được gom cùng một nhóm dedupe.
+2. Ưu tiên bản có `metadata.version` cao hơn.
+3. Nếu bằng version, ưu tiên trust repo theo thứ tự:
+	- `extensions/` (local curated)
+	- `darkrai9x-vbook-extensions`
+	- `dat-bi-ext-vbook`
+	- các repo còn lại
+4. Nếu vẫn bằng nhau, dùng lexical path để đảm bảo kết quả deterministic.
+
+Lưu ý:
+- `vbook sort` giữ nguyên `metadata.author`, không rewrite tên tác giả.
+- Nếu đích `extensions/{type}/{folder}` đã tồn tại thì command sẽ skip, không ghi đè.

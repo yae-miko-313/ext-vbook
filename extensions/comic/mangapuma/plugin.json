@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "Manga Puma",
+    "author": "AleshaOnOn",
+    "version": 1,
+    "source": "https://mangapuma.com",
+    "regexp": "(www.)?mangapuma.com/[0-9a-z-]+/?$",
+    "description": "Tiền thân là mangabuddy",
+    "locale": "en-EN",
+    "language": "javascript",
+    "type": "comic",
+    "tag" : "nsfw"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}

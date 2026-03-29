@@ -1,11 +1,9 @@
 {
   "metadata": {
     "author": "kychi",
-    "description": "VBook Extension Tool - Personal extensions & comprehensive catalog builder",
-    "type": "personal",
-    "catalogPath": "extensions/plugin.json"
+    "description": "ext cá nhân, fix một số lỗi từ các nguồn hay đọc mà các dev chưa fix, đồng thời thêm mới nghịch code"
   },
-  "personal": [
+  "data": [
     {
       "name": "nTruyen",
       "author": "kychi",
@@ -13,7 +11,7 @@
       "version": 1,
       "source": "https://ntruyen.biz/",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/ntruyen/icon.png",
-      "description": "(fix ext lão B) Đọc truyện từ ntruyen.biz, toàn đam với ngôn tình :)))",
+      "description": "(fix ext lão B ) Đọc truyện từ ntruyen.biz, toàn đam với ngôn tình :)))",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -39,11 +37,5 @@
       "type": "novel",
       "locale": "vi_VN"
     }
-  ],
-  "note": {
-    "personal": "3 extensions by kychi (personal collection)",
-    "catalog": "Use catalogPath reference for 372+ community extensions with full attribution",
-    "philosophy": "Respect original authors - kychi builds tools, community builds content"
-  }
+  ]
 }
-

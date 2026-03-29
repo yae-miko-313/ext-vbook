@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "name": "truyenfullCom",
+    "author": "B",
+    "version": 4,
+    "source": "https://truyenfull.com",
+    "regexp": "(www.)?truyenfull.com/[^/]+/?$",
+    "description": "Đọc truyện trên trang Truyện Full",
+    "locale": "vi_VN",
+    "type": "novel",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}

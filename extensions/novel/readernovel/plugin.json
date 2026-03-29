@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "name": "Novel Fire",
+    "author": "Vearn",
+    "version": 1,
+    "source": "https://www.readernovel.net/",
+    "regexp": "(www.)?(m.)?readernovel.net/novel/*",
+    "description": "Đọc truyện trên trang https://www.readernovel.net/",
+    "locale": "en_US",
+    "language": "javascript",
+    "type": "novel"
+  },
+  "script": {
+    "home": "home.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}
