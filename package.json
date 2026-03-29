@@ -9,6 +9,16 @@
   },
   "scripts": {
     "start": "node tools/cli/index.js",
+    "lint:ext": "node tools/cli/index.js lint --plugin extensions/ntruyen",
+    "lint:all": "node tools/cli/index.js lint",
+    "lint:json": "node tools/cli/index.js lint --json",
+    "lint:refs": "node tools/cli/index.js lint --refs",
+    "health": "node tools/cli/index.js health",
+    "health:refs": "node tools/cli/index.js health --refs",
+    "fix": "node tools/cli/index.js fix",
+    "fix:write": "node tools/cli/index.js fix --write",
+    "scaffold:dry": "node tools/cli/index.js scaffold --name DemoExt --source https://example.com --author kychi --dry-run",
+    "verify": "node tools/cli/index.js verify --plugin extensions/ntruyen",
     "test:all": "node tools/cli/index.js test-all --plugin extensions/ntruyen",
     "build:ext": "node tools/cli/index.js build --plugin extensions/ntruyen",
     "install:ext": "node tools/cli/index.js install --plugin extensions/ntruyen"

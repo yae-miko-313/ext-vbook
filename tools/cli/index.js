@@ -7,6 +7,11 @@ const http = require('http');
 const archiver = require('archiver');
 const stringArgv = require('string-argv').default;
 const { getLocalIP, sendRequest } = require('./utils');
+const { runLint, printLintTableReport } = require('./lint');
+const { buildHealthReport, printHealthTableReport } = require('./health');
+const { runFix, printFixTableReport } = require('./fix');
+const { scaffoldExtension, askIfMissing } = require('./scaffold');
+const { runOfflineVerify, runOnlineVerify } = require('./verify');
 
 const WORKSPACE_ROOT = path.resolve(__dirname, '..', '..');
 require('dotenv').config({ path: path.join(WORKSPACE_ROOT, '.env') });
@@ -17,6 +22,226 @@ program
     .name('vbook')
     .description('VBook Extension CLI')
     .version('1.0.0');
+
+/**
+ * LINT COMMAND
+ */
+program.command('lint')
+    .description('Validate extension structure and metadata')
+    .option('-pl, --plugin <path>', 'Extension path (contains plugin.json)')
+    .option('--refs', 'Scan references/repos instead of local extensions/')
+    .option('--rhino', 'Enable Rhino compatibility syntax checks')
+    .option('--json', 'Output report as JSON')
+    .option('--max-warnings <count>', 'Fail if warning count exceeds this number')
+    .action(async (options) => {
+        try {
+            const report = runLint(WORKSPACE_ROOT, options.plugin, {
+                scanReferences: Boolean(options.refs),
+                enableRhinoChecks: Boolean(options.rhino)
+            });
+            if (options.json) {
+                console.log(JSON.stringify(report, null, 2));
+            } else {
+                printLintTableReport(report);
+            }
+
+            const maxWarnings =
+                options.maxWarnings !== undefined ? parseInt(options.maxWarnings, 10) : null;
+            if (maxWarnings !== null && (Number.isNaN(maxWarnings) || maxWarnings < 0)) {
+                throw new Error('--max-warnings must be a non-negative integer.');
+            }
+
+            if (report.summary.counts.error > 0) {
+                process.exitCode = 1;
+            }
+
+            if (
+                maxWarnings !== null &&
+                report.summary.counts.warning > maxWarnings
+            ) {
+                process.exitCode = 1;
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
+
+/**
+ * HEALTH COMMAND
+ */
+program.command('health')
+    .description('Show quality/issue distribution summary from lint data')
+    .option('-pl, --plugin <path>', 'Extension path (contains plugin.json)')
+    .option('--refs', 'Scan references/repos instead of local extensions/')
+    .option('--rhino', 'Enable Rhino compatibility syntax checks')
+    .option('--json', 'Output report as JSON')
+    .option('--strict-exit', 'Return exit code 1 when errors are present')
+    .action(async (options) => {
+        try {
+            const report = buildHealthReport(WORKSPACE_ROOT, {
+                plugin: options.plugin,
+                scanReferences: Boolean(options.refs),
+                enableRhinoChecks: Boolean(options.rhino)
+            });
+
+            if (options.json) {
+                console.log(JSON.stringify(report, null, 2));
+            } else {
+                printHealthTableReport(report);
+            }
+
+            if (options.strictExit && report.summary.counts.error > 0) {
+                process.exitCode = 1;
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
+
+/**
+ * FIX COMMAND
+ */
+program.command('fix')
+    .description('Propose or apply safe autofixes for plugin.json and script entries')
+    .option('-pl, --plugin <path>', 'Extension path (contains plugin.json)')
+    .option('--refs', 'Scan references/repos instead of local extensions/')
+    .option('--rhino', 'Enable Rhino compatibility checks in lint snapshots')
+    .option('--write', 'Apply fixes to files (default is propose only)')
+    .option('--cleanup-noise', 'Remove known noise files (plugin.zip, src/test.json) when --write is set')
+    .option('--json', 'Output report as JSON')
+    .action(async (options) => {
+        try {
+            const report = runFix(WORKSPACE_ROOT, options.plugin, {
+                scanReferences: Boolean(options.refs),
+                enableRhinoChecks: Boolean(options.rhino),
+                write: Boolean(options.write),
+                cleanupNoise: Boolean(options.cleanupNoise)
+            });
+
+            if (options.json) {
+                console.log(JSON.stringify(report, null, 2));
+            } else {
+                printFixTableReport(report);
+            }
+
+            const lintSnapshot = report.afterLint || report.beforeLint;
+            if (lintSnapshot.summary.counts.error > 0) {
+                process.exitCode = 1;
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
+
+/**
+ * SCAFFOLD COMMAND
+ */
+program.command('scaffold')
+    .description('Generate a new extension from template')
+    .option('--name <name>', 'Extension display name')
+    .option('--folder <folder>', 'Output folder name slug (default from --name)')
+    .option('--source <url>', 'Source website URL')
+    .option('--type <type>', 'Extension type (novel|comic|chinese_novel|translate|tts)', 'novel')
+    .option('--locale <locale>', 'Locale (vi_VN|zh_CN|en_US)', 'vi_VN')
+    .option('--author <author>', 'Metadata author')
+    .option('--description <text>', 'Metadata description')
+    .option('--regexp <regex>', 'Metadata regexp override')
+    .option('--template <path>', 'Template directory path')
+    .option('--output <path>', 'Output directory path')
+    .option('--force', 'Overwrite output if already exists')
+    .option('--dry-run', 'Preview generation without writing files')
+    .option('--skip-lint', 'Skip post-generate lint gate')
+    .option('--json', 'Output result as JSON')
+    .action(async (options) => {
+        try {
+            const interactiveConfig = { ...options };
+            await askIfMissing(interactiveConfig, 'name', 'Extension name');
+            await askIfMissing(interactiveConfig, 'source', 'Source URL (domain)');
+            await askIfMissing(interactiveConfig, 'author', 'Author', process.env.VBOOK_AUTHOR || 'kychi');
+
+            const result = scaffoldExtension(WORKSPACE_ROOT, interactiveConfig);
+
+            if (options.json) {
+                console.log(JSON.stringify(result, null, 2));
+            } else {
+                console.log('');
+                console.log('VBook Scaffold Report');
+                console.log('=====================');
+                console.log(`Name: ${result.name}`);
+                console.log(`Output: ${result.outputDir}`);
+                console.log(`Generated: ${result.generated ? 'yes' : 'no (dry-run)'}`);
+                if (result.lintReport) {
+                    console.log(
+                        `Post-lint: errors=${result.lintReport.summary.counts.error}, warnings=${result.lintReport.summary.counts.warning}`
+                    );
+                }
+            }
+
+            if (!result.success) {
+                process.exitCode = 1;
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
+
+/**
+ * VERIFY COMMAND
+ */
+program.command('verify')
+    .description('Run extension verification workflow (offline or device-online)')
+    .option('-pl, --plugin <path>', 'Extension path (contains plugin.json)')
+    .option('--mode <mode>', 'Verify mode: offline|online', 'offline')
+    .option('--rhino', 'Enable Rhino compatibility checks in offline mode')
+    .option('-i, --ip <ip>', 'Device IP (online mode)')
+    .option('-p, --port <port>', 'Device port (online mode)', '8080')
+    .option('-v, --verbose', 'Verbose logs for online mode')
+    .option('--json', 'Output result as JSON')
+    .action(async (options) => {
+        try {
+            let report;
+            if (options.mode === 'online') {
+                report = await runOnlineVerify(WORKSPACE_ROOT, {
+                    plugin: options.plugin,
+                    ip: options.ip,
+                    port: options.port,
+                    verbose: options.verbose
+                });
+            } else {
+                report = runOfflineVerify(WORKSPACE_ROOT, options.plugin, {
+                    rhino: options.rhino
+                });
+            }
+
+            if (options.json) {
+                console.log(JSON.stringify(report, null, 2));
+            } else {
+                console.log('');
+                console.log('VBook Verify Report');
+                console.log('===================');
+                console.log(`Mode: ${report.mode}`);
+                console.log(`Target: ${report.pluginRoot}`);
+                console.log(`Result: ${report.success ? 'PASS' : 'FAIL'}`);
+
+                if (report.mode === 'offline-structure' && Array.isArray(report.steps)) {
+                    for (const step of report.steps) {
+                        console.log(`- ${step.id}: ${step.success ? 'ok' : 'failed'}`);
+                    }
+                }
+            }
+
+            if (!report.success) {
+                process.exitCode = 1;
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
 
 /**
  * Common logic to find plugin root and metadata
@@ -417,6 +642,7 @@ program.command('test-all')
             console.log("\n[SUCCESS] One-click test completed successfully!");
         } catch (error) {
             console.error(`\n[ERROR] ${error.message}`);
+            process.exitCode = 1;
         } finally {
             if (server) server.close();
         }
