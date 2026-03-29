@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode">
+        <span id="theme-icon">☀️</span>
+    </button>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
             <h1>VBook Extension Catalog</h1>
-            <p class="subtitle">Extension list overview</p>
+            <p class="subtitle">Browse 372+ community extensions</p>
         </header>
 
         <!-- Stats Section -->
         <section class="stats">
             <div class="stat-card">
                 <div class="stat-number" id="total-extensions">0</div>
-                <div class="stat-label">Total Extensions</div>
+                <div class="stat-label">Total</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="novel-count">0</div>
@@ -30,7 +35,7 @@
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="chinese-count">0</div>
-                <div class="stat-label">Chinese Novel</div>
+                <div class="stat-label">Chinese</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="other-count">0</div>
@@ -50,7 +55,7 @@
             </div>
             <div class="filter-group">
                 <select id="type-filter" class="filter-select">
-                    <option value="">-- All Types --</option>
+                    <option value="">All Types</option>
                     <option value="novel">Novel</option>
                     <option value="comic">Comic</option>
                     <option value="chinese_novel">Chinese Novel</option>
@@ -61,8 +66,8 @@
             </div>
             <div class="filter-group">
                 <select id="sort-select" class="filter-select">
-                    <option value="name">Sort: Name A-Z</option>
-                    <option value="version">Sort: Version (Newest)</option>
+                    <option value="name">Sort: Name</option>
+                    <option value="version">Sort: Version</option>
                     <option value="author">Sort: Author</option>
                 </select>
             </div>
@@ -81,5 +86,6 @@
 
     <script src="data.js"></script>
     <script src="script.js"></script>
+    <script src="theme.js"></script>
 </body>
 </html>
