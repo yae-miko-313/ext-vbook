@@ -1,8 +1,8 @@
 {
-  "name": "vbook-ext",
-  "version": "1.0.0",
-  "description": "Jay20 personal VBook extension project",
-  "author": "jay20",
+  "name": "vbook-tool",
+  "version": "2.0.0",
+  "description": "VBook CLI extension tool - batch processing, catalog generation, and quality assurance",
+  "author": "kychi",
   "main": "tools/cli/index.js",
   "bin": {
     "vbook": "./tools/cli/index.js"
@@ -17,6 +17,12 @@
     "health:refs": "node tools/cli/index.js health --refs",
     "fix": "node tools/cli/index.js fix",
     "fix:write": "node tools/cli/index.js fix --write",
+    "inventory": "node tools/cli/index.js inventory",
+    "sort": "node tools/cli/index.js sort",
+    "batch-fix": "node tools/cli/index.js batch-fix",
+    "build-catalog": "node tools/cli/index.js build-catalog",
+    "ai-fix-queue": "node tools/cli/index.js ai-fix-queue",
+    "migrate:all": "node tools/cli/index.js inventory ; node tools/cli/index.js sort ; node tools/cli/index.js batch-fix ; node tools/cli/index.js build-catalog",
     "scaffold:dry": "node tools/cli/index.js scaffold --name DemoExt --source https://example.com --author kychi --dry-run",
     "verify": "node tools/cli/index.js verify --plugin extensions/ntruyen",
     "test:all": "node tools/cli/index.js test-all --plugin extensions/ntruyen",
