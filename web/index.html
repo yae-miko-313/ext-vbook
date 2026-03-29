@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VBook Extension Catalog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>📚 VBook Extension Catalog</h1>
+            <p class="subtitle">Tổng quan các extension có sẵn</p>
+        </header>
+
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-extensions">0</div>
+                <div class="stat-label">Tổng Extensions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="novel-count">0</div>
+                <div class="stat-label">Novel</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="comic-count">0</div>
+                <div class="stat-label">Comic</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="chinese-count">0</div>
+                <div class="stat-label">Chinese Novel</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="other-count">0</div>
+                <div class="stat-label">Khác</div>
+            </div>
+        </section>
+
+        <!-- Filters Section -->
+        <section class="filters">
+            <div class="filter-group">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="🔍 Tìm extension..." 
+                    class="search-box"
+                >
+            </div>
+            <div class="filter-group">
+                <select id="type-filter" class="filter-select">
+                    <option value="">-- Tất cả loại --</option>
+                    <option value="novel">Novel</option>
+                    <option value="comic">Comic</option>
+                    <option value="chinese_novel">Chinese Novel</option>
+                    <option value="translate">Translate</option>
+                    <option value="tts">TTS</option>
+                    <option value="_unknown">Unknown</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <select id="sort-select" class="filter-select">
+                    <option value="name">Tên A-Z</option>
+                    <option value="version">Version (mới nhất)</option>
+                    <option value="author">Tác giả</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Extensions Grid -->
+        <section class="extensions">
+            <div id="extensions-grid" class="extensions-grid"></div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>🎯 VBook Extension Tool v2.0.0 | kychi</p>
+        </footer>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
