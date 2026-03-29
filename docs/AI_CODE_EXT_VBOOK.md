@@ -6,12 +6,17 @@ This document provides instructions for AI agents on how to develop and test VBo
 
 1. **Coding Rules**: Read VBOOK CTX (below), [vbook_demo.md](./vbook_demo.md).
 2. **CLI Testing**: Read [README.md](../README.md) for `vbook` commands (`test-all`, `debug`, `install`, `build`).
+3. **Reference Repos**: Browse [REFERENCE_REPOS.md](./REFERENCE_REPOS.md) for a catalog of 24+ local reference repositories.
 
 ---
 
 ## 🌐 Community references (learn, do not blindly copy)
 
-Large public extension collections document many real-site patterns. Use them to **spot ideas**, then **re-verify** against the live site and this repo’s rules.
+Large public extension collections document many real-site patterns. Use them to **spot ideas**, then **re-verify** against the live site and this repo's rules.
+
+**Complete list of reference repositories**: See [REFERENCE_REPOS.md](./REFERENCE_REPOS.md)
+
+Primary references:
 
 | Source | Role |
 |--------|------|
