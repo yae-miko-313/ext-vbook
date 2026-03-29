@@ -9,10 +9,10 @@ const extensionCatalog = {
     _unknown: []
 };
 
-// Load from extensions/plugin.json
+// Load from ./catalog.json (local copy of extensions/plugin.json)
 async function loadExtensions() {
     try {
-        const response = await fetch('../extensions/plugin.json');
+        const response = await fetch('./catalog.json');
         const data = await response.json();
         
         // Populate catalog from loaded data
@@ -29,7 +29,7 @@ async function loadExtensions() {
         // Show error message
         document.getElementById('extensions-grid').innerHTML = 
             `<div style="grid-column: 1/-1; padding: 20px; color: red;">
-                ⚠️ Lỗi load dữ liệu. Kiểm tra ../extensions/plugin.json
+                ERROR: Cannot load catalog.json. Make sure to copy extensions/plugin.json to web/catalog.json
             </div>`;
     }
 }

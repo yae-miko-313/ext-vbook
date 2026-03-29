@@ -70,12 +70,12 @@ function renderStats() {
 // Render extension card
 function renderCard(ext) {
     const typeLabels = {
-        novel: '📖 Novel',
-        comic: '🎨 Comic',
-        chinese_novel: '🏮 Chinese Novel',
-        translate: '🌍 Translate',
-        tts: '🔊 TTS',
-        _unknown: '❓ Unknown'
+        novel: '[NOVEL]',
+        comic: '[COMIC]',
+        chinese_novel: '[CHINESE]',
+        translate: '[TRANS]',
+        tts: '[TTS]',
+        _unknown: '[UNKNOWN]'
     };
     
     const typeLabel = typeLabels[ext.type] || ext.type;
@@ -87,10 +87,10 @@ function renderCard(ext) {
                 <h3 class="ext-name">${ext.name || 'Unnamed'}</h3>
                 <span class="ext-version">v${ext.version || '0'}</span>
             </div>
-            <p class="ext-author">👤 ${ext.author || 'Unknown'}</p>
+            <p class="ext-author">Author: ${ext.author || 'Unknown'}</p>
             <p class="ext-description">${ext.description || 'No description'}</p>
-            ${ext.source ? `<a href="${ext.source}" target="_blank" class="ext-link">🔗 Source</a>` : ''}
-            ${ext.relativePath ? `<div class="ext-path">📁 ${ext.relativePath}</div>` : ''}
+            ${ext.source ? `<a href="${ext.source}" target="_blank" class="ext-link">View Source</a>` : ''}
+            ${ext.relativePath ? `<div class="ext-path">${ext.relativePath}</div>` : ''}
         </div>
     `;
 }
@@ -103,8 +103,8 @@ function renderGrid() {
     if (extensions.length === 0) {
         grid.innerHTML = `
             <div style="grid-column: 1/-1; padding: 40px; text-align: center; color: #666;">
-                <p style="font-size: 18px;">😞 Không tìm thấy extension</p>
-                <p style="font-size: 14px;">Thử đổi tìm kiếm hoặc filter</p>
+                <p style="font-size: 18px;">No extensions found</p>
+                <p style="font-size: 14px;">Try changing your search or filters</p>
             </div>
         `;
         return;
