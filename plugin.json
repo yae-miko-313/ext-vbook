@@ -28,9 +28,9 @@
     },
     {
       "name": "TruyenMoiKK",
-      "author": "kychi",                                                                                                 
+      "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/truyenmoi/plugin.zip",
-      "version": 3,
+      "version": 4,
       "source": "https://truyenmoikk.com/",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/truyenmoi/icon.png",
       "description": "Fork từ ext TruyenMoi của HieuDM, fix lỗi title detail và search.",

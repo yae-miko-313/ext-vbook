@@ -23,10 +23,21 @@ function execute(url) {
         if (!description) description = root.select(".desc-text").html();
         if (!description) description = "";
         
+        // Status: map "đang cập nhật" -> "Đang ra", "hoàn thành" -> "Hoàn thành"
+        let statusText = root.text();
+        let ongoing = true;
+        if (statusText.indexOf("hoàn thành") >= 0 || statusText.indexOf("Hoàn thành") >= 0 ||
+            statusText.indexOf("Đã hoàn thành") >= 0) {
+            ongoing = false;
+        }
+        
         // Thể loại / chi tiết
-        let detail = root.select(".info").html();
-        if (!detail) detail = root.select(".cat-link").html();
-        if (!detail) detail = author; // Tránh lỗi nếu web rỗng thông tin
+        let detail = "Tác giả: " + author + "<br>";
+        detail += "Trạng thái: " + (ongoing ? "Đang ra" : "Hoàn thành") + "<br>";
+        
+        let infoText = root.select(".info").text();
+        if (!infoText) infoText = root.select(".cat-link").text();
+        if (infoText) detail += "Thể loại: " + infoText;
 
         return Response.success({
             name: name,
@@ -34,7 +45,8 @@ function execute(url) {
             author: author,
             description: description,
             detail: detail,
-            host: "https://truyenmoikk.com"
+            host: "https://truyenmoikk.com",
+            ongoing: ongoing
         });
     }
     return null;

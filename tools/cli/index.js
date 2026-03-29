@@ -15,7 +15,7 @@ const program = new Command();
 
 program
     .name('vbook')
-    .description('kychi VBook Extension CLI')
+    .description('VBook Extension CLI')
     .version('1.0.0');
 
 /**
