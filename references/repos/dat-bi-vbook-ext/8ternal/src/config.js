@@ -1,1 +1,0 @@
-const BASE_URL = 'https://comic.8ternal.com/';
