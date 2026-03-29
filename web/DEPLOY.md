@@ -1,76 +1,48 @@
 # VBook Extension Catalog - GitHub Pages Deploy
 
-## Quick Deploy
+## Current Deploy Flow
+
+Project đã dùng workflow sẵn: `.github/workflows/deploy-pages.yml`.
+
+Trigger deploy khi push thay đổi trong `web/**` lên `main`.
+
+## Quick Deploy (Current)
 
 ```bash
-# 1. Ensure files are committed
-git add web/
-git commit -m "feat: redesign web with glass morphism style"
+# 1) Sync catalog data
+npx vbook build-catalog
+Copy-Item extensions/plugin.json web/catalog.json -Force
 
-# 2. Push to GitHub
-git push origin all-in-one
+# 2) Commit web/docs changes
+git add web/ README.md docs/
+git commit -m "chore: sync web catalog and docs"
 
-# 3. Create gh-pages branch (first time)
-git checkout --orphan gh-pages
-git reset --hard
-cp -r web/* .
-git add .
-git commit -m "deploy: initial github pages"
-git push -u origin gh-pages
-
-# 4. Set GitHub Pages in Settings
-# Go to repo → Settings → Pages → Source: Deploy from a branch → gh-pages
+# 3) Push main
+git push origin main
 ```
 
-## Auto Deploy Script
+## What Happens In CI
 
-Create `.github/workflows/deploy.yml`:
-```yaml
-name: Deploy to GitHub Pages
+- Workflow upload toàn bộ thư mục `web/` thành Pages artifact
+- GitHub Pages deploy tự động từ artifact này
+- Không cần tạo/force-push `gh-pages` thủ công
 
-on:
-  push:
-    branches: [all-in-one]
-    paths: [web/**]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Deploy to gh-pages
-        run: |
-          git config user.name "CI"
-          git config user.email "ci@example.com"
-          git checkout --orphan gh-pages
-          git reset --hard
-          cp -r web/* .
-          rm web/ .gitignore
-          git add .
-          git commit -m "deploy: $(date)"
-          git push -f origin gh-pages
-```
-
-## Manual Deploy
+## Manual Preview (Local)
 
 ```bash
-cd web
-# Sync catalog before deploying
-cp ../extensions/plugin.json catalog.json
-
-# Push to gh-pages
-git subtree push --prefix web origin gh-pages
+python -m http.server 8000 --directory web
 ```
+
+Mở `http://localhost:8000`
 
 ## Site URL
 
-After enabling GitHub Pages:
-- `https://USERNAME.github.io/vbook-tool/`
+Sau khi bật GitHub Pages:
+- `https://USERNAME.github.io/vbook-ext/`
 
 ## Features
 
-✨ Glass morphism design (from global.css style)
-🌓 Dark/Light mode toggle (localStorage)
-🔍 Search, filter, sort extensions
-📱 Responsive mobile-first
-⚡ Zero dependencies
+- Glass morphism UI + dark/light toggle
+- Search/filter/sort/copy quick-link
+- Responsive layout cho desktop/mobile
+- Zero dependency frontend (vanilla HTML/CSS/JS)

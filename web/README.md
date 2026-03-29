@@ -1,24 +1,30 @@
 # VBook Extension Catalog Viewer
 
-Simple dashboard to view all extensions in the catalog.
+Dashboard để duyệt catalog extension, tìm kiếm nhanh, copy raw link và theo dõi thống kê.
 
 ## How to Use
 
 ### Quick Start
 ```bash
-# Ensure catalog.json exists (auto-synced from extensions/plugin.json)
+# 1) Sync data
+cd ..
+npx vbook build-catalog
+Copy-Item extensions/plugin.json web/catalog.json -Force
+
+# 2) Run local web server
 cd web
 python -m http.server 8000
-
-# Then open: http://localhost:8000
 ```
+
+Mở: `http://localhost:8000`
 
 ## Features
 
 - Dashboard: Total count, stats by type
 - Search: Find by name, author, description
-- Filter: By extension type
-- Sort: A-Z, Version (newest), Author
+- Compact filter toolbar: Search + type + sort + copy quick-link
+- Copy raw link: tổng catalog hoặc catalog theo từng nhóm
+- Theme toggle + back-to-top
 
 ## File Structure
 
@@ -37,8 +43,9 @@ web/
 Loads from `catalog.json` which is a copy of `extensions/plugin.json`
 
 When to sync:
-- After running `npx vbook build-catalog`, copy the new json to `web/catalog.json`
-- Or: `cp extensions/plugin.json web/catalog.json`
+- Run `npx vbook build-catalog`
+- Sync `web/catalog.json` từ `extensions/plugin.json`
+- (Optional) regenerate `extensions/catalogs/*.plugin.json` để quick-link theo nhóm luôn chính xác
 
 ## Troubleshooting
 

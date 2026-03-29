@@ -1,0 +1,68 @@
+﻿{
+    "_unknown":  [
+                     {
+                         "folder":  "koanchay",
+                         "name":  "Koanchay",
+                         "author":  "vBook",
+                         "source":  "https://koanchay.net",
+                         "version":  12,
+                         "type":  "novel",
+                         "locale":  "vi_VN",
+                         "relativePath":  "extensions/_unknown/koanchay",
+                         "metadata":  {
+                                          "name":  "Koanchay",
+                                          "author":  "vBook",
+                                          "version":  12,
+                                          "source":  "https://koanchay.net",
+                                          "regexp":  "(www.)?koanchay.(com|net|info|org)/truyen/[^/]+/?$",
+                                          "description":  "Äá»c truyá»‡n trÃªn trang Koanchay",
+                                          "locale":  "vi_VN",
+                                          "language":  "javascript",
+                                          "tag":  "nsfw",
+                                          "type":  "novel"
+                                      }
+                     },
+                     {
+                         "folder":  "sstruyen.com",
+                         "name":  "SSTruyen",
+                         "author":  "HieuDM",
+                         "source":  "https://sstruyen.com.vn",
+                         "version":  1,
+                         "type":  "novel",
+                         "locale":  "vi_VN",
+                         "relativePath":  "extensions/_unknown/sstruyen.com",
+                         "metadata":  {
+                                          "name":  "SSTruyen",
+                                          "author":  "HieuDM",
+                                          "version":  1,
+                                          "source":  "https://sstruyen.com.vn",
+                                          "regexp":  "sstruyen\\.com\\.vn/([^/]+)/?$",
+                                          "type":  "novel",
+                                          "description":  "Äá»c truyá»‡n chá»¯ online trÃªn SSTruyen",
+                                          "locale":  "vi_VN",
+                                          "language":  "javascript"
+                                      }
+                     },
+                     {
+                         "folder":  "truyennhieu",
+                         "name":  "Truyá»‡n Nhiá»u",
+                         "author":  "Nhocconsr",
+                         "source":  "https://truyennhieu.com",
+                         "version":  3,
+                         "type":  "novel",
+                         "locale":  "vi_VN",
+                         "relativePath":  "extensions/_unknown/truyennhieu",
+                         "metadata":  {
+                                          "name":  "Truyá»‡n Nhiá»u",
+                                          "author":  "Nhocconsr",
+                                          "version":  3,
+                                          "source":  "https://truyennhieu.com",
+                                          "regexp":  "(www.)?truyennhieu.com/[^/]+/?",
+                                          "description":  "Äá»c truyá»‡n trÃªn trang Truyennhieu.com",
+                                          "language":  "javascript",
+                                          "locale":  "vi_VN",
+                                          "type":  "novel"
+                                      }
+                     }
+                 ]
+}

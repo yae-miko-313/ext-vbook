@@ -4,12 +4,12 @@ const themeIcon = document.getElementById('theme-icon');
 const htmlElement = document.documentElement;
 
 // Load saved theme preference
-const savedTheme = localStorage.getItem('theme') || 'dark';
+const savedTheme = localStorage.getItem('theme') || 'light';
 htmlElement.setAttribute('data-theme', savedTheme);
 updateThemeIcon(savedTheme);
 
 function updateThemeIcon(theme) {
-    themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    themeIcon.textContent = theme === 'dark' ? '☼' : '☾';
 }
 
 themeToggle.addEventListener('click', () => {

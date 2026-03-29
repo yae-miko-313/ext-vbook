@@ -1,75 +1,80 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="vi" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VBook Extension Catalog</title>
+    <title>Extension VBook</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Theme Toggle -->
-    <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode">
-        <span id="theme-icon">☀️</span>
+    <button class="theme-toggle" id="theme-toggle" title="Chuyển chế độ sáng/tối">
+        <span id="theme-icon">☾</span>
     </button>
 
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1>VBook Extension Catalog</h1>
-            <p class="subtitle">Browse 372+ community extensions</p>
+            <h1>Extension VBook</h1>
+            <p class="subtitle">Danh Sách Extension VBook và copy nhanh gọn</p>
         </header>
 
         <!-- Stats Section -->
         <section class="stats">
             <div class="stat-card">
                 <div class="stat-number" id="total-extensions">0</div>
-                <div class="stat-label">Total</div>
+                <div class="stat-label">Tổng</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="novel-count">0</div>
-                <div class="stat-label">Novel</div>
+                <div class="stat-label">Truyện Chữ</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="comic-count">0</div>
-                <div class="stat-label">Comic</div>
+                <div class="stat-label">Truyện Tranh</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="chinese-count">0</div>
-                <div class="stat-label">Chinese</div>
+                <div class="stat-label">Truyện Trung</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="other-count">0</div>
-                <div class="stat-label">Other</div>
+                <div class="stat-label">Khác</div>
             </div>
         </section>
 
         <!-- Filters Section -->
         <section class="filters">
-            <div class="filter-group">
-                <input 
-                    type="text" 
-                    id="search-input" 
-                    placeholder="Search extensions..." 
+            <div class="filter-group search-group">
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Tìm tiện ích..."
                     class="search-box"
                 >
             </div>
-            <div class="filter-group">
-                <select id="type-filter" class="filter-select">
-                    <option value="">All Types</option>
-                    <option value="novel">Novel</option>
-                    <option value="comic">Comic</option>
-                    <option value="chinese_novel">Chinese Novel</option>
-                    <option value="translate">Translate</option>
+            <div class="filter-group compact-group type-group" title="Lọc thể loại">
+                <span class="compact-icon" aria-hidden="true">≣</span>
+                <select id="type-unified-select" class="filter-select compact-select" aria-label="Lọc thể loại">
+                    <option value="all">Tất cả thể loại</option>
+                    <option value="novel">Truyện chữ</option>
+                    <option value="comic">Truyện tranh</option>
+                    <option value="chinese_novel">Truyện Trung</option>
+                    <option value="translate">Quick Translate</option>
                     <option value="tts">TTS</option>
-                    <option value="_unknown">Unknown</option>
+                    <option value="_unknown">Không rõ</option>
                 </select>
             </div>
-            <div class="filter-group">
-                <select id="sort-select" class="filter-select">
-                    <option value="name">Sort: Name</option>
-                    <option value="version">Sort: Version</option>
-                    <option value="author">Sort: Author</option>
+            <div class="filter-group compact-group sort-group" title="Sắp xếp">
+                <span class="compact-icon" aria-hidden="true">⇳</span>
+                <select id="sort-select" class="filter-select compact-select" aria-label="Sắp xếp">
+                    <option value="name">Sắp xếp: Tên</option>
+                    <option value="version">Sắp xếp: Phiên bản</option>
+                    <option value="author">Sắp xếp: Tác giả</option>
                 </select>
+            </div>
+            <div class="filter-group compact-group copy-group" title="Sao chép link">
+                <button id="copy-quick-link" class="action-btn compact-copy-btn" aria-label="Sao chép link">⧉</button>
             </div>
         </section>
 
@@ -78,11 +83,58 @@
             <div id="extensions-grid" class="extensions-grid"></div>
         </section>
 
+        <section class="contribute">
+            <div class="contribute-head">
+                <h2>Đóng Góp Từ Repo Gốc</h2>
+                <div class="contribute-actions">
+                    <a class="contribute-link" href="https://github.com/kychitoge/vbook-ext/issues/new" target="_blank">Tạo Issue</a>
+                    <a class="contribute-link" href="https://github.com/kychitoge/vbook-ext/pulls" target="_blank">Tạo PR</a>
+                </div>
+            </div>
+            <p> Mình chỉ tổng hợp lại các repo extension đang rải rác  Các repo và contributor đang được tham chiếu: </p>
+            <div class="repo-list">
+                <div class="repo-item"><strong>Darkrai9x</strong>: darkrai9x-vbook-extensions</div>
+                <div class="repo-item"><strong>dat-bi</strong>: dat-bi-ext-vbook, dat-bi-vbook-ext</div>
+                <div class="repo-item"><strong>b3x0m</strong>: b3x0m-vbook-ext</div>
+                <div class="repo-item"><strong>banquyy</strong>: banquyy-vbook</div>
+                <div class="repo-item"><strong>baobao666888</strong>: baobao666888-ext-vbook-w</div>
+                <div class="repo-item"><strong>chanhnh</strong>: chanhnh-vbook-ext</div>
+                <div class="repo-item"><strong>laofun</strong>: laofun-vbook-extensions-with-filter</div>
+                <div class="repo-item"><strong>alexsonxxx</strong>: alexsonxxx-vbook</div>
+                <div class="repo-item"><strong>duongden</strong>: duongden-vbook</div>
+                <div class="repo-item"><strong>evamirion</strong>: evamirion-vbook-ext</div>
+                <div class="repo-item"><strong>hajljnopera</strong>: hajljnopera-vbook-ext</div>
+                <div class="repo-item"><strong>hienpro00123</strong>: hienpro00123-vbook_meou</div>
+                <div class="repo-item"><strong>hieu45666</strong>: hieu45666-vbook_ext</div>
+                <div class="repo-item"><strong>hishirooo</strong>: hishirooo-vbook-ext</div>
+                <div class="repo-item"><strong>khoa301020</strong>: khoa301020-vbook-ext</div>
+                <div class="repo-item"><strong>lethituyen</strong>: lethituyen-vbooks-extension</div>
+                <div class="repo-item"><strong>mizhm</strong>: mizhm-vbook-extensions</div>
+                <div class="repo-item"><strong>moleys</strong>: moleys-vbook-ext</div>
+                <div class="repo-item"><strong>seyah24</strong>: seyah24-vbook-exts</div>
+                <div class="repo-item"><strong>sonzin</strong>: sonzin-vbook-extension</div>
+                <div class="repo-item"><strong>springpeachvinh</strong>: springpeachvinh-vbook-ext</div>
+                <div class="repo-item"><strong>tamchau</strong>: tamchau-vbook-extensions</div>
+                <div class="repo-item"><strong>tuanhai03</strong>: tuanhai03-vbook-extensions</div>
+            </div>
+        </section>
+
+
         <!-- Footer -->
         <footer class="footer">
-            <p>VBook Extension Tool v2.0.0 | kychi</p>
+            <div class="footer-content">
+                <p>Extension VBook Tool v2.0.0 | kychi</p>
+                <div class="contact-cards">
+                    <a href="https://github.com/kychitoge" target="_blank" class="contact-card">GitHub: kychitoge</a>
+                    <a href="https://discord.com/users/kyctg" target="_blank" class="contact-card">Discord: Liên hệ qua Discord</a>
+                </div>
+            </div>
         </footer>
     </div>
+
+    <button id="back-to-top" class="back-to-top" title="Lên đầu trang">↑</button>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
 
     <script src="data.js"></script>
     <script src="script.js"></script>

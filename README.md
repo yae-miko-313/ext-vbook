@@ -93,13 +93,18 @@ extensions/my-website/
 
 **Root `plugin.json`:**
 - Metadata & personal extensions (3 by kychi)
-- Reference: `extensions/plugin.json` cho full community catalog (372+ entries)
+- Reference: `extensions/plugin.json` cho full community catalog (373 entries)
 - Dùng để distribute bản cá nhân + link đến full catalog
 
 **`extensions/plugin.json` (Auto-generated):**
-- Mega catalog với 372+ community extensions
+- Mega catalog với 373 community extensions
 - Được generate bởi `npx vbook build-catalog`
 - Tôn trọng tác quyền - giữ nguyên author info từ original sources
+
+**`extensions/catalogs/*.plugin.json` (Auto-generated):**
+- Catalog theo từng nhóm để copy raw link nhanh từ web viewer
+- Bao gồm: `novel`, `comic`, `chinese_novel`, `translate`, `tts`, `_unknown`
+- Có thể regenerate bằng script đồng bộ sau khi build catalog
 
 **CLI Tools:**
 - Chỉ làm việc với `extensions/{type}/plugin.json` files

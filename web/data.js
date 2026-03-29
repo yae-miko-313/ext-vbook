@@ -13,6 +13,9 @@ const extensionCatalog = {
 async function loadExtensions() {
     try {
         const response = await fetch('./catalog.json');
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
         const data = await response.json();
         
         // Populate catalog from loaded data
@@ -29,7 +32,7 @@ async function loadExtensions() {
         // Show error message
         document.getElementById('extensions-grid').innerHTML = 
             `<div style="grid-column: 1/-1; padding: 20px; color: red;">
-                ERROR: Cannot load catalog.json. Make sure to copy extensions/plugin.json to web/catalog.json
+                Lỗi: Không thể tải catalog.json. Hãy chạy build-catalog rồi đồng bộ lại web/catalog.json
             </div>`;
     }
 }

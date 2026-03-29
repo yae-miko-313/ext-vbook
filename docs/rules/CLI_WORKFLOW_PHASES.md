@@ -22,6 +22,11 @@ Quy trình phát triển extension tiêu chuẩn sau khi sort + migrate:
    - Mục đích: Đồng bộ `extensions/plugin.json` với từng type catalog
    - Output: `extensions/plugin.json`, `extensions/{type}/plugin.json`
 
+4. **(Optional) Generate `extensions/catalogs/*.plugin.json`**
+   - Dùng cho web quick-link theo từng nhóm
+   - Mục đích: giữ web copy-link và catalog theo type luôn đồng bộ
+   - Output: `extensions/catalogs/novel.plugin.json`, `comic.plugin.json`, ...
+
 ### Optional Phases (khi cần)
 
 **`verify --mode offline`** (recommended before push)
@@ -56,6 +61,7 @@ $tmpDirs = Get-ChildItem -Path . -Recurse -Directory -Force -ErrorAction Silentl
 - `tools/cli/reports/fix-report.json` ← batch-fix output
 - `tools/cli/reports/ai-fix-report.json` ← ai-fix-queue output
 - `extensions/plugin.json` ← build-catalog mega catalog
+- `extensions/catalogs/*.plugin.json` ← per-type quick-link catalogs (optional)
 - Không tạo plugin.zip trừ khi thực sự cần
 
 ## Best Practices
