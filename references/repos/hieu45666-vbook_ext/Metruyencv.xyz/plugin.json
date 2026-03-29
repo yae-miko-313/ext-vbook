@@ -1,0 +1,23 @@
+{
+    "metadata": {
+        "name": "Mê Truyện CV",
+        "author": "HieuDM",
+        "version": 1,
+        "source": "https://metruyencv.xyz",
+        "regexp": "(www.)?(metruyenchu|mtccv|metruyencv).[a-z]+/truyen/[a-zA-Z0-9-]+/?$",
+        "type": "novel",
+        "description": "Extension cào dữ liệu từ metruyencv.xyz",
+        "locale": "vi_VN",
+        "language": "javascript"
+    },
+    "script": {
+        "home": "home.js",
+        "detail": "detail.js",
+        "toc": "toc.js",
+        "chap": "chap.js",
+        "search": "search.js",
+        "gen": "gen.js",
+        "genre": "genre.js"
+    }
+
+}

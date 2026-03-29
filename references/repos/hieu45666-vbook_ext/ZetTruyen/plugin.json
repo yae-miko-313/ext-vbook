@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "ZetTruyen",
+    "author": "HieuDM",
+    "version": 1,
+    "source": "https://www.zettruyen.africa/",
+    "regexp": "https?:\\/\\/(www\\.)?zettruyen\\.africa\\/truyen-tranh\\/[a-z0-9\\-]+",
+    "description": "Extension đọc truyện từ Zettruyen",
+    "local": "vi-VN",
+    "language": "javascript",
+    "type": "comic"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "gen" : "gen.js"
+  }
+}

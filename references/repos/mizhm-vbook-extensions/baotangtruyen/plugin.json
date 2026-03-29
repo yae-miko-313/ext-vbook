@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "name": "Bảo tàng truyện",
+    "author": "mizhm",
+    "version": 2,
+    "source": "https://baotangtruyen36.top",
+    "regexp": "(www.)?baotangtruyenhot.com/truyen-tranh/[^/]+/?$",
+    "description": "Đọc Truyện Tranh Online - Kho Truyện Tranh Lớn Nhất VN - BaoTangTruyenTranh",
+    "local": "vi-VN",
+    "language": "javascript",
+    "type": "comic"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}

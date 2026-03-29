@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "name": "Truyện đọc việt",
+    "author": "Laofun",
+    "version": 1,
+    "source": "https://truyendocviet.vn",
+    "regexp": "(www.)?truyendocviet.vn/[0-9a-z]+/([0-9a-z-]+)?$",
+    "description": "truyendocviet.vn",
+    "local": "vi-VN",
+    "language": "javascript",
+    "type": "novel"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "name": "jpmtl",
+    "author": "Cá mụp cắn cáp",
+    "version": 1,
+    "source": "https://jpmtl.com",
+    "regexp": "(www.)?jpmtl.com/books/\\d+$",
+    "description": "add search",
+    "local": "vi-VN",
+    "language": "javascript",
+    "type": "novel"//sai stype =))
+  },
+  "script": {
+    "home": "home.js",
+    //"genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}

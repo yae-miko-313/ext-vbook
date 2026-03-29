@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "name": "[Ảnh] Bộ sưu tập ảnh gái xinh của Mol 🛠📷",
+    "author": "Moleys",
+    "version": 2,
+    "source": "https://github.com/Moleys/vbook-ext/anh_moleys-gc",
+    "regexp": "github.com/Moleys/vbook-ext/anh_moleys-gc/(.*?)",
+    "description": "Xem ảnh ở bộ sưu tập của Moleys",
+    "type": "comic",
+    "locale": "vi_VN",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}

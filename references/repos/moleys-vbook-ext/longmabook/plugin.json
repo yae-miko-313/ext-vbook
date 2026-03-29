@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "name": "longmabook [Long Mã/Hải Đường] 💰✅",
+    "author": "Moleys",
+    "version": 5,
+    "source": "https://ebook.longmabook.com",
+    "regexp": "(www.|ebook.)?longmabook.com/(.*?)bookid=\\d+(.*?)",
+    "description": "Đọc truyện trên trang https://ebook.longmabook.com",
+    "locale": "zh_CN",
+    "language": "javascript",
+    "type": "chinese_novel"
+  },
+  "script": {
+    "home": "home.js",
+    "detail": "detail.js",
+    "page": "page.js",
+    "toc": "toc.js",
+    "search": "search.js",
+    "chap": "chap.js"
+  }
+}

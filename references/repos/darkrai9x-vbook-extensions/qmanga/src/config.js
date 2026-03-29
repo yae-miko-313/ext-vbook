@@ -1,0 +1,1 @@
+const BASE_URL = 'https://qmanga8.com';
