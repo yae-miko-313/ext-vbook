@@ -1,104 +1,63 @@
 {
-  "tts": [
+  "metadata": {
+    "author": "kychi",
+    "description": "catalog tts - synced from extensions/tts"
+  },
+  "data": [
     {
-      "folder": "bing-tts",
       "name": "Bing TTS",
       "author": "vBook",
-      "description": "Nghe truyện bằng Bing TTS",
-      "source": "https://www.bing.com/translator",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/bing-tts/plugin.json",
       "version": 1,
+      "source": "https://www.bing.com/translator",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/bing-tts/icon.png",
+      "description": "Nghe truyện bằng Bing TTS",
       "type": "tts",
-      "locale": "vi_VN",
-      "relativePath": "extensions/tts/bing-tts",
-      "metadata": {
-        "name": "Bing TTS",
-        "author": "vBook",
-        "version": 1,
-        "source": "https://www.bing.com/translator",
-        "description": "Nghe truyện bằng Bing TTS",
-        "type": "tts",
-        "locale": "vi_VN"
-      }
+      "locale": "vi_VN"
     },
     {
-      "folder": "gemini-tts",
       "name": "Gemini TTS",
       "author": "vBook",
-      "description": "Nghe truyện bằng Gemini TTS",
-      "source": "https://gemini.google.com",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/gemini-tts/plugin.json",
       "version": 1,
+      "source": "https://gemini.google.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/gemini-tts/icon.png",
+      "description": "Nghe truyện bằng Gemini TTS",
       "type": "tts",
-      "locale": "vi_VN",
-      "relativePath": "extensions/tts/gemini-tts",
-      "metadata": {
-        "name": "Gemini TTS",
-        "author": "vBook",
-        "version": 1,
-        "source": "https://gemini.google.com",
-        "description": "Nghe truyện bằng Gemini TTS",
-        "type": "tts",
-        "locale": "vi_VN"
-      }
+      "locale": "vi_VN"
     },
     {
-      "folder": "google-tts",
       "name": "Google TTS",
       "author": "vBook",
-      "description": "Nghe truyện bằng Google TTS",
-      "source": "https://www.google.com",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/google-tts/plugin.json",
       "version": 1,
+      "source": "https://www.google.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/google-tts/icon.png",
+      "description": "Nghe truyện bằng Google TTS",
       "type": "tts",
-      "locale": "vi_VN",
-      "relativePath": "extensions/tts/google-tts",
-      "metadata": {
-        "name": "Google TTS",
-        "author": "vBook",
-        "version": 1,
-        "source": "https://www.google.com",
-        "description": "Nghe truyện bằng Google TTS",
-        "type": "tts",
-        "locale": "vi_VN"
-      }
+      "locale": "vi_VN"
     },
     {
-      "folder": "tiktok-tts",
       "name": "Tiktok TTS",
       "author": "vBook",
-      "description": "Nghe truyện bằng Tiktok TTS",
-      "source": "https://www.tiktok.com",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/tiktok-tts/plugin.json",
       "version": 1,
+      "source": "https://www.tiktok.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/tiktok-tts/icon.png",
+      "description": "Nghe truyện bằng Tiktok TTS",
       "type": "tts",
-      "locale": "vi_VN",
-      "relativePath": "extensions/tts/tiktok-tts",
-      "metadata": {
-        "name": "Tiktok TTS",
-        "author": "vBook",
-        "version": 1,
-        "source": "https://www.tiktok.com",
-        "description": "Nghe truyện bằng Tiktok TTS",
-        "type": "tts",
-        "locale": "vi_VN"
-      }
+      "locale": "vi_VN"
     },
     {
-      "folder": "zalo-tts",
       "name": "Zalo AI TTS",
       "author": "vBook",
-      "description": "Nghe truyện bằng Zalo AI TTS",
-      "source": "https://ai.zalo.cloud/docs/api/getting-started",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/zalo-tts/plugin.json",
       "version": 1,
+      "source": "https://ai.zalo.cloud/docs/api/getting-started",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/zalo-tts/icon.png",
+      "description": "Nghe truyện bằng Zalo AI TTS",
       "type": "tts",
-      "locale": "vi_VN",
-      "relativePath": "extensions/tts/zalo-tts",
-      "metadata": {
-        "name": "Zalo AI TTS",
-        "author": "vBook",
-        "version": 1,
-        "source": "https://ai.zalo.cloud/docs/api/getting-started",
-        "description": "Nghe truyện bằng Zalo AI TTS",
-        "type": "tts",
-        "locale": "vi_VN"
-      }
+      "locale": "vi_VN"
     }
   ]
 }

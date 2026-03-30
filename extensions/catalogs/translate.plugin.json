@@ -1,85 +1,52 @@
 {
-  "translate": [
+  "metadata": {
+    "author": "kychi",
+    "description": "catalog translate - synced from extensions/translate"
+  },
+  "data": [
     {
-      "folder": "baidu-translate",
       "name": "Baidu Translate",
       "author": "vBook",
-      "description": "Dịch truyện bằng Baidu Translate",
-      "source": "https://fanyi.baidu.com",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/baidu-translate/plugin.json",
       "version": 1,
+      "source": "https://fanyi.baidu.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/baidu-translate/icon.png",
+      "description": "Dịch truyện bằng Baidu Translate",
       "type": "translate",
-      "locale": "vi_VN",
-      "relativePath": "extensions/translate/baidu-translate",
-      "metadata": {
-        "name": "Baidu Translate",
-        "author": "vBook",
-        "version": 1,
-        "source": "https://fanyi.baidu.com",
-        "description": "Dịch truyện bằng Baidu Translate",
-        "type": "translate",
-        "locale": "vi_VN"
-      }
+      "locale": "vi_VN"
     },
     {
-      "folder": "google-translate",
       "name": "Google Translate mod",
       "author": "vBook",
-      "description": "Google Translate mới",
-      "source": "https://translate.google.com",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/google-translate/plugin.json",
       "version": 18,
+      "source": "https://translate.google.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/google-translate/icon.png",
+      "description": "Google Translate mới",
       "type": "translate",
-      "locale": "vi_VN",
-      "relativePath": "extensions/translate/google-translate",
-      "metadata": {
-        "name": "Google Translate mod",
-        "author": "vBook",
-        "version": 18,
-        "source": "https://translate.google.com",
-        "description": "Google Translate mới",
-        "locale": "vi_VN",
-        "language": "javascript",
-        "type": "translate"
-      }
+      "locale": "vi_VN"
     },
     {
-      "folder": "openai-translate",
       "name": "OpenAI Translate",
       "author": "vBook",
-      "description": "Dịch truyện bằng OpenAI Compatible API",
-      "source": "https://api.vectorengine.ai",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/openai-translate/plugin.json",
       "version": 1,
+      "source": "https://api.vectorengine.ai",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/openai-translate/icon.png",
+      "description": "Dịch truyện bằng OpenAI Compatible API",
       "type": "translate",
-      "locale": "vi_VN",
-      "relativePath": "extensions/translate/openai-translate",
-      "metadata": {
-        "name": "OpenAI Translate",
-        "author": "vBook",
-        "version": 1,
-        "source": "https://api.vectorengine.ai",
-        "description": "Dịch truyện bằng OpenAI Compatible API",
-        "type": "translate",
-        "locale": "vi_VN"
-      }
+      "locale": "vi_VN"
     },
     {
-      "folder": "xombot",
       "name": "Xombot Dịch",
       "author": "b3x0m",
-      "description": "Dịch truyện bằng Xombot",
-      "source": "https://xombot.b3x0m.us.kg/",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/xombot/plugin.json",
       "version": 1,
+      "source": "https://xombot.b3x0m.us.kg/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/xombot/icon.png",
+      "description": "Dịch truyện bằng Xombot",
       "type": "translate",
-      "locale": "vi_VN",
-      "relativePath": "extensions/translate/xombot",
-      "metadata": {
-        "name": "Xombot Dịch",
-        "author": "b3x0m",
-        "version": 1,
-        "source": "https://xombot.b3x0m.us.kg/",
-        "description": "Dịch truyện bằng Xombot",
-        "type": "translate",
-        "locale": "vi_VN"
-      }
+      "locale": "vi_VN"
     }
   ]
 }

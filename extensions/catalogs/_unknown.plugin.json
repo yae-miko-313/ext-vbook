@@ -1,71 +1,41 @@
 {
-  "_unknown": [
+  "metadata": {
+    "author": "kychi",
+    "description": "catalog _unknown - synced from extensions/_unknown"
+  },
+  "data": [
     {
-      "folder": "koanchay",
       "name": "Koanchay",
       "author": "vBook",
-      "description": "Đọc truyện trên trang Koanchay",
-      "source": "https://koanchay.net",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/_unknown/koanchay/plugin.json",
       "version": 12,
+      "source": "https://koanchay.net",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/_unknown/koanchay/icon.png",
+      "description": "Đọc truyện trên trang Koanchay",
       "type": "novel",
-      "locale": "vi_VN",
-      "relativePath": "extensions/_unknown/koanchay",
-      "metadata": {
-        "name": "Koanchay",
-        "author": "vBook",
-        "version": 12,
-        "source": "https://koanchay.net",
-        "regexp": "(www.)?koanchay.(com|net|info|org)/truyen/[^/]+/?$",
-        "description": "Đọc truyện trên trang Koanchay",
-        "locale": "vi_VN",
-        "language": "javascript",
-        "tag": "nsfw",
-        "type": "novel"
-      }
+      "locale": "vi_VN"
     },
     {
-      "folder": "sstruyen.com",
       "name": "SSTruyen",
       "author": "HieuDM",
-      "description": "Đọc truyện chữ online trên SSTruyen",
-      "source": "https://sstruyen.com.vn",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/_unknown/sstruyen.com/plugin.json",
       "version": 1,
+      "source": "https://sstruyen.com.vn",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/_unknown/sstruyen.com/icon.png",
+      "description": "Đọc truyện chữ online trên SSTruyen",
       "type": "novel",
-      "locale": "vi_VN",
-      "relativePath": "extensions/_unknown/sstruyen.com",
-      "metadata": {
-        "name": "SSTruyen",
-        "author": "HieuDM",
-        "version": 1,
-        "source": "https://sstruyen.com.vn",
-        "regexp": "sstruyen\\.com\\.vn/([^/]+)/?$",
-        "type": "novel",
-        "description": "Đọc truyện chữ online trên SSTruyen",
-        "locale": "vi_VN",
-        "language": "javascript"
-      }
+      "locale": "vi_VN"
     },
     {
-      "folder": "truyennhieu",
       "name": "Truyện Nhiều",
       "author": "Nhocconsr",
-      "description": "Đọc truyện trên trang Truyennhieu.com",
-      "source": "https://truyennhieu.com",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/_unknown/truyennhieu/plugin.json",
       "version": 3,
+      "source": "https://truyennhieu.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/_unknown/truyennhieu/icon.png",
+      "description": "Đọc truyện trên trang Truyennhieu.com",
       "type": "novel",
-      "locale": "vi_VN",
-      "relativePath": "extensions/_unknown/truyennhieu",
-      "metadata": {
-        "name": "Truyện Nhiều",
-        "author": "Nhocconsr",
-        "version": 3,
-        "source": "https://truyennhieu.com",
-        "regexp": "(www.)?truyennhieu.com/[^/]+/?",
-        "description": "Đọc truyện trên trang Truyennhieu.com",
-        "language": "javascript",
-        "locale": "vi_VN",
-        "type": "novel"
-      }
+      "locale": "vi_VN"
     }
   ]
 }
