@@ -12,7 +12,7 @@ const {
     resolveInventoryPath,
     tryGetSourceDomain,
     writeJson
-} = require('./migration-utils');
+} = require('../core/migration-utils');
 
 function buildInventory(workspaceRoot) {
     const pluginRoots = discoverAllPluginRoots(workspaceRoot);

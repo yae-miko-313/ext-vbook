@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { runLint } = require('./lint');
+const { runLint } = require('../lint/lint');
 
 const REQUIRED_SCRIPT_KEYS_BY_TYPE = {
     novel: new Set(['detail', 'toc', 'chap']),

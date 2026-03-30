@@ -6,7 +6,7 @@ const {
     relativeFromWorkspace,
     resolveInventoryPath,
     writeJson
-} = require('./migration-utils');
+} = require('../core/migration-utils');
 
 function copyDirRecursive(sourceDir, targetDir) {
     fs.mkdirSync(targetDir, { recursive: true });

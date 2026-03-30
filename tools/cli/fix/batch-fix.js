@@ -1,12 +1,12 @@
 const path = require('path');
 const { runFix } = require('./fix');
-const { runLint } = require('./lint');
+const { runLint } = require('../lint/lint');
 const {
     collectPluginRootsRecursively,
     relativeFromWorkspace,
     resolveFixReportPath,
     writeJson
-} = require('./migration-utils');
+} = require('../core/migration-utils');
 
 function discoverPluginRootsUnder(workspaceRoot, relativeDir) {
     const absoluteDir = path.resolve(workspaceRoot, relativeDir);

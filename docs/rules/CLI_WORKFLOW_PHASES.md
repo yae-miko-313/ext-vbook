@@ -2,6 +2,12 @@
 
 ## Recommended Development Pipeline
 
+
+> **Lưu ý:**
+> - Tất cả CLI scripts đã được tổ chức lại thành 5 nhóm folder: `core/`, `build/`, `lint/`, `fix/`, `scaffold/` trong `tools/cli/`.
+> - Mọi lệnh CLI đều gọi qua entrypoint `tools/cli/index.js <command>` (hoặc alias `npx vbook <command>` nếu đã link).
+> - Scripts trong `package.json` đã cập nhật để đồng bộ với cấu trúc mới.
+
 Quy trình phát triển extension tiêu chuẩn sau khi sort + migrate:
 
 ### Phase Execution Order

@@ -1,15 +1,15 @@
 const fs = require('fs');
 const path = require('path');
-const { runLint } = require('./lint');
+const { runLint } = require('../lint/lint');
 const { runFix } = require('./fix');
-const { runOfflineVerify } = require('./verify');
+const { runOfflineVerify } = require('../scaffold/verify');
 const {
     VALID_TYPES,
     readJson,
     relativeFromWorkspace,
     resolveFixReportPath,
     writeJson
-} = require('./migration-utils');
+} = require('../core/migration-utils');
 
 const REQUIRED_SCRIPT_KEYS_BY_TYPE = {
     novel: new Set(['detail', 'toc', 'chap']),

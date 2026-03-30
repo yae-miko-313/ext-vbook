@@ -23,24 +23,46 @@ npm install
 4. **Verify Offline**: `npx vbook verify --mode offline --plugin extensions/[tên]` - Kiểm tra scripts an toàn.
 5. **Build**: `npx vbook build --plugin extensions/[tên]` - Xuất `plugin.zip` để test.
 
-## CLI Commands
+## CLI Commands & Structure
 
-| Command | Mô tả ngắn | Status |
-|---|---|---|
-| `lint` | Kiểm tra tính hợp lệ file `plugin.json` và cấu trúc mã nguồn. | 🟢 Done |
-| `health` | Report tổng quan về lỗi nhiều extension (top-rules list). | 🟢 Done |
-| `scaffold`| Generates mã lệnh ext mới thông qua menu tương tác. | 🟢 Done |
-| `fix` | Autofix file rác, metadata typo, rule case issues. | 🟢 Done |
-| `verify` | Offline check các script function và Online test kết nối ping. | 🟢 Done |
-| `build` | Đóng gói thư mục src/ icon.png thành `plugin.zip` . | 🟢 Done |
-| `install` | Sideload trực tiếp extension test lên Mobile IP port VBook. | 🟢 Done |
-| `test-all`| 1-click test flow liên kết endpoint từ JS lên App (Home->Chap). | 🟢 (Local) |
-| `debug` | Sandbox mode run bất kỳ hàm `js` độc lập trên terminal . | 🟢 (Local) |
-| `inventory` | Quét toàn bộ ext + refs, dedupe theo domain và xuất báo cáo inventory. | 🟢 Done |
-| `sort` | Copy ext keepFlag vào nhóm type `extensions/{type}/{name}` (skip nếu đích tồn tại). | 🟢 Done |
-| `batch-fix` | Chạy lint -> fix(write+cleanup) -> lint lại trên toàn bộ ext đã sort. | 🟢 Done |
-| `build-catalog` | Build catalog từng type và mega catalog `extensions/plugin.json`. | 🟢 Done |
-| `ai-fix-queue` | Chạy vòng AI heuristic fix cho nhóm `needs_ai` với tối đa 2 attempts. | 🟢 Done |
+CLI scripts đã được tổ chức lại thành 5 nhóm chính trong `tools/cli/`:
+
+- `core/`      : Tiện ích chung, utils, migration-utils
+- `build/`     : build-catalog, sort, inventory
+- `lint/`      : lint, health
+- `fix/`       : fix, batch-fix, ai-fix-queue
+- `scaffold/`  : scaffold, verify
+
+Tất cả lệnh CLI đều gọi qua entrypoint `tools/cli/index.js`.
+
+| Command         | Mô tả ngắn                                                                 | Status        |
+|-----------------|----------------------------------------------------------------------------|--------------|
+| `lint`          | Kiểm tra tính hợp lệ file `plugin.json` và cấu trúc mã nguồn.              | 🟢 Done      |
+| `health`        | Report tổng quan về lỗi nhiều extension (top-rules list).                  | 🟢 Done      |
+| `scaffold`      | Generates mã lệnh ext mới thông qua menu tương tác.                        | 🟢 Done      |
+| `fix`           | Autofix file rác, metadata typo, rule case issues.                         | 🟢 Done      |
+| `verify`        | Offline check các script function và Online test kết nối ping.              | 🟢 Done      |
+| `build`         | Đóng gói thư mục src/ icon.png thành `plugin.zip` .                        | 🟢 Done      |
+| `install`       | Sideload trực tiếp extension test lên Mobile IP port VBook.                | 🟢 Done      |
+| `test-all`      | 1-click test flow liên kết endpoint từ JS lên App (Home->Chap).            | 🟢 (Local)   |
+| `debug`         | Sandbox mode run bất kỳ hàm `js` độc lập trên terminal .                   | 🟢 (Local)   |
+| `inventory`     | Quét toàn bộ ext + refs, dedupe theo domain và xuất báo cáo inventory.     | 🟢 Done      |
+| `sort`          | Copy ext keepFlag vào nhóm type `extensions/{type}/{name}` (skip nếu đích tồn tại). | 🟢 Done |
+| `batch-fix`     | Chạy lint -> fix(write+cleanup) -> lint lại trên toàn bộ ext đã sort.      | 🟢 Done      |
+| `build-catalog` | Build catalog từng type và mega catalog `extensions/plugin.json`.           | 🟢 Done      |
+| `ai-fix-queue`  | Chạy vòng AI heuristic fix cho nhóm `needs_ai` với tối đa 2 attempts.      | 🟢 Done      |
+
+Ví dụ chạy CLI:
+
+```bash
+npx vbook lint --plugin extensions/ntruyen
+npx vbook fix --plugin extensions/ntruyen --write
+npx vbook build-catalog
+```
+
+> **Lưu ý:**
+> - Scripts trong `package.json` đã được cập nhật để gọi đúng entrypoint mới.
+> - Có thể gọi trực tiếp qua `node tools/cli/index.js <command>` hoặc dùng alias `npx vbook <command>` nếu đã link.
 
 ## Mass Migration Workflow
 

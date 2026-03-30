@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
-const { runLint } = require('./lint');
+const { runLint } = require('../lint/lint');
 
 function findPluginRoot(startDir) {
     let current = path.resolve(startDir);

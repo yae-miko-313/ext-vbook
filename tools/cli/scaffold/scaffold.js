@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline/promises');
-const { runLint } = require('./lint');
+const { runLint } = require('../lint/lint');
 
 const ALLOWED_TYPES = ['novel', 'comic', 'chinese_novel', 'translate', 'tts'];
 const ALLOWED_LOCALES = ['vi_VN', 'zh_CN', 'en_US'];
