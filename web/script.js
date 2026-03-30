@@ -72,19 +72,20 @@ function setupQuickLinkActions() {
         renderGrid();
     });
 
+
     copyQuickLinkBtn.addEventListener('click', async () => {
         const type = unifiedSelect.value;
         const link = type === 'all'
-            ? buildRawLink('extensions/plugin.json')
+            ? buildRawLink('extensions/catalogs/all.plugin.json')
             : buildRawLink(`extensions/catalogs/${type}.plugin.json`);
 
         try {
             await copyToClipboard(link);
             showToast(type === 'all'
-                ? 'Da sao chep link plugin.json tong'
-                : `Da sao chep link plugin.json cua ${type}`);
+                ? 'Đã sao chép link tổng all.plugin.json'
+                : `Đã sao chép link plugin.json của nhóm ${type}`);
         } catch (error) {
-            showToast('Khong the sao chep. Hay thu lai hoac copy thu cong.');
+            showToast('Không thể sao chép. Hãy thử lại hoặc copy thủ công.');
         }
     });
 
@@ -102,9 +103,9 @@ function setupQuickLinkActions() {
         const link = buildRawLink(pluginPath);
         try {
             await copyToClipboard(link);
-            showToast('Da sao chep link plugin.json cua extension');
+            showToast('Đã sao chép link plugin.json của extension');
         } catch (error) {
-            showToast('Khong the sao chep. Hay thu lai hoac copy thu cong.');
+            showToast('Không thể sao chép. Hãy thử lại hoặc copy thủ công.');
         }
     });
 }
@@ -222,12 +223,12 @@ function renderCatalogUpdatedTime() {
     const updatedLabel = formatCatalogUpdatedAt(status.updatedAt);
 
     if (!updatedLabel) {
-        element.textContent = 'Cap nhat: chua co du lieu';
+        element.textContent = 'Cập nhật: chưa có dữ liệu';
         return;
     }
 
     const suffix = status.updatedAtSource === 'header' ? '' : ' (local)';
-    element.textContent = `Cap nhat: ${updatedLabel}${suffix}`;
+    element.textContent = `Cập nhật: ${updatedLabel}${suffix}`;
 }
 
 function escapeHtml(value) {
@@ -300,12 +301,12 @@ function renderAuthorAcknowledgement() {
     const totalByAuthors = authors.reduce((sum, item) => sum + item[1], 0);
 
     if (authors.length === 0) {
-        listEl.innerHTML = '<p class="authors-empty">Chua co du lieu tac gia.</p>';
+        listEl.innerHTML = '<p class="authors-empty">Chưa có dữ liệu tác giả.</p>';
         if (topListEl) {
-            topListEl.innerHTML = '<p class="authors-empty">Chua co du lieu.</p>';
+            topListEl.innerHTML = '<p class="authors-empty">Chưa có dữ liệu.</p>';
         }
         if (shareListEl) {
-            shareListEl.innerHTML = '<p class="authors-empty">Chua co du lieu.</p>';
+            shareListEl.innerHTML = '<p class="authors-empty">Chưa có dữ liệu.</p>';
         }
         return;
     }
