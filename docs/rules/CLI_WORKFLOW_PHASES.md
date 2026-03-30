@@ -79,6 +79,13 @@ $tmpDirs = Get-ChildItem -Path . -Recurse -Directory -Force -ErrorAction Silentl
 - Skip build-catalog (catalog phải đồng bộ)
 - Xoá icon.png tự động (báo lại để xử lý thủ công)
 
+## Legal Gate (Bắt buộc trước khi làm ext mới)
+
+- Nếu site có mã số thuế hoặc thông tin đăng ký/đã thông báo Bộ Công Thương, không làm extension cho site đó.
+- Nếu site thể hiện quyền sở hữu bản quyền và đang vận hành thương mại rõ ràng, ưu tiên né để giảm rủi ro pháp lý.
+- Nếu gặp case nghi ngờ: dừng implement, mở issue nội bộ và chờ xác nhận maintainer.
+- Ngoại lệ: domain quốc tế `.com` không tự động bị chặn, vẫn xem xét theo từng case cụ thể.
+
 ## Quick Commands
 
 ```bash
