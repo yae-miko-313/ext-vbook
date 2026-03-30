@@ -96,6 +96,6 @@ b.close(); // Quan trọng: Luôn gọi close() để tránh memory leak
 	- Có thông tin đăng ký hoặc xác thực Bộ Công Thương.
 	- Có cảnh báo sở hữu bản quyền nội dung rõ ràng và đang vận hành thương mại.
 - Khi phát hiện các dấu hiệu trên: dừng implement, không merge, báo lại maintainer để loại khỏi catalog.
-- Rule này ưu tiên an toàn pháp lý cho domain nội địa. Domain quốc tế `.com` không tự động bị chặn, đánh giá theo từng trường hợp.
+- Rule này ưu tiên an toàn pháp lý và phải áp dụng nhất quán để giảm rủi ro.
 
 > Reference repos: xem REFERENCE_REPOS.md

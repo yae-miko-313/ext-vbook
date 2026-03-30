@@ -655,16 +655,6 @@ body {
     gap: 12px;
 }
 
-.legal-note {
-    max-width: 920px;
-    font-size: 12px;
-    line-height: 1.55;
-    color: var(--color-text-tertiary);
-    text-align: center;
-    border-top: 1px dashed var(--color-border);
-    padding-top: 10px;
-}
-
 .contact-cards {
     display: grid;
     grid-template-columns: repeat(2, minmax(220px, 280px));
