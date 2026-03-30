@@ -175,7 +175,6 @@ function collectPluginRootsRecursively(rootDir) {
         const pluginJsonPath = path.join(current, 'plugin.json');
         if (fs.existsSync(pluginJsonPath)) {
             found.push(current);
-            continue;
         }
 
         let entries = [];
@@ -192,6 +191,30 @@ function collectPluginRootsRecursively(rootDir) {
     }
 
     return found;
+}
+
+function isLintableExtensionManifest(pluginRoot) {
+    const pluginJsonPath = path.join(pluginRoot, 'plugin.json');
+    if (!fs.existsSync(pluginJsonPath)) {
+        return false;
+    }
+
+    try {
+        const parsed = JSON.parse(fs.readFileSync(pluginJsonPath, 'utf8'));
+        return (
+            parsed &&
+            typeof parsed === 'object' &&
+            !Array.isArray(parsed) &&
+            parsed.metadata &&
+            typeof parsed.metadata === 'object' &&
+            !Array.isArray(parsed.metadata) &&
+            parsed.script &&
+            typeof parsed.script === 'object' &&
+            !Array.isArray(parsed.script)
+        );
+    } catch (error) {
+        return false;
+    }
 }
 
 function discoverTargets(workspaceRoot, optionPluginPath, options = {}) {
@@ -212,7 +235,7 @@ function discoverTargets(workspaceRoot, optionPluginPath, options = {}) {
             console.warn(`[WARN] references/repos directory not found. Skipping reference scan.`);
             return [];
         }
-        return collectPluginRootsRecursively(refsRoot);
+        return collectPluginRootsRecursively(refsRoot).filter(isLintableExtensionManifest);
     }
 
     const extensionsDir = path.join(workspaceRoot, 'extensions');
@@ -220,10 +243,7 @@ function discoverTargets(workspaceRoot, optionPluginPath, options = {}) {
         throw new Error('extensions directory not found in workspace root.');
     }
 
-    return fs
-        .readdirSync(extensionsDir)
-        .map((name) => path.join(extensionsDir, name))
-        .filter((absPath) => fs.existsSync(path.join(absPath, 'plugin.json')));
+    return collectPluginRootsRecursively(extensionsDir).filter(isLintableExtensionManifest);
 }
 
 function loadCatalogIndex(workspaceRoot) {

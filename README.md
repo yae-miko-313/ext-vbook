@@ -68,7 +68,8 @@ Quy ước quan trọng:
 - `sort` giữ nguyên `metadata.author` và giữ tên folder ext gốc.
 - Nếu thư mục đích đã tồn tại, `sort` sẽ skip để tránh ghi đè.
 - Có thể dùng `--overwrite-existing --cleanup-root` để đồng bộ lại và dọn các ext top-level đã migrate khỏi `extensions/`.
-- `build-catalog` luôn tạo đủ 6 nhóm: `novel`, `comic`, `chinese_novel`, `translate`, `tts`, `_unknown`.
+- `build-catalog` luôn tạo 5 nhóm chuẩn: `novel`, `comic`, `chinese_novel`, `translate`, `tts`.
+- Nhóm `_unknown` chỉ được tạo khi thực sự còn extension chưa phân loại.
 
 ## File Structure
 
@@ -94,17 +95,18 @@ extensions/my-website/
 **Root `plugin.json`:**
 - Metadata & personal extensions (3 by kychi)
 - Schema cố định: `{ "metadata": {...}, "data": [...] }`
-- Reference: `extensions/plugin.json` cho full community catalog (373 entries)
+- Reference: `extensions/plugin.json` cho full community catalog
 - Dùng để distribute bản cá nhân + link đến full catalog
 
 **`extensions/plugin.json` (Auto-generated):**
-- Mega catalog với 373 community extensions
+- Mega catalog cộng đồng được build từ toàn bộ nhóm type
 - Được generate bởi `npx vbook build-catalog`
 - Tôn trọng tác quyền - giữ nguyên author info từ original sources
 
 **`extensions/catalogs/*.plugin.json` (Auto-generated):**
 - Catalog theo từng nhóm để copy raw link nhanh từ web viewer
-- Bao gồm: `novel`, `comic`, `chinese_novel`, `translate`, `tts`, `_unknown`
+- Bao gồm mặc định: `novel`, `comic`, `chinese_novel`, `translate`, `tts`
+- `_unknown` chỉ xuất hiện khi có extension chưa phân loại
 - Có thể regenerate bằng script đồng bộ sau khi build catalog
 
 **CLI Tools:**

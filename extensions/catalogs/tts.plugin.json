@@ -11,7 +11,7 @@
       "version": 1,
       "source": "https://www.bing.com/translator",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/bing-tts/icon.png",
-      "description": "Nghe truyá»‡n báº±ng Bing TTS",
+      "description": "Nghe truyện bằng Bing TTS",
       "type": "tts",
       "locale": "vi_VN"
     },
@@ -22,7 +22,7 @@
       "version": 1,
       "source": "https://gemini.google.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/gemini-tts/icon.png",
-      "description": "Nghe truyá»‡n báº±ng Gemini TTS",
+      "description": "Nghe truyện bằng Gemini TTS",
       "type": "tts",
       "locale": "vi_VN"
     },
@@ -33,7 +33,7 @@
       "version": 1,
       "source": "https://www.google.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/google-tts/icon.png",
-      "description": "Nghe truyá»‡n báº±ng Google TTS",
+      "description": "Nghe truyện bằng Google TTS",
       "type": "tts",
       "locale": "vi_VN"
     },
@@ -44,7 +44,7 @@
       "version": 1,
       "source": "https://www.tiktok.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/tiktok-tts/icon.png",
-      "description": "Nghe truyá»‡n báº±ng Tiktok TTS",
+      "description": "Nghe truyện bằng Tiktok TTS",
       "type": "tts",
       "locale": "vi_VN"
     },
@@ -55,10 +55,9 @@
       "version": 1,
       "source": "https://ai.zalo.cloud/docs/api/getting-started",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/zalo-tts/icon.png",
-      "description": "Nghe truyá»‡n báº±ng Zalo AI TTS",
+      "description": "Nghe truyện bằng Zalo AI TTS",
       "type": "tts",
       "locale": "vi_VN"
     }
   ]
 }
-
