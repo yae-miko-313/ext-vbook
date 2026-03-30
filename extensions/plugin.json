@@ -2228,28 +2228,7 @@
         "type": "novel"
       }
     },
-    {
-      "folder": "vbook-ext-template",
-      "name": "Template Novel",
-      "author": "kychi",
-      "description": "Starter template for a personal VBook novel extension",
-      "source": "https://example.com/",
-      "version": 1,
-      "type": "novel",
-      "locale": "vi_VN",
-      "relativePath": "extensions/novel/vbook-ext-template",
-      "metadata": {
-        "name": "Template Novel",
-        "author": "kychi",
-        "version": 1,
-        "source": "https://example.com/",
-        "regexp": "example\\.com/novel/[^/]+/?$",
-        "description": "Starter template for a personal VBook novel extension",
-        "locale": "vi_VN",
-        "language": "javascript",
-        "type": "novel"
-      }
-    },
+    
     {
       "folder": "vietnamnet",
       "name": "vietnamnet",

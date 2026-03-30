@@ -1115,17 +1115,7 @@
       "type": "novel",
       "locale": "vi_VN"
     },
-    {
-      "name": "Template Novel",
-      "author": "kychi",
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/vbook-ext-template/plugin.zip",
-      "version": 1,
-      "source": "https://example.com/",
-      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/vbook-ext-template/icon.png",
-      "description": "Starter template for a personal VBook novel extension",
-      "type": "novel",
-      "locale": "vi_VN"
-    },
+    
     {
       "name": "vietnamnet",
       "author": "Đường đen",
