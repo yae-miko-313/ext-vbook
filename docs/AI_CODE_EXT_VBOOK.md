@@ -92,6 +92,11 @@ b.close(); // Quan trọng: Luôn gọi close() để tránh memory leak
 - `build-catalog` chỉ dành cho `extensions/plugin.json`, `extensions/{type}/plugin.json`, `extensions/catalogs/*.plugin.json`.
 - Khi cập nhật root manifest, chỉ sửa thủ công theo format cá nhân, không sync tự động từ catalog community.
 
+### Grouped catalog path rule (critical)
+- `extensions/catalogs/*.plugin.json` hiện dùng `path` trỏ tới `plugin.zip` cho từng extension leaf.
+- Khi đổi hoặc sync grouped catalogs, phải đảm bảo `extensions/{type}/{name}/plugin.zip` tồn tại tương ứng.
+- Nếu thiếu zip: chạy `npx vbook build --plugin extensions/{type}/{name}` hoặc build hàng loạt trước commit/push.
+
 ## 7. SELF-EVOLUTION
 - Hợp nhất code: Tìm regex chung để nén nhiều `gen.js` và `search.js` gọi hàm của file chung qua `load("utils.js")`.
 - Giải quyết String Obfuscation: Viết `cleanContent` custom filter HTML/unicode.

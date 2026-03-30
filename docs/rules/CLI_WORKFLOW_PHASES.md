@@ -39,10 +39,10 @@ Quy trình phát triển extension tiêu chuẩn sau khi sort + migrate:
 - Cần `.env` có VBOOK_IP + kết nối mạng
 - Tùy chọn sau khi push
 
-**`build`** (chỉ khi cần plugin.zip)
+**`build`** (khi cần plugin.zip)
 - Đóng gói src/ + icon.png thành plugin.zip
 - Dùng khi cần sideload trực tiếp lên app
-- Không cần build nếu test qua endpoint
+- Bắt buộc nếu catalog/grouped manifest đang trỏ `path` tới `plugin.zip`
 
 ## Cleanup Strategy
 
@@ -56,13 +56,33 @@ $tmpDirs = Get-ChildItem -Path . -Recurse -Directory -Force -ErrorAction Silentl
 - Phase ai-fix-queue → cleanup
 - Phase build-catalog → cleanup
 
+## Catalog Zip Sync (khi grouped catalogs dùng zip path)
+
+- Nếu `extensions/catalogs/*.plugin.json` trỏ `path` tới `plugin.zip`, phải build zip đồng bộ trước commit/push.
+- Mỗi ext leaf trong `extensions/{type}/{name}` phải có `plugin.zip` tương ứng.
+
+```bash
+# Build zip cho 1 extension
+npx vbook build --plugin extensions/[type]/[name]
+
+# Build zip hàng loạt cho toàn bộ ext leaf
+$plugins = Get-ChildItem -Path "extensions" -Filter "plugin.json" -Recurse |
+   Where-Object { $_.FullName -match "extensions\\[^\\]+\\[^\\]+\\plugin.json$" } |
+   ForEach-Object { Split-Path $_.FullName -Parent } | Sort-Object -Unique
+
+foreach ($p in $plugins) {
+   $rel = $p.Substring((Get-Location).Path.Length + 1)
+   node tools/cli/index.js build --plugin "$rel"
+}
+```
+
 ## Output Artifacts
 
 - `tools/cli/reports/fix-report.json` ← batch-fix output
 - `tools/cli/reports/ai-fix-report.json` ← ai-fix-queue output
 - `extensions/plugin.json` ← build-catalog mega catalog
 - `extensions/catalogs/*.plugin.json` ← per-type quick-link catalogs (optional)
-- Không tạo plugin.zip trừ khi thực sự cần
+- `extensions/**/plugin.zip` ← bắt buộc khi grouped catalogs dùng zip path
 - Root `plugin.json` (manifest cá nhân) không nằm trong output auto-generate
 
 ## Best Practices
@@ -70,13 +90,14 @@ $tmpDirs = Get-ChildItem -Path . -Recurse -Directory -Force -ErrorAction Silentl
 ✅ **DO:**
 - Chạy batch-fix + ai-fix-queue sau mỗi lần migrate/sort
 - Chạy build-catalog cuối cùng để sync catalog
+- Build zip hàng loạt trước push nếu grouped catalogs đang dùng zip path
 - Commit/push liền không cần build/test thủ công
 - Test trên app sau push (nếu cần, dùng test-all)
 - Dọn tmp sau từng phase
 - Giữ root `plugin.json` theo schema cá nhân `{metadata, data}`
 
 ❌ **DON'T:**
-- Build plugin.zip nếu không có nhu cầu sideload
+- Bỏ qua build plugin.zip khi grouped catalogs đang trỏ zip path
 - Test thủ công manual trên điện thoại nếu có thể test qua endpoint
 - Skip build-catalog (catalog phải đồng bộ)
 - Xoá icon.png tự động (báo lại để xử lý thủ công)
@@ -104,4 +125,7 @@ npx vbook test-all --plugin extensions/[name]
 
 # Build chỉ khi cần (hiếm):
 npx vbook build --plugin extensions/[name]
+
+# Nếu grouped catalogs dùng zip path: build đồng bộ trước push
+# (dùng script PowerShell ở mục "Catalog Zip Sync")
 ```
