@@ -7,46 +7,47 @@
     {
       "name": "Baidu Translate",
       "author": "vBook",
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/baidu-translate/plugin.json",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/baidu-translate/plugin.zip",
       "version": 1,
       "source": "https://fanyi.baidu.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/baidu-translate/icon.png",
-      "description": "Dịch truyện bằng Baidu Translate",
+      "description": "Dá»‹ch truyá»‡n báº±ng Baidu Translate",
       "type": "translate",
       "locale": "vi_VN"
     },
     {
       "name": "Google Translate mod",
       "author": "vBook",
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/google-translate/plugin.json",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/google-translate/plugin.zip",
       "version": 18,
       "source": "https://translate.google.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/google-translate/icon.png",
-      "description": "Google Translate mới",
+      "description": "Google Translate má»›i",
       "type": "translate",
       "locale": "vi_VN"
     },
     {
       "name": "OpenAI Translate",
       "author": "vBook",
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/openai-translate/plugin.json",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/openai-translate/plugin.zip",
       "version": 1,
       "source": "https://api.vectorengine.ai",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/openai-translate/icon.png",
-      "description": "Dịch truyện bằng OpenAI Compatible API",
+      "description": "Dá»‹ch truyá»‡n báº±ng OpenAI Compatible API",
       "type": "translate",
       "locale": "vi_VN"
     },
     {
-      "name": "Xombot Dịch",
+      "name": "Xombot Dá»‹ch",
       "author": "b3x0m",
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/xombot/plugin.json",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/xombot/plugin.zip",
       "version": 1,
       "source": "https://xombot.b3x0m.us.kg/",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/translate/xombot/icon.png",
-      "description": "Dịch truyện bằng Xombot",
+      "description": "Dá»‹ch truyá»‡n báº±ng Xombot",
       "type": "translate",
       "locale": "vi_VN"
     }
   ]
 }
+
