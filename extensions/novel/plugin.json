@@ -2494,28 +2494,6 @@
     }
   },
   {
-    "folder": "webnovel-vn",
-    "name": "WebNovel.vn",
-    "author": "@R",
-    "description": "Beauty Edition: Code trình bày chuẩn mực, sạch sẽ, dễ bảo trì.",
-    "source": "https://webnovel.vn",
-    "version": 21,
-    "type": "novel",
-    "locale": "vi_VN",
-    "relativePath": "extensions/novel/webnovel-vn",
-    "metadata": {
-      "name": "WebNovel.vn",
-      "author": "@R",
-      "version": 21,
-      "source": "https://webnovel.vn",
-      "regexp": "(www.)?webnovel.vn/.*",
-      "description": "Beauty Edition: Code trình bày chuẩn mực, sạch sẽ, dễ bảo trì.",
-      "locale": "vi_VN",
-      "language": "javascript",
-      "type": "novel"
-    }
-  },
-  {
     "folder": "webtruyen",
     "name": "D Truyện",
     "author": "vBook",
