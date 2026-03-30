@@ -93,6 +93,7 @@ extensions/my-website/
 
 **Root `plugin.json`:**
 - Metadata & personal extensions (3 by kychi)
+- Schema cố định: `{ "metadata": {...}, "data": [...] }`
 - Reference: `extensions/plugin.json` cho full community catalog (373 entries)
 - Dùng để distribute bản cá nhân + link đến full catalog
 
@@ -109,3 +110,4 @@ extensions/my-website/
 **CLI Tools:**
 - Chỉ làm việc với `extensions/{type}/plugin.json` files
 - Không modify root `plugin.json` (personal distribution file)
+- Không convert root `plugin.json` sang schema catalog cộng đồng

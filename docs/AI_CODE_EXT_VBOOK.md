@@ -85,6 +85,13 @@ b.close(); // Quan trọng: Luôn gọi close() để tránh memory leak
 3. **`author`**: Đọc environment fallback `"author": "kychi"` hoặc theo `VBOOK_AUTHOR`.
 4. Mọi extension version phải > 0 và đồng bộ `version` (int). Numeric strings (e.g. `"1"`) tự fix = CLI.
 
+### Root manifest rule (critical)
+- `plugin.json` ở root là manifest cá nhân, schema là:
+	- `{ "metadata": {...}, "data": [...] }`
+- Không được ghi đè root `plugin.json` theo schema catalog của `extensions/plugin.json`.
+- `build-catalog` chỉ dành cho `extensions/plugin.json`, `extensions/{type}/plugin.json`, `extensions/catalogs/*.plugin.json`.
+- Khi cập nhật root manifest, chỉ sửa thủ công theo format cá nhân, không sync tự động từ catalog community.
+
 ## 7. SELF-EVOLUTION
 - Hợp nhất code: Tìm regex chung để nén nhiều `gen.js` và `search.js` gọi hàm của file chung qua `load("utils.js")`.
 - Giải quyết String Obfuscation: Viết `cleanContent` custom filter HTML/unicode.

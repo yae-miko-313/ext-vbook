@@ -63,6 +63,7 @@ $tmpDirs = Get-ChildItem -Path . -Recurse -Directory -Force -ErrorAction Silentl
 - `extensions/plugin.json` ← build-catalog mega catalog
 - `extensions/catalogs/*.plugin.json` ← per-type quick-link catalogs (optional)
 - Không tạo plugin.zip trừ khi thực sự cần
+- Root `plugin.json` (manifest cá nhân) không nằm trong output auto-generate
 
 ## Best Practices
 
@@ -72,12 +73,14 @@ $tmpDirs = Get-ChildItem -Path . -Recurse -Directory -Force -ErrorAction Silentl
 - Commit/push liền không cần build/test thủ công
 - Test trên app sau push (nếu cần, dùng test-all)
 - Dọn tmp sau từng phase
+- Giữ root `plugin.json` theo schema cá nhân `{metadata, data}`
 
 ❌ **DON'T:**
 - Build plugin.zip nếu không có nhu cầu sideload
 - Test thủ công manual trên điện thoại nếu có thể test qua endpoint
 - Skip build-catalog (catalog phải đồng bộ)
 - Xoá icon.png tự động (báo lại để xử lý thủ công)
+- Không sync hoặc ghi đè root `plugin.json` bằng schema catalog từ `extensions/plugin.json`
 
 ## Legal Gate (Bắt buộc trước khi làm ext mới)
 
