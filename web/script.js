@@ -193,6 +193,43 @@ function renderStats() {
     document.getElementById('other-count').textContent = otherCount;
 }
 
+function formatCatalogUpdatedAt(isoString) {
+    if (!isoString) {
+        return '';
+    }
+
+    const parsed = new Date(isoString);
+    if (Number.isNaN(parsed.getTime())) {
+        return '';
+    }
+
+    return parsed.toLocaleString('vi-VN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+function renderCatalogUpdatedTime() {
+    const element = document.getElementById('catalog-updated');
+    if (!element) {
+        return;
+    }
+
+    const status = window.catalogStatus || {};
+    const updatedLabel = formatCatalogUpdatedAt(status.updatedAt);
+
+    if (!updatedLabel) {
+        element.textContent = 'Cap nhat: chua co du lieu';
+        return;
+    }
+
+    const suffix = status.updatedAtSource === 'header' ? '' : ' (local)';
+    element.textContent = `Cap nhat: ${updatedLabel}${suffix}`;
+}
+
 function escapeHtml(value) {
     return String(value || '')
         .replace(/&/g, '&amp;')
@@ -351,6 +388,7 @@ function renderGrid() {
 
 function renderDashboard() {
     renderStats();
+    renderCatalogUpdatedTime();
     renderAuthorAcknowledgement();
     renderGrid();
 }

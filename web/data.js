@@ -9,6 +9,12 @@ const extensionCatalog = {
     _unknown: []
 };
 
+window.catalogStatus = {
+    loadedAt: null,
+    updatedAt: null,
+    updatedAtSource: ''
+};
+
 // Load from ./catalog.json (local copy of extensions/plugin.json)
 async function loadExtensions() {
     try {
@@ -17,6 +23,17 @@ async function loadExtensions() {
             throw new Error(`HTTP ${response.status}`);
         }
         const data = await response.json();
+
+        const loadedAtIso = new Date().toISOString();
+        const headerLastModified = response.headers.get('Last-Modified');
+        const parsedLastModified = headerLastModified ? new Date(headerLastModified) : null;
+        const validLastModified = parsedLastModified && !Number.isNaN(parsedLastModified.getTime())
+            ? parsedLastModified.toISOString()
+            : null;
+
+        window.catalogStatus.loadedAt = loadedAtIso;
+        window.catalogStatus.updatedAt = validLastModified || loadedAtIso;
+        window.catalogStatus.updatedAtSource = validLastModified ? 'header' : 'loaded';
         
         // Populate catalog from loaded data
         Object.keys(data).forEach(type => {

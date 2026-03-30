@@ -73,6 +73,7 @@ body {
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
+    position: relative;
 }
 
 .header h1 {
@@ -88,6 +89,21 @@ body {
 .subtitle {
     font-size: 16px;
     color: var(--color-text-secondary);
+}
+
+.catalog-updated {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    margin: 0;
+    padding: 5px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+    background: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
 }
 
 .stats {
@@ -751,6 +767,14 @@ body {
 
     .subtitle {
         font-size: 14px;
+    }
+
+    .catalog-updated {
+        position: static;
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 10px;
+        padding: 4px 8px;
     }
 
     .filters {
