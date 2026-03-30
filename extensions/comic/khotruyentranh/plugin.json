@@ -6,7 +6,7 @@
     "source": "https://khotruyentranhonline.net",
     "regexp": "(www.)?khotruyentranhonline.net/truyen/(.*?)+",
     "description": "Đọc truyện trên trang khotruyentranh.net",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "comic"
   },

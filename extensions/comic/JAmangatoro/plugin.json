@@ -6,9 +6,9 @@
     "source": "https://ja.mangatoro.com/",
     "regexp": "(www.)?ja.mangatoro.com/manga/[A-Za-z0-9].+/?",
     "description": "Đọc truyện tại https://ja.mangatoro.com/",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

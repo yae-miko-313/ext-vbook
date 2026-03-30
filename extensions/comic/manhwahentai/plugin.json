@@ -6,7 +6,7 @@
     "source": "https://manhwahentai.me",
     "regexp": "(www.)?manhwahentai.me/webtoon/[^/]+/?",
     "description": "Đọc truyện trên trang manhwahentai.me",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "comic",
     "tag": "nsfw"

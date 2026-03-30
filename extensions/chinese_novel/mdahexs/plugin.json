@@ -6,9 +6,9 @@
     "source": "https://m.dahexs.net/",
     "regexp": "(www.)?m.dahexs.net/(\\d+).+/?$",
     "description": "Truyện tiếng trung",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

@@ -6,9 +6,9 @@
     "source": "http://truyendichgiare.com",
     "regexp": "(www.)?truyendichgiare.com/[0-9a-z-]+/?$",
     "description": "Fix lỗi chèn chữ chương VIP",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
-    "type" : "novel"
+    "type": "novel"
   },
   "script": {
     "home": "home.js",

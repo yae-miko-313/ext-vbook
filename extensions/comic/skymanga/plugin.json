@@ -6,9 +6,9 @@
     "source": "https://skymanga.co",
     "regexp": "skymanga\\.co/manga/[^/]+/?$",
     "description": "Đọc truyện trên trang https://skymanga.co",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "detail": "detail.js",

@@ -1,20 +1,24 @@
 {
   "metadata": {
     "name": "Novel Fire",
-    "author": "Vearn",
-    "version": 4,
+    "author": "@R",
+    "version": 60,
     "source": "https://novelfire.net/",
     "regexp": "(www.)?(m.)?novelfire.net/book/.*",
-    "description": "Đọc truyện trên trang https://novelfire.net/",
+    "description": "V60 Master: Kiến trúc đa module. Tối ưu Regex TOC, bóc tách API Sniffing cho Comments & Recommendations.",
     "locale": "en_US",
     "language": "javascript",
+    "icon": "icon.png",
     "type": "novel"
   },
   "script": {
     "home": "home.js",
+    "genre": "genre.js",
     "detail": "detail.js",
+    "page": "page.js",
     "toc": "toc.js",
     "chap": "chap.js",
-    "genre": "genre.js"
+    "comment": "comment.js",
+    "recommended": "recommended.js"
   }
 }

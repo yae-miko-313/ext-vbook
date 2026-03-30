@@ -6,7 +6,7 @@
     "source": "https://www.qimao.com",
     "regexp": "(www.)?(qimao.com/shuku/\\d+/?)|(api-bc.wtzw.com/.*)",
     "description": "Qimao",
-    "locale": "zh-CN",
+    "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel"
   },

@@ -6,9 +6,9 @@
     "source": "https://nhomdich.com/",
     "regexp": "(www.)?nhomdich.com/[^/]+/?$",
     "description": "Đọc truyện tại https://nhomdich.com",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

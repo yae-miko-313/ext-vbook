@@ -20,6 +20,7 @@ function classifyFinalStatus(beforeReport, afterReport) {
     const beforeCounts = beforeReport.summary.counts;
     const afterCounts = afterReport.summary.counts;
 
+    if (afterCounts.error === 0 && afterCounts.warning === 0) return 'clean';
     if (afterCounts.error === 0 && beforeCounts.error > 0) return 'fixed';
     if (afterCounts.error === 0) return 'warnings_only';
     return 'needs_ai';
@@ -43,7 +44,7 @@ function runBatchFix(workspaceRoot, options = {}) {
         let failureReason = null;
 
         try {
-            if (beforeCounts.error > 0) {
+            if (beforeCounts.error > 0 || beforeCounts.warning > 0) {
                 fixReport = runFix(workspaceRoot, pluginRoot, {
                     scanReferences: false,
                     enableRhinoChecks: Boolean(options.rhino),
@@ -80,6 +81,7 @@ function runBatchFix(workspaceRoot, options = {}) {
     const summary = {
         total: items.length,
         fixed: items.filter((item) => item.finalStatus === 'fixed').length,
+        clean: items.filter((item) => item.finalStatus === 'clean').length,
         warningsOnly: items.filter((item) => item.finalStatus === 'warnings_only').length,
         needsAi: items.filter((item) => item.finalStatus === 'needs_ai').length
     };
@@ -106,7 +108,7 @@ function printBatchFixReport(report) {
     console.log('======================');
     console.log(`Target: ${report.targetDir}`);
     console.log(`Report: ${report.reportPath}`);
-    console.log(`Total: ${report.summary.total} | Fixed: ${report.summary.fixed} | WarningsOnly: ${report.summary.warningsOnly} | NeedsAI: ${report.summary.needsAi}`);
+    console.log(`Total: ${report.summary.total} | Clean: ${report.summary.clean} | Fixed: ${report.summary.fixed} | WarningsOnly: ${report.summary.warningsOnly} | NeedsAI: ${report.summary.needsAi}`);
 }
 
 module.exports = {

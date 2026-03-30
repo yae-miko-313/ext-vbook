@@ -6,9 +6,9 @@
     "source": "https://yurineko.net",
     "regexp": "yurineko\\.net/manga/[^/]+/?$",
     "description": "Đọc truyện trên trang https://yurineko.net",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

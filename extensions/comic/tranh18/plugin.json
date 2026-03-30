@@ -9,7 +9,7 @@
     "locale": "vi_VN",
     "language": "javascript",
     "type": "comic",
-    "tag" : "nsfw"
+    "tag": "nsfw"
   },
   "script": {
     "home": "home.js",

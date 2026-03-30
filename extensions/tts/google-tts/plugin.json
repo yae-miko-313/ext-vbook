@@ -5,7 +5,8 @@
     "version": 1,
     "source": "https://www.google.com",
     "description": "Nghe truyện bằng Google TTS",
-    "type": "tts"
+    "type": "tts",
+    "locale": "vi_VN"
   },
   "script": {
     "voice": "voice.js",

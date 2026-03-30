@@ -6,9 +6,9 @@
     "source": "https://dragonballwiki.net/doctruyen/",
     "regexp": "(www.)?dragonballwiki.net/doctruyen/[A-Za-z-].+/?",
     "description": "Mô tả",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

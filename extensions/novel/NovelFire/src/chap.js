@@ -1,62 +1,66 @@
-load('config.js');
-if (tran_eng) {
-	function execute(url) {
-		var doc = Http.get(url).html();
-		const MAX_LENGTH = 1700;
-		if (doc){
-			var p_tag = doc.select("div#content");
+function execute(url) {
+    var res = fetch(url);
+    if (!res.ok) return null;
+    var doc = res.html();
+    var content = doc.select("#chapter-content, #chapter-container, div#content, .chapter-content, div[itemprop='articleBody']").first();
+    if (!content) return null;
 
-			let arr_text_output = [];
-			let temp_text = "";
-			p_tag.forEach(e => 
-			{
-				let el = e.select("p").text().trim();
-				if(temp_text.length + el.length >= MAX_LENGTH)
-				{
-					arr_text_output.push(temp_text);
-					temp_text = "";
-				}
-				else
-				{
-					temp_text = temp_text + el + "\n";
-					
-				}
-			});
-			if(temp_text.length > 0)
-			{
-				arr_text_output.push(temp_text);
-				temp_text = "";
-			}
+    content.select("script, style, iframe, .ads, .ad-box, .notice, .text-muted").remove();
+    var htm = content.html();
+    var lowerHtm = htm.toLowerCase();
+    
+    // Thuật toán dò tìm rác cắt chuỗi một lần duy nhất
+    var shareIdx = lowerHtm.indexOf("share to your friends");
+    var tipIdx = lowerHtm.indexOf("tip: you can use left");
+    var cutIdx = -1;
+    
+    if (shareIdx !== -1) cutIdx = shareIdx;
+    if (tipIdx !== -1 && (cutIdx === -1 || tipIdx < cutIdx)) cutIdx = tipIdx;
+    
+    if (cutIdx !== -1) {
+        var cutPos = lowerHtm.lastIndexOf("<br", cutIdx);
+        if (cutPos === -1) cutPos = lowerHtm.lastIndexOf("<p", cutIdx);
+        if (cutPos === -1) cutPos = lowerHtm.lastIndexOf("<div", cutIdx);
+        htm = htm.substring(0, cutPos !== -1 ? cutPos : cutIdx);
+    }
+    
+    htm = htm.replace(/Restore scroll position/gi, "").replace(/<\/?(div|p)[^>]*>/gi, "<br>");
+    var rawLines = htm.split(/<br\s*\/?>/i);
+    var cleanLines = [];
 
-			let output_text =  "";
+    for (var i = 0; i < rawLines.length; i++) {
+        var line = rawLines[i].replace(/<[^>]*>/g, "").trim();
+        if (!line || line.toLowerCase() === "report") continue;
 
-			arr_text_output.forEach(phra => 
-			{
-				let input_value_q = encodeURIComponent(phra);
-				let response = fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=vi&dt=t&q=" + input_value_q);
-				if (response.ok) {
-					let t = response.json();
-					phra_output = "";
-					t[0].forEach(element => phra_output += element[0]);
-					output_text += phra_output;
-				}
-			});
+        // --- ĐỒNG BỘ THUẬT TOÁN REGEX TỪ TOC.JS ---
+        line = line.replace(/^\d+\s+(Chapter|Chương)/i, "$1");
+        line = line.replace(/(Chapter\s*\d+)[\s:.-]+(?:Chapter\s*\d+[\s:.-]*)+/gi, "$1");
+        line = line.replace(/^(Chapter\s*\d+)\s*-\s*\d+\s*[:-]\s*/i, "$1: ");
 
-			output_text = output_text.replace(/\n/g, "<br>");
-			return Response.success(output_text);
-		}   
-		return null;
-	}
+        var isDuplicate = false;
+        if (cleanLines.length > 0) {
+            var prev = cleanLines[cleanLines.length - 1];
+            var lowerLine = line.toLowerCase(), lowerPrev = prev.toLowerCase();
+            if (lowerPrev === lowerLine) isDuplicate = true;
+            else if ((lowerPrev.indexOf(lowerLine) === 0 || lowerLine.indexOf(lowerPrev) === 0) && (lowerLine.indexOf("chapter") === 0 || lowerLine.indexOf("chương") === 0)) {
+                if (line.length > prev.length) cleanLines[cleanLines.length - 1] = line;
+                isDuplicate = true;
+            }
+        }
+        if (!isDuplicate) cleanLines.push(line);
+    }
+
+    var output = "";
+    var splitter = /(“[^”]+”|"[^"]+"|‘[^’]+’|'[^']+'|\([^)]+\)|\[[^\]]+\]|<[^>]+>|&lt;[^&]+&gt;)/g;
+
+    for (var j = 0; j < cleanLines.length; j++) {
+        var parts = cleanLines[j].split(splitter);
+        for (var k = 0; k < parts.length; k++) {
+            var pText = parts[k].trim();
+            if (!pText) continue;
+            if (/^(“.*”|".*"|‘.*’|'.*'|\(.*\)|\[.*\]|<.*>|&lt;.*&gt;)$/.test(pText)) pText = "<i>" + pText + "</i>";
+            output += '<p style="text-indent: 1.5em; text-align: justify; margin-top: 0.6em; margin-bottom: 0.6em; line-height: 1.6;">' + pText + '</p>';
+        }
+    }
+    return Response.success(output);
 }
-else {
-		function execute(url) {
-		let response = fetch(url);
-		if (response.ok) {
-			let doc = response.html('utf-8');
-			let htm = doc.select("div#content").html();
-			return Response.success(htm);
-		}
-		return null;
-	}
-}
-	

@@ -6,9 +6,9 @@
     "source": "https://kocr.net/",
     "regexp": "(www.)?kocr.net/bl/[^/].+/?",
     "description": "Đam mỹ, đam mỹ everywhere\n Fix code app mới",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

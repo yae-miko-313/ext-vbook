@@ -6,7 +6,7 @@
     "source": "https://hitruyen.vip",
     "regexp": "https://hitruyen.vip/truyen-tranh/[0-9a-z-]+/?$",
     "description": "Hi Truyện VIP – Đọc Truyện Hay Mỗi Ngày!",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "comic"
   },

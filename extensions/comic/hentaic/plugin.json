@@ -6,10 +6,10 @@
     "source": "https://hentaic.net",
     "regexp": "hentaic\\.net/[^/]+/[^/]+/?$",
     "description": "Đọc truyện trên trang https://hentaic.net",
-    "local": "vi-VN",
     "language": "javascript",
     "type": "comic",
-    "tag": "nsfw"
+    "tag": "nsfw",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

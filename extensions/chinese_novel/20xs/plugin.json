@@ -6,7 +6,7 @@
     "source": "https://www.20xs.org",
     "regexp": "(www.)?(m.)?20xs.org/(shu/)?\\d+/?(.html)?",
     "description": "Đọc truyện trên trang www.20xs.org",
-    "locale": "zh-CN",
+    "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel"
   },

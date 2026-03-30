@@ -6,9 +6,9 @@
     "source": "https://manhuarock.net/",
     "regexp": "manhuarock.net/[a-zA-Z0-9-/]+/?$",
     "description": "Đọc truyện trên trang Manhuarock",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

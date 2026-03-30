@@ -6,9 +6,9 @@
     "source": "https://truyenmoikk.com",
     "regexp": "(www\\.)?truyenmoi(ii|kk)\\.(com|org)/[a-zA-Z0-9-]+/?$",
     "description": "Extension đọc truyện chữ từ TruyenMoi",
-    "local": "vi_VN",
     "type": "novel",
-    "language": "javascript"
+    "language": "javascript",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

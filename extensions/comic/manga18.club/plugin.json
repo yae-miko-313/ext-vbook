@@ -6,9 +6,9 @@
     "source": "https://manga18.club",
     "regexp": "manga18\\.club/manhwa/[^/]+/?$",
     "description": "Đọc truyện trên trang https://manga18.club",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

@@ -6,7 +6,7 @@
     "source": "https://mtlnation.com",
     "regexp": "(www.)?mtlnation.com/novel/[0-9a-z-]+/?$",
     "description": "V2: fix login",
-    "locale": "en-EN",
+    "locale": "en_US",
     "language": "javascript",
     "type": "novel"
   },

@@ -6,9 +6,9 @@
     "source": "https://truyenconect.com/",
     "regexp": "(www.)?truyenconect.com/truyen/[^.].+.html",
     "description": "Đọc truyện tại Truyen Conect\nFix code",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "novel"
+    "type": "novel",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

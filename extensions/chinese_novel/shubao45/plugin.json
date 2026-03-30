@@ -6,9 +6,9 @@
     "source": "http://m.shubao45.com",
     "regexp": "m.shubao45.com/\\d+_\\d+/?$",
     "description": "Đọc truyện trên trang m.shubao45.com",
-    "local": "zh-CN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "zh_CN"
   },
   "script": {
     "home": "home.js",

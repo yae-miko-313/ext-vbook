@@ -6,7 +6,7 @@
     "source": "https://wattpad.com",
     "regexp": "(www.)?wattpad.com/story/\\d+.*?/?$",
     "description": "Đọc truyện trên trang Wattpad",
-    "locale": "global",
+    "locale": "en_US",
     "language": "javascript",
     "type": "novel"
   },

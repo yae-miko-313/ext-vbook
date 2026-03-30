@@ -6,9 +6,9 @@
     "source": "https://www.xinyushuwu.com",
     "regexp": "(www|m)\\.xinyushuwu\\.com/\\d+/\\d+/?",
     "description": "Đọc truyện trên trang https://www.xinyushuwu.com. Hàng bị xóa của hajljnopera",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "vi_VN"
   },
   "script": {
     "detail": "detail.js",

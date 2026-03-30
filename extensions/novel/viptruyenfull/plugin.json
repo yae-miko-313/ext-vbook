@@ -6,7 +6,7 @@
     "source": "https://viptruyenfull.com",
     "regexp": "(www.)?viptruyenfull.com/[0-9a-z-]+/?$",
     "description": "Để đọc cần đăng nhập nhé!",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"
   },

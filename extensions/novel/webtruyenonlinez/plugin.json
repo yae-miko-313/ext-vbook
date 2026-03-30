@@ -6,9 +6,9 @@
     "source": "http://webtruyenonlinez.com/",
     "regexp": "(www.)?webtruyenonlinez.com/truyen/[^/].+/?$",
     "description": "Fix lỗi thiếu chương lần nữa =)) ",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "novel"
+    "type": "novel",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

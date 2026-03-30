@@ -6,7 +6,7 @@
     "source": "https://tiemtruyenchu.com/",
     "regexp": "(www.|m.)?tiemtruyenchu.com/truyen/\\d+",
     "description": "Đọc truyện trên trang https://tiemtruyenchu.com/",
-    "locale": "vn_VI",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"
   },

@@ -6,9 +6,9 @@
     "source": "https://www.haitanglin.com",
     "regexp": "(www|m)\\.haitanglin\\.com/(info|book)/\\d+(\\.html)?$",
     "description": "Đọc truyện trên trang https://www.haitanglin.com",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "vi_VN"
   },
   "script": {
     "detail": "detail.js",

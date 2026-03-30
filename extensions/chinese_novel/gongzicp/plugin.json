@@ -6,9 +6,9 @@
     "source": "https://www.gongzicp.com",
     "regexp": "(www.|m.)gongzicp.com/novel-\\d+.html$",
     "description": "Đọc truyện trên trang gongzicp.com",
-    "local": "zh-CN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "zh_CN"
   },
   "script": {
     "home": "home.js",

@@ -6,7 +6,7 @@
     "source": "https://ztruyen.vn",
     "regexp": "https://ztruyen.vn/truyen/[0-9a-z-]+/?$",
     "description": "zTruyen.vn",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"
   },

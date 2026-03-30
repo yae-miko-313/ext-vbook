@@ -6,10 +6,10 @@
     "source": "https://hentairead.com",
     "regexp": "hentairead\\.com/hentai/[^/]+/?$",
     "description": "Đọc truyện trên trang https://hentairead.com",
-    "local": "vi-VN",
     "language": "javascript",
     "type": "comic",
-    "tag": "nsfw"
+    "tag": "nsfw",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

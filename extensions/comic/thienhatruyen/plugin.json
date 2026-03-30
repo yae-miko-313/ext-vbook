@@ -6,7 +6,7 @@
     "source": "https://thienhatruyen.com",
     "regexp": "(www.)?thienhatruyen.com/[0-9a-z-]+.html",
     "description": "Lỗi extension liên hệ email: phamgiavang@gmail.com",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "comic"
   },

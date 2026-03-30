@@ -6,10 +6,10 @@
     "source": "https://hentaivv1.com/",
     "regexp": "(www.)?hentaivv.*?/truyen/[^/]+/?$",
     "description": "Đọc truyện hentai tại hentaivv1.com. Fix code",
-    "local": "vi-VN",
     "language": "javascript",
     "type": "comic",
-    "tag" : "nsfw"
+    "tag": "nsfw",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

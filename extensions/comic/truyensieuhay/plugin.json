@@ -6,7 +6,7 @@
     "source": "https://truyensieuhay.com",
     "regexp": "(www.)?(m.)?truyensieuhay.com/[0-9a-z-]+.html",
     "description": "đọc truyện trên truyensieuhay.com",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "comic"
   },

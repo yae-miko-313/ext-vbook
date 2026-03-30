@@ -6,9 +6,9 @@
     "source": "https://luvevaland.co",
     "regexp": "(www.)?(lustaveland.com|luvevaland.co)/(truyen|truyen-tranh|tieu-thuyet)/[^/]+/?$",
     "description": "Đọc truyện trên trang Luvevaland",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "novel"
+    "type": "novel",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

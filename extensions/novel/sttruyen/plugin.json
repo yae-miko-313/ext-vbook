@@ -6,7 +6,7 @@
     "source": "https://sttruyen.com",
     "regexp": "(www.)?sttruyen.com/story/[0-9a-z-]+/?$",
     "description": "Nếu extention bị lỗi vui lòng liên hệ email: Phamgiavang@gmail.com",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"
   },

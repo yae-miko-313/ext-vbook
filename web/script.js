@@ -141,6 +141,10 @@ function getAllExtensions() {
     return all;
 }
 
+function getDescription(ext) {
+    return (ext && (ext.description || (ext.metadata && ext.metadata.description))) || '';
+}
+
 function filterExtensions() {
     let all = getAllExtensions();
 
@@ -153,7 +157,7 @@ function filterExtensions() {
         all = all.filter((ext) =>
             (ext.name || '').toLowerCase().includes(search) ||
             (ext.author || '').toLowerCase().includes(search) ||
-            (ext.description || '').toLowerCase().includes(search)
+            getDescription(ext).toLowerCase().includes(search)
         );
     }
 
@@ -189,6 +193,113 @@ function renderStats() {
     document.getElementById('other-count').textContent = otherCount;
 }
 
+function escapeHtml(value) {
+    return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function normalizeAuthorName(author) {
+    return String(author || '')
+        .normalize('NFKC')
+        .trim()
+        .replace(/\s+/g, ' ');
+}
+
+function normalizeAuthorKey(author) {
+    return normalizeAuthorName(author).toLocaleLowerCase('vi');
+}
+
+function renderAuthorAcknowledgement() {
+    const listEl = document.getElementById('authors-list');
+    const countEl = document.getElementById('authors-count');
+    const topListEl = document.getElementById('authors-top-list');
+    const shareListEl = document.getElementById('authors-share-list');
+
+    if (!listEl || !countEl) {
+        return;
+    }
+
+    const authorGroups = new Map();
+    getAllExtensions().forEach((ext) => {
+        const author = normalizeAuthorName(ext.author || '');
+        if (!author) {
+            return;
+        }
+
+        const key = normalizeAuthorKey(author);
+        if (!authorGroups.has(key)) {
+            authorGroups.set(key, { total: 0, variants: new Map() });
+        }
+
+        const group = authorGroups.get(key);
+        group.total += 1;
+        group.variants.set(author, (group.variants.get(author) || 0) + 1);
+    });
+
+    const authors = Array.from(authorGroups.values())
+        .map((group) => {
+            const displayAuthor = Array.from(group.variants.entries())
+                .sort((a, b) => {
+                    if (b[1] !== a[1]) {
+                        return b[1] - a[1];
+                    }
+                    return a[0].localeCompare(b[0], 'vi');
+                })[0][0];
+            return [displayAuthor, group.total];
+        })
+        .sort((a, b) => {
+            if (b[1] !== a[1]) {
+                return b[1] - a[1];
+            }
+            return a[0].localeCompare(b[0], 'vi');
+        });
+
+    countEl.textContent = String(authors.length);
+
+    const totalByAuthors = authors.reduce((sum, item) => sum + item[1], 0);
+
+    if (authors.length === 0) {
+        listEl.innerHTML = '<p class="authors-empty">Chua co du lieu tac gia.</p>';
+        if (topListEl) {
+            topListEl.innerHTML = '<p class="authors-empty">Chua co du lieu.</p>';
+        }
+        if (shareListEl) {
+            shareListEl.innerHTML = '<p class="authors-empty">Chua co du lieu.</p>';
+        }
+        return;
+    }
+
+    if (topListEl) {
+        const topAuthors = authors.slice(0, 3);
+        topListEl.innerHTML = topAuthors
+            .map(([author, total], index) =>
+                `<article class="authors-top-item"><span class="authors-top-rank">#${index + 1}</span><span class="authors-top-name" title="${escapeHtml(author)}">${escapeHtml(author)}</span><span class="authors-top-value">${total} plugin</span></article>`
+            )
+            .join('');
+    }
+
+    if (shareListEl) {
+        const topShares = authors.slice(0, 8);
+        shareListEl.innerHTML = topShares
+            .map(([author, total]) => {
+                const ratio = totalByAuthors > 0 ? (total / totalByAuthors) * 100 : 0;
+                const ratioLabel = `${ratio.toFixed(1)}%`;
+                return `<li class="authors-share-item"><div class="authors-share-head"><span class="authors-share-name" title="${escapeHtml(author)}">${escapeHtml(author)}</span><span>${total} (${ratioLabel})</span></div><div class="authors-share-track"><div class="authors-share-fill" style="width:${ratio.toFixed(2)}%"></div></div></li>`;
+            })
+            .join('');
+    }
+
+    listEl.innerHTML = authors
+        .map(([author, total]) =>
+            `<li class="author-chip"><span class="author-name">${escapeHtml(author)}</span><span class="author-total">${total}</span></li>`
+        )
+        .join('');
+}
+
 function renderCard(ext) {
     const typeLabels = {
         novel: '[TRUYỆN CHỮ]',
@@ -201,6 +312,7 @@ function renderCard(ext) {
 
     const typeLabel = typeLabels[ext.type] || ext.type;
     const pluginPath = ext.relativePath ? `${ext.relativePath}/plugin.json` : '';
+    const description = getDescription(ext);
 
     return `
         <div class="ext-card">
@@ -210,7 +322,7 @@ function renderCard(ext) {
                 <span class="ext-version">v${ext.version || '0'}</span>
             </div>
             <p class="ext-author">Tác giả: ${ext.author || 'Không rõ'}</p>
-            <p class="ext-description">${ext.description || 'Chưa có mô tả'}</p>
+            <p class="ext-description">${description || 'Chưa có mô tả'}</p>
             <div class="ext-actions">
                 ${ext.source ? `<a href="${ext.source}" target="_blank" class="ext-link">Nguồn</a>` : '<span class="ext-link" style="opacity:0.35;">Nguồn</span>'}
                 ${pluginPath ? `<button class="ext-copy-btn" data-plugin-path="${pluginPath}">Copy Raw</button>` : '<span class="ext-copy-btn" style="opacity:0.35;">Copy Raw</span>'}
@@ -239,6 +351,7 @@ function renderGrid() {
 
 function renderDashboard() {
     renderStats();
+    renderAuthorAcknowledgement();
     renderGrid();
 }
 

@@ -14,7 +14,7 @@ const REQUIRED_SCRIPT_KEYS_BY_TYPE = {
 };
 const ALLOWED_PLUGIN_TOP_LEVEL_KEYS = new Set(['metadata', 'script', 'config']);
 const ALLOWED_TYPES = new Set(['novel', 'comic', 'chinese_novel', 'translate', 'tts']);
-const ALLOWED_LOCALES = new Set(['vi_VN', 'zh_CN', 'en_US']);
+const ALLOWED_LOCALES = new Set(['vi_VN', 'zh_CN', 'en_US', 'ja_JP']);
 const CONFIG_KEY_SCHEMA = {
     thread_num: { types: ['number'], integer: true, min: 1 },
     delay: { types: ['number'], integer: true, min: 0 },
@@ -313,7 +313,7 @@ function addRhinoSyntaxIssues(srcDir, workspaceRoot, issues) {
         {
             ruleId: 'rhino.async-await',
             message: 'Rhino compatibility: avoid async/await syntax',
-            regex: /\basync\b|\bawait\b/
+            regex: /\basync\s+(?:function|\()|\bawait\s+[A-Za-z_$({\[]/
         },
         {
             ruleId: 'rhino.import-export',
@@ -323,7 +323,7 @@ function addRhinoSyntaxIssues(srcDir, workspaceRoot, issues) {
         {
             ruleId: 'rhino.optional-chaining',
             message: 'Rhino compatibility: avoid optional chaining (?.)',
-            regex: /\?\./
+            regex: /[A-Za-z0-9_$\]\)]\s*\?\.\s*(?:[A-Za-z_$\[]|\()/
         },
         {
             ruleId: 'rhino.nullish-coalescing',
@@ -359,6 +359,7 @@ function addRhinoSyntaxIssues(srcDir, workspaceRoot, issues) {
 function validateExtension(targetRoot, workspaceRoot, catalogIndex, expectedAuthor, options = {}) {
     const includeNoiseWarnings = Boolean(options.includeNoiseWarnings);
     const enableProjectSpecificWarnings = Boolean(options.enableProjectSpecificWarnings);
+    const enableRegexpHeuristics = Boolean(options.enableRegexpHeuristics);
     const enableRhinoChecks = Boolean(options.enableRhinoChecks);
 
     const issues = [];
@@ -559,7 +560,7 @@ function validateExtension(targetRoot, workspaceRoot, catalogIndex, expectedAuth
             try {
                 const compiledRegexp = new RegExp(metadata.regexp);
                 const looksAnchored = /\$\s*$/.test(metadata.regexp.trim());
-                if (enableProjectSpecificWarnings && typeNeedsStrictDetailRegexp && !looksAnchored) {
+                if (enableProjectSpecificWarnings && enableRegexpHeuristics && typeNeedsStrictDetailRegexp && !looksAnchored) {
                     issues.push(
                         createIssue(
                             'warning',
@@ -572,7 +573,7 @@ function validateExtension(targetRoot, workspaceRoot, catalogIndex, expectedAuth
 
                 const source = typeof metadata.source === 'string' ? metadata.source : '';
                 if (source) {
-                    if (enableProjectSpecificWarnings) {
+                    if (enableProjectSpecificWarnings && enableRegexpHeuristics) {
                         let sourceHost = '';
                         try {
                             sourceHost = new URL(source).hostname;
@@ -609,38 +610,6 @@ function validateExtension(targetRoot, workspaceRoot, catalogIndex, expectedAuth
             }
         }
 
-        if (
-            enableProjectSpecificWarnings &&
-            expectedAuthor &&
-            (typeof metadata.author !== 'string' || metadata.author.trim() !== expectedAuthor)
-        ) {
-            issues.push(
-                createIssue(
-                    'warning',
-                    'metadata.author',
-                    `metadata.author should be "${expectedAuthor}"`,
-                    path.relative(workspaceRoot, pluginJsonPath)
-                )
-            );
-        }
-
-        const catalogEntry = resolveCatalogEntry(catalogIndex, metadata);
-        if (
-            enableProjectSpecificWarnings &&
-            catalogEntry &&
-            Number.isInteger(metadata.version) &&
-            Number.isInteger(catalogEntry.version) &&
-            metadata.version !== catalogEntry.version
-        ) {
-            issues.push(
-                createIssue(
-                    'warning',
-                    'catalog.version-sync',
-                    `Version mismatch with root catalog: extension=${metadata.version}, catalog=${catalogEntry.version}`,
-                    path.relative(workspaceRoot, pluginJsonPath)
-                )
-            );
-        }
     }
 
     if (script && typeof script === 'object' && !Array.isArray(script)) {

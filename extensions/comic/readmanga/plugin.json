@@ -6,9 +6,9 @@
     "source": "https://readmanga.org",
     "regexp": "readmanga.org/[^/]+?",
     "description": "Read manga",
-    "local": "en_US",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "en_US"
   },
   "script": {
     "home": "home.js",

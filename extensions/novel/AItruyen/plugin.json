@@ -6,7 +6,7 @@
     "source": "https://aitruyen.net/",
     "regexp": "(www.|m.)?aitruyen.net//truyen/*",
     "description": "Đọc truyện trên trang https://aitruyen.net/",
-    "locale": "vn_VI",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"
   },

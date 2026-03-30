@@ -6,9 +6,9 @@
     "source": "https://mongtruyen.com/",
     "regexp": "mongtruyen.com/[a-zA-Z0-9-]+/?$",
     "description": "Nguồn truyện chữ tổng hợp mongtruyen.com",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "novel"
+    "type": "novel",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

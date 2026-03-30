@@ -6,7 +6,7 @@
     "source": "https://www.19358.net",
     "regexp": "(www.)?19358.net/\\d+/?",
     "description": "Lỗi extension liên hệ email: phamgiavang@gmail.com",
-    "locale": "zh-CN",
+    "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel"
   },

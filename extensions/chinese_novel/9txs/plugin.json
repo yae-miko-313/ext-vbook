@@ -6,7 +6,7 @@
     "source": "https://9taoxs.com",
     "regexp": "(www.)?(m.)?9taoxs.com/book/\\d+.html",
     "description": "Đọc truyện trên trang 9taoxs.com",
-    "locale": "zh-CN",
+    "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel"
   },

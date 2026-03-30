@@ -6,7 +6,7 @@
     "source": "https://comic.8ternal.com",
     "regexp": "https://comic.8ternal.com/series/(.*?)[.]html",
     "description": "8ternal tổng hợp truyện dịch từ nhiều nguồn khác nhau, hỗ trợ các bạn đọc comics theo đúng timeline của các sự kiện chính. Hoặc đọc truyện theo timeline nhân vật mà các bạn yêu thích.",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "comic"
   },

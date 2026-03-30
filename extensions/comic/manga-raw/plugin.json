@@ -6,9 +6,9 @@
     "source": "https://www.manga-raw.club",
     "regexp": "www\\.manga-raw\\.club/manga/[^/]+/?$",
     "description": "Đọc truyện trên trang https://www.manga-raw.club",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

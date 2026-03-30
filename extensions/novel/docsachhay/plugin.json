@@ -6,7 +6,7 @@
     "source": "https://docsachhay.net",
     "regexp": "(www.)?docsachhay.net/sach/[0-9a-z-]+/?",
     "description": "Trang web đọc sách hay",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"
   },

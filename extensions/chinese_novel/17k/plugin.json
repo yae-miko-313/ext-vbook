@@ -6,9 +6,9 @@
     "source": "https://www.17k.com",
     "regexp": "(www|h5)\\.17k\\.com/book/\\d+\\.html",
     "description": "Đọc truyện trên trang https://www.17k.com.\n(Giới hạn chỉ đọc được chương free)",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "vi_VN"
   },
   "script": {
     "detail": "detail.js",

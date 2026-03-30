@@ -6,9 +6,9 @@
     "source": "https://hiperdex.com",
     "regexp": "hiperdex\\.com/manga/[^/]+/?$",
     "description": "Đọc truyện trên trang https://hiperdex.com",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

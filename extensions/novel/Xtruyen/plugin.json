@@ -6,7 +6,7 @@
     "source": "https://xtruyen.vn",
     "regexp": "(www.|m.)?xtruyen.vn/truyen/[0-9a-z]",
     "description": "Đọc truyện trên trang https://xtruyen.vn",
-    "locale": "vn_VI",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"
   },

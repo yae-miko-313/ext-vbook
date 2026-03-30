@@ -6,7 +6,7 @@
     "source": "https://8muses.com",
     "regexp": "comics\\.8muses\\.com\\/comics\\/album\\/[^\\/]+\\/[^\\/]+",
     "description": "Đọc truyện trên trang https://8muses.com",
-    "locale": "en",
+    "locale": "en_US",
     "language": "javascript",
     "type": "comic"
   },

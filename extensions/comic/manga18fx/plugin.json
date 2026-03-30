@@ -6,9 +6,9 @@
     "source": "https://manga18fx.com",
     "regexp": "manga18fx\\.com/manga/[^/]+/?$",
     "description": "Đọc truyện trên trang https://manga18fx.com",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "detail": "detail.js",

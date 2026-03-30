@@ -6,9 +6,9 @@
     "source": "https://www.kelexsw.com",
     "regexp": "(www.)?(m.)?kelexsw.com/book/\\d+/?",
     "description": "text",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

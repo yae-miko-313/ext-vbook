@@ -6,9 +6,9 @@
     "source": "https://tusachxinh.info",
     "regexp": "(www.)?tusachxinh(.*?)/[^/].+/?$",
     "description": "Fix code",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

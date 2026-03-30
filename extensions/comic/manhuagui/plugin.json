@@ -6,7 +6,7 @@
     "source": "https://www.manhuagui.com",
     "regexp": "(www.)?(m.)?(manhuagui||mhgui).com/comic/\\d+/?",
     "description": "Nếu có lỗi vui lòng liên hệ email : Phamgiavang@gmail.com",
-    "locale": "zh-CN",
+    "locale": "zh_CN",
     "language": "javascript",
     "type": "comic"
   },

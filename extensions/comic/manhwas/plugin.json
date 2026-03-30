@@ -6,10 +6,10 @@
     "source": "https://manhwas.men",
     "regexp": "manhwas\\.men/manga/[^/]+/?$",
     "description": "Đọc truyện trên trang https://manhwas.men",
-    "local": "vi-VN",
     "language": "javascript",
     "type": "comic",
-    "tag": "nsfw"
+    "tag": "nsfw",
+    "locale": "vi_VN"
   },
   "script": {
     "detail": "detail.js",

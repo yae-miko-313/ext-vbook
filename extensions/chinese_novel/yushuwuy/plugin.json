@@ -6,9 +6,9 @@
     "source": "https://yushuwuy.com",
     "regexp": "https://yushuwuy.com/read/\\d+.html",
     "description": "Đọc truyện tại yushuwuy.com",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

@@ -6,7 +6,7 @@
     "source": "https://sayhentai.one",
     "regexp": "(www.)?sayhentai.(.*?)/[^/]+.html$",
     "description": "Đọc truyện trên trang Say Hentai",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "comic",
     "tag": "nsfw"

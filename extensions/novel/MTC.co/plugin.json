@@ -6,9 +6,9 @@
     "source": "https://metruyenchu.co",
     "regexp": "^https:\\/\\/metruyenchu\\.co\\/truyen\\/([a-z0-9-]+)$",
     "description": "Đọc truyện từ trang metruyenchu.co",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "novel"
+    "type": "novel",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",
@@ -16,6 +16,6 @@
     "search": "search.js",
     "toc": "toc.js",
     "chap": "chap.js",
-    "gen" : "gen.js"
+    "gen": "gen.js"
   }
 }

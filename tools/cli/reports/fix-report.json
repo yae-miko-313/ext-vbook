@@ -1,0 +1,6422 @@
+{
+  "generatedAt": "2026-03-30T12:50:56.148Z",
+  "targetDir": "extensions",
+  "summary": {
+    "total": 377,
+    "fixed": 0,
+    "clean": 377,
+    "warningsOnly": 0,
+    "needsAi": 0
+  },
+  "items": [
+    {
+      "pluginRoot": "extensions/_unknown/koanchay",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/_unknown/sstruyen.com",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/_unknown/truyennhieu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/123ds",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/17k",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/18mh",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/19358",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/20xs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/230book",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/23shu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/250sy",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/256wx",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/256wxc",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/265xs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/2kxs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/51txt",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/520danmei",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/52shuku",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/60ks",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/69shu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/69yuedu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/82zw",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/8xsk",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/9txs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/aixdzs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/bfaloo",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/Bilinovel",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/biqubu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/biqugeabc",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/bixiange",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/bookqq",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/bqxs520",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/chuandaipc",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/cijige",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ciweimao",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/czbooks",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ddxs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/dingdian",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/dizishu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/elysia",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/esjzone",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/fanqienovel",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/fansg",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/feiszw",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ffxs8",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/fuxsb",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/gongzicp",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/haitang16",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/haitanglin",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/hetushu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/html5qq",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/idejian",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ihuaben",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ijjxs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ilwxs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/imiaobige",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ixdzs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ixunshu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/jingwubook",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/jpxs123",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/jwxs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/kanshuwu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/kanunu8",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/keepshu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/lanrenyuhai",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/linovel",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/linovelib",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/liquge",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/lnovel",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/longmabook",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/lrxs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/masiro",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/mbtxt",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/mdahexs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/mengyuanshucheng",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/mibiquge",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/mipciweimao",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/myrics",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/nhimmeo",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/nhimmeo_sv2",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/piaotian5",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/piaoyuxuan",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/pixiv",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/plhydp",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/po18gv",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/po18tw",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/powanjuan",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ptwxc",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ptwxz",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ptwxzOrg",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/qbtr",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/qidian",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/qimao",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/qiushubang",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/qmxs123",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/quanben",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/qubook",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ranwen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/raudonhimmeo",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/Sangt̀acviet",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/sfacg",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/shencou",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/shenyekanshu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/shu05",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/shubao45",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/shubl",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/shuhaige",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/shumilou",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/shuquge",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/shushuwuxs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/sjks88",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/sxyxht",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/tadu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/Tianyue",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/tongrenquan",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/TongRenShe",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/trxs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/trxsme",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/ttkan",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/tushumi.cc",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/Twfanti",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/twkan",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/txt520",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/Uaa",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/uukanshu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/uuksorg",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/uuxs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/wenku8",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/xbanxia",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/xbiquge",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/xinyushuwu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/xinyushuwu-com",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/xklxsw",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/xyushu5",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/yazhouse8",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/yodu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/yushubo",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/yushuwuy",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/Yyun",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/zhenhunxiaoshuo",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/zongheng",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/8muses",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/8ternal",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/acqq",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/allporncomic",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/baotangtruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/bato",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/beeng",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/blogtruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/blogtruyenmoi",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/boxtruyentranh",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/Buondua",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/cmangatop",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/creative-comic",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/cuutruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/dichtruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/Độc giả số 1",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/doctruyen3q",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/doujins",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/dragonballwiki",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/Dưa Leo Truyện",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/dualeotruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/e-hentai",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/goctruyentranh",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hentai-img",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hentai2read",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hentaic",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hentaicube",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hentaidexy",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hentaifox",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hentaiporns",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hentairead",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hentairules",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hentaivn",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hentaivnvip",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hentaivv",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hiperdex",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/hitruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/ihentai",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/JAmangatoro",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/khotruyentranh",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/kissaway",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/kocr",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/lkdttzz",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/lxhentai",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/manga-raw",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/manga18.club",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/manga18fx",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/mangabuddy",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/mangadex",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/mangadistrict",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/mangapuma",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/mangaread",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/mangaxy",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/mangayeh",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/manhuagui",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/manhuarock",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/manhuavn",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/manhwahentai",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/manhwas",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/medoctruyentranh",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/Men18",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/metruyentranh",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/nettruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/ngonphong",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/nhentai",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/nhentaione",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/ocumoe",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/otakusan",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/otruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/qmanga",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/rawdevart",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/readcomiconline",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/readmanga",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/sanyteam",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/sayhentai",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/saytruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/skymanga",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/thienhatruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/tranh18",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyen210",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyencool",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyendex",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyengg",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyenkk1",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyenlh",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyenqq",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyensieuhay",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyentranh",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyentranh3q",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyentranhaudio",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyentranhlh",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyenvn",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/truyenz",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/tsumino",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/tusachxinhxinh",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/umetruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/ungtycomics",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/vcomycs",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/vlogtruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/webtoonxyz",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/yocomic",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/yurineko",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/comic/ZetTruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/123truyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/AItruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/akaytruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/bachngocsach",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/banlong",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/chivi",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/docsach24",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/docsachhay",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/doctruyen14",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/gacsach",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/gettruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/giangsonnhuhoa",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/giangthe",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/hako",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/hamtruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/hiepnu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/hotruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/isach",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/kakuyomu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/knoxt",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/koanchay",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/Kỳ huyễn",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/kychi_ntruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/kychi_truyenmoikk",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/legado-minhducmon",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/legado2",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/lightnovel",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/lightnovelreader",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/lustaveland",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/medoctruyenchu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/metruyenchu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/metruyencv",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/MongTruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/monkeyd",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/MTC.co",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/mtlnation",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/mtlnovel",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/ngoctieucac",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/nguoilaodong",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/nhasachmienphi",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/novelbuddy",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/NovelFire",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/novelfull",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/Novest",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/ntruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/nuhiep",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/readernovel",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/readwn",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/royalroad",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/sachhayonline",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/sangtacviet",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/santruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/SiTruyenCV",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/soha",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/sstruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/sstruyen.com",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/sttruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/stvlimit",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/syosetu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/tangthuvien",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/thichdoctruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/thichtruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/Tiemtruyenchu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/tienhiepXYZ",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/tienvuc",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/Trùm Truyện",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyena",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenchu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenchuth",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyencodetheoyeucau",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenconect",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenconvert",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyencv",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyendich",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyendichgiare",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyendichmienphi",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/Truyendocviet",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenfree",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenfull",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenfullCom",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyengihot",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenhayvn",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenhd",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenheo",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenhoan",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenhoangdung",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/TruyenMoi",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenmoii",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyennet",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyennhieu",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyennow",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyentienhiep",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyentiki",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyentr",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenwiki",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenwikicom",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/truyenyy",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/Tu Chân Giới",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/tuoinung",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/tuoitre",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/tytnovel",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/vbook-ext-template",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/vietnamnet",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/vietwriter",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/vipbns",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/VIPngontinh",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/viptruyenfull",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/vlognovel",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/vnexpress",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/vozer",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/vtruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/wattpad",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/webnovel",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/webnovel-vn",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/webtruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/webtruyendich",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/webtruyenonlinez",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/wikidich",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/wikidich-app",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/wuxiaworld",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/Xtruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/zingtruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/novel/ztruyen",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/translate/baidu-translate",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/translate/google-translate",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/translate/openai-translate",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/translate/xombot",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/tts/bing-tts",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/tts/gemini-tts",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/tts/google-tts",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/tts/tiktok-tts",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/tts/zalo-tts",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    },
+    {
+      "pluginRoot": "extensions/vbook-ext-template",
+      "beforeCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "afterCounts": {
+        "targets": 1,
+        "error": 0,
+        "warning": 0
+      },
+      "fixesApplied": 0,
+      "changedTargets": 0,
+      "finalStatus": "clean",
+      "failureReason": null
+    }
+  ]
+}

@@ -6,10 +6,10 @@
     "source": "https://hentaidexy.net",
     "regexp": "(www.)?hentaidexy.net/manga/[0-9a-z-]+/?",
     "description": "Nếu có lỗi vui lòng liên hệ email : phamgiavang@gmail.com",
-    "locale": "en-EN",
+    "locale": "en_US",
     "language": "javascript",
     "type": "comic",
-    "tag" : "nsfw"
+    "tag": "nsfw"
   },
   "script": {
     "home": "home.js",

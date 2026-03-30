@@ -10,7 +10,19 @@ const REQUIRED_SCRIPT_KEYS_BY_TYPE = {
 
 function normalizeLocale(locale) {
     if (typeof locale !== 'string') return locale;
-    const value = locale.trim().replace(/-/g, '_');
+    const raw = locale.trim();
+    const mapped = {
+        en_EN: 'en_US',
+        cn_CN: 'zh_CN',
+        vn_VI: 'vi_VN',
+        en: 'en_US',
+        ja: 'ja_JP',
+        global: 'en_US',
+        locale: 'en_US'
+    };
+    if (mapped[raw]) return mapped[raw];
+
+    const value = raw.replace(/-/g, '_');
     const parts = value.split('_');
     if (parts.length !== 2) return value;
     const lang = parts[0].toLowerCase();
@@ -117,6 +129,15 @@ function applySafeFixes(pluginJson, pluginSourceDir) {
                     to: normalized
                 });
             }
+        } else if (typeof plugin.metadata.type === 'string') {
+            const defaultLocale = plugin.metadata.type === 'chinese_novel' ? 'zh_CN' : 'vi_VN';
+            plugin.metadata.locale = defaultLocale;
+            changes.push({
+                field: 'metadata.locale',
+                action: 'set-default',
+                from: '(missing)',
+                to: defaultLocale
+            });
         }
     }
 

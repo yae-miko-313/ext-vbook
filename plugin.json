@@ -7,11 +7,11 @@
     {
       "name": "nTruyen",
       "author": "kychi",
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/ntruyen/plugin.zip",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/kychi_ntruyen/plugin.zip",
       "version": 1,
       "source": "https://ntruyen.biz/",
-      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/ntruyen/icon.png",
-      "description": "(fix ext lão B ) Đọc truyện từ ntruyen.biz, toàn đam với ngôn tình :)))",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/kychi_ntruyen/icon.png",
+      "description": "(fix ext lão B) Đọc truyện từ ntruyen.biz, toàn đam với ngôn tình",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -29,11 +29,11 @@
     {
       "name": "TruyenMoiKK",
       "author": "kychi",
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/truyenmoi/plugin.zip",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/kychi_truyenmoikk/plugin.zip",
       "version": 4,
       "source": "https://truyenmoikk.com/",
-      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/truyenmoi/icon.png",
-      "description": "Fork từ ext TruyenMoi của HieuDM, fix lỗi title detail và search.",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/kychi_truyenmoikk/icon.png",
+      "description": "Fork từ ext TruyenMoi của HieuDM, fix lỗi title detail và search",
       "type": "novel",
       "locale": "vi_VN"
     }

@@ -8,7 +8,8 @@
     "description": "Đọc truyện trên trang e-hentai.org",
     "language": "javascript",
     "type": "comic",
-    "tag": "nsfw"
+    "tag": "nsfw",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

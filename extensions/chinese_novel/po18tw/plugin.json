@@ -6,7 +6,7 @@
     "source": "https://www.po18.tw",
     "regexp": "(www.)?po18.tw/books/\\d+/?",
     "description": "Đọc truyện tại trang po18.tw",
-    "locale": "zh-CN",
+    "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel"
   },

@@ -6,7 +6,7 @@
     "source": "https://www.twfanti.com",
     "regexp": "(www.)?(m.)?twfanti.com/book/.*",
     "description": "đang test",
-    "locale": "zh-CN",
+    "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel"
   },

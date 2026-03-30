@@ -6,10 +6,10 @@
     "source": "https://hentaiporns.net",
     "regexp": "hentaiporns\\.net/[^/]+/?$",
     "description": "Đọc truyện trên trang https://hentaiporns.net",
-    "local": "vi-VN",
     "language": "javascript",
     "type": "comic",
-    "tag": "nsfw"
+    "tag": "nsfw",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

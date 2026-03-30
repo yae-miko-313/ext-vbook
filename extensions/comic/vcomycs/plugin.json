@@ -6,9 +6,9 @@
     "source": "https://vcomycs.info/",
     "regexp": "(www.)?vcomycs.info/truyen-tranh/[^/].+/?$",
     "description": "Đọc truyện tại https://vcomycs.info/",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

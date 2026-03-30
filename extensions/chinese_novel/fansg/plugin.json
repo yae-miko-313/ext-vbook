@@ -6,9 +6,9 @@
     "source": "http://m.fansg.com",
     "regexp": "(www.|m.)fansg.com/.*?book_.*?.html?$",
     "description": "Đọc truyện trên trang fansg.com",
-    "local": "zh-CN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "zh_CN"
   },
   "script": {
     "home": "home.js",

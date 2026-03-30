@@ -6,7 +6,7 @@
     "source": "https://mangadex.org",
     "regexp": "mangadex.org/title/.*?",
     "description": "Đọc truyện trên trang MangaDex",
-    "locale": "global",
+    "locale": "en_US",
     "language": "javascript",
     "type": "comic"
   },

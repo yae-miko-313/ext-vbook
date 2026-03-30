@@ -6,7 +6,7 @@
     "source": "https://taitruyen.org",
     "regexp": "(www.)?((taitruyen.org/[^/+]+/)|(taitruyen.org/[^/+]+))",
     "description": "V4: change domain",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"
   },

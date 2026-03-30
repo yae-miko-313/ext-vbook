@@ -5,7 +5,8 @@
     "version": 1,
     "source": "https://www.bing.com/translator",
     "description": "Nghe truyện bằng Bing TTS",
-    "type": "tts"
+    "type": "tts",
+    "locale": "vi_VN"
   },
   "script": {
     "voice": "voice.js",

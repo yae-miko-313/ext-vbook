@@ -6,10 +6,10 @@
     "source": "https://ihentai.info",
     "regexp": "(www1?.)?ihentai\\.info/[^/]+/?$",
     "description": "Đọc truyện trên trang https://ihentai.info",
-    "local": "vi-VN",
     "language": "javascript",
     "type": "comic",
-    "tag": "nsfw"
+    "tag": "nsfw",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

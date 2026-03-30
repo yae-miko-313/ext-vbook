@@ -6,7 +6,7 @@
     "source": "https://vlogtruyen12.com",
     "regexp": "(www.)?vlogtruyen12.*?/[^/]+.html",
     "description": "Đọc truyện tại https://vlogtruyen12.com",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "comic"
   },

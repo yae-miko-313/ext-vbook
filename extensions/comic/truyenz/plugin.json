@@ -6,9 +6,9 @@
     "source": "https://truyenz.info",
     "regexp": "(www.)?truyenz.info/manga/[0-9a-z-]+/?$",
     "description": "Đọc truyện trên trang truyenz.info",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

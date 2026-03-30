@@ -6,10 +6,10 @@
     "source": "https://truyen210.net/",
     "regexp": "(www.)?truyen210.net/[^.]+.html",
     "description": "Nhiều truyện adult quá...",
-    "local": "vi-VN",
     "language": "javascript",
     "type": "comic",
-    "tag": "nsfw"
+    "tag": "nsfw",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

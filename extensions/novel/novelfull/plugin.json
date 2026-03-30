@@ -6,9 +6,9 @@
     "source": "https://novelfull.com/",
     "regexp": "(www.)?novelfull.com/[0-9a-z].+html$",
     "description": "Đọc truyện tại Novel Full",
-    "local": "en-US",
     "language": "javascript",
-    "type": "novel"
+    "type": "novel",
+    "locale": "en_US"
   },
   "script": {
     "home": "home.js",

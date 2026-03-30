@@ -6,7 +6,7 @@
     "source": "https://nhentai.one",
     "regexp": "(www.)?nhentai.one/(.*?)/?$",
     "description": "Đọc truyện trên trang nHentai.one",
-    "locale": "locale",
+    "locale": "en_US",
     "language": "javascript",
     "type": "comic",
     "tag": "nsfw"

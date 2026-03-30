@@ -6,7 +6,7 @@
     "source": "https://knoxt.space",
     "regexp": "(www.)?knoxt.space/[0-9a-z-]+/?",
     "description": "https://knoxt.space",
-    "locale": "en-EN",
+    "locale": "en_US",
     "language": "javascript",
     "type": "novel"
   },

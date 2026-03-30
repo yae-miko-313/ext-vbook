@@ -6,15 +6,15 @@
     "source": "https://k.2kxs.org/",
     "regexp": "https://k.2kxs.org/\\d+_\\d+/",
     "description": "2k",
-    "local": "zh_CN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "zh_CN"
   },
   "script": {
     "home": "home.js",
     "detail": "detail.js",
     "search": "search.js",
-    "toc":"toc.js",
+    "toc": "toc.js",
     "chap": "chap.js"
   }
 }

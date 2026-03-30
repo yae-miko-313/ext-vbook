@@ -6,9 +6,9 @@
     "source": "https://truyenchuth.com",
     "regexp": "(www.)?truyenchuth.com/truyen.*?",
     "description": "Truyện chữ, truyện tranh tùm lum...",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "novel"
+    "type": "novel",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

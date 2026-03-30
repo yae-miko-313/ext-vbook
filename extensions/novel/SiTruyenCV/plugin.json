@@ -6,9 +6,9 @@
     "source": "https://sitruyencv.com",
     "regexp": "^https?:\\/\\/sitruyencv\\.com\\/story\\/\\d+-.*",
     "description": "Đọc truyện từ trang Si Truyện CV",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "novel"
+    "type": "novel",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

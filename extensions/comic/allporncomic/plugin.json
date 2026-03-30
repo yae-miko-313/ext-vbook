@@ -6,10 +6,10 @@
     "source": "https://allporncomic.com/",
     "regexp": "(www.)?allporncomic.com/[^/].+/[^/].+/?$",
     "description": "Truyện hentai\n fix code",
-    "local": "vi-VN",
     "language": "javascript",
     "type": "comic",
-    "tag": "nsfw"
+    "tag": "nsfw",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

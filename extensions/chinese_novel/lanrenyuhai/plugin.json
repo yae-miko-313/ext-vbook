@@ -6,7 +6,7 @@
     "source": "https://www.lanrenyuhai.com",
     "regexp": "(www.)?www.lanrenyuhai.com/go/\\d+/?",
     "description": "Nếu lỗi báo cáo email : phamgiavang@gmail.com hoặc discord",
-    "locale": "zh-CN",
+    "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel"
   },

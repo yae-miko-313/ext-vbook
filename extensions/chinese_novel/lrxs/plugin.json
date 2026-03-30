@@ -6,9 +6,9 @@
     "source": "https://www.lrxs.org",
     "regexp": "(www|m)\\.lrxs\\.org/\\d+_\\d+/?",
     "description": "Đọc truyện trên trang https://www.lrxs.org",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "vi_VN"
   },
   "script": {
     "detail": "detail.js",

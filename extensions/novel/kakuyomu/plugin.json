@@ -7,7 +7,7 @@
     "regexp": "kakuyomu.jp/(.*)$",
     "description": "書ける、読める、伝えられる！",
     "type": "novel",
-    "locale": "ja-JP",
+    "locale": "ja_JP",
     "language": "javascript"
   },
   "script": {

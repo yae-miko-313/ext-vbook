@@ -6,9 +6,9 @@
     "source": "https://mangayeh.com",
     "regexp": "mangayeh\\.com/manga/[^/]+/?$",
     "description": "Đọc truyện trên trang https://mangayeh.com",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

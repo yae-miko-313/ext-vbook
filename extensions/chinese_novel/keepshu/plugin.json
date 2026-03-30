@@ -6,9 +6,9 @@
     "source": "https://www.keepshu.com",
     "regexp": "(www.|m.)keepshu.com/[a-z]+_\\d+.html$",
     "description": "Đọc truyện trên trang keepshu.com",
-    "local": "zh-CN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "zh_CN"
   },
   "script": {
     "home": "home.js",

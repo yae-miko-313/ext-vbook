@@ -6,9 +6,9 @@
     "source": "https://www.tushumi.cc/",
     "regexp": "https://www.tushumi.cc/shu/\\d+/",
     "description": "Đọc truyện ở tushumi.cc",
-    "local": "zh_CN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "zh_CN"
   },
   "script": {
     "home": "home.js",

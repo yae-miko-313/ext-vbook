@@ -3,10 +3,11 @@
     "folder": "123truyen",
     "name": "123 Truyện",
     "author": "Nhocconsr",
+    "description": "Đổi domain bằng mã bổ sung",
     "source": "https://123truyen.vn",
     "version": 14,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/123truyen",
     "metadata": {
       "name": "123 Truyện",
@@ -15,7 +16,7 @@
       "source": "https://123truyen.vn",
       "regexp": "(www.)?123truyen.vn/[0-9a-z-]+",
       "description": "Đổi domain bằng mã bổ sung",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -24,10 +25,11 @@
     "folder": "AItruyen",
     "name": "A.I Truyện",
     "author": "Vearn",
+    "description": "Đọc truyện trên trang https://aitruyen.net/",
     "source": "https://aitruyen.net/",
     "version": 1,
     "type": "novel",
-    "locale": "vn_VI",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/AItruyen",
     "metadata": {
       "name": "A.I Truyện",
@@ -36,7 +38,7 @@
       "source": "https://aitruyen.net/",
       "regexp": "(www.|m.)?aitruyen.net//truyen/*",
       "description": "Đọc truyện trên trang https://aitruyen.net/",
-      "locale": "vn_VI",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -45,6 +47,7 @@
     "folder": "akaytruyen",
     "name": "akaytruyen",
     "author": "B",
+    "description": "Đọc truyện trên trang https://akaytruyen.com/",
     "source": "https://akaytruyen.com",
     "version": 1,
     "type": "novel",
@@ -66,6 +69,7 @@
     "folder": "bachngocsach",
     "name": "Bạch Ngọc Sách",
     "author": "vBook",
+    "description": "Đọc truyện trên trang bachngocsach.com.vn/reader",
     "source": "https://bachngocsach.cc/reader",
     "version": 14,
     "type": "novel",
@@ -87,10 +91,11 @@
     "folder": "banlong",
     "name": "Bàn Long",
     "author": "vBook",
+    "description": "Đọc truyện trên banlong.us",
     "source": "https://blhvip.vn",
     "version": 7,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/banlong",
     "metadata": {
       "name": "Bàn Long",
@@ -99,7 +104,7 @@
       "source": "https://blhvip.vn",
       "regexp": "(www.)?(banlong.vip|blhvip.vn)/truyen/[0-9a-z-]+/?",
       "description": "Đọc truyện trên banlong.us",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -108,6 +113,7 @@
     "folder": "chivi",
     "name": "Chivi",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Chivi",
     "source": "https://chivi.app",
     "version": 24,
     "type": "novel",
@@ -129,10 +135,11 @@
     "folder": "docsach24",
     "name": "Docsach24",
     "author": "Fusornat",
+    "description": "Docsach24 tổng hợp và sửa lỗi chính tả các tác phẩm sách, truyện hiện có trên mạng Internet. Chúng tôi không sở hữu hay chịu trách nhiệm bất kỳ thông tin nào trên web này. Nếu làm ảnh hưởng đến cá nhân hay tổ chức nào, khi được yêu cầu, chúng tôi sẽ xem xét và gỡ bỏ ngay lập tức.",
     "source": "https://docsach24.co",
     "version": 1,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/docsach24",
     "metadata": {
       "name": "Docsach24",
@@ -141,7 +148,7 @@
       "source": "https://docsach24.co",
       "regexp": "https://docsach24.co/e-book/(.*?).html",
       "description": "Docsach24 tổng hợp và sửa lỗi chính tả các tác phẩm sách, truyện hiện có trên mạng Internet. Chúng tôi không sở hữu hay chịu trách nhiệm bất kỳ thông tin nào trên web này. Nếu làm ảnh hưởng đến cá nhân hay tổ chức nào, khi được yêu cầu, chúng tôi sẽ xem xét và gỡ bỏ ngay lập tức.",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -150,10 +157,11 @@
     "folder": "docsachhay",
     "name": "Đọc Sách Hay",
     "author": "Nhocconsr",
+    "description": "Trang web đọc sách hay",
     "source": "https://docsachhay.net",
     "version": 1,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/docsachhay",
     "metadata": {
       "name": "Đọc Sách Hay",
@@ -162,7 +170,7 @@
       "source": "https://docsachhay.net",
       "regexp": "(www.)?docsachhay.net/sach/[0-9a-z-]+/?",
       "description": "Trang web đọc sách hay",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -171,6 +179,7 @@
     "folder": "doctruyen14",
     "name": "Đọc Truyện 14",
     "author": "B",
+    "description": "Đọc Truyện 14 là trang web đọc truyện chữ online.",
     "source": "https://doctruyen14.vip/",
     "version": 2,
     "type": "novel",
@@ -193,6 +202,7 @@
     "folder": "gacsach",
     "name": "Gác Sách",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Gác Sách",
     "source": "https://gacsach.org",
     "version": 9,
     "type": "novel",
@@ -214,10 +224,11 @@
     "folder": "gettruyen",
     "name": "GetTruyen (Tải Truyện)",
     "author": "Nhocconsr",
+    "description": "V4: change domain",
     "source": "https://taitruyen.org",
     "version": 4,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/gettruyen",
     "metadata": {
       "name": "GetTruyen (Tải Truyện)",
@@ -226,7 +237,29 @@
       "source": "https://taitruyen.org",
       "regexp": "(www.)?((taitruyen.org/[^/+]+/)|(taitruyen.org/[^/+]+))",
       "description": "V4: change domain",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
+      "language": "javascript",
+      "type": "novel"
+    }
+  },
+  {
+    "folder": "giangsonnhuhoa",
+    "name": "Giang Sơn Như Họa Master",
+    "author": "@R",
+    "description": "Đọc truyện trên doctruyen.giangsonnhuhoa.com",
+    "source": "https://doctruyen.giangsonnhuhoa.com",
+    "version": 3,
+    "type": "novel",
+    "locale": "vi_VN",
+    "relativePath": "extensions/novel/giangsonnhuhoa",
+    "metadata": {
+      "name": "Giang Sơn Như Họa Master",
+      "author": "@R",
+      "version": 3,
+      "source": "https://doctruyen.giangsonnhuhoa.com",
+      "regexp": "doctruyen\\.giangsonnhuhoa\\.com",
+      "description": "Đọc truyện trên doctruyen.giangsonnhuhoa.com",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -235,6 +268,7 @@
     "folder": "giangthe",
     "name": "Giáng Thế",
     "author": "Nhocconsr",
+    "description": "Fix lỗi khoảng cách chữ",
     "source": "https://giangthe.com",
     "version": 3,
     "type": "novel",
@@ -256,6 +290,7 @@
     "folder": "hako",
     "name": "Hako Novel",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Hako",
     "source": "https://docln.sbs",
     "version": 12,
     "type": "novel",
@@ -277,10 +312,11 @@
     "folder": "hamtruyen",
     "name": "Ham Truyện",
     "author": "Nhocconsr",
+    "description": "Đọc truyện tranh trên trang hamtruyenmoi.com",
     "source": "https://hamtruyen.info",
     "version": 10,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/hamtruyen",
     "metadata": {
       "name": "Ham Truyện",
@@ -289,7 +325,7 @@
       "source": "https://hamtruyen.info",
       "regexp": "(www.)?(m.)?hamtruyen.(info|vn)/(truyen/)?[0-9a-z-]+.html",
       "description": "Đọc truyện tranh trên trang hamtruyenmoi.com",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -298,6 +334,7 @@
     "folder": "hiepnu",
     "name": "Hiệp Nữ",
     "author": "bexom",
+    "description": "Đọc truyện trên Hiệp Nữ",
     "source": "https://hiepnu.net",
     "version": 2,
     "type": "novel",
@@ -319,10 +356,11 @@
     "folder": "hotruyen",
     "name": "Hố Truyện",
     "author": "Nhocconsr",
+    "description": "Đọc truyện trên trang Hotruyen.com",
     "source": "https://hotruyen1.com",
     "version": 5,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/hotruyen",
     "metadata": {
       "name": "Hố Truyện",
@@ -331,7 +369,7 @@
       "source": "https://hotruyen1.com",
       "regexp": "(www.)?hotruyen1.com/truyen/[^/+]+",
       "description": "Đọc truyện trên trang Hotruyen.com",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -340,6 +378,7 @@
     "folder": "isach",
     "name": "iSach",
     "author": "vBook",
+    "description": "Đọc truyện trên trang iSach",
     "source": "https://isach.info",
     "version": 2,
     "type": "novel",
@@ -361,10 +400,11 @@
     "folder": "kakuyomu",
     "name": "Kakuyomu",
     "author": "Beast666",
+    "description": "書ける、読める、伝えられる！",
     "source": "https://kakuyomu.jp",
     "version": 1,
     "type": "novel",
-    "locale": "ja-JP",
+    "locale": "ja_JP",
     "relativePath": "extensions/novel/kakuyomu",
     "metadata": {
       "name": "Kakuyomu",
@@ -374,7 +414,7 @@
       "regexp": "kakuyomu.jp/(.*)$",
       "description": "書ける、読める、伝えられる！",
       "type": "novel",
-      "locale": "ja-JP",
+      "locale": "ja_JP",
       "language": "javascript"
     }
   },
@@ -382,10 +422,11 @@
     "folder": "knoxt",
     "name": "Knoxt",
     "author": "Nhocconsr",
+    "description": "https://knoxt.space",
     "source": "https://knoxt.space",
     "version": 1,
     "type": "novel",
-    "locale": "en-EN",
+    "locale": "en_US",
     "relativePath": "extensions/novel/knoxt",
     "metadata": {
       "name": "Knoxt",
@@ -394,7 +435,7 @@
       "source": "https://knoxt.space",
       "regexp": "(www.)?knoxt.space/[0-9a-z-]+/?",
       "description": "https://knoxt.space",
-      "locale": "en-EN",
+      "locale": "en_US",
       "language": "javascript",
       "type": "novel"
     }
@@ -403,6 +444,7 @@
     "folder": "koanchay",
     "name": "Koanchay",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Koanchay",
     "source": "https://koanchay.net",
     "version": 12,
     "type": "novel",
@@ -425,6 +467,7 @@
     "folder": "Kỳ huyễn",
     "name": "Kỳ huyễn",
     "author": "B",
+    "description": "Đọc truyện trên trang Kỳ huyễn kyhuyen.com",
     "source": "https://kyhuyen.com/",
     "version": 1,
     "type": "novel",
@@ -446,6 +489,7 @@
     "folder": "kychi_ntruyen",
     "name": "nTruyen",
     "author": "kychi",
+    "description": "(fix ext lão B) Đọc truyện từ ntruyen.biz, toàn đam với ngôn tình",
     "source": "https://ntruyen.biz/",
     "version": 1,
     "type": "novel",
@@ -464,30 +508,10 @@
     }
   },
   {
-    "folder": "kychi_truyenhoan",
-    "name": "Truyện Hoàn",
-    "author": "kychi",
-    "source": "https://truyenhoan.com/",
-    "version": 8,
-    "type": "novel",
-    "locale": "vi_VN",
-    "relativePath": "extensions/novel/kychi_truyenhoan",
-    "metadata": {
-      "name": "Truyện Hoàn",
-      "author": "kychi",
-      "version": 8,
-      "source": "https://truyenhoan.com/",
-      "regexp": "(www.)?truyenhoan.com/[^/]+/?$",
-      "description": "Đọc truyện tiên hiệp, huyền huyễn, ngôn tình từ Truyện Hoàn - website truyện full online miễn phí",
-      "locale": "vi_VN",
-      "language": "javascript",
-      "type": "novel"
-    }
-  },
-  {
     "folder": "kychi_truyenmoikk",
     "name": "TruyenMoiKK",
     "author": "kychi",
+    "description": "Fork từ ext TruyenMoi của HieuDM, fix lỗi title detail và search",
     "source": "https://truyenmoikk.com/",
     "version": 4,
     "type": "novel",
@@ -509,6 +533,7 @@
     "folder": "legado-minhducmon",
     "name": "Legado - AI Dịch - Minh Đức Môn",
     "author": "Moleys",
+    "description": "Đọc truyện qua app Legado và AI dịch, chi tiết vui lòng xem hướng dẫn trong Thảo luận",
     "source": "https://minhducmon.ru",
     "version": 14,
     "type": "novel",
@@ -530,6 +555,7 @@
     "folder": "legado2",
     "name": "Legado thêm Google dịch",
     "author": "Moleys",
+    "description": "Đọc truyện qua app Legado, chi tiết vui lòng xem hướng dẫn trong Thảo luận",
     "source": "https://github.com/gedoor/legado",
     "version": 14,
     "type": "novel",
@@ -551,6 +577,7 @@
     "folder": "lightnovel",
     "name": "LightNovel VN",
     "author": "Nhocconsr",
+    "description": "LightNovel En",
     "source": "https://quykiep.com",
     "version": 5,
     "type": "novel",
@@ -572,10 +599,11 @@
     "folder": "lightnovelreader",
     "name": "LightNovel Reader",
     "author": "vBook",
+    "description": "Read novel",
     "source": "https://readlightnovel.app",
     "version": 4,
     "type": "novel",
-    "locale": null,
+    "locale": "en_US",
     "relativePath": "extensions/novel/lightnovelreader",
     "metadata": {
       "name": "LightNovel Reader",
@@ -584,19 +612,20 @@
       "source": "https://readlightnovel.app",
       "regexp": "(lightnovelreader|lnreader|readlightnovel).(org|me|app)/[^/]+?",
       "description": "Read novel",
-      "local": "en-US",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "en_US"
     }
   },
   {
     "folder": "lustaveland",
     "name": "Luvevaland",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Luvevaland",
     "source": "https://luvevaland.co",
     "version": 4,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/lustaveland",
     "metadata": {
       "name": "Luvevaland",
@@ -605,15 +634,16 @@
       "source": "https://luvevaland.co",
       "regexp": "(www.)?(lustaveland.com|luvevaland.co)/(truyen|truyen-tranh|tieu-thuyet)/[^/]+/?$",
       "description": "Đọc truyện trên trang Luvevaland",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "medoctruyenchu",
     "name": "Mê Đọc Truyện Chữ",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Mê Đọc Truyện Chữ",
     "source": "https://www.medoctruyenchu.net",
     "version": 3,
     "type": "novel",
@@ -635,6 +665,7 @@
     "folder": "metruyenchu",
     "name": "MeTruyenChu",
     "author": "Meo",
+    "description": "MeTruyenChu - Đọc truyện chữ online miễn phí, không quảng cáo",
     "source": "https://metruyenchu.com.vn",
     "version": 3,
     "type": "novel",
@@ -655,6 +686,7 @@
     "folder": "metruyencv",
     "name": "Mê Truyện CV",
     "author": "springpeachvinh",
+    "description": "Đọc truyện trên trang Mê Truyện CV",
     "source": "https://metruyencv.xyz",
     "version": 3,
     "type": "novel",
@@ -676,10 +708,11 @@
     "folder": "MongTruyen",
     "name": "Mộng Truyện",
     "author": "HieuDM",
+    "description": "Nguồn truyện chữ tổng hợp mongtruyen.com",
     "source": "https://mongtruyen.com/",
     "version": 2,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/MongTruyen",
     "metadata": {
       "name": "Mộng Truyện",
@@ -688,15 +721,16 @@
       "source": "https://mongtruyen.com/",
       "regexp": "mongtruyen.com/[a-zA-Z0-9-]+/?$",
       "description": "Nguồn truyện chữ tổng hợp mongtruyen.com",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "monkeyd",
     "name": "MonkeyD VN",
     "author": "Nhocconsr",
+    "description": "Đọc truyện MonkeyD",
     "source": "https://monkeyd.net.vn",
     "version": 7,
     "type": "novel",
@@ -718,10 +752,11 @@
     "folder": "MTC.co",
     "name": "Mê Truyện Chữ chấm CO",
     "author": "HieuDM",
+    "description": "Đọc truyện từ trang metruyenchu.co",
     "source": "https://metruyenchu.co",
     "version": 1,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/MTC.co",
     "metadata": {
       "name": "Mê Truyện Chữ chấm CO",
@@ -730,19 +765,20 @@
       "source": "https://metruyenchu.co",
       "regexp": "^https:\\/\\/metruyenchu\\.co\\/truyen\\/([a-z0-9-]+)$",
       "description": "Đọc truyện từ trang metruyenchu.co",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "mtlnation",
     "name": "MTL Nation",
     "author": "Nhocconsr",
+    "description": "V2: fix login",
     "source": "https://mtlnation.com",
     "version": 2,
     "type": "novel",
-    "locale": "en-EN",
+    "locale": "en_US",
     "relativePath": "extensions/novel/mtlnation",
     "metadata": {
       "name": "MTL Nation",
@@ -751,7 +787,7 @@
       "source": "https://mtlnation.com",
       "regexp": "(www.)?mtlnation.com/novel/[0-9a-z-]+/?$",
       "description": "V2: fix login",
-      "locale": "en-EN",
+      "locale": "en_US",
       "language": "javascript",
       "type": "novel"
     }
@@ -760,10 +796,11 @@
     "folder": "mtlnovel",
     "name": "MTL Novel",
     "author": "Tác giả",
+    "description": "Lỗi extention liên hệ email: phamgiavang@gmail.com",
     "source": "https://www.mtlnovel.com",
     "version": 2,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/mtlnovel",
     "metadata": {
       "name": "MTL Novel",
@@ -772,7 +809,7 @@
       "source": "https://www.mtlnovel.com",
       "regexp": "(www.)mtlnovel.com/[0-9a-z-]+/?$",
       "description": "Lỗi extention liên hệ email: phamgiavang@gmail.com",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -781,6 +818,7 @@
     "folder": "ngoctieucac",
     "name": "Ngọc Tiếu Các",
     "author": "sonzin",
+    "description": "Đọc truyện trên trang Ngọc Tiếu Các",
     "source": "https://ngoctieucac.com",
     "version": 1,
     "type": "novel",
@@ -802,6 +840,7 @@
     "folder": "nguoilaodong",
     "name": "Người Lao Động",
     "author": "Đường đen",
+    "description": "Người Lao Động",
     "source": "https://nld.com.vn",
     "version": 1,
     "type": "novel",
@@ -823,6 +862,7 @@
     "folder": "nhasachmienphi",
     "name": "nhasachmienphi 📚",
     "author": "Moleys",
+    "description": "Đọc truyện trên trang http://nhasachmienphi.com",
     "source": "http://nhasachmienphi.com",
     "version": 4,
     "type": "novel",
@@ -844,10 +884,11 @@
     "folder": "novelbuddy",
     "name": "Novel Buddy",
     "author": "Nhocconsr",
+    "description": "Mô tả",
     "source": "https://novelbuddy.com",
     "version": 2,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/novelbuddy",
     "metadata": {
       "name": "Novel Buddy",
@@ -856,7 +897,7 @@
       "source": "https://novelbuddy.com",
       "regexp": "(www.)?novelbuddy.com/[0-9a-z-]+/?$",
       "description": "Mô tả",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -864,21 +905,23 @@
   {
     "folder": "NovelFire",
     "name": "Novel Fire",
-    "author": "Vearn",
+    "author": "@R",
+    "description": "V60 Master: Kiến trúc đa module. Tối ưu Regex TOC, bóc tách API Sniffing cho Comments & Recommendations.",
     "source": "https://novelfire.net/",
-    "version": 4,
+    "version": 60,
     "type": "novel",
     "locale": "en_US",
     "relativePath": "extensions/novel/NovelFire",
     "metadata": {
       "name": "Novel Fire",
-      "author": "Vearn",
-      "version": 4,
+      "author": "@R",
+      "version": 60,
       "source": "https://novelfire.net/",
       "regexp": "(www.)?(m.)?novelfire.net/book/.*",
-      "description": "Đọc truyện trên trang https://novelfire.net/",
+      "description": "V60 Master: Kiến trúc đa module. Tối ưu Regex TOC, bóc tách API Sniffing cho Comments & Recommendations.",
       "locale": "en_US",
       "language": "javascript",
+      "icon": "icon.png",
       "type": "novel"
     }
   },
@@ -886,10 +929,11 @@
     "folder": "novelfull",
     "name": "Novel Full",
     "author": "Cá mụp cắn cáp",
+    "description": "Đọc truyện tại Novel Full",
     "source": "https://novelfull.com/",
     "version": 2,
     "type": "novel",
-    "locale": null,
+    "locale": "en_US",
     "relativePath": "extensions/novel/novelfull",
     "metadata": {
       "name": "Novel Full",
@@ -898,19 +942,20 @@
       "source": "https://novelfull.com/",
       "regexp": "(www.)?novelfull.com/[0-9a-z].+html$",
       "description": "Đọc truyện tại Novel Full",
-      "local": "en-US",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "en_US"
     }
   },
   {
     "folder": "Novest",
     "name": "Novest",
     "author": "HieuDM",
+    "description": "Đọc truyện từ trang novest.me",
     "source": "https://novest.me",
     "version": 1,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/Novest",
     "metadata": {
       "name": "Novest",
@@ -919,15 +964,16 @@
       "source": "https://novest.me",
       "regexp": "^https:\\/\\/novest\\.me\\/truyen\\/[^\\/]+\\/?$",
       "description": "Đọc truyện từ trang novest.me",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "ntruyen",
     "name": "ntruyen",
     "author": "B",
+    "description": "Truyện chữ tùm lum...",
     "source": "https://ntruyen.biz/",
     "version": 10,
     "type": "novel",
@@ -949,6 +995,7 @@
     "folder": "nuhiep",
     "name": "Nữ Hiệp",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Nữ Hiệp",
     "source": "https://nuhiep.com",
     "version": 9,
     "type": "novel",
@@ -970,6 +1017,7 @@
     "folder": "readernovel",
     "name": "Novel Fire",
     "author": "Vearn",
+    "description": "Đọc truyện trên trang https://www.readernovel.net/",
     "source": "https://www.readernovel.net/",
     "version": 1,
     "type": "novel",
@@ -991,6 +1039,7 @@
     "folder": "readwn",
     "name": "readwn",
     "author": "Moleys",
+    "description": "Đọc truyện trên trang https://www.readwn.com",
     "source": "https://www.readwn.com",
     "version": 1,
     "type": "novel",
@@ -1012,10 +1061,11 @@
     "folder": "royalroad",
     "name": "Royal Road",
     "author": "fusornat",
+    "description": "Royal Road® is the home of web novels and fan fictions! In our amazing community, you can find various talented individuals who write as a hobby or even professionally, artists who create art for them, and many, many readers who provide valuable feedback and encouragement.",
     "source": "https://www.royalroad.com",
     "version": 1,
     "type": "novel",
-    "locale": "en-EN",
+    "locale": "en_US",
     "relativePath": "extensions/novel/royalroad",
     "metadata": {
       "name": "Royal Road",
@@ -1024,7 +1074,7 @@
       "source": "https://www.royalroad.com",
       "regexp": "(www.)?royalroad.com/fiction/(\\d+)/[A-Za-z-].+",
       "description": "Royal Road® is the home of web novels and fan fictions! In our amazing community, you can find various talented individuals who write as a hobby or even professionally, artists who create art for them, and many, many readers who provide valuable feedback and encouragement.",
-      "locale": "en-EN",
+      "locale": "en_US",
       "language": "javascript",
       "type": "novel"
     }
@@ -1033,10 +1083,11 @@
     "folder": "sachhayonline",
     "name": "sachhayonline",
     "author": "fusornat",
+    "description": "Sách Hay Online: Đọc Sách Hay trực tuyến miễn phí, thư viện sách online miễn phí chọn lọc hay nhất, đọc truyện online, sách văn học, lịch sử, truyện ngắn, truyện cười",
     "source": "https://www.sachhayonline.com/",
     "version": 2,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/sachhayonline",
     "metadata": {
       "name": "sachhayonline",
@@ -1045,7 +1096,7 @@
       "source": "https://www.sachhayonline.com/",
       "regexp": "(www.)?sachhayonline.com/tua-sach/[A-Za-z].+/?$",
       "description": "Sách Hay Online: Đọc Sách Hay trực tuyến miễn phí, thư viện sách online miễn phí chọn lọc hay nhất, đọc truyện online, sách văn học, lịch sử, truyện ngắn, truyện cười",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -1054,10 +1105,11 @@
     "folder": "sangtacviet",
     "name": "Sáng Tác Việt",
     "author": "vBook",
+    "description": null,
     "source": "https://sangtacviet.vip",
     "version": 7,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/sangtacviet",
     "metadata": {
       "name": "Sáng Tác Việt",
@@ -1066,7 +1118,7 @@
       "source": "https://sangtacviet.vip",
       "regexp": "(www.)?sangtacviet.(pro|vip|com)/truyen/([a-zA-Z0-9])+/\\d+/\\d+/?$",
       "description": "",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel",
       "encrypt": true
@@ -1076,6 +1128,7 @@
     "folder": "santruyen",
     "name": "Sàn Truyện",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Sàn Truyện",
     "source": "http://santruyen.com",
     "version": 2,
     "type": "novel",
@@ -1097,10 +1150,11 @@
     "folder": "SiTruyenCV",
     "name": "Si Truyện CV",
     "author": "HieuDM",
+    "description": "Đọc truyện từ trang Si Truyện CV",
     "source": "https://sitruyencv.com",
     "version": 1,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/SiTruyenCV",
     "metadata": {
       "name": "Si Truyện CV",
@@ -1109,15 +1163,16 @@
       "source": "https://sitruyencv.com",
       "regexp": "^https?:\\/\\/sitruyencv\\.com\\/story\\/\\d+-.*",
       "description": "Đọc truyện từ trang Si Truyện CV",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "soha",
     "name": "soha",
     "author": "Đường đen",
+    "description": "Đọc soha",
     "source": "https://m.soha.vn",
     "version": 1,
     "type": "novel",
@@ -1139,6 +1194,7 @@
     "folder": "sstruyen",
     "name": "SS Truyện",
     "author": "vBook",
+    "description": "Đọc truyện trên trang SS Truyện",
     "source": "https://sstruyen.vn",
     "version": 6,
     "type": "novel",
@@ -1160,6 +1216,7 @@
     "folder": "sstruyen.com",
     "name": "SSTruyen",
     "author": "HieuDM",
+    "description": "Đọc truyện chữ online trên SSTruyen",
     "source": "https://sstruyen.com.vn",
     "version": 1,
     "type": "novel",
@@ -1181,10 +1238,11 @@
     "folder": "sttruyen",
     "name": "ST Truyện",
     "author": "Nhocconsr",
+    "description": "Nếu extention bị lỗi vui lòng liên hệ email: Phamgiavang@gmail.com",
     "source": "https://sttruyen.com",
     "version": 7,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/sttruyen",
     "metadata": {
       "name": "ST Truyện",
@@ -1193,7 +1251,7 @@
       "source": "https://sttruyen.com",
       "regexp": "(www.)?sttruyen.com/story/[0-9a-z-]+/?$",
       "description": "Nếu extention bị lỗi vui lòng liên hệ email: Phamgiavang@gmail.com",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -1202,10 +1260,11 @@
     "folder": "stvlimit",
     "name": "STV Limited",
     "author": "Nhocconsr",
+    "description": "Updated ^^!. Fix linh tinh. Site lol",
     "source": "https://sangtacviet.info",
     "version": 9,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/stvlimit",
     "metadata": {
       "name": "STV Limited",
@@ -1214,7 +1273,7 @@
       "source": "https://sangtacviet.info",
       "regexp": "(www.)?sangtacviet.(info|com|xyz)/truyen/([a-zA-Z0-9])+/\\d+/\\d+/?$",
       "description": "Updated ^^!. Fix linh tinh. Site lol",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -1223,10 +1282,11 @@
     "folder": "syosetu",
     "name": "Syosetu",
     "author": "Beast666",
+    "description": "小説を読もう！",
     "source": "https://yomou.syosetu.com",
     "version": 6,
     "type": "novel",
-    "locale": "ja-JP",
+    "locale": "ja_JP",
     "relativePath": "extensions/novel/syosetu",
     "metadata": {
       "name": "Syosetu",
@@ -1236,7 +1296,7 @@
       "regexp": "((yomou)|(ncode)).syosetu.com/(.*)$",
       "description": "小説を読もう！",
       "type": "novel",
-      "locale": "ja-JP",
+      "locale": "ja_JP",
       "language": "javascript"
     }
   },
@@ -1244,6 +1304,7 @@
     "folder": "tangthuvien",
     "name": "Tàng Thư Viện",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Tàng Thư Viện",
     "source": "https://tangthuvien.net",
     "version": 11,
     "type": "novel",
@@ -1265,6 +1326,7 @@
     "folder": "thichdoctruyen",
     "name": "Thích Đọc Truyện",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Thích Đọc Truyện",
     "source": "https://thichdoctruyen.xyz",
     "version": 7,
     "type": "novel",
@@ -1286,10 +1348,11 @@
     "folder": "thichtruyen",
     "name": "Thích Truyện",
     "author": "Nhocconsr",
+    "description": "Đọc truyện trên trang thichtruyen.vn",
     "source": "https://thichtruyen.vn",
     "version": 1,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/thichtruyen",
     "metadata": {
       "name": "Thích Truyện",
@@ -1298,19 +1361,20 @@
       "source": "https://thichtruyen.vn",
       "regexp": "(www.)?thichtruyen.vn.*",
       "description": "Đọc truyện trên trang thichtruyen.vn",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "Tiemtruyenchu",
     "name": "Tiệm truyện chữ",
     "author": "Vearn",
+    "description": "Đọc truyện trên trang https://tiemtruyenchu.com/",
     "source": "https://tiemtruyenchu.com/",
     "version": 4,
     "type": "novel",
-    "locale": "vn_VI",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/Tiemtruyenchu",
     "metadata": {
       "name": "Tiệm truyện chữ",
@@ -1319,7 +1383,7 @@
       "source": "https://tiemtruyenchu.com/",
       "regexp": "(www.|m.)?tiemtruyenchu.com/truyen/\\d+",
       "description": "Đọc truyện trên trang https://tiemtruyenchu.com/",
-      "locale": "vn_VI",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -1328,6 +1392,7 @@
     "folder": "tienhiepXYZ",
     "name": "truyendich.vn",
     "author": "B",
+    "description": "Đọc truyện trên trang tienhiep.net",
     "source": "https://truyendich.vn",
     "version": 3,
     "type": "novel",
@@ -1349,6 +1414,7 @@
     "folder": "tienvuc",
     "name": "Tiên Vực",
     "author": "Nhocconsr",
+    "description": "Liên hệ Nhocconsr",
     "source": "https://tienvuc.me",
     "version": 13,
     "type": "novel",
@@ -1370,6 +1436,7 @@
     "folder": "Trùm Truyện",
     "name": "Trùm Truyện",
     "author": "B",
+    "description": "Đọc truyện trên trang Truyện Full",
     "source": "https://trumtruyen.live",
     "version": 5,
     "type": "novel",
@@ -1391,10 +1458,11 @@
     "folder": "truyena",
     "name": "Truyện A",
     "author": "Nhocconsr",
+    "description": "Nếu có lỗi bạn có thể liên hệ tới Email: phamgiavang@gmail.com hoặc Discord",
     "source": "https://truyena.net",
     "version": 4,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyena",
     "metadata": {
       "name": "Truyện A",
@@ -1403,7 +1471,7 @@
       "source": "https://truyena.net",
       "regexp": "(www.)?truyena.net/[0-9a-z-]+.\\d+/?$",
       "description": "Nếu có lỗi bạn có thể liên hệ tới Email: phamgiavang@gmail.com hoặc Discord",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -1412,6 +1480,7 @@
     "folder": "truyenchu",
     "name": "Truyện Chữ",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Truyện Chữ",
     "source": "https://metruyenchu.vn",
     "version": 6,
     "type": "novel",
@@ -1433,10 +1502,11 @@
     "folder": "truyenchuth",
     "name": "truyenchuth",
     "author": "B",
+    "description": "Truyện chữ, truyện tranh tùm lum...",
     "source": "https://truyenchuth.com",
     "version": 1,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyenchuth",
     "metadata": {
       "name": "truyenchuth",
@@ -1445,15 +1515,16 @@
       "source": "https://truyenchuth.com",
       "regexp": "(www.)?truyenchuth.com/truyen.*?",
       "description": "Truyện chữ, truyện tranh tùm lum...",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "truyencodetheoyeucau",
     "name": "Truyen CodeTheoYeuCau",
     "author": "B",
+    "description": "Đọc truyện từ truyen.codetheoyeucau.online",
     "source": "https://truyen.codetheoyeucau.online",
     "version": 1,
     "type": "novel",
@@ -1475,10 +1546,11 @@
     "folder": "truyenconect",
     "name": "Truyện Conect .Com",
     "author": "Cá mụp cắn cáp",
+    "description": "Đọc truyện tại Truyen Conect\nFix code",
     "source": "https://truyenconect.com/",
     "version": 4,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyenconect",
     "metadata": {
       "name": "Truyện Conect .Com",
@@ -1487,19 +1559,20 @@
       "source": "https://truyenconect.com/",
       "regexp": "(www.)?truyenconect.com/truyen/[^.].+.html",
       "description": "Đọc truyện tại Truyen Conect\nFix code",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "truyenconvert",
     "name": "Truyện Convert",
     "author": "Nhocconsr",
+    "description": "V3: fix load chuong",
     "source": "https://truyenconvert.net",
     "version": 3,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyenconvert",
     "metadata": {
       "name": "Truyện Convert",
@@ -1508,7 +1581,7 @@
       "source": "https://truyenconvert.net",
       "regexp": "(www.)?truyenconvert.net/truyen/[0-9a-z-]+",
       "description": "V3: fix load chuong",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -1517,10 +1590,11 @@
     "folder": "truyencv",
     "name": "truyencv",
     "author": "Nhocconsr",
+    "description": "TruyenCV.",
     "source": "https://m.truyencv.vn/",
     "version": 1,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyencv",
     "metadata": {
       "name": "truyencv",
@@ -1529,7 +1603,7 @@
       "source": "https://m.truyencv.vn/",
       "regexp": "https://m.truyencv.vn/truyen/[0-9a-z-]+/?$",
       "description": "TruyenCV.",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -1538,10 +1612,11 @@
     "folder": "truyendich",
     "name": "Truyện Dịch",
     "author": "Nhocconsr",
+    "description": "Đọc truyện trên trang truyendichh.net",
     "source": "https://truyendichh.net",
     "version": 7,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyendich",
     "metadata": {
       "name": "Truyện Dịch",
@@ -1550,7 +1625,7 @@
       "source": "https://truyendichh.net",
       "regexp": "(www.)?truyendichh.net/[0-9a-z-]+",
       "description": "Đọc truyện trên trang truyendichh.net",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -1559,10 +1634,11 @@
     "folder": "truyendichgiare",
     "name": "Truyện Dịch Giá Rẻ",
     "author": "Nhocconsr",
+    "description": "Fix lỗi chèn chữ chương VIP",
     "source": "http://truyendichgiare.com",
     "version": 2,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyendichgiare",
     "metadata": {
       "name": "Truyện Dịch Giá Rẻ",
@@ -1571,7 +1647,7 @@
       "source": "http://truyendichgiare.com",
       "regexp": "(www.)?truyendichgiare.com/[0-9a-z-]+/?$",
       "description": "Fix lỗi chèn chữ chương VIP",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -1580,6 +1656,7 @@
     "folder": "truyendichmienphi",
     "name": "Truyện dịch miễn phí",
     "author": "mizhm",
+    "description": "TruyenDichMienPhi.com là nền tảng đọc truyện chữ online miễn phí. Truyện dịch rõ nghĩa, mượt mà, không quảng cáo, không cần đăng nhập. Cập nhật nhanh các thể loại hot: tiên hiệp, huyền ảo, đô thị, kiếm hiệp, xuyên không...",
     "source": "https://truyendichmienphi.com",
     "version": 15,
     "type": "novel",
@@ -1601,10 +1678,11 @@
     "folder": "Truyendocviet",
     "name": "Truyện Đọc Việt",
     "author": "HieuDM",
+    "description": "Extension đọc truyện từ trang Truyện Đọc Việt",
     "source": "https://truyendocviet1.xyz/",
     "version": 3,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/Truyendocviet",
     "metadata": {
       "name": "Truyện Đọc Việt",
@@ -1613,15 +1691,16 @@
       "source": "https://truyendocviet1.xyz/",
       "regexp": "truyendocviet\\d*\\.xyz\\/doc-truyen\\/[^/]+\\.html$",
       "description": "Extension đọc truyện từ trang Truyện Đọc Việt",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "truyenfree",
     "name": "truyenfree",
     "author": "mizhm",
+    "description": "TruyenFree: Thư viện Truyện và Sách chất lượng, đa dạng thể loại để phục vụ bạn đọc.",
     "source": "https://truyenfree.org",
     "version": 2,
     "type": "novel",
@@ -1643,6 +1722,7 @@
     "folder": "truyenfull",
     "name": "Truyện Full",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Truyện Full",
     "source": "https://truyenfull.vision",
     "version": 10,
     "type": "novel",
@@ -1664,6 +1744,7 @@
     "folder": "truyenfullCom",
     "name": "truyenfullCom",
     "author": "B",
+    "description": "Đọc truyện trên trang Truyện Full",
     "source": "https://truyenfull.com",
     "version": 4,
     "type": "novel",
@@ -1685,10 +1766,11 @@
     "folder": "truyengihot",
     "name": "Truyện Gì Hot",
     "author": "Nhocconsr",
+    "description": "Nếu mà site đổi domain thì thêm mã bổ sung let CONFIG_URL = 'tên miền mới'",
     "source": "https://truyengihotmoi.net",
     "version": 11,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyengihot",
     "metadata": {
       "name": "Truyện Gì Hot",
@@ -1697,7 +1779,7 @@
       "source": "https://truyengihotmoi.net",
       "regexp": "(www.)?truyengihot(.*?).net/[^/]+.html$",
       "description": "Nếu mà site đổi domain thì thêm mã bổ sung let CONFIG_URL = 'tên miền mới'",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel",
       "tag": "nsfw"
@@ -1707,10 +1789,11 @@
     "folder": "truyenhayvn",
     "name": "TruyenHayVN",
     "author": "vBook",
+    "description": "Đọc truyện trên trang TruyenHayVN",
     "source": "https://truyenhay.com",
     "version": 3,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyenhayvn",
     "metadata": {
       "name": "TruyenHayVN",
@@ -1719,7 +1802,7 @@
       "source": "https://truyenhay.com",
       "regexp": "(www.|1.)?truyenhay(vn)?.com/[^/]+/?$",
       "description": "Đọc truyện trên trang TruyenHayVN",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -1728,6 +1811,7 @@
     "folder": "truyenhd",
     "name": "TruyệnHD",
     "author": "vBook",
+    "description": "Đọc truyện trên trang TruyệnHD",
     "source": "https://truyenhdt.com",
     "version": 14,
     "type": "novel",
@@ -1750,6 +1834,7 @@
     "folder": "truyenheo",
     "name": "truyenheo",
     "author": "B",
+    "description": "Đọc truyện trên trang https://truyenxxx.net tác giả là hajljnopera mà xóa rồi, dat-bi sửa",
     "source": "https://truyenxxx.net",
     "version": 19,
     "type": "novel",
@@ -1772,6 +1857,7 @@
     "folder": "truyenhoan",
     "name": "Truyện Hoàn",
     "author": "kychi",
+    "description": "Đọc truyện tiên hiệp, huyền huyễn, ngôn tình từ Truyện Hoàn - website truyện full online miễn phí",
     "source": "https://truyenhoan.com/",
     "version": 8,
     "type": "novel",
@@ -1793,10 +1879,11 @@
     "folder": "truyenhoangdung",
     "name": "Truyện Hoàng Dung",
     "author": "vBook",
+    "description": null,
     "source": "https://truyenhoangdung.xyz",
     "version": 3,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyenhoangdung",
     "metadata": {
       "name": "Truyện Hoàng Dung",
@@ -1805,7 +1892,7 @@
       "source": "https://truyenhoangdung.xyz",
       "regexp": "https://truyenhoangdung.xyz/truyen/[0-9a-z-]+.html",
       "description": "",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -1814,10 +1901,11 @@
     "folder": "TruyenMoi",
     "name": "TruyenMoiYY",
     "author": "HieuDM",
+    "description": "Extension đọc truyện chữ từ TruyenMoi",
     "source": "https://truyenmoikk.com",
     "version": 1,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/TruyenMoi",
     "metadata": {
       "name": "TruyenMoiYY",
@@ -1826,19 +1914,20 @@
       "source": "https://truyenmoikk.com",
       "regexp": "(www\\.)?truyenmoi(ii|kk)\\.(com|org)/[a-zA-Z0-9-]+/?$",
       "description": "Extension đọc truyện chữ từ TruyenMoi",
-      "local": "vi_VN",
       "type": "novel",
-      "language": "javascript"
+      "language": "javascript",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "truyenmoii",
     "name": "Truyện Mới",
     "author": "fusornat",
+    "description": "truyenmoii.com. Đọc truyện online miễn phí,đọc truyện mới,đọc truyện hay,truyện full, được cập nhật đầy đủ và nhanh nhất..",
     "source": "https://truyenmoii.com",
     "version": 3,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyenmoii",
     "metadata": {
       "name": "Truyện Mới",
@@ -1847,7 +1936,7 @@
       "source": "https://truyenmoii.com",
       "regexp": "(www.)?truyenmoii.com/[0-9a-z-]+",
       "description": "truyenmoii.com. Đọc truyện online miễn phí,đọc truyện mới,đọc truyện hay,truyện full, được cập nhật đầy đủ và nhanh nhất..",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -1856,6 +1945,7 @@
     "folder": "truyennet",
     "name": "Truyện Net",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Truyện Net",
     "source": "https://truyennet.vn/",
     "version": 1,
     "type": "novel",
@@ -1877,6 +1967,7 @@
     "folder": "truyennhieu",
     "name": "Truyện Nhiều",
     "author": "Nhocconsr",
+    "description": "Đọc truyện trên trang Truyennhieu.com",
     "source": "https://truyennhieu.com",
     "version": 3,
     "type": "novel",
@@ -1898,6 +1989,7 @@
     "folder": "truyennow",
     "name": "Truyen Now",
     "author": "mizhm",
+    "description": "Truyen.Free - Đọc truyện chữ online miễn phí, truyện tiên hiệp, kiếm hiệp, ngôn tình, đô thị được dịch nhanh chóng.",
     "source": "https://truyen.now",
     "version": 1,
     "type": "novel",
@@ -1918,6 +2010,7 @@
     "folder": "truyentienhiep",
     "name": "Truyện Tiên Hiệp",
     "author": "Nhocconsr",
+    "description": "Đọc truyện trên trang truyentienhiep.net",
     "source": "https://truyentienhiep.net/",
     "version": 2,
     "type": "novel",
@@ -1939,10 +2032,11 @@
     "folder": "truyentiki",
     "name": "Truyện Tiki",
     "author": "Nhocconsr",
+    "description": "Đọc truyện trên trang Truyentiki.com",
     "source": "https://truyentiki.com",
     "version": 3,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyentiki",
     "metadata": {
       "name": "Truyện Tiki",
@@ -1951,15 +2045,16 @@
       "source": "https://truyentiki.com",
       "regexp": "(www.)?((truyentiki.com/[^/+]+/)|(truyentiki.com/[^/+]+))",
       "description": "Đọc truyện trên trang Truyentiki.com",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "truyentr",
     "name": "TruyệnTR",
     "author": "vBook",
+    "description": "Đọc truyện trên trang TruyệnTR",
     "source": "https://truyenazz.vn",
     "version": 6,
     "type": "novel",
@@ -1981,10 +2076,11 @@
     "folder": "truyenwiki",
     "name": "Truyện Wiki",
     "author": "Nhocconsr",
+    "description": "Đọc truyện trên trang truyenwiki.net",
     "source": "https://truyenwiki.net",
     "version": 2,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyenwiki",
     "metadata": {
       "name": "Truyện Wiki",
@@ -1993,7 +2089,7 @@
       "source": "https://truyenwiki.net",
       "regexp": "(www.)?truyenwiki.net/[0-9a-z-]+.\\d+/?",
       "description": "Đọc truyện trên trang truyenwiki.net",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -2002,10 +2098,11 @@
     "folder": "truyenwikicom",
     "name": "Truyện Wiki Com",
     "author": "Nhocconsr",
+    "description": "Đọc truyện trên trang truyenwki.com/",
     "source": "https://truyenwki.com/",
     "version": 4,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/truyenwikicom",
     "metadata": {
       "name": "Truyện Wiki Com",
@@ -2014,15 +2111,16 @@
       "source": "https://truyenwki.com/",
       "regexp": "(www.)?truyenwki.com/truyen/.*?",
       "description": "Đọc truyện trên trang truyenwki.com/",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "truyenyy",
     "name": "Truyện YY",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Truyện YY",
     "source": "https://truyenyy.xyz",
     "version": 15,
     "type": "novel",
@@ -2044,6 +2142,7 @@
     "folder": "Tu Chân Giới",
     "name": "Tu Chân Giới",
     "author": "B",
+    "description": "Đọc truyện trên trang tienhiep.net",
     "source": "https://tuchangioi.net/",
     "version": 2,
     "type": "novel",
@@ -2065,10 +2164,11 @@
     "folder": "tuoinung",
     "name": "tuoinung",
     "author": "fusornat",
+    "description": "Truyện sex hay với đầy đủ các thể loại: phá trinh, loạn luân, ngoại tình, bạo dâm, hiếp dâm, dâm hiệp, học sinh, giáo viên, sinh viên ...",
     "source": "https://tuoinung.com",
     "version": 1,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/tuoinung",
     "metadata": {
       "name": "tuoinung",
@@ -2077,7 +2177,7 @@
       "source": "https://tuoinung.com",
       "regexp": "https://(www.)?tuoinung.com/\\d+/\\d+/(.*?)[.]html",
       "description": "Truyện sex hay với đầy đủ các thể loại: phá trinh, loạn luân, ngoại tình, bạo dâm, hiếp dâm, dâm hiệp, học sinh, giáo viên, sinh viên ...",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel",
       "tag": "nsfw"
@@ -2087,6 +2187,7 @@
     "folder": "tuoitre",
     "name": "Tuổi Trẻ",
     "author": "Đường đen",
+    "description": "Đọc Tuổi Trẻ",
     "source": "https://tuoitre.vn",
     "version": 1,
     "type": "novel",
@@ -2108,6 +2209,7 @@
     "folder": "tytnovel",
     "name": "TYT Novel",
     "author": "laofun",
+    "description": "TYT Novel APP",
     "source": "https://tytnovel.xyz",
     "version": 3,
     "type": "novel",
@@ -2129,6 +2231,7 @@
     "folder": "vbook-ext-template",
     "name": "Template Novel",
     "author": "kychi",
+    "description": "Starter template for a personal VBook novel extension",
     "source": "https://example.com/",
     "version": 1,
     "type": "novel",
@@ -2150,6 +2253,7 @@
     "folder": "vietnamnet",
     "name": "vietnamnet",
     "author": "Đường đen",
+    "description": "Đọc vietnamnet",
     "source": "https://vietnamnet.vn",
     "version": 1,
     "type": "novel",
@@ -2169,29 +2273,32 @@
   },
   {
     "folder": "vietwriter",
-    "name": "Việt Writer",
-    "author": "Nhocconsr",
-    "source": "https://vietwriter.vn",
+    "name": "VietWriter Đọc đủ loại truyện trệ forum",
+    "author": "Rake & Gemini",
+    "description": "Giao diện NovelFire chuẩn: 3 Tab Trang chủ, còn lại ném vào Menu.",
+    "source": "https://vietwriter.one",
     "version": 1,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/vietwriter",
     "metadata": {
-      "name": "Việt Writer",
-      "author": "Nhocconsr",
+      "name": "VietWriter Đọc đủ loại truyện trệ forum",
+      "author": "Rake & Gemini",
       "version": 1,
-      "source": "https://vietwriter.vn",
-      "regexp": "(www.)?vietwriter.vn/[A-Za-z].+/?",
-      "description": "Lỗi extension liên hệ email: phamgiavang@gmail.com",
-      "local": "vi-VN",
+      "source": "https://vietwriter.one",
+      "regexp": "vietwriter\\\\.one/threads/",
+      "description": "Giao diện NovelFire chuẩn: 3 Tab Trang chủ, còn lại ném vào Menu.",
+      "type": "novel",
+      "locale": "vi_VN",
       "language": "javascript",
-      "type": "novel"
+      "icon": "icon.png"
     }
   },
   {
     "folder": "vipbns",
     "name": "【VIP】Bạch Ngọc Sách",
     "author": "Nhocconsr",
+    "description": "New vesion! phamgiavang@gmail.com",
     "source": "https://bnsvip.net",
     "version": 1,
     "type": "novel",
@@ -2213,10 +2320,11 @@
     "folder": "VIPngontinh",
     "name": "VIPngontinh",
     "author": "fusornat",
+    "description": "Truyện VIP - truyenvipfull.com trang đọc truyện thu phí với chất lượng dịch tốt nhất giá rẻ được biên dịch chuyên nghiệp sẽ đem sự hài lòng thỏa niềm đam mê đọc truyện",
     "source": "https://truyenvipfull.com",
     "version": 1,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/VIPngontinh",
     "metadata": {
       "name": "VIPngontinh",
@@ -2225,7 +2333,7 @@
       "source": "https://truyenvipfull.com",
       "regexp": "truyenvipfull.com/[a-z0-9_.-]+$",
       "description": "Truyện VIP - truyenvipfull.com trang đọc truyện thu phí với chất lượng dịch tốt nhất giá rẻ được biên dịch chuyên nghiệp sẽ đem sự hài lòng thỏa niềm đam mê đọc truyện",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -2234,10 +2342,11 @@
     "folder": "viptruyenfull",
     "name": "VIP Truyện Full",
     "author": "Nhocconsr",
+    "description": "Để đọc cần đăng nhập nhé!",
     "source": "https://viptruyenfull.com",
     "version": 1,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/viptruyenfull",
     "metadata": {
       "name": "VIP Truyện Full",
@@ -2246,7 +2355,7 @@
       "source": "https://viptruyenfull.com",
       "regexp": "(www.)?viptruyenfull.com/[0-9a-z-]+/?$",
       "description": "Để đọc cần đăng nhập nhé!",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -2255,10 +2364,11 @@
     "folder": "vlognovel",
     "name": "Vlognovel",
     "author": "fusornat",
+    "description": "Vlognovel- Đọc là nghiền",
     "source": "https://vlognovel.com",
     "version": 4,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/vlognovel",
     "metadata": {
       "name": "Vlognovel",
@@ -2267,7 +2377,7 @@
       "source": "https://vlognovel.com",
       "regexp": "https://vlognovel.com/[^/]+.html",
       "description": "Vlognovel- Đọc là nghiền",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -2276,6 +2386,7 @@
     "folder": "vnexpress",
     "name": "vnexpress",
     "author": "Đường đen",
+    "description": "Đọc vnexpress",
     "source": "https://vnexpress.net",
     "version": 2,
     "type": "novel",
@@ -2297,10 +2408,11 @@
     "folder": "vozer",
     "name": "Vozer",
     "author": "mizhm",
+    "description": "Vozer là web đọc truyện online miễn phí với với tổng hợp đầy đủ chuyện trên trời dưới đất, nhưng nổi bật nhất vẫn là là Truyện Voz. Nơi đây sản sinh ra những tác giả có những cuốn tự truyện có thể nói là huyền thoại một thời. Vozer có nhiều truyện mới nhất từ các tác giả với tất cả thể loại như Tâm linh, Tình yêu, Truyện ma,...",
     "source": "https://vozer.io",
     "version": 4,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/vozer",
     "metadata": {
       "name": "Vozer",
@@ -2309,15 +2421,16 @@
       "source": "https://vozer.io",
       "regexp": "https://vozer.io/(.*?)$",
       "description": "Vozer là web đọc truyện online miễn phí với với tổng hợp đầy đủ chuyện trên trời dưới đất, nhưng nổi bật nhất vẫn là là Truyện Voz. Nơi đây sản sinh ra những tác giả có những cuốn tự truyện có thể nói là huyền thoại một thời. Vozer có nhiều truyện mới nhất từ các tác giả với tất cả thể loại như Tâm linh, Tình yêu, Truyện ma,...",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "vtruyen",
     "name": "vTruyện",
     "author": "vBook",
+    "description": "Đọc truyện trên trang vTruyện",
     "source": "https://vtruyen.com",
     "version": 10,
     "type": "novel",
@@ -2340,10 +2453,11 @@
     "folder": "wattpad",
     "name": "Wattpad",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Wattpad",
     "source": "https://wattpad.com",
     "version": 3,
     "type": "novel",
-    "locale": "global",
+    "locale": "en_US",
     "relativePath": "extensions/novel/wattpad",
     "metadata": {
       "name": "Wattpad",
@@ -2352,7 +2466,7 @@
       "source": "https://wattpad.com",
       "regexp": "(www.)?wattpad.com/story/\\d+.*?/?$",
       "description": "Đọc truyện trên trang Wattpad",
-      "locale": "global",
+      "locale": "en_US",
       "language": "javascript",
       "type": "novel"
     }
@@ -2361,10 +2475,11 @@
     "folder": "webnovel",
     "name": "WebNovel (Novel)",
     "author": "Nhocconsr",
+    "description": "Đọc truyện chữ tại www.webnovel.com. Chỉ đọc truyện chữ ^^!",
     "source": "https://www.webnovel.com",
     "version": 1,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/webnovel",
     "metadata": {
       "name": "WebNovel (Novel)",
@@ -2373,7 +2488,29 @@
       "source": "https://www.webnovel.com",
       "regexp": "(www.)?(m.)?webnovel.com/book/.*",
       "description": "Đọc truyện chữ tại www.webnovel.com. Chỉ đọc truyện chữ ^^!",
-      "local": "vi-VN",
+      "language": "javascript",
+      "type": "novel",
+      "locale": "vi_VN"
+    }
+  },
+  {
+    "folder": "webnovel-vn",
+    "name": "WebNovel.vn",
+    "author": "@R",
+    "description": "Beauty Edition: Code trình bày chuẩn mực, sạch sẽ, dễ bảo trì.",
+    "source": "https://webnovel.vn",
+    "version": 21,
+    "type": "novel",
+    "locale": "vi_VN",
+    "relativePath": "extensions/novel/webnovel-vn",
+    "metadata": {
+      "name": "WebNovel.vn",
+      "author": "@R",
+      "version": 21,
+      "source": "https://webnovel.vn",
+      "regexp": "(www.)?webnovel.vn/.*",
+      "description": "Beauty Edition: Code trình bày chuẩn mực, sạch sẽ, dễ bảo trì.",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -2382,6 +2519,7 @@
     "folder": "webtruyen",
     "name": "D Truyện",
     "author": "vBook",
+    "description": "Đọc truyện trên trang D Truyện",
     "source": "https://dtruyen.net",
     "version": 6,
     "type": "novel",
@@ -2400,13 +2538,35 @@
     }
   },
   {
+    "folder": "webtruyendich",
+    "name": "Webtruyendich",
+    "author": "longvuu",
+    "description": "Bản V18 Final: Fallback siêu tốc độ (Zero-delay) tránh AI fake error. Core ổn định.",
+    "source": "https://webtruyendich.com/",
+    "version": 18,
+    "type": "novel",
+    "locale": "vi_VN",
+    "relativePath": "extensions/novel/webtruyendich",
+    "metadata": {
+      "name": "Webtruyendich",
+      "author": "longvuu",
+      "version": 18,
+      "source": "https://webtruyendich.com/",
+      "regexp": "^https?://(www\\.)?webtruyendich\\.com/",
+      "description": "Bản V18 Final: Fallback siêu tốc độ (Zero-delay) tránh AI fake error. Core ổn định.",
+      "locale": "vi_VN",
+      "type": "novel"
+    }
+  },
+  {
     "folder": "webtruyenonlinez",
     "name": "Webtruyenonlinez.com",
     "author": "Cá mụp cắn cáp",
+    "description": "Fix lỗi thiếu chương lần nữa =)) ",
     "source": "http://webtruyenonlinez.com/",
     "version": 7,
     "type": "novel",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/webtruyenonlinez",
     "metadata": {
       "name": "Webtruyenonlinez.com",
@@ -2415,15 +2575,16 @@
       "source": "http://webtruyenonlinez.com/",
       "regexp": "(www.)?webtruyenonlinez.com/truyen/[^/].+/?$",
       "description": "Fix lỗi thiếu chương lần nữa =)) ",
-      "local": "vi-VN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "vi_VN"
     }
   },
   {
     "folder": "wikidich",
     "name": "Wiki Dịch",
     "author": "vBook",
+    "description": "Đọc truyện trên trang Wiki Dịch, review ở thông tin truyện",
     "source": "https://wikicv.net",
     "version": 23,
     "type": "novel",
@@ -2445,6 +2606,7 @@
     "folder": "wikidich-app",
     "name": "Wikidich App",
     "author": "vBook",
+    "description": "Đọc truyện trên App Wiki Dịch",
     "source": "https://api.truyenreview.com",
     "version": 3,
     "type": "novel",
@@ -2466,10 +2628,11 @@
     "folder": "wuxiaworld",
     "name": "Wuxia World",
     "author": "Nhocconsr",
+    "description": "Đọc truyện trên trang www.wuxiaworld.com",
     "source": "https://www.wuxiaworld.com",
     "version": 1,
     "type": "novel",
-    "locale": null,
+    "locale": "en_US",
     "relativePath": "extensions/novel/wuxiaworld",
     "metadata": {
       "name": "Wuxia World",
@@ -2478,19 +2641,20 @@
       "source": "https://www.wuxiaworld.com",
       "regexp": "(www.)?wuxiaworld.com.*",
       "description": "Đọc truyện trên trang www.wuxiaworld.com",
-      "local": "en-EN",
       "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "locale": "en_US"
     }
   },
   {
     "folder": "Xtruyen",
     "name": "X Truyện",
     "author": "Vearn",
+    "description": "Đọc truyện trên trang https://xtruyen.vn",
     "source": "https://xtruyen.vn",
     "version": 1,
     "type": "novel",
-    "locale": "vn_VI",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/Xtruyen",
     "metadata": {
       "name": "X Truyện",
@@ -2499,7 +2663,7 @@
       "source": "https://xtruyen.vn",
       "regexp": "(www.|m.)?xtruyen.vn/truyen/[0-9a-z]",
       "description": "Đọc truyện trên trang https://xtruyen.vn",
-      "locale": "vn_VI",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }
@@ -2508,6 +2672,7 @@
     "folder": "zingtruyen",
     "name": "Zing Truyện",
     "author": "Nhocconsr",
+    "description": "Nếu lỗi extention liên hệ email : Phamgiavang@gmail.com hoặc Discord trong Vbook",
     "source": "https://zingtruyen.store",
     "version": 7,
     "type": "novel",
@@ -2529,10 +2694,11 @@
     "folder": "ztruyen",
     "name": "zTruyen",
     "author": "fusornat",
+    "description": "zTruyen.vn",
     "source": "https://ztruyen.vn",
     "version": 5,
     "type": "novel",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/novel/ztruyen",
     "metadata": {
       "name": "zTruyen",
@@ -2541,7 +2707,7 @@
       "source": "https://ztruyen.vn",
       "regexp": "https://ztruyen.vn/truyen/[0-9a-z-]+/?$",
       "description": "zTruyen.vn",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"
     }

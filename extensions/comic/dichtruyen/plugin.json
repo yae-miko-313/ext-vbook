@@ -6,9 +6,9 @@
     "source": "https://dichtruyen.org/",
     "regexp": "(www.)?dichtruyen.org/truyen/[^/]+/?$",
     "description": "Sửa lỗi get truyện",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

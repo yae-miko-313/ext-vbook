@@ -6,7 +6,7 @@
     "source": "https://truyenvipfull.com",
     "regexp": "truyenvipfull.com/[a-z0-9_.-]+$",
     "description": "Truyện VIP - truyenvipfull.com trang đọc truyện thu phí với chất lượng dịch tốt nhất giá rẻ được biên dịch chuyên nghiệp sẽ đem sự hài lòng thỏa niềm đam mê đọc truyện",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"
   },

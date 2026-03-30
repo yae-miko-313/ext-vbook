@@ -6,9 +6,9 @@
     "source": "https://truyentranhdammyhay.com/",
     "regexp": "(www.)?truyentranhdammyhay.com/[^/].+/?$",
     "description": "Box truyện tranh đổi tên miền thành truyentranhdammyhay.com",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

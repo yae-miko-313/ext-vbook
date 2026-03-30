@@ -6,7 +6,7 @@
     "source": "https://sj.qubook.cc/",
     "regexp": "sj.?qubook.cc/TXT/(.*?).html",
     "description": "Đọc truyện trên trang qubook.cc",
-    "locale": "zh-CN",
+    "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel"
   },

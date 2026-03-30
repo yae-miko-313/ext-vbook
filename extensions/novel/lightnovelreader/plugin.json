@@ -6,9 +6,9 @@
     "source": "https://readlightnovel.app",
     "regexp": "(lightnovelreader|lnreader|readlightnovel).(org|me|app)/[^/]+?",
     "description": "Read novel",
-    "local": "en-US",
     "language": "javascript",
-    "type": "novel"
+    "type": "novel",
+    "locale": "en_US"
   },
   "script": {
     "home": "home.js",

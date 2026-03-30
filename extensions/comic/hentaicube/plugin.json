@@ -6,7 +6,7 @@
     "source": "https://hentaicube.net",
     "regexp": "(www.)?hentaicube.net/read/.*",
     "description": "V7 : Fix lỗi thiếu ảnh",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "comic",
     "tag": "nsfw"

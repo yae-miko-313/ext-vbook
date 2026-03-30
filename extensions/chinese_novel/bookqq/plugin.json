@@ -6,7 +6,7 @@
     "source": "https://book.qq.com",
     "regexp": "(www.)?(ubook.reader|book).qq.com/book-detail/\\d+/?$",
     "description": "Book QQ",
-    "locale": "zh-CN",
+    "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel"
   },

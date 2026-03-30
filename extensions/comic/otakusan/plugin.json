@@ -6,9 +6,9 @@
     "source": "https://otakusan.net/",
     "regexp": "https://otakusan.net/manga-detail/(\\d+)/[0-9a-z].+$",
     "description": "fix mục lục",
-    "local": "vi-VN",
     "language": "javascript",
-    "type": "comic"
+    "type": "comic",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",

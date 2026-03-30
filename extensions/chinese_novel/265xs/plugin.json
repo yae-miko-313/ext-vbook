@@ -6,7 +6,7 @@
     "source": "https://265xs.com",
     "regexp": "(www.)?(m.)?265xs.com/(book)?\\d+/?(.html)?",
     "description": "Đọc truyện trên trang www.265xs.com",
-    "locale": "zh-CN",
+    "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel"
   },

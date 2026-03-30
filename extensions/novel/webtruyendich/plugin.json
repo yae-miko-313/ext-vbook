@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "name": "Webtruyendich",
+    "author": "longvuu",
+    "version": 18,
+    "source": "https://webtruyendich.com/",
+    "regexp": "^https?://(www\\.)?webtruyendich\\.com/",
+    "description": "Bản V18 Final: Fallback siêu tốc độ (Zero-delay) tránh AI fake error. Core ổn định.",
+    "locale": "vi_VN",
+    "type": "novel"
+  },
+  "script": {
+    "home": "home.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "search": "source.js",
+    "genre": "genre.js"
+  }
+}

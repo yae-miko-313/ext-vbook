@@ -22,6 +22,7 @@ function buildDescriptor(workspaceRoot, pluginRoot) {
         folder: path.basename(pluginRoot),
         name: metadata.name || null,
         author: metadata.author || null,
+        description: metadata.description || null,
         source: metadata.source || null,
         version: metadata.version || null,
         type: metadata.type || null,
@@ -54,6 +55,7 @@ function collectDescriptorsForType(workspaceRoot, typeDir) {
 
 function runBuildCatalog(workspaceRoot, options = {}) {
     const extensionsRoot = path.join(workspaceRoot, 'extensions');
+    const catalogsRoot = path.join(extensionsRoot, 'catalogs');
     const buckets = getTypeBuckets();
     const megaCatalog = {};
 
@@ -66,6 +68,12 @@ function runBuildCatalog(workspaceRoot, options = {}) {
 
     const megaPath = path.join(extensionsRoot, 'plugin.json');
     writeJson(megaPath, megaCatalog);
+
+    // Optional quick-link catalogs are kept in sync here to avoid stale or malformed files.
+    for (const bucket of buckets) {
+        const catalogPath = path.join(catalogsRoot, `${bucket}.plugin.json`);
+        writeJson(catalogPath, { [bucket]: megaCatalog[bucket] });
+    }
 
     const summary = {
         total: buckets.reduce((acc, bucket) => acc + megaCatalog[bucket].length, 0),
