@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "name": "Truyện TR",
+    "author": "vBook",
+    "version": 6,
+    "source": "https://truyenazz.vn/",
+    "description": "Đọc truyện trên trang Truyện TR",
+    "locale": "vi_VN",
+    "type": "novel"
+  },
+  "download_info": {
+    "path": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/truyentr/plugin.zip",
+    "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/truyentr/icon.png",
+    "sourceUrl": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/plugin.json",
+    "downloadedAt": "2026-03-31T13:39:59.749Z"
+  }
+}

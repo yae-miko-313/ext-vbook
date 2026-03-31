@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "name": "Wikidich App",
+    "author": "vBook",
+    "version": 3,
+    "source": "https://truyenwikidich.com",
+    "description": "Đọc truyện trên trang app Wiki Dịch",
+    "locale": "vi_VN",
+    "type": "novel"
+  },
+  "download_info": {
+    "path": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/wikidich-app/plugin.zip",
+    "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/wikidich-app/icon.png",
+    "sourceUrl": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/plugin.json",
+    "downloadedAt": "2026-03-31T13:40:05.902Z"
+  }
+}

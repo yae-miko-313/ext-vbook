@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "name": "Truyện QQ",
+    "author": "vBook",
+    "version": 23,
+    "source": "https://truyenqqno.com",
+    "description": "Đọc truyện trên trang Truyện QQ",
+    "locale": "vi_VN",
+    "type": "comic"
+  },
+  "download_info": {
+    "path": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/truyenqq/plugin.zip",
+    "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/truyenqq/icon.png",
+    "sourceUrl": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/plugin.json",
+    "downloadedAt": "2026-03-31T13:40:09.863Z"
+  }
+}

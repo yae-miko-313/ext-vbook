@@ -664,21 +664,21 @@
     },
     {
       "folder": "metruyenchu",
-      "name": "MeTruyenChu",
-      "author": "Meo",
-      "description": "MeTruyenChu - Đọc truyện chữ online miễn phí, không quảng cáo",
+      "name": "Mê Truyện Chữ",
+      "author": "QuocBao",
+      "description": "Đọc truyện chữ trên Mê Truyện Chữ",
       "source": "https://metruyenchu.com.vn",
-      "version": 3,
+      "version": 2,
       "type": "novel",
       "locale": "vi_VN",
       "relativePath": "extensions/novel/metruyenchu",
       "metadata": {
-        "name": "MeTruyenChu",
-        "author": "Meo",
-        "version": 3,
+        "name": "Mê Truyện Chữ",
+        "author": "QuocBao",
+        "version": 2,
         "source": "https://metruyenchu.com.vn",
         "regexp": "metruyenchu\\.com\\.vn",
-        "description": "MeTruyenChu - Đọc truyện chữ online miễn phí, không quảng cáo",
+        "description": "Đọc truyện chữ trên Mê Truyện Chữ",
         "locale": "vi_VN",
         "type": "novel"
       }
@@ -906,23 +906,22 @@
     {
       "folder": "NovelFire",
       "name": "Novel Fire",
-      "author": "@R",
-      "description": "V60 Master: Kiến trúc đa module. Tối ưu Regex TOC, bóc tách API Sniffing cho Comments & Recommendations.",
+      "author": "Vearn",
+      "description": "Đọc truyện trên trang https://novelfire.net/",
       "source": "https://novelfire.net/",
-      "version": 60,
+      "version": 4,
       "type": "novel",
       "locale": "en_US",
       "relativePath": "extensions/novel/NovelFire",
       "metadata": {
         "name": "Novel Fire",
-        "author": "@R",
-        "version": 60,
+        "author": "Vearn",
+        "version": 4,
         "source": "https://novelfire.net/",
         "regexp": "(www.)?(m.)?novelfire.net/book/.*",
-        "description": "V60 Master: Kiến trúc đa module. Tối ưu Regex TOC, bóc tách API Sniffing cho Comments & Recommendations.",
+        "description": "Đọc truyện trên trang https://novelfire.net/",
         "locale": "en_US",
         "language": "javascript",
-        "icon": "icon.png",
         "type": "novel"
       }
     },
@@ -2228,7 +2227,6 @@
         "type": "novel"
       }
     },
-    
     {
       "folder": "vietnamnet",
       "name": "vietnamnet",
@@ -2253,25 +2251,24 @@
     },
     {
       "folder": "vietwriter",
-      "name": "VietWriter Đọc đủ loại truyện trệ forum",
-      "author": "Rake & Gemini",
-      "description": "Giao diện NovelFire chuẩn: 3 Tab Trang chủ, còn lại ném vào Menu.",
-      "source": "https://vietwriter.one",
+      "name": "Việt Writer",
+      "author": "Nhocconsr",
+      "description": "Lỗi extension liên hệ email: phamgiavang@gmail.com",
+      "source": "https://vietwriter.vn",
       "version": 1,
       "type": "novel",
       "locale": "vi_VN",
       "relativePath": "extensions/novel/vietwriter",
       "metadata": {
-        "name": "VietWriter Đọc đủ loại truyện trệ forum",
-        "author": "Rake & Gemini",
+        "name": "Việt Writer",
+        "author": "Nhocconsr",
         "version": 1,
-        "source": "https://vietwriter.one",
-        "regexp": "vietwriter\\\\.one/threads/",
-        "description": "Giao diện NovelFire chuẩn: 3 Tab Trang chủ, còn lại ném vào Menu.",
-        "type": "novel",
-        "locale": "vi_VN",
+        "source": "https://vietwriter.vn",
+        "regexp": "(www.)?vietwriter.vn/[A-Za-z].+/?",
+        "description": "Lỗi extension liên hệ email: phamgiavang@gmail.com",
         "language": "javascript",
-        "icon": "icon.png"
+        "type": "novel",
+        "locale": "vi_VN"
       }
     },
     {
