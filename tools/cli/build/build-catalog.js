@@ -6,7 +6,7 @@ const {
     readJson,
     relativeFromWorkspace,
     writeJson
-} = require('./migration-utils');
+} = require('../core/migration-utils');
 
 const RAW_REPO_BASE = 'https://raw.githubusercontent.com/kychitoge/vbook-ext/main';
 

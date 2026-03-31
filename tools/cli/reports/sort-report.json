@@ -1,0 +1,2324 @@
+{
+  "generatedAt": "2026-03-31T11:14:19.062Z",
+  "inventoryPath": "tools/cli/reports/inventory.json",
+  "summary": {
+    "totalCandidates": 385,
+    "copied": 4,
+    "overwritten": 381,
+    "skippedExisting": 0,
+    "errors": 0,
+    "cleanedRootSources": 0
+  },
+  "items": [
+    {
+      "source": "extensions/vbook-ext-template",
+      "destination": "extensions/novel/vbook-ext-template",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/b3x0m-vbook-ext/520danmei",
+      "destination": "extensions/chinese_novel/520danmei",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/b3x0m-vbook-ext/hiepnu",
+      "destination": "extensions/novel/hiepnu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/b3x0m-vbook-ext/nhentaione",
+      "destination": "extensions/comic/nhentaione",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/b3x0m-vbook-ext/truyenlh",
+      "destination": "extensions/comic/truyenlh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/b3x0m-vbook-ext/uuxs",
+      "destination": "extensions/chinese_novel/uuxs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/b3x0m-vbook-ext/xbanxia",
+      "destination": "extensions/chinese_novel/xbanxia",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/b3x0m-vbook-ext/xombot",
+      "destination": "extensions/translate/xombot",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/banquyy-vbook/plhydp",
+      "destination": "extensions/chinese_novel/plhydp",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/banquyy-vbook/ttkan",
+      "destination": "extensions/chinese_novel/ttkan",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/banquyy-vbook/Twfanti",
+      "destination": "extensions/chinese_novel/Twfanti",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/baobao666888-ext-vbook-w/256wx",
+      "destination": "extensions/chinese_novel/256wx",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/baobao666888-ext-vbook-w/dualeotruyen",
+      "destination": "extensions/comic/dualeotruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/baobao666888-ext-vbook-w/ixdzs",
+      "destination": "extensions/chinese_novel/ixdzs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/baobao666888-ext-vbook-w/sanyteam",
+      "destination": "extensions/comic/sanyteam",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/baobao666888-ext-vbook-w/tushumi.cc",
+      "destination": "extensions/chinese_novel/tushumi.cc",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/baobao666888-ext-vbook-w/ungtycomics",
+      "destination": "extensions/comic/ungtycomics",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/bachngocsach",
+      "destination": "extensions/novel/bachngocsach",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/baidu-translate",
+      "destination": "extensions/translate/baidu-translate",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/banlong",
+      "destination": "extensions/novel/banlong",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/beeng",
+      "destination": "extensions/comic/beeng",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/bing-tts",
+      "destination": "extensions/tts/bing-tts",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/biqubu",
+      "destination": "extensions/chinese_novel/biqubu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/blogtruyen",
+      "destination": "extensions/comic/blogtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/blogtruyenmoi",
+      "destination": "extensions/comic/blogtruyenmoi",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/bqxs520",
+      "destination": "extensions/chinese_novel/bqxs520",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/chivi",
+      "destination": "extensions/novel/chivi",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/chuandaipc",
+      "destination": "extensions/chinese_novel/chuandaipc",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/cuutruyen",
+      "destination": "extensions/comic/cuutruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/dizishu",
+      "destination": "extensions/chinese_novel/dizishu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/e-hentai",
+      "destination": "extensions/comic/e-hentai",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/fansg",
+      "destination": "extensions/chinese_novel/fansg",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/gacsach",
+      "destination": "extensions/novel/gacsach",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/gemini-tts",
+      "destination": "extensions/tts/gemini-tts",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/gongzicp",
+      "destination": "extensions/chinese_novel/gongzicp",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/google-tts",
+      "destination": "extensions/tts/google-tts",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/hako",
+      "destination": "extensions/novel/hako",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/hentai-img",
+      "destination": "extensions/comic/hentai-img",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/hentai2read",
+      "destination": "extensions/comic/hentai2read",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/hentaivn",
+      "destination": "extensions/comic/hentaivn",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/isach",
+      "destination": "extensions/novel/isach",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/ixunshu",
+      "destination": "extensions/chinese_novel/ixunshu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/keepshu",
+      "destination": "extensions/chinese_novel/keepshu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/koanchay",
+      "destination": "extensions/_unknown/koanchay",
+      "status": "copied",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/lightnovelreader",
+      "destination": "extensions/novel/lightnovelreader",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/lustaveland",
+      "destination": "extensions/novel/lustaveland",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/mangadex",
+      "destination": "extensions/comic/mangadex",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/medoctruyenchu",
+      "destination": "extensions/novel/medoctruyenchu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/medoctruyentranh",
+      "destination": "extensions/comic/medoctruyentranh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/metruyenchu",
+      "destination": "extensions/novel/metruyenchu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/mibiquge",
+      "destination": "extensions/chinese_novel/mibiquge",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/nettruyen",
+      "destination": "extensions/comic/nettruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/ngonphong",
+      "destination": "extensions/comic/ngonphong",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/nhentai",
+      "destination": "extensions/comic/nhentai",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/nuhiep",
+      "destination": "extensions/novel/nuhiep",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/ocumoe",
+      "destination": "extensions/comic/ocumoe",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/qiushubang",
+      "destination": "extensions/chinese_novel/qiushubang",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/qmanga",
+      "destination": "extensions/comic/qmanga",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/readmanga",
+      "destination": "extensions/comic/readmanga",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/sangtacviet",
+      "destination": "extensions/novel/sangtacviet",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/santruyen",
+      "destination": "extensions/novel/santruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/saytruyen",
+      "destination": "extensions/comic/saytruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/shubao45",
+      "destination": "extensions/chinese_novel/shubao45",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/shubl",
+      "destination": "extensions/chinese_novel/shubl",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/sstruyen",
+      "destination": "extensions/novel/sstruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/tangthuvien",
+      "destination": "extensions/novel/tangthuvien",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/thichdoctruyen",
+      "destination": "extensions/novel/thichdoctruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/tiktok-tts",
+      "destination": "extensions/tts/tiktok-tts",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/truyenchu",
+      "destination": "extensions/novel/truyenchu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/truyenfull",
+      "destination": "extensions/novel/truyenfull",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/truyenhayvn",
+      "destination": "extensions/novel/truyenhayvn",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/truyenhd",
+      "destination": "extensions/novel/truyenhd",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/truyenqq",
+      "destination": "extensions/comic/truyenqq",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/truyentr",
+      "destination": "extensions/novel/truyentr",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/truyentranhaudio",
+      "destination": "extensions/comic/truyentranhaudio",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/truyenvn",
+      "destination": "extensions/comic/truyenvn",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/truyenyy",
+      "destination": "extensions/novel/truyenyy",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/umetruyen",
+      "destination": "extensions/comic/umetruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/uukanshu",
+      "destination": "extensions/chinese_novel/uukanshu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/vtruyen",
+      "destination": "extensions/novel/vtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/wattpad",
+      "destination": "extensions/novel/wattpad",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/webtruyen",
+      "destination": "extensions/novel/webtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/wikidich",
+      "destination": "extensions/novel/wikidich",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/wikidich-app",
+      "destination": "extensions/novel/wikidich-app",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/darkrai9x-vbook-extensions/zalo-tts",
+      "destination": "extensions/tts/zalo-tts",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/123ds",
+      "destination": "extensions/chinese_novel/123ds",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/18mh",
+      "destination": "extensions/chinese_novel/18mh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/60ks",
+      "destination": "extensions/chinese_novel/60ks",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/82zw",
+      "destination": "extensions/chinese_novel/82zw",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/8xsk",
+      "destination": "extensions/chinese_novel/8xsk",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/akaytruyen",
+      "destination": "extensions/novel/akaytruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/Buondua",
+      "destination": "extensions/comic/Buondua",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/ddxs",
+      "destination": "extensions/chinese_novel/ddxs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/Độc giả số 1",
+      "destination": "extensions/comic/Độc giả số 1",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/doctruyen14",
+      "destination": "extensions/novel/doctruyen14",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/Dưa Leo Truyện",
+      "destination": "extensions/comic/Dưa Leo Truyện",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/kanshuwu",
+      "destination": "extensions/chinese_novel/kanshuwu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/kanunu8",
+      "destination": "extensions/chinese_novel/kanunu8",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/Kỳ huyễn",
+      "destination": "extensions/novel/Kỳ huyễn",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/lkdttzz",
+      "destination": "extensions/comic/lkdttzz",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/mangadistrict",
+      "destination": "extensions/comic/mangadistrict",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/Men18",
+      "destination": "extensions/comic/Men18",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/ntruyen",
+      "destination": "extensions/novel/ntruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/ptwxzOrg",
+      "destination": "extensions/chinese_novel/ptwxzOrg",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/qubook",
+      "destination": "extensions/chinese_novel/qubook",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/ranwen",
+      "destination": "extensions/chinese_novel/ranwen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/shushuwuxs",
+      "destination": "extensions/chinese_novel/shushuwuxs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/tienhiepXYZ",
+      "destination": "extensions/novel/tienhiepXYZ",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/Trùm Truyện",
+      "destination": "extensions/novel/Trùm Truyện",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/truyenchuth",
+      "destination": "extensions/novel/truyenchuth",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/truyencodetheoyeucau",
+      "destination": "extensions/novel/truyencodetheoyeucau",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/truyendocviet",
+      "destination": "extensions/novel/truyendocviet",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/truyenfullCom",
+      "destination": "extensions/novel/truyenfullCom",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/truyenheo",
+      "destination": "extensions/novel/truyenheo",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/truyentranh3q",
+      "destination": "extensions/comic/truyentranh3q",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/Tu Chân Giới",
+      "destination": "extensions/novel/Tu Chân Giới",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/twkan",
+      "destination": "extensions/chinese_novel/twkan",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/xinyushuwu",
+      "destination": "extensions/chinese_novel/xinyushuwu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/xyushu5",
+      "destination": "extensions/chinese_novel/xyushu5",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-ext-vbook/zhenhunxiaoshuo",
+      "destination": "extensions/chinese_novel/zhenhunxiaoshuo",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/123truyen",
+      "destination": "extensions/novel/123truyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/19358",
+      "destination": "extensions/chinese_novel/19358",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/20xs",
+      "destination": "extensions/chinese_novel/20xs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/230book",
+      "destination": "extensions/chinese_novel/230book",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/23shu",
+      "destination": "extensions/chinese_novel/23shu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/250sy",
+      "destination": "extensions/chinese_novel/250sy",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/265xs",
+      "destination": "extensions/chinese_novel/265xs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/2kxs",
+      "destination": "extensions/chinese_novel/2kxs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/69shu",
+      "destination": "extensions/chinese_novel/69shu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/8ternal",
+      "destination": "extensions/comic/8ternal",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/9txs",
+      "destination": "extensions/chinese_novel/9txs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/acqq",
+      "destination": "extensions/comic/acqq",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/baotangtruyen",
+      "destination": "extensions/comic/baotangtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/bfaloo",
+      "destination": "extensions/chinese_novel/bfaloo",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/bookqq",
+      "destination": "extensions/chinese_novel/bookqq",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/ciweimao",
+      "destination": "extensions/chinese_novel/ciweimao",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/cmangatop",
+      "destination": "extensions/comic/cmangatop",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/creative-comic",
+      "destination": "extensions/comic/creative-comic",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/dingdian",
+      "destination": "extensions/chinese_novel/dingdian",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/docsach24",
+      "destination": "extensions/novel/docsach24",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/docsachhay",
+      "destination": "extensions/novel/docsachhay",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/doctruyen3q",
+      "destination": "extensions/comic/doctruyen3q",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/doujins",
+      "destination": "extensions/comic/doujins",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/fanqienovel",
+      "destination": "extensions/chinese_novel/fanqienovel",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/gettruyen",
+      "destination": "extensions/novel/gettruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/goctruyentranh",
+      "destination": "extensions/comic/goctruyentranh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/hamtruyen",
+      "destination": "extensions/novel/hamtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/hentaicube",
+      "destination": "extensions/comic/hentaicube",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/hentaidexy",
+      "destination": "extensions/comic/hentaidexy",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/hentaivnvip",
+      "destination": "extensions/comic/hentaivnvip",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/hetushu",
+      "destination": "extensions/chinese_novel/hetushu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/hitruyen",
+      "destination": "extensions/comic/hitruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/hotruyen",
+      "destination": "extensions/novel/hotruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/imiaobige",
+      "destination": "extensions/chinese_novel/imiaobige",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/khotruyentranh",
+      "destination": "extensions/comic/khotruyentranh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/kissaway",
+      "destination": "extensions/comic/kissaway",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/knoxt",
+      "destination": "extensions/novel/knoxt",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/lanrenyuhai",
+      "destination": "extensions/chinese_novel/lanrenyuhai",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/linovel",
+      "destination": "extensions/chinese_novel/linovel",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/linovelib",
+      "destination": "extensions/chinese_novel/linovelib",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/lxhentai",
+      "destination": "extensions/comic/lxhentai",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/mangabuddy",
+      "destination": "extensions/comic/mangabuddy",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/manhuagui",
+      "destination": "extensions/comic/manhuagui",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/mbtxt",
+      "destination": "extensions/chinese_novel/mbtxt",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/mtlnation",
+      "destination": "extensions/novel/mtlnation",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/po18tw",
+      "destination": "extensions/chinese_novel/po18tw",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/ptwxc",
+      "destination": "extensions/chinese_novel/ptwxc",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/qimao",
+      "destination": "extensions/chinese_novel/qimao",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/royalroad",
+      "destination": "extensions/novel/royalroad",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/sachhayonline",
+      "destination": "extensions/novel/sachhayonline",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/sayhentai",
+      "destination": "extensions/comic/sayhentai",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/shu05",
+      "destination": "extensions/chinese_novel/shu05",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/shuquge",
+      "destination": "extensions/chinese_novel/shuquge",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/sttruyen",
+      "destination": "extensions/novel/sttruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/stvlimit",
+      "destination": "extensions/novel/stvlimit",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/tadu",
+      "destination": "extensions/chinese_novel/tadu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/thichtruyen",
+      "destination": "extensions/novel/thichtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/thienhatruyen",
+      "destination": "extensions/comic/thienhatruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/tienvuc",
+      "destination": "extensions/novel/tienvuc",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyena",
+      "destination": "extensions/novel/truyena",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyenconvert",
+      "destination": "extensions/novel/truyenconvert",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyencool",
+      "destination": "extensions/comic/truyencool",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyencv",
+      "destination": "extensions/novel/truyencv",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyendich",
+      "destination": "extensions/novel/truyendich",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyendichgiare",
+      "destination": "extensions/novel/truyendichgiare",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyengihot",
+      "destination": "extensions/novel/truyengihot",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyenmoii",
+      "destination": "extensions/novel/truyenmoii",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyennhieu",
+      "destination": "extensions/_unknown/truyennhieu",
+      "status": "copied",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyensieuhay",
+      "destination": "extensions/comic/truyensieuhay",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyentienhiep",
+      "destination": "extensions/novel/truyentienhiep",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyentiki",
+      "destination": "extensions/novel/truyentiki",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyentranh",
+      "destination": "extensions/comic/truyentranh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyentranhlh",
+      "destination": "extensions/comic/truyentranhlh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyenwiki",
+      "destination": "extensions/novel/truyenwiki",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyenwikicom",
+      "destination": "extensions/novel/truyenwikicom",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/truyenz",
+      "destination": "extensions/comic/truyenz",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/tsumino",
+      "destination": "extensions/comic/tsumino",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/tuoinung",
+      "destination": "extensions/novel/tuoinung",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/vietwriter",
+      "destination": "extensions/novel/vietwriter",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/vipbns",
+      "destination": "extensions/novel/vipbns",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/VIPngontinh",
+      "destination": "extensions/novel/VIPngontinh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/viptruyenfull",
+      "destination": "extensions/novel/viptruyenfull",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/vlognovel",
+      "destination": "extensions/novel/vlognovel",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/vlogtruyen",
+      "destination": "extensions/comic/vlogtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/webnovel",
+      "destination": "extensions/novel/webnovel",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/webtoonxyz",
+      "destination": "extensions/comic/webtoonxyz",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/wuxiaworld",
+      "destination": "extensions/novel/wuxiaworld",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/yocomic",
+      "destination": "extensions/comic/yocomic",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/yushubo",
+      "destination": "extensions/chinese_novel/yushubo",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/zingtruyen",
+      "destination": "extensions/novel/zingtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/dat-bi-vbook-ext/ztruyen",
+      "destination": "extensions/novel/ztruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/duongden-vbook/nguoilaodong",
+      "destination": "extensions/novel/nguoilaodong",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/duongden-vbook/soha",
+      "destination": "extensions/novel/soha",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/duongden-vbook/tuoitre",
+      "destination": "extensions/novel/tuoitre",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/duongden-vbook/vietnamnet",
+      "destination": "extensions/novel/vietnamnet",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/duongden-vbook/vnexpress",
+      "destination": "extensions/novel/vnexpress",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/evamirion-vbook-ext/AItruyen",
+      "destination": "extensions/novel/AItruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/evamirion-vbook-ext/Bilinovel",
+      "destination": "extensions/chinese_novel/Bilinovel",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/evamirion-vbook-ext/ilwxs",
+      "destination": "extensions/chinese_novel/ilwxs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/evamirion-vbook-ext/linovelib",
+      "destination": "extensions/chinese_novel/linovelib",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/evamirion-vbook-ext/lnovel",
+      "destination": "extensions/chinese_novel/lnovel",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/evamirion-vbook-ext/NovelFire",
+      "destination": "extensions/novel/NovelFire",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/evamirion-vbook-ext/readernovel",
+      "destination": "extensions/novel/readernovel",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/evamirion-vbook-ext/Tiemtruyenchu",
+      "destination": "extensions/novel/Tiemtruyenchu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/evamirion-vbook-ext/TongRenShe",
+      "destination": "extensions/chinese_novel/TongRenShe",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/evamirion-vbook-ext/Xtruyen",
+      "destination": "extensions/novel/Xtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/17k",
+      "destination": "extensions/chinese_novel/17k",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/69shu",
+      "destination": "extensions/chinese_novel/69shu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/8muses",
+      "destination": "extensions/comic/8muses",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/czbooks",
+      "destination": "extensions/chinese_novel/czbooks",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/haitanglin",
+      "destination": "extensions/chinese_novel/haitanglin",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/hentaic",
+      "destination": "extensions/comic/hentaic",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/hentaiporns",
+      "destination": "extensions/comic/hentaiporns",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/hentairead",
+      "destination": "extensions/comic/hentairead",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/hentairules",
+      "destination": "extensions/comic/hentairules",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/hiperdex",
+      "destination": "extensions/comic/hiperdex",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/ihentai",
+      "destination": "extensions/comic/ihentai",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/liquge",
+      "destination": "extensions/chinese_novel/liquge",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/lrxs",
+      "destination": "extensions/chinese_novel/lrxs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/manga-raw",
+      "destination": "extensions/comic/manga-raw",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/manga18.club",
+      "destination": "extensions/comic/manga18.club",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/manga18fx",
+      "destination": "extensions/comic/manga18fx",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/mangayeh",
+      "destination": "extensions/comic/mangayeh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/manhwas",
+      "destination": "extensions/comic/manhwas",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/piaotian5",
+      "destination": "extensions/chinese_novel/piaotian5",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/ptwxz",
+      "destination": "extensions/chinese_novel/ptwxz",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/qidian",
+      "destination": "extensions/chinese_novel/qidian",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/quanben",
+      "destination": "extensions/chinese_novel/quanben",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/rawdevart",
+      "destination": "extensions/comic/rawdevart",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/skymanga",
+      "destination": "extensions/comic/skymanga",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/trxs",
+      "destination": "extensions/chinese_novel/trxs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/xbiquge",
+      "destination": "extensions/chinese_novel/xbiquge",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/yurineko",
+      "destination": "extensions/comic/yurineko",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hajljnopera-vbook-ext/zongheng",
+      "destination": "extensions/chinese_novel/zongheng",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hienpro00123-vbook_meou/metruyenchu",
+      "destination": "extensions/novel/metruyenchu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hienpro00123-vbook_meou/otruyen",
+      "destination": "extensions/comic/otruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hienpro00123-vbook_meou/truyendex",
+      "destination": "extensions/comic/truyendex",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hieu45666-vbook_ext/MongTruyen",
+      "destination": "extensions/novel/MongTruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hieu45666-vbook_ext/MTC.co",
+      "destination": "extensions/novel/MTC.co",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hieu45666-vbook_ext/Novest",
+      "destination": "extensions/novel/Novest",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hieu45666-vbook_ext/SiTruyenCV",
+      "destination": "extensions/novel/SiTruyenCV",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hieu45666-vbook_ext/sstruyen.com",
+      "destination": "extensions/_unknown/sstruyen.com",
+      "status": "copied",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hieu45666-vbook_ext/Truyendocviet",
+      "destination": "extensions/novel/Truyendocviet",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hieu45666-vbook_ext/TruyenMoi",
+      "destination": "extensions/novel/TruyenMoi",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hieu45666-vbook_ext/ZetTruyen",
+      "destination": "extensions/comic/ZetTruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/256wxc",
+      "destination": "extensions/chinese_novel/256wxc",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/51txt",
+      "destination": "extensions/chinese_novel/51txt",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/allporncomic",
+      "destination": "extensions/comic/allporncomic",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/bato",
+      "destination": "extensions/comic/bato",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/boxtruyentranh",
+      "destination": "extensions/comic/boxtruyentranh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/dichtruyen",
+      "destination": "extensions/comic/dichtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/dragonballwiki",
+      "destination": "extensions/comic/dragonballwiki",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/feiszw",
+      "destination": "extensions/chinese_novel/feiszw",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/hentaifox",
+      "destination": "extensions/comic/hentaifox",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/hentaivv",
+      "destination": "extensions/comic/hentaivv",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/JAmangatoro",
+      "destination": "extensions/comic/JAmangatoro",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/kocr",
+      "destination": "extensions/comic/kocr",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/mangaxy",
+      "destination": "extensions/comic/mangaxy",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/mdahexs",
+      "destination": "extensions/chinese_novel/mdahexs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/novelfull",
+      "destination": "extensions/novel/novelfull",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/otakusan",
+      "destination": "extensions/comic/otakusan",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/sxyxht",
+      "destination": "extensions/chinese_novel/sxyxht",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/truyen210",
+      "destination": "extensions/comic/truyen210",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/truyenconect",
+      "destination": "extensions/novel/truyenconect",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/truyenkk1",
+      "destination": "extensions/comic/truyenkk1",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/tusachxinhxinh",
+      "destination": "extensions/comic/tusachxinhxinh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/vcomycs",
+      "destination": "extensions/comic/vcomycs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/webtruyenonlinez",
+      "destination": "extensions/novel/webtruyenonlinez",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/xklxsw",
+      "destination": "extensions/chinese_novel/xklxsw",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/hishirooo-vbook-ext/yushuwuy",
+      "destination": "extensions/chinese_novel/yushuwuy",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/khoa301020-vbook-ext/kakuyomu",
+      "destination": "extensions/novel/kakuyomu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/khoa301020-vbook-ext/syosetu",
+      "destination": "extensions/novel/syosetu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/laofun-vbook-extensions-with-filter/metruyentranh",
+      "destination": "extensions/comic/metruyentranh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/laofun-vbook-extensions-with-filter/tytnovel",
+      "destination": "extensions/novel/tytnovel",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/123truyen",
+      "destination": "extensions/novel/123truyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/baotangtruyen",
+      "destination": "extensions/comic/baotangtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/giangthe",
+      "destination": "extensions/novel/giangthe",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/hotruyen",
+      "destination": "extensions/novel/hotruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/kissaway",
+      "destination": "extensions/comic/kissaway",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/lightnovel",
+      "destination": "extensions/novel/lightnovel",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/mangaread",
+      "destination": "extensions/comic/mangaread",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/manhuavn",
+      "destination": "extensions/comic/manhuavn",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/manhwahentai",
+      "destination": "extensions/comic/manhwahentai",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/monkeyd",
+      "destination": "extensions/novel/monkeyd",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/mtlnovel",
+      "destination": "extensions/novel/mtlnovel",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/myrics",
+      "destination": "extensions/chinese_novel/myrics",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/novelbuddy",
+      "destination": "extensions/novel/novelbuddy",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/sayhentai",
+      "destination": "extensions/comic/sayhentai",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/tienvuc",
+      "destination": "extensions/novel/tienvuc",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/tranh18",
+      "destination": "extensions/comic/tranh18",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/truyengg",
+      "destination": "extensions/comic/truyengg",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/vipbns",
+      "destination": "extensions/novel/vipbns",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/vozer",
+      "destination": "extensions/novel/vozer",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/lethituyen-vbooks-extension/zingtruyen",
+      "destination": "extensions/novel/zingtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/mizhm-vbook-extensions/baotangtruyen",
+      "destination": "extensions/comic/baotangtruyen",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/mizhm-vbook-extensions/example",
+      "destination": "extensions/_unknown/example",
+      "status": "copied",
+      "reason": null
+    },
+    {
+      "source": "references/repos/mizhm-vbook-extensions/ihuaben",
+      "destination": "extensions/chinese_novel/ihuaben",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/mizhm-vbook-extensions/manhuarock",
+      "destination": "extensions/comic/manhuarock",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/mizhm-vbook-extensions/truyendichmienphi",
+      "destination": "extensions/novel/truyendichmienphi",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/mizhm-vbook-extensions/truyenfree",
+      "destination": "extensions/novel/truyenfree",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/mizhm-vbook-extensions/truyennow",
+      "destination": "extensions/novel/truyennow",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/mizhm-vbook-extensions/vozer",
+      "destination": "extensions/novel/vozer",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/52shuku",
+      "destination": "extensions/chinese_novel/52shuku",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/aixdzs",
+      "destination": "extensions/chinese_novel/aixdzs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/biqugeabc",
+      "destination": "extensions/chinese_novel/biqugeabc",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/bixiange",
+      "destination": "extensions/chinese_novel/bixiange",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/elysia",
+      "destination": "extensions/chinese_novel/elysia",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/esjzone",
+      "destination": "extensions/chinese_novel/esjzone",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/ffxs8",
+      "destination": "extensions/chinese_novel/ffxs8",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/fuxsb",
+      "destination": "extensions/chinese_novel/fuxsb",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/haitang16",
+      "destination": "extensions/chinese_novel/haitang16",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/html5qq",
+      "destination": "extensions/chinese_novel/html5qq",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/ijjxs",
+      "destination": "extensions/chinese_novel/ijjxs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/jingwubook",
+      "destination": "extensions/chinese_novel/jingwubook",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/jpxs123",
+      "destination": "extensions/chinese_novel/jpxs123",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/legado-minhducmon",
+      "destination": "extensions/novel/legado-minhducmon",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/legado2",
+      "destination": "extensions/novel/legado2",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/longmabook",
+      "destination": "extensions/chinese_novel/longmabook",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/masiro",
+      "destination": "extensions/chinese_novel/masiro",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/mengyuanshucheng",
+      "destination": "extensions/chinese_novel/mengyuanshucheng",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/mipciweimao",
+      "destination": "extensions/chinese_novel/mipciweimao",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/nhasachmienphi",
+      "destination": "extensions/novel/nhasachmienphi",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/nhimmeo",
+      "destination": "extensions/chinese_novel/nhimmeo",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/nhimmeo_sv2",
+      "destination": "extensions/chinese_novel/nhimmeo_sv2",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/piaoyuxuan",
+      "destination": "extensions/chinese_novel/piaoyuxuan",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/pixiv",
+      "destination": "extensions/chinese_novel/pixiv",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/po18gv",
+      "destination": "extensions/chinese_novel/po18gv",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/powanjuan",
+      "destination": "extensions/chinese_novel/powanjuan",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/qbtr",
+      "destination": "extensions/chinese_novel/qbtr",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/qmxs123",
+      "destination": "extensions/chinese_novel/qmxs123",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/raudonhimmeo",
+      "destination": "extensions/chinese_novel/raudonhimmeo",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/readcomiconline",
+      "destination": "extensions/comic/readcomiconline",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/readwn",
+      "destination": "extensions/novel/readwn",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/sfacg",
+      "destination": "extensions/chinese_novel/sfacg",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/shencou",
+      "destination": "extensions/chinese_novel/shencou",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/shuhaige",
+      "destination": "extensions/chinese_novel/shuhaige",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/shumilou",
+      "destination": "extensions/chinese_novel/shumilou",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/sjks88",
+      "destination": "extensions/chinese_novel/sjks88",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/tongrenquan",
+      "destination": "extensions/chinese_novel/tongrenquan",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/trxsme",
+      "destination": "extensions/chinese_novel/trxsme",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/txt520",
+      "destination": "extensions/chinese_novel/txt520",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/uuksorg",
+      "destination": "extensions/chinese_novel/uuksorg",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/wenku8",
+      "destination": "extensions/chinese_novel/wenku8",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/yazhouse8",
+      "destination": "extensions/chinese_novel/yazhouse8",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/moleys-vbook-ext/yodu",
+      "destination": "extensions/chinese_novel/yodu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/seyah24-vbook-exts/cijige",
+      "destination": "extensions/chinese_novel/cijige",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/seyah24-vbook-exts/mangapuma",
+      "destination": "extensions/comic/mangapuma",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/seyah24-vbook-exts/shenyekanshu",
+      "destination": "extensions/chinese_novel/shenyekanshu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/seyah24-vbook-exts/xinyushuwu",
+      "destination": "extensions/chinese_novel/xinyushuwu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/seyah24-vbook-exts/xinyushuwu-com",
+      "destination": "extensions/chinese_novel/xinyushuwu-com",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/seyah24-vbook-exts/Yyun",
+      "destination": "extensions/chinese_novel/Yyun",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/sonzin-vbook-extension/ngoctieucac",
+      "destination": "extensions/novel/ngoctieucac",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/sonzin-vbook-extension/openai-translate",
+      "destination": "extensions/translate/openai-translate",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/sonzin-vbook-extension/truyennet",
+      "destination": "extensions/novel/truyennet",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/springpeachvinh-vbook-ext/metruyencv",
+      "destination": "extensions/novel/metruyencv",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/tamchau-vbook-extensions/truyenhoangdung",
+      "destination": "extensions/novel/truyenhoangdung",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/tuanhai03-vbook-extensions/69shu",
+      "destination": "extensions/chinese_novel/69shu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/tuanhai03-vbook-extensions/69yuedu",
+      "destination": "extensions/chinese_novel/69yuedu",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/tuanhai03-vbook-extensions/goctruyentranh",
+      "destination": "extensions/comic/goctruyentranh",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/tuanhai03-vbook-extensions/idejian",
+      "destination": "extensions/chinese_novel/idejian",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/tuanhai03-vbook-extensions/jwxs",
+      "destination": "extensions/chinese_novel/jwxs",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/tuanhai03-vbook-extensions/Sangt̀acviet",
+      "destination": "extensions/chinese_novel/Sangt̀acviet",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/tuanhai03-vbook-extensions/Tianyue",
+      "destination": "extensions/chinese_novel/Tianyue",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/tuanhai03-vbook-extensions/Uaa",
+      "destination": "extensions/chinese_novel/Uaa",
+      "status": "overwritten",
+      "reason": null
+    },
+    {
+      "source": "references/repos/tuanhai03-vbook-extensions/uukanshu",
+      "destination": "extensions/chinese_novel/uukanshu",
+      "status": "overwritten",
+      "reason": null
+    }
+  ]
+}

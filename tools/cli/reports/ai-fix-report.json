@@ -1,0 +1,200 @@
+{
+  "generatedAt": "2026-03-31T11:14:46.047Z",
+  "inputFixReport": "tools/cli/reports/fix-report.json",
+  "maxAttempts": 2,
+  "summary": {
+    "total": 10,
+    "fixed": 9,
+    "needsHuman": 1
+  },
+  "items": [
+    {
+      "pluginRoot": "extensions/_unknown/example",
+      "finalStatus": "fixed",
+      "finalReason": "offline-verify-pass",
+      "attempts": [
+        {
+          "attempt": 1,
+          "changes": [
+            "set-metadata.type:novel"
+          ],
+          "verify": {
+            "success": true,
+            "errors": 0,
+            "warnings": 1
+          }
+        }
+      ]
+    },
+    {
+      "pluginRoot": "extensions/_unknown/koanchay",
+      "finalStatus": "fixed",
+      "finalReason": "offline-verify-pass",
+      "attempts": [
+        {
+          "attempt": 1,
+          "changes": [
+            "set-metadata.type:novel"
+          ],
+          "verify": {
+            "success": true,
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      ]
+    },
+    {
+      "pluginRoot": "extensions/_unknown/sstruyen.com",
+      "finalStatus": "needs_human",
+      "finalReason": "no-heuristic-change",
+      "attempts": [
+        {
+          "attempt": 1,
+          "changes": [
+            "set-metadata.type:novel"
+          ],
+          "verify": {
+            "success": false,
+            "errors": 0,
+            "warnings": 0
+          }
+        },
+        {
+          "attempt": 2,
+          "changes": [],
+          "verify": {
+            "success": false,
+            "reason": "no-heuristic-change"
+          }
+        }
+      ]
+    },
+    {
+      "pluginRoot": "extensions/_unknown/truyennhieu",
+      "finalStatus": "fixed",
+      "finalReason": "offline-verify-pass",
+      "attempts": [
+        {
+          "attempt": 1,
+          "changes": [
+            "set-metadata.type:novel"
+          ],
+          "verify": {
+            "success": true,
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      ]
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/html5qq",
+      "finalStatus": "fixed",
+      "finalReason": "offline-verify-pass",
+      "attempts": [
+        {
+          "attempt": 1,
+          "changes": [
+            "created-script-stub:chap.js"
+          ],
+          "verify": {
+            "success": true,
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      ]
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/jwxs",
+      "finalStatus": "fixed",
+      "finalReason": "offline-verify-pass",
+      "attempts": [
+        {
+          "attempt": 1,
+          "changes": [
+            "copied-fallback-icon"
+          ],
+          "verify": {
+            "success": true,
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      ]
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/linovelib",
+      "finalStatus": "fixed",
+      "finalReason": "offline-verify-pass",
+      "attempts": [
+        {
+          "attempt": 1,
+          "changes": [
+            "replaced-invalid-regexp-from-source"
+          ],
+          "verify": {
+            "success": true,
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      ]
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/Tianyue",
+      "finalStatus": "fixed",
+      "finalReason": "offline-verify-pass",
+      "attempts": [
+        {
+          "attempt": 1,
+          "changes": [
+            "copied-fallback-icon"
+          ],
+          "verify": {
+            "success": true,
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      ]
+    },
+    {
+      "pluginRoot": "extensions/chinese_novel/uukanshu",
+      "finalStatus": "fixed",
+      "finalReason": "offline-verify-pass",
+      "attempts": [
+        {
+          "attempt": 1,
+          "changes": [
+            "copied-fallback-icon"
+          ],
+          "verify": {
+            "success": true,
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      ]
+    },
+    {
+      "pluginRoot": "extensions/novel/truyentienhiep",
+      "finalStatus": "fixed",
+      "finalReason": "offline-verify-pass",
+      "attempts": [
+        {
+          "attempt": 1,
+          "changes": [
+            "replaced-invalid-regexp-from-source"
+          ],
+          "verify": {
+            "success": true,
+            "errors": 0,
+            "warnings": 0
+          }
+        }
+      ]
+    }
+  ]
+}
