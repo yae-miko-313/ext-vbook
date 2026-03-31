@@ -1,9 +1,1 @@
-load("config.js");
-
-function execute() {
-    return Response.success([
-        { title: "Truyện Hot",     input: "truyen-hot",  script: "homecontent.js" },
-        { title: "Mới cập nhật",   input: "/",           script: "homecontent.js" },
-        { title: "Hoàn thành",     input: "truyen-full", script: "homecontent.js" },
-    ]);
-}
+0jqx0P1XxwFAv6sfsx0P2XxX0mpDHP17ToaXaSVk3nk52IsiTwVr6uV9X3AmsOeo821OLx0P1XxO3fye9H5wDqtXWSo10naEifAjUr6TdtVIQT5939gGJ2EXvBx0P1XxoBpRTmzVHDgrNHE7Dhx0P2Xxht0P1Imu9x0P1XxxsxtKNEN0dNhgS5vcyVjKxxIKMEbYTavKjV5VqSLBc6itoTdWqhURKgrlknGA310a6AcjSSjOgvwaNpOjUqRc3OkbHlxMGy1UgIlec82Ugp2fS5KEincOnIS2krU1XF5Px8jlx74oXEuKysEuv8jx0P2Xx1X8uydpA3gYkhtbT7LevcYJDpMyUtbKxUyF2p7JrQzpgG5oCFhb9W6ooxvNN2AjQYlPNMZGT8Gt6nncGwVaDKXSnzEPjKWu5nlTa4R8JvoXxeegh7TMI2j8xDiMO3GC3j9jCB1JRRKpQGoovKajouYI0XcXdSuYPG4tnx0P1XxHFSUEbQOTonTcGwyZ3c4hWWKKEQgGdzTgGIfyUUYxpXtZB25pyamSZ69x0P1XxVLHdbFoVKXv8ulaLG8cPVJdSmxu1vDrsAaX5kAd0Vkz4DgLx0P1XxMyzyLzEpz2SWEYsA6rPAYvDZxjELXHQBSv07pBvD5RY5R68ydOXYXVlASqdvZIz5gGKycHwdrdoOLB45vWe8idmrx0P2XxkfnZttTJL6vuTML9SWKfNhAIRFQzCeRpUftoDWpV8sP94eAnx0P2XxLATt8uw3zQ9HRpkL1r7Pqi7VQ8YoXCNx0P1XxZTdNx0P2XxTLp5wQ7HK67svb0tX0qNmUpngvmVPTep42n7xnIl38Ex0P2Xxb2ZApm1I3Qx0P2Xx5i9gfYLzJPqf2A65LxDnaEq5Y3FsgRIx0P1XxEPJO1ZZdm03MxnsAa1s6n019Y7plIzfndnmitqwqG3Z9ND3SC6i0TVx0P2Xxa0uDNE2yxbaW2GowcQ5I7U2Hn3pumNXpjXhcnIwSUFawgx0P3Xxx0P3Xx
