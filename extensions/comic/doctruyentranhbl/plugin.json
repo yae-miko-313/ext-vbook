@@ -1,0 +1,22 @@
+{
+    "metadata": {
+        "name": "Đọc Truyện Tranh BL",
+        "author": "QuocBao",
+        "version": 1,
+        "source": "https://doctruyentranhbl.com/",
+        "regexp": "https://doctruyentranhbl.com/truyen/[^/]+/?$",
+        "description": "Đọc truyện tranh BL tại doctruyentranhbl.com",
+        "locale": "vi_VN",
+        "language": "javascript",
+        "type": "comic",
+        "encrypt": true
+    },
+    "script": {
+        "home": "home.js",
+        "genre": "genre.js",
+        "detail": "detail.js",
+        "toc": "toc.js",
+        "chap": "chap.js",
+        "search": "search.js"
+    }
+}

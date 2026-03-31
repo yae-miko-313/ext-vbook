@@ -1,11 +1,7 @@
-let BASE_URL = "https://vozer.io";
-let BASE_UA = "ua";
+let BASE_URL = 'https://vozer.vn';
 try {
-	if (CONFIG_URL) {
-		BASE_URL = CONFIG_URL;
-	}
-
-	if (CONFIG_UA) {
-		BASE_UA = CONFIG_UA;
-	}
-} catch (error) {}
+    if (CONFIG_URL) {
+        BASE_URL = CONFIG_URL;
+    }
+} catch (error) {
+}

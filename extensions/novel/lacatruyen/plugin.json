@@ -1,0 +1,26 @@
+{
+    "metadata": {
+        "name": "La cà truyện",
+        "author": "QuocBao",
+        "version": 8,
+        "source": "https://lacatruyen.club",
+        "regexp": "lacatruyen.(club|store|online|com)/story/[^/]+/?$",
+        "description": "Đọc truyện trên La cà truyện. Đã thêm tham số chờ giữa 2 chap ít nhất 15s.)",
+        "language": "javascript",
+        "type": "novel",
+        "locale": "vi_VN",
+        "encrypt": true
+    },
+    "script": {
+        "home": "home.js",
+        "genre": "genre.js",
+        "detail": "detail.js",
+        "search": "search.js",
+        "toc": "toc.js",
+        "chap": "chap.js"
+    },
+    "config": {
+        "thread_num": 1,
+        "delay": 10000
+    }
+}

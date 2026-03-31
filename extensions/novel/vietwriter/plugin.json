@@ -1,20 +1,18 @@
 {
   "metadata": {
-    "name": "VietWriter Đọc đủ loại truyện trệ forum",
-    "author": "Rake & Gemini",
+    "name": "Việt Writer",
+    "author": "Nhocconsr",
     "version": 1,
-    "source": "https://vietwriter.one",
-    "regexp": "vietwriter\\\\.one/threads/",
-    "description": "Giao diện NovelFire chuẩn: 3 Tab Trang chủ, còn lại ném vào Menu.",
-    "type": "novel",
-    "locale": "vi_VN",
+    "source": "https://vietwriter.vn",
+    "regexp": "(www.)?vietwriter.vn/[A-Za-z].+/?",
+    "description": "Lỗi extension liên hệ email: phamgiavang@gmail.com",
     "language": "javascript",
-    "icon": "icon.png"
+    "type": "novel",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",
-    "genre": "gen.js",
-    "book": "book.js",
+    "genre": "genre.js",
     "detail": "detail.js",
     "toc": "toc.js",
     "chap": "chap.js"

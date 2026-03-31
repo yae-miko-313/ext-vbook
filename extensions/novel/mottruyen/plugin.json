@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "Mọt Truyện",
+    "author": "QuocBao",
+    "version": 1,
+    "source": "https://mottruyen.com.vn",
+    "regexp": "(www.)?mottruyen.(com.vn|vn)/.+?/\\d+(/chuong/\\d+)?",
+    "description": "Đọc truyện trên app Mọt Truyện",
+    "language": "javascript",
+    "type": "novel",
+    "locale": "vi_VN",
+    "encrypt": true
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}

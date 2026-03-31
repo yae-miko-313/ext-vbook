@@ -38,6 +38,17 @@
       "locale": "vi_VN"
     },
     {
+      "name": "[APP] Wikidich",
+      "author": "QuocBao",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/api/plugin.zip",
+      "version": 1,
+      "source": "https://api.truyenreview.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/api/icon.png",
+      "description": "Đọc truyện trên App Wiki Dịch",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "Bạch Ngọc Sách",
       "author": "vBook",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/bachngocsach/plugin.zip",
@@ -56,6 +67,28 @@
       "source": "https://blhvip.vn",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/banlong/icon.png",
       "description": "Đọc truyện trên banlong.us",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Bàn Long",
+      "author": "vBook",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/blhvip/plugin.zip",
+      "version": 7,
+      "source": "https://blhvip.vn",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/blhvip/icon.png",
+      "description": "Đọc truyện trên banlong.us",
+      "type": "novel",
+      "locale": "vi-VN"
+    },
+    {
+      "name": "【VIP】Bạch Ngọc Sách",
+      "author": "Nhocconsr",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/bnsvip/plugin.zip",
+      "version": 1,
+      "source": "https://bnsvip.net",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/bnsvip/icon.png",
+      "description": "New vesion! phamgiavang@gmail.com",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -192,6 +225,17 @@
       "locale": "vi_VN"
     },
     {
+      "name": "Hố Truyện",
+      "author": "Nhocconsr",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/hotruyen1/plugin.zip",
+      "version": 5,
+      "source": "https://hotruyen1.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/hotruyen1/icon.png",
+      "description": "Đọc truyện trên trang Hotruyen.com",
+      "type": "novel",
+      "locale": "vi-VN"
+    },
+    {
       "name": "iSach",
       "author": "vBook",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/isach/plugin.zip",
@@ -269,6 +313,28 @@
       "locale": "vi_VN"
     },
     {
+      "name": "Kỳ huyễn",
+      "author": "B",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kyhuyen/plugin.zip",
+      "version": 1,
+      "source": "https://kyhuyen.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kyhuyen/icon.png",
+      "description": "Đọc truyện trên trang Kỳ huyễn kyhuyen.com",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "La cà truyện",
+      "author": "QuocBao",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/lacatruyen/plugin.zip",
+      "version": 8,
+      "source": "https://lacatruyen.club",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/lacatruyen/icon.png",
+      "description": "Đọc truyện trên La cà truyện. Đã thêm tham số chờ giữa 2 chap ít nhất 15s.)",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "Legado - AI Dịch - Minh Đức Môn",
       "author": "Moleys",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/legado-minhducmon/plugin.zip",
@@ -324,6 +390,28 @@
       "locale": "vi_VN"
     },
     {
+      "name": "Luvevaland",
+      "author": "vBook",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/luvevaland/plugin.zip",
+      "version": 4,
+      "source": "https://luvevaland.co",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/luvevaland/icon.png",
+      "description": "Đọc truyện trên trang Luvevaland",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "soha",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/m/plugin.zip",
+      "version": 1,
+      "source": "https://m.soha.vn",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/m/icon.png",
+      "description": "Đọc soha",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "Mê Đọc Truyện Chữ",
       "author": "vBook",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/medoctruyenchu/plugin.zip",
@@ -335,13 +423,13 @@
       "locale": "vi_VN"
     },
     {
-      "name": "MeTruyenChu",
-      "author": "Meo",
+      "name": "Mê Truyện Chữ",
+      "author": "QuocBao",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/metruyenchu/plugin.zip",
-      "version": 3,
+      "version": 2,
       "source": "https://metruyenchu.com.vn",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/metruyenchu/icon.png",
-      "description": "MeTruyenChu - Đọc truyện chữ online miễn phí, không quảng cáo",
+      "description": "Đọc truyện chữ trên Mê Truyện Chữ",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -353,6 +441,17 @@
       "source": "https://metruyencv.xyz",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/metruyencv/icon.png",
       "description": "Đọc truyện trên trang Mê Truyện CV",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Minttea Novel",
+      "author": "QuocBao",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/mintteanovel/plugin.zip",
+      "version": 1,
+      "source": "https://mintteanovel.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/mintteanovel/icon.png",
+      "description": "Đọc truyện chữ trên Minttea Novel",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -375,6 +474,28 @@
       "source": "https://monkeyd.net.vn",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/monkeyd/icon.png",
       "description": "Đọc truyện MonkeyD",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "MonkeyD VN - repo duongden",
+      "author": "Nhocconsr",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/monkeydtruyen/plugin.zip",
+      "version": 9,
+      "source": "https://monkeydtruyen.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/monkeydtruyen/icon.png",
+      "description": "Đọc truyện MonkeyD",
+      "type": "novel",
+      "locale": "vi-VN"
+    },
+    {
+      "name": "Mọt Truyện",
+      "author": "QuocBao",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/mottruyen/plugin.zip",
+      "version": 1,
+      "source": "https://mottruyen.com.vn",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/mottruyen/icon.png",
+      "description": "Đọc truyện trên app Mọt Truyện",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -445,6 +566,39 @@
       "locale": "vi_VN"
     },
     {
+      "name": "nhieutruyen (qidian-vp)",
+      "author": "B",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/nhieutruyen/plugin.zip",
+      "version": 12,
+      "source": "https://nhieutruyen.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/nhieutruyen/icon.png",
+      "description": "Đọc truyện trên trang qidian-vp, nhieutruyen.com ",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Người Lao Động",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/nld/plugin.zip",
+      "version": 1,
+      "source": "https://nld.com.vn",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/nld/icon.png",
+      "description": "Người Lao Động",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Novel Next",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/novel-next/plugin.zip",
+      "version": 4,
+      "source": "https://novel-next.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/novel-next/icon.png",
+      "description": "Đọc truyện trên trang Novel Next",
+      "type": "novel",
+      "locale": "en-US"
+    },
+    {
       "name": "Novel Buddy",
       "author": "Nhocconsr",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/novelbuddy/plugin.zip",
@@ -457,12 +611,12 @@
     },
     {
       "name": "Novel Fire",
-      "author": "@R",
+      "author": "Vearn",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/NovelFire/plugin.zip",
-      "version": 60,
+      "version": 4,
       "source": "https://novelfire.net/",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/NovelFire/icon.png",
-      "description": "V60 Master: Kiến trúc đa module. Tối ưu Regex TOC, bóc tách API Sniffing cho Comments & Recommendations.",
+      "description": "Đọc truyện trên trang https://novelfire.net/",
       "type": "novel",
       "locale": "en_US"
     },
@@ -511,6 +665,28 @@
       "locale": "vi_VN"
     },
     {
+      "name": "Dịch truyện tự động từ Qidian",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/q/plugin.zip",
+      "version": 3,
+      "source": "https://q.kyhuyen.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/q/icon.png",
+      "description": "Read novel q.kyhuyen",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "LightNovel VN",
+      "author": "Nhocconsr",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/quykiep/plugin.zip",
+      "version": 5,
+      "source": "https://quykiep.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/quykiep/icon.png",
+      "description": "LightNovel En",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "Novel Fire",
       "author": "Vearn",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/readernovel/plugin.zip",
@@ -520,6 +696,17 @@
       "description": "Đọc truyện trên trang https://www.readernovel.net/",
       "type": "novel",
       "locale": "en_US"
+    },
+    {
+      "name": "LightNovel Reader",
+      "author": "vBook",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/readlightnovel/plugin.zip",
+      "version": 4,
+      "source": "https://readlightnovel.app",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/readlightnovel/icon.png",
+      "description": "Read novel",
+      "type": "novel",
+      "locale": "vi_VN"
     },
     {
       "name": "readwn",
@@ -575,6 +762,17 @@
       "description": "Đọc truyện trên trang Sàn Truyện",
       "type": "novel",
       "locale": "vi_VN"
+    },
+    {
+      "name": "Sinodan",
+      "author": "3690",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/sinodan/plugin.zip",
+      "version": 17,
+      "source": "https://www.sinodan.link/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/sinodan/icon.png",
+      "description": "Đọc truyện trên sinodan.link",
+      "type": "novel",
+      "locale": "zh_CN"
     },
     {
       "name": "Si Truyện CV",
@@ -643,17 +841,6 @@
       "locale": "vi_VN"
     },
     {
-      "name": "Syosetu",
-      "author": "Beast666",
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/syosetu/plugin.zip",
-      "version": 6,
-      "source": "https://yomou.syosetu.com",
-      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/syosetu/icon.png",
-      "description": "小説を読もう！",
-      "type": "novel",
-      "locale": "ja_JP"
-    },
-    {
       "name": "Tàng Thư Viện",
       "author": "vBook",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/tangthuvien/plugin.zip",
@@ -720,6 +907,28 @@
       "locale": "vi_VN"
     },
     {
+      "name": "Tinh Linh",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/tinhlinh/plugin.zip",
+      "version": 2,
+      "source": "https://tinhlinh.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/tinhlinh/icon.png",
+      "description": "Read novel https://tinhlinh.com",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Trang Truyện",
+      "author": "QuocBao",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/trangtruyen/plugin.zip",
+      "version": 4,
+      "source": "https://trangtruyen.site",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/trangtruyen/icon.png",
+      "description": "Đọc truyện trên Trang Truyện ~. App thường dùng mã bổ sung cookie hiện có (`let AUTH_COOKIE = '...';`); bản beta chỉ cần nhập `cookie` trong cấu hình. Fingerprint ext tự sinh, không cần nhập thêm.",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "Trùm Truyện",
       "author": "B",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/Tr%C3%B9m%20Truy%E1%BB%87n/plugin.zip",
@@ -727,6 +936,28 @@
       "source": "https://trumtruyen.live",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/Tr%C3%B9m%20Truy%E1%BB%87n/icon.png",
       "description": "Đọc truyện trên trang Truyện Full",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Trùm Truyện",
+      "author": "B",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/trumtruyen/plugin.zip",
+      "version": 5,
+      "source": "https://trumtruyen.live",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/trumtruyen/icon.png",
+      "description": "Đọc truyện trên trang Truyện Full",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Truyen Now",
+      "author": "mizhm",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyen/plugin.zip",
+      "version": 1,
+      "source": "https://truyen.now",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyen/icon.png",
+      "description": "Truyen.Free - Đọc truyện chữ online miễn phí, truyện tiên hiệp, kiếm hiệp, ngôn tình, đô thị được dịch nhanh chóng.",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -771,6 +1002,17 @@
       "source": "https://truyen.codetheoyeucau.online",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyencodetheoyeucau/icon.png",
       "description": "Đọc truyện từ truyen.codetheoyeucau.online",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Truyện Com",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyencom/plugin.zip",
+      "version": 2,
+      "source": "https://truyencom.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyencom/icon.png",
+      "description": "Đọc truyện trên Truyện Com",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -852,6 +1094,17 @@
       "locale": "vi_VN"
     },
     {
+      "name": "Truyện Đọc Việt",
+      "author": "HieuDM",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyendocviet1/plugin.zip",
+      "version": 3,
+      "source": "https://truyendocviet1.xyz/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyendocviet1/icon.png",
+      "description": "Extension đọc truyện từ trang Truyện Đọc Việt",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "truyenfree",
       "author": "mizhm",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenfree/plugin.zip",
@@ -894,6 +1147,17 @@
       "description": "Nếu mà site đổi domain thì thêm mã bổ sung let CONFIG_URL = 'tên miền mới'",
       "type": "novel",
       "locale": "vi_VN"
+    },
+    {
+      "name": "TruyenHayVN",
+      "author": "vBook",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenhay/plugin.zip",
+      "version": 3,
+      "source": "https://truyenhay.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenhay/icon.png",
+      "description": "Đọc truyện trên trang TruyenHayVN",
+      "type": "novel",
+      "locale": "vi-VN"
     },
     {
       "name": "TruyenHayVN",
@@ -973,6 +1237,28 @@
       "locale": "vi_VN"
     },
     {
+      "name": "Truyện mới org",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenmoiii/plugin.zip",
+      "version": 1,
+      "source": "https://truyenmoiii.org",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenmoiii/icon.png",
+      "description": "Đọc truyện trên trang truyenmoiii.org",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "TruyenMoiKK",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenmoikk/plugin.zip",
+      "version": 4,
+      "source": "https://truyenmoikk.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenmoikk/icon.png",
+      "description": "Fork từ ext TruyenMoi của HieuDM, fix lỗi title detail và search",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "Truyện Net",
       "author": "vBook",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyennet/plugin.zip",
@@ -1002,6 +1288,17 @@
       "source": "https://truyen.now",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyennow/icon.png",
       "description": "Truyen.Free - Đọc truyện chữ online miễn phí, truyện tiên hiệp, kiếm hiệp, ngôn tình, đô thị được dịch nhanh chóng.",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Truyện sexTV",
+      "author": "3690",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyensextv99/plugin.zip",
+      "version": 4,
+      "source": "https://truyensextv99.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyensextv99/icon.png",
+      "description": "đọc truyện sex",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -1061,6 +1358,17 @@
       "locale": "vi_VN"
     },
     {
+      "name": "truyenheo",
+      "author": "B",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenxxx/plugin.zip",
+      "version": 19,
+      "source": "https://truyenxxx.net",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenxxx/icon.png",
+      "description": "Đọc truyện trên trang https://truyenxxx.net tác giả là hajljnopera mà xóa rồi, dat-bi sửa",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "Truyện YY",
       "author": "vBook",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenyy/plugin.zip",
@@ -1078,6 +1386,17 @@
       "version": 2,
       "source": "https://tuchangioi.net/",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/Tu%20Ch%C3%A2n%20Gi%E1%BB%9Bi/icon.png",
+      "description": "Đọc truyện trên trang tienhiep.net",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Tu Chân Giới",
+      "author": "B",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/tuchangioi/plugin.zip",
+      "version": 2,
+      "source": "https://tuchangioi.net/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/tuchangioi/icon.png",
       "description": "Đọc truyện trên trang tienhiep.net",
       "type": "novel",
       "locale": "vi_VN"
@@ -1105,6 +1424,17 @@
       "locale": "vi_VN"
     },
     {
+      "name": "TVTruyen",
+      "author": "longvuu",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/tvtruyen/plugin.zip",
+      "version": 29,
+      "source": "https://www.tvtruyen.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/tvtruyen/icon.png",
+      "description": "TVTruyen - Truyện tranh, truyện chữ miễn phí",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "TYT Novel",
       "author": "laofun",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/tytnovel/plugin.zip",
@@ -1115,7 +1445,28 @@
       "type": "novel",
       "locale": "vi_VN"
     },
-    
+    {
+      "name": "Template Novel",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/vbook-ext-template/plugin.zip",
+      "version": 1,
+      "source": "https://example.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/vbook-ext-template/icon.png",
+      "description": "Starter template for a personal VBook novel extension",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Viblo",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/viblo/plugin.zip",
+      "version": 2,
+      "source": "https://viblo.asia",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/viblo/icon.png",
+      "description": "Đọc viblo trên vbook",
+      "type": "novel",
+      "locale": "vi-VN"
+    },
     {
       "name": "vietnamnet",
       "author": "Đường đen",
@@ -1128,13 +1479,13 @@
       "locale": "vi_VN"
     },
     {
-      "name": "VietWriter Đọc đủ loại truyện trệ forum",
-      "author": "Rake & Gemini",
+      "name": "Việt Writer",
+      "author": "Nhocconsr",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/vietwriter/plugin.zip",
       "version": 1,
-      "source": "https://vietwriter.one",
+      "source": "https://vietwriter.vn",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/vietwriter/icon.png",
-      "description": "Giao diện NovelFire chuẩn: 3 Tab Trang chủ, còn lại ném vào Menu.",
+      "description": "Lỗi extension liên hệ email: phamgiavang@gmail.com",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -1195,12 +1546,12 @@
     },
     {
       "name": "Vozer",
-      "author": "mizhm",
+      "author": "Nhocconsr",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/vozer/plugin.zip",
-      "version": 4,
-      "source": "https://vozer.io",
+      "version": 5,
+      "source": "https://vozer.vn",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/vozer/icon.png",
-      "description": "Vozer là web đọc truyện online miễn phí với với tổng hợp đầy đủ chuyện trên trời dưới đất, nhưng nổi bật nhất vẫn là là Truyện Voz. Nơi đây sản sinh ra những tác giả có những cuốn tự truyện có thể nói là huyền thoại một thời. Vozer có nhiều truyện mới nhất từ các tác giả với tất cả thể loại như Tâm linh, Tình yêu, Truyện ma,...",
+      "description": "Truyện voz",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -1271,6 +1622,17 @@
       "locale": "vi_VN"
     },
     {
+      "name": "WikiCV",
+      "author": "Alex",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/wikicv/plugin.zip",
+      "version": 1,
+      "source": "https://wikicv.net",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/wikicv/icon.png",
+      "description": "WikiCV",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "Wiki Dịch",
       "author": "vBook",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/wikidich/plugin.zip",
@@ -1311,6 +1673,17 @@
       "source": "https://xtruyen.vn",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/Xtruyen/icon.png",
       "description": "Đọc truyện trên trang https://xtruyen.vn",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Yêu truyện",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/yeutruyen/plugin.zip",
+      "version": 1,
+      "source": "https://yeutruyen.online",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/yeutruyen/icon.png",
+      "description": "Đọc truyện trên trang yeutruyen",
       "type": "novel",
       "locale": "vi_VN"
     },

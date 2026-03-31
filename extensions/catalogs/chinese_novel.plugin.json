@@ -16,6 +16,17 @@
       "locale": "zh_CN"
     },
     {
+      "name": "123ds",
+      "author": "B",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/123duw/plugin.zip",
+      "version": 3,
+      "source": "https://www.123duw.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/123duw/icon.png",
+      "description": "Đọc truyện trên trang https://www.123duw.com",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
       "name": "17k",
       "author": "hajljnopera",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/17k/plugin.zip",
@@ -181,6 +192,17 @@
       "locale": "zh_CN"
     },
     {
+      "name": "69hsz",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/69hsz/plugin.zip",
+      "version": 5,
+      "source": "https://www.69hsw.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/69hsz/icon.png",
+      "description": "Đọc sách trên trang 69hsz",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
       "name": "69shuba",
       "author": "TuanHai03",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/69shu/plugin.zip",
@@ -188,6 +210,17 @@
       "source": "https://www.69shu.biz",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/69shu/icon.png",
       "description": "Đọc truyện trên trang 69shuba.com, 69yuedu.net",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "69shuba",
+      "author": "longvuu",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/69shuba/plugin.zip",
+      "version": 3,
+      "source": "https://www.69shuba.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/69shuba/icon.png",
+      "description": "https://www.69shuba.com/ trang truyện tiếng Trung",
       "type": "chinese_novel",
       "locale": "zh_CN"
     },
@@ -236,6 +269,28 @@
       "locale": "zh_CN"
     },
     {
+      "name": "笔趣阁-07br",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/a26b53/plugin.zip",
+      "version": 4,
+      "source": "https://www.bqg992.xyz/#/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/a26b53/icon.png",
+      "description": "Đọc truyện trên trang bqg992",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "笔趣阁-abcbiquge",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/abcbiquge/plugin.zip",
+      "version": 1,
+      "source": "http://www.abcbiquge.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/abcbiquge/icon.png",
+      "description": "Đọc truyện trên trang abcbiquge",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
       "name": "aixdzs",
       "author": "Moleys",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/aixdzs/plugin.zip",
@@ -243,6 +298,39 @@
       "source": "http://m.aixdzs.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/aixdzs/icon.png",
       "description": "Đọc truyện trên trang http://m.aixdzs.com",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "alicesw",
+      "author": "3690",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/alicesw/plugin.zip",
+      "version": 46,
+      "source": "https://www.alicesw.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/alicesw/icon.png",
+      "description": "Đọc truyện trên alicesw.com",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "bFaloo (飞卢小说)",
+      "author": "Nhocconsr",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/b/plugin.zip",
+      "version": 5,
+      "source": "https://b.faloo.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/b/icon.png",
+      "description": "Nếu có lỗi bạn có thể liên hệ tới Email: phamgiavang@gmail.com",
+      "type": "chinese_novel",
+      "locale": "zh-CN"
+    },
+    {
+      "name": "笔趣阁-b520",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/b520/plugin.zip",
+      "version": 3,
+      "source": "http://www.b520.cc",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/b520/icon.png",
+      "description": "Đọc truyện trên trang http://www.b520.cc",
       "type": "chinese_novel",
       "locale": "zh_CN"
     },
@@ -304,11 +392,33 @@
     {
       "name": "Book QQ [阅读]",
       "author": "Nhocconsr",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/book/plugin.zip",
+      "version": 1,
+      "source": "https://book.qq.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/book/icon.png",
+      "description": "Book QQ",
+      "type": "chinese_novel",
+      "locale": "zh-CN"
+    },
+    {
+      "name": "Book QQ [阅读]",
+      "author": "Nhocconsr",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/bookqq/plugin.zip",
       "version": 1,
       "source": "https://book.qq.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/bookqq/icon.png",
       "description": "Book QQ",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "html5.qq.com",
+      "author": "Moleys",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/bookshelf/plugin.zip",
+      "version": 8,
+      "source": "https://bookshelf.html5.qq.com/qbread/categorylist?traceid=0809004&sceneid=FeedsTab&strageid=&ch=001995&tabfrom=top&feeds_version=8516&reader_version=0&groupid=1502&tag_type_id=1%27",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/bookshelf/icon.png",
+      "description": "Đọc truyện trên trang https://bookshelf.html5.qq.com",
       "type": "chinese_novel",
       "locale": "zh_CN"
     },
@@ -357,6 +467,28 @@
       "locale": "zh_CN"
     },
     {
+      "name": "Cool18 Novel",
+      "author": "hieu05",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/cool18/plugin.zip",
+      "version": 1,
+      "source": "https://www.cool18.com/bbs4/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/cool18/icon.png",
+      "description": "Đọc truyện trên trang Cool18",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "Elysia",
+      "author": "Moleys",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/cwm/plugin.zip",
+      "version": 8,
+      "source": "https://mnz.nhimmeo.cf",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/cwm/icon.png",
+      "description": "Support by Nhocconsr",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
       "name": "czbooks",
       "author": "hajljnopera",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/czbooks/plugin.zip",
@@ -379,12 +511,34 @@
       "locale": "zh_CN"
     },
     {
+      "name": "得奇小说网 - deqixs",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/deqixs/plugin.zip",
+      "version": 2,
+      "source": "https://www.deqixs.co",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/deqixs/icon.png",
+      "description": "Đọc truyện trên trang deqixs",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
       "name": "Dingdian 【顶点】",
       "author": "Nhocconsr",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/dingdian/plugin.zip",
       "version": 1,
       "source": "https://www.dingdian666.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/dingdian/icon.png",
+      "description": "Nếu lỗi báo cáo email : phamgiavang@gmail.com hoặc discord.Extention này cover méo có đâu nên đừng bảo lỗi nhé :)",
+      "type": "chinese_novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Dingdian 【顶点】",
+      "author": "Nhocconsr",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/dingdian666/plugin.zip",
+      "version": 1,
+      "source": "https://www.dingdian666.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/dingdian666/icon.png",
       "description": "Nếu lỗi báo cáo email : phamgiavang@gmail.com hoặc discord.Extention này cover méo có đâu nên đừng bảo lỗi nhé :)",
       "type": "chinese_novel",
       "locale": "vi_VN"
@@ -397,6 +551,28 @@
       "source": "https://www.dizishu.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/dizishu/icon.png",
       "description": "Đọc truyện trên trang dizishu.com",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "drxsw",
+      "author": "3690",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/drxsw/plugin.zip",
+      "version": 5,
+      "source": "https://www.drxsw.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/drxsw/icon.png",
+      "description": "Đọc truyện trên drxsw.com",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "ebookbao",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/ebookbao6/plugin.zip",
+      "version": 4,
+      "source": "https://m.ebookbao6.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/ebookbao6/icon.png",
+      "description": "Có thể sửa domain bằng mã bổ sung. Đọc truyện trên trang https://m.ebookbao6.com/",
       "type": "chinese_novel",
       "locale": "zh_CN"
     },
@@ -621,6 +797,17 @@
       "locale": "zh_CN"
     },
     {
+      "name": "Jjwxc-repo duongden💰✅",
+      "author": "Moleys",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/jjwxc/plugin.zip",
+      "version": 54,
+      "source": "http://www.jjwxc.net",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/jjwxc/icon.png",
+      "description": "Đọc truyện trên trang Tấn Giang - Đọc chương VIP bằng cách nhập token trong Mã bổ sung",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
       "name": "jpxs123",
       "author": "Moleys",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/jpxs123/plugin.zip",
@@ -683,6 +870,17 @@
       "source": "https://www.lanrenyuhai.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/lanrenyuhai/icon.png",
       "description": "Nếu lỗi báo cáo email : phamgiavang@gmail.com hoặc discord",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "Legado",
+      "author": "Moleys",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/legado/plugin.zip",
+      "version": 12,
+      "source": "https://github.com/gedoor/legado",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/legado/icon.png",
+      "description": "Đọc truyện qua app Legado, chi tiết vui lòng xem hướng dẫn trong Thảo luận",
       "type": "chinese_novel",
       "locale": "zh_CN"
     },
@@ -797,6 +995,17 @@
       "locale": "zh_CN"
     },
     {
+      "name": "mengyuanshucheng",
+      "author": "Moleys",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/mengyuanshuchengcn/plugin.zip",
+      "version": 3,
+      "source": "https://www.mengyuanshuchengcn.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/mengyuanshuchengcn/icon.png",
+      "description": "Đọc truyện trên trang https://www.mengyuanshuchengcn.com/",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
       "name": "mibiquge",
       "author": "vBook",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/mibiquge/plugin.zip",
@@ -852,6 +1061,17 @@
       "locale": "zh_CN"
     },
     {
+      "name": "piaotian-app",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/piaotian/plugin.zip",
+      "version": 1,
+      "source": "https://www.piaotian.app",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/piaotian/icon.png",
+      "description": "Đọc sách trên trang piaotian.app",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
       "name": "piaotian5",
       "author": "hajljnopera",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/piaotian5/plugin.zip",
@@ -892,6 +1112,17 @@
       "source": "http://www.plhydp.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/plhydp/icon.png",
       "description": "Đọc truyện trên trang biququ.com",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "po18",
+      "author": "Moleys",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/po18/plugin.zip",
+      "version": 1,
+      "source": "https://www.po18.tw",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/po18/icon.png",
+      "description": "Đọc truyện trên trang www.po18.tw",
       "type": "chinese_novel",
       "locale": "zh_CN"
     },
@@ -1061,6 +1292,17 @@
       "locale": "zh_CN"
     },
     {
+      "name": "5in1",
+      "author": "B",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/sangtacviet/plugin.zip",
+      "version": 70,
+      "source": "http://14.225.254.182",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/sangtacviet/icon.png",
+      "description": "(5 trong 1) hỗ trợ đọc các web qidian(chương free), 69shu, ptwxz, qimao, fanqie (lên sangtacviet chỉ để lấy thông tin truyện với đọc bình luận cho tiện thôi)",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
       "name": "Sáng Tác Việt",
       "author": "TuanHai03",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/Sangt%CC%80acviet/plugin.zip",
@@ -1160,6 +1402,28 @@
       "locale": "zh_CN"
     },
     {
+      "name": "shumilou",
+      "author": "Moleys",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/shumilouxs/plugin.zip",
+      "version": 3,
+      "source": "http://www.shumilouxs.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/shumilouxs/icon.png",
+      "description": "Đọc truyện trên trang http://www.shumilouxs.com",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "shuqi.com",
+      "author": "longvuu",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/shuqi/plugin.zip",
+      "version": 1,
+      "source": "https://shuqi.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/shuqi/icon.png",
+      "description": "trang web đọc truyện chữ online.",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
       "name": "Shuquge",
       "author": "Nhocconsr",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/shuquge/plugin.zip",
@@ -1182,6 +1446,17 @@
       "locale": "zh_CN"
     },
     {
+      "name": "qubook",
+      "author": "B",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/sj/plugin.zip",
+      "version": 2,
+      "source": "https://sj.qubook.cc/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/sj/icon.png",
+      "description": "Đọc truyện trên trang qubook.cc",
+      "type": "chinese_novel",
+      "locale": "zh-CN"
+    },
+    {
       "name": "sjks88",
       "author": "Moleys",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/sjks88/plugin.zip",
@@ -1189,6 +1464,28 @@
       "source": "http://www.sjks88.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/sjks88/icon.png",
       "description": "Đọc truyện trên trang http://www.sjks88.com",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "soxscc",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/soxscc/plugin.zip",
+      "version": 1,
+      "source": "https://www.soxscc.net",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/soxscc/icon.png",
+      "description": "soxscc.net - search bằng browser",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "速读谷 - Sudugu",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/sudugu/plugin.zip",
+      "version": 4,
+      "source": "https://www.sudugu.org",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/sudugu/icon.png",
+      "description": "Đọc truyện trên trang sudugu",
       "type": "chinese_novel",
       "locale": "zh_CN"
     },
@@ -1283,6 +1580,17 @@
     {
       "name": "tushumi.cc",
       "author": "QuocBao",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/tushumi/plugin.zip",
+      "version": 1,
+      "source": "https://www.tushumi.cc/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/tushumi/icon.png",
+      "description": "Đọc truyện ở tushumi.cc",
+      "type": "chinese_novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "tushumi.cc",
+      "author": "QuocBao",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/tushumi.cc/plugin.zip",
       "version": 1,
       "source": "https://www.tushumi.cc/",
@@ -1349,6 +1657,17 @@
     {
       "name": "uuksorg",
       "author": "Moleys",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/uuks/plugin.zip",
+      "version": 1,
+      "source": "https://www.uuks.org",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/uuks/icon.png",
+      "description": "Đọc truyện trên trang https://www.uuks.org",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "uuksorg",
+      "author": "Moleys",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/uuksorg/plugin.zip",
       "version": 1,
       "source": "https://www.uuks.org",
@@ -1380,6 +1699,28 @@
       "locale": "zh_CN"
     },
     {
+      "name": "wfxs.tw",
+      "author": "longvuu",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/wfxs/plugin.zip",
+      "version": 4,
+      "source": "https://www.wfxs.tw/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/wfxs/icon.png",
+      "description": "trang web đọc truyện chữ online.",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "x33xs4",
+      "author": "Đường đen",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/x33xs6/plugin.zip",
+      "version": 2,
+      "source": "https://www.x33xs6.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/x33xs6/icon.png",
+      "description": "Đọc truyện trên trang x33xs6.com",
+      "type": "chinese_novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "Xbanxia",
       "author": "bexom",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/xbanxia/plugin.zip",
@@ -1400,6 +1741,17 @@
       "description": "Đọc truyện trên trang https://www.xbiquge.so",
       "type": "chinese_novel",
       "locale": "vi_VN"
+    },
+    {
+      "name": "Xianqihaotiami APP",
+      "author": "QuocBao",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/xianqihaotianmi/plugin.zip",
+      "version": 2,
+      "source": "http://www.xianqihaotianmi.org/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/xianqihaotianmi/icon.png",
+      "description": "Đọc truyện trên App xianqihaotiami",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
     },
     {
       "name": "xinyushuwu",
@@ -1497,6 +1849,17 @@
       "source": "https://www.yyun.net",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/Yyun/icon.png",
       "description": "Đọc truyện trên trang https://www.yyun.net đổi thành https://www.yanyunxs.com/",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "zhaoshuyuan",
+      "author": "vBook",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/zhaoshuyuan/plugin.zip",
+      "version": 9,
+      "source": "https://www.zhaoshuyuan.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/zhaoshuyuan/icon.png",
+      "description": "Đọc truyện trên trang uukanshu.net",
       "type": "chinese_novel",
       "locale": "zh_CN"
     },
