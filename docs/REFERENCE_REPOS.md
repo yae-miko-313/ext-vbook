@@ -30,6 +30,12 @@ Dùng khi cần tham khảo pattern lập trình extension cho site type cụ th
 | springpeachvinh-vbook-ext | Cộng đồng chia sẻ / General Novel | springpeachvinh/vbook-ext |
 | tamchau-vbook-extensions | Cộng đồng chia sẻ / General Novel | tamchau/vbook-extensions |
 | tuanhai03-vbook-extensions | Cộng đồng chia sẻ / General Novel | tuanhai03/vbook-extensions |
+| **SoulGodEve9x9-vbook-ext** | Nahona extensions / Comic, Novel, Chinese Novel | [SoulGodEve9x9](https://github.com/SoulGodEve9x9/Vbook-ext/tree/Nahona) |
+| **hieunm3103-vbook-extension** | Cosplay, Photo galleries / Comic, Novel, Chinese Novel | [hieunm3103](https://gitlab.com/hieunm3103/vbook-extension) |
+| **longvuu-ext** | Chinese novels, General Novel / Novel, Comic, Chinese Novel | [longvuu](https://github.com/longvuu/ext) |
+| **gh369-639-vbook-ext-public** | 3690 extensions / Translate, Novel, Comic, Chinese Novel | [gh369-639](https://github.com/gh369-639/vbook-ext-public) |
+| **kur21-vbook-ext** | Kou extensions / Comic (NSFW) | [kur21](https://github.com/kur21/vbook-ext) |
+| **Gold2k2k2k-HTri-Vbook-Ext** | Hữu Trí extensions / Novel | [Gold2k2k2k](https://github.com/Gold2k2k2k/HTri-Vbook-Ext) |
 
 ## Rules khi dùng references
 - **Verify lại với live site** (HTML/XHR): Structure DOM của target server được update hàng tháng, do đó selector trong các repositories này có khả năng lỗi thời. Regex và Selectors cần review trước.
