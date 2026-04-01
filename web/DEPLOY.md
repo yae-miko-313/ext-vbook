@@ -1,48 +1,34 @@
-# VBook Extension Catalog - GitHub Pages Deploy
+﻿# Deploy Web Catalog (GitHub Pages)
 
-## Current Deploy Flow
+## Pipeline
 
-Project đã dùng workflow sẵn: `.github/workflows/deploy-pages.yml`.
+Workflow deploy: `.github/workflows/deploy-pages.yml`
 
-Trigger deploy khi push thay đổi trong `web/**` lên `main`.
+Trigger khi push thay đổi trong `web/**`.
 
-## Quick Deploy (Current)
+## Trước khi push
 
 ```bash
-# 1) Sync catalog data
-npx vbook build-catalog
-Copy-Item extensions/plugin.json web/catalog.json -Force
+npm run full-sync
+npm run sync:web-catalog
+```
 
-# 2) Commit web/docs changes
+Sau đó commit/push:
+
+```bash
 git add web/ README.md docs/
-git commit -m "chore: sync web catalog and docs"
-
-# 3) Push main
+git commit -m "chore: sync catalog and docs"
 git push origin main
 ```
 
-## What Happens In CI
-
-- Workflow upload toàn bộ thư mục `web/` thành Pages artifact
-- GitHub Pages deploy tự động từ artifact này
-- Không cần tạo/force-push `gh-pages` thủ công
-
-## Manual Preview (Local)
+## Local Preview
 
 ```bash
 python -m http.server 8000 --directory web
 ```
 
-Mở `http://localhost:8000`
+## Contributing
 
-## Site URL
+Xem hướng dẫn chung:
 
-Sau khi bật GitHub Pages:
-- `https://USERNAME.github.io/vbook-ext/`
-
-## Features
-
-- Glass morphism UI + dark/light toggle
-- Search/filter/sort/copy quick-link
-- Responsive layout cho desktop/mobile
-- Zero dependency frontend (vanilla HTML/CSS/JS)
+- `../docs/CONTRIBUTING.md`
