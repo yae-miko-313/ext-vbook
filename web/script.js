@@ -1,35 +1,17 @@
-// Global state
-let currentSort = 'name';
-let currentTypeFilter = '';
 let currentSearch = '';
-let rawBaseUrl = '';
-
-function detectRawBaseUrl() {
-    const host = window.location.hostname;
-    const pathParts = window.location.pathname.split('/').filter(Boolean);
-    if (host.endsWith('github.io')) {
-        const owner = host.split('.')[0];
-        const repo = pathParts[0] || 'vbook-ext';
-        return `https://raw.githubusercontent.com/${owner}/${repo}/main`;
-    }
-    return 'https://raw.githubusercontent.com/kychitoge/vbook-ext/main';
-}
-
-function normalizeRawBaseUrl(value) {
-    return (value || '').trim().replace(/\/$/, '');
-}
-
-function buildRawLink(path) {
-    return `${normalizeRawBaseUrl(rawBaseUrl)}/${path}`;
-}
+let currentViewMode = 'extension';
+let viewModeBound = false;
 
 async function copyToClipboard(text) {
+    if (!text) {
+        throw new Error('Nothing to copy');
+    }
+
     if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
         return;
     }
 
-    // Fallback for non-secure contexts or browsers that block clipboard API.
     const textArea = document.createElement('textarea');
     textArea.value = text;
     textArea.setAttribute('readonly', '');
@@ -51,147 +33,73 @@ function showToast(message) {
     if (!toast) {
         return;
     }
+
     toast.textContent = message;
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 1800);
 }
 
-function setupQuickLinkActions() {
-    const copyQuickLinkBtn = document.getElementById('copy-quick-link');
-    const unifiedSelect = document.getElementById('type-unified-select');
-
-    if (!copyQuickLinkBtn || !unifiedSelect) {
-        return;
-    }
-
-    rawBaseUrl = normalizeRawBaseUrl(detectRawBaseUrl());
-
-    unifiedSelect.addEventListener('change', () => {
-        const value = unifiedSelect.value;
-        currentTypeFilter = value === 'all' ? '' : value;
-        renderGrid();
-    });
-
-
-    copyQuickLinkBtn.addEventListener('click', async () => {
-        const type = unifiedSelect.value;
-        const link = type === 'all'
-            ? buildRawLink('extensions/catalogs/all.plugin.json')
-            : buildRawLink(`extensions/catalogs/${type}.plugin.json`);
-
-        try {
-            await copyToClipboard(link);
-            showToast(type === 'all'
-                ? 'Đã sao chép link tổng all.plugin.json'
-                : `Đã sao chép link plugin.json của nhóm ${type}`);
-        } catch (error) {
-            showToast('Không thể sao chép. Hãy thử lại hoặc copy thủ công.');
-        }
-    });
-
-    document.addEventListener('click', async (event) => {
-        const button = event.target.closest('.ext-copy-btn');
-        if (!button) {
-            return;
-        }
-
-        const pluginPath = button.getAttribute('data-plugin-path');
-        if (!pluginPath) {
-            return;
-        }
-
-        const link = buildRawLink(pluginPath);
-        try {
-            await copyToClipboard(link);
-            showToast('Đã sao chép link plugin.json của extension');
-        } catch (error) {
-            showToast('Không thể sao chép. Hãy thử lại hoặc copy thủ công.');
-        }
-    });
-}
-
-function setupBackToTopButton() {
-    const button = document.getElementById('back-to-top');
-    if (!button) {
-        return;
-    }
-
-    const toggleVisibility = () => {
-        if (window.scrollY > 180) {
-            button.classList.add('show');
-        } else {
-            button.classList.remove('show');
-        }
-    };
-
-    window.addEventListener('scroll', toggleVisibility, { passive: true });
-    button.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    toggleVisibility();
-}
-
-function getAllExtensions() {
-    const all = [];
-    Object.keys(extensionCatalog).forEach((type) => {
-        extensionCatalog[type].forEach((ext) => {
-            all.push({ ...ext, type });
-        });
-    });
-    return all;
+function escapeHtml(value) {
+    return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 }
 
 function getDescription(ext) {
     return (ext && (ext.description || (ext.metadata && ext.metadata.description))) || '';
 }
 
+function getAllExtensions() {
+    return Array.isArray(window.catalogExtensions) ? window.catalogExtensions.slice() : [];
+}
+
 function filterExtensions() {
     let all = getAllExtensions();
-
-    if (currentTypeFilter) {
-        all = all.filter((ext) => ext.type === currentTypeFilter);
-    }
 
     if (currentSearch) {
         const search = currentSearch.toLowerCase();
         all = all.filter((ext) =>
             (ext.name || '').toLowerCase().includes(search) ||
             (ext.author || '').toLowerCase().includes(search) ||
+            (ext.source || '').toLowerCase().includes(search) ||
             getDescription(ext).toLowerCase().includes(search)
         );
     }
 
-    switch (currentSort) {
-        case 'name':
-            all.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'vi'));
-            break;
-        case 'version':
-            all.sort((a, b) => (b.version || 0) - (a.version || 0));
-            break;
-        case 'author':
-            all.sort((a, b) => (a.author || '').localeCompare(b.author || '', 'vi'));
-            break;
-        default:
-            break;
-    }
-
+    all.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'vi'));
     return all;
 }
 
-function renderStats() {
-    const all = getAllExtensions();
+function filterSources() {
+    let sources = Array.isArray(window.catalogSources) ? window.catalogSources.slice() : [];
 
-    document.getElementById('total-extensions').textContent = all.length;
-    document.getElementById('novel-count').textContent = extensionCatalog.novel.length;
-    document.getElementById('comic-count').textContent = extensionCatalog.comic.length;
-    document.getElementById('chinese-count').textContent = extensionCatalog.chinese_novel.length;
+    if (!currentSearch) {
+        return sources;
+    }
 
-    const otherCount =
-        (extensionCatalog.translate?.length || 0) +
-        (extensionCatalog.tts?.length || 0) +
-        (extensionCatalog._unknown?.length || 0);
-    document.getElementById('other-count').textContent = otherCount;
+    const search = currentSearch.toLowerCase();
+    return sources.filter((source) => {
+        if ((source.displayName || '').toLowerCase().includes(search)) {
+            return true;
+        }
+
+        if ((source.url || '').toLowerCase().includes(search)) {
+            return true;
+        }
+
+        const extItems = Array.isArray(source.extItems) ? source.extItems : [];
+        return extItems.some((ext) =>
+            (ext.name || '').toLowerCase().includes(search) ||
+            (ext.source || '').toLowerCase().includes(search)
+        );
+    });
+}
+
+function getAuthorDisplayName(author) {
+    return normalizeAuthorName(author || '');
 }
 
 function formatCatalogUpdatedAt(isoString) {
@@ -231,13 +139,468 @@ function renderCatalogUpdatedTime() {
     element.textContent = `Cập nhật: ${updatedLabel}${suffix}`;
 }
 
-function escapeHtml(value) {
-    return String(value || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+function renderStats() {
+    const all = getAllExtensions();
+
+    document.getElementById('total-extensions').textContent = all.length;
+    document.getElementById('novel-count').textContent = extensionCatalog.novel.length;
+    document.getElementById('comic-count').textContent = extensionCatalog.comic.length;
+    document.getElementById('chinese-count').textContent = extensionCatalog.chinese_novel.length;
+
+    const otherCount =
+        (extensionCatalog.translate && extensionCatalog.translate.length ? extensionCatalog.translate.length : 0) +
+        (extensionCatalog.tts && extensionCatalog.tts.length ? extensionCatalog.tts.length : 0) +
+        (extensionCatalog._unknown && extensionCatalog._unknown.length ? extensionCatalog._unknown.length : 0);
+
+    document.getElementById('other-count').textContent = otherCount;
+}
+
+function renderSourceRepoCount() {
+    const info = document.getElementById('source-repo-count');
+    if (!info) {
+        return;
+    }
+
+    const repoTotal = Array.isArray(window.catalogSources) ? window.catalogSources.length : 0;
+    info.textContent = `Repo nguồn: ${repoTotal}`;
+}
+
+function renderAggregateButton() {
+    const button = document.getElementById('copy-aggregate-btn');
+    if (!button) {
+        return;
+    }
+
+    const copyUrl = window.catalogMeta && window.catalogMeta.aggregateCopyUrl ? window.catalogMeta.aggregateCopyUrl : '';
+    button.disabled = !copyUrl;
+    button.setAttribute('data-copy-url', copyUrl);
+}
+
+function toRepoBrowseUrl(rawUrl) {
+    try {
+        const parsed = new URL(rawUrl);
+        const parts = parsed.pathname.split('/').filter(Boolean);
+
+        if (parsed.hostname.includes('raw.githubusercontent.com') && parts.length >= 4) {
+            const owner = parts[0];
+            const repo = parts[1];
+            const branch = parts[3];
+            const path = parts.slice(4).join('/');
+            return `https://github.com/${owner}/${repo}/blob/${branch}/${path}`;
+        }
+
+        if (parsed.hostname.includes('gitlab.com') && parts.length >= 4 && parts[2] === '-' && parts[3] === 'raw') {
+            const group = parts[0];
+            const project = parts[1];
+            const branch = parts[4] || 'main';
+            const path = parts.slice(5).join('/');
+            return `https://gitlab.com/${group}/${project}/-/blob/${branch}/${path}`;
+        }
+    } catch (_error) {
+        return rawUrl;
+    }
+
+    return rawUrl;
+}
+
+function avatarFromRawUrl(rawUrl) {
+    try {
+        const parsed = new URL(rawUrl);
+        const parts = parsed.pathname.split('/').filter(Boolean);
+        if (parsed.hostname.includes('raw.githubusercontent.com') && parts.length >= 1) {
+            return `https://github.com/${parts[0]}.png?size=80`;
+        }
+        if (parsed.hostname.includes('gitlab.com') && parts.length >= 1) {
+            return `https://ui-avatars.com/api/?name=${encodeURIComponent(parts[0])}&background=f1f1f1&color=333333`;
+        }
+    } catch (_error) {
+        return 'https://ui-avatars.com/api/?name=repo&background=f1f1f1&color=333333';
+    }
+    return 'https://ui-avatars.com/api/?name=repo&background=f1f1f1&color=333333';
+}
+
+function renderContributeSection() {
+    const repoListEl = document.getElementById('repo-list');
+    const countEl = document.getElementById('contribute-source-count');
+    const referenceListLinkEl = document.getElementById('reference-list-link');
+    if (!repoListEl || !countEl) {
+        return;
+    }
+
+    const sources = Array.isArray(window.catalogSources) ? window.catalogSources : [];
+    countEl.textContent = `${sources.length} nguồn`;
+
+    repoListEl.innerHTML = sources
+        .map((source) => {
+            const browseUrl = toRepoBrowseUrl(source.url || '');
+            const avatarUrl = avatarFromRawUrl(source.url || '');
+            const label = source.displayName || source.id || source.url || 'unknown-source';
+            return `<a class="repo-chip" href="${escapeHtml(browseUrl)}" target="_blank"><img class="repo-avatar" src="${escapeHtml(avatarUrl)}" alt="${escapeHtml(label)} avatar"><span class="repo-chip-label" title="${escapeHtml(label)}">${escapeHtml(label)}</span></a>`;
+        })
+        .join('');
+
+    if (!sources.length) {
+        repoListEl.innerHTML = '<p class="authors-empty">Chưa có nguồn tham chiếu.</p>';
+    }
+
+    if (referenceListLinkEl) {
+        const referenceListUrl = window.catalogMeta && window.catalogMeta.referenceListUrl
+            ? window.catalogMeta.referenceListUrl
+            : '';
+        if (referenceListUrl) {
+            referenceListLinkEl.href = referenceListUrl;
+            referenceListLinkEl.style.display = 'inline-flex';
+        } else {
+            referenceListLinkEl.style.display = 'none';
+        }
+    }
+}
+
+function renderCard(ext) {
+    const typeLabels = {
+        novel: 'TRUYỆN CHỮ',
+        comic: 'TRUYỆN TRANH',
+        chinese_novel: 'TRUYỆN TRUNG',
+        translate: 'DỊCH',
+        tts: 'TTS',
+        _unknown: 'KHÔNG RÕ'
+    };
+
+    const typeLabel = typeLabels[ext.type] || ext.type;
+    const extensionUrl = ext.path || '';
+    const description = getDescription(ext);
+
+    return `
+        <div class="ext-card">
+            <div class="ext-type-badge">${escapeHtml(typeLabel)}</div>
+            <div class="ext-header">
+                <h3 class="ext-name">${escapeHtml(ext.name || 'Chưa đặt tên')}</h3>
+                <span class="ext-version">v${escapeHtml(ext.version || '0')}</span>
+            </div>
+            <p class="ext-author">Tác giả: ${escapeHtml(ext.author || 'Không rõ')}</p>
+            <p class="ext-description">${escapeHtml(description || 'Chưa có mô tả')}</p>
+            <div class="ext-actions">
+                ${ext.source ? `<a href="${escapeHtml(ext.source)}" target="_blank" class="ext-link">Site URL</a>` : '<span class="ext-link ext-link-disabled">Site URL</span>'}
+                ${extensionUrl ? `<button class="ext-copy-btn" data-copy-url="${escapeHtml(extensionUrl)}">Copy Ext</button>` : '<span class="ext-copy-btn ext-link-disabled">Copy Ext</span>'}
+            </div>
+        </div>
+    `;
+}
+
+const SOURCE_TYPE_LABELS = {
+    novel: 'Truyện chữ',
+    comic: 'Truyện tranh',
+    chinese_novel: 'Truyện Trung',
+    translate: 'Dịch',
+    tts: 'TTS',
+    _unknown: 'Khác'
+};
+
+function getSourceTypeLabel(type) {
+    return SOURCE_TYPE_LABELS[type] || type || 'Khác';
+}
+
+function getSourceHost(url) {
+    try {
+        const parsed = new URL(url);
+        return parsed.hostname || 'Unknown host';
+    } catch (_error) {
+        return 'Unknown host';
+    }
+}
+
+function summarizeSourceTypes(extItems) {
+    const counts = new Map();
+    (extItems || []).forEach((ext) => {
+        const type = ext && ext.type ? ext.type : '_unknown';
+        counts.set(type, (counts.get(type) || 0) + 1);
+    });
+
+    return Array.from(counts.entries())
+        .sort((a, b) => {
+            if (b[1] !== a[1]) {
+                return b[1] - a[1];
+            }
+            return a[0].localeCompare(b[0], 'vi');
+        })
+        .map(([type, total]) => ({ type, total }));
+}
+
+function renderSourceExtBadge(ext) {
+    const type = ext.type || '_unknown';
+    return `
+        <li class="source-ext-pill source-ext-pill-${escapeHtml(type)}">
+            <span class="source-ext-name">${escapeHtml(ext.name || 'Unknown')}</span>
+        </li>
+    `;
+}
+
+function renderSourceExtDetail(ext) {
+    const type = ext.type || '_unknown';
+    return `
+        <li class="source-ext-detail">
+            <div class="source-ext-detail-head">
+                <span class="source-ext-detail-name">${escapeHtml(ext.name || 'Unknown')}</span>
+                <span class="source-ext-detail-meta">${escapeHtml(getSourceTypeLabel(type))}</span>
+            </div>
+            <div class="source-ext-detail-inline">
+                <span>Tác giả: <strong>${escapeHtml(ext.author || 'Không rõ')}</strong></span>
+                <span>Phiên bản: <strong>v${escapeHtml(ext.version || '0')}</strong></span>
+            </div>
+        </li>
+    `;
+}
+
+function getSourceKey(source) {
+    return source && (source.id || source.url || source.displayName) ? (source.id || source.url || source.displayName) : '';
+}
+
+function isSourceExpanded(source) {
+    const key = getSourceKey(source);
+    return Boolean(key && window.catalogSourceExpandedState && window.catalogSourceExpandedState[key]);
+}
+
+function renderSourceCard(source) {
+    const extItems = Array.isArray(source.extItems) ? source.extItems : [];
+    const status = (source.status || '').trim().toLowerCase();
+    const statusLabel = status && status !== 'unchanged' ? status : '';
+    const expanded = isSourceExpanded(source);
+    const sourceTotal = source.itemCount || extItems.length;
+    const previewItems = extItems.slice(0, expanded ? 4 : 3);
+    const detailHtml = expanded && extItems.length
+        ? `<ul class="source-ext-detail-list">${extItems.map(renderSourceExtDetail).join('')}</ul>`
+        : (expanded ? '<p class="source-ext-empty">Không có ext trong nguồn này</p>' : '');
+    const toggleAria = expanded ? 'Thu gọn thông tin nguồn' : 'Mở thông tin nguồn';
+    const key = getSourceKey(source);
+
+    return `
+        <article class="source-card ${expanded ? 'is-expanded' : 'is-collapsed'}" data-source-key="${escapeHtml(key)}">
+            <button class="source-toggle-btn" type="button" data-source-toggle="${escapeHtml(key)}" aria-expanded="${expanded ? 'true' : 'false'}" aria-label="${escapeHtml(toggleAria)}">
+                <h3 class="source-name" title="${escapeHtml(source.displayName)}">${escapeHtml(source.displayName)}</h3>
+                <div class="source-toggle-meta">
+                    <span class="source-total-pill">${sourceTotal} ext</span>
+                    ${statusLabel ? `<span class="source-status ${escapeHtml(statusLabel)}">${escapeHtml(statusLabel)}</span>` : ''}
+                    <span class="source-toggle-icon">${expanded ? '−' : '+'}</span>
+                </div>
+            </button>
+            <ul class="source-ext-preview-list">
+                ${previewItems.map(renderSourceExtBadge).join('')}
+            </ul>
+            ${extItems.length > previewItems.length ? `<p class="source-preview-note">+${extItems.length - previewItems.length} extension khác</p>` : ''}
+            ${detailHtml}
+            <div class="source-actions">
+                <button class="source-copy-btn" data-source-url="${escapeHtml(source.url)}">Copy Source</button>
+            </div>
+        </article>
+    `;
+}
+
+function renderGrid() {
+    const grid = document.getElementById('extensions-grid');
+    const extensions = filterExtensions();
+
+    if (extensions.length === 0) {
+        grid.innerHTML = `
+            <div style="grid-column: 1/-1; padding: 40px; text-align: center; color: #666;">
+                <p style="font-size: 18px;">Không tìm thấy extension</p>
+                <p style="font-size: 14px;">Hãy thử đổi từ khóa</p>
+            </div>
+        `;
+        return;
+    }
+
+    grid.innerHTML = extensions.map(renderCard).join('');
+}
+
+function renderSourceView() {
+    const grid = document.getElementById('extensions-grid');
+    const sources = filterSources();
+
+    if (!sources.length) {
+        grid.innerHTML = `
+            <div style="grid-column: 1/-1; padding: 40px; text-align: center; color: #666;">
+                <p style="font-size: 18px;">Không tìm thấy source</p>
+                <p style="font-size: 14px;">Hãy thử đổi từ khóa</p>
+            </div>
+        `;
+        return;
+    }
+
+    grid.innerHTML = sources.map(renderSourceCard).join('');
+}
+
+function renderActiveView() {
+    if (currentViewMode === 'source') {
+        renderSourceView();
+        return;
+    }
+
+    renderGrid();
+}
+
+function setupViewModeToggle() {
+    const modeSelect = document.getElementById('view-mode-select');
+    if (!modeSelect) {
+        return;
+    }
+
+    const hasSources = Array.isArray(window.catalogSources) && window.catalogSources.length > 0;
+    const sourceOption = modeSelect.querySelector('option[value="source"]');
+    const extensionOption = modeSelect.querySelector('option[value="extension"]');
+    const isCompact = window.matchMedia('(max-width: 768px)').matches;
+
+    if (sourceOption) {
+        sourceOption.disabled = !hasSources;
+        sourceOption.textContent = hasSources
+            ? (isCompact ? 'By Source' : 'Hiển thị: By Source')
+            : (isCompact ? 'No Source' : 'Hiển thị: By Source (chưa có dữ liệu)');
+    }
+
+    if (extensionOption) {
+        extensionOption.textContent = isCompact ? 'By Ext' : 'Hiển thị: By Ext';
+    }
+
+    modeSelect.value = currentViewMode;
+
+    if (viewModeBound) {
+        return;
+    }
+
+    modeSelect.addEventListener('change', () => {
+        const requestedMode = modeSelect.value;
+        if (requestedMode === 'source' && !hasSources) {
+            modeSelect.value = 'extension';
+            currentViewMode = 'extension';
+            return;
+        }
+
+        currentViewMode = requestedMode;
+        renderActiveView();
+    });
+
+    viewModeBound = true;
+}
+
+function setupSearch() {
+    const searchInput = document.getElementById('search-input');
+    if (!searchInput || searchInput.dataset.bound === 'true') {
+        return;
+    }
+
+    searchInput.addEventListener('input', (event) => {
+        currentSearch = event.target.value || '';
+        renderActiveView();
+    });
+
+    searchInput.dataset.bound = 'true';
+}
+
+function setupCopyActions() {
+    document.addEventListener('click', async (event) => {
+        const extButton = event.target.closest('.ext-copy-btn[data-copy-url]');
+        if (extButton) {
+            const copyUrl = extButton.getAttribute('data-copy-url');
+            try {
+                await copyToClipboard(copyUrl);
+                showToast('Đã copy link ext');
+            } catch (_error) {
+                showToast('Không thể copy ext');
+            }
+            return;
+        }
+
+        const sourceButton = event.target.closest('.source-copy-btn[data-source-url]');
+        if (sourceButton) {
+            const sourceUrl = sourceButton.getAttribute('data-source-url');
+            try {
+                await copyToClipboard(sourceUrl);
+                showToast('Đã copy link source');
+            } catch (_error) {
+                showToast('Không thể copy source');
+            }
+            return;
+        }
+
+        const sourceToggle = event.target.closest('[data-source-toggle]');
+        if (sourceToggle) {
+            const key = sourceToggle.getAttribute('data-source-toggle');
+            if (!key) {
+                return;
+            }
+
+            if (!window.catalogSourceExpandedState) {
+                window.catalogSourceExpandedState = {};
+            }
+
+            window.catalogSourceExpandedState[key] = !window.catalogSourceExpandedState[key];
+            renderActiveView();
+            return;
+        }
+
+        const sourceCard = event.target.closest('.source-card[data-source-key]');
+        if (sourceCard) {
+            if (event.target.closest('.source-copy-btn, .source-toggle-btn, a, button')) {
+                return;
+            }
+
+            const key = sourceCard.getAttribute('data-source-key');
+            if (!key) {
+                return;
+            }
+
+            if (!window.catalogSourceExpandedState) {
+                window.catalogSourceExpandedState = {};
+            }
+
+            window.catalogSourceExpandedState[key] = !window.catalogSourceExpandedState[key];
+            renderActiveView();
+            return;
+        }
+
+        const aggregateButton = event.target.closest('#copy-aggregate-btn[data-copy-url]');
+        if (aggregateButton) {
+            const aggregateUrl = aggregateButton.getAttribute('data-copy-url');
+            try {
+                await copyToClipboard(aggregateUrl);
+                showToast('Đã copy link tổng');
+            } catch (_error) {
+                showToast('Không thể copy link tổng');
+            }
+        }
+    });
+}
+
+function setupBackToTopButton() {
+    const button = document.getElementById('back-to-top');
+    if (!button) {
+        return;
+    }
+
+    const toggleVisibility = () => {
+        if (window.scrollY > 180) {
+            button.classList.add('show');
+        } else {
+            button.classList.remove('show');
+        }
+    };
+
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    button.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    toggleVisibility();
+}
+
+function renderDashboard() {
+    renderStats();
+    renderCatalogUpdatedTime();
+    renderSourceRepoCount();
+    renderAggregateButton();
+    renderContributeSection();
+    renderAuthorAcknowledgement();
+    setupViewModeToggle();
+    renderActiveView();
 }
 
 function normalizeAuthorName(author) {
@@ -397,74 +760,9 @@ function renderAuthorAcknowledgement() {
     updateAuthorsMobileCollapse();
 }
 
-function renderCard(ext) {
-    const typeLabels = {
-        novel: '[TRUYỆN CHỮ]',
-        comic: '[TRUYỆN TRANH]',
-        chinese_novel: '[TRUYỆN TRUNG]',
-        translate: '[DỊCH]',
-        tts: '[TTS]',
-        _unknown: '[KHÔNG RÕ]'
-    };
-
-    const typeLabel = typeLabels[ext.type] || ext.type;
-    const pluginPath = ext.relativePath ? `${ext.relativePath}/plugin.json` : '';
-    const description = getDescription(ext);
-
-    return `
-        <div class="ext-card">
-            <div class="ext-type-badge">${typeLabel}</div>
-            <div class="ext-header">
-                <h3 class="ext-name">${ext.name || 'Chưa đặt tên'}</h3>
-                <span class="ext-version">v${ext.version || '0'}</span>
-            </div>
-            <p class="ext-author">Tác giả: ${ext.author || 'Không rõ'}</p>
-            <p class="ext-description">${description || 'Chưa có mô tả'}</p>
-            <div class="ext-actions">
-                ${ext.source ? `<a href="${ext.source}" target="_blank" class="ext-link">Nguồn</a>` : '<span class="ext-link" style="opacity:0.35;">Nguồn</span>'}
-                ${pluginPath ? `<button class="ext-copy-btn" data-plugin-path="${pluginPath}">Copy Raw</button>` : '<span class="ext-copy-btn" style="opacity:0.35;">Copy Raw</span>'}
-            </div>
-            ${ext.relativePath ? `<div class="ext-path">${ext.relativePath}</div>` : ''}
-        </div>
-    `;
-}
-
-function renderGrid() {
-    const grid = document.getElementById('extensions-grid');
-    const extensions = filterExtensions();
-
-    if (extensions.length === 0) {
-        grid.innerHTML = `
-            <div style="grid-column: 1/-1; padding: 40px; text-align: center; color: #666;">
-                <p style="font-size: 18px;">Không tìm thấy extension</p>
-                <p style="font-size: 14px;">Hãy thử đổi từ khóa hoặc bộ lọc</p>
-            </div>
-        `;
-        return;
-    }
-
-    grid.innerHTML = extensions.map(renderCard).join('');
-}
-
-function renderDashboard() {
-    renderStats();
-    renderCatalogUpdatedTime();
-    renderAuthorAcknowledgement();
-    renderGrid();
-}
-
-document.getElementById('search-input').addEventListener('input', (e) => {
-    currentSearch = e.target.value;
-    renderGrid();
-});
-
-document.getElementById('sort-select').addEventListener('change', (e) => {
-    currentSort = e.target.value;
-    renderGrid();
-});
-
 document.addEventListener('DOMContentLoaded', () => {
-    setupQuickLinkActions();
+    setupSearch();
+    setupCopyActions();
     setupBackToTopButton();
     setupAuthorsMobileToggle();
 });
