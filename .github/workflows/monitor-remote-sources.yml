@@ -1,0 +1,35 @@
+name: Monitor Remote Sources
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run monitor
+        run: npm run monitor:sources
+
+      - name: Upload monitor report
+        uses: actions/upload-artifact@v4
+        with:
+          name: remote-sources-monitor-report
+          path: tools/cli/reports/remote-sources-monitor.json
+
+      - name: Warn on changes
+        run: |
+          node -e "const fs=require('fs');const r=JSON.parse(fs.readFileSync('tools/cli/reports/remote-sources-monitor.json','utf8'));const changed=(r.summary&&typeof r.summary.changed==='number')?r.summary.changed:0;if(changed>0){console.log('::warning::Remote sources changed: '+changed);}else{console.log('No remote source changes detected.');}"

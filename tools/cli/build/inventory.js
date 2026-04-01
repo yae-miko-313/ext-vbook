@@ -56,7 +56,7 @@ function buildInventory(workspaceRoot) {
             author: typeof metadata.author === 'string' ? metadata.author : null,
             source: typeof metadata.source === 'string' ? metadata.source : null,
             sourceDomain: tryGetSourceDomain(metadata.source),
-            type: normalizeType(metadata.type),
+            type: normalizeType(metadata.type, metadata, plugin.script),
             rawType: typeof metadata.type === 'string' ? metadata.type : null,
             version: parseVersion(metadata.version),
             rawVersion: metadata.version,

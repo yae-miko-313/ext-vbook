@@ -3,6 +3,7 @@ const path = require('path');
 const {
     VALID_TYPES,
     collectPluginRootsRecursively,
+    normalizeType,
     readJson,
     relativeFromWorkspace,
     writeJson
@@ -28,7 +29,7 @@ function buildDescriptor(workspaceRoot, pluginRoot) {
         description: metadata.description || null,
         source: metadata.source || null,
         version: metadata.version || null,
-        type: metadata.type || null,
+        type: normalizeType(metadata.type, metadata, plugin.script),
         locale: metadata.locale || null,
         relativePath: relativeFromWorkspace(workspaceRoot, pluginRoot),
         metadata

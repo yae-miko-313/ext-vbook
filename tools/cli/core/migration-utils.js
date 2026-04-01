@@ -32,10 +32,58 @@ function isExtensionPluginJson(pluginJsonPath) {
     }
 }
 
-function normalizeType(type) {
-    if (typeof type !== 'string') return '_unknown';
-    const value = type.trim().toLowerCase();
-    return VALID_TYPES.includes(value) ? value : '_unknown';
+function isSampleExtension(pluginJsonPath) {
+    try {
+        const parsed = readJson(pluginJsonPath);
+        const metadata = parsed && typeof parsed === 'object' ? parsed.metadata || {} : {};
+        const folder = path.basename(path.dirname(pluginJsonPath)).toLowerCase();
+
+        if (folder === 'example' || folder === 'template' || folder === 'vbook-ext-template') {
+            return true;
+        }
+
+        const name = typeof metadata.name === 'string' ? metadata.name.toLowerCase() : '';
+        const source = typeof metadata.source === 'string' ? metadata.source.toLowerCase() : '';
+        const regexp = typeof metadata.regexp === 'string' ? metadata.regexp : '';
+
+        // Exclude scaffold/example placeholders from all catalogs/reports.
+        if (name.includes('template')) return true;
+        if (source.includes('example.com')) return true;
+        if (regexp.includes('<') || regexp.includes('>')) return true;
+
+        return false;
+    } catch (error) {
+        return false;
+    }
+}
+
+function normalizeType(type, metadata = {}, script = {}) {
+    if (typeof type === 'string') {
+        const value = type.trim().toLowerCase();
+        if (VALID_TYPES.includes(value)) return value;
+        if (value === 'text' || value === 'novel_text' || value === 'text_novel') return 'novel';
+    }
+
+    const locale = typeof metadata.locale === 'string' ? metadata.locale.trim().toLowerCase() : '';
+    if (locale === 'zh_cn') return 'chinese_novel';
+
+    const signals = [
+        typeof metadata.name === 'string' ? metadata.name : '',
+        typeof metadata.description === 'string' ? metadata.description : '',
+        typeof metadata.regexp === 'string' ? metadata.regexp : '',
+        typeof metadata.source === 'string' ? metadata.source : ''
+    ].join(' ').toLowerCase();
+
+    if (/manga|manhwa|manhua|comic|truyen-tranh|truyện-tranh/.test(signals)) {
+        return 'comic';
+    }
+
+    if (script && typeof script === 'object' && !Array.isArray(script)) {
+        const scriptKeys = Object.keys(script).join(' ').toLowerCase();
+        if (/manga|comic/.test(scriptKeys)) return 'comic';
+    }
+
+    return 'novel';
 }
 
 function normalizeName(name) {
@@ -73,7 +121,10 @@ function tryGetSourceDomain(source) {
 
 function getDedupeKey(metadata) {
     const domain = tryGetSourceDomain(metadata && metadata.source);
-    if (domain) return `domain:${domain}`;
+    if (domain) {
+        const author = normalizeName(metadata && metadata.author) || '_unknown';
+        return `domain:${domain}|author:${author}`;
+    }
 
     const name = normalizeName(metadata && metadata.name);
     if (name) return `name:${name}`;
@@ -121,7 +172,7 @@ function collectPluginRootsRecursively(baseDir, collector) {
         const hasPluginJson = entries.some((entry) => entry.isFile() && entry.name === 'plugin.json');
         const pluginJsonPath = path.join(current, 'plugin.json');
 
-        if (hasPluginJson && isExtensionPluginJson(pluginJsonPath)) {
+        if (hasPluginJson && isExtensionPluginJson(pluginJsonPath) && !isSampleExtension(pluginJsonPath)) {
             collector.push(current);
         }
 

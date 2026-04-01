@@ -14,7 +14,9 @@ const { runInventory, printInventoryReport } = require('./build/inventory');
 const { runSort, printSortReport } = require('./build/sort');
 const { runBatchFix, printBatchFixReport } = require('./fix/batch-fix');
 const { runBuildCatalog, printBuildCatalogReport } = require('./build/build-catalog');
+const { runCheckDuplicates, printCheckDuplicatesReport } = require('./build/check-duplicates');
 const { runAiFixQueue, printAiFixQueueReport } = require('./fix/ai-fix-queue');
+const { syncOrMonitorRemoteSources, printRemoteSourcesReport } = require('./build/remote-sources');
 const { scaffoldExtension, askIfMissing } = require('./scaffold/scaffold');
 const { runOfflineVerify, runOnlineVerify } = require('./scaffold/verify');
 
@@ -188,7 +190,8 @@ program.command('sort')
                 printSortReport(report);
             }
 
-            if (report.summary.errors > 0) {
+            const errors = Number(report?.summary?.errors || 0);
+            if (errors > 0) {
                 process.exitCode = 1;
             }
         } catch (error) {
@@ -243,6 +246,92 @@ program.command('build-catalog')
                 console.log(JSON.stringify(report, null, 2));
             } else {
                 printBuildCatalogReport(report);
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
+
+/**
+ * SYNC-SOURCES COMMAND
+ */
+program.command('sync-sources')
+    .description('Download and sync remote raw plugin manifests from references/remote-sources.json')
+    .option('--config <path>', 'Custom remote source config path')
+    .option('--json', 'Output report as JSON')
+    .action(async (options) => {
+        try {
+            const report = await syncOrMonitorRemoteSources(WORKSPACE_ROOT, {
+                mode: 'sync',
+                config: options.config
+            });
+
+            if (options.json) {
+                console.log(JSON.stringify(report, null, 2));
+            } else {
+                printRemoteSourcesReport(report);
+            }
+
+            const errors = Number(report?.summary?.errors || 0);
+            if (errors > 0) {
+                process.exitCode = 1;
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
+
+/**
+ * MONITOR-SOURCES COMMAND
+ */
+program.command('monitor-sources')
+    .description('Check remote raw plugin manifests for updates against last synced hash state')
+    .option('--config <path>', 'Custom remote source config path')
+    .option('--json', 'Output report as JSON')
+    .action(async (options) => {
+        try {
+            const report = await syncOrMonitorRemoteSources(WORKSPACE_ROOT, {
+                mode: 'monitor',
+                config: options.config
+            });
+
+            if (options.json) {
+                console.log(JSON.stringify(report, null, 2));
+            } else {
+                printRemoteSourcesReport(report);
+            }
+
+            if (report.summary.errors > 0) {
+                process.exitCode = 1;
+            }
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+            process.exitCode = 1;
+        }
+    });
+
+/**
+ * CHECK-DUPLICATES COMMAND
+ */
+program.command('check-duplicates')
+    .description('Check duplicate sources using policy: same source + same author is violation')
+    .option('--out <path>', 'Output report path (default: tools/cli/reports/duplicate_sources_report.json)')
+    .option('--json', 'Output report as JSON')
+    .action(async (options) => {
+        try {
+            const result = runCheckDuplicates(WORKSPACE_ROOT, { out: options.out });
+
+            if (options.json) {
+                console.log(JSON.stringify(result.report, null, 2));
+            } else {
+                printCheckDuplicatesReport(result);
+            }
+
+            const violations = Number(result?.report?.summary?.policyViolationSources || 0);
+            if (violations > 0) {
+                process.exitCode = 1;
             }
         } catch (error) {
             console.error(`[ERROR] ${error.message}`);
