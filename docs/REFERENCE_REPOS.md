@@ -3,7 +3,73 @@
 Tài liệu này là danh sách nguồn tham chiếu đầy đủ để sync metadata.
 Không copy blind, luôn verify lại với live site.
 
+## Ghi chú kiến trúc mới
+
+1. **`extensions/`**: Chỉ chứa ext riêng của maintainer (personal extensions)
+   - Build thành `.zip` qua CLI
+  - Không tham gia vào `web/plugin.json`
+
+2. **`code-reference/`**: Fork/sample từ external repos (học tập, không dùng direct)
+   - Organized by type (novel, comic, translate, tts)
+   - Read-only, không embed vào catalog
+
+3. **`ref/plugin.json`**: Aggregate của external sources
+   - Định kỳ sync từ provider các repos
+   - Chứa `sources[]` list + nested `content.data[]` items
+   - Nằm trong `sources[]` array của web catalog
+
+4. **`web/plugin.json`**: Link tổng cho web viewer
+  - Mirror root-like từ `ref/plugin.json`
+  - Hiển thị By Extension
+  - Format: `{ metadata, data[] }`
+
+5. **`web/catalog.json`**: Sidecar cho source view
+  - Mirror metadata/source từ `ref/plugin.json`
+  - Hiển thị By Source + reference metadata
+  - Format: `{ metadata, summary, referenceListUrl, sources[] }`
+
+## Aggregate structure
+
+### Main link (web/plugin.json)
+
+```json
+{
+  "metadata": { "author": "kychi", "description": "..." },
+  "data": [
+    { "name": "...", "author": "...", "type": "novel", "path": "..." }
+  ]
+}
+```
+
+### Source sidecar (web/catalog.json)
+
+```json
+{
+  "metadata": { "author": "kychi", "description": "..." },
+  "sources": [
+    // External sources from ref/plugin.json
+    {
+      "id": "...",
+      "url": "https://raw.githubusercontent.com/.../plugin.json",
+      "content": {
+        "data": [
+          // Items từ external source
+          { "name": "...", "author": "...", ... }
+        ]
+      }
+    }
+  ],
+  "referenceListUrl": "..."
+}
+```
+
+Web viewer load split files:
+- By Extension từ `web/plugin.json`
+- By Source từ `web/catalog.json`
+
 ## Danh sách nguồn cập nhật (raw URL)
+
+Được sync vào `ref/plugin.json` theo priority:
 
 1. https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/plugin.json
 2. https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/chinese_plugin.json
@@ -31,7 +97,9 @@ Không copy blind, luôn verify lại với live site.
 24. https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/translate.json
 25. https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/tts.json
 
-## Danh sách ext hiện có
+**Note**: Sync logic external config, không cứng trong codebase - tham khảo `ref/plugin.json` metadata
+
+## Danh sách ext hiện có (community)
 
 - https://xn--ngc-bmz.vn/i/vbook/extension_list.php#id-22
 
@@ -42,14 +110,34 @@ Không copy blind, luôn verify lại với live site.
 3. Refactor về syntax tương thích Rhino nếu gặp snippet không tương thích.
 4. Nếu `gen.js` và `search.js` trùng logic, tách function chung sang `utils.js`.
 
-## Dedup Priority (Mass Migration)
+## Dedup Priority (cho contributors)
 
-1. Key dedupe: `domain(source) + author`.
-2. Cùng domain khác author được phép cùng tồn tại.
-3. Trong cùng key: version cao hơn được ưu tiên.
-4. Nếu bằng version: trust order
-   - `extensions/`
+1. **Key dedupe**: `domain(source) + author`.
+2. Cùng domain khác author → được phép cùng tồn tại.
+3. Cùng key → version cao hơn ưu tiên.
+4. Nếu bằng version → trust order:
+   - `extensions/` (personal)
    - darkrai9x-vbook-extensions
    - dat-bi-ext-vbook
-   - các nguồn còn lại
-5. Nếu vẫn bằng nhau: lexical path để deterministic.
+   - các nguồn khác
+5. Deterministic: lexical path khi vẫn tie.
+
+## Web aggregate cập nhật
+
+```bash
+# Rebuild personal extension manifests
+npm run build:catalog
+
+# Sync community aggregate into web/plugin.json + web/catalog.json
+npm run sync:web-catalog
+
+# Verify web/plugin.json được update
+cat web/plugin.json | head -20
+```
+
+Workflow:
+1. Edit/create extension qua CLI
+2. Chạy `npm run build:catalog` nếu personal extension đổi
+3. Chạy `npm run sync:web-catalog` khi community aggregate đổi
+4. Web viewer tự động load updated `web/plugin.json` + `web/catalog.json`
+

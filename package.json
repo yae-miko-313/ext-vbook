@@ -1,44 +1,26 @@
 {
   "name": "vbook-tool",
   "version": "2.0.0",
-  "description": "VBook CLI extension tool - batch processing, catalog generation, and quality assurance",
+  "description": "VBook 2-in-1 tool: personal extension repair/build plus community catalog aggregation",
   "author": "kychi",
   "main": "tools/cli/index.js",
   "bin": {
     "vbook": "./tools/cli/index.js"
   },
+
   "scripts": {
     "start": "node tools/cli/index.js",
-    "lint:ext": "node tools/cli/index.js lint --plugin extensions/ntruyen",
-    "lint:all": "node tools/cli/index.js lint",
-    "lint:json": "node tools/cli/index.js lint --json",
-    "lint:refs": "node tools/cli/index.js lint --refs",
-    "health": "node tools/cli/index.js health",
-    "health:refs": "node tools/cli/index.js health --refs",
-    "fix": "node tools/cli/index.js fix",
-    "fix:write": "node tools/cli/index.js fix --write",
-    "inventory": "node tools/cli/index.js inventory",
-    "sync:sources": "node tools/cli/index.js sync-sources",
-    "prune-policy-duplicates": "node tools/cli/build/prune-policy-duplicates.js",
-    "sync:web-catalog": "node -e \"const fs=require('fs');fs.copyFileSync('extensions/plugin.json','web/catalog.json');\"",
-    "check:duplicates": "node tools/cli/index.js check-duplicates",
-    "monitor:sources": "node tools/cli/index.js monitor-sources",
-    "sort": "node tools/cli/index.js sort",
-    "batch-fix": "node tools/cli/index.js batch-fix",
-    "build-catalog": "node tools/cli/index.js build-catalog",
-    "ai-fix-queue": "node tools/cli/index.js ai-fix-queue",
-    "migrate:all": "node tools/cli/index.js inventory ; node tools/cli/index.js sort ; node tools/cli/index.js batch-fix ; node tools/cli/index.js build-catalog",
-    "full-sync": "npm run sync:sources && npm run inventory && npm run sort && (npm run batch-fix || node -e \"process.exit(0)\") && npm run prune-policy-duplicates && npm run build-catalog && npm run sync:web-catalog && npm run check:duplicates",
-    "scaffold:dry": "node tools/cli/index.js scaffold --name DemoExt --source https://example.com --author kychi --dry-run",
-    "verify": "node tools/cli/index.js verify --plugin extensions/ntruyen",
-    "test:all": "node tools/cli/index.js test-all --plugin extensions/ntruyen",
-    "build:ext": "node tools/cli/index.js build --plugin extensions/ntruyen",
-    "install:ext": "node tools/cli/index.js install --plugin extensions/ntruyen"
+    "ext:create": "node tools/cli/index.js ext --mode create",
+    "ext:edit": "node tools/cli/index.js ext --mode edit --plugin extensions/novel/kychi_ntruyen/plugin.json --dry-run",
+    "ext:create:dry": "node tools/cli/index.js ext --mode create --name DemoExt --source https://example.com --author kychi --dry-run",
+    "build": "node tools/cli/index.js build --plugin extensions/novel/kychi_ntruyen",
+    "build:catalog": "node tools/cli/index.js build-catalog",
+    "sync:web-catalog": "node -e \"const {buildWebCatalog}=require('./tools/cli/build/sync-web-catalog');console.log(JSON.stringify(buildWebCatalog(process.cwd()), null, 2));\"",
+    "full-sync": "npm run build:catalog && npm run sync:web-catalog"
   },
   "dependencies": {
     "archiver": "^7.0.1",
     "commander": "^12.1.0",
-    "dotenv": "^16.4.5",
-    "string-argv": "^0.3.2"
+    "dotenv": "^16.4.5"
   }
 }

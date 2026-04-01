@@ -10,7 +10,6 @@ Trigger khi push thay đổi trong `web/**`.
 
 ```bash
 npm run full-sync
-npm run sync:web-catalog
 ```
 
 Sau đó commit/push:

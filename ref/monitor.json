@@ -1,0 +1,416 @@
+{
+  "generatedAt": "2026-04-01T11:07:05.113Z",
+  "mode": "sync",
+  "summary": {
+    "total": 25,
+    "changed": 0,
+    "unchanged": 25,
+    "errors": 0,
+    "mode": "sync",
+    "autoSyncedOnChange": true
+  },
+  "items": [
+    {
+      "id": "alexsonxxx-main",
+      "url": "https://raw.githubusercontent.com/alexsonxxx/vbook/refs/heads/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "9ca14e1bc19885a8c9f5731c9bc758921ff7dbabf6a6ec1d33e87e46bb5075bf",
+      "error": null
+    },
+    {
+      "id": "baobao666888-main",
+      "url": "https://raw.githubusercontent.com/BaoBao666888/ext-vbook-w/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "a2e2f970bd1a28c5ef401fdc80ffd882c512b6974c1e6d5f56efa76b0f44f88c",
+      "error": null
+    },
+    {
+      "id": "darkrai9x-chinese",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/chinese_plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "b507967e75b0193e634c7b8529cb2dc0aa95d10ed7be6ae5c263fb68a65650e6",
+      "error": null
+    },
+    {
+      "id": "darkrai9x-main",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "f26bc8cc20df351b2073589602f159eef138271f1231157d604f2a0f591599ca",
+      "error": null
+    },
+    {
+      "id": "darkrai9x-translate",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/translate.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "e12691fc7d81a0fb843ca9fd7cbfd9c31290581f57a08389096e57500154d4f8",
+      "error": null
+    },
+    {
+      "id": "darkrai9x-tts",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/tts.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "6feaa6756fef6bf64be1703beb898c4be0c9051a25c089442b2aa3482d5262a3",
+      "error": null
+    },
+    {
+      "id": "dat-bi-main",
+      "url": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "c38e102ee2e463f9c3dfca698e2bf8a6fa8e56532ed6ad81e1d04a638e2cf68b",
+      "error": null
+    },
+    {
+      "id": "duongden-main",
+      "url": "https://raw.githubusercontent.com/duongden/vbook/refs/heads/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "75bb82093564c053c5e8dbc68119c0234e59e0653b5ba0405cbcce748387459d",
+      "error": null
+    },
+    {
+      "id": "evamirion-main",
+      "url": "https://raw.githubusercontent.com/Evamirion/vbook-ext/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "b45ec5d82d45b356f8cfb4eed21a8cd107916a4ae7d0bb6525b58777c8d83d01",
+      "error": null
+    },
+    {
+      "id": "gh369-639-main",
+      "url": "https://raw.githubusercontent.com/gh369-639/vbook-ext-public/refs/heads/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "bfd5471e8fc07a64991cce4af0fe627973ffc4cb8feb02691c42449ca872fd70",
+      "error": null
+    },
+    {
+      "id": "gold2k2k2k-main",
+      "url": "https://raw.githubusercontent.com/Gold2k2k2k/HTri-Vbook-Ext/refs/heads/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "7c4330223ab48f7fd48bf5a7f9fa079bf78073de892514e297d1db3786264ff3",
+      "error": null
+    },
+    {
+      "id": "hienpro00123-main",
+      "url": "https://raw.githubusercontent.com/hienpro00123/vbook_MeoU/refs/heads/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "567a8b93482db3a4fd4b2e77550bb91b907f70b05a42b6f871b476d823410e2e",
+      "error": null
+    },
+    {
+      "id": "hieu45666-main",
+      "url": "https://raw.githubusercontent.com/hieu45666/vbook_ext/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "c78386227328596117044ebb08ea296d4509b3fa09650521627804a196689efd",
+      "error": null
+    },
+    {
+      "id": "hieunm3103-main",
+      "url": "https://gitlab.com/hieunm3103/vbook-extension/-/raw/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "f5b8a14994a62b56d87e95b06541c7f692004f703da79f9a883cdf8cc431bb80",
+      "error": null
+    },
+    {
+      "id": "hishirooo-main",
+      "url": "https://raw.githubusercontent.com/hishirooo/vbook-ext/master/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "bfca5f127aa23d2d7e48a0b47a6abe5fef5c61af6f548ccc6d87a916ffd0d319",
+      "error": null
+    },
+    {
+      "id": "kur21-main",
+      "url": "https://raw.githubusercontent.com/kur21/vbook-ext/refs/heads/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "9480036d64d027643833ebb7b0006348feddde6bbf603256c67165c87f46e303",
+      "error": null
+    },
+    {
+      "id": "kychitoge-main",
+      "url": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "ae46cdb93232daf14b4ebfc46d4cdbd5dc5661474d79f2bbd088d73ec823d1cc",
+      "error": null
+    },
+    {
+      "id": "lethituyen-main",
+      "url": "https://raw.githubusercontent.com/lethituyen/vbooks-extension/refs/heads/master/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "1f86cbd99bd59ab7622b5a912c06e00e2fae12373c70a332ecd715f9b040a234",
+      "error": null
+    },
+    {
+      "id": "longvuu-main",
+      "url": "https://raw.githubusercontent.com/longvuu/ext/refs/heads/master/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "a589c522f563062ba5d7db90f3ba979905eb34b0e610c86dab64c9740f12ccd7",
+      "error": null
+    },
+    {
+      "id": "mizhm-main",
+      "url": "https://raw.githubusercontent.com/mizhm/vbook-extensions/refs/heads/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "b801ca7101e219bab756829fa81b2eeef729a831a5e723d004ee551786278d84",
+      "error": null
+    },
+    {
+      "id": "moleys-main",
+      "url": "https://raw.githubusercontent.com/Moleys/vbook-ext/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "620a431e8e79dd3ce89dc310b89f74241e753e753f8ef628b8a9788131bec55a",
+      "error": null
+    },
+    {
+      "id": "sonzin-main",
+      "url": "https://raw.githubusercontent.com/sonzin/vbook-extension/refs/heads/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "a916908d8ad30d359a755a96684dc40744b2c296f50ce7f1a0290baeac0adc74",
+      "error": null
+    },
+    {
+      "id": "soulgod-nahona-main",
+      "url": "https://raw.githubusercontent.com/SoulGodEve9x9/Vbook-ext/Nahona/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "2d380217d9c899e71eaee33653e17c4fa6d0986acdc046c02f7a61339310f94d",
+      "error": null
+    },
+    {
+      "id": "tuanhai03-main",
+      "url": "https://raw.githubusercontent.com/TuanHai03/vbook-extensions/refs/heads/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "dbff40ec1e136c4b6b180dfd412cb821e78c5f6bb5e12f265ab5870cf88dca1f",
+      "error": null
+    },
+    {
+      "id": "willsun28-main",
+      "url": "https://raw.githubusercontent.com/WillSun28/vbook-extensions/refs/heads/main/plugin.json",
+      "status": "unchanged",
+      "changed": false,
+      "hash": "4f5c462dec12b465f4ca5b02c48e9168712ef856f13f54b6be55c148b9210613",
+      "error": null
+    }
+  ],
+  "state": {
+    "hieunm3103-main": {
+      "hash": "f5b8a14994a62b56d87e95b06541c7f692004f703da79f9a883cdf8cc431bb80",
+      "etag": "\"8d2d25fcb2f29e0d45dce45b4047ddbd\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://gitlab.com/hieunm3103/vbook-extension/-/raw/main/plugin.json"
+    },
+    "baobao666888-main": {
+      "hash": "a2e2f970bd1a28c5ef401fdc80ffd882c512b6974c1e6d5f56efa76b0f44f88c",
+      "etag": "\"09c82133167d4c4b467cae50045dd06278b54c1a95631dc484461fe09ecb1486\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/BaoBao666888/ext-vbook-w/main/plugin.json"
+    },
+    "darkrai9x-main": {
+      "hash": "f26bc8cc20df351b2073589602f159eef138271f1231157d604f2a0f591599ca",
+      "etag": "\"7801f53506d81fe2b61bf8273f7f4730b8e4f7825ac8cbc23c061d07252c0030\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/plugin.json"
+    },
+    "moleys-main": {
+      "hash": "620a431e8e79dd3ce89dc310b89f74241e753e753f8ef628b8a9788131bec55a",
+      "etag": "\"9ec0c79c474ed1b9789b0178d38f45ab144b17e58b1850b92035bf40bc5ac0fb\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/Moleys/vbook-ext/main/plugin.json"
+    },
+    "duongden-main": {
+      "hash": "75bb82093564c053c5e8dbc68119c0234e59e0653b5ba0405cbcce748387459d",
+      "etag": "\"da37decc3d48863545896c8a5bfd3ed96f1bac069274e7d4148531c11a467f1a\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/duongden/vbook/refs/heads/main/plugin.json"
+    },
+    "sonzin-main": {
+      "hash": "a916908d8ad30d359a755a96684dc40744b2c296f50ce7f1a0290baeac0adc74",
+      "etag": "\"c3c89cd04187d3d8df41da0f27288d46eeb5b8d449345cb1079d598b0b6b4259\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/sonzin/vbook-extension/refs/heads/main/plugin.json"
+    },
+    "evamirion-main": {
+      "hash": "b45ec5d82d45b356f8cfb4eed21a8cd107916a4ae7d0bb6525b58777c8d83d01",
+      "etag": "\"488df41ab2ff032665165fedbbd9a537e26eda71726e0b9ef389cde74665c877\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/Evamirion/vbook-ext/main/plugin.json"
+    },
+    "gh369-639-main": {
+      "hash": "bfd5471e8fc07a64991cce4af0fe627973ffc4cb8feb02691c42449ca872fd70",
+      "etag": "\"237c4819755964528c134bf902162490e06d40f9de6754d1c35ee54f291831b1\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/gh369-639/vbook-ext-public/refs/heads/main/plugin.json"
+    },
+    "gold2k2k2k-main": {
+      "hash": "7c4330223ab48f7fd48bf5a7f9fa079bf78073de892514e297d1db3786264ff3",
+      "etag": "\"4f7c6fd438fea21d508fbf2852417747f01d443a26eae8c29154c33be3482f18\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/Gold2k2k2k/HTri-Vbook-Ext/refs/heads/main/plugin.json"
+    },
+    "willsun28-main": {
+      "hash": "4f5c462dec12b465f4ca5b02c48e9168712ef856f13f54b6be55c148b9210613",
+      "etag": "\"a90384016d23708b2958592f85ba8b39735c1aa497163fad81ce6301ff40b3f3\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/WillSun28/vbook-extensions/refs/heads/main/plugin.json"
+    },
+    "hieu45666-main": {
+      "hash": "c78386227328596117044ebb08ea296d4509b3fa09650521627804a196689efd",
+      "etag": "\"26fcac24cf411ff3220b9b47e957d7379205afbf275599e3b452afe2ee639f7b\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/hieu45666/vbook_ext/main/plugin.json"
+    },
+    "soulgod-nahona-main": {
+      "hash": "2d380217d9c899e71eaee33653e17c4fa6d0986acdc046c02f7a61339310f94d",
+      "etag": "\"e77ce7bc058fdb38f734a19a1835bfe7cbbefbb19665af375f29774aba732628\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/SoulGodEve9x9/Vbook-ext/Nahona/plugin.json"
+    },
+    "mizhm-main": {
+      "hash": "b801ca7101e219bab756829fa81b2eeef729a831a5e723d004ee551786278d84",
+      "etag": "\"98bb019d01162500e705d37cb51be612ad315826ba5ffcd95bff9e713204237c\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/mizhm/vbook-extensions/refs/heads/main/plugin.json"
+    },
+    "darkrai9x-chinese": {
+      "hash": "b507967e75b0193e634c7b8529cb2dc0aa95d10ed7be6ae5c263fb68a65650e6",
+      "etag": "\"6185427c6422eabda84227ba746eb46ca1eb82f24619bbecb32500400cd31716\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/chinese_plugin.json"
+    },
+    "dat-bi-main": {
+      "hash": "c38e102ee2e463f9c3dfca698e2bf8a6fa8e56532ed6ad81e1d04a638e2cf68b",
+      "etag": "\"35915975ef54c0b71ebad6f57a46e4b9978df33eee80b0c23171730d83afcae8\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/plugin.json"
+    },
+    "darkrai9x-translate": {
+      "hash": "e12691fc7d81a0fb843ca9fd7cbfd9c31290581f57a08389096e57500154d4f8",
+      "etag": "\"9172d4b573b671c9e26fdce8e55b67bf824388f2af580d2f0cc16a5cee7a3ed6\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/translate.json"
+    },
+    "longvuu-main": {
+      "hash": "a589c522f563062ba5d7db90f3ba979905eb34b0e610c86dab64c9740f12ccd7",
+      "etag": "\"6c29a6318b3378c0b1a53e01b1a7c6bd075b1c669d53a105c329c25ba274d7ad\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/longvuu/ext/refs/heads/master/plugin.json"
+    },
+    "hishirooo-main": {
+      "hash": "bfca5f127aa23d2d7e48a0b47a6abe5fef5c61af6f548ccc6d87a916ffd0d319",
+      "etag": "\"bd298a40b52c20112432ddd9830af0ae5d9cd132e78ac7640e01e22a6c695d80\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/hishirooo/vbook-ext/master/plugin.json"
+    },
+    "tuanhai03-main": {
+      "hash": "dbff40ec1e136c4b6b180dfd412cb821e78c5f6bb5e12f265ab5870cf88dca1f",
+      "etag": "\"213e9a0ae1d6be4250f02f3335bae185a3bb4c0cc0ab35828d8d9e04d5cfff3a\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/TuanHai03/vbook-extensions/refs/heads/main/plugin.json"
+    },
+    "kychitoge-main": {
+      "hash": "ae46cdb93232daf14b4ebfc46d4cdbd5dc5661474d79f2bbd088d73ec823d1cc",
+      "etag": "\"c4bc31dd47110fd3e4490ba34dae4f8eacede32b42a6db130423e4c450c4116d\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json"
+    },
+    "lethituyen-main": {
+      "hash": "1f86cbd99bd59ab7622b5a912c06e00e2fae12373c70a332ecd715f9b040a234",
+      "etag": "\"096b369e5652c91f0cbce639bd8c459a8dc39a375deb0c3076eab779e64c3b45\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/lethituyen/vbooks-extension/refs/heads/master/plugin.json"
+    },
+    "alexsonxxx-main": {
+      "hash": "9ca14e1bc19885a8c9f5731c9bc758921ff7dbabf6a6ec1d33e87e46bb5075bf",
+      "etag": "\"8104ee4dbb845a31260196e89ba326b26197cdc8e6e9b7d6c09b72f2233411f3\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/alexsonxxx/vbook/refs/heads/main/plugin.json"
+    },
+    "kur21-main": {
+      "hash": "9480036d64d027643833ebb7b0006348feddde6bbf603256c67165c87f46e303",
+      "etag": "\"a377b9ef246e721aee1f3721df84d87241452a1d71806419c5a093934331b4a8\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/kur21/vbook-ext/refs/heads/main/plugin.json"
+    },
+    "hienpro00123-main": {
+      "hash": "567a8b93482db3a4fd4b2e77550bb91b907f70b05a42b6f871b476d823410e2e",
+      "etag": "\"3249b10dc281b8d5766c222edd5d7d7d8011d14c1d884bc93867c4d37780fa3f\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/hienpro00123/vbook_MeoU/refs/heads/main/plugin.json"
+    },
+    "darkrai9x-tts": {
+      "hash": "6feaa6756fef6bf64be1703beb898c4be0c9051a25c089442b2aa3482d5262a3",
+      "etag": "\"6fe80d25ccd2da3211d5cb1003c9eea73ed0561bc9581fa12194fac9e79a4d0c\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-01T11:07:05.113Z",
+      "lastSyncedAt": "2026-04-01T11:07:05.113Z",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/tts.json"
+    }
+  }
+}

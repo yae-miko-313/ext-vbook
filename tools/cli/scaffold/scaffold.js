@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline/promises');
-const { runLint } = require('../lint/lint');
 
 const ALLOWED_TYPES = ['novel', 'comic', 'chinese_novel', 'translate', 'tts'];
 const ALLOWED_LOCALES = ['vi_VN', 'zh_CN', 'en_US'];
@@ -70,17 +69,16 @@ function parseAndNormalizeOptions(workspaceRoot, options = {}) {
     const folderName = options.folder
         ? slugifyName(options.folder)
         : slugifyName(name);
+    const type = String(options.type || 'novel').trim();
+    const locale = String(options.locale || 'vi_VN').trim();
 
     const templateDir = path.resolve(
-        options.template || path.join(workspaceRoot, 'extensions', 'vbook-ext-template')
+        options.template || path.join(workspaceRoot, 'code-reference', '_unknown', 'example')
     );
 
     const outputDir = path.resolve(
-        options.output || path.join(workspaceRoot, 'extensions', folderName)
+        options.output || path.join(workspaceRoot, 'extensions', type, folderName)
     );
-
-    const type = String(options.type || 'novel').trim();
-    const locale = String(options.locale || 'vi_VN').trim();
     const author = String(options.author || process.env.VBOOK_AUTHOR || 'kychi').trim();
     const description = String(options.description || `Generated extension for ${source}`).trim();
     const regexp = String(options.regexp || buildDefaultRegexp(source)).trim();
@@ -107,8 +105,7 @@ function parseAndNormalizeOptions(workspaceRoot, options = {}) {
         templateDir,
         outputDir,
         dryRun: Boolean(options.dryRun),
-        force: Boolean(options.force),
-        skipLint: Boolean(options.skipLint)
+        force: Boolean(options.force)
     };
 }
 
@@ -133,6 +130,118 @@ function updateGeneratedPluginJson(config, outputDir) {
     plugin.metadata.type = config.type;
 
     fs.writeFileSync(pluginPath, `${JSON.stringify(plugin, null, 2)}\n`, 'utf8');
+}
+
+function resolvePluginJsonPath(workspaceRoot, pluginOption) {
+    const rawPath = String(pluginOption || '').trim();
+    if (!rawPath) {
+        throw new Error('Missing --plugin path for edit mode.');
+    }
+
+    const candidate = path.resolve(workspaceRoot, rawPath);
+    if (!fs.existsSync(candidate)) {
+        throw new Error(`Plugin path not found: ${candidate}`);
+    }
+
+    const stat = fs.statSync(candidate);
+    if (stat.isFile()) {
+        if (path.basename(candidate) !== 'plugin.json') {
+            throw new Error('--plugin must be an extension folder or plugin.json file.');
+        }
+        return candidate;
+    }
+
+    const pluginPath = path.join(candidate, 'plugin.json');
+    if (!fs.existsSync(pluginPath)) {
+        throw new Error(`plugin.json not found in: ${candidate}`);
+    }
+
+    return pluginPath;
+}
+
+function updateExistingExtension(workspaceRoot, options = {}) {
+    const pluginPath = resolvePluginJsonPath(workspaceRoot, options.plugin);
+    const plugin = JSON.parse(fs.readFileSync(pluginPath, 'utf8'));
+    const metadata = plugin.metadata || {};
+
+    const next = { ...metadata };
+    const updates = [];
+
+    function applyField(field, value, transform) {
+        if (value === undefined || value === null || value === '') {
+            return;
+        }
+        const nextValue = transform ? transform(value) : String(value).trim();
+        if (String(next[field] || '') !== String(nextValue || '')) {
+            next[field] = nextValue;
+            updates.push(field);
+        }
+    }
+
+    applyField('name', options.name);
+    applyField('source', options.source, ensureUrl);
+    applyField('author', options.author);
+    applyField('description', options.description);
+    applyField('regexp', options.regexp);
+
+    if (options.type) {
+        const type = String(options.type).trim();
+        if (!ALLOWED_TYPES.includes(type)) {
+            throw new Error(`Unsupported type: ${type}. Allowed: ${ALLOWED_TYPES.join(', ')}`);
+        }
+        applyField('type', type);
+    }
+
+    if (options.locale) {
+        const locale = String(options.locale).trim();
+        if (!ALLOWED_LOCALES.includes(locale)) {
+            throw new Error(`Unsupported locale: ${locale}. Allowed: ${ALLOWED_LOCALES.join(', ')}`);
+        }
+        applyField('locale', locale);
+    }
+
+    if (options.version !== undefined) {
+        const version = parseInt(options.version, 10);
+        if (!Number.isInteger(version) || version < 1) {
+            throw new Error('--version must be an integer >= 1.');
+        }
+        if (Number(next.version || 0) !== version) {
+            next.version = version;
+            updates.push('version');
+        }
+    }
+
+    if (options.bumpVersion) {
+        const currentVersion = Number(next.version || 0);
+        next.version = currentVersion + 1;
+        updates.push('version');
+    }
+
+    const dryRun = Boolean(options.dryRun);
+    if (!updates.length) {
+        return {
+            success: true,
+            updated: false,
+            dryRun,
+            pluginPath: path.relative(workspaceRoot, pluginPath),
+            metadata: next,
+            message: 'No metadata changes detected.'
+        };
+    }
+
+    if (!dryRun) {
+        plugin.metadata = next;
+        fs.writeFileSync(pluginPath, `${JSON.stringify(plugin, null, 2)}\n`, 'utf8');
+    }
+
+    return {
+        success: true,
+        updated: !dryRun,
+        dryRun,
+        pluginPath: path.relative(workspaceRoot, pluginPath),
+        changedFields: Array.from(new Set(updates)),
+        metadata: next
+    };
 }
 
 function scaffoldExtension(workspaceRoot, options = {}) {
@@ -175,33 +284,16 @@ function scaffoldExtension(workspaceRoot, options = {}) {
     copyDirRecursive(config.templateDir, config.outputDir);
     updateGeneratedPluginJson(config, config.outputDir);
 
-    let lintReport = null;
-    if (!config.skipLint) {
-        lintReport = runLint(workspaceRoot, config.outputDir, {
-            scanReferences: false,
-            enableRhinoChecks: true
-        });
-
-        if (lintReport.summary.counts.error > 0) {
-            return {
-                success: false,
-                generated: true,
-                ...planned,
-                lintReport
-            };
-        }
-    }
-
     return {
         success: true,
         generated: true,
-        ...planned,
-        lintReport
+        ...planned
     };
 }
 
 module.exports = {
     scaffoldExtension,
+    updateExistingExtension,
     askIfMissing,
     ALLOWED_TYPES,
     ALLOWED_LOCALES

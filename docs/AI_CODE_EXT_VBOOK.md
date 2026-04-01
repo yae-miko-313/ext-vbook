@@ -1,17 +1,16 @@
 ﻿# Agent Guide — VBook Extension
 
-Tài liệu này dành cho agent và contributor khi viết/sửa extension.
+Tài liệu này dành cho agent và contributor khi viết/sửa extension ở phân vùng cá nhân của repo.
 
 ## 1. Workflow bắt buộc
 
-`Research -> Implement -> Lint -> Fix -> Verify -> Build`
+`Research -> Implement -> Edit metadata -> Build -> Rebuild catalog`
 
 - Research: kiểm tra DOM/XHR live site trước khi code.
-- Implement: tất cả script bắt đầu bằng `function execute(...)`.
-- Lint: `npx vbook lint --plugin <path>`.
-- Fix: `npx vbook fix --plugin <path> --write`.
-- Verify: `npx vbook verify --mode offline --plugin <path>`.
+- Implement: viết code trong `src/` theo contract của extension.
+- Edit metadata: dùng `vbook ext --mode edit` để cập nhật `plugin.json`.
 - Build: `npx vbook build --plugin <path>`.
+- Rebuild catalog: `npx vbook build-catalog`.
 
 ## 2. Rhino contract
 
@@ -49,6 +48,7 @@ Tài liệu này dành cho agent và contributor khi viết/sửa extension.
 - Lỗi page next: `next` nên trả về string.
 - Lỗi runtime: đảm bảo có `execute` và không dùng syntax không hỗ trợ.
 - Lỗi duplicate policy: tránh tạo extension trùng `source + author`.
+- Lỗi package: chạy `vbook build` để kiểm tra `src/` + `icon.png` có đủ không.
 
 ## 6. Legal/Safety Rules
 
@@ -56,7 +56,13 @@ Tài liệu này dành cho agent và contributor khi viết/sửa extension.
 - Không merge extension vi phạm policy nội bộ.
 - Luôn review lại source và metadata trước khi commit.
 
-## 7. Đọc thêm
+## 7. Phân vùng repo
+
+- `extensions/` và `tools/cli/` là phân vùng cá nhân.
+- `ref/` và `web/` là phân vùng cộng đồng.
+- Khi viết extension, chỉ quan tâm tới phân vùng cá nhân; catalog cộng đồng được xử lý bởi workflow riêng.
+
+## 8. Đọc thêm
 
 - `docs/REFERENCE_REPOS.md`
 - `docs/CONTRIBUTING.md`
