@@ -21,7 +21,7 @@ Tạo file `.env` tại thư mục gốc:
 VBOOK_IP=192.168.1.100
 LOCAL_PORT=8080
 VBOOK_PORT=8080
-VBOOK_AUTHOR=kychi
+VBOOK_AUTHOR=tên_của_bạn
 ```
 
 ## Workflow chính
