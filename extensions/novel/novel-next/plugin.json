@@ -6,7 +6,7 @@
     "source": "https://novel-next.com",
     "regexp": "^(?:https?:\\/\\/)?(?:www\\.)?novel-next\\.com\\/novel\\/[^\\/]+\\/?$",
     "description": "Đọc truyện trên trang Novel Next",
-    "locale": "en-US",
+    "locale": "en_US",
     "type": "novel",
     "language": "javascript",
     "encrypt": true

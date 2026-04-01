@@ -6,7 +6,7 @@
     "source": "https://monkeydtruyen.com",
     "regexp": "(www\\.)?monkeydtruyen(.*?)\\/[0-9a-z-]+\\.html",
     "description": "Đọc truyện MonkeyD",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "novel",
     "encrypt": true

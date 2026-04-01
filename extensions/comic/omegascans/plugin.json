@@ -6,7 +6,7 @@
     "source": "https://omegascans.org",
     "regexp": "(www.)?omegascans.org/series/[0-9a-z-]+/?$",
     "description": "Chỉ đọc chương Free",
-    "locale": "en_EN",
+    "locale": "en_US",
     "language": "javascript",
     "type": "comic"
   },

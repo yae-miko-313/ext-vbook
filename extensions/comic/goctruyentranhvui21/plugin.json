@@ -6,7 +6,7 @@
     "source": "https://goctruyentranhvui21.com/",
     "regexp": "(www.)?goctruyentranhvui[a-z0-9]+.com/truyen/[0-9a-z-]+/?",
     "description": "Xem truyện tại Góc truyện tranh",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "comic"
   },

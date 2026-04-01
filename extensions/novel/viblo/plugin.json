@@ -6,7 +6,7 @@
     "source": "https://viblo.asia",
     "regexp": "^https?:\\/\\/viblo\\.asia\\/p\\/[a-z0-9-]+-[A-Za-z0-9]+$",
     "description": "Đọc viblo trên vbook",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"
   },

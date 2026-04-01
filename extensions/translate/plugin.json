@@ -7,7 +7,7 @@
     "source": "https://gemini.google.com",
     "version": 84,
     "type": "translate",
-    "locale": null,
+    "locale": "vi_VN",
     "relativePath": "extensions/translate/aistudio",
     "metadata": {
       "name": "Gemini Baidu Translate change Model V2.0",
@@ -16,7 +16,8 @@
       "source": "https://gemini.google.com",
       "description": "Dịch văn bản bằng Google Gemini API với nhiều key, prompt, tùy chỉnh theo thể loại và xử lý lỗi an toàn thông minh. DONATE CHO ADMIN VBOOK NHIỀU LÊN ĐỂ VỪA CÓ TÊN ĐẸP, ADMIN LẠI CÓ THÊM ĐỘNG LỰC HOÀN THIỆN APP\nHDSD:\n1. Lấy API Key Gemini từ https://aistudio.google.com/apikey (cần tài khoản trả phí mới dùng được một số model)\n2. Nhập API Key vào mục cấu hình, có thể nhập nhiều key, mỗi key trên một dòng\n3. Một số biến Bộ nhớ cục bộ cần lưu ý:\nvb_stopWord : từ rác sẽ không được dùng khi lọc name\nvb_stopWord_dic : Danh sách các từ dừng mặc định\nvb_basic_dic : Từ điển cơ bản có thể dùng trong quá trình dịch tất cá các truyện\nvb_Hau_to_bo_sung : danh sách các hậu tố bồ sung dùng để lọc name\nvb_Ho_bo_sung : danh sách các họ bổ sung dùng để lọc name\n",
       "type": "translate",
-      "encrypt": true
+      "encrypt": true,
+      "locale": "vi_VN"
     }
   },
   {

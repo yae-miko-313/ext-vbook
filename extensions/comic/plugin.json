@@ -490,28 +490,6 @@
     }
   },
   {
-    "folder": "docgiaso1",
-    "name": "Độc giả số 1",
-    "author": "B",
-    "description": "Đọc truyện trên trang Net Truyện",
-    "source": "https://docgiaso1.com",
-    "version": 1,
-    "type": "comic",
-    "locale": "vi_VN",
-    "relativePath": "extensions/comic/docgiaso1",
-    "metadata": {
-      "name": "Độc giả số 1",
-      "author": "B",
-      "version": 1,
-      "source": "https://docgiaso1.com",
-      "regexp": "https://(www.)?docgiaso1.com/truyen-.*?.html",
-      "description": "Đọc truyện trên trang Net Truyện",
-      "locale": "vi_VN",
-      "language": "javascript",
-      "type": "comic"
-    }
-  },
-  {
     "folder": "doctruyen3q",
     "name": "Đọc Truyện 3Q",
     "author": "Nhocconsr",
@@ -696,29 +674,6 @@
     }
   },
   {
-    "folder": "dualeotruyenza",
-    "name": "Dưa Leo Truyện",
-    "author": "B",
-    "description": "Đọc truyện trên trang dualeotruyen",
-    "source": "https://dualeotruyenyk.com/",
-    "version": 16,
-    "type": "comic",
-    "locale": "vi_VN",
-    "relativePath": "extensions/comic/dualeotruyenza",
-    "metadata": {
-      "name": "Dưa Leo Truyện",
-      "author": "B",
-      "version": 16,
-      "source": "https://dualeotruyenyk.com/",
-      "regexp": "dualeotruyen.*?/truyen-tranh/.*?",
-      "description": "Đọc truyện trên trang dualeotruyen",
-      "locale": "vi_VN",
-      "language": "javascript",
-      "type": "comic",
-      "tag": "nsfw"
-    }
-  },
-  {
     "folder": "e-hentai",
     "name": "E Hentai",
     "author": "vBook",
@@ -839,7 +794,7 @@
     "source": "https://goctruyentranhvui21.com/",
     "version": 38,
     "type": "comic",
-    "locale": "vi-VN",
+    "locale": "vi_VN",
     "relativePath": "extensions/comic/goctruyentranhvui21",
     "metadata": {
       "name": "Góc Truyện Tranh",
@@ -848,7 +803,7 @@
       "source": "https://goctruyentranhvui21.com/",
       "regexp": "(www.)?goctruyentranhvui[a-z0-9]+.com/truyen/[0-9a-z-]+/?",
       "description": "Xem truyện tại Góc truyện tranh",
-      "locale": "vi-VN",
+      "locale": "vi_VN",
       "language": "javascript",
       "type": "comic"
     }
@@ -1265,6 +1220,29 @@
     }
   },
   {
+    "folder": "htfox",
+    "name": "Hentaifox.com",
+    "author": "TuanHai03",
+    "description": "Fix lỗi load ảnh",
+    "source": "https://hentaifox.com/",
+    "version": 3,
+    "type": "comic",
+    "locale": "vi_VN",
+    "relativePath": "extensions/comic/htfox",
+    "metadata": {
+      "name": "Hentaifox.com",
+      "author": "TuanHai03",
+      "version": 3,
+      "source": "https://hentaifox.com/",
+      "regexp": "(www.)?hentaifox.com/gallery/(\\d+)/?$",
+      "description": "Fix lỗi load ảnh",
+      "language": "javascript",
+      "type": "comic",
+      "tag": "nsfw",
+      "locale": "vi_VN"
+    }
+  },
+  {
     "folder": "ihentai",
     "name": "ihentai",
     "author": "hajljnopera",
@@ -1349,28 +1327,6 @@
       "regexp": "(www.)?klz9.com/[a-z-]+.html",
       "description": "Đọc truyện trên trang klz9.com. Nếu bị lỗi extention bạn có thể báo cáo qua email: phamgiavang@gmail.com",
       "locale": "en_US",
-      "language": "javascript",
-      "type": "comic"
-    }
-  },
-  {
-    "folder": "klz9",
-    "name": "KissLove (Raw)",
-    "author": "Nhocconsr",
-    "description": "Đọc truyện trên trang klz9.com. Nếu bị lỗi extention bạn có thể báo cáo qua email: phamgiavang@gmail.com",
-    "source": "https://klz9.com",
-    "version": 4,
-    "type": "comic",
-    "locale": "en_EN",
-    "relativePath": "extensions/comic/klz9",
-    "metadata": {
-      "name": "KissLove (Raw)",
-      "author": "Nhocconsr",
-      "version": 4,
-      "source": "https://klz9.com",
-      "regexp": "(www.)?klz9.com/[a-z-]+.html",
-      "description": "Đọc truyện trên trang klz9.com. Nếu bị lỗi extention bạn có thể báo cáo qua email: phamgiavang@gmail.com",
-      "locale": "en_EN",
       "language": "javascript",
       "type": "comic"
     }
@@ -1825,6 +1781,29 @@
     }
   },
   {
+    "folder": "ManhwasMen",
+    "name": "ManhwasMen",
+    "author": "Cá Mụp Cắn Cáp",
+    "description": "Truyện 18+",
+    "source": "https://manhwas.men/",
+    "version": 2,
+    "type": "comic",
+    "locale": "vi_VN",
+    "relativePath": "extensions/comic/ManhwasMen",
+    "metadata": {
+      "name": "ManhwasMen",
+      "author": "Cá Mụp Cắn Cáp",
+      "version": 2,
+      "source": "https://manhwas.men/",
+      "regexp": "(www.)?manhwas.men/manga/[^/].+/?$",
+      "description": "Truyện 18+",
+      "language": "javascript",
+      "type": "comic",
+      "tag": "nsfw",
+      "locale": "vi_VN"
+    }
+  },
+  {
     "folder": "medoctruyentranh",
     "name": "Mê Đọc Truyện Tranh",
     "author": "vBook",
@@ -1844,29 +1823,6 @@
       "locale": "vi_VN",
       "language": "javascript",
       "type": "comic"
-    }
-  },
-  {
-    "folder": "Men18",
-    "name": "Men18",
-    "author": "B",
-    "description": "Đọc truyện trên trang men18",
-    "source": "https://hen18.vip/",
-    "version": 4,
-    "type": "comic",
-    "locale": "vi_VN",
-    "relativePath": "extensions/comic/Men18",
-    "metadata": {
-      "name": "Men18",
-      "author": "B",
-      "version": 4,
-      "source": "https://hen18.vip/",
-      "regexp": "https://hen18.(.*?)/(.*?)/",
-      "description": "Đọc truyện trên trang men18",
-      "locale": "vi_VN",
-      "language": "javascript",
-      "type": "comic",
-      "tag": "nsfw"
     }
   },
   {
@@ -1958,28 +1914,6 @@
       "language": "javascript",
       "type": "comic",
       "encrypt": true
-    }
-  },
-  {
-    "folder": "nettrom",
-    "name": "Cứu Truyện",
-    "author": "vBook",
-    "description": "Đọc truyện trên trang Cứu Truyện",
-    "source": "https://nettrom.com",
-    "version": 4,
-    "type": "comic",
-    "locale": null,
-    "relativePath": "extensions/comic/nettrom",
-    "metadata": {
-      "name": "Cứu Truyện",
-      "author": "vBook",
-      "version": 4,
-      "source": "https://nettrom.com",
-      "regexp": "(www.)?(cuutruyen|cuutruyent9sv7|hetcuutruyen|nettrom).(net|xyz|com)/mangas/\\d+/?",
-      "description": "Đọc truyện trên trang Cứu Truyện",
-      "local": "vi-VN",
-      "language": "javascript",
-      "type": "comic"
     }
   },
   {
@@ -2124,7 +2058,7 @@
     "source": "https://omegascans.org",
     "version": 1,
     "type": "comic",
-    "locale": "en_EN",
+    "locale": "en_US",
     "relativePath": "extensions/comic/omegascans",
     "metadata": {
       "name": "Omega Scans [EN]",
@@ -2133,7 +2067,7 @@
       "source": "https://omegascans.org",
       "regexp": "(www.)?omegascans.org/series/[0-9a-z-]+/?$",
       "description": "Chỉ đọc chương Free",
-      "locale": "en_EN",
+      "locale": "en_US",
       "language": "javascript",
       "type": "comic"
     }
@@ -2236,28 +2170,6 @@
     "type": "comic",
     "locale": "vi_VN",
     "relativePath": "extensions/comic/qmanga",
-    "metadata": {
-      "name": "QManga",
-      "author": "vBook",
-      "version": 9,
-      "source": "https://qmanga8.com",
-      "regexp": "(www.)?qmanga.*?(net|co|com)/[^/]+.html$",
-      "description": "Đọc truyện trên trang QManga",
-      "locale": "vi_VN",
-      "language": "javascript",
-      "type": "comic"
-    }
-  },
-  {
-    "folder": "qmanga8",
-    "name": "QManga",
-    "author": "vBook",
-    "description": "Đọc truyện trên trang QManga",
-    "source": "https://qmanga8.com",
-    "version": 9,
-    "type": "comic",
-    "locale": "vi_VN",
-    "relativePath": "extensions/comic/qmanga8",
     "metadata": {
       "name": "QManga",
       "author": "vBook",
@@ -2894,28 +2806,6 @@
     }
   },
   {
-    "folder": "umetruyenz",
-    "name": "U Mê Truyện",
-    "author": "vBook",
-    "description": "Đọc truyện trên trang U Mê Truyện",
-    "source": "https://umetruyenz.org/",
-    "version": 11,
-    "type": "comic",
-    "locale": "vi_VN",
-    "relativePath": "extensions/comic/umetruyenz",
-    "metadata": {
-      "name": "U Mê Truyện",
-      "author": "vBook",
-      "version": 11,
-      "source": "https://umetruyenz.org/",
-      "regexp": "(www.)?umetruyen.*?/[^/]+.html$",
-      "description": "Đọc truyện trên trang U Mê Truyện",
-      "locale": "vi_VN",
-      "language": "javascript",
-      "type": "comic"
-    }
-  },
-  {
     "folder": "ungtycomics",
     "name": "Ưng Tỷ Comics",
     "author": "QuocBao",
@@ -2925,28 +2815,6 @@
     "type": "comic",
     "locale": "vi_VN",
     "relativePath": "extensions/comic/ungtycomics",
-    "metadata": {
-      "name": "Ưng Tỷ Comics",
-      "author": "QuocBao",
-      "version": 1,
-      "source": "https://ungtycomicseo.com/",
-      "regexp": "https://ungtycomics[^/]+.com/[^/]+.html$",
-      "description": "Đọc truyện trên trang Ưng Tỷ Comics",
-      "locale": "vi_VN",
-      "language": "javascript",
-      "type": "comic"
-    }
-  },
-  {
-    "folder": "ungtycomicseo",
-    "name": "Ưng Tỷ Comics",
-    "author": "QuocBao",
-    "description": "Đọc truyện trên trang Ưng Tỷ Comics",
-    "source": "https://ungtycomicseo.com/",
-    "version": 1,
-    "type": "comic",
-    "locale": "vi_VN",
-    "relativePath": "extensions/comic/ungtycomicseo",
     "metadata": {
       "name": "Ưng Tỷ Comics",
       "author": "QuocBao",

@@ -22,28 +22,6 @@
     }
   },
   {
-    "folder": "123duw",
-    "name": "123ds",
-    "author": "B",
-    "description": "Đọc truyện trên trang https://www.123duw.com",
-    "source": "https://www.123duw.com",
-    "version": 3,
-    "type": "chinese_novel",
-    "locale": "zh_CN",
-    "relativePath": "extensions/chinese_novel/123duw",
-    "metadata": {
-      "name": "123ds",
-      "author": "B",
-      "version": 3,
-      "source": "https://www.123duw.com",
-      "regexp": "https://?(www.|m.)123duw.com/(.*?)/\\d+/",
-      "description": "Đọc truyện trên trang https://www.123duw.com",
-      "locale": "zh_CN",
-      "language": "javascript",
-      "type": "chinese_novel"
-    }
-  },
-  {
     "folder": "17k",
     "name": "17k",
     "author": "hajljnopera",
@@ -630,7 +608,7 @@
     "source": "https://b.faloo.com",
     "version": 5,
     "type": "chinese_novel",
-    "locale": "zh-CN",
+    "locale": "zh_CN",
     "relativePath": "extensions/chinese_novel/b",
     "metadata": {
       "name": "bFaloo (飞卢小说)",
@@ -639,7 +617,7 @@
       "source": "https://b.faloo.com",
       "regexp": "(www.)?((b.faloo.com/\\d+.html)|(wap.faloo.com/\\d+.html))",
       "description": "Nếu có lỗi bạn có thể liên hệ tới Email: phamgiavang@gmail.com",
-      "locale": "zh-CN",
+      "locale": "zh_CN",
       "language": "javascript",
       "type": "chinese_novel"
     }
@@ -661,28 +639,6 @@
       "source": "http://www.b520.cc",
       "regexp": "(www.|m.)?b520.cc/\\d+_\\d+/?$",
       "description": "Đọc truyện trên trang http://www.b520.cc",
-      "locale": "zh_CN",
-      "language": "javascript",
-      "type": "chinese_novel"
-    }
-  },
-  {
-    "folder": "bfaloo",
-    "name": "bFaloo (飞卢小说)",
-    "author": "Nhocconsr",
-    "description": "Nếu có lỗi bạn có thể liên hệ tới Email: phamgiavang@gmail.com",
-    "source": "https://b.faloo.com",
-    "version": 5,
-    "type": "chinese_novel",
-    "locale": "zh_CN",
-    "relativePath": "extensions/chinese_novel/bfaloo",
-    "metadata": {
-      "name": "bFaloo (飞卢小说)",
-      "author": "Nhocconsr",
-      "version": 5,
-      "source": "https://b.faloo.com",
-      "regexp": "(www.)?((b.faloo.com/\\d+.html)|(wap.faloo.com/\\d+.html))",
-      "description": "Nếu có lỗi bạn có thể liên hệ tới Email: phamgiavang@gmail.com",
       "locale": "zh_CN",
       "language": "javascript",
       "type": "chinese_novel"
@@ -784,30 +740,8 @@
     "source": "https://book.qq.com",
     "version": 1,
     "type": "chinese_novel",
-    "locale": "zh-CN",
-    "relativePath": "extensions/chinese_novel/book",
-    "metadata": {
-      "name": "Book QQ [阅读]",
-      "author": "Nhocconsr",
-      "version": 1,
-      "source": "https://book.qq.com",
-      "regexp": "(www.)?(ubook.reader|book).qq.com/book-detail/\\d+/?$",
-      "description": "Book QQ",
-      "locale": "zh-CN",
-      "language": "javascript",
-      "type": "chinese_novel"
-    }
-  },
-  {
-    "folder": "bookqq",
-    "name": "Book QQ [阅读]",
-    "author": "Nhocconsr",
-    "description": "Book QQ",
-    "source": "https://book.qq.com",
-    "version": 1,
-    "type": "chinese_novel",
     "locale": "zh_CN",
-    "relativePath": "extensions/chinese_novel/bookqq",
+    "relativePath": "extensions/chinese_novel/book",
     "metadata": {
       "name": "Book QQ [阅读]",
       "author": "Nhocconsr",
@@ -861,6 +795,28 @@
       "description": "Đọc truyện trên trang bqxs520.com",
       "locale": "zh_CN",
       "language": "javascript",
+      "type": "chinese_novel"
+    }
+  },
+  {
+    "folder": "cachua",
+    "name": "Cà Chua",
+    "author": "mizhm",
+    "description": "Cà Chua",
+    "source": "https://fanqienovel.com",
+    "version": 8,
+    "type": "chinese_novel",
+    "locale": "zh_CN",
+    "relativePath": "extensions/chinese_novel/cachua",
+    "metadata": {
+      "name": "Cà Chua",
+      "author": "mizhm",
+      "version": 8,
+      "source": "https://fanqienovel.com",
+      "regexp": "https://fanqienovel.com/(.*?)$",
+      "description": "Cà Chua",
+      "locale": "zh_CN",
+      "tag": "",
       "type": "chinese_novel"
     }
   },
@@ -1020,6 +976,28 @@
     }
   },
   {
+    "folder": "ddxsfix",
+    "name": "ddxs",
+    "author": "BQY",
+    "description": "Đọc truyện trên trang ddxs.com",
+    "source": "https://www.ddxs.com",
+    "version": 1,
+    "type": "chinese_novel",
+    "locale": "zh_CN",
+    "relativePath": "extensions/chinese_novel/ddxsfix",
+    "metadata": {
+      "name": "ddxs",
+      "author": "BQY",
+      "version": 1,
+      "source": "https://www.ddxs.com",
+      "regexp": "https://(www.|m.)?ddxs.com/(.*?)/",
+      "description": "Đọc truyện trên trang ddxs.com",
+      "locale": "zh_CN",
+      "language": "javascript",
+      "type": "chinese_novel"
+    }
+  },
+  {
     "folder": "deqixs",
     "name": "得奇小说网 - deqixs",
     "author": "Đường đen",
@@ -1062,28 +1040,6 @@
       "language": "javascript",
       "type": "chinese_novel",
       "locale": "vi_VN"
-    }
-  },
-  {
-    "folder": "dingdian666",
-    "name": "Dingdian 【顶点】",
-    "author": "Nhocconsr",
-    "description": "Nếu lỗi báo cáo email : phamgiavang@gmail.com hoặc discord.Extention này cover méo có đâu nên đừng bảo lỗi nhé :)",
-    "source": "https://www.dingdian666.com",
-    "version": 1,
-    "type": "chinese_novel",
-    "locale": null,
-    "relativePath": "extensions/chinese_novel/dingdian666",
-    "metadata": {
-      "name": "Dingdian 【顶点】",
-      "author": "Nhocconsr",
-      "version": 1,
-      "source": "https://www.dingdian666.com",
-      "regexp": "(www.)?((dingdian666.com/xiaoshuo/\\d+/?$)|(m.dingdian666.com/ebooks/\\d+/?$))",
-      "description": "Nếu lỗi báo cáo email : phamgiavang@gmail.com hoặc discord.Extention này cover méo có đâu nên đừng bảo lỗi nhé :)",
-      "local": "vi-VN",
-      "language": "javascript",
-      "type": "chinese_novel"
     }
   },
   {
@@ -1148,28 +1104,6 @@
       "source": "https://m.ebookbao6.com",
       "regexp": "https://m.ebookbao6.com/book/\\d+/",
       "description": "Có thể sửa domain bằng mã bổ sung. Đọc truyện trên trang https://m.ebookbao6.com/",
-      "locale": "zh_CN",
-      "language": "javascript",
-      "type": "chinese_novel"
-    }
-  },
-  {
-    "folder": "elysia",
-    "name": "Elysia",
-    "author": "Moleys",
-    "description": "Support by Nhocconsr",
-    "source": "https://mnz.nhimmeo.cf",
-    "version": 8,
-    "type": "chinese_novel",
-    "locale": "zh_CN",
-    "relativePath": "extensions/chinese_novel/elysia",
-    "metadata": {
-      "name": "Elysia",
-      "author": "Moleys",
-      "version": 8,
-      "source": "https://mnz.nhimmeo.cf",
-      "regexp": "(cwm.elysia.rip|mnz.nhimmeo.cf|cwm-c-2.elysia.rip|cwm-n-1.elysia.rip|cwm-n-1.elysia.rip)/(book|detail)/(\\d+)",
-      "description": "Support by Nhocconsr",
       "locale": "zh_CN",
       "language": "javascript",
       "type": "chinese_novel"
@@ -1286,6 +1220,50 @@
     }
   },
   {
+    "folder": "fq",
+    "name": "Fanqie",
+    "author": "TuanHai03",
+    "description": "Hỗ trợ đọc truyện bị gỡ trên fanqie",
+    "source": "https://fanqienovel.com",
+    "version": 1,
+    "type": "chinese_novel",
+    "locale": "zh_CN",
+    "relativePath": "extensions/chinese_novel/fq",
+    "metadata": {
+      "name": "Fanqie",
+      "author": "TuanHai03",
+      "version": 1,
+      "source": "https://fanqienovel.com",
+      "regexp": "api.api-fanqienovel.sunianyun.live/info(.*?)|list.fqapi.jilulu.cn/info(.*?)|fanqienovel.com/page/(\\d+)\\?.*|fanqienovel.com/info(.*?)|sangtacviet.[a-z]{2,}/truyen/fanqie/1/(\\d+)/?",
+      "description": "Hỗ trợ đọc truyện bị gỡ trên fanqie",
+      "locale": "zh_CN",
+      "language": "javascript",
+      "type": "chinese_novel"
+    }
+  },
+  {
+    "folder": "fqweb",
+    "name": "FQWeb Universal",
+    "author": "Chanhnh",
+    "description": "Fanqie Web Universal. Chỉ dùng được trên vBook beta\nDành cho mục đích phát triển\nCần tham khảo ý kiến các chiên da để sử dụng\nCấu hình các thông tin API trong phần <Cài đặt> ở dưới trước khi sử dụng",
+    "source": "https://fanqienovel.com",
+    "version": 2,
+    "type": "chinese_novel",
+    "locale": "zh_CN",
+    "relativePath": "extensions/chinese_novel/fqweb",
+    "metadata": {
+      "name": "FQWeb Universal",
+      "author": "Chanhnh",
+      "version": 2,
+      "source": "https://fanqienovel.com",
+      "regexp": "fanqienovel.com/page/(\\d+)|fanqienovel.com/info(.*?)",
+      "description": "Fanqie Web Universal. Chỉ dùng được trên vBook beta\nDành cho mục đích phát triển\nCần tham khảo ý kiến các chiên da để sử dụng\nCấu hình các thông tin API trong phần <Cài đặt> ở dưới trước khi sử dụng",
+      "locale": "zh_CN",
+      "language": "javascript",
+      "type": "chinese_novel"
+    }
+  },
+  {
     "folder": "fuxsb",
     "name": "fuxsb 👨‍❤️‍👨👩‍❤️‍👩",
     "author": "Moleys",
@@ -1391,28 +1369,6 @@
       "source": "https://www.hetushu.com",
       "regexp": "(www.)?(m.)?hetushu.com/book/\\d+/index.html",
       "description": "Lỗi extension liên hệ email: phamgiavang@gmail.com",
-      "locale": "zh_CN",
-      "language": "javascript",
-      "type": "chinese_novel"
-    }
-  },
-  {
-    "folder": "html5qq",
-    "name": "html5.qq.com",
-    "author": "Moleys",
-    "description": "Đọc truyện trên trang https://bookshelf.html5.qq.com",
-    "source": "https://bookshelf.html5.qq.com/qbread/categorylist?traceid=0809004&sceneid=FeedsTab&strageid=&ch=001995&tabfrom=top&feeds_version=8516&reader_version=0&groupid=1502&tag_type_id=1%27",
-    "version": 8,
-    "type": "chinese_novel",
-    "locale": "zh_CN",
-    "relativePath": "extensions/chinese_novel/html5qq",
-    "metadata": {
-      "name": "html5.qq.com",
-      "author": "Moleys",
-      "version": 8,
-      "source": "https://bookshelf.html5.qq.com/qbread/categorylist?traceid=0809004&sceneid=FeedsTab&strageid=&ch=001995&tabfrom=top&feeds_version=8516&reader_version=0&groupid=1502&tag_type_id=1%27",
-      "regexp": "(bookshelf|novel)\\.html5\\.qq\\.com/(qbread|autojump|portal/novel-intro)(\\?.*)?",
-      "description": "Đọc truyện trên trang https://bookshelf.html5.qq.com",
       "locale": "zh_CN",
       "language": "javascript",
       "type": "chinese_novel"
@@ -1749,28 +1705,6 @@
     }
   },
   {
-    "folder": "legado",
-    "name": "Legado",
-    "author": "Moleys",
-    "description": "Đọc truyện qua app Legado, chi tiết vui lòng xem hướng dẫn trong Thảo luận",
-    "source": "https://github.com/gedoor/legado",
-    "version": 12,
-    "type": "chinese_novel",
-    "locale": "zh_CN",
-    "relativePath": "extensions/chinese_novel/legado",
-    "metadata": {
-      "name": "Legado",
-      "author": "Moleys",
-      "version": 12,
-      "source": "https://github.com/gedoor/legado",
-      "regexp": "((\\d+)[.](\\d+)[.](\\d+)[.](\\d+)|localhost):1122/(.*?)",
-      "description": "Đọc truyện qua app Legado, chi tiết vui lòng xem hướng dẫn trong Thảo luận",
-      "locale": "zh_CN",
-      "language": "javascript",
-      "type": "chinese_novel"
-    }
-  },
-  {
     "folder": "linovel",
     "name": "LiNovel 【轻小说文库】",
     "author": "Nhocconsr",
@@ -1978,28 +1912,6 @@
     "type": "chinese_novel",
     "locale": "zh_CN",
     "relativePath": "extensions/chinese_novel/mengyuanshucheng",
-    "metadata": {
-      "name": "mengyuanshucheng",
-      "author": "Moleys",
-      "version": 3,
-      "source": "https://www.mengyuanshuchengcn.com",
-      "regexp": "(www.|wap.)?mengyuanshuchengcn.com/(my|index)/(.*?).html",
-      "description": "Đọc truyện trên trang https://www.mengyuanshuchengcn.com/",
-      "locale": "zh_CN",
-      "language": "javascript",
-      "type": "chinese_novel"
-    }
-  },
-  {
-    "folder": "mengyuanshuchengcn",
-    "name": "mengyuanshucheng",
-    "author": "Moleys",
-    "description": "Đọc truyện trên trang https://www.mengyuanshuchengcn.com/",
-    "source": "https://www.mengyuanshuchengcn.com",
-    "version": 3,
-    "type": "chinese_novel",
-    "locale": "zh_CN",
-    "relativePath": "extensions/chinese_novel/mengyuanshuchengcn",
     "metadata": {
       "name": "mengyuanshucheng",
       "author": "Moleys",
@@ -2808,28 +2720,6 @@
     }
   },
   {
-    "folder": "shumilouxs",
-    "name": "shumilou",
-    "author": "Moleys",
-    "description": "Đọc truyện trên trang http://www.shumilouxs.com",
-    "source": "http://www.shumilouxs.com",
-    "version": 3,
-    "type": "chinese_novel",
-    "locale": "zh_CN",
-    "relativePath": "extensions/chinese_novel/shumilouxs",
-    "metadata": {
-      "name": "shumilou",
-      "author": "Moleys",
-      "version": 3,
-      "source": "http://www.shumilouxs.com",
-      "regexp": "(www.|m.)?shumilouxs.com/.*?",
-      "description": "Đọc truyện trên trang http://www.shumilouxs.com",
-      "locale": "zh_CN",
-      "language": "javascript",
-      "type": "chinese_novel"
-    }
-  },
-  {
     "folder": "shuqi",
     "name": "shuqi.com",
     "author": "longvuu",
@@ -2890,28 +2780,6 @@
       "regexp": "https://(www|m).shushuwuxs.com/(read(.*?)|new(.*?))",
       "description": "Đọc truyện trên trang http://www.shushuwuxs.cọm",
       "locale": "zh_CN",
-      "language": "javascript",
-      "type": "chinese_novel"
-    }
-  },
-  {
-    "folder": "sj",
-    "name": "qubook",
-    "author": "B",
-    "description": "Đọc truyện trên trang qubook.cc",
-    "source": "https://sj.qubook.cc/",
-    "version": 2,
-    "type": "chinese_novel",
-    "locale": "zh-CN",
-    "relativePath": "extensions/chinese_novel/sj",
-    "metadata": {
-      "name": "qubook",
-      "author": "B",
-      "version": 2,
-      "source": "https://sj.qubook.cc/",
-      "regexp": "sj.?qubook.cc/TXT/(.*?).html",
-      "description": "Đọc truyện trên trang qubook.cc",
-      "locale": "zh-CN",
       "language": "javascript",
       "type": "chinese_novel"
     }
@@ -3167,30 +3035,8 @@
     "source": "https://www.tushumi.cc/",
     "version": 1,
     "type": "chinese_novel",
-    "locale": null,
-    "relativePath": "extensions/chinese_novel/tushumi",
-    "metadata": {
-      "name": "tushumi.cc",
-      "author": "QuocBao",
-      "version": 1,
-      "source": "https://www.tushumi.cc/",
-      "regexp": "https://www.tushumi.cc/shu/\\d+/",
-      "description": "Đọc truyện ở tushumi.cc",
-      "local": "zh_CN",
-      "language": "javascript",
-      "type": "chinese_novel"
-    }
-  },
-  {
-    "folder": "tushumi.cc",
-    "name": "tushumi.cc",
-    "author": "QuocBao",
-    "description": "Đọc truyện ở tushumi.cc",
-    "source": "https://www.tushumi.cc/",
-    "version": 1,
-    "type": "chinese_novel",
     "locale": "zh_CN",
-    "relativePath": "extensions/chinese_novel/tushumi.cc",
+    "relativePath": "extensions/chinese_novel/tushumi",
     "metadata": {
       "name": "tushumi.cc",
       "author": "QuocBao",
@@ -3337,28 +3183,6 @@
     }
   },
   {
-    "folder": "uuksorg",
-    "name": "uuksorg",
-    "author": "Moleys",
-    "description": "Đọc truyện trên trang https://www.uuks.org",
-    "source": "https://www.uuks.org",
-    "version": 1,
-    "type": "chinese_novel",
-    "locale": "zh_CN",
-    "relativePath": "extensions/chinese_novel/uuksorg",
-    "metadata": {
-      "name": "uuksorg",
-      "author": "Moleys",
-      "version": 1,
-      "source": "https://www.uuks.org",
-      "regexp": "(www.|m.)?uuks.org/(b|book)/\\d+(/?|\\.html)",
-      "description": "Đọc truyện trên trang https://www.uuks.org",
-      "locale": "zh_CN",
-      "language": "javascript",
-      "type": "chinese_novel"
-    }
-  },
-  {
     "folder": "uuxs",
     "name": "uuxs",
     "author": "bexom",
@@ -3375,6 +3199,28 @@
       "source": "https://www.uuxs.com/",
       "regexp": "https://www.uuxs.com/(.*?)/?$",
       "description": "Đọc truyện trên trang uuxs",
+      "locale": "zh_CN",
+      "language": "javascript",
+      "type": "chinese_novel"
+    }
+  },
+  {
+    "folder": "wattpad",
+    "name": "Wattpad ver dịch",
+    "author": "AleshaOnOn",
+    "description": "Đọc truyện trên trang Wattpad",
+    "source": "https://wattpad.com",
+    "version": 1,
+    "type": "chinese_novel",
+    "locale": "zh_CN",
+    "relativePath": "extensions/chinese_novel/wattpad",
+    "metadata": {
+      "name": "Wattpad ver dịch",
+      "author": "AleshaOnOn",
+      "version": 1,
+      "source": "https://wattpad.com",
+      "regexp": "(www.)?wattpad.com/story/\\d+.*?/?$",
+      "description": "Đọc truyện trên trang Wattpad",
       "locale": "zh_CN",
       "language": "javascript",
       "type": "chinese_novel"
@@ -3431,7 +3277,7 @@
     "source": "https://www.x33xs6.com",
     "version": 2,
     "type": "chinese_novel",
-    "locale": null,
+    "locale": "zh_CN",
     "relativePath": "extensions/chinese_novel/x33xs6",
     "metadata": {
       "name": "x33xs4",
@@ -3440,9 +3286,9 @@
       "source": "https://www.x33xs6.com",
       "regexp": "(www.|m.)x33xs(.*?).com/33xs/\\d+/\\d+/?$",
       "description": "Đọc truyện trên trang x33xs6.com",
-      "local": "zh-CN",
       "language": "javascript",
-      "type": "chinese_novel"
+      "type": "chinese_novel",
+      "locale": "zh_CN"
     }
   },
   {

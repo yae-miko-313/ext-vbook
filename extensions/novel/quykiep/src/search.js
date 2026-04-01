@@ -1,21 +1,23 @@
-load('config.js')
+load("config.js");
+
 function execute(key, page) {
-    let response = fetch(`https://quykiep.com/api/book-search`,{
-        method : 'POST',
-        body : {keyword: key}
-    })
-    if (response.ok){
-        let $ = response.json()
-        let list = []
-        $.data.forEach(book => {
-            list.push({
-                name: book.name,
-                link: `https://quykiep.com/truyen/${book.slug}`,
-                cover: 'https://static.quykiep.com/cdn-cgi/image/w=150,f=auto'+book.coverUrl,
-                description: book.lastChapterName,
-                host: BASE_URL,
-            })
-        });
-        return Response.success(list)
-    }
+	const data = fetch(`${BASE_URL}/api/book-search`, {
+		method: "POST",
+		body: JSON.stringify({
+			keyword: key,
+		}),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	}).json();
+	const list = data.data.map((book) => {
+		return {
+			name: book.name,
+			link: `${BASE_URL}/truyen/${book.slug}`,
+			host: BASE_URL,
+			cover: `${BASE_URL.replace("quykiep", "static.quykiep")}${book.coverUrl}`,
+			description: book.introduction,
+		};
+	});
+	return Response.success(list, null);
 }

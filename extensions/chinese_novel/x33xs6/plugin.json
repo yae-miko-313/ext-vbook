@@ -6,9 +6,9 @@
     "source": "https://www.x33xs6.com",
     "regexp": "(www.|m.)x33xs(.*?).com/33xs/\\d+/\\d+/?$",
     "description": "Đọc truyện trên trang x33xs6.com",
-    "local": "zh-CN",
     "language": "javascript",
-    "type": "chinese_novel"
+    "type": "chinese_novel",
+    "locale": "zh_CN"
   },
   "script": {
     "home": "home.js",

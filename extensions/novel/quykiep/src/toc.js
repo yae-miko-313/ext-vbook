@@ -1,17 +1,13 @@
-load('base64.js')
+load("config.js");
+
 function execute(url) {
-    let slug = url.split('/').pop()
-    let response = fetch(`https://api.quykiep.com/api/book/get-chapter-list-version-2/${slug}/21`)
-    if (response.ok){
-        let json = response.json()
-        let data = JSON.parse(Base64.decode(json.data))
-        let list = []
-        data.forEach((book) => {
-            list.push({
-                name: book.name,
-                url: url +'/'+ book.slug
-            })  
-        })
-        return Response.success(list)
-    }
+	const data = JSON.parse(fetch(url).html().select("#__NEXT_DATA__").html());
+	const list = data.props.pageProps.chapterList.map((chapter) => {
+		return {
+			name: chapter.name,
+			url: `${BASE_URL}/truyen/${data.props.pageProps.book.slug}/${chapter.slug}`,
+			host: BASE_URL,
+		};
+	});
+	return Response.success(list);
 }

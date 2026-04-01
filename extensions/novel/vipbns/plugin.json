@@ -2,19 +2,20 @@
   "metadata": {
     "name": "【VIP】Bạch Ngọc Sách",
     "author": "Nhocconsr",
-    "version": 1,
-    "source": "https://bnsvip.net",
-    "regexp": "(www.)?(bachngocsach.(info|pro|net.vn|io.vn)|bnsvip.(vn|com|com.vn|net))/truyen/[0-9a-z-]+/?",
-    "description": "New vesion! phamgiavang@gmail.com",
-    "locale": "vi_VN",
+    "version": 10,
+    "source": "https://bachngocsach.vip",
+    "regexp": "(www.)?bachngocsach.vip/truyen/[0-9a-z-]+/\\d+.html",
+    "description": "V8 : Fix lỗi load chương",
     "language": "javascript",
-    "type": "novel"
+    "type": "novel",
+    "locale": "vi_VN"
   },
   "script": {
     "home": "home.js",
     "genre": "genre.js",
     "detail": "detail.js",
     "search": "search.js",
+    "page": "page.js",
     "toc": "toc.js",
     "chap": "chap.js"
   }
