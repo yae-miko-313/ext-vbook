@@ -1,137 +1,79 @@
-# VBook Extension Tool
+﻿# VBook Tool
 
-CLI tool hỗ trợ phát triển, kiểm thử và đóng gói extension cho hệ thống VBook.
+CLI và bộ quy trình catalog cho hệ thống extension VBook.
 
-## Quick Start
+## Mục tiêu
 
-Setup file `.env` tại thư mục gốc của workspace:
-```env
-VBOOK_IP=192.168.1.100
-LOCAL_PORT=8080
-VBOOK_PORT=8080
-VBOOK_AUTHOR=your_name
-```
+- Đồng bộ extension từ nhiều nguồn.
+- Chuẩn hóa metadata và cấu trúc extension.
+- Build catalog để web viewer và app sử dụng.
+- Bảo vệ policy dedupe theo `source + author`.
+
+## Bắt đầu nhanh
 
 ```bash
 npm install
 ```
 
-**Workflow chuẩn 5 bước thiết kế Extension:**
-1. **Scaffold**: `npx vbook scaffold` - Khởi tạo bộ khung.
-2. **Lint**: `npx vbook lint --plugin extensions/[tên]` - Xác thực validate mã và metadata ban đầu.
-3. **Fix**: `npx vbook fix --plugin extensions/[tên] --write` - Tự động chữa lỗi sai format/Noise.
-4. **Verify Offline**: `npx vbook verify --mode offline --plugin extensions/[tên]` - Kiểm tra scripts an toàn.
-5. **Build**: `npx vbook build --plugin extensions/[tên]` - Xuất `plugin.zip` để test.
+Tạo file `.env` tại thư mục gốc:
 
-## CLI Commands & Structure
-
-CLI scripts đã được tổ chức lại thành 5 nhóm chính trong `tools/cli/`:
-
-- `core/`      : Tiện ích chung, utils, migration-utils
-- `build/`     : build-catalog, sort, inventory
-- `lint/`      : lint, health
-- `fix/`       : fix, batch-fix, ai-fix-queue
-- `scaffold/`  : scaffold, verify
-
-Tất cả lệnh CLI đều gọi qua entrypoint `tools/cli/index.js`.
-
-| Command         | Mô tả ngắn                                                                 | Status        |
-|-----------------|----------------------------------------------------------------------------|--------------|
-| `lint`          | Kiểm tra tính hợp lệ file `plugin.json` và cấu trúc mã nguồn.              | 🟢 Done      |
-| `health`        | Report tổng quan về lỗi nhiều extension (top-rules list).                  | 🟢 Done      |
-| `scaffold`      | Generates mã lệnh ext mới thông qua menu tương tác.                        | 🟢 Done      |
-| `fix`           | Autofix file rác, metadata typo, rule case issues.                         | 🟢 Done      |
-| `verify`        | Offline check các script function và Online test kết nối ping.              | 🟢 Done      |
-| `build`         | Đóng gói thư mục src/ icon.png thành `plugin.zip` .                        | 🟢 Done      |
-| `install`       | Sideload trực tiếp extension test lên Mobile IP port VBook.                | 🟢 Done      |
-| `test-all`      | 1-click test flow liên kết endpoint từ JS lên App (Home->Chap).            | 🟢 (Local)   |
-| `debug`         | Sandbox mode run bất kỳ hàm `js` độc lập trên terminal .                   | 🟢 (Local)   |
-| `inventory`     | Quét toàn bộ ext + refs, dedupe theo domain và xuất báo cáo inventory.     | 🟢 Done      |
-| `sort`          | Copy ext keepFlag vào nhóm type `extensions/{type}/{name}` (skip nếu đích tồn tại). | 🟢 Done |
-| `batch-fix`     | Chạy lint -> fix(write+cleanup) -> lint lại trên toàn bộ ext đã sort.      | 🟢 Done      |
-| `build-catalog` | Build catalog từng type và mega catalog `extensions/plugin.json`.           | 🟢 Done      |
-| `ai-fix-queue`  | Chạy vòng AI heuristic fix cho nhóm `needs_ai` với tối đa 2 attempts.      | 🟢 Done      |
-
-Ví dụ chạy CLI:
-
-```bash
-npx vbook lint --plugin extensions/ntruyen
-npx vbook fix --plugin extensions/ntruyen --write
-npx vbook build-catalog
+```env
+VBOOK_IP=192.168.1.100
+LOCAL_PORT=8080
+VBOOK_PORT=8080
+VBOOK_AUTHOR=kychi
 ```
 
-> **Lưu ý:**
-> - Scripts trong `package.json` đã được cập nhật để gọi đúng entrypoint mới.
-> - Có thể gọi trực tiếp qua `node tools/cli/index.js <command>` hoặc dùng alias `npx vbook <command>` nếu đã link.
+## Workflow chính
 
-## Mass Migration Workflow
+1. Đồng bộ full pipeline:
+   - `npm run full-sync`
+2. Kiểm tra duplicate policy:
+   - `npm run check:duplicates`
+3. Nếu sửa web:
+   - `npm run sync:web-catalog`
 
-Pipeline khuyến nghị cho hợp nhất hàng loạt extension:
+## Lệnh quan trọng
 
-```bash
-npx vbook inventory
-npx vbook sort --overwrite-existing --cleanup-root
-npx vbook batch-fix
-npx vbook ai-fix-queue
-npx vbook build-catalog
+- `npm run sync:sources`: Lấy metadata raw từ remote sources.
+- `npm run inventory`: Tạo inventory report.
+- `npm run sort`: Sắp xếp extension theo type vào `extensions/{type}/{name}`.
+- `npm run batch-fix`: Chạy lint/fix hàng loạt.
+- `npm run prune-policy-duplicates`: Loại bỏ extension vi phạm policy trùng source + author.
+- `npm run build-catalog`: Build `extensions/plugin.json` và `extensions/catalogs/*.plugin.json`.
+- `npm run check:duplicates`: Kiểm tra duplicate policy và ghi report.
+
+## Report Path
+
+Tất cả report runtime được ghi vào:
+
+- `tools/cli/reports/*.json`
+
+Không commit report json vào git.
+
+## Cấu trúc repo
+
+```text
+extensions/                 # Extension đã được phân loại
+   catalogs/                 # Catalog theo nhóm type
+tools/cli/                  # Lệnh CLI
+  build/
+  fix/
+  lint/
+  scaffold/
+web/                        # Web viewer catalog
+references/                 # Remote source references
 ```
 
-**Chi tiết đầy đủ:** Xem [`docs/rules/CLI_WORKFLOW_PHASES.md`](docs/rules/CLI_WORKFLOW_PHASES.md#workflow--best-practices)
+## Tài liệu
 
-Artifacts mặc định:
-- `tools/cli/reports/inventory.json`
-- `tools/cli/reports/sort-report.json`
-- `tools/cli/reports/fix-report.json`
-- `tools/cli/reports/ai-fix-report.json`
+- `docs/AI_CODE_EXT_VBOOK.md`: Contract cho agent khi viết extension.
+- `docs/CONTRIBUTING.md`: Quy trình đóng góp và checklist PR.
+- `docs/REFERENCE_REPOS.md`: Danh sách repo tham khảo + trust priority.
+- `docs/vbook_demo.md`: Snippet mẫu cho home/detail/toc/chap.
 
-Quy ước quan trọng:
-- Dedupe key ưu tiên domain từ `metadata.source`.
-- Rule thắng trùng lặp: version cao hơn -> trust repo cao hơn (`extensions` > `darkrai9x` > `dat-bi` > `others`).
-- `sort` giữ nguyên `metadata.author` và giữ tên folder ext gốc.
-- Nếu thư mục đích đã tồn tại, `sort` sẽ skip để tránh ghi đè.
-- Có thể dùng `--overwrite-existing --cleanup-root` để đồng bộ lại và dọn các ext top-level đã migrate khỏi `extensions/`.
-- `build-catalog` luôn tạo 5 nhóm chuẩn: `novel`, `comic`, `chinese_novel`, `translate`, `tts`.
-- Nhóm `_unknown` chỉ được tạo khi thực sự còn extension chưa phân loại.
+## Lưu ý
 
-## File Structure
-
-Cấu trúc chuẩn của một VBook Extension:
-```
-extensions/my-website/
-├── plugin.json        # Config thông số script
-├── icon.png           # 64x64px
-├── src/               # Nơi chứa toàn bộ execute JS scripts
-│   ├── detail.js
-│   ├── toc.js
-│   └── chap.js
-```
-
-## Docs
-- [`docs/rules/CLI_WORKFLOW_PHASES.md`](docs/rules/CLI_WORKFLOW_PHASES.md): Quy trình hợp lệ batch processing extension, cleanup rules, best practices.
-- [`docs/AI_CODE_EXT_VBOOK.md`](docs/AI_CODE_EXT_VBOOK.md): Dùng để nắm Rule viết code, Javascript API có sẵn, Rhino API.
-- [`docs/REFERENCE_REPOS.md`](docs/REFERENCE_REPOS.md): Các kho mở cộng đồng tham khảo pattern xử lý web.
-- [`docs/vbook_demo.md`](docs/vbook_demo.md): Tham khảo cách xử lý DOM, JS logic mẫu và config nâng cao.
-
-## Distribution & Catalogs
-
-**Root `plugin.json`:**
-- Metadata & personal extensions (3 by kychi)
-- Schema cố định: `{ "metadata": {...}, "data": [...] }`
-- Reference: `extensions/plugin.json` cho full community catalog
-- Dùng để distribute bản cá nhân + link đến full catalog
-
-**`extensions/plugin.json` (Auto-generated):**
-- Mega catalog cộng đồng được build từ toàn bộ nhóm type
-- Được generate bởi `npx vbook build-catalog`
-- Tôn trọng tác quyền - giữ nguyên author info từ original sources
-
-**`extensions/catalogs/*.plugin.json` (Auto-generated):**
-- Catalog theo từng nhóm để copy raw link nhanh từ web viewer
-- Bao gồm mặc định: `novel`, `comic`, `chinese_novel`, `translate`, `tts`
-- `_unknown` chỉ xuất hiện khi có extension chưa phân loại
-- Có thể regenerate bằng script đồng bộ sau khi build catalog
-
-**CLI Tools:**
-- Chỉ làm việc với `extensions/{type}/plugin.json` files
-- Không modify root `plugin.json` (personal distribution file)
-- Không convert root `plugin.json` sang schema catalog cộng đồng
+- Không rewrite tác giả gốc trong metadata.
+- Cùng source nhưng khác author được phép cùng tồn tại.
+- Vi phạm chỉ khi trùng `source + author`.
