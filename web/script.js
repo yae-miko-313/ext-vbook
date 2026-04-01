@@ -251,6 +251,62 @@ function normalizeAuthorKey(author) {
     return normalizeAuthorName(author).toLocaleLowerCase('vi');
 }
 
+const MOBILE_AUTHOR_PREVIEW_COUNT = 7;
+
+function updateAuthorsMobileCollapse() {
+    const listEl = document.getElementById('authors-list');
+    const toggleEl = document.getElementById('authors-expand-toggle');
+    if (!listEl || !toggleEl) {
+        return;
+    }
+
+    const authorItems = listEl.querySelectorAll('.author-chip').length;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const shouldCollapse = isMobile && authorItems > MOBILE_AUTHOR_PREVIEW_COUNT;
+
+    if (!shouldCollapse) {
+        listEl.classList.remove('authors-list-collapsed', 'authors-list-expanded');
+        toggleEl.classList.remove('show');
+        toggleEl.setAttribute('aria-expanded', 'false');
+        toggleEl.textContent = 'xem thêm';
+        return;
+    }
+
+    toggleEl.classList.add('show');
+
+    if (!listEl.classList.contains('authors-list-expanded')) {
+        listEl.classList.add('authors-list-collapsed');
+        toggleEl.setAttribute('aria-expanded', 'false');
+        toggleEl.textContent = 'xem thêm';
+        return;
+    }
+
+    listEl.classList.remove('authors-list-collapsed');
+    toggleEl.setAttribute('aria-expanded', 'true');
+    toggleEl.textContent = 'Thu gọn';
+}
+
+function setupAuthorsMobileToggle() {
+    const listEl = document.getElementById('authors-list');
+    const toggleEl = document.getElementById('authors-expand-toggle');
+    if (!listEl || !toggleEl || toggleEl.dataset.bound === 'true') {
+        return;
+    }
+
+    toggleEl.addEventListener('click', () => {
+        const expanded = listEl.classList.toggle('authors-list-expanded');
+        if (expanded) {
+            listEl.classList.remove('authors-list-collapsed');
+        } else {
+            listEl.classList.add('authors-list-collapsed');
+        }
+        updateAuthorsMobileCollapse();
+    });
+
+    window.addEventListener('resize', updateAuthorsMobileCollapse);
+    toggleEl.dataset.bound = 'true';
+}
+
 function renderAuthorAcknowledgement() {
     const listEl = document.getElementById('authors-list');
     const countEl = document.getElementById('authors-count');
@@ -308,6 +364,7 @@ function renderAuthorAcknowledgement() {
         if (shareListEl) {
             shareListEl.innerHTML = '<p class="authors-empty">Chưa có dữ liệu.</p>';
         }
+        updateAuthorsMobileCollapse();
         return;
     }
 
@@ -336,6 +393,8 @@ function renderAuthorAcknowledgement() {
             `<li class="author-chip"><span class="author-name">${escapeHtml(author)}</span><span class="author-total">${total}</span></li>`
         )
         .join('');
+
+    updateAuthorsMobileCollapse();
 }
 
 function renderCard(ext) {
@@ -407,4 +466,5 @@ document.getElementById('sort-select').addEventListener('change', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
     setupQuickLinkActions();
     setupBackToTopButton();
+    setupAuthorsMobileToggle();
 });
