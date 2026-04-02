@@ -15,7 +15,7 @@ function execute(url, page) {
             let cover = a.select("img").attr("data-src");
 
             data.push({
-                name: e.select(".dx-title").text().replace(e.select(".dx-title span").text(), "").trim(),
+                name: e.select("h3").text().trim(),
                 link: a.attr("href"),
                 cover: "https://base64-image.luhanhgia09.workers.dev/proxy?url=" + cover,
                 host: BASE_URL

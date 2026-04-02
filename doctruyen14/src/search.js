@@ -5,7 +5,7 @@ function execute(key, page) {
         page = `page/${page}/`
     };
     var key = encodeURIComponent(key)
-    let response = fetch("https://doctruyen14.vip/"+page + "?s=" + key + "&submit=T%C3%ACm")
+    let response = fetch("https://doctruyen14.biz/"+page + "?s=" + key + "&submit=T%C3%ACm")
     if (response.ok) {
         let doc = response.html();
         let data = [];

@@ -55,6 +55,7 @@ When asked to create or fix an extension, follow these steps:
 - **Use `vbook test-all` First**: This is the fastest way to verify the entire extension logic in one go.
 - **Enrich the Detail UI (`detail.js`)**: ALWAYS populate the optional `genres` (for clickable tags) and `suggests` (for "Cùng tác giả" or related books) arrays in the `detail(url)` response if the website provides categories or author names. Map their `script` to `"gen.js"` (if pushing a URL) or `"search.js"` (if pushing a keyword) to massively improve user experience.
 - **Robust Selectors**: Sites often change structure. Use multiple selectors in `doc.select()` (e.g. `.row, .item, .col-truyen-main .row`) to increase resilience.
+- **Track Layout Changes**: When an existing extension suddenly breaks (e.g., "Home page error"), verify if the target site dropped custom classes (like `.dx-title`) in favor of simplified tags (like `h3` or `h4`). Use plain tag selectors where possible for better longevity.
 - **Browser Tool**: Use the browser tool to double-check selectors if `read_url_content` is unclear.
 
 ---

@@ -8,6 +8,7 @@ function execute(url) {
     if (response.ok) {
         let doc = response.html();
         doc.select("input").remove()
+        doc.select(".wp-pagenavi").remove()
         let htm = doc.select('.entry-content').html();
         htm = htm.replace(/<br>|\\n/g, "<br><br>")
         return Response.success(htm);

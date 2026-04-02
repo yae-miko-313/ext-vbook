@@ -86,7 +86,7 @@
             "name": "18mh",
             "author": "B",
             "path": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/18mh/plugin.zip",
-            "version": 1,
+            "version": 2,
             "source": "https://18mh.net",
             "icon": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/18mh/icon.png",
             "description": "Đọc truyện trên trang 18mh",
@@ -354,7 +354,7 @@
             "type": "novel",
             "locale": "vi_VN"
         },
-                {
+        {
             "name": "truyencodetheoyeucau",
             "author": "B",
             "path": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/truyencodetheoyeucau/plugin.zip",
@@ -402,8 +402,8 @@
             "name": "doctruyen14",
             "author": "B",
             "path": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/doctruyen14/plugin.zip",
-            "version": 2,
-            "source": "https://doctruyen14.vip/",
+            "version": 4,
+            "source": "https://doctruyen14.biz/",
             "icon": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/doctruyen14/icon.png",
             "description": "doctruyen14",
             "type": "novel",

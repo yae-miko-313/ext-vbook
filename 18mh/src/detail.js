@@ -1,16 +1,19 @@
 load('config.js');
 function execute(url) {
-    let id = url.match(/id=\d+/)[0];
-  let url_cmt = BASE_URL + "/index/commentList?type=1&target_" +id 
+    let idMatch = url.match(/\/detail\/(\d+)/);
+    let id = idMatch ? idMatch[1] : '';
+    let url_cmt = BASE_URL + "/index/commentList?type=1&target_id=" + id;
   console.log(url_cmt);
   var response = fetch(url);
   if (response.ok) {
     var doc = response.html();
-    let name = doc.select('.items-center  h1').text();
-    let author = doc.select('.ml-3 .text-primary').first().text();
-    let cover = doc.select('div.flex-1 > div.flex.items-center img').attr('data-src');
+    let nameEl = doc.select('div.flex-1 h2');
+    let name = nameEl.size() > 1 ? nameEl.get(1).text() : (nameEl.size() > 0 ? nameEl.get(0).text() : '');
+    let author = doc.select('a[href*="author="]').first() != null ? doc.select('a[href*="author="]').first().text() : '';
+    let coverEl = doc.select('section img[data-src], .poster img[data-src], main img[data-src]');
+    let cover = coverEl.size() > 0 ? coverEl.first().attr('data-src') : '';
     let genres = [];
-    doc.select('.line-clamp-1 a').forEach(e => {
+    doc.select('a[href*="/novel/all/"]').forEach(e => {
       genres.push({
         title: e.text(),
         input:  e.attr("href"),

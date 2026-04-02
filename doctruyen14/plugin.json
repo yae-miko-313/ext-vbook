@@ -2,13 +2,13 @@
     "metadata": {
         "name": "Đọc Truyện 14",
         "author": "B",
-        "version": 2,
-        "source": "https://doctruyen14.vip/",
-        "regexp": "https://doctruyen14.vip/.*?/",
+        "version": 4,
+        "source": "https://doctruyen14.biz/",
+        "regexp": "https://doctruyen14.(vip|biz|cc)/.*?/",
         "description": "Đọc Truyện 14 là trang web đọc truyện chữ online.",
         "locale": "vi_VN",
         "language": "javascript",
-        "type": "novel",
+        "type": "novel",    
         "tag": "nsfw"
     },
     "script": {
