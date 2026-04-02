@@ -100,21 +100,40 @@ function resolveCatalogUrl() {
     return './plugin.json';
 }
 
-function resolveSourceCatalogUrl(catalogUrl) {
+function resolveCatalogEndpoints(catalogUrl) {
+    const fallback = {
+        rootUrl: './plugin.json',
+        sourceUrl: './catalog.json'
+    };
+
     if (!catalogUrl) {
-        return './catalog.json';
+        return fallback;
     }
 
     try {
         const parsed = new URL(catalogUrl, window.location.href);
+
+        if (/\/catalog\.json$/i.test(parsed.pathname)) {
+            const rootUrl = new URL(parsed.toString());
+            rootUrl.pathname = rootUrl.pathname.replace(/\/catalog\.json$/i, '/plugin.json');
+            return {
+                rootUrl: rootUrl.toString(),
+                sourceUrl: parsed.toString()
+            };
+        }
+
         if (/\/plugin\.json$/i.test(parsed.pathname)) {
-            parsed.pathname = parsed.pathname.replace(/\/plugin\.json$/i, '/catalog.json');
-            return parsed.toString();
+            const sourceUrl = new URL(parsed.toString());
+            sourceUrl.pathname = sourceUrl.pathname.replace(/\/plugin\.json$/i, '/catalog.json');
+            return {
+                rootUrl: parsed.toString(),
+                sourceUrl: sourceUrl.toString()
+            };
         }
     } catch (_error) {
     }
 
-    return './catalog.json';
+    return fallback;
 }
 
 function hydrateFromRootCatalog(data) {
@@ -141,6 +160,7 @@ function hydrateFromSourceCatalog(data) {
         return {
             id: source.id || '',
             url: rawUrl,
+            avatar: source.avatar || '',
             itemCount: Number(source.itemCount || normalizedItems.length || 0),
             status: source.status || '',
             displayName: sourceDisplayNameFromUrl(rawUrl, source.id || ''),
@@ -154,13 +174,18 @@ function hydrateFromSourceCatalog(data) {
 async function loadExtensions() {
     try {
         const catalogUrl = resolveCatalogUrl();
-        const response = await fetch(catalogUrl);
+        const endpoints = resolveCatalogEndpoints(catalogUrl);
+        const response = await fetch(endpoints.rootUrl);
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }
 
         const data = await response.json();
         if (!Array.isArray(data.data)) {
+            if (Array.isArray(data.sources)) {
+                throw new Error('catalog.json là sidecar, cần plugin.json làm root manifest');
+            }
+
             throw new Error('plugin.json sai cấu trúc aggregate: cần có data[]');
         }
 
@@ -174,7 +199,7 @@ async function loadExtensions() {
         window.catalogStatus.loadedAt = loadedAtIso;
         window.catalogStatus.updatedAt = validLastModified || loadedAtIso;
         window.catalogStatus.updatedAtSource = validLastModified ? 'header' : 'loaded';
-        window.catalogMeta.loadedCatalogUrl = absoluteUrlFromRelative(catalogUrl);
+        window.catalogMeta.loadedCatalogUrl = absoluteUrlFromRelative(endpoints.rootUrl);
         window.catalogMeta.aggregateCopyUrl = window.catalogMeta.loadedCatalogUrl || '';
 
         resetExtensionCatalog();
@@ -183,9 +208,8 @@ async function loadExtensions() {
         window.catalogSourceExpandedState = {};
         hydrateFromRootCatalog(data);
 
-        const sourceCatalogUrl = resolveSourceCatalogUrl(catalogUrl);
         try {
-            const sourceResponse = await fetch(sourceCatalogUrl);
+            const sourceResponse = await fetch(endpoints.sourceUrl);
             if (sourceResponse.ok) {
                 const sourceData = await sourceResponse.json();
                 hydrateFromSourceCatalog(sourceData);

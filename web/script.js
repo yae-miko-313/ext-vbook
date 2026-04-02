@@ -176,6 +176,29 @@ function renderAggregateButton() {
     button.setAttribute('data-copy-url', copyUrl);
 }
 
+function getRepoDisplayPath(rawUrl) {
+    try {
+        const parsed = new URL(rawUrl);
+        const parts = parsed.pathname.split('/').filter(Boolean);
+
+        if (parsed.hostname.includes('raw.githubusercontent.com') && parts.length >= 2) {
+            const owner = parts[0];
+            const repo = parts[1];
+            return `${owner}/${repo}`;
+        }
+
+        if (parsed.hostname.includes('gitlab.com') && parts.length >= 2) {
+            const group = parts[0];
+            const project = parts[1];
+            return `${group}/${project}`;
+        }
+    } catch (_error) {
+        return null;
+    }
+
+    return null;
+}
+
 function toRepoBrowseUrl(rawUrl) {
     try {
         const parsed = new URL(rawUrl);
@@ -223,6 +246,18 @@ function avatarFallback(label) {
     return `https://ui-avatars.com/api/?name=${encodeURIComponent(label || 'repo')}&background=f1f1f1&color=333333`;
 }
 
+function extensionIconFallback(extName) {
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(extName || 'ext')}&background=f1f1f1&color=333333`;
+}
+
+function getSourceAvatarUrl(source) {
+    if (source && source.avatar) {
+        return source.avatar;
+    }
+
+    return avatarFromRawUrl(source && source.url ? source.url : '');
+}
+
 function renderContributeSection() {
     const repoListEl = document.getElementById('repo-list');
     const countEl = document.getElementById('contribute-source-count');
@@ -237,10 +272,12 @@ function renderContributeSection() {
     repoListEl.innerHTML = sources
         .map((source) => {
             const browseUrl = toRepoBrowseUrl(source.url || '');
-            const label = source.displayName || source.id || source.url || 'unknown-source';
-            const avatarUrl = avatarFromRawUrl(source.url || '');
-            const fallbackUrl = avatarFallback(label);
-            return `<a class="repo-chip" href="${escapeHtml(browseUrl)}" target="_blank" rel="noopener noreferrer"><img class="repo-avatar" src="${escapeHtml(avatarUrl)}" alt="${escapeHtml(label)} avatar" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${escapeHtml(fallbackUrl)}';"><span class="repo-chip-label" title="${escapeHtml(label)}">${escapeHtml(label)}</span></a>`;
+            const repoPath = getRepoDisplayPath(source.url || '');
+            const displayLabel = repoPath || source.displayName || source.id || 'unknown-source';
+            const fullLabel = source.displayName || source.id || source.url || 'unknown-source';
+            const avatarUrl = getSourceAvatarUrl(source);
+            const fallbackUrl = avatarFallback(fullLabel);
+            return `<a class="repo-chip" href="${escapeHtml(browseUrl)}" target="_blank" rel="noopener noreferrer"><img class="repo-avatar" src="${escapeHtml(avatarUrl)}" alt="${escapeHtml(fullLabel)} avatar" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${escapeHtml(fallbackUrl)}';"><span class="repo-chip-label" title="${escapeHtml(fullLabel)}">${escapeHtml(displayLabel)}</span></a>`;
         })
         .join('');
 
@@ -274,12 +311,22 @@ function renderCard(ext) {
     const typeLabel = typeLabels[ext.type] || ext.type;
     const extensionUrl = ext.path || '';
     const description = getDescription(ext);
+    const iconUrl = ext.icon || extensionIconFallback(ext.name || 'ext');
+    const iconFallback = extensionIconFallback(ext.name || 'ext');
+    const sourceLabel = ext.source || '';
+    const sourceHost = sourceLabel ? getSourceHost(sourceLabel) : '';
 
     return `
         <div class="ext-card">
             <div class="ext-type-badge">${escapeHtml(typeLabel)}</div>
             <div class="ext-header">
-                <h3 class="ext-name">${escapeHtml(ext.name || 'Chưa đặt tên')}</h3>
+                <div class="ext-icon-wrap">
+                    <img class="ext-icon" src="${escapeHtml(iconUrl)}" alt="${escapeHtml(ext.name || 'Extension')} icon" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${escapeHtml(iconFallback)}';">
+                </div>
+                <div class="ext-title-wrap">
+                    <h3 class="ext-name">${escapeHtml(ext.name || 'Chưa đặt tên')}</h3>
+                    <p class="ext-site-url" title="${escapeHtml(sourceLabel || 'Không rõ nguồn')}">${escapeHtml(sourceHost || sourceLabel || 'Không rõ nguồn')}</p>
+                </div>
                 <span class="ext-version">v${escapeHtml(ext.version || '0')}</span>
             </div>
             <p class="ext-author">Tác giả: ${escapeHtml(ext.author || 'Không rõ')}</p>
@@ -377,11 +424,17 @@ function renderSourceCard(source) {
         : (expanded ? '<p class="source-ext-empty">Không có ext trong nguồn này</p>' : '');
     const toggleAria = expanded ? 'Thu gọn thông tin nguồn' : 'Mở thông tin nguồn';
     const key = getSourceKey(source);
+    const avatarUrl = getSourceAvatarUrl(source);
+    const repoPath = getRepoDisplayPath(source.url || '');
+    const displayLabel = repoPath || source.displayName || source.id || 'unknown-source';
+    const fullLabel = source.displayName || source.id || source.url || 'unknown-source';
+    const fallbackUrl = avatarFallback(fullLabel);
 
     return `
         <article class="source-card ${expanded ? 'is-expanded' : 'is-collapsed'}" data-source-key="${escapeHtml(key)}">
             <button class="source-toggle-btn" type="button" data-source-toggle="${escapeHtml(key)}" aria-expanded="${expanded ? 'true' : 'false'}" aria-label="${escapeHtml(toggleAria)}">
-                <h3 class="source-name" title="${escapeHtml(source.displayName)}">${escapeHtml(source.displayName)}</h3>
+                <img class="source-card-avatar" src="${escapeHtml(avatarUrl)}" alt="${escapeHtml(fullLabel)} avatar" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${escapeHtml(fallbackUrl)}'">
+                <h3 class="source-name" title="${escapeHtml(fullLabel)}">${escapeHtml(displayLabel)}</h3>
                 <div class="source-toggle-meta">
                     <span class="source-total-pill">${sourceTotal} ext</span>
                     ${statusLabel ? `<span class="source-status ${escapeHtml(statusLabel)}">${escapeHtml(statusLabel)}</span>` : ''}
