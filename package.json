@@ -16,7 +16,8 @@
     "build": "node tools/cli/index.js build --plugin extensions/novel/kychi_ntruyen",
     "build:catalog": "node tools/cli/index.js build-catalog",
     "sync:web-catalog": "node -e \"const {buildWebCatalog}=require('./tools/cli/build/sync-web-catalog');console.log(JSON.stringify(buildWebCatalog(process.cwd()), null, 2));\"",
-    "full-sync": "npm run build:catalog && npm run sync:web-catalog"
+    "full-sync": "npm run build:catalog && npm run sync:web-catalog",
+    "monitor:sources": "node tools/cli/monitor/monitor-remote-sources.js"
   },
   "dependencies": {
     "archiver": "^7.0.1",
