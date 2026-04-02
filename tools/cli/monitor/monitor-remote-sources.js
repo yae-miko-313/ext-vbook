@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { buildWebCatalog } = require('../build/sync-web-catalog');
 
 const WORKSPACE_ROOT = path.resolve(__dirname, '..', '..', '..');
 const SOURCES_FILE = path.join(WORKSPACE_ROOT, 'references', 'remote-sources.json');
@@ -266,6 +267,13 @@ async function run() {
     fs.mkdirSync(REPORT_DIR, { recursive: true });
     fs.writeFileSync(REPORT_FILE, JSON.stringify(report, null, 2), 'utf8');
     fs.writeFileSync(BASELINE_FILE, JSON.stringify(buildSnapshot(report, sourceConfig), null, 2), 'utf8');
+
+    try {
+        const syncResult = buildWebCatalog(WORKSPACE_ROOT);
+        console.log(`[monitor] synced web aggregate: ${syncResult.total} extensions.`);
+    } catch (error) {
+        console.warn(`[monitor] warning: failed to sync web aggregate: ${error.message}`);
+    }
 
     if (errors > 0) {
         console.log(`[monitor] completed with ${errors} error(s).`);
