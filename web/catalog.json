@@ -2,9 +2,9 @@
   "metadata": {},
   "summary": {
     "total": 34,
-    "changed": 2,
-    "unchanged": 31,
-    "errors": 1,
+    "changed": 0,
+    "unchanged": 34,
+    "errors": 0,
     "mode": "sync",
     "autoSyncedOnChange": true
   },
@@ -2858,8 +2858,8 @@
       "id": "duongden-main",
       "url": "https://raw.githubusercontent.com/duongden/vbook/refs/heads/main/plugin.json",
       "avatar": null,
-      "status": "new",
-      "changed": true,
+      "status": "unchanged",
+      "changed": false,
       "hash": "75bb82093564c053c5e8dbc68119c0234e59e0653b5ba0405cbcce748387459d",
       "etag": "W/\"7ef0411978fcfcd6d3aa59a4323f3ada829d25592649db6364609026138af7e4\"",
       "lastModified": null,
@@ -3584,8 +3584,8 @@
       "id": "willsun28-main",
       "url": "https://raw.githubusercontent.com/WillSun28/vbook-extensions/refs/heads/main/plugin.json",
       "avatar": null,
-      "status": "changed",
-      "changed": true,
+      "status": "unchanged",
+      "changed": false,
       "hash": "116206611538d7b97ed200ecc082f087532fe122dfbf989eb64b2667797842c9",
       "etag": "W/\"790a6e8257f3292a8c943b3f5ef54ee513e4af84f792fc7c009b06aa72abe159\"",
       "lastModified": null,
@@ -5195,10 +5195,187 @@
       "id": "bqy-main",
       "url": "https://raw.githubusercontent.com/BanQuyY/Vbook/main/plugin_vb.json",
       "avatar": null,
-      "status": "error",
+      "status": "unchanged",
       "changed": false,
-      "hash": null,
-      "error": "HTTP 429"
+      "hash": "84226fe104e4691b5df339ee516cce4eb986a5d2d98bc642d2a8619bcb58b994",
+      "etag": "W/\"b2d17dd672fe86244a73255f50aae9cef594abaedf81c6ddfa66d43b0b775ff2\"",
+      "lastModified": null,
+      "itemCount": 15,
+      "contentType": "json",
+      "content": {
+        "metadata": {
+          "author": "bqy",
+          "description": ""
+        },
+        "data": [
+          {
+            "name": "ddxs",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/blob/main/ddxsfix/Ddxs.zip?raw=true",
+            "version": 1,
+            "source": "https://ddxs.com",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "Đọc truyện trên trang ddxs",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "STV Home",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/blob/main/STVHome/STVHome.zip?raw=true",
+            "version": 2,
+            "source": "http://sangtacviet.com",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "STV Home",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "STV",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/raw/main/stv/STV.zip?raw=true",
+            "version": 2,
+            "source": "http://sangtacviet.vip",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "STV",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Yushubo",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/blob/main/Yushubo/Yushubo.zip?raw=true",
+            "version": 2,
+            "source": "http://yushubo.com",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "Yushubo",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "twfanti",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/blob/main/Twfanti/Twfanti.zip?raw=true",
+            "version": 1,
+            "source": "https://www.twfanti.com/",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "Twfanti",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "121du",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/blob/main/121du/121du.zip?raw=true",
+            "version": 1,
+            "source": "https://www.121du.cc/",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "121du",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "Yousuu",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/blob/main/Yousuu/Yousuu.zip?raw=true",
+            "version": 1,
+            "source": "https://www.yousuu.com/",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "yousuu",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "qidian home",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/blob/main/qidian_home/qidian.zip?raw=true",
+            "version": 1,
+            "source": "https://www.qidian.com/",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "qidian home",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "Biququ",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/blob/main/Biqubu/Biqubu.zip?raw=true",
+            "version": 1,
+            "source": "https://biququ.com/",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "Biququ",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "qiuxiaoshuo",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/blob/main/qiuxiaoshuo/Qiuxiaoshuo.zip?raw=true",
+            "version": 1,
+            "source": "https://qiuxiaoshuo.org/",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "qiuxiaoshuo",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "szyangxiao",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/blob/main/szyangxiao/szyangxiao.zip?raw=true",
+            "version": 1,
+            "source": "https://www.szyangxiao.com/",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "szyangxiao",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "69shu",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/raw/main/69shu/69shu.zip?raw=true",
+            "version": 1,
+            "source": "https://www.69shu.com/",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "69shu",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "ttkan",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/blob/main/ttkan/plugin.zip?raw=true",
+            "version": 1,
+            "source": "https://cn.ttkan.co/",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "ttkan",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "FQWEB",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/raw/main/Fanqie%20API/Fanqienovel.zip?raw=true",
+            "version": 1,
+            "source": "fanqienovel.com",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "Fanqie",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "UAA",
+            "author": "bqy",
+            "path": "https://github.com/BanQuyY/Vbook/raw/main/uaa/Uaa.zip?raw=true",
+            "version": 1,
+            "source": "uaa.com",
+            "icon": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/master/uukanshu/icon.png",
+            "description": "UAA",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          }
+        ]
+      },
+      "error": null
     },
     {
       "id": "bexom-main",
