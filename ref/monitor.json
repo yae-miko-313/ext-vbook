@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-04-02T14:24:52.429Z",
+  "generatedAt": "2026-04-02T14:39:06.629Z",
   "mode": "sync",
   "summary": {
-    "total": 34,
-    "changed": 0,
+    "total": 35,
+    "changed": 1,
     "unchanged": 34,
     "errors": 0,
     "mode": "sync",
@@ -5710,6 +5710,324 @@
       "error": null
     },
     {
+      "id": "ivan1hai-main",
+      "url": "https://raw.githubusercontent.com/Ivan1hai/ext/main/plugin.json",
+      "avatar": null,
+      "status": "new",
+      "changed": true,
+      "hash": "2a463ec505c6c6d631d36995553597b0154c7b8cb33cac42b8c9c4a4416105f6",
+      "etag": "W/\"dbc29efb4ab087b37866db6bdc519c53cd61be3203873eb1b2d34e18fe24c871\"",
+      "lastModified": null,
+      "itemCount": 27,
+      "contentType": "json",
+      "content": {
+        "metadata": {
+          "author": "ivanzzz",
+          "description": "Danh sách plugin vBook"
+        },
+        "data": [
+          {
+            "name": "17 Tiểu thuyết",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/m.1qxs.com_ok/plugin.zip",
+            "version": 3,
+            "source": "https://m.1qxs.com/",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/m.1qxs.com_ok/icon.png",
+            "description": "Doc truyen tren trang 1QXS",
+            "type": "novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "AkayTruyen",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/akaytruyen.com_ok/plugin.zip",
+            "version": 1,
+            "source": "https://akaytruyen.com",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/akaytruyen.com_ok/icon.png",
+            "description": "Doc truyen tai AkayTruyen",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "AliceSW",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/alice_ok/plugin.zip",
+            "version": 2,
+            "source": "https://www.alicesw.com/",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/alice_ok/icon.png",
+            "description": "trang truyên seggg.",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+          },
+          {
+            "name": "Bàn Long",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/banlong_ok/plugin.zip",
+            "version": 1,
+            "source": "https://blhvip.vn",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/banlong_ok/icon.png",
+            "description": "Đọc truyện trên blhvip.vn",
+            "type": "novel",
+            "locale": "vi-VN"
+          },
+          {
+            "name": "Hang Truyện Chữ",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/hangtruyenchu_ok/plugin.zip",
+            "version": 1,
+            "source": "https://hangtruyenchu.com",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/hangtruyenchu_ok/icon.png",
+            "description": "Đọc truyện tại Hang Truyện Chữ",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "La Cà Truyện",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/lacatruyen_ok/plugin.zip",
+            "version": 1,
+            "source": "https://lacatruyen.club",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/lacatruyen_ok/icon.png",
+            "description": "Đọc truyện tại La Cà Truyện",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "MTC",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/mtc_ok/plugin.zip",
+            "version": 2,
+            "source": "https://metruyencv.com",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/mtc_ok/icon.png",
+            "description": "Đọc truyện trên trang Mê Truyện CV",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "MeTruyenCV",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/metruyencv.com.vn_ok/plugin.zip",
+            "version": 2,
+            "source": "https://metruyencv.com.vn/",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/metruyencv.com.vn_ok/icon.png",
+            "description": "Doc truyen tren MeTruyenCV",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Mê Truyện CV",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/metruyencv.xyz_ok/plugin.zip",
+            "version": 1,
+            "source": "https://metruyencv.xyz",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/metruyencv.xyz_ok/icon.png",
+            "description": "Đọc truyện trên trang Mê Truyện CV",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Mê Truyện Chữ",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/metruyenchu.com.vn_ok/plugin.zip",
+            "version": 2,
+            "source": "https://metruyenchu.com.vn/",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/metruyenchu.com.vn_ok/icon.png",
+            "description": "Đọc truyện trên Mê Truyện Chữ",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Mê Truyện Chữ",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/metruyenchu.co_ok/plugin.zip",
+            "version": 1,
+            "source": "https://metruyenchu.co",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/metruyenchu.co_ok/icon.png",
+            "description": "Mê Truyện Chữ",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "QuyKiep",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/quykiep_ok/plugin.zip",
+            "version": 1,
+            "source": "https://quykiep.com",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/quykiep_ok/icon.png",
+            "description": "Mê Đọc Truyện Chữ Light Novel Online - Kho Tàng Light Novel Hay Nhất",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Si Truyện CV",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/sitruyencv.com_ok/plugin.zip",
+            "version": 1,
+            "source": "https://sitruyencv.com/",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/sitruyencv.com_ok/icon.png",
+            "description": "Đọc truyện trên SiTruyenCV",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Tiệm Truyện Chữ",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/tiemtruyenchu_ok/plugin.zip",
+            "version": 3,
+            "source": "https://www.tiemtruyenchu.com/",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/tiemtruyenchu_ok/icon.png",
+            "description": "Đọc truyện chữ trên Tiệm Truyện Chữ",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Truyen Hoan",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyenhoan.com_ok/plugin.zip",
+            "version": 2,
+            "source": "https://truyenhoan.com/",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyenhoan.com_ok/icon.png",
+            "description": "Doc truyen tren trang Truyen Hoan",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Truyện Chữ Hay",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyenchuhay_ok/plugin.zip",
+            "version": 1,
+            "source": "https://truyenchuhay.org",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyenchuhay_ok/icon.png",
+            "description": "Truyện Chữ Hay Online",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Truyện Dịch Miễn Phí",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyendichmienphi_ok/plugin.zip",
+            "version": 2,
+            "source": "https://truyendichmienphi.com",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyendichmienphi_ok/icon.png",
+            "description": "Truyện Dịch Miễn Phí",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Truyện Full",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyenfull.vison_ok/plugin.zip",
+            "version": 1,
+            "source": "https://truyenfull.vision",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyenfull.vison_ok/icon.png",
+            "description": "Đọc truyện trên trang Truyện Full",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Truyện Mới KK",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyenmoikk_ok/plugin.zip",
+            "version": 1,
+            "source": "https://truyenmoikk.com",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyenmoikk_ok/icon.png",
+            "description": "Cào dữ liệu từ truyenmoikk.com",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Truyện Net",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyennet.vn_ok/plugin.zip",
+            "version": 1,
+            "source": "https://truyennet.vn/",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyennet.vn_ok/icon.png",
+            "description": "Đọc truyện trên trang Truyện Net",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Tàng Thư Viện",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyen.tangthuvien.vn_ok/plugin.zip",
+            "version": 1,
+            "source": "https://truyen.tangthuvien.vn",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/truyen.tangthuvien.vn_ok/icon.png",
+            "description": "Đọc truyện tại Tàng Thư Viện",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Wattpad",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/wattpad.com.vn_ok/plugin.zip",
+            "version": 2,
+            "source": "https://wattpad.com.vn/",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/wattpad.com.vn_ok/icon.png",
+            "description": "Đọc truyện trên Wattpad",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Web Truyện Dịch",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/webtruyendich_ok/plugin.zip",
+            "version": 3,
+            "source": "https://webtruyendich.com/",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/webtruyendich_ok/icon.png",
+            "description": "Web Truyện Dịch",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Wiki Dịch",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/wikicv.net_ok/plugin.zip",
+            "version": 1,
+            "source": "https://wikicv.net",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/wikicv.net_ok/icon.png",
+            "description": "Đọc truyện trên trang Wiki Dịch",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "Xa Lộ Sách",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/xalosach_ok/plugin.zip",
+            "version": 2,
+            "source": "https://xalosach.com",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/xalosach_ok/icon.png",
+            "description": "Xalosach.com là nền tảng đọc truyện chữ online, truyện dịch hay nhiều thể loại.",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "allin1",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/allin1/plugin.zip",
+            "version": 3,
+            "source": "https://sangtacviet.com/",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/allin1/icon.png",
+            "description": "Đọc truyện tại 14.225.254.182",
+            "type": "novel",
+            "locale": "vi_VN"
+          },
+          {
+            "name": "bFaloo (飞卢小说)",
+            "author": "ivanzzz",
+            "path": "https://raw.githubusercontent.com/Ivan1hai/ext/main/bfaloo_ok/plugin.zip",
+            "version": 1,
+            "source": "https://b.faloo.com",
+            "icon": "https://raw.githubusercontent.com/Ivan1hai/ext/main/bfaloo_ok/icon.png",
+            "description": "BFaloo (飞卢小说)",
+            "type": "chinese_novel",
+            "locale": "zh-CN"
+          }
+        ]
+      },
+      "error": null
+    },
+    {
       "id": "darkrai9x-translate",
       "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/translate.json",
       "avatar": null,
@@ -5827,272 +6145,280 @@
       "hash": "f26bc8cc20df351b2073589602f159eef138271f1231157d604f2a0f591599ca",
       "etag": "W/\"c861cdd8f9a4c92d5d8937b369189ce146a14a2fcb635b06212f9ac3b2f85bf8\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/plugin.json"
     },
     "darkrai9x-chinese": {
       "hash": "b507967e75b0193e634c7b8529cb2dc0aa95d10ed7be6ae5c263fb68a65650e6",
       "etag": "W/\"cddd249f17fdc9687cd9d85b71e1501d282c3198d22db7baaa012e9bf40ae756\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/chinese_plugin.json"
     },
     "lethituyen-main": {
       "hash": "1f86cbd99bd59ab7622b5a912c06e00e2fae12373c70a332ecd715f9b040a234",
       "etag": "W/\"893557a38ee83b3022113698e0c20efaa6d906eb222d260ede92103776adf60f\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/lethituyen/vbooks-extension/refs/heads/master/plugin.json"
     },
     "moleys-main": {
       "hash": "620a431e8e79dd3ce89dc310b89f74241e753e753f8ef628b8a9788131bec55a",
       "etag": "W/\"dfc88ff10a264a3b7ed769a063dfa41c09c83e49af9d07f12b538d05748582a1\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/Moleys/vbook-ext/main/plugin.json"
     },
     "dat-bi-main": {
       "hash": "a423c09187ea8ace7f6d2388a910f5fa2fdd64e469453eb641b453f65b9056e6",
       "etag": "W/\"702bcd658e7fc100964329ef3beaa2ae508b3cfa0a359b1b3e70944cb79018d0\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/plugin.json"
     },
     "soulgod-nahona-main": {
       "hash": "2d380217d9c899e71eaee33653e17c4fa6d0986acdc046c02f7a61339310f94d",
       "etag": "W/\"67aa7b6bd80ef19dd4d26b1c6fd97b53cbd8aab98e4bbcb442178ed845041ead\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/SoulGodEve9x9/Vbook-ext/Nahona/plugin.json"
     },
     "hieunm3103-main": {
       "hash": "f5b8a14994a62b56d87e95b06541c7f692004f703da79f9a883cdf8cc431bb80",
       "etag": "\"8d2d25fcb2f29e0d45dce45b4047ddbd\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://gitlab.com/hieunm3103/vbook-extension/-/raw/main/plugin.json"
     },
     "baobao666888-main": {
       "hash": "a2e2f970bd1a28c5ef401fdc80ffd882c512b6974c1e6d5f56efa76b0f44f88c",
       "etag": "W/\"dfbd1924bc47d4063b14fc6647908e93921c623650f97a5fbe7cf15602f01d10\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/BaoBao666888/ext-vbook-w/main/plugin.json"
     },
     "duongden-main": {
       "hash": "75bb82093564c053c5e8dbc68119c0234e59e0653b5ba0405cbcce748387459d",
       "etag": "W/\"7ef0411978fcfcd6d3aa59a4323f3ada829d25592649db6364609026138af7e4\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/duongden/vbook/refs/heads/main/plugin.json"
     },
     "longvuu-main": {
       "hash": "26db1052b1b05533953c98509ce5529f17b4185815be10d5473fd7628ddfcd46",
       "etag": "W/\"c092bd5a406c47d27815f0032c3d92afe32d5641d1b13e952b486a5355426eb1\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/longvuu/ext/refs/heads/master/plugin.json"
     },
     "tuanhai03-main": {
       "hash": "dbff40ec1e136c4b6b180dfd412cb821e78c5f6bb5e12f265ab5870cf88dca1f",
       "etag": "W/\"26ab5a2ee1a271815511cb601efbbba3a02471feb0cc8e75323b7d0bd13a0248\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/TuanHai03/vbook-extensions/refs/heads/main/plugin.json"
     },
     "willsun28-main": {
       "hash": "116206611538d7b97ed200ecc082f087532fe122dfbf989eb64b2667797842c9",
       "etag": "W/\"790a6e8257f3292a8c943b3f5ef54ee513e4af84f792fc7c009b06aa72abe159\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/WillSun28/vbook-extensions/refs/heads/main/plugin.json"
     },
     "gh369-639-main": {
       "hash": "68a04865c28b51aa6af80745f18405a97fac3bfca4310be28df8a4f98964ea2a",
       "etag": "W/\"530099b6d9fdc36ca07a669e9b4a70c14d0d981137eaab88f09eeb414bc8942f\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/gh369-639/vbook-ext-public/refs/heads/main/plugin.json"
     },
     "mizhm-main": {
       "hash": "b801ca7101e219bab756829fa81b2eeef729a831a5e723d004ee551786278d84",
       "etag": "W/\"987439d6e7f66318e93ba7e4df346645bc88a451dc2662cc534336a781220d0c\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/mizhm/vbook-extensions/refs/heads/main/plugin.json"
     },
     "kur21-main": {
       "hash": "9480036d64d027643833ebb7b0006348feddde6bbf603256c67165c87f46e303",
       "etag": "W/\"33b4a74c46fe47c863d5beb7ab37bbbdf5cdc5f401f7387934a786af78d3d619\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/kur21/vbook-ext/refs/heads/main/plugin.json"
     },
     "sonzin-main": {
       "hash": "a916908d8ad30d359a755a96684dc40744b2c296f50ce7f1a0290baeac0adc74",
       "etag": "W/\"3ad3b33b028d01d090835d2f9d482bbb3e6abe415e94b3cfb2fa55c9dc3a5baa\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/sonzin/vbook-extension/refs/heads/main/plugin.json"
     },
     "alexsonxxx-main": {
       "hash": "9ca14e1bc19885a8c9f5731c9bc758921ff7dbabf6a6ec1d33e87e46bb5075bf",
       "etag": "W/\"9ec2a2ebe7a919850ff587a0b3ecab8c463d7a48ea8fd4603974efa71a67c628\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/alexsonxxx/vbook/refs/heads/main/plugin.json"
     },
     "kychitoge-main": {
       "hash": "ae46cdb93232daf14b4ebfc46d4cdbd5dc5661474d79f2bbd088d73ec823d1cc",
       "etag": "W/\"37fc1a909289c256367da8722b8282c22fe5d819d04f27774b30994a0c45ba25\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json"
     },
     "gold2k2k2k-main": {
       "hash": "7c4330223ab48f7fd48bf5a7f9fa079bf78073de892514e297d1db3786264ff3",
       "etag": "W/\"d67eee58e39e35a577eac863c25e72efd4bce157672389640b6c32b347cfe3dd\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/Gold2k2k2k/HTri-Vbook-Ext/refs/heads/main/plugin.json"
     },
     "evamirion-main": {
       "hash": "fe222f21075bb05d872efbb09b97fd9abec68e2b09dc5ab8ce9a879018da6ee8",
       "etag": "W/\"1280d838905871b4b1a15e7e20ac45fae2f5e842db388700125ac0a4038f7145\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/Evamirion/vbook-ext/main/plugin.json"
     },
     "hienpro00123-main": {
       "hash": "567a8b93482db3a4fd4b2e77550bb91b907f70b05a42b6f871b476d823410e2e",
       "etag": "W/\"2692e4a11bf45e2b683136b655ffe0704f3578f1fb4b07053d3c47a0bf014b74\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/hienpro00123/vbook_MeoU/refs/heads/main/plugin.json"
     },
     "hieu45666-main": {
       "hash": "0faf3f4037b4d2abdadfd5d6de875414c8786ac0db570e42fe6d7bcd9a6c37c9",
       "etag": "W/\"0b71b3854e4bdf219fc79a731af62db8bb23098e6bf0416c70ae15b39d54032e\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/hieu45666/vbook_ext/main/plugin.json"
     },
     "hishirooo-main": {
       "hash": "bfca5f127aa23d2d7e48a0b47a6abe5fef5c61af6f548ccc6d87a916ffd0d319",
       "etag": "W/\"2c2c5e795937122d020a215c779b5d80adc9847a163a20fb252dfb8b627cf7ee\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/hishirooo/vbook-ext/master/plugin.json"
     },
     "hajljnopera-main": {
       "hash": "d2d66d090477f96b2a8ad22d489a784fc1972ff2fa85668c6e4b46037ce7d73d",
       "etag": "W/\"1dbbe7103c087740cd8d43417a14c5ce16c87fc1dc2fa76983505848c42e59e1\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/hajljnopera/vbook-ext/main/plugin.json"
     },
     "bqy-main": {
       "hash": "84226fe104e4691b5df339ee516cce4eb986a5d2d98bc642d2a8619bcb58b994",
       "etag": "W/\"b2d17dd672fe86244a73255f50aae9cef594abaedf81c6ddfa66d43b0b775ff2\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/BanQuyY/Vbook/main/plugin_vb.json"
     },
     "bexom-main": {
       "hash": "1bdb12d6ad566883cb05e90d762445cd3aaf74b70b2ca8f434e9a6d7884d4f5d",
       "etag": "W/\"a851673306b8a1cfef98bca2646fb43c2b01d0e19c3885f141d5a5ea92216b85\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/B3x0m/vbook-ext/main/plugin.json"
     },
     "chanhnh-main": {
       "hash": "12333b90b5485457001dc8b5635eff149252152404dab8204b8b014339d7ea42",
       "etag": "W/\"e01073c8211ffe3afb937adc7a9e254c0a74339f3f46551f38e4e47150fd5e79\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/Chanhnh/vbook-ext/main/plugin.json"
     },
     "aleshaonon-main": {
       "hash": "99cc267f88c93a3641aed69fad3733811fdeb48b4a63f319defd4f6f296e36b2",
       "etag": "W/\"70c7e8eded10422963bfa0aaba8845614fd71f7747bc15f9f549b7cc58fbf2c6\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/seyah24/vbook-exts/main/plugin.json"
     },
     "beast666-main": {
       "hash": "15014f005c191b83a97bb9ab6e1d883cfe6b12b1eae1254c232ddcf2a421eaec",
       "etag": "W/\"19288d71fb29960d8aaebd736595126e8c032c493e914e66f908627bfab5c730\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/khoa301020/vbook-ext/master/plugin.json"
     },
     "tamchau-main": {
       "hash": "36e4c1a1794c988ebcd8a3c3f6dac2e8de683efd07d31ab1c1da5a73e289fc41",
       "etag": "W/\"b9a4de7e2bb7c17951f6043b96de3133901b7ee9664c3ca55172d82de2f54b9c\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/TamChau/vbook-extensions/main/plugin.json"
     },
     "springpeachvinh-main": {
       "hash": "cab5e555b6c03fb3e3de9213200ff3fab564e14e27f73e5b64ec8755d773a49a",
       "etag": "W/\"e221a322370108f8a9afbf32bb461708110b51a4ccf8f20fc27790d66f32cda9\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/SPRINGPEACHVINH/vbook-ext/main/plugin.json"
     },
     "laofun-main": {
       "hash": "152bdcc1373293efcf08e2358d7f6fc8164eeefe0fecd8e45643519b0cbf4125",
       "etag": "W/\"9115b8205d0d6e5c8ec9fad6ec61cf8a93f8f04128d30e08f4ef9caa3d53175b\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/laofun/vbook-extensions-with-filter/master/plugin.json"
+    },
+    "ivan1hai-main": {
+      "hash": "2a463ec505c6c6d631d36995553597b0154c7b8cb33cac42b8c9c4a4416105f6",
+      "etag": "W/\"dbc29efb4ab087b37866db6bdc519c53cd61be3203873eb1b2d34e18fe24c871\"",
+      "lastModified": null,
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
+      "url": "https://raw.githubusercontent.com/Ivan1hai/ext/main/plugin.json"
     },
     "darkrai9x-translate": {
       "hash": "e12691fc7d81a0fb843ca9fd7cbfd9c31290581f57a08389096e57500154d4f8",
       "etag": "W/\"a7167592a306fb0add95b86a2bd0d2dc943661bc82f222cc7a996fec4f8db4a2\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/translate.json"
     },
     "darkrai9x-tts": {
       "hash": "6feaa6756fef6bf64be1703beb898c4be0c9051a25c089442b2aa3482d5262a3",
       "etag": "W/\"b0c5545b657baba701a72c3d57b3c88f3ebf9b0a3b2281c96584e1768f741454\"",
       "lastModified": null,
-      "lastCheckedAt": "2026-04-02T14:24:52.429Z",
-      "lastSyncedAt": "2026-04-02T14:24:52.429Z",
+      "lastCheckedAt": "2026-04-02T14:39:06.629Z",
+      "lastSyncedAt": "2026-04-02T14:39:06.629Z",
       "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/tts.json"
     }
   },
