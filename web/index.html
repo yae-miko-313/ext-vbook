@@ -15,10 +15,11 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
+            <p class="catalog-updated" id="catalog-updated">Cập Nhật : đợi xíu load đã...</p>
             <h1>Extension VBook</h1>
             <p class="subtitle">Danh Sách Extension và copy nhanh gọn</p>
             <p class="subtitle">(Link Tổng chỉ dùng được ở beta version)</p>
-            <p class="catalog-updated" id="catalog-updated">Cập Nhật : đợi xíu load đã...</p>
+            <button id="copy-aggregate-btn" class="action-btn header-copy-btn" type="button" title="Copy link tổng để thêm nhanh">Copy Link Tổng</button>
         </header>
 
         <!-- Stats Section -->
@@ -55,15 +56,44 @@
                     class="search-box"
                 >
             </div>
-            <div class="filter-group view-select-group" title="Hiển thị dữ liệu theo chế độ">
-                <select id="view-mode-select" class="filter-select view-mode-select" aria-label="Chế độ hiển thị">
-                    <option value="extension">Hiển thị: Ext</option>
-                    <option value="source">Hiển thị: Source</option>
-                </select>
-            </div>
-            <button id="copy-aggregate-btn" class="action-btn" type="button" title="Copy link tổng để thêm nhanh">Copy Link Tổng</button>
+            <button id="open-filter-btn" class="action-btn" type="button">Lọc</button>
             <p id="source-repo-count" class="source-repo-count" aria-live="polite">Repo nguồn: 0</p>
         </section>
+
+        <div id="filter-modal" class="filter-modal" aria-hidden="true">
+            <div class="filter-modal-backdrop" data-filter-close="true"></div>
+            <section class="filter-modal-panel" role="dialog" aria-modal="true" aria-labelledby="filter-modal-title">
+                <h2 id="filter-modal-title" class="filter-modal-title">Lọc</h2>
+
+                <div class="filter-modal-group">
+                    <h3 class="filter-modal-group-title">Tác giả</h3>
+                    <div id="filter-authors" class="filter-chip-list"></div>
+                </div>
+
+                <div class="filter-modal-group">
+                    <h3 class="filter-modal-group-title">Ngôn ngữ</h3>
+                    <div id="filter-locales" class="filter-chip-list"></div>
+                </div>
+
+                <div class="filter-modal-group">
+                    <h3 class="filter-modal-group-title">Loại</h3>
+                    <div id="filter-types" class="filter-chip-list"></div>
+                </div>
+
+                <div class="filter-modal-switch-row">
+                    <span class="filter-modal-switch-label">Theo nguồn repo</span>
+                    <label class="filter-switch">
+                        <input id="filter-source-switch" type="checkbox">
+                        <span class="filter-switch-slider"></span>
+                    </label>
+                </div>
+
+                <div class="filter-modal-actions">
+                    <button id="filter-cancel-btn" class="filter-modal-btn filter-modal-btn-cancel" type="button">Hủy</button>
+                    <button id="filter-apply-btn" class="filter-modal-btn filter-modal-btn-apply" type="button">Áp dụng</button>
+                </div>
+            </section>
+        </div>
 
         <!-- Extensions Grid -->
         <section class="extensions">

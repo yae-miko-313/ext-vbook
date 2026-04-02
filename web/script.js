@@ -1,6 +1,13 @@
 let currentSearch = '';
-let currentViewMode = 'extension';
-let viewModeBound = false;
+let sourceViewEnabled = false;
+let selectedAuthorKeys = new Set();
+let selectedLocales = new Set();
+let selectedTypes = new Set();
+let filterModalBound = false;
+let draftSourceViewEnabled = false;
+let draftAuthorKeys = new Set();
+let draftLocales = new Set();
+let draftTypes = new Set();
 
 async function copyToClipboard(text) {
     if (!text) {
@@ -56,8 +63,83 @@ function getAllExtensions() {
     return Array.isArray(window.catalogExtensions) ? window.catalogExtensions.slice() : [];
 }
 
+function normalizeLocaleKey(locale) {
+    const raw = String(locale || '_unknown').trim();
+    if (!raw) {
+        return '_unknown';
+    }
+
+    const normalized = raw.replace(/-/g, '_').toLowerCase();
+
+    if (normalized.startsWith('vi') || normalized.startsWith('vn')) {
+        return 'vi';
+    }
+
+    if (normalized.startsWith('zh')) {
+        return 'zh';
+    }
+
+    if (normalized.startsWith('en')) {
+        return 'en';
+    }
+
+    if (normalized === 'global') {
+        return 'global';
+    }
+
+    return normalized;
+}
+
+function getLocaleDisplayLabel(localeKey) {
+    if (localeKey === 'vi') {
+        return 'Tiếng Việt';
+    }
+
+    if (localeKey === 'zh') {
+        return '中文';
+    }
+
+    if (localeKey === 'en') {
+        return 'English';
+    }
+
+    if (localeKey === 'global') {
+        return 'global';
+    }
+
+    if (localeKey === '_unknown') {
+        return 'Không rõ';
+    }
+
+    return localeKey;
+}
+
+function extensionMatchesStructuredFilters(ext) {
+    if (!ext || typeof ext !== 'object') {
+        return false;
+    }
+
+    const authorKey = normalizeAuthorKey(ext.author || '');
+    const localeValue = normalizeLocaleKey(ext.locale || '_unknown');
+    const typeValue = String(ext.type || '_unknown').trim() || '_unknown';
+
+    if (selectedAuthorKeys.size > 0 && !selectedAuthorKeys.has(authorKey)) {
+        return false;
+    }
+
+    if (selectedLocales.size > 0 && !selectedLocales.has(localeValue)) {
+        return false;
+    }
+
+    if (selectedTypes.size > 0 && !selectedTypes.has(typeValue)) {
+        return false;
+    }
+
+    return true;
+}
+
 function filterExtensions() {
-    let all = getAllExtensions();
+    let all = getAllExtensions().filter(extensionMatchesStructuredFilters);
 
     if (currentSearch) {
         const search = currentSearch.toLowerCase();
@@ -76,26 +158,46 @@ function filterExtensions() {
 function filterSources() {
     let sources = Array.isArray(window.catalogSources) ? window.catalogSources.slice() : [];
 
-    if (!currentSearch) {
-        return sources;
+    if (!sourceViewEnabled) {
+        return [];
     }
 
+    const hasSearch = Boolean(currentSearch);
     const search = currentSearch.toLowerCase();
-    return sources.filter((source) => {
-        if ((source.displayName || '').toLowerCase().includes(search)) {
-            return true;
-        }
 
-        if ((source.url || '').toLowerCase().includes(search)) {
-            return true;
-        }
+    return sources
+        .map((source) => {
+            const extItems = Array.isArray(source.extItems) ? source.extItems : [];
+            const structuredItems = extItems.filter(extensionMatchesStructuredFilters);
 
-        const extItems = Array.isArray(source.extItems) ? source.extItems : [];
-        return extItems.some((ext) =>
-            (ext.name || '').toLowerCase().includes(search) ||
-            (ext.source || '').toLowerCase().includes(search)
-        );
-    });
+            if (!hasSearch) {
+                return {
+                    ...source,
+                    extItems: structuredItems,
+                    itemCount: structuredItems.length
+                };
+            }
+
+            const sourceMatch =
+                (source.displayName || '').toLowerCase().includes(search) ||
+                (source.url || '').toLowerCase().includes(search);
+
+            const searchedItems = structuredItems.filter((ext) =>
+                (ext.name || '').toLowerCase().includes(search) ||
+                (ext.author || '').toLowerCase().includes(search) ||
+                (ext.source || '').toLowerCase().includes(search) ||
+                getDescription(ext).toLowerCase().includes(search)
+            );
+
+            const visibleItems = searchedItems.length > 0 ? searchedItems : (sourceMatch ? structuredItems : []);
+
+            return {
+                ...source,
+                extItems: visibleItems,
+                itemCount: visibleItems.length
+            };
+        })
+        .filter((source) => Array.isArray(source.extItems) && source.extItems.length > 0);
 }
 
 function getAuthorDisplayName(author) {
@@ -309,16 +411,21 @@ function renderCard(ext) {
     };
 
     const typeLabel = typeLabels[ext.type] || ext.type;
-    const extensionUrl = ext.path || '';
     const description = getDescription(ext);
     const iconUrl = ext.icon || extensionIconFallback(ext.name || 'ext');
     const iconFallback = extensionIconFallback(ext.name || 'ext');
     const sourceLabel = ext.source || '';
     const sourceHost = sourceLabel ? getSourceHost(sourceLabel) : '';
+    const siteCopyButton = sourceLabel
+        ? `<button class="ext-site-copy-btn" data-site-url="${escapeHtml(sourceLabel)}" aria-label="Copy URL site" title="Copy URL site">🔗</button>`
+        : '<span class="ext-site-copy-btn ext-site-copy-btn-disabled" aria-hidden="true">🔗</span>';
 
     return `
         <div class="ext-card">
-            <div class="ext-type-badge">${escapeHtml(typeLabel)}</div>
+            <div class="ext-top-row">
+                <div class="ext-type-badge">${escapeHtml(typeLabel)}</div>
+                ${siteCopyButton}
+            </div>
             <div class="ext-header">
                 <div class="ext-icon-wrap">
                     <img class="ext-icon" src="${escapeHtml(iconUrl)}" alt="${escapeHtml(ext.name || 'Extension')} icon" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${escapeHtml(iconFallback)}';">
@@ -331,10 +438,6 @@ function renderCard(ext) {
             </div>
             <p class="ext-author">Tác giả: ${escapeHtml(ext.author || 'Không rõ')}</p>
             <p class="ext-description">${escapeHtml(description || 'Chưa có mô tả')}</p>
-            <div class="ext-actions">
-                ${ext.source ? `<a href="${escapeHtml(ext.source)}" target="_blank" class="ext-link">Site URL</a>` : '<span class="ext-link ext-link-disabled">Site URL</span>'}
-                ${extensionUrl ? `<button class="ext-copy-btn" data-copy-url="${escapeHtml(extensionUrl)}">Copy Ext</button>` : '<span class="ext-copy-btn ext-link-disabled">Copy Ext</span>'}
-            </div>
         </div>
     `;
 }
@@ -488,7 +591,7 @@ function renderSourceView() {
 }
 
 function renderActiveView() {
-    if (currentViewMode === 'source') {
+    if (sourceViewEnabled) {
         renderSourceView();
         return;
     }
@@ -496,47 +599,185 @@ function renderActiveView() {
     renderGrid();
 }
 
-function setupViewModeToggle() {
-    const modeSelect = document.getElementById('view-mode-select');
-    if (!modeSelect) {
-        return;
-    }
-
-    const hasSources = Array.isArray(window.catalogSources) && window.catalogSources.length > 0;
-    const sourceOption = modeSelect.querySelector('option[value="source"]');
-    const extensionOption = modeSelect.querySelector('option[value="extension"]');
-    const isCompact = window.matchMedia('(max-width: 768px)').matches;
-
-    if (sourceOption) {
-        sourceOption.disabled = !hasSources;
-        sourceOption.textContent = hasSources
-            ? (isCompact ? 'By Source' : 'Hiển thị: By Source')
-            : (isCompact ? 'No Source' : 'Hiển thị: By Source (chưa có dữ liệu)');
-    }
-
-    if (extensionOption) {
-        extensionOption.textContent = isCompact ? 'By Ext' : 'Hiển thị: By Ext';
-    }
-
-    modeSelect.value = currentViewMode;
-
-    if (viewModeBound) {
-        return;
-    }
-
-    modeSelect.addEventListener('change', () => {
-        const requestedMode = modeSelect.value;
-        if (requestedMode === 'source' && !hasSources) {
-            modeSelect.value = 'extension';
-            currentViewMode = 'extension';
+function getAuthorFilterOptions() {
+    const authorGroups = new Map();
+    getAllExtensions().forEach((ext) => {
+        const author = normalizeAuthorName(ext.author || '');
+        const authorKey = normalizeAuthorKey(author);
+        if (!authorKey) {
             return;
         }
 
-        currentViewMode = requestedMode;
-        renderActiveView();
+        if (!authorGroups.has(authorKey)) {
+            authorGroups.set(authorKey, { label: author, total: 0 });
+        }
+        authorGroups.get(authorKey).total += 1;
     });
 
-    viewModeBound = true;
+    return Array.from(authorGroups.entries())
+        .map(([value, info]) => ({ value, label: info.label, total: info.total }))
+        .sort((a, b) => a.label.localeCompare(b.label, 'vi'));
+}
+
+function getLocaleFilterOptions() {
+    const localeMap = new Map();
+    getAllExtensions().forEach((ext) => {
+        const localeKey = normalizeLocaleKey(ext.locale || '_unknown');
+        localeMap.set(localeKey, (localeMap.get(localeKey) || 0) + 1);
+    });
+
+    return Array.from(localeMap.entries())
+        .map(([value, total]) => ({ value, label: `${getLocaleDisplayLabel(value)} (${total})` }))
+        .sort((a, b) => a.label.localeCompare(b.label, 'vi'));
+}
+
+function getTypeFilterOptions() {
+    const typeSet = new Set();
+    getAllExtensions().forEach((ext) => {
+        typeSet.add(String(ext.type || '_unknown').trim() || '_unknown');
+    });
+
+    return Array.from(typeSet)
+        .map((value) => ({ value, label: getSourceTypeLabel(value) }))
+        .sort((a, b) => a.label.localeCompare(b.label, 'vi'));
+}
+
+function renderFilterChipList(containerId, groupName, options, selectedSet) {
+    const container = document.getElementById(containerId);
+    if (!container) {
+        return;
+    }
+
+    const allChip = `<button type="button" class="filter-chip ${selectedSet.size === 0 ? 'active' : ''}" data-filter-group="${groupName}" data-filter-value="__all">Tất cả</button>`;
+    const optionChips = options
+        .map((item) => `<button type="button" class="filter-chip ${selectedSet.has(item.value) ? 'active' : ''}" data-filter-group="${groupName}" data-filter-value="${escapeHtml(item.value)}">${escapeHtml(item.label)}</button>`)
+        .join('');
+
+    container.innerHTML = allChip + optionChips;
+}
+
+function updateFilterButtonLabel() {
+    const button = document.getElementById('open-filter-btn');
+    if (!button) {
+        return;
+    }
+
+    const totalSelected = selectedAuthorKeys.size + selectedLocales.size + selectedTypes.size;
+    button.textContent = totalSelected > 0 ? `Lọc (${totalSelected})` : 'Lọc';
+}
+
+function openFilterModal() {
+    const modal = document.getElementById('filter-modal');
+    const sourceSwitch = document.getElementById('filter-source-switch');
+    if (!modal || !sourceSwitch) {
+        return;
+    }
+
+    draftAuthorKeys = new Set(selectedAuthorKeys);
+    draftLocales = new Set(selectedLocales);
+    draftTypes = new Set(selectedTypes);
+    draftSourceViewEnabled = sourceViewEnabled;
+
+    renderFilterChipList('filter-authors', 'author', getAuthorFilterOptions(), draftAuthorKeys);
+    renderFilterChipList('filter-locales', 'locale', getLocaleFilterOptions(), draftLocales);
+    renderFilterChipList('filter-types', 'type', getTypeFilterOptions(), draftTypes);
+    sourceSwitch.checked = draftSourceViewEnabled;
+
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('filter-open');
+}
+
+function closeFilterModal() {
+    const modal = document.getElementById('filter-modal');
+    if (!modal) {
+        return;
+    }
+
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('filter-open');
+}
+
+function applyFilterModal() {
+    selectedAuthorKeys = new Set(draftAuthorKeys);
+    selectedLocales = new Set(draftLocales);
+    selectedTypes = new Set(draftTypes);
+    sourceViewEnabled = draftSourceViewEnabled;
+
+    updateFilterButtonLabel();
+    closeFilterModal();
+    renderActiveView();
+}
+
+function toggleDraftFilter(groupName, value) {
+    const targetSet = groupName === 'author'
+        ? draftAuthorKeys
+        : (groupName === 'locale' ? draftLocales : draftTypes);
+
+    if (value === '__all') {
+        targetSet.clear();
+    } else if (targetSet.has(value)) {
+        targetSet.delete(value);
+    } else {
+        targetSet.add(value);
+    }
+
+    if (groupName === 'author') {
+        renderFilterChipList('filter-authors', 'author', getAuthorFilterOptions(), draftAuthorKeys);
+    } else if (groupName === 'locale') {
+        renderFilterChipList('filter-locales', 'locale', getLocaleFilterOptions(), draftLocales);
+    } else {
+        renderFilterChipList('filter-types', 'type', getTypeFilterOptions(), draftTypes);
+    }
+}
+
+function setupFilterModal() {
+    const openButton = document.getElementById('open-filter-btn');
+    const modal = document.getElementById('filter-modal');
+    const applyButton = document.getElementById('filter-apply-btn');
+    const cancelButton = document.getElementById('filter-cancel-btn');
+    const sourceSwitch = document.getElementById('filter-source-switch');
+    if (!openButton || !modal || !applyButton || !cancelButton || !sourceSwitch) {
+        return;
+    }
+
+    updateFilterButtonLabel();
+
+    if (filterModalBound) {
+        return;
+    }
+
+    openButton.addEventListener('click', openFilterModal);
+    applyButton.addEventListener('click', applyFilterModal);
+    cancelButton.addEventListener('click', closeFilterModal);
+
+    sourceSwitch.addEventListener('change', () => {
+        draftSourceViewEnabled = sourceSwitch.checked;
+    });
+
+    modal.addEventListener('click', (event) => {
+        const closeTarget = event.target.closest('[data-filter-close="true"]');
+        if (closeTarget) {
+            closeFilterModal();
+            return;
+        }
+
+        const chip = event.target.closest('.filter-chip[data-filter-group][data-filter-value]');
+        if (!chip) {
+            return;
+        }
+
+        const groupName = chip.getAttribute('data-filter-group');
+        const value = chip.getAttribute('data-filter-value');
+        if (!groupName || !value) {
+            return;
+        }
+
+        toggleDraftFilter(groupName, value);
+    });
+
+    filterModalBound = true;
 }
 
 function setupSearch() {
@@ -555,14 +796,14 @@ function setupSearch() {
 
 function setupCopyActions() {
     document.addEventListener('click', async (event) => {
-        const extButton = event.target.closest('.ext-copy-btn[data-copy-url]');
-        if (extButton) {
-            const copyUrl = extButton.getAttribute('data-copy-url');
+        const siteCopyButton = event.target.closest('.ext-site-copy-btn[data-site-url]');
+        if (siteCopyButton) {
+            const siteUrl = siteCopyButton.getAttribute('data-site-url');
             try {
-                await copyToClipboard(copyUrl);
-                showToast('Đã copy link ext');
+                await copyToClipboard(siteUrl);
+                showToast('Đã copy URL site');
             } catch (_error) {
-                showToast('Không thể copy ext');
+                showToast('Không thể copy URL site');
             }
             return;
         }
@@ -657,7 +898,7 @@ function renderDashboard() {
     renderAggregateButton();
     renderContributeSection();
     renderAuthorAcknowledgement();
-    setupViewModeToggle();
+    setupFilterModal();
     renderActiveView();
 }
 
