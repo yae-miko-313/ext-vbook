@@ -18,7 +18,9 @@ python -m http.server 8000
 
 Mở browser: `http://localhost:8000/web/`
 
-`npm run sync:web-catalog` là lệnh chuẩn để refresh dữ liệu web từ `ref/plugin.json`.
+`npm run sync:web-catalog` là lệnh chuẩn để refresh dữ liệu web từ `ref/monitor.json`.
+
+`npm run monitor:sources` sẽ fetch nguồn từ `references/remote-sources.json`, cập nhật `ref/monitor.json`, và tự sync luôn `web/plugin.json` + `web/catalog.json`.
 
 ## Cấu trúc dữ liệu
 
@@ -51,7 +53,7 @@ Root `plugin.json` của repo chỉ là manifest cá nhân, dạng:
 ```json
 {
   "metadata": { "author": "kychi", "description": "..." },
-  "summary": { "total": 25, "changed": 0, "unchanged": 25, "errors": 0 },
+  "summary": { "total": 35, "changed": 0, "unchanged": 35, "errors": 0 },
   "referenceListUrl": "...",
   "sources": [
     {
@@ -107,6 +109,8 @@ Root `plugin.json` của repo chỉ là manifest cá nhân, dạng:
 - Distribution chart (top 8) with percentages
 
 ## Cập nhật dữ liệu
+
+Snapshot hiện tại (sau sync gần nhất): 35 repo nguồn, 497 extension aggregate.
 
 ### Tự động (developer)
 ```bash

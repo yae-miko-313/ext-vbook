@@ -13,18 +13,18 @@ Không copy blind, luôn verify lại với live site.
    - Organized by type (novel, comic, translate, tts)
    - Read-only, không embed vào catalog
 
-3. **`ref/plugin.json`**: Aggregate của external sources
+3. **`ref/monitor.json`**: Aggregate snapshot của external sources
    - Định kỳ sync từ provider các repos
    - Chứa `sources[]` list + nested `content.data[]` items
    - Nằm trong `sources[]` array của web catalog
 
 4. **`web/plugin.json`**: Link tổng cho web viewer
-  - Mirror root-like từ `ref/plugin.json`
+  - Mirror root-like từ `ref/monitor.json`
   - Hiển thị By Extension
   - Format: `{ metadata, data[] }`
 
 5. **`web/catalog.json`**: Sidecar cho source view
-  - Mirror metadata/source từ `ref/plugin.json`
+  - Mirror metadata/source từ `ref/monitor.json`
   - Hiển thị By Source + reference metadata
   - Format: `{ metadata, summary, referenceListUrl, sources[] }`
 
@@ -47,7 +47,7 @@ Không copy blind, luôn verify lại với live site.
 {
   "metadata": { "author": "kychi", "description": "..." },
   "sources": [
-    // External sources from ref/plugin.json
+    // External sources from ref/monitor.json
     {
       "id": "...",
       "url": "https://raw.githubusercontent.com/.../plugin.json",
@@ -69,35 +69,52 @@ Web viewer load split files:
 
 ## Danh sách nguồn cập nhật (raw URL)
 
-Được sync vào `ref/plugin.json` theo priority:
+Danh sách nguồn đầy đủ được quản lý tại `references/remote-sources.json`.
 
-1. https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/plugin.json
-2. https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/chinese_plugin.json
-3. https://raw.githubusercontent.com/lethituyen/vbooks-extension/refs/heads/master/plugin.json
-4. https://raw.githubusercontent.com/Moleys/vbook-ext/main/plugin.json
-5. https://raw.githubusercontent.com/dat-bi/ext-vbook/main/plugin.json
-6. https://raw.githubusercontent.com/SoulGodEve9x9/Vbook-ext/Nahona/plugin.json
-7. https://gitlab.com/hieunm3103/vbook-extension/-/raw/main/plugin.json
-8. https://raw.githubusercontent.com/BaoBao666888/ext-vbook-w/main/plugin.json
-9. https://raw.githubusercontent.com/duongden/vbook/refs/heads/main/plugin.json
-10. https://raw.githubusercontent.com/longvuu/ext/refs/heads/master/plugin.json
-11. https://raw.githubusercontent.com/TuanHai03/vbook-extensions/refs/heads/main/plugin.json
-12. https://raw.githubusercontent.com/WillSun28/vbook-extensions/refs/heads/main/plugin.json
-13. https://raw.githubusercontent.com/gh369-639/vbook-ext-public/refs/heads/main/plugin.json
-14. https://raw.githubusercontent.com/mizhm/vbook-extensions/refs/heads/main/plugin.json
-15. https://raw.githubusercontent.com/kur21/vbook-ext/refs/heads/main/plugin.json
-16. https://raw.githubusercontent.com/sonzin/vbook-extension/refs/heads/main/plugin.json
-17. https://raw.githubusercontent.com/alexsonxxx/vbook/refs/heads/main/plugin.json
-18. https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json
-19. https://raw.githubusercontent.com/Gold2k2k2k/HTri-Vbook-Ext/refs/heads/main/plugin.json
-20. https://raw.githubusercontent.com/Evamirion/vbook-ext/main/plugin.json
-21. https://raw.githubusercontent.com/hienpro00123/vbook_MeoU/refs/heads/main/plugin.json
-22. https://raw.githubusercontent.com/hieu45666/vbook_ext/main/plugin.json
-23. https://raw.githubusercontent.com/hishirooo/vbook-ext/master/plugin.json
-24. https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/translate.json
-25. https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/tts.json
+1. darkrai9x-main - https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/plugin.json
+2. darkrai9x-chinese - https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/chinese_plugin.json
+3. lethituyen-main - https://raw.githubusercontent.com/lethituyen/vbooks-extension/refs/heads/master/plugin.json
+4. moleys-main - https://raw.githubusercontent.com/Moleys/vbook-ext/main/plugin.json
+5. dat-bi-main - https://raw.githubusercontent.com/dat-bi/ext-vbook/main/plugin.json
+6. soulgod-nahona-main - https://raw.githubusercontent.com/SoulGodEve9x9/Vbook-ext/Nahona/plugin.json
+7. hieunm3103-main - https://gitlab.com/hieunm3103/vbook-extension/-/raw/main/plugin.json
+8. baobao666888-main - https://raw.githubusercontent.com/BaoBao666888/ext-vbook-w/main/plugin.json
+9. duongden-main - https://raw.githubusercontent.com/duongden/vbook/refs/heads/main/plugin.json
+10. longvuu-main - https://raw.githubusercontent.com/longvuu/ext/refs/heads/master/plugin.json
+11. tuanhai03-main - https://raw.githubusercontent.com/TuanHai03/vbook-extensions/refs/heads/main/plugin.json
+12. willsun28-main - https://raw.githubusercontent.com/WillSun28/vbook-extensions/refs/heads/main/plugin.json
+13. gh369-639-main - https://raw.githubusercontent.com/gh369-639/vbook-ext-public/refs/heads/main/plugin.json
+14. mizhm-main - https://raw.githubusercontent.com/mizhm/vbook-extensions/refs/heads/main/plugin.json
+15. kur21-main - https://raw.githubusercontent.com/kur21/vbook-ext/refs/heads/main/plugin.json
+16. sonzin-main - https://raw.githubusercontent.com/sonzin/vbook-extension/refs/heads/main/plugin.json
+17. alexsonxxx-main - https://raw.githubusercontent.com/alexsonxxx/vbook/refs/heads/main/plugin.json
+18. kychitoge-main - https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json
+19. gold2k2k2k-main - https://raw.githubusercontent.com/Gold2k2k2k/HTri-Vbook-Ext/refs/heads/main/plugin.json
+20. evamirion-main - https://raw.githubusercontent.com/Evamirion/vbook-ext/main/plugin.json
+21. hienpro00123-main - https://raw.githubusercontent.com/hienpro00123/vbook_MeoU/refs/heads/main/plugin.json
+22. hieu45666-main - https://raw.githubusercontent.com/hieu45666/vbook_ext/main/plugin.json
+23. hishirooo-main - https://raw.githubusercontent.com/hishirooo/vbook-ext/master/plugin.json
+24. hajljnopera-main - https://raw.githubusercontent.com/hajljnopera/vbook-ext/main/plugin.json
+25. bqy-main - https://raw.githubusercontent.com/BanQuyY/Vbook/main/plugin_vb.json
+26. bexom-main - https://raw.githubusercontent.com/B3x0m/vbook-ext/main/plugin.json
+27. chanhnh-main - https://raw.githubusercontent.com/Chanhnh/vbook-ext/main/plugin.json
+28. aleshaonon-main - https://raw.githubusercontent.com/seyah24/vbook-exts/main/plugin.json
+29. beast666-main - https://raw.githubusercontent.com/khoa301020/vbook-ext/master/plugin.json
+30. tamchau-main - https://raw.githubusercontent.com/TamChau/vbook-extensions/main/plugin.json
+31. springpeachvinh-main - https://raw.githubusercontent.com/SPRINGPEACHVINH/vbook-ext/main/plugin.json
+32. laofun-main - https://raw.githubusercontent.com/laofun/vbook-extensions-with-filter/master/plugin.json
+33. ivan1hai-main - https://raw.githubusercontent.com/Ivan1hai/ext/main/plugin.json
+34. darkrai9x-translate - https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/translate.json
+35. darkrai9x-tts - https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/tts.json
 
-**Note**: Sync logic external config, không cứng trong codebase - tham khảo `ref/plugin.json` metadata
+**Note**: Sync logic external config, không cứng trong codebase - tham khảo `ref/monitor.json` metadata
+
+## Snapshot contribute hiện tại
+
+Sau lần sync gần nhất:
+- Repo nguồn: 35
+- Extension aggregate: 497
+- Nguồn `ivan1hai-main`: 27 extension
 
 ## Danh sách ext hiện có (community)
 
