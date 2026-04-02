@@ -8,6 +8,7 @@ let draftSourceViewEnabled = false;
 let draftAuthorKeys = new Set();
 let draftLocales = new Set();
 let draftTypes = new Set();
+let lockedBodyScrollY = 0;
 
 async function copyToClipboard(text) {
     if (!text) {
@@ -685,7 +686,9 @@ function openFilterModal() {
 
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
+    lockedBodyScrollY = window.scrollY || window.pageYOffset || 0;
     document.body.classList.add('filter-open');
+    document.body.style.top = `-${lockedBodyScrollY}px`;
 }
 
 function closeFilterModal() {
@@ -697,6 +700,8 @@ function closeFilterModal() {
     modal.classList.remove('show');
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('filter-open');
+    document.body.style.top = '';
+    window.scrollTo(0, lockedBodyScrollY);
 }
 
 function applyFilterModal() {

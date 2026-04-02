@@ -168,6 +168,7 @@ body {
     inset: 0;
     z-index: 2200;
     display: none;
+    overscroll-behavior: contain;
 }
 
 .filter-modal.show {
@@ -178,6 +179,8 @@ body {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    transition: opacity 0.22s ease;
 }
 
 .filter-modal-panel {
@@ -190,6 +193,21 @@ body {
     border-radius: 18px;
     background: var(--color-bg-primary);
     border: 1px solid var(--glass-border);
+    transform: translateY(28px);
+    opacity: 0;
+    transition: transform 0.24s ease, opacity 0.24s ease;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+}
+
+.filter-modal.show .filter-modal-backdrop {
+    opacity: 1;
+}
+
+.filter-modal.show .filter-modal-panel {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .filter-modal-title {
@@ -283,9 +301,11 @@ body {
 }
 
 .filter-modal-actions {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
+    gap: 12px;
+    margin-top: 14px;
 }
 
 .filter-modal-btn {
@@ -294,6 +314,10 @@ body {
     font-size: 28px;
     font-weight: 700;
     cursor: pointer;
+    padding: 10px 14px;
+    min-height: 52px;
+    width: 100%;
+    text-align: center;
 }
 
 .filter-modal-btn-cancel {
@@ -308,6 +332,14 @@ body.filter-open .theme-toggle,
 body.filter-open .back-to-top {
     opacity: 0;
     pointer-events: none;
+}
+
+body.filter-open {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 .search-box,
@@ -433,6 +465,28 @@ body.filter-open .back-to-top {
         font-size: 24px;
     }
 
+    .filter-modal-panel {
+        width: 100vw;
+        height: 100dvh;
+        max-height: 100dvh;
+        margin: 0;
+        border-radius: 18px 18px 0 0;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: auto;
+        padding: 18px 14px calc(34px + env(safe-area-inset-bottom));
+        transform: translateY(100%);
+    }
+
+    .filter-modal.show .filter-modal-panel {
+        transform: translateY(0);
+    }
+
     .filter-modal-group-title {
         font-size: 20px;
     }
@@ -448,6 +502,16 @@ body.filter-open .back-to-top {
 
     .filter-modal-btn {
         font-size: 20px;
+        min-height: 56px;
+        padding: 12px 14px;
+    }
+
+    .filter-modal-actions {
+        position: static;
+        margin-top: 16px;
+        padding-top: 10px;
+        padding-bottom: 0;
+        background: transparent;
     }
 
     .source-repo-count {
