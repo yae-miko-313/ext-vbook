@@ -61,15 +61,27 @@ function flattenCommunityData(refCatalog) {
         });
     }
 
+    if (Array.isArray(refCatalog.items)) {
+        refCatalog.items.forEach((item) => {
+            const sourceItems = Array.isArray(item && item.content && item.content.data)
+                ? item.content.data
+                : [];
+            sourceItems.forEach((sourceItem) => {
+                pushUnique(sourceItem);
+            });
+        });
+    }
+
     return flat;
 }
 
 function buildWebCatalog(workspaceRoot) {
-    const refPath = path.join(workspaceRoot, 'ref', 'plugin.json');
-    const sourceCatalog = safeReadJson(refPath);
+    const monitorPath = path.join(workspaceRoot, 'ref', 'monitor.json');
+    const legacyPath = path.join(workspaceRoot, 'ref', 'plugin.json');
+    const sourceCatalog = safeReadJson(monitorPath) || safeReadJson(legacyPath);
 
     if (!sourceCatalog || typeof sourceCatalog !== 'object') {
-        throw new Error('ref/plugin.json is missing or invalid');
+        throw new Error('ref/monitor.json or ref/plugin.json is missing or invalid');
     }
 
     const data = flattenCommunityData(sourceCatalog);
@@ -85,11 +97,15 @@ function buildWebCatalog(workspaceRoot) {
         data
     };
 
+    const sources = Array.isArray(sourceCatalog.sources)
+        ? sourceCatalog.sources
+        : (Array.isArray(sourceCatalog.items) ? sourceCatalog.items : []);
+
     const sidecarCatalog = {
         metadata: sourceCatalog.metadata || {},
         summary: sourceCatalog.summary || {},
         referenceListUrl: sourceCatalog.referenceListUrl || '',
-        sources: Array.isArray(sourceCatalog.sources) ? sourceCatalog.sources : []
+        sources
     };
 
     fs.writeFileSync(path.join(workspaceRoot, 'web', 'plugin.json'), `${JSON.stringify(rootCatalog, null, 2)}\n`, 'utf8');

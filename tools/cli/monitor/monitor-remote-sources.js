@@ -33,6 +33,69 @@ async function fetchText(url) {
     return { text, etag, lastModified };
 }
 
+function stripJsonComments(text) {
+    let result = '';
+    let inString = false;
+    let escapeNext = false;
+
+    for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const nextChar = text[i + 1];
+
+        if (escapeNext) {
+            result += char;
+            escapeNext = false;
+            continue;
+        }
+
+        if (char === '\\') {
+            result += char;
+            escapeNext = true;
+            continue;
+        }
+
+        if (char === '"') {
+            inString = !inString;
+            result += char;
+            continue;
+        }
+
+        if (!inString && char === '/' && nextChar === '/') {
+            // Skip rest of line
+            while (i < text.length && text[i] !== '\n') {
+                i++;
+            }
+            if (i < text.length) result += '\n';
+            continue;
+        }
+
+        result += char;
+    }
+
+    return result;
+}
+
+function removeTrailingCommas(text) {
+    return text.replace(/,(\s*[}\]])/g, '$1');
+}
+
+function parseSourceContent(text, id) {
+    // Strip comments and trailing commas for more lenient JSON parsing
+    let cleanedText = stripJsonComments(text);
+    cleanedText = removeTrailingCommas(cleanedText);
+
+    const parsed = JSON.parse(cleanedText);
+    if (!parsed || typeof parsed !== 'object') {
+        throw new Error('Source JSON is invalid');
+    }
+
+    return {
+        contentType: Array.isArray(parsed.data) ? 'json' : 'unknown',
+        itemCount: Array.isArray(parsed.data) ? parsed.data.length : 0,
+        content: parsed
+    };
+}
+
 function readJson(filePath, fallback = null) {
     try {
         return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -41,12 +104,75 @@ function readJson(filePath, fallback = null) {
     }
 }
 
+function buildBaselineState(baseline) {
+    if (baseline && baseline.state && typeof baseline.state === 'object') {
+        return baseline.state;
+    }
+
+    if (!baseline || !Array.isArray(baseline.items)) {
+        return {};
+    }
+
+    const state = {};
+    for (const item of baseline.items) {
+        if (!item || !item.id || !item.hash) {
+            continue;
+        }
+
+        state[item.id] = {
+            hash: item.hash,
+            etag: item.etag || null,
+            lastModified: item.lastModified || null,
+            lastCheckedAt: baseline.generatedAt || null,
+            lastSyncedAt: baseline.generatedAt || null,
+            url: item.url || null
+        };
+    }
+
+    return state;
+}
+
+function buildSnapshot(report, sourceConfig) {
+    const state = {};
+
+    for (const item of report.items) {
+        if (!item || !item.id) {
+            continue;
+        }
+
+        state[item.id] = {
+            hash: item.hash || null,
+            etag: item.etag || null,
+            lastModified: item.lastModified || null,
+            lastCheckedAt: report.generatedAt,
+            lastSyncedAt: report.generatedAt,
+            url: item.url || null
+        };
+    }
+
+    return {
+        generatedAt: report.generatedAt,
+        mode: 'sync',
+        summary: {
+            total: report.summary.total,
+            changed: report.summary.changed,
+            unchanged: report.summary.unchanged,
+            errors: report.summary.errors,
+            mode: 'sync',
+            autoSyncedOnChange: true
+        },
+        items: report.items,
+        state,
+        referenceListUrl: sourceConfig.referenceListUrl || null
+    };
+}
+
 async function run() {
     const startedAt = new Date().toISOString();
 
     const sourceConfig = readJson(SOURCES_FILE, { sources: [] });
     const baseline = readJson(BASELINE_FILE, { state: {} });
-    const baselineState = baseline && baseline.state ? baseline.state : {};
+    const baselineState = buildBaselineState(baseline);
 
     const sources = Array.isArray(sourceConfig.sources) ? sourceConfig.sources : [];
     const items = [];
@@ -57,12 +183,14 @@ async function run() {
     for (const source of sources) {
         const id = String(source.id || '').trim();
         const url = String(source.url || '').trim();
+        const avatar = String(source.avatar || '').trim();
 
         if (!id || !url) {
             errors += 1;
             items.push({
                 id,
                 url,
+                avatar: avatar || null,
                 status: 'error',
                 changed: false,
                 hash: null,
@@ -75,6 +203,7 @@ async function run() {
             const previous = baselineState[id] || null;
             const fetched = await fetchText(url);
             const hash = sha256(fetched.text);
+            const parsed = parseSourceContent(fetched.text, id);
 
             let status = 'unchanged';
             let isChanged = false;
@@ -94,11 +223,15 @@ async function run() {
             items.push({
                 id,
                 url,
+                avatar: avatar || null,
                 status,
                 changed: isChanged,
                 hash,
                 etag: fetched.etag,
                 lastModified: fetched.lastModified,
+                itemCount: parsed.itemCount,
+                contentType: parsed.contentType,
+                content: parsed.content,
                 error: null
             });
         } catch (error) {
@@ -106,6 +239,7 @@ async function run() {
             items.push({
                 id,
                 url,
+                avatar: avatar || null,
                 status: 'error',
                 changed: false,
                 hash: null,
@@ -131,6 +265,7 @@ async function run() {
 
     fs.mkdirSync(REPORT_DIR, { recursive: true });
     fs.writeFileSync(REPORT_FILE, JSON.stringify(report, null, 2), 'utf8');
+    fs.writeFileSync(BASELINE_FILE, JSON.stringify(buildSnapshot(report, sourceConfig), null, 2), 'utf8');
 
     if (errors > 0) {
         console.log(`[monitor] completed with ${errors} error(s).`);
