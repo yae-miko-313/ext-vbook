@@ -208,7 +208,7 @@ function avatarFromRawUrl(rawUrl) {
         const parsed = new URL(rawUrl);
         const parts = parsed.pathname.split('/').filter(Boolean);
         if (parsed.hostname.includes('raw.githubusercontent.com') && parts.length >= 1) {
-            return `https://github.com/${parts[0]}.png?size=80`;
+            return `https://avatars.githubusercontent.com/${parts[0]}?size=80`;
         }
         if (parsed.hostname.includes('gitlab.com') && parts.length >= 1) {
             return `https://ui-avatars.com/api/?name=${encodeURIComponent(parts[0])}&background=f1f1f1&color=333333`;
@@ -217,6 +217,10 @@ function avatarFromRawUrl(rawUrl) {
         return 'https://ui-avatars.com/api/?name=repo&background=f1f1f1&color=333333';
     }
     return 'https://ui-avatars.com/api/?name=repo&background=f1f1f1&color=333333';
+}
+
+function avatarFallback(label) {
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(label || 'repo')}&background=f1f1f1&color=333333`;
 }
 
 function renderContributeSection() {
@@ -233,9 +237,10 @@ function renderContributeSection() {
     repoListEl.innerHTML = sources
         .map((source) => {
             const browseUrl = toRepoBrowseUrl(source.url || '');
-            const avatarUrl = avatarFromRawUrl(source.url || '');
             const label = source.displayName || source.id || source.url || 'unknown-source';
-            return `<a class="repo-chip" href="${escapeHtml(browseUrl)}" target="_blank"><img class="repo-avatar" src="${escapeHtml(avatarUrl)}" alt="${escapeHtml(label)} avatar"><span class="repo-chip-label" title="${escapeHtml(label)}">${escapeHtml(label)}</span></a>`;
+            const avatarUrl = avatarFromRawUrl(source.url || '');
+            const fallbackUrl = avatarFallback(label);
+            return `<a class="repo-chip" href="${escapeHtml(browseUrl)}" target="_blank" rel="noopener noreferrer"><img class="repo-avatar" src="${escapeHtml(avatarUrl)}" alt="${escapeHtml(label)} avatar" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${escapeHtml(fallbackUrl)}';"><span class="repo-chip-label" title="${escapeHtml(label)}">${escapeHtml(label)}</span></a>`;
         })
         .join('');
 
