@@ -1,10 +1,12 @@
 let currentSearch = '';
 let sourceViewEnabled = false;
+let hideNsfwEnabled = true;
 let selectedAuthorKeys = new Set();
 let selectedLocales = new Set();
 let selectedTypes = new Set();
 let filterModalBound = false;
 let draftSourceViewEnabled = false;
+let draftHideNsfwEnabled = true;
 let draftAuthorKeys = new Set();
 let draftLocales = new Set();
 let draftTypes = new Set();
@@ -115,6 +117,15 @@ function getLocaleDisplayLabel(localeKey) {
     return localeKey;
 }
 
+function isNsfwExtension(ext) {
+    if (!ext || typeof ext !== 'object') {
+        return false;
+    }
+
+    const tagValue = typeof ext.tag === 'string' ? ext.tag.trim().toLowerCase() : '';
+    return tagValue === 'nsfw';
+}
+
 function extensionMatchesStructuredFilters(ext) {
     if (!ext || typeof ext !== 'object') {
         return false;
@@ -123,6 +134,10 @@ function extensionMatchesStructuredFilters(ext) {
     const authorKey = normalizeAuthorKey(ext.author || '');
     const localeValue = normalizeLocaleKey(ext.locale || '_unknown');
     const typeValue = String(ext.type || '_unknown').trim() || '_unknown';
+
+    if (hideNsfwEnabled && isNsfwExtension(ext)) {
+        return false;
+    }
 
     if (selectedAuthorKeys.size > 0 && !selectedAuthorKeys.has(authorKey)) {
         return false;
@@ -670,7 +685,8 @@ function updateFilterButtonLabel() {
 function openFilterModal() {
     const modal = document.getElementById('filter-modal');
     const sourceSwitch = document.getElementById('filter-source-switch');
-    if (!modal || !sourceSwitch) {
+    const nsfwSwitch = document.getElementById('filter-nsfw-switch');
+    if (!modal || !sourceSwitch || !nsfwSwitch) {
         return;
     }
 
@@ -678,11 +694,13 @@ function openFilterModal() {
     draftLocales = new Set(selectedLocales);
     draftTypes = new Set(selectedTypes);
     draftSourceViewEnabled = sourceViewEnabled;
+    draftHideNsfwEnabled = hideNsfwEnabled;
 
     renderFilterChipList('filter-authors', 'author', getAuthorFilterOptions(), draftAuthorKeys);
     renderFilterChipList('filter-locales', 'locale', getLocaleFilterOptions(), draftLocales);
     renderFilterChipList('filter-types', 'type', getTypeFilterOptions(), draftTypes);
     sourceSwitch.checked = draftSourceViewEnabled;
+    nsfwSwitch.checked = draftHideNsfwEnabled;
 
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
@@ -709,6 +727,7 @@ function applyFilterModal() {
     selectedLocales = new Set(draftLocales);
     selectedTypes = new Set(draftTypes);
     sourceViewEnabled = draftSourceViewEnabled;
+    hideNsfwEnabled = draftHideNsfwEnabled;
 
     updateFilterButtonLabel();
     closeFilterModal();
@@ -743,7 +762,8 @@ function setupFilterModal() {
     const applyButton = document.getElementById('filter-apply-btn');
     const cancelButton = document.getElementById('filter-cancel-btn');
     const sourceSwitch = document.getElementById('filter-source-switch');
-    if (!openButton || !modal || !applyButton || !cancelButton || !sourceSwitch) {
+    const nsfwSwitch = document.getElementById('filter-nsfw-switch');
+    if (!openButton || !modal || !applyButton || !cancelButton || !sourceSwitch || !nsfwSwitch) {
         return;
     }
 
@@ -759,6 +779,10 @@ function setupFilterModal() {
 
     sourceSwitch.addEventListener('change', () => {
         draftSourceViewEnabled = sourceSwitch.checked;
+    });
+
+    nsfwSwitch.addEventListener('change', () => {
+        draftHideNsfwEnabled = nsfwSwitch.checked;
     });
 
     modal.addEventListener('click', (event) => {

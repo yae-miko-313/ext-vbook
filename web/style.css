@@ -311,8 +311,9 @@ body {
 .filter-modal-btn {
     border: 0;
     background: transparent;
-    font-size: 28px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
     cursor: pointer;
     padding: 10px 14px;
     min-height: 52px;
@@ -501,7 +502,7 @@ body.filter-open {
     }
 
     .filter-modal-btn {
-        font-size: 20px;
+        font-size: 18px;
         min-height: 56px;
         padding: 12px 14px;
     }
