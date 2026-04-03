@@ -71,7 +71,8 @@ function buildExtensionZip(workspaceRoot, pluginPath, dryRun = false) {
         
         archive.pipe(output);
         
-        // Add src directory (entire) and icon.png (if exists)
+        // Add required files for extension loader.
+        archive.file(pluginJsonPath, { name: 'plugin.json' });
         archive.directory(srcDir, 'src');
         if (fs.existsSync(iconPath)) {
             archive.file(iconPath, { name: 'icon.png' });

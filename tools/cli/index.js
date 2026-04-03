@@ -99,7 +99,7 @@ program.command('ext')
     });
 
 program.command('build')
-    .description('Build extension to plugin.zip (src/ + icon.png)')
+    .description('Build extension to plugin.zip (plugin.json + src/ + icon.png)')
     .option('--plugin <path>', 'Extension folder or plugin.json path', 'extensions/novel/kychi_ntruyen')
     .option('--dry-run', 'Preview only, do not create zip')
     .option('--json', 'Output as JSON')
