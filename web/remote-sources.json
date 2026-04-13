@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-13T08:46:58.551Z",
+  "generatedAt": "2026-04-13T12:56:55.597Z",
   "source": "references/remote-sources.json",
   "referenceListUrl": "https://xn--ngc-bmz.vn/i/vbook/extension_list.php#id-22",
   "sources": [
@@ -135,6 +135,10 @@
     {
       "id": "ivan1hai-main",
       "url": "https://raw.githubusercontent.com/Ivan1hai/ext/main/plugin.json"
+    },
+    {
+      "id": "chillguyk5-klein-main",
+      "url": "https://raw.githubusercontent.com/chillguyk5/vbook_Klein/main/plugin.json"
     },
     {
       "id": "darkrai9x-translate",
