@@ -66,6 +66,11 @@ function getAllExtensions() {
     return Array.isArray(window.catalogExtensions) ? window.catalogExtensions.slice() : [];
 }
 
+function getActiveCatalogSources() {
+    const sources = Array.isArray(window.catalogSources) ? window.catalogSources : [];
+    return sources.filter((source) => String(source && source.status ? source.status : '').toLowerCase() !== 'error');
+}
+
 function normalizeLocaleKey(locale) {
     const raw = String(locale || '_unknown').trim();
     if (!raw) {
@@ -269,7 +274,9 @@ function renderSourceRepoCount() {
         return;
     }
 
-    const repoTotal = Array.isArray(window.catalogSources) ? window.catalogSources.length : 0;
+    const activeSources = getActiveCatalogSources();
+    const repoTotal = activeSources.length;
+    const totalSources = Array.isArray(window.catalogSources) ? window.catalogSources.length : repoTotal;
     const modeValue = String(window.catalogStatus && window.catalogStatus.mode ? window.catalogStatus.mode : '').toLowerCase();
     const modeIcon = modeValue === 'realtime' ? '⚡' : (modeValue === 'snapshot' ? '☁' : '•');
     const modeLabel = modeValue === 'realtime'
@@ -289,11 +296,13 @@ function renderSourceRepoCount() {
     }
 
     const fullUrl = String(window.catalogMeta && window.catalogMeta.loadedCatalogUrl ? window.catalogMeta.loadedCatalogUrl : '').trim();
-    const tooltip = fullUrl ? `Repo nguồn: ${repoTotal}\nMode: ${modeLabel}\nData: ${fullUrl}` : `Repo nguồn: ${repoTotal}\nMode: ${modeLabel}`;
+    const tooltip = fullUrl
+        ? `Repo nguồn: ${repoTotal}/${totalSources} active\nMode: ${modeLabel}\nData: ${fullUrl}`
+        : `Repo nguồn: ${repoTotal}/${totalSources} active\nMode: ${modeLabel}`;
 
     info.innerHTML = `<span class="source-repo-count-pill" title="Số repo nguồn">${repoTotal}</span> <span class="source-repo-count-sep">•</span> <span class="source-repo-count-pill" title="Chế độ tải">${modeIcon} ${modeLabel}</span>`;
     info.setAttribute('title', tooltip);
-    info.setAttribute('aria-label', `${repoTotal} nguồn, mode ${modeLabel}, data ${loadedFromLabel}`);
+    info.setAttribute('aria-label', `${repoTotal} nguồn active trên ${totalSources}, mode ${modeLabel}, data ${loadedFromLabel}`);
 }
 
 function renderAggregateButton() {
@@ -407,7 +416,8 @@ function renderContributeSection() {
     }
 
     const sources = Array.isArray(window.catalogSources) ? window.catalogSources : [];
-    countEl.textContent = `${sources.length} nguồn`;
+    const activeSources = sources.filter((source) => String(source && source.status ? source.status : '').toLowerCase() !== 'error');
+    countEl.textContent = `${activeSources.length} nguồn`;
 
     repoListEl.innerHTML = sources
         .map((source) => {

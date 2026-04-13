@@ -59,6 +59,10 @@ const REALTIME_SOURCE_LIST_CANDIDATES = [
 ];
 
 const DEFAULT_TIMEOUT_MS = 12000;
+const DEFAULT_REFRESH_INTERVAL_MS = 30000;
+
+let isLoadingExtensions = false;
+let liveRefreshTimer = null;
 
 function normalizeSiteUrlKey(rawUrl) {
     try {
@@ -203,10 +207,11 @@ function normalizeSourceEntry(entry, index) {
  */
 function shouldUseRealtimeMode() {
     const params = new URLSearchParams(window.location.search || '');
+    const catalogParam = String(params.get('catalog') || '').trim();
 
-    // Explicit override: ?catalog=1 forces snapshot mode
-    if (params.get('catalog')) {
-        console.log('[VBook Catalog] Snapshot mode forced via ?catalog=1');
+    // Any ?catalog=... value means using explicit snapshot/root URL mode.
+    if (catalogParam) {
+        console.log(`[VBook Catalog] Snapshot mode forced via ?catalog=${catalogParam}`);
         return false;
     }
 
@@ -564,7 +569,13 @@ async function loadSiteHealthData() {
     }
 }
 
-async function loadExtensions() {
+async function loadExtensions(options = {}) {
+    if (isLoadingExtensions) {
+        return;
+    }
+
+    isLoadingExtensions = true;
+
     resetExtensionCatalog();
     window.catalogExtensions = [];
     window.catalogSources = [];
@@ -572,10 +583,11 @@ async function loadExtensions() {
 
     const loadedAtIso = new Date().toISOString();
 
-    // REALTIME MODE: Fetch fresh data from remote sources
-    if (shouldUseRealtimeMode()) {
-        try {
-            console.log('[VBook Catalog] Loading realtime extension sources...');
+    try {
+        // REALTIME MODE: Fetch fresh data from remote sources
+        if (shouldUseRealtimeMode()) {
+            try {
+                console.log('[VBook Catalog] Loading realtime extension sources...');
             
             const sourceList = await loadRealtimeSourceList();
             console.log(`[VBook Catalog] Loaded ${sourceList.sources.length} realtime sources`);
@@ -660,17 +672,16 @@ async function loadExtensions() {
             hydrateFromSourceCatalog(realtimeSidecar);
             await loadSiteHealthData();
             
-            console.log(`[VBook Catalog] ✓ Realtime mode loaded successfully: ${realtimeRoot.data.length} extensions`);
-            renderDashboard();
-            return;
-        } catch (error) {
-            console.warn('[VBook Catalog] ✗ Realtime mode failed:', error);
-            console.log('[VBook Catalog] Falling back to snapshot mode...');
+                console.log(`[VBook Catalog] ✓ Realtime mode loaded successfully: ${realtimeRoot.data.length} extensions`);
+                renderDashboard();
+                return;
+            } catch (error) {
+                console.warn('[VBook Catalog] ✗ Realtime mode failed:', error);
+                console.log('[VBook Catalog] Falling back to snapshot mode...');
+            }
         }
-    }
 
-    // SNAPSHOT MODE: Fallback to static cached data
-    try {
+        // SNAPSHOT MODE: Fallback to static cached data
         console.log('[VBook Catalog] Loading snapshot from web/plugin.json...');
         
         const catalogUrl = resolveCatalogUrl();
@@ -718,11 +729,49 @@ async function loadExtensions() {
         renderDashboard();
     } catch (error) {
         console.error('[VBook Catalog] ✗ Failed to load extensions:', error);
+        const catalogParam = String(new URLSearchParams(window.location.search || '').get('catalog') || '').trim();
+        const failedToFetch = /Failed to fetch/i.test(String(error && error.message ? error.message : ''));
+        const dnsHint = failedToFetch && catalogParam
+            ? `<div style="margin-top:8px;color:#b91c1c;font-size:13px;">Gợi ý: URL catalog đang không truy cập được từ trình duyệt (DNS/network). Hãy kiểm tra domain trong <code>?catalog=...</code>. Ví dụ hợp lệ: <code>https://vbook-ext.vercel.app/api/plugin.json</code>.</div>`
+            : '';
+
         document.getElementById('extensions-grid').innerHTML =
             `<div style="grid-column: 1/-1; padding: 20px; color: red;">
                 Lỗi: Không thể tải plugin.json đúng cấu trúc root manifest. Error: ${escapeHtml(error.message)}
+                ${dnsHint}
             </div>`;
+    } finally {
+        isLoadingExtensions = false;
     }
 }
 
-document.addEventListener('DOMContentLoaded', loadExtensions);
+function setupLiveAutoRefresh() {
+    if (liveRefreshTimer) {
+        return;
+    }
+
+    const params = new URLSearchParams(window.location.search || '');
+    const refreshSec = Number(params.get('refreshSec') || 30);
+    const intervalMs = Number.isFinite(refreshSec) && refreshSec >= 10
+        ? refreshSec * 1000
+        : DEFAULT_REFRESH_INTERVAL_MS;
+
+    liveRefreshTimer = setInterval(() => {
+        if (document.hidden) {
+            return;
+        }
+
+        loadExtensions({ reason: 'auto-refresh' });
+    }, intervalMs);
+
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            loadExtensions({ reason: 'tab-visible' });
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadExtensions({ reason: 'initial' });
+    setupLiveAutoRefresh();
+});
