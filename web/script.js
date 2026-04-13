@@ -271,21 +271,29 @@ function renderSourceRepoCount() {
 
     const repoTotal = Array.isArray(window.catalogSources) ? window.catalogSources.length : 0;
     const modeValue = String(window.catalogStatus && window.catalogStatus.mode ? window.catalogStatus.mode : '').toLowerCase();
+    const modeIcon = modeValue === 'realtime' ? '⚡' : (modeValue === 'snapshot' ? '☁' : '•');
     const modeLabel = modeValue === 'realtime'
-        ? 'realtime-browser'
-        : (modeValue === 'snapshot' ? 'snapshot' : 'unknown');
+        ? 'live'
+        : (modeValue === 'snapshot' ? 'fallback' : 'unknown');
 
-    let loadedFromLabel = 'không rõ';
+    let loadedFromLabel = 'unknown';
     try {
         const loadedUrl = String(window.catalogMeta && window.catalogMeta.loadedCatalogUrl ? window.catalogMeta.loadedCatalogUrl : '').trim();
         if (loadedUrl) {
             const parsed = new URL(loadedUrl, window.location.href);
-            loadedFromLabel = `${parsed.hostname}${parsed.pathname}`;
+            const pathParts = String(parsed.pathname || '/').split('/').filter(Boolean);
+            const tail = pathParts.slice(-2).join('/');
+            loadedFromLabel = tail ? `${parsed.hostname}/${tail}` : parsed.hostname;
         }
     } catch (_error) {
     }
 
-    info.textContent = `Repo nguồn: ${repoTotal} | Mode: ${modeLabel} | Data: ${loadedFromLabel}`;
+    const fullUrl = String(window.catalogMeta && window.catalogMeta.loadedCatalogUrl ? window.catalogMeta.loadedCatalogUrl : '').trim();
+    const tooltip = fullUrl ? `Repo nguồn: ${repoTotal}\nMode: ${modeLabel}\nData: ${fullUrl}` : `Repo nguồn: ${repoTotal}\nMode: ${modeLabel}`;
+
+    info.innerHTML = `<span class="source-repo-count-pill" title="Số repo nguồn">${repoTotal}</span> <span class="source-repo-count-sep">•</span> <span class="source-repo-count-pill" title="Chế độ tải">${modeIcon} ${modeLabel}</span>`;
+    info.setAttribute('title', tooltip);
+    info.setAttribute('aria-label', `${repoTotal} nguồn, mode ${modeLabel}, data ${loadedFromLabel}`);
 }
 
 function renderAggregateButton() {

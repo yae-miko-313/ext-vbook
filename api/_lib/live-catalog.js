@@ -1,18 +1,24 @@
 const path = require('path');
-const fs = require('fs');
 
 const DEFAULT_CACHE_TTL_MS = Number(process.env.VBOOK_WEB_CACHE_TTL_MS || 0);
 const DEFAULT_TIMEOUT_MS = Number(process.env.VBOOK_WEB_FETCH_TIMEOUT_MS || 12000);
 
-let liveSnapshotCache = null;
+let bundledSourceList = null;
+let referenceSourceList = null;
 
-function safeReadJson(filePath) {
-    try {
-        return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    } catch {
-        return null;
-    }
+try {
+    bundledSourceList = require('../../web/remote-sources.json');
+} catch {
+    bundledSourceList = null;
 }
+
+try {
+    referenceSourceList = require('../../references/remote-sources.json');
+} catch {
+    referenceSourceList = null;
+}
+
+let liveSnapshotCache = null;
 
 function stripJsonComments(text) {
     let result = '';
@@ -79,16 +85,15 @@ function normalizeSourceEntry(source, index) {
 }
 
 function loadReferenceSourceList(workspaceRoot) {
-    const sourceListPath = path.join(workspaceRoot, 'references', 'remote-sources.json');
-    const sourceList = safeReadJson(sourceListPath);
+    const sourceList = bundledSourceList || referenceSourceList;
 
     if (!sourceList || typeof sourceList !== 'object' || !Array.isArray(sourceList.sources)) {
-        throw new Error('references/remote-sources.json is missing or invalid');
+        throw new Error('web/remote-sources.json or references/remote-sources.json is missing or invalid');
     }
 
     return {
         generatedAt: new Date().toISOString(),
-        source: 'references/remote-sources.json',
+        source: bundledSourceList ? 'web/remote-sources.json' : 'references/remote-sources.json',
         referenceListUrl: sourceList.referenceListUrl || '',
         sources: sourceList.sources
             .map((source, index) => normalizeSourceEntry(source, index))
