@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const DEFAULT_CACHE_TTL_MS = Number(process.env.VBOOK_WEB_CACHE_TTL_MS || 15000);
+const DEFAULT_CACHE_TTL_MS = Number(process.env.VBOOK_WEB_CACHE_TTL_MS || 0);
 const DEFAULT_TIMEOUT_MS = Number(process.env.VBOOK_WEB_FETCH_TIMEOUT_MS || 12000);
 
 let liveSnapshotCache = null;
@@ -270,6 +270,10 @@ async function getLiveSnapshot(workspaceRoot, options = {}) {
     const now = Date.now();
     const ttlMs = Number(options.cacheTtlMs || DEFAULT_CACHE_TTL_MS);
 
+    if (ttlMs <= 0) {
+        return buildLiveSnapshot(workspaceRoot, options);
+    }
+
     if (liveSnapshotCache && liveSnapshotCache.workspaceRoot === workspaceRoot && liveSnapshotCache.expiresAt > now) {
         return liveSnapshotCache.promise;
     }
@@ -304,7 +308,7 @@ function applyCommonHeaders(req, res) {
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Vary', 'Origin');
-    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
 }
 
 function handlePreflight(req, res) {
@@ -321,7 +325,7 @@ function handlePreflight(req, res) {
 async function getSnapshot(req) {
     const workspaceRoot = resolveWorkspaceRoot();
     const timeoutMs = Number(process.env.VBOOK_WEB_FETCH_TIMEOUT_MS || 12000);
-    const cacheTtlMs = Number(process.env.VBOOK_WEB_CACHE_TTL_MS || 15000);
+    const cacheTtlMs = Number(process.env.VBOOK_WEB_CACHE_TTL_MS || 0);
 
     return getLiveSnapshot(workspaceRoot, {
         timeoutMs,

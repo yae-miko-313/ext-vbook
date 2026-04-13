@@ -270,7 +270,22 @@ function renderSourceRepoCount() {
     }
 
     const repoTotal = Array.isArray(window.catalogSources) ? window.catalogSources.length : 0;
-    info.textContent = `Repo nguồn: ${repoTotal}`;
+    const modeValue = String(window.catalogStatus && window.catalogStatus.mode ? window.catalogStatus.mode : '').toLowerCase();
+    const modeLabel = modeValue === 'realtime'
+        ? 'realtime-browser'
+        : (modeValue === 'snapshot' ? 'snapshot' : 'unknown');
+
+    let loadedFromLabel = 'không rõ';
+    try {
+        const loadedUrl = String(window.catalogMeta && window.catalogMeta.loadedCatalogUrl ? window.catalogMeta.loadedCatalogUrl : '').trim();
+        if (loadedUrl) {
+            const parsed = new URL(loadedUrl, window.location.href);
+            loadedFromLabel = `${parsed.hostname}${parsed.pathname}`;
+        }
+    } catch (_error) {
+    }
+
+    info.textContent = `Repo nguồn: ${repoTotal} | Mode: ${modeLabel} | Data: ${loadedFromLabel}`;
 }
 
 function renderAggregateButton() {
