@@ -247,14 +247,15 @@ function renderCatalogUpdatedTime() {
 
     const status = window.catalogStatus || {};
     const updatedLabel = formatCatalogUpdatedAt(status.updatedAt);
+    const modeSuffix = status.mode === 'realtime' ? ' (realtime)' : '';
 
     if (!updatedLabel) {
-        element.textContent = 'Cập nhật: chưa có dữ liệu';
+        element.textContent = `Cập nhật: chưa có dữ liệu${modeSuffix}`;
         return;
     }
 
     const suffix = status.updatedAtSource === 'header' ? '' : ' (local)';
-    element.textContent = `Cập nhật: ${updatedLabel}${suffix}`;
+    element.textContent = `Cập nhật: ${updatedLabel}${suffix}${modeSuffix}`;
 }
 
 function renderStats() {

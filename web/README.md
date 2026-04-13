@@ -112,6 +112,14 @@ Root `plugin.json` của repo chỉ là manifest cá nhân, dạng:
 
 Snapshot hiện tại (sau sync gần nhất): 35 repo nguồn, 497 extension aggregate.
 
+Mặc định web chạy ở chế độ **realtime**: browser sẽ đọc `web/remote-sources.json`, fetch trực tiếp các `raw plugin.json` từ repo nguồn và tự aggregate khi mở trang.
+
+Nếu cần ép về snapshot tĩnh (đọc `web/plugin.json` + `web/catalog.json`), thêm query:
+
+```
+https://<your-pages-url>/?realtime=0
+```
+
 ### Tự động (developer)
 ```bash
   npm run sync:web-catalog
@@ -119,6 +127,7 @@ Snapshot hiện tại (sau sync gần nhất): 35 repo nguồn, 497 extension ag
 Tái sinh:
 - `web/plugin.json` (link tổng)
 - `web/catalog.json` (sidecar nguồn)
+- `web/remote-sources.json` (manifest nguồn cho realtime mode)
 
 Logic sync có khử trùng theo `path` (fallback: `name+author+source+type`) để tránh double-count khi `ref/plugin.json` có cả `data[]` và `sources[].content.data[]`.
 

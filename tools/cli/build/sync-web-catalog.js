@@ -9,6 +9,30 @@ function safeReadJson(filePath) {
     }
 }
 
+function buildWebSourceList(workspaceRoot) {
+    const sourceListPath = path.join(workspaceRoot, 'references', 'remote-sources.json');
+    const sourceList = safeReadJson(sourceListPath);
+
+    if (!sourceList || typeof sourceList !== 'object') {
+        return null;
+    }
+
+    const normalizedSources = Array.isArray(sourceList.sources)
+        ? sourceList.sources.map((source) => ({
+            id: source && source.id ? String(source.id) : '',
+            url: source && source.url ? String(source.url) : '',
+            avatar: source && source.avatar ? String(source.avatar) : undefined
+        })).filter((source) => source.id && source.url)
+        : [];
+
+    return {
+        generatedAt: new Date().toISOString(),
+        source: 'references/remote-sources.json',
+        referenceListUrl: sourceList.referenceListUrl || '',
+        sources: normalizedSources
+    };
+}
+
 function flattenCommunityData(refCatalog) {
     const flat = [];
     const seen = new Set();
@@ -108,14 +132,20 @@ function buildWebCatalog(workspaceRoot) {
         sources
     };
 
+    const webSourceList = buildWebSourceList(workspaceRoot);
+
     fs.writeFileSync(path.join(workspaceRoot, 'web', 'plugin.json'), `${JSON.stringify(rootCatalog, null, 2)}\n`, 'utf8');
     fs.writeFileSync(path.join(workspaceRoot, 'web', 'catalog.json'), `${JSON.stringify(sidecarCatalog, null, 2)}\n`, 'utf8');
+    if (webSourceList) {
+        fs.writeFileSync(path.join(workspaceRoot, 'web', 'remote-sources.json'), `${JSON.stringify(webSourceList, null, 2)}\n`, 'utf8');
+    }
 
     return {
         success: true,
         files: [
             { path: 'web/plugin.json', count: data.length },
-            { path: 'web/catalog.json', count: sidecarCatalog.sources.length }
+            { path: 'web/catalog.json', count: sidecarCatalog.sources.length },
+            { path: 'web/remote-sources.json', count: webSourceList ? webSourceList.sources.length : 0 }
         ],
         total: data.length
     };
