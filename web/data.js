@@ -59,11 +59,9 @@ const REALTIME_SOURCE_LIST_CANDIDATES = [
 ];
 
 const DEFAULT_TIMEOUT_MS = 12000;
-const DEFAULT_REFRESH_INTERVAL_MS = 30000;
 const DEFAULT_BACKEND_CATALOG_URL = 'https://vbook-ext.vercel.app/api/plugin.json';
 
 let isLoadingExtensions = false;
-let liveRefreshTimer = null;
 
 function normalizeSiteUrlKey(rawUrl) {
     try {
@@ -752,33 +750,6 @@ async function loadExtensions(options = {}) {
     }
 }
 
-function setupLiveAutoRefresh() {
-    if (liveRefreshTimer) {
-        return;
-    }
-
-    const params = new URLSearchParams(window.location.search || '');
-    const refreshSec = Number(params.get('refreshSec') || 30);
-    const intervalMs = Number.isFinite(refreshSec) && refreshSec >= 10
-        ? refreshSec * 1000
-        : DEFAULT_REFRESH_INTERVAL_MS;
-
-    liveRefreshTimer = setInterval(() => {
-        if (document.hidden) {
-            return;
-        }
-
-        loadExtensions({ reason: 'auto-refresh' });
-    }, intervalMs);
-
-    document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) {
-            loadExtensions({ reason: 'tab-visible' });
-        }
-    });
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     loadExtensions({ reason: 'initial' });
-    setupLiveAutoRefresh();
 });
