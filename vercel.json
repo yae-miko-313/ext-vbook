@@ -1,5 +1,7 @@
 {
-  "outputDirectory": "web",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "",
   "functions": {
     "api/**/*.js": {
       "maxDuration": 60

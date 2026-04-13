@@ -99,6 +99,10 @@ This does not replace Vercel dynamic APIs. It keeps `web/plugin.json`, `web/cata
 - Use project root as Root Directory (not `api/`).
 - Keep Build Command empty.
 - Confirm `vercel.json` exists in repo root and includes `api/**/*.js` functions.
+- If this repo has a `build` script for other purposes, force backend-only deploy by setting:
+	- `"framework": null`
+	- `"buildCommand": ""`
+	in `vercel.json` so Vercel does not expect a static output directory.
 
 ### Copy Link Tong still points to GitHub Pages plugin.json
 
