@@ -1,4 +1,5 @@
 {
+  "outputDirectory": "web",
   "functions": {
     "api/**/*.js": {
       "maxDuration": 60
