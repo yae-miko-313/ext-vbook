@@ -60,6 +60,7 @@ const REALTIME_SOURCE_LIST_CANDIDATES = [
 
 const DEFAULT_TIMEOUT_MS = 12000;
 const DEFAULT_REFRESH_INTERVAL_MS = 30000;
+const DEFAULT_BACKEND_CATALOG_URL = 'https://vbook-ext.vercel.app/api/plugin.json';
 
 let isLoadingExtensions = false;
 let liveRefreshTimer = null;
@@ -222,9 +223,9 @@ function shouldUseRealtimeMode() {
         return false;
     }
 
-    // DEFAULT: Always use realtime mode (try fresh data first)
-    console.log('[VBook Catalog] Realtime mode enabled (default)');
-    return true;
+    // DEFAULT: Use backend-backed snapshot mode so the page loads from Vercel.
+    console.log('[VBook Catalog] Backend snapshot mode enabled (default)');
+    return false;
 }
 
 function stripJsonComments(text) {
@@ -418,13 +419,13 @@ function resolveCatalogUrl() {
     if (byQuery) {
         return byQuery;
     }
-    return './plugin.json';
+    return DEFAULT_BACKEND_CATALOG_URL;
 }
 
 function resolveCatalogEndpoints(catalogUrl) {
     const fallback = {
-        rootUrl: './plugin.json',
-        sourceUrl: './catalog.json'
+        rootUrl: DEFAULT_BACKEND_CATALOG_URL,
+        sourceUrl: DEFAULT_BACKEND_CATALOG_URL.replace(/\/plugin\.json$/i, '/catalog.json')
     };
 
     if (!catalogUrl) {
@@ -575,6 +576,9 @@ async function loadExtensions(options = {}) {
     }
 
     isLoadingExtensions = true;
+    if (typeof window.renderLoadingState === 'function') {
+        window.renderLoadingState();
+    }
 
     resetExtensionCatalog();
     window.catalogExtensions = [];
@@ -742,6 +746,9 @@ async function loadExtensions(options = {}) {
             </div>`;
     } finally {
         isLoadingExtensions = false;
+        if (typeof window.clearLoadingState === 'function') {
+            window.clearLoadingState();
+        }
     }
 }
 

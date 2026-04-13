@@ -252,6 +252,67 @@ function renderCatalogUpdatedTime() {
     element.style.display = 'none';
 }
 
+function renderLoadingState() {
+    const grid = document.getElementById('extensions-grid');
+    if (grid) {
+        grid.innerHTML = `
+            <div class="skeleton-grid">
+                ${Array.from({ length: 8 }).map(() => `
+                    <article class="skeleton-card">
+                        <div class="skeleton-line skeleton-line-sm"></div>
+                        <div class="skeleton-row">
+                            <div class="skeleton-avatar"></div>
+                            <div class="skeleton-blocks">
+                                <div class="skeleton-line skeleton-line-md"></div>
+                                <div class="skeleton-line skeleton-line-sm"></div>
+                            </div>
+                        </div>
+                        <div class="skeleton-line skeleton-line-lg"></div>
+                        <div class="skeleton-line skeleton-line-lg"></div>
+                    </article>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    ['total-extensions', 'novel-count', 'comic-count', 'chinese-count', 'other-count'].forEach((id) => {
+        const element = document.getElementById(id);
+        if (!element) {
+            return;
+        }
+
+        element.textContent = '—';
+        element.classList.add('is-loading');
+    });
+
+    const sourceRepoCount = document.getElementById('source-repo-count');
+    if (sourceRepoCount) {
+        sourceRepoCount.textContent = 'Đang tải...';
+        sourceRepoCount.classList.add('is-loading');
+    }
+
+    const contributeCount = document.getElementById('contribute-source-count');
+    if (contributeCount) {
+        contributeCount.textContent = 'đang tải';
+    }
+}
+
+function clearLoadingState() {
+    ['total-extensions', 'novel-count', 'comic-count', 'chinese-count', 'other-count'].forEach((id) => {
+        const element = document.getElementById(id);
+        if (!element) {
+            return;
+        }
+
+        element.classList.remove('is-loading');
+    });
+
+    const sourceRepoCount = document.getElementById('source-repo-count');
+    if (sourceRepoCount) {
+        sourceRepoCount.classList.remove('is-loading');
+    }
+}
+
 function renderStats() {
     const all = getAllExtensions();
 
