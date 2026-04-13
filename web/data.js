@@ -358,6 +358,15 @@ function buildRealtimeShareUrl() {
     return current.toString();
 }
 
+function buildAggregateCopyUrl(preferredUrl) {
+    const candidate = String(preferredUrl || '').trim();
+    if (candidate) {
+        return candidate;
+    }
+
+    return absoluteUrlFromRelative('./plugin.json');
+}
+
 function makeExtUniqueKey(item) {
     function normalize(value) {
         return String(value || '').trim().toLowerCase();
@@ -645,7 +654,7 @@ async function loadExtensions() {
             window.catalogStatus.updatedAtSource = latestHeaderIso ? 'header' : 'loaded';
             window.catalogStatus.mode = 'realtime';
             window.catalogMeta.loadedCatalogUrl = sourceList.loadedFrom;
-            window.catalogMeta.aggregateCopyUrl = buildRealtimeShareUrl();
+            window.catalogMeta.aggregateCopyUrl = buildAggregateCopyUrl();
 
             hydrateFromRootCatalog(realtimeRoot);
             hydrateFromSourceCatalog(realtimeSidecar);
@@ -688,7 +697,7 @@ async function loadExtensions() {
         window.catalogStatus.updatedAtSource = validLastModified ? 'header' : 'loaded';
         window.catalogStatus.mode = 'snapshot';
         window.catalogMeta.loadedCatalogUrl = absoluteUrlFromRelative(endpoints.rootUrl);
-        window.catalogMeta.aggregateCopyUrl = window.catalogMeta.loadedCatalogUrl || '';
+        window.catalogMeta.aggregateCopyUrl = buildAggregateCopyUrl(window.catalogMeta.loadedCatalogUrl);
 
         hydrateFromRootCatalog(data);
 

@@ -24,6 +24,12 @@ npm run build:catalog
 # Sync community aggregate into web/plugin.json + web/catalog.json + web/remote-sources.json
 npm run sync:web-catalog
 
+# Start live endpoint server that serves dynamic /plugin.json, /catalog.json, /remote-sources.json
+npm run serve:web-catalog
+
+# Refresh from repo source first, then start the live endpoint server
+npm run serve:web-catalog:sync
+
 # Start web server
 cd web
 python -m http.server 8000
@@ -31,7 +37,7 @@ python -m http.server 8000
 
 Mở browser: `http://localhost:8000/`
 
-Mặc định là realtime mode - browser sẽ đọc `./remote-sources.json` và fetch trực tiếp từng source.
+Mặc định là realtime mode - browser sẽ đọc `./remote-sources.json` và fetch trực tiếp từng source. Nếu chạy `npm run serve:web-catalog`, các endpoint này cũng được phục vụ động từ repo nguồn mới nhất.
 
 **Force snapshot mode** (debug only):
 ```
