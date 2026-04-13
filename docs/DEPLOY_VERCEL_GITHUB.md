@@ -29,6 +29,12 @@ npm run sync:web-catalog
 npm run sync:health:all
 ```
 
+CI-safe sync for GitHub Pages workflow:
+
+```bash
+npm run full-sync:ci
+```
+
 ## 2. Deploy Backend to Vercel
 
 1. Create a new Vercel project from this repository.
@@ -36,13 +42,14 @@ npm run sync:health:all
 3. Root directory: repository root.
 4. Build command: leave empty.
 5. Output directory: leave empty.
-6. Add environment variables:
+6. Ensure `vercel.json` at repo root is used (already added in this project).
+7. Add environment variables:
 
 - `VBOOK_ALLOWED_ORIGIN=https://<username>.github.io`
 - `VBOOK_WEB_CACHE_TTL_MS=15000`
 - `VBOOK_WEB_FETCH_TIMEOUT_MS=12000`
 
-7. Deploy.
+8. Deploy.
 
 After deploy, verify:
 
@@ -86,6 +93,12 @@ This does not replace Vercel dynamic APIs. It keeps `web/plugin.json`, `web/cata
 
 - Reduce number of remote sources or increase timeouts moderately.
 - Tune cache with `VBOOK_WEB_CACHE_TTL_MS`.
+
+### Vercel deploy fails when using root
+
+- Use project root as Root Directory (not `api/`).
+- Keep Build Command empty.
+- Confirm `vercel.json` exists in repo root and includes `api/**/*.js` functions.
 
 ### Copy Link Tong still points to GitHub Pages plugin.json
 
