@@ -54,6 +54,7 @@ Tạo `extensions/novel/my_ext/plugin.zip` sẵn sàng phân phối.
 ```bash
 npm run build:catalog
 npm run sync:web-catalog
+npm run sync:health:all
 ```
 Tái sinh personal catalog:
 - `extensions/*/plugin.json` (per-type)
@@ -63,6 +64,7 @@ Sync community catalog:
 - `web/plugin.json` (snapshot fallback aggregate)
 - `web/catalog.json` (snapshot fallback sidecar for By Source)
 - `web/remote-sources.json` (manifest nguồn cho realtime mode)
+- `web/site-health.json` (status URL cho web badges)
 
 **⚠️ IMPORTANT**: Bước 5 BẮTBUỘC trước khi commit/PR khi đổi personal extensions hoặc community aggregate.
 
@@ -78,6 +80,7 @@ Sync community catalog:
 - [ ] Extension đã build zip (`npm run build`)
 - [ ] **Personal catalog đã rebuild** (`npm run build:catalog`) ✓ CRITICAL
 - [ ] **Community web artifacts đã sync** (`npm run sync:web-catalog`) nếu `references/` hoặc web flow đổi
+- [ ] **Health status da cap nhat** (`npm run sync:health:all`) truoc PR/deploy
 - [ ] Web viewer artifacts có update (`web/plugin.json`, `web/catalog.json`, hoặc `web/remote-sources.json`)
 - [ ] Không commit runtime reports (`tools/cli/reports/`)
 - [ ] README + docs cập nhật nếu có thay đổi workflow

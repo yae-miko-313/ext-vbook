@@ -61,11 +61,13 @@ Quét `extensions/*/` → tái sinh:
 ### 5️⃣ Đồng bộ web viewer / community aggregate
 ```bash
 npm run sync:web-catalog
+npm run sync:health:all
 ```
 Sinh file snapshot/fallback cho web viewer:
 - `web/plugin.json`: link tổng (root-like: `metadata` + `data`)
 - `web/catalog.json`: sidecar source (`summary` + `referenceListUrl` + `sources[]`)
 - `web/remote-sources.json`: danh sách nguồn cho realtime mode
+- `web/site-health.json`: trạng thái URL (dead/cloudflare/redirected)
 
 ### 🚀 Full sync (all-in-one)
 ```bash

@@ -2,13 +2,26 @@
 
 Web viewer cho phân vùng cộng đồng: hiển thị extension hiện có, tác giả, contribute, và copy link theo 2 kiểu.
 
+## Kiến trúc: Realtime-First + Snapshot Fallback
+
+**Realtime Mode (DEFAULT)**
+- Thực time fetches fresh extension data directly from remote GitHub/GitLab sources
+- Được kích hoạt mặc định khi mở trang
+- Đảm bảo data luôn up-to-date (không cần rebuild)
+- Flow: `./remote-sources.json` → fetch từng source trực tiếp
+
+**Snapshot Mode (FALLBACK)**
+- Sử dụng static cached files: `plugin.json`, `catalog.json`, `site-health.json`
+- Chỉ được dùng khi realtime fetch không thành công
+- Auto-generated bởi `npm run build:catalog`
+
 ## Chạy local
 
 ```bash
 # Rebuild personal extension manifests
 npm run build:catalog
 
-# Sync community aggregate into web/plugin.json + web/catalog.json
+# Sync community aggregate into web/plugin.json + web/catalog.json + web/remote-sources.json
 npm run sync:web-catalog
 
 # Start web server
@@ -16,44 +29,36 @@ cd web
 python -m http.server 8000
 ```
 
-Mở browser: `http://localhost:8000/web/`
+Mở browser: `http://localhost:8000/`
 
-`npm run sync:web-catalog` là lệnh chuẩn để tái sinh web artifacts (`web/plugin.json`, `web/catalog.json`, `web/remote-sources.json`).
+Mặc định là realtime mode - browser sẽ đọc `./remote-sources.json` và fetch trực tiếp từng source.
 
-Web mặc định chạy realtime: khi mở trang, browser sẽ đọc `web/remote-sources.json` và fetch trực tiếp các raw URL nguồn.
+**Force snapshot mode** (debug only):
+```
+http://localhost:8000/?catalog=1
+```
 
 ## Cấu trúc dữ liệu
 
-Root `plugin.json` của repo chỉ là manifest cá nhân, dạng:
+### web/plugin.json (Root Manifest - Snapshot)
+Aggregate của toàn bộ extensions (fallback khi realtime fail).
 
 ```json
 {
   "metadata": { "author": "kychi", "description": "..." },
   "data": [
-    { "name": "...", "author": "...", "type": "novel" }
+    { "name": "...", "author": "...", "type": "novel", "path": "..." }
   ]
 }
 ```
 
-`web/plugin.json` là file aggregate cộng đồng dùng cho By Extension.
-
-`web/catalog.json` là sidecar nguồn cho By Source (`summary`, `referenceListUrl`, `sources[]`).
-
-```json
-{
-  "metadata": { "author": "kychi", "description": "..." },
-  "data": [
-    { "name": "...", "author": "...", "type": "novel" }
-  ]
-}
-```
-
-`web/catalog.json`:
+### web/catalog.json (Sidecar - Snapshot)
+Chi tiết về từng source repo (By Source view).
 
 ```json
 {
   "metadata": { "author": "kychi", "description": "..." },
-  "summary": { "total": 35, "changed": 0, "unchanged": 35, "errors": 0 },
+  "summary": { "total": 35, "changed": 0, "unchanged": 35, "errors": 0, "mode": "sync" },
   "referenceListUrl": "...",
   "sources": [
     {
@@ -61,20 +66,53 @@ Root `plugin.json` của repo chỉ là manifest cá nhân, dạng:
       "url": "https://raw.githubusercontent.com/alexsonxxx/vbook/...",
       "displayName": "alexsonxxx/vbook",
       "status": "active",
-      "content": {
-        "data": [ { "name": "...", ... } ]
-      }
+      "content": { "data": [ { "name": "...", ... } ] }
     }
   ]
 }
 ```
+
+### web/remote-sources.json (Realtime Config - CRITICAL)
+Danh sách source repositories cho realtime fetching. **AUTO-SYNCED từ references/remote-sources.json**.
+
+```json
+{
+  "generatedAt": "2026-04-13T05:36:41.876Z",
+  "source": "references/remote-sources.json",
+  "referenceListUrl": "https://...",
+  "sources": [
+    {
+      "id": "darkrai9x-main",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/.../plugin.json",
+      "avatar": "..."
+    }
+  ]
+}
+```
+
+### web/site-health.json (Monitoring Data)
+Health status của từng source site (dead, cloudflare, redirected, etc).
+
+## Lenh health check theo scope
+
+```bash
+# Legacy alias (chi check URL source trong web/plugin.json)
+npm run sync:web-health
+
+# Scope ro rang
+npm run sync:health:web
+npm run sync:health:realtime
+npm run sync:health:all
+```
+
+Khuyen nghi deploy: chay `npm run sync:health:all` de gom ca URL site extension va URL repo realtime.
 
 ## Tính năng viewer
 
 ### Header: Statistics Dashboard
 - Tổng ext, By Type (novel/comic/chinese/...)
 - Tổng repo nguồn tham khảo
-- Link copy aggregate catalog (`web/plugin.json`)
+- Link copy aggregate catalog
 
 ### Community Focus
 - Hiển thị ext cộng đồng theo view trực quan
@@ -83,21 +121,34 @@ Root `plugin.json` của repo chỉ là manifest cá nhân, dạng:
 
 ### View Mode: By Extension
 - **Hiển thị**: Mỗi extension cộng đồng là 1 card
-- **Source**: Đọc trực tiếp từ `web/plugin.json` (`data[]`)
+- **Source**: Realtime mode: fetched từng source; Snapshot: từ `web/plugin.json`
 - **Action buttons**: 
   - "Site URL": Mở trang gốc
-  - "Copy Ext": Copy link raw ext từ repo
-- **Author credits**: Đếm unique authors từ toàn bộ extension cộng đồng
+  - "Copy Link": Copy raw URL
+- **Author credits**: Đếm unique authors từ toàn bộ extension
 
 ### View Mode: By Source
 - **Hiển thị**: Mỗi source repo là 1 card
-- **Source**: Từ `web/catalog.json` (`sources[]`)
-- **Info**: Header tối giản khi đóng; mở ra mới thấy đầy đủ metadata + toàn bộ ext
+- **Source**: Realtime mode: fetched live; Snapshot: từ `web/catalog.json`
+- **Info**: Header tối giản khi đóng; mở ra mới thấy đầy đủ metadata + extension list
 - **Action**: "Copy Source" - copy raw plugin.json URL
 
-### Copy flows
-- **Copy link tổng**: copy `web/plugin.json` để user paste một link duy nhất
-- **Copy theo nguồn repo**: copy raw plugin.json URL của từng source
+## File purposes
+
+| File | Purpose | Auto-generated? | Role |
+|------|---------|---|---|
+| `index.html` | UI structure | No | Static |
+| `script.js` | Rendering & UI logic | No | Static |
+| `data.js` | Data loader (realtime/snapshot) | No | **CRITICAL - handles mode switching** |
+| `style.css` | Styling | No | Static |
+| `theme.js` | Dark/light theme toggle | No | Static |
+| `plugin.json` | Snapshot root manifest | **Yes** | Fallback only |
+| `catalog.json` | Snapshot sidecar/sources | **Yes** | Fallback only |
+| `remote-sources.json` | Realtime source list | **Yes** (from references/) | **CRITICAL - realtime mode** |
+| `site-health.json` | Site health monitoring | **Yes** (external) | Optional |
+| `.nojekyll` | GitHub Pages config | No | Static |
+| `DEPLOY.md` | Deployment notes | No | Reference |
+| `README.md` | This file | No | Reference |
 
 ### Search
 - Tìm theo: tên ext, author, description, source URL
@@ -123,11 +174,34 @@ https://<your-pages-url>/?realtime=0
 ### Tự động (developer)
 ```bash
   npm run sync:web-catalog
+  npm run sync:web-health
 ```
 Tái sinh:
 - `web/plugin.json` (link tổng)
 - `web/catalog.json` (sidecar nguồn)
 - `web/remote-sources.json` (manifest nguồn cho realtime mode)
+- `web/site-health.json` (trạng thái URL site ext: die/cloudflare/redirect)
+
+Nếu có domain đổi tên nhưng script chưa nhận đúng, thêm override tại `references/site-health-overrides.json`.
+
+Format:
+```json
+{
+  "byUrl": {
+    "https://old.example.com/": {
+      "state": "redirected",
+      "finalUrl": "https://new.example.com/",
+      "note": "Domain moved"
+    }
+  },
+  "byHost": {
+    "old-host.com": {
+      "state": "redirected",
+      "finalUrl": "https://new-host.com/"
+    }
+  }
+}
+```
 
 Logic sync có khử trùng theo `path` (fallback: `name+author+source+type`) để tránh double-count khi `ref/plugin.json` có cả `data[]` và `sources[].content.data[]`.
 

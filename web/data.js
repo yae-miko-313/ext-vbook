@@ -1,3 +1,20 @@
+/**
+ * VBook Extension Web Catalog Loader
+ * 
+ * Architecture:
+ * - PRIMARY: Realtime mode - fetches fresh extension data from remote sources in real-time
+ * - FALLBACK: Snapshot mode - uses static cached JSON files from web/ folder
+ * 
+ * Realtime flow:
+ * 1. Load source list from ./remote-sources.json (synced from references/remote-sources.json)
+ * 2. Fetch each remote source's plugin.json in parallel
+ * 3. Merge results into catalog, dedup by extension path/signature
+ * 
+ * Snapshot flow (fallback only):
+ * 1. Load from ./plugin.json if realtime fails
+ * 2. Used when browser can't reach remote sources or network is offline
+ */
+
 // Load community catalog data from web/plugin.json (root-like aggregate) and web/catalog.json (source sidecar).
 const extensionCatalog = {
     novel: [],
@@ -11,6 +28,18 @@ const extensionCatalog = {
 window.catalogExtensions = [];
 window.catalogSources = [];
 window.catalogSourceExpandedState = {};
+window.siteHealthByUrl = {};
+window.siteHealthMeta = {
+    timestamp: '',
+    totalChecked: 0,
+    stats: {
+        ok: 0,
+        redirected: 0,
+        cloudflare: 0,
+        dead: 0,
+        uncertain: 0
+    }
+};
 window.catalogMeta = {
     aggregateCopyUrl: '',
     referenceListUrl: '',
@@ -20,15 +49,50 @@ window.catalogStatus = {
     loadedAt: null,
     updatedAt: null,
     updatedAtSource: '',
-    mode: 'snapshot'
+    mode: 'realtime' // DEFAULT: Always try realtime first
 };
 
+// Candidates for loading realtime source list (tried in order)
 const REALTIME_SOURCE_LIST_CANDIDATES = [
     './remote-sources.json',
     '../references/remote-sources.json'
 ];
 
 const DEFAULT_TIMEOUT_MS = 12000;
+
+function normalizeSiteUrlKey(rawUrl) {
+    try {
+        const parsed = new URL(String(rawUrl || '').trim());
+        const protocol = parsed.protocol.toLowerCase();
+        const hostname = parsed.hostname.toLowerCase();
+        const port = parsed.port && !((protocol === 'http:' && parsed.port === '80') || (protocol === 'https:' && parsed.port === '443'))
+            ? `:${parsed.port}`
+            : '';
+        const pathname = parsed.pathname.replace(/\/+$/, '') || '/';
+        return `${protocol}//${hostname}${port}${pathname}`;
+    } catch (_error) {
+        return '';
+    }
+}
+
+window.normalizeSiteUrlKey = normalizeSiteUrlKey;
+window.filterByState = function filterByState(items, state) {
+    const target = String(state || '').trim().toLowerCase();
+    if (!target) {
+        return Array.isArray(items) ? items.slice() : [];
+    }
+
+    return (Array.isArray(items) ? items : []).filter((item) => String(item && item.state ? item.state : '').toLowerCase() === target);
+};
+
+window.filterByConfidence = function filterByConfidence(items, confidence) {
+    const target = String(confidence || '').trim().toLowerCase();
+    if (!target) {
+        return Array.isArray(items) ? items.slice() : [];
+    }
+
+    return (Array.isArray(items) ? items : []).filter((item) => String(item && item.confidence ? item.confidence : '').toLowerCase() === target);
+};
 
 function resetExtensionCatalog() {
     Object.keys(extensionCatalog).forEach((type) => {
@@ -120,18 +184,41 @@ function normalizeSourceEntry(entry, index) {
     };
 }
 
+/**
+ * Determine whether to use realtime mode.
+ * 
+ * REALTIME MODE (default):
+ * - Fetches fresh data directly from remote GitHub/GitLab sources
+ * - By default: enabled unless explicitly disabled via query params
+ * 
+ * SNAPSHOT MODE (fallback only):
+ * - Uses static web/plugin.json and web/catalog.json if realtime fails
+ * - Should ONLY be used when realtime fetch is impossible
+ * 
+ * Query parameters to control:
+ * - ?realtime=1 or ?live=1 (explicit enable, default)
+ * - ?realtime=0 or ?catalog=1 (force snapshot mode)
+ * 
+ * @returns {boolean} true = fetch realtime, false = use snapshot fallback
+ */
 function shouldUseRealtimeMode() {
     const params = new URLSearchParams(window.location.search || '');
 
+    // Explicit override: ?catalog=1 forces snapshot mode
     if (params.get('catalog')) {
+        console.log('[VBook Catalog] Snapshot mode forced via ?catalog=1');
         return false;
     }
 
-    const raw = String(params.get('realtime') || params.get('live') || '1').trim().toLowerCase();
-    if (raw === '0' || raw === 'false' || raw === 'off' || raw === 'no') {
+    // Check explicit realtime parameter
+    const realtimeParam = String(params.get('realtime') || params.get('live') || '').trim().toLowerCase();
+    if (realtimeParam === '0' || realtimeParam === 'false' || realtimeParam === 'off' || realtimeParam === 'no') {
+        console.log('[VBook Catalog] Snapshot mode forced via query parameter');
         return false;
     }
 
+    // DEFAULT: Always use realtime mode (try fresh data first)
+    console.log('[VBook Catalog] Realtime mode enabled (default)');
     return true;
 }
 
@@ -391,6 +478,83 @@ function hydrateFromSourceCatalog(data) {
     window.catalogMeta.referenceListUrl = data.referenceListUrl || window.catalogMeta.referenceListUrl || '';
 }
 
+function hydrateSiteHealthData(data) {
+    const map = {};
+
+    const metadata = data && data.metadata && typeof data.metadata === 'object'
+        ? data.metadata
+        : {
+            timestamp: data && data.generatedAt ? data.generatedAt : '',
+            totalChecked: Array.isArray(data && data.items) ? data.items.length : 0,
+            stats: data && data.summary ? {
+                ok: Number(data.summary.ok || 0),
+                redirected: Number(data.summary.redirected || 0),
+                cloudflare: Number(data.summary.cloudflare || 0),
+                dead: Number(data.summary.dead || 0),
+                uncertain: Number(data.summary.uncertain || 0)
+            } : {
+                ok: 0,
+                redirected: 0,
+                cloudflare: 0,
+                dead: 0,
+                uncertain: 0
+            }
+        };
+
+    window.siteHealthMeta = {
+        timestamp: metadata.timestamp || '',
+        totalChecked: Number(metadata.totalChecked || 0),
+        stats: {
+            ok: Number(metadata.stats && metadata.stats.ok || 0),
+            redirected: Number(metadata.stats && metadata.stats.redirected || 0),
+            cloudflare: Number(metadata.stats && metadata.stats.cloudflare || 0),
+            dead: Number(metadata.stats && metadata.stats.dead || 0),
+            uncertain: Number(metadata.stats && metadata.stats.uncertain || 0)
+        }
+    };
+
+    if (data && data.byUrl && typeof data.byUrl === 'object') {
+        Object.keys(data.byUrl).forEach((key) => {
+            if (!key) {
+                return;
+            }
+
+            map[key] = data.byUrl[key];
+        });
+    }
+
+    if (data && Array.isArray(data.items)) {
+        data.items.forEach((item) => {
+            const key = item && item.normalizedUrl ? item.normalizedUrl : normalizeSiteUrlKey(item && item.url ? item.url : '');
+            if (!key) {
+                return;
+            }
+
+            if (!map[key]) {
+                map[key] = item;
+            }
+        });
+    }
+
+    window.siteHealthByUrl = map;
+}
+
+async function loadSiteHealthData() {
+    try {
+        const response = await fetchWithTimeout('./site-health.json', DEFAULT_TIMEOUT_MS);
+        if (!response.ok) {
+            window.siteHealthByUrl = {};
+            return;
+        }
+
+        const text = await response.text();
+        const parsed = parseJsonLenient(text);
+        hydrateSiteHealthData(parsed);
+    } catch (_error) {
+        window.siteHealthByUrl = {};
+    }
+}
+
 async function loadExtensions() {
     resetExtensionCatalog();
     window.catalogExtensions = [];
@@ -399,9 +563,14 @@ async function loadExtensions() {
 
     const loadedAtIso = new Date().toISOString();
 
+    // REALTIME MODE: Fetch fresh data from remote sources
     if (shouldUseRealtimeMode()) {
         try {
+            console.log('[VBook Catalog] Loading realtime extension sources...');
+            
             const sourceList = await loadRealtimeSourceList();
+            console.log(`[VBook Catalog] Loaded ${sourceList.sources.length} realtime sources`);
+            
             const sourceFetchResults = await Promise.all(sourceList.sources.map(async (source) => {
                 try {
                     const response = await fetchWithTimeout(source.url, DEFAULT_TIMEOUT_MS);
@@ -414,6 +583,8 @@ async function loadExtensions() {
                     const itemCount = Array.isArray(parsed.data) ? parsed.data.length : 0;
                     const lastModifiedIso = parseLastModifiedToIso(response.headers.get('Last-Modified'));
 
+                    console.log(`[VBook Catalog] ✓ Loaded ${itemCount} items from ${source.id}`);
+                    
                     return {
                         id: source.id,
                         url: source.url,
@@ -425,6 +596,8 @@ async function loadExtensions() {
                         content: parsed
                     };
                 } catch (error) {
+                    console.warn(`[VBook Catalog] ✗ Failed to load ${source.id}: ${error.message}`);
+                    
                     return {
                         id: source.id,
                         url: source.url,
@@ -476,14 +649,21 @@ async function loadExtensions() {
 
             hydrateFromRootCatalog(realtimeRoot);
             hydrateFromSourceCatalog(realtimeSidecar);
+            await loadSiteHealthData();
+            
+            console.log(`[VBook Catalog] ✓ Realtime mode loaded successfully: ${realtimeRoot.data.length} extensions`);
             renderDashboard();
             return;
         } catch (error) {
-            console.warn('Realtime mode failed, fallback to snapshot mode:', error);
+            console.warn('[VBook Catalog] ✗ Realtime mode failed:', error);
+            console.log('[VBook Catalog] Falling back to snapshot mode...');
         }
     }
 
+    // SNAPSHOT MODE: Fallback to static cached data
     try {
+        console.log('[VBook Catalog] Loading snapshot from web/plugin.json...');
+        
         const catalogUrl = resolveCatalogUrl();
         const endpoints = resolveCatalogEndpoints(catalogUrl);
         const response = await fetchWithTimeout(endpoints.rootUrl, DEFAULT_TIMEOUT_MS);
@@ -523,12 +703,15 @@ async function loadExtensions() {
             window.catalogSources = [];
         }
 
+        await loadSiteHealthData();
+
+        console.log(`[VBook Catalog] ⚠ Snapshot mode loaded (fallback): ${data.data.length} extensions`);
         renderDashboard();
     } catch (error) {
-        console.error('Error loading extensions:', error);
+        console.error('[VBook Catalog] ✗ Failed to load extensions:', error);
         document.getElementById('extensions-grid').innerHTML =
             `<div style="grid-column: 1/-1; padding: 20px; color: red;">
-                Lỗi: Không thể tải plugin.json đúng cấu trúc root manifest.
+                Lỗi: Không thể tải plugin.json đúng cấu trúc root manifest. Error: ${escapeHtml(error.message)}
             </div>`;
     }
 }

@@ -244,18 +244,7 @@ function renderCatalogUpdatedTime() {
     if (!element) {
         return;
     }
-
-    const status = window.catalogStatus || {};
-    const updatedLabel = formatCatalogUpdatedAt(status.updatedAt);
-    const modeSuffix = status.mode === 'realtime' ? ' (realtime)' : '';
-
-    if (!updatedLabel) {
-        element.textContent = `Cập nhật: chưa có dữ liệu${modeSuffix}`;
-        return;
-    }
-
-    const suffix = status.updatedAtSource === 'header' ? '' : ' (local)';
-    element.textContent = `Cập nhật: ${updatedLabel}${suffix}${modeSuffix}`;
+    element.style.display = 'none';
 }
 
 function renderStats() {
@@ -326,8 +315,17 @@ function toRepoBrowseUrl(rawUrl) {
         if (parsed.hostname.includes('raw.githubusercontent.com') && parts.length >= 4) {
             const owner = parts[0];
             const repo = parts[1];
-            const branch = parts[3];
-            const path = parts.slice(4).join('/');
+            let branch = 'main';
+            let path = '';
+
+            if (parts[2] === 'refs' && parts[3] === 'heads' && parts.length >= 6) {
+                branch = parts[4];
+                path = parts.slice(5).join('/');
+            } else {
+                branch = parts[2];
+                path = parts.slice(3).join('/');
+            }
+
             return `https://github.com/${owner}/${repo}/blob/${branch}/${path}`;
         }
 
@@ -433,6 +431,7 @@ function renderCard(ext) {
     const iconFallback = extensionIconFallback(ext.name || 'ext');
     const sourceLabel = ext.source || '';
     const sourceHost = sourceLabel ? getSourceHost(sourceLabel) : '';
+    const siteHealthBadge = renderExtensionSiteHealthBadge(sourceLabel);
     const siteCopyButton = sourceLabel
         ? `<button class="ext-site-copy-btn" data-site-url="${escapeHtml(sourceLabel)}" aria-label="Copy URL site" title="Copy URL site">🔗</button>`
         : '<span class="ext-site-copy-btn ext-site-copy-btn-disabled" aria-hidden="true">🔗</span>';
@@ -450,6 +449,7 @@ function renderCard(ext) {
                 <div class="ext-title-wrap">
                     <h3 class="ext-name">${escapeHtml(ext.name || 'Chưa đặt tên')}</h3>
                     <p class="ext-site-url" title="${escapeHtml(sourceLabel || 'Không rõ nguồn')}">${escapeHtml(sourceHost || sourceLabel || 'Không rõ nguồn')}</p>
+                    ${siteHealthBadge ? `<div class="ext-health-row">${siteHealthBadge}</div>` : ''}
                 </div>
                 <span class="ext-version">v${escapeHtml(ext.version || '0')}</span>
             </div>
@@ -479,6 +479,121 @@ function getSourceHost(url) {
     } catch (_error) {
         return 'Unknown host';
     }
+}
+
+function getExtensionSiteHealth(sourceUrl) {
+    if (!sourceUrl) {
+        return null;
+    }
+
+    const map = window.siteHealthByUrl || {};
+    const key = typeof window.normalizeSiteUrlKey === 'function'
+        ? window.normalizeSiteUrlKey(sourceUrl)
+        : '';
+
+    if (!key || !map[key]) {
+        return null;
+    }
+
+    return map[key];
+}
+
+function getHealthBadgeClass(info) {
+    const state = getUiHealthState(info);
+    const confidence = String(info && info.confidence ? info.confidence : 'high').toLowerCase();
+
+    const stateClassMap = {
+        dead: 'ext-health-dead',
+        cloudflare: 'ext-health-cloudflare',
+        redirected: 'ext-health-redirected',
+        uncertain: 'ext-health-uncertain'
+    };
+
+    const confidenceClassMap = {
+        high: 'ext-health-confidence-high',
+        medium: 'ext-health-confidence-medium',
+        low: 'ext-health-confidence-low'
+    };
+
+    const stateClass = stateClassMap[state] || 'ext-health-unknown';
+    const confidenceClass = confidenceClassMap[confidence] || 'ext-health-confidence-medium';
+    return `${stateClass} ${confidenceClass}`;
+}
+
+function getHealthLabel(info) {
+    const state = getUiHealthState(info);
+
+    if (state === 'dead') {
+        return 'Die';
+    }
+
+    if (state === 'cloudflare') {
+        return 'Cloudflare/Bot';
+    }
+
+    if (state === 'redirected') {
+        const label = info && info.finalHost ? escapeHtml(info.finalHost) : 'miền mới';
+        return `Direct: ${label}`;
+    }
+
+    return '';
+}
+
+function getUiHealthState(info) {
+    const rawState = String(info && info.state ? info.state : '').toLowerCase();
+
+    if (rawState === 'dead' || rawState === 'cloudflare' || rawState === 'redirected') {
+        return rawState;
+    }
+
+    if (rawState !== 'uncertain') {
+        return rawState;
+    }
+
+    const evidence = Array.isArray(info && info.evidence) ? info.evidence : [];
+    const hasRedirectEvidence = evidence.some((item) => {
+        const type = String(item && item.type ? item.type : '').toLowerCase();
+        return type === 'http_301_302_host_changed'
+            || type === 'meta_refresh_cross_domain'
+            || type === 'canonical_link_cross_domain'
+            || type === 'migration_text_with_url';
+    });
+
+    if (hasRedirectEvidence) {
+        return 'redirected';
+    }
+
+    return 'cloudflare';
+}
+
+function buildHealthTooltip(info) {
+    const confidence = String(info && info.confidence ? info.confidence : 'unknown');
+    const evidence = Array.isArray(info && info.evidence) ? info.evidence : [];
+    const evidenceLabels = evidence
+        .map((item) => `${item.type || 'unknown'} (${item.strength || 'unknown'})`)
+        .slice(0, 4);
+
+    const base = `Confidence: ${confidence}`;
+    if (!evidenceLabels.length) {
+        return base;
+    }
+
+    return `${base}\nEvidence: ${evidenceLabels.join(', ')}`;
+}
+
+function renderExtensionSiteHealthBadge(sourceUrl) {
+    const info = getExtensionSiteHealth(sourceUrl);
+    if (!info || !info.state) {
+        return '';
+    }
+    const label = getHealthLabel(info);
+    if (!label) {
+        return '';
+    }
+
+    const badgeClass = getHealthBadgeClass(info);
+    const tooltip = buildHealthTooltip(info);
+    return `<span class="ext-health-badge ${badgeClass}" title="${escapeHtml(tooltip)}">${label}</span>`;
 }
 
 function summarizeSourceTypes(extItems) {
@@ -535,7 +650,8 @@ function isSourceExpanded(source) {
 function renderSourceCard(source) {
     const extItems = Array.isArray(source.extItems) ? source.extItems : [];
     const status = (source.status || '').trim().toLowerCase();
-    const statusLabel = status && status !== 'unchanged' ? status : '';
+    const statusKind = status === 'error' ? 'error' : 'active';
+    const statusLabel = statusKind === 'error' ? 'error' : 'active';
     const expanded = isSourceExpanded(source);
     const sourceTotal = source.itemCount || extItems.length;
     const previewItems = extItems.slice(0, expanded ? 4 : 3);
@@ -557,7 +673,7 @@ function renderSourceCard(source) {
                 <h3 class="source-name" title="${escapeHtml(fullLabel)}">${escapeHtml(displayLabel)}</h3>
                 <div class="source-toggle-meta">
                     <span class="source-total-pill">${sourceTotal} ext</span>
-                    ${statusLabel ? `<span class="source-status ${escapeHtml(statusLabel)}">${escapeHtml(statusLabel)}</span>` : ''}
+                    <span class="source-status-indicator ${escapeHtml(statusKind)}"><span class="source-status-dot" aria-hidden="true"></span><span class="source-status-text">${escapeHtml(statusLabel)}</span></span>
                     <span class="source-toggle-icon">${expanded ? '−' : '+'}</span>
                 </div>
             </button>
