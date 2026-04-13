@@ -4,6 +4,7 @@
   "buildCommand": "",
   "functions": {
     "api/**/*.js": {
+      "includeFiles": "references/remote-sources.json",
       "maxDuration": 60
     }
   },

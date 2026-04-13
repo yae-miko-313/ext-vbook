@@ -94,6 +94,13 @@ This does not replace Vercel dynamic APIs. It keeps `web/plugin.json`, `web/cata
 - Reduce number of remote sources or increase timeouts moderately.
 - Tune cache with `VBOOK_WEB_CACHE_TTL_MS`.
 
+### `references/remote-sources.json is missing or invalid`
+
+- Ensure `references/remote-sources.json` exists and is valid JSON.
+- Ensure `vercel.json` includes this file in function bundle:
+	- `"functions": { "api/**/*.js": { "includeFiles": "references/remote-sources.json" } }`
+- Redeploy after commit/push because serverless bundle is rebuilt on each deploy.
+
 ### Vercel deploy fails when using root
 
 - Use project root as Root Directory (not `api/`).
