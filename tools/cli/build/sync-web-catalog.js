@@ -102,10 +102,37 @@ function flattenCommunityData(refCatalog) {
 function buildWebCatalog(workspaceRoot) {
     const monitorPath = path.join(workspaceRoot, 'ref', 'monitor.json');
     const legacyPath = path.join(workspaceRoot, 'ref', 'plugin.json');
-    const sourceCatalog = safeReadJson(monitorPath) || safeReadJson(legacyPath);
+    const webSourceList = buildWebSourceList(workspaceRoot);
+
+    let sourceCatalog = safeReadJson(monitorPath) || safeReadJson(legacyPath);
 
     if (!sourceCatalog || typeof sourceCatalog !== 'object') {
-        throw new Error('ref/monitor.json or ref/plugin.json is missing or invalid');
+        const fallbackSources = webSourceList && Array.isArray(webSourceList.sources)
+            ? webSourceList.sources.map((source) => ({
+                id: source.id,
+                url: source.url,
+                avatar: source.avatar || '',
+                itemCount: 0,
+                status: 'active',
+                content: { data: [] }
+            }))
+            : [];
+
+        sourceCatalog = {
+            metadata: {
+                author: 'kychi',
+                description: 'Community aggregate manifest'
+            },
+            summary: {
+                total: fallbackSources.length,
+                changed: 0,
+                unchanged: fallbackSources.length,
+                errors: 0
+            },
+            referenceListUrl: webSourceList && webSourceList.referenceListUrl ? webSourceList.referenceListUrl : '',
+            sources: fallbackSources,
+            data: []
+        };
     }
 
     const data = flattenCommunityData(sourceCatalog);
@@ -131,8 +158,6 @@ function buildWebCatalog(workspaceRoot) {
         referenceListUrl: sourceCatalog.referenceListUrl || '',
         sources
     };
-
-    const webSourceList = buildWebSourceList(workspaceRoot);
 
     fs.writeFileSync(path.join(workspaceRoot, 'web', 'plugin.json'), `${JSON.stringify(rootCatalog, null, 2)}\n`, 'utf8');
     fs.writeFileSync(path.join(workspaceRoot, 'web', 'catalog.json'), `${JSON.stringify(sidecarCatalog, null, 2)}\n`, 'utf8');

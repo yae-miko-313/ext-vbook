@@ -48,15 +48,17 @@ npm run build:catalog
 ```bash
 npm run sync:web-catalog
 ```
-- Generate `web/plugin.json` (root-like aggregate link)
-- Generate `web/catalog.json` (source sidecar)
-- Web viewer reads both files
+- Generate `web/plugin.json` (snapshot fallback)
+- Generate `web/catalog.json` (snapshot source sidecar fallback)
+- Generate `web/remote-sources.json` (realtime source manifest)
+- Web viewer ưu tiên realtime fetch từ nguồn, snapshot dùng khi fallback
 
 ## Community Workflow
 
-- `ref/plugin.json` is the synced community aggregate of raw sources.
-- `web/plugin.json` is the main aggregate file for By Extension.
-- `web/catalog.json` is the sidecar file for By Source.
+- `references/remote-sources.json` is the source list for community raw repos.
+- `web/remote-sources.json` is the published manifest consumed by realtime web mode.
+- `web/plugin.json` is snapshot fallback file for By Extension.
+- `web/catalog.json` is snapshot fallback file for By Source.
 - `build:catalog` is for personal manifests.
 - `sync:web-catalog` is for community viewer sync.
 
@@ -64,7 +66,7 @@ npm run sync:web-catalog
 
 - Do not manually edit generated catalog files.
 - Do not manually edit generated catalog files.
-- Use `sync:web-catalog` to update `web/plugin.json` + `web/catalog.json` from `ref/plugin.json`.
+- Use `sync:web-catalog` to update `web/plugin.json` + `web/catalog.json` + `web/remote-sources.json`.
 - Treat all generated files as outputs that serve one of the two partitions.
 - Always run `npm run build:catalog` before commit or PR when personal extension data changes.
 - Always run `npm run sync:web-catalog` before commit or PR when community aggregate changes.
@@ -75,6 +77,7 @@ npm run sync:web-catalog
 - `extensions/plugin.json`
 - `web/plugin.json`
 - `web/catalog.json`
+- `web/remote-sources.json`
 - `extensions/**/plugin.zip`
 
 ## Deprecated Workflow

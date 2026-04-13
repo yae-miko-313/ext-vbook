@@ -13,20 +13,24 @@ Không copy blind, luôn verify lại với live site.
    - Organized by type (novel, comic, translate, tts)
    - Read-only, không embed vào catalog
 
-3. **`ref/monitor.json`**: Aggregate snapshot của external sources
-   - Định kỳ sync từ provider các repos
-   - Chứa `sources[]` list + nested `content.data[]` items
-   - Nằm trong `sources[]` array của web catalog
+3. **`references/remote-sources.json`**: Danh sách nguồn external (single source of truth)
+  - Web realtime đọc danh sách này (qua `web/remote-sources.json` sau sync)
+  - Mỗi source là raw URL `plugin.json`/`translate.json`/`tts.json`
+  - Không phụ thuộc monitor snapshot để hiển thị web
 
 4. **`web/plugin.json`**: Link tổng cho web viewer
-  - Mirror root-like từ `ref/monitor.json`
+  - Snapshot fallback do `sync:web-catalog` sinh
   - Hiển thị By Extension
   - Format: `{ metadata, data[] }`
 
 5. **`web/catalog.json`**: Sidecar cho source view
-  - Mirror metadata/source từ `ref/monitor.json`
+  - Snapshot fallback do `sync:web-catalog` sinh
   - Hiển thị By Source + reference metadata
   - Format: `{ metadata, summary, referenceListUrl, sources[] }`
+
+6. **`web/remote-sources.json`**: Manifest nguồn cho realtime mode
+   - Mirror từ `references/remote-sources.json`
+   - Dùng để browser fetch trực tiếp repo nguồn khi mở web
 
 ## Aggregate structure
 
@@ -47,7 +51,7 @@ Không copy blind, luôn verify lại với live site.
 {
   "metadata": { "author": "kychi", "description": "..." },
   "sources": [
-    // External sources from ref/monitor.json
+    // External sources snapshot
     {
       "id": "...",
       "url": "https://raw.githubusercontent.com/.../plugin.json",
@@ -107,7 +111,7 @@ Danh sách nguồn đầy đủ được quản lý tại `references/remote-sou
 34. darkrai9x-translate - https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/translate.json
 35. darkrai9x-tts - https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/tts.json
 
-**Note**: Sync logic external config, không cứng trong codebase - tham khảo `ref/monitor.json` metadata
+**Note**: Sync logic external config, không cứng trong codebase - tham khảo `references/remote-sources.json`.
 
 ## Snapshot contribute hiện tại
 
@@ -155,6 +159,6 @@ cat web/plugin.json | head -20
 Workflow:
 1. Edit/create extension qua CLI
 2. Chạy `npm run build:catalog` nếu personal extension đổi
-3. Chạy `npm run sync:web-catalog` khi community aggregate đổi
-4. Web viewer tự động load updated `web/plugin.json` + `web/catalog.json`
+3. Chạy `npm run sync:web-catalog` khi source list/community workflow đổi
+4. Web viewer mặc định fetch realtime từ repo nguồn; snapshot (`web/plugin.json` + `web/catalog.json`) là fallback
 

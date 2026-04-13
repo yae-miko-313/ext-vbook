@@ -12,6 +12,11 @@ Trigger khi push thay đổi trong `web/**`.
 npm run full-sync
 ```
 
+Lệnh trên sẽ tái sinh toàn bộ web artifacts:
+- `web/plugin.json` (snapshot fallback)
+- `web/catalog.json` (snapshot fallback sidecar)
+- `web/remote-sources.json` (manifest cho realtime mode)
+
 Sau đó commit/push:
 
 ```bash

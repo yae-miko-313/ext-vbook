@@ -8,7 +8,7 @@ Tài liệu đóng góp chính cho repo.
 - **Code reference**: `code-reference/**` - repos tham khảo từ contributors (read-only)
 - **CLI**: `tools/cli/**` - commands create/edit/build/build-catalog
 - **Web viewer**: `web/**` - catalog viewer + community aggregate loader
-- **Reference data**: `ref/plugin.json` - community aggregate (synced outside)
+- **Reference data**: `references/remote-sources.json` - danh sách nguồn repo để web fetch realtime
 - **Docs**: `docs/**` - documentation
 
 ## Prerequisites
@@ -60,8 +60,9 @@ Tái sinh personal catalog:
 - `extensions/plugin.json` (root)
 
 Sync community catalog:
-- `web/plugin.json` (root-like aggregate link)
-- `web/catalog.json` (source sidecar for By Source)
+- `web/plugin.json` (snapshot fallback aggregate)
+- `web/catalog.json` (snapshot fallback sidecar for By Source)
+- `web/remote-sources.json` (manifest nguồn cho realtime mode)
 
 **⚠️ IMPORTANT**: Bước 5 BẮTBUỘC trước khi commit/PR khi đổi personal extensions hoặc community aggregate.
 
@@ -76,8 +77,8 @@ Sync community catalog:
 - [ ] Code tham khảo `docs/AI_CODE_EXT_VBOOK.md` contract
 - [ ] Extension đã build zip (`npm run build`)
 - [ ] **Personal catalog đã rebuild** (`npm run build:catalog`) ✓ CRITICAL
-- [ ] **Community catalog đã sync** (`npm run sync:web-catalog`) nếu `ref/` đổi
-- [ ] Web viewer catalogs có update (`web/plugin.json` và/hoặc `web/catalog.json` modified)
+- [ ] **Community web artifacts đã sync** (`npm run sync:web-catalog`) nếu `references/` hoặc web flow đổi
+- [ ] Web viewer artifacts có update (`web/plugin.json`, `web/catalog.json`, hoặc `web/remote-sources.json`)
 - [ ] Không commit runtime reports (`tools/cli/reports/`)
 - [ ] README + docs cập nhật nếu có thay đổi workflow
 
@@ -86,7 +87,7 @@ Sync community catalog:
 - **Không thủ công tạo folder**: Dùng CLI `npm run ext:create`
 - **Không edit trực tiếp plugin.json**: Dùng CLI `npm run ext:edit`
 - **Không skip build-catalog**: Bắt buộc để cập nhật personal manifests
-- **Không skip sync:web-catalog**: Bắt buộc để cập nhật community web catalog khi `ref/` đổi
+- **Không skip sync:web-catalog**: Bắt buộc để cập nhật web artifacts khi source list/community flow đổi
 - **Không copy-paste code mù**: Verify live site trước - tham khảo `code-reference/` là ví dụ, không template
 
 ## Testing locally
@@ -106,8 +107,8 @@ cat web/plugin.json | grep -i "test_ext"
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
-| Extension không xuất hiện trong web | `web/plugin.json` chưa update | Chạy `npm run sync:web-catalog` |
-| "Lỗi structure aggregate" | `data[]` missing trong `web/plugin.json` | Verify `ref/plugin.json` format |
+| Extension không xuất hiện trong web | Source remote lỗi/CORS hoặc chưa reload | Reload trang, kiểm tra query `?realtime=0`, chạy lại `npm run sync:web-catalog` để cập nhật fallback |
+| "Lỗi structure aggregate" | `data[]` thiếu trong snapshot fallback | Chạy `npm run sync:web-catalog` để tái sinh `web/plugin.json` |
 | Build failed | `src/` không tồn tại | Kiểm tra extension scaffold complete |
 | Author count = 0 | Missing `author` field | Edit `extensions/*/plugin.json` thêm author |
 
@@ -132,8 +133,9 @@ extensions/                 # Chỉ edit qua CLI
 └── plugin.json              # Root catalog (auto-generated)
 
 web/
-├── plugin.json              # AUTO-GENERATED root-like aggregate
-└── catalog.json             # AUTO-GENERATED source sidecar
+├── plugin.json              # AUTO-GENERATED snapshot fallback aggregate
+├── catalog.json             # AUTO-GENERATED snapshot fallback sidecar
+└── remote-sources.json      # AUTO-GENERATED realtime source manifest
 
 tools/cli/
 ├── index.js                 # Main entrypoint
@@ -145,7 +147,7 @@ tools/cli/
 ## Notes
 
 - Cá nhân extensions chỉ qua CLI - đảm bảo consistency + track changes
-- Catalog rebuild/sync bắt buộc để web viewer thấy changes
+- Catalog rebuild/sync bắt buộc để web artifacts luôn nhất quán
 - Author credits động từ data - không hardcode
 - Sync script có dedupe theo path để tránh double-count community items
 

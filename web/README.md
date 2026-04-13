@@ -18,9 +18,9 @@ python -m http.server 8000
 
 Mở browser: `http://localhost:8000/web/`
 
-`npm run sync:web-catalog` là lệnh chuẩn để refresh dữ liệu web từ `ref/monitor.json`.
+`npm run sync:web-catalog` là lệnh chuẩn để tái sinh web artifacts (`web/plugin.json`, `web/catalog.json`, `web/remote-sources.json`).
 
-`npm run monitor:sources` sẽ fetch nguồn từ `references/remote-sources.json`, cập nhật `ref/monitor.json`, và tự sync luôn `web/plugin.json` + `web/catalog.json`.
+Web mặc định chạy realtime: khi mở trang, browser sẽ đọc `web/remote-sources.json` và fetch trực tiếp các raw URL nguồn.
 
 ## Cấu trúc dữ liệu
 
