@@ -297,14 +297,75 @@ function resolveWorkspaceRoot() {
     return path.resolve(__dirname, '..', '..');
 }
 
-function getAllowedOrigin(req) {
-    const explicit = String(process.env.VBOOK_ALLOWED_ORIGIN || '').trim();
-    if (explicit) {
-        return explicit;
+function normalizeOriginValue(value) {
+    const raw = String(value || '').trim();
+    if (!raw) {
+        return '';
     }
 
-    const fallback = String(req && req.headers && req.headers.origin ? req.headers.origin : '').trim();
-    return fallback || '*';
+    if (raw === '*') {
+        return '*';
+    }
+
+    try {
+        return new URL(raw).origin;
+    } catch {
+        return raw.replace(/\/+$/, '');
+    }
+}
+
+function originMatchesRule(origin, rule) {
+    if (!origin || !rule) {
+        return false;
+    }
+
+    if (rule === '*') {
+        return true;
+    }
+
+    if (origin === rule) {
+        return true;
+    }
+
+    if (rule.startsWith('*.')) {
+        try {
+            const host = new URL(origin).hostname;
+            const suffix = rule.slice(1).toLowerCase();
+            return host.toLowerCase().endsWith(suffix);
+        } catch {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+function getAllowedOrigin(req) {
+    const requestOrigin = normalizeOriginValue(req && req.headers && req.headers.origin ? req.headers.origin : '');
+    const explicit = String(process.env.VBOOK_ALLOWED_ORIGIN || '').trim();
+
+    if (explicit) {
+        const rules = explicit
+            .split(',')
+            .map((item) => normalizeOriginValue(item))
+            .filter(Boolean);
+
+        if (!rules.length) {
+            return requestOrigin || '*';
+        }
+
+        if (!requestOrigin) {
+            return rules[0];
+        }
+
+        if (rules.some((rule) => originMatchesRule(requestOrigin, rule))) {
+            return requestOrigin;
+        }
+
+        return rules[0];
+    }
+
+    return requestOrigin || '*';
 }
 
 function applyCommonHeaders(req, res) {
