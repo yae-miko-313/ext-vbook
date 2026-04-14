@@ -7,3 +7,5 @@ references/
 tools/cli/reports/*.json
 duplicate_sources_report.json
 .codebase/
+.private/
+code-reference/
