@@ -1,48 +1,25 @@
 load('config.js');
-
-function pickText(el) {
-    return el ? el.text().trim() : '';
-}
-
-function pickAttr(el, key) {
-    return el ? (el.attr(key) || '') : '';
-}
-
 function execute(url) {
-    var response = fetch(url);
-    if (response.ok){
+    var response = fetchPage(url);
+    if (response.ok) {
         var doc = response.html();
-        var titleEl = doc.select('h1.title, h1[itemprop=name]').first();
-        var coverEl = doc.select('.book img, .info-holder img[itemprop=image], img[itemprop=image]').first();
-        var authorEl = doc.select('.info > div').first() || doc.select('a[itemprop=author]').first();
-        var statusEl = doc.select('.info .label, .info span.text-success').first();
-
-        var name = pickText(titleEl);
-        var cover = pickAttr(coverEl, 'src');
-        var author = pickText(authorEl);
-        var description = doc.select('.desc-text, [itemprop=description]').first();
-        var descriptionHtml = description ? description.html() : '';
-        var statusText = pickText(statusEl);
-
-        if (cover.indexOf('//') === 0) {
-            cover = 'https:' + cover;
-        }
-
-        var ongoing = true;
-        var st = statusText.toLowerCase();
-        if (st.indexOf('full') >= 0 || st.indexOf('hoàn') >= 0 || st.indexOf('đã hoàn') >= 0 || st.indexOf('complete') >= 0) {
-            ongoing = false;
-        }
-
+        var name = doc.select('h3[itemprop="name"]').text();
+        if (!name) name = doc.select('h3.truyen-title').text();
+        var cover = doc.select('img[itemprop="image"]').attr('src');
+        if (!cover) cover = doc.select('.book img').attr('src');
+        var author = doc.select('[itemprop="author"]').text();
+        if (!author) author = doc.select('.author').text();
+        var description = doc.select('[itemprop="description"]').html();
+        if (!description) description = doc.select('.desc-text').html();
+        var detail = doc.select('.info').html();
+        if (!detail) detail = doc.select('.cat-link').html();
+        if (!detail) detail = author;
         return Response.success({
             name: name,
             cover: cover,
             author: author,
-            description: descriptionHtml,
-            detail: author + '<br>Trạng thái: ' + statusText,
-            ongoing: ongoing,
-            genres: [],
-            suggests: [],
+            description: description,
+            detail: detail,
             host: BASE_URL
         });
     }

@@ -1,49 +1,47 @@
 load('config.js');
-
-function normalizeLink(href) {
-    if (!href) return '';
-    if (href.indexOf('http') === 0) return href;
-    if (href.charAt(0) === '/') return BASE_URL + href;
-    return BASE_URL + '/' + href;
-}
-
 function execute(url) {
-    var response = fetch(url);
-    if (response.ok){
-        var doc = response.html();
-        var list = [];
-        var seen = {};
-
-        doc.select('.list-chapter a, .l-chapters a, #list-chapter a').forEach(function(a) {
-            var name = a.text().trim();
-            var chapterUrl = normalizeLink(a.attr('href') || '');
-            if (!name || !chapterUrl || seen[chapterUrl]) return;
-            seen[chapterUrl] = true;
-            list.push({
-                name: name,
-                url: chapterUrl,
-                host: BASE_URL
-            });
+    url = url.replace(/\/$/, '');
+    var response = fetchPage(url);
+    if (!response.ok) return Response.error('HTTP Error: ' + response.status);
+    var doc = response.html();
+    var chapters = [];
+    var items = doc.select('.list-chapter li a');
+    for (var i = 0; i < items.size(); i++) {
+        var e = items.get(i);
+        chapters.push({
+            name: e.text().trim(),
+            url: e.attr('href'),
+            host: BASE_URL
         });
+    }
 
-        if (list.length === 0) {
-            var firstChapter = doc.select('.l-chapters .chapter-text, .chapter-text').first();
-            var totalMatch = firstChapter ? firstChapter.text().match(/(\d+)/) : null;
-            var total = totalMatch ? parseInt(totalMatch[1], 10) : 0;
-            for (var i = 1; i <= total; i++) {
-                list.push({
-                    name: 'Chương ' + i,
-                    url: normalizeLink(url + '/chuong-' + i),
+    var maxPage = 1;
+    var pages = doc.select('.pagination li a');
+    for (var j = 0; j < pages.size(); j++) {
+        var pageUrl = pages.get(j).attr('href') || '';
+        var match = pageUrl.match(/trang-(\d+)/);
+        if (match) {
+            var pageNum = parseInt(match[1], 10);
+            if (pageNum > maxPage) maxPage = pageNum;
+        }
+    }
+
+    if (maxPage > 1) {
+        for (var k = 2; k <= maxPage; k++) {
+            var pageResponse = fetchPage(url + '/trang-' + k + '/');
+            if (!pageResponse.ok) continue;
+            var pageDoc = pageResponse.html();
+            var pageItems = pageDoc.select('.list-chapter li a');
+            for (var x = 0; x < pageItems.size(); x++) {
+                var p = pageItems.get(x);
+                chapters.push({
+                    name: p.text().trim(),
+                    url: p.attr('href'),
                     host: BASE_URL
                 });
             }
         }
-
-        if (list.length === 0) {
-            return Response.error('Không tìm thấy danh sách chương.');
-        }
-
-        return Response.success(list);
     }
-    return Response.error('HTTP Error: ' + response.status);
+
+    return Response.success(chapters);
 }
