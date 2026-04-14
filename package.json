@@ -1,13 +1,12 @@
 {
   "name": "vbook-tool",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "VBook 2-in-1 tool: personal extension repair/build plus community catalog aggregation",
   "author": "kychi",
   "main": "tools/cli/index.js",
   "bin": {
     "vbook": "./tools/cli/index.js"
   },
-
   "scripts": {
     "start": "node tools/cli/index.js",
     "ext:create": "node tools/cli/index.js ext --mode create",
@@ -29,6 +28,7 @@
   "dependencies": {
     "archiver": "^7.0.1",
     "commander": "^12.1.0",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "string-argv": "^0.3.2"
   }
 }

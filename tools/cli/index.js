@@ -9,9 +9,19 @@ const {
 } = require('./scaffold/scaffold');
 const { buildExtensionZip } = require('./build/build');
 const { buildCatalog } = require('./build/build-catalog');
+const {
+    runDevicePing,
+    runDeviceDebug,
+    runDeviceInstall,
+    runDeviceTestAll
+} = require('./device/commands');
 
 const WORKSPACE_ROOT = path.resolve(__dirname, '..', '..');
 require('dotenv').config({ path: path.join(WORKSPACE_ROOT, '.env') });
+
+if (!process.env.VBOOK_AUTHOR && process.env.author) {
+    process.env.VBOOK_AUTHOR = process.env.author;
+}
 
 const program = new Command();
 
@@ -156,5 +166,106 @@ program.command('build-catalog')
             process.exitCode = 1;
         }
     });
+
+program.command('device')
+    .description('Debug/install extension on VBook device (TCP bridge)')
+    .option('-i, --ip <ip>', 'Device IP address (default: VBOOK_IP)')
+    .option('-p, --port <port>', 'Device port (default: VBOOK_PORT)', '8080')
+    .option('--timeout-ms <n>', 'TCP timeout waiting for device response (default: 60000)', '60000')
+    .option('--verbose', 'Verbose network logs')
+    .addCommand(
+        new Command('ping')
+            .description('Check TCP connectivity to device')
+            .action(async (...args) => {
+                try {
+                    const command = args[args.length - 1];
+                    const opts = command.parent.opts();
+                    const result = await runDevicePing(opts);
+                    console.log(`[OK] Device reachable at ${result.ip}:${result.port}`);
+                } catch (error) {
+                    console.error(`[ERROR] ${error.message}`);
+                    process.exitCode = 1;
+                }
+            })
+    )
+    .addCommand(
+        new Command('debug')
+            .description('Debug a script on the device')
+            .argument('<file>', 'Path to the script (e.g. extensions/novel/kychi_ntruyen/src/home.js)')
+            .option('-in, --input <input>', 'Input args string (e.g. "https://site/path" "2")')
+            .action(async (file, subOptions, ...rest) => {
+                try {
+                    const command = rest[rest.length - 1];
+                    const opts = { ...command.parent.opts(), ...subOptions };
+                    const result = await runDeviceDebug(file, opts);
+
+                    if (result.log) {
+                        console.log('[LOG FROM DEVICE]');
+                        const logStr = typeof result.log === 'string' ? result.log.replace(/\\n/g, '\n') : JSON.stringify(result.log, null, 2);
+                        console.log(logStr);
+                    }
+
+                    if (result.exception) {
+                        console.warn('[EXCEPTION FROM DEVICE]');
+                        const excStr = typeof result.exception === 'string' ? result.exception.replace(/\\n/g, '\n') : JSON.stringify(result.exception, null, 2);
+                        console.warn(excStr);
+                        process.exitCode = 1;
+                        return;
+                    }
+
+                    if (typeof result.result !== 'undefined') {
+                        console.log('[RESULT]');
+                        console.log(JSON.stringify(result.result, null, 2));
+                    } else {
+                        console.log('[RESPONSE]');
+                        console.log(JSON.stringify(result.raw, null, 2));
+                    }
+                } catch (error) {
+                    console.error(`[ERROR] ${error.message}`);
+                    process.exitCode = 1;
+                }
+            })
+    )
+    .addCommand(
+        new Command('install')
+            .description('Install the extension on the device')
+            .option('--plugin <path>', 'Extension folder path (default: current dir)')
+            .action(async (subOptions, ...rest) => {
+                try {
+                    const command = rest[rest.length - 1];
+                    const opts = { ...command.parent.opts(), ...subOptions };
+                    const result = await runDeviceInstall(subOptions.plugin || '.', opts);
+                    if (result.exception) {
+                        console.warn('[FAILED]');
+                        console.warn(typeof result.exception === 'string' ? result.exception : JSON.stringify(result.exception, null, 2));
+                        process.exitCode = 1;
+                        return;
+                    }
+                    console.log('[SUCCESS] Install request sent.');
+                    if (result.result) {
+                        console.log(JSON.stringify(result.result, null, 2));
+                    }
+                } catch (error) {
+                    console.error(`[ERROR] ${error.message}`);
+                    process.exitCode = 1;
+                }
+            })
+    )
+    .addCommand(
+        new Command('test-all')
+            .description('One-click test (home -> gen -> detail -> toc -> chap)')
+            .option('--plugin <path>', 'Extension folder path (default: current dir)')
+            .action(async (subOptions, ...rest) => {
+                try {
+                    const command = rest[rest.length - 1];
+                    const opts = { ...command.parent.opts(), ...subOptions };
+                    await runDeviceTestAll(subOptions.plugin || '.', opts);
+                    console.log('[SUCCESS] One-click test completed successfully!');
+                } catch (error) {
+                    console.error(`[ERROR] ${error.message}`);
+                    process.exitCode = 1;
+                }
+            })
+    );
 
 program.parse(process.argv);
