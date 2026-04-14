@@ -4,7 +4,7 @@
 
 - **Community partition**: `ref/` + `web/`
 - **Personal partition**: `extensions/` + `tools/cli/`
-- **Shared support**: `code-reference/` + `docs/`
+- **Shared support**: `.private/code-reference/` + `docs/`
 
 ## Current CLI Commands
 
@@ -55,7 +55,7 @@ npm run sync:web-catalog
 
 ## Community Workflow
 
-- `references/remote-sources.json` is the source list for community raw repos.
+- `.private/references/remote-sources.json` is the source list for community raw repos.
 - `web/remote-sources.json` is the published manifest consumed by realtime web mode.
 - `web/plugin.json` is snapshot fallback file for By Extension.
 - `web/catalog.json` is snapshot fallback file for By Source.

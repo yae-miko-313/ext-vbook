@@ -11,7 +11,7 @@
     }
   },
   "generatedAt": "2026-04-13T07:38:05.792Z",
-  "source": "web/plugin.json:data[].source + references/remote-sources.json:sources[].url",
+  "source": "web/plugin.json:data[].source + .private/references/remote-sources.json:sources[].url",
   "sourceScope": "all",
   "summary": {
     "total": 487,

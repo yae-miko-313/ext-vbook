@@ -95,16 +95,16 @@ function normalizeSourceEntry(source, index) {
 }
 
 function loadReferenceSourceList(workspaceRoot) {
-    const sourceListPath = path.join(workspaceRoot, 'references', 'remote-sources.json');
+    const sourceListPath = path.join(workspaceRoot, '.private', 'references', 'remote-sources.json');
     const sourceList = safeReadJson(sourceListPath);
 
     if (!sourceList || typeof sourceList !== 'object' || !Array.isArray(sourceList.sources)) {
-        throw new Error('references/remote-sources.json is missing or invalid');
+        throw new Error('.private/references/remote-sources.json is missing or invalid');
     }
 
     return {
         generatedAt: new Date().toISOString(),
-        source: 'references/remote-sources.json',
+        source: '.private/references/remote-sources.json',
         referenceListUrl: sourceList.referenceListUrl || '',
         sources: sourceList.sources
             .map((source, index) => normalizeSourceEntry(source, index))

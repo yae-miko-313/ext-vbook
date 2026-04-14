@@ -10,7 +10,7 @@ function safeReadJson(filePath) {
 }
 
 function buildWebSourceList(workspaceRoot) {
-    const sourceListPath = path.join(workspaceRoot, 'references', 'remote-sources.json');
+    const sourceListPath = path.join(workspaceRoot, '.private', 'references', 'remote-sources.json');
     const sourceList = safeReadJson(sourceListPath);
 
     if (!sourceList || typeof sourceList !== 'object') {
@@ -27,7 +27,7 @@ function buildWebSourceList(workspaceRoot) {
 
     return {
         generatedAt: new Date().toISOString(),
-        source: 'references/remote-sources.json',
+        source: '.private/references/remote-sources.json',
         referenceListUrl: sourceList.referenceListUrl || '',
         sources: normalizedSources
     };

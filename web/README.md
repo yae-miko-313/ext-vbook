@@ -79,12 +79,12 @@ Chi tiết về từng source repo (By Source view).
 ```
 
 ### web/remote-sources.json (Realtime Config - CRITICAL)
-Danh sách source repositories cho realtime fetching. **AUTO-SYNCED từ references/remote-sources.json**.
+Danh sách source repositories cho realtime fetching. **AUTO-SYNCED từ .private/references/remote-sources.json**.
 
 ```json
 {
   "generatedAt": "2026-04-13T05:36:41.876Z",
-  "source": "references/remote-sources.json",
+  "source": ".private/references/remote-sources.json",
   "referenceListUrl": "https://...",
   "sources": [
     {
@@ -150,7 +150,7 @@ Khuyen nghi deploy: chay `npm run sync:health:all` de gom ca URL site extension 
 | `theme.js` | Dark/light theme toggle | No | Static |
 | `plugin.json` | Snapshot root manifest | **Yes** | Fallback only |
 | `catalog.json` | Snapshot sidecar/sources | **Yes** | Fallback only |
-| `remote-sources.json` | Realtime source list | **Yes** (from references/) | **CRITICAL - realtime mode** |
+| `remote-sources.json` | Realtime source list | **Yes** (from .private/references/) | **CRITICAL - realtime mode** |
 | `site-health.json` | Site health monitoring | **Yes** (external) | Optional |
 | `.nojekyll` | GitHub Pages config | No | Static |
 | `DEPLOY.md` | Deployment notes | No | Reference |
@@ -196,7 +196,7 @@ Tái sinh:
 - `web/remote-sources.json` (manifest nguồn cho realtime mode)
 - `web/site-health.json` (trạng thái URL site ext: die/cloudflare/redirect)
 
-Nếu có domain đổi tên nhưng script chưa nhận đúng, thêm override tại `references/site-health-overrides.json`.
+Nếu có domain đổi tên nhưng script chưa nhận đúng, thêm override tại `.private/references/site-health-overrides.json`.
 
 Format:
 ```json

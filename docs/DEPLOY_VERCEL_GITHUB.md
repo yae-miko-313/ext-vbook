@@ -6,7 +6,7 @@ This guide deploys dynamic catalog APIs on Vercel and static UI on GitHub Pages.
 
 - Frontend: GitHub Pages serves files in `web/`
 - Backend: Vercel serves dynamic APIs in `api/`
-- Data source: `references/remote-sources.json`
+- Data source: `.private/references/remote-sources.json`
 
 Dynamic endpoints:
 - `/api/plugin.json`
@@ -94,11 +94,11 @@ This does not replace Vercel dynamic APIs. It keeps `web/plugin.json`, `web/cata
 - Reduce number of remote sources or increase timeouts moderately.
 - Tune cache with `VBOOK_WEB_CACHE_TTL_MS`.
 
-### `references/remote-sources.json is missing or invalid`
+### `.private/references/remote-sources.json is missing or invalid`
 
-- Ensure `references/remote-sources.json` exists and is valid JSON.
+- Ensure `.private/references/remote-sources.json` exists and is valid JSON.
 - Ensure `vercel.json` includes this file in function bundle:
-	- `"functions": { "api/**/*.js": { "includeFiles": "references/remote-sources.json" } }`
+	- `"functions": { "api/**/*.js": { "includeFiles": ".private/references/remote-sources.json" } }`
 - Redeploy after commit/push because serverless bundle is rebuilt on each deploy.
 
 ### Vercel deploy fails when using root

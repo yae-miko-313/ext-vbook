@@ -7,12 +7,12 @@ Repo này là công cụ 2 trong 1 cho VBook:
 
 ## Mục tiêu hệ thống
 
-- **`references/`**: Danh sách raw URL nguồn cộng đồng (`remote-sources.json`)
+- **`.private/references/`**: Danh sách raw URL nguồn cộng đồng (`remote-sources.json`)
 - **`web/`**: Hiển thị extension cộng đồng theo chế độ realtime (fetch trực tiếp từ repo nguồn), đồng thời giữ snapshot fallback
 - **`extensions/`**: Chứa extension cá nhân dạng public trong repo, build thành `.zip` để phân phối
 - **`.private/`**: Chứa extension cá nhân không public source/distribution (đã ignore bởi git)
 - **`tools/cli/`**: Tạo/sửa/build extension cho cá nhân chủ sở hữu
-- **`code-reference/`**: Kho source tham chiếu để học tập, không phải output cuối
+- **`.private/code-reference/`**: Kho source tham chiếu để học tập, không phải output cuối
 
 ## Bắt đầu nhanh
 
@@ -133,12 +133,12 @@ tools/cli/
     ├── build.js                 # buildExtensionZip() - ZIP extension
     └── build-catalog.js         # buildCatalog() - rebuild manifests
 
-code-reference/                 # External repos (for learning)
+.private/code-reference/        # External repos (for learning)
 ├── novel/
 ├── comic/
 └── ...
 
-references/
+.private/references/
 └── remote-sources.json          # Danh sách nguồn raw cho realtime viewer
 
 web/                            # Web viewer (reads aggregate)

@@ -13,7 +13,7 @@ try {
 }
 
 try {
-    referenceSourceList = require('../../references/remote-sources.json');
+    referenceSourceList = require('../../.private/references/remote-sources.json');
 } catch {
     referenceSourceList = null;
 }
@@ -88,12 +88,12 @@ function loadReferenceSourceList(workspaceRoot) {
     const sourceList = bundledSourceList || referenceSourceList;
 
     if (!sourceList || typeof sourceList !== 'object' || !Array.isArray(sourceList.sources)) {
-        throw new Error('web/remote-sources.json or references/remote-sources.json is missing or invalid');
+        throw new Error('web/remote-sources.json or .private/references/remote-sources.json is missing or invalid');
     }
 
     return {
         generatedAt: new Date().toISOString(),
-        source: bundledSourceList ? 'web/remote-sources.json' : 'references/remote-sources.json',
+        source: bundledSourceList ? 'web/remote-sources.json' : '.private/references/remote-sources.json',
         referenceListUrl: sourceList.referenceListUrl || '',
         sources: sourceList.sources
             .map((source, index) => normalizeSourceEntry(source, index))

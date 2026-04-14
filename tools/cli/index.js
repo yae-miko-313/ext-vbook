@@ -23,7 +23,7 @@ program
 program.command('ext')
     .description('Tao moi hoac sua metadata extension')
     .option('--mode <mode>', 'create|edit', 'create')
-    .option('--from-reference <path>', 'Thu muc tham chieu hoc tap (template plugin folder)', 'code-reference/_unknown/example')
+    .option('--from-reference <path>', 'Thu muc tham chieu hoc tap (template plugin folder)', '.private/code-reference/_unknown/example')
     .option('--name <name>', 'Extension display name')
     .option('--folder <folder>', 'Output folder slug (create mode)')
     .option('--source <url>', 'Source website URL')

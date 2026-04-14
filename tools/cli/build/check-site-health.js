@@ -580,10 +580,10 @@ function collectUrlsByScope(workspaceRoot, scope) {
     }
 
     if (includeRealtime) {
-        const remoteSourcesPath = path.join(workspaceRoot, 'references', 'remote-sources.json');
+        const remoteSourcesPath = path.join(workspaceRoot, '.private', 'references', 'remote-sources.json');
         const remoteSourcesData = safeReadJson(remoteSourcesPath);
         if (!remoteSourcesData || !Array.isArray(remoteSourcesData.sources)) {
-            throw new Error('references/remote-sources.json is missing or invalid');
+            throw new Error('.private/references/remote-sources.json is missing or invalid');
         }
 
         remoteSourcesData.sources.forEach((source) => {
@@ -674,8 +674,8 @@ async function buildSiteHealth(workspaceRoot, options = {}) {
         source: sourceScope === 'web'
             ? 'web/plugin.json:data[].source'
             : (sourceScope === 'realtime'
-                ? 'references/remote-sources.json:sources[].url'
-                : 'web/plugin.json:data[].source + references/remote-sources.json:sources[].url'),
+                ? '.private/references/remote-sources.json:sources[].url'
+                : 'web/plugin.json:data[].source + .private/references/remote-sources.json:sources[].url'),
         sourceScope,
         summary: {
             total: checkedItems.length,

@@ -6,10 +6,10 @@ Tài liệu đóng góp chính cho repo.
 
 - **Personal extensions**: `extensions/**` - tạo/sửa qua CLI
 - **Private personal extensions**: `.private/extensions/**` - không public, không vào catalog
-- **Code reference**: `code-reference/**` - repos tham khảo từ contributors (read-only)
+- **Code reference**: `.private/code-reference/**` - repos tham khảo từ contributors (read-only)
 - **CLI**: `tools/cli/**` - commands create/edit/build/build-catalog
 - **Web viewer**: `web/**` - catalog viewer + community aggregate loader
-- **Reference data**: `references/remote-sources.json` - danh sách nguồn repo để web fetch realtime
+- **Reference data**: `.private/references/remote-sources.json` - danh sách nguồn repo để web fetch realtime
 - **Docs**: `docs/**` - documentation
 
 ## Prerequisites
@@ -83,7 +83,7 @@ Sync community catalog:
 - [ ] Code tham khảo `docs/AI_CODE_EXT_VBOOK.md` contract
 - [ ] Extension đã build zip (`npm run build`)
 - [ ] **Personal catalog đã rebuild** (`npm run build:catalog`) ✓ CRITICAL
-- [ ] **Community web artifacts đã sync** (`npm run sync:web-catalog`) nếu `references/` hoặc web flow đổi
+- [ ] **Community web artifacts đã sync** (`npm run sync:web-catalog`) nếu `.private/references/` hoặc web flow đổi
 - [ ] **Health status da cap nhat** (`npm run sync:health:all`) truoc PR/deploy
 - [ ] Web viewer artifacts có update (`web/plugin.json`, `web/catalog.json`, hoặc `web/remote-sources.json`)
 - [ ] Không commit runtime reports (`tools/cli/reports/`)
@@ -95,7 +95,7 @@ Sync community catalog:
 - **Không edit trực tiếp plugin.json**: Dùng CLI `npm run ext:edit`
 - **Không skip build-catalog**: Bắt buộc để cập nhật personal manifests
 - **Không skip sync:web-catalog**: Bắt buộc để cập nhật web artifacts khi source list/community flow đổi
-- **Không copy-paste code mù**: Verify live site trước - tham khảo `code-reference/` là ví dụ, không template
+- **Không copy-paste code mù**: Verify live site trước - tham khảo `.private/code-reference/` là ví dụ, không template
 - **Ext private không được để trong `extensions/`**: đặt tại `.private/extensions/**` để tránh public
 
 ## Testing locally
@@ -126,7 +126,7 @@ cat web/plugin.json | grep -i "test_ext"
 - CLI commands → update `../README.md` + `docs/CONTRIBUTING.md`
 - Web structure → update `web/README.md`
 - Extension template → update `docs/AI_CODE_EXT_VBOOK.md`
-- External sources → update `references/remote-sources.json`
+- External sources → update `.private/references/remote-sources.json`
 
 ## File structure recap
 

@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - 'web/**'
-      - 'references/**'
+      - '.private/references/**'
       - 'tools/**'
       - 'extensions/**'
       - 'package.json'

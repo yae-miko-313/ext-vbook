@@ -6,7 +6,7 @@
  * - FALLBACK: Snapshot mode - uses static cached JSON files from web/ folder
  * 
  * Realtime flow:
- * 1. Load source list from ./remote-sources.json (synced from references/remote-sources.json)
+ * 1. Load source list from ./remote-sources.json (synced from .private/references/remote-sources.json)
  * 2. Fetch each remote source's plugin.json in parallel
  * 3. Merge results into catalog, dedup by extension path/signature
  * 
@@ -55,7 +55,7 @@ window.catalogStatus = {
 // Candidates for loading realtime source list (tried in order)
 const REALTIME_SOURCE_LIST_CANDIDATES = [
     './remote-sources.json',
-    '../references/remote-sources.json'
+    '../.private/references/remote-sources.json'
 ];
 
 const DEFAULT_TIMEOUT_MS = 12000;
