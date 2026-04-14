@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "QuyKhu",
+    "author": "kychi",
+    "version": 1,
+    "source": "https://quykhu.com/",
+    "regexp": "(www\\.)?quykhu\\.com/[^/]+/?$",
+    "description": "Đọc truyện từ quykhu.com (migrated từ vozer.io)",
+    "locale": "vi_VN",
+    "language": "javascript",
+    "type": "novel"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "page": "page.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "gen": "gen.js"
+  }
+}
