@@ -5,6 +5,7 @@ Tài liệu đóng góp chính cho repo.
 ## Phạm vi
 
 - **Personal extensions**: `extensions/**` - tạo/sửa qua CLI
+- **Private personal extensions**: `.private/extensions/**` - không public, không vào catalog
 - **Code reference**: `code-reference/**` - repos tham khảo từ contributors (read-only)
 - **CLI**: `tools/cli/**` - commands create/edit/build/build-catalog
 - **Web viewer**: `web/**` - catalog viewer + community aggregate loader
@@ -54,17 +55,20 @@ Tạo `extensions/novel/my_ext/plugin.zip` sẵn sàng phân phối.
 ```bash
 npm run build:catalog
 npm run sync:web-catalog
-npm run sync:health:all
 ```
 Tái sinh personal catalog:
 - `extensions/*/plugin.json` (per-type)
 - `extensions/plugin.json` (root)
+
+Lưu ý: catalog chỉ quét `extensions/**`. Các ext đặt trong `.private/**` sẽ không xuất hiện trong catalog public.
 
 Sync community catalog:
 - `web/plugin.json` (snapshot fallback aggregate)
 - `web/catalog.json` (snapshot fallback sidecar for By Source)
 - `web/remote-sources.json` (manifest nguồn cho realtime mode)
 - `web/site-health.json` (status URL cho web badges)
+
+`sync:web-catalog` hiện đã chạy kèm `sync:health:all`.
 
 **⚠️ IMPORTANT**: Bước 5 BẮTBUỘC trước khi commit/PR khi đổi personal extensions hoặc community aggregate.
 
@@ -92,6 +96,7 @@ Sync community catalog:
 - **Không skip build-catalog**: Bắt buộc để cập nhật personal manifests
 - **Không skip sync:web-catalog**: Bắt buộc để cập nhật web artifacts khi source list/community flow đổi
 - **Không copy-paste code mù**: Verify live site trước - tham khảo `code-reference/` là ví dụ, không template
+- **Ext private không được để trong `extensions/`**: đặt tại `.private/extensions/**` để tránh public
 
 ## Testing locally
 
@@ -121,7 +126,7 @@ cat web/plugin.json | grep -i "test_ext"
 - CLI commands → update `../README.md` + `docs/CONTRIBUTING.md`
 - Web structure → update `web/README.md`
 - Extension template → update `docs/AI_CODE_EXT_VBOOK.md`
-- External sources → update `ref/plugin.json` + `docs/REFERENCE_REPOS.md`
+- External sources → update `references/remote-sources.json`
 
 ## File structure recap
 
@@ -134,6 +139,11 @@ extensions/                 # Chỉ edit qua CLI
 │   │   └── plugin.json      # Metadata
 │   └── plugin.json          # Type catalog (auto-generated)
 └── plugin.json              # Root catalog (auto-generated)
+
+.private/                   # Private ext (gitignored)
+└── extensions/
+    └── novel/
+        └── my_private_ext/
 
 web/
 ├── plugin.json              # AUTO-GENERATED snapshot fallback aggregate

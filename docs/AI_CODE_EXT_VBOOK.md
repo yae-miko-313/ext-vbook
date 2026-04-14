@@ -12,6 +12,8 @@ Tài liệu này dành cho agent và contributor khi viết/sửa extension ở 
 - Build: `npx vbook build --plugin <path>`.
 - Rebuild catalog: `npx vbook build-catalog`.
 
+Nếu ext không muốn public, đặt toàn bộ trong `.private/extensions/**` (thư mục này đã gitignored) và không đưa vào `extensions/**`.
+
 ## 2. Rhino contract
 
 ### Được dùng
@@ -59,11 +61,12 @@ Tài liệu này dành cho agent và contributor khi viết/sửa extension ở 
 ## 7. Phân vùng repo
 
 - `extensions/` và `tools/cli/` là phân vùng cá nhân.
+- `.private/extensions/` là phân vùng cá nhân private, không lên catalog public.
 - `ref/` và `web/` là phân vùng cộng đồng.
 - Khi viết extension, chỉ quan tâm tới phân vùng cá nhân; catalog cộng đồng được xử lý bởi workflow riêng.
 
 ## 8. Đọc thêm
 
-- `docs/REFERENCE_REPOS.md`
 - `docs/CONTRIBUTING.md`
+- `docs/DEPLOY_VERCEL_GITHUB.md`
 - `docs/vbook_demo.md`

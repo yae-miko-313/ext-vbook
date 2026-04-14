@@ -26,8 +26,9 @@ Optional local checks:
 
 ```bash
 npm run sync:web-catalog
-npm run sync:health:all
 ```
+
+`sync:web-catalog` hiện đã bao gồm bước sync health (`sync:health:all`).
 
 CI-safe sync for GitHub Pages workflow:
 
@@ -77,7 +78,6 @@ Use these when you want to refresh static fallback artifacts:
 
 ```bash
 npm run sync:web-catalog
-npm run sync:health:all
 ```
 
 This does not replace Vercel dynamic APIs. It keeps `web/plugin.json`, `web/catalog.json`, and `web/site-health.json` fresh as fallback.
@@ -127,3 +127,32 @@ https://<username>.github.io/<repo>/?catalog=https://<vercel-domain>/api/plugin.
 That gives:
 - Static UI from GitHub Pages
 - Dynamic all-in-one `plugin.json` from Vercel
+
+## 7. Backend API Contract (Vercel)
+
+Endpoints:
+
+- `GET /api/plugin.json`: aggregate root (`metadata`, `referenceListUrl`, `data[]`)
+- `GET /api/catalog.json`: sidecar by source (`metadata`, `summary`, `referenceListUrl`, `sources[]`)
+- `GET /api/remote-sources.json`: normalized source list (`generatedAt`, `source`, `referenceListUrl`, `sources[]`)
+
+Method behavior:
+
+- `GET` → `200`
+- `OPTIONS` (preflight) → `204`
+- Methods khác → `405` (`{ "error": "Method Not Allowed" }`)
+- Runtime/fetch lỗi → `500` (`{ "error": "..." }`)
+
+CORS/env:
+
+- `VBOOK_ALLOWED_ORIGIN` hỗ trợ 1 hoặc nhiều origin (comma-separated), và wildcard host kiểu `*.domain.com`
+
+Cache/timeout env:
+
+- `VBOOK_WEB_CACHE_TTL_MS`
+- `VBOOK_WEB_FETCH_TIMEOUT_MS`
+
+Dedupe item key:
+
+1. `path`
+2. fallback `name|author|source|type`

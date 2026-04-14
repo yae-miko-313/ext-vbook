@@ -1,4 +1,4 @@
-﻿# vBook Demo Snippets
+# vBook Demo Snippets
 
 Snippet ngắn để tham khảo nhanh khi viết extension.
 

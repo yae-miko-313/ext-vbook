@@ -9,7 +9,8 @@ Repo này là công cụ 2 trong 1 cho VBook:
 
 - **`references/`**: Danh sách raw URL nguồn cộng đồng (`remote-sources.json`)
 - **`web/`**: Hiển thị extension cộng đồng theo chế độ realtime (fetch trực tiếp từ repo nguồn), đồng thời giữ snapshot fallback
-- **`extensions/`**: Chứa extension cá nhân (private), build thành `.zip` để phân phối
+- **`extensions/`**: Chứa extension cá nhân dạng public trong repo, build thành `.zip` để phân phối
+- **`.private/`**: Chứa extension cá nhân không public source/distribution (đã ignore bởi git)
 - **`tools/cli/`**: Tạo/sửa/build extension cho cá nhân chủ sở hữu
 - **`code-reference/`**: Kho source tham chiếu để học tập, không phải output cuối
 
@@ -48,6 +49,8 @@ npm run build -- --plugin extensions/novel/my_ext
 ```
 Tạo `extensions/novel/my_ext/plugin.zip` chứa `src/` + `icon.png`. Dùng để phân phối / cài vào VBook client.
 
+Nếu không muốn public toàn bộ extension, lưu ext trong `.private/extensions/...` và không đưa vào `extensions/`.
+
 ### 4️⃣ Rebuild catalog manifests
 ```bash
 npm run build:catalog
@@ -61,13 +64,14 @@ Quét `extensions/*/` → tái sinh:
 ### 5️⃣ Đồng bộ web viewer / community aggregate
 ```bash
 npm run sync:web-catalog
-npm run sync:health:all
 ```
 Sinh file snapshot/fallback cho web viewer:
 - `web/plugin.json`: link tổng (root-like: `metadata` + `data`)
 - `web/catalog.json`: sidecar source (`summary` + `referenceListUrl` + `sources[]`)
 - `web/remote-sources.json`: danh sách nguồn cho realtime mode
 - `web/site-health.json`: trạng thái URL (dead/cloudflare/redirected)
+
+`sync:web-catalog` hiện đã chạy kèm health sync (`sync:health:all`).
 
 ### 🚀 Full sync (all-in-one)
 ```bash
@@ -113,6 +117,15 @@ extensions/                     # Personal extensions (build to .zip)
 ├── comic/
 ├── plugin.json                  # Root manifest (all extensions)
 
+.private/                        # Private extensions (gitignored)
+└── extensions/
+  └── novel/
+    └── my_private_ext/
+      ├── src/
+      ├── icon.png
+      ├── plugin.json
+      └── plugin.zip
+
 tools/cli/
 ├── index.js                     # Main CLI entrypoint
 ├── scaffold/                    # Extension template generator
@@ -140,8 +153,7 @@ web/                            # Web viewer (reads aggregate)
 docs/                           # Documentation
 ├── AI_CODE_EXT_VBOOK.md         # Extension writing contract for AI agents
 ├── CONTRIBUTING.md              # PR checklist + contributing guide
-├── REFERENCE_REPOS.md           # External source list + trust levels
-└── vbook_demo.md                # Code snippet examples
+└── DEPLOY_VERCEL_GITHUB.md      # Deploy + Vercel backend API
 ```
 
 ## Web viewer: Aggregate design
@@ -199,7 +211,7 @@ Web cũng hiển thị:
 
 - [docs/AI_CODE_EXT_VBOOK.md](docs/AI_CODE_EXT_VBOOK.md): Contract khi viết extension (variables, APIs)
 - [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md): PR checklist, build/test steps
-- [docs/REFERENCE_REPOS.md](docs/REFERENCE_REPOS.md): Danh sách repo tham khảo + trust level
+- [docs/DEPLOY_VERCEL_GITHUB.md](docs/DEPLOY_VERCEL_GITHUB.md): Deploy guide + contract backend API Vercel
 - [docs/vbook_demo.md](docs/vbook_demo.md): Snippet mẫu cho page types
 
 ## Workflow phát triển (dev loop)
