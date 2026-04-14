@@ -1,4 +1,4 @@
-let BASE_URL = 'https://123truyen.vn';
+var BASE_URL = 'https://ntruyen.biz';
 try {
     if (CONFIG_URL) {
         BASE_URL = CONFIG_URL;

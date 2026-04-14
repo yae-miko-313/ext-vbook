@@ -1,17 +1,22 @@
 load('config.js');
 function execute() {
-    let response = fetch(BASE_URL);
+    var response = fetch(BASE_URL);
     if (response.ok) {
-        let doc = response.html();
-        let data = [];
-        doc.select('.list-cat-inner  a').forEach(e => {
+        var doc = response.html();
+        var data = [];
+        var seen = {};
+        doc.select('.list-cat-inner a').forEach(function(e) {
+            var title = e.text().trim();
+            var href = e.attr('href') || '';
+            if (!title || !href || seen[href]) return;
+            seen[href] = true;
             data.push({
-                title: e.select('a').text(),
-                input: e.attr('href'),
+                title: title,
+                input: href,
                 script: 'gen.js'
             });
         });
         return Response.success(data);
     }
-    return null;
+    return Response.error('HTTP Error: ' + response.status);
 }
