@@ -8,21 +8,10 @@
       "name": "nTruyen",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_ntruyen/plugin.zip",
-      "version": 1,
+      "version": 2,
       "source": "https://ntruyen.biz/",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_ntruyen/icon.png",
-      "description": "(fix ext lão B) Đọc truyện từ ntruyen.biz, toàn đam với ngôn tình",
-      "type": "novel",
-      "locale": "vi_VN"
-    },
-    {
-      "name": "Truyện Hoàn",
-      "author": "kychi",
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenhoan/plugin.zip",
-      "version": 8,
-      "source": "https://truyenhoan.com/",
-      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenhoan/icon.png",
-      "description": "Đọc truyện tiên hiệp, huyền huyễn, ngôn tình từ Truyện Hoàn - website truyện full online miễn phí",
+      "description": "Đọc truyện từ ntruyen.biz (fork của B) (đã refactor parser, toc và error handling)",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -30,10 +19,32 @@
       "name": "TruyenMoiKK",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmoikk/plugin.zip",
-      "version": 4,
+      "version": 5,
       "source": "https://truyenmoikk.com/",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmoikk/icon.png",
-      "description": "Fork từ ext TruyenMoi của HieuDM, fix lỗi title detail và search",
+      "description": "Fork TruyenMoi của HieuDM, đã refactor parser + null guard + tối ưu toc/search/detail",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "Truyện Hoàn",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenhoan/plugin.zip",
+      "version": 9,
+      "source": "https://truyenhoan.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenhoan/icon.png",
+      "description": "Đọc truyện tiên hiệp, huyền huyễn, ngôn tình từ Truyện Hoàn - website truyện full online miễn phí",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
+      "name": "QuyKhu",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_quykhu/plugin.zip",
+      "version": 1,
+      "source": "https://quykhu.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_quykhu/icon.png",
+      "description": "Đọc truyện từ quykhu.com (migrated từ vozer.io)",
       "type": "novel",
       "locale": "vi_VN"
     }
