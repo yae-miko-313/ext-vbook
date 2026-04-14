@@ -1,49 +1,47 @@
 load('config.js');
-
-function normalizeLink(href) {
-    if (!href) return '';
-    if (href.indexOf('http') === 0) return href;
-    if (href.charAt(0) === '/') return BASE_URL + href;
-    return BASE_URL + '/' + href;
+function execute(url) {
+    var apiUrl = buildApiUrl(url, BASE_URL);
+    if (!apiUrl) return Response.error('Không lấy được API chương');
+    var listchapter = [];
+    var response = fetchPage(apiUrl);
+    if (!response.ok) return Response.error('HTTP Error: ' + response.status);
+    var json = JSON.parse(response.text());
+    var chapters = json.chapters || [];
+    chapters.forEach(function(e) {
+        listchapter.push({
+            name: e.name,
+            url: '/doc-truyen/' + e.slug + '-' + e.id,
+            host: BASE_URL
+        });
+    });
+    return Response.success(listchapter);
 }
 
-function execute(url) {
-    var response = fetch(url);
-    if (response.ok){
-        var doc = response.html();
-        var list = [];
-        var seen = {};
-
-        doc.select('.list-chapter a, .l-chapters a, #list-chapter a').forEach(function(a) {
-            var name = a.text().trim();
-            var chapterUrl = normalizeLink(a.attr('href') || '');
-            if (!name || !chapterUrl || seen[chapterUrl]) return;
-            seen[chapterUrl] = true;
-            list.push({
-                name: name,
-                url: chapterUrl,
-                host: BASE_URL
-            });
-        });
-
-        if (list.length === 0) {
-            var firstChapter = doc.select('.l-chapters .chapter-text, .chapter-text').first();
-            var totalMatch = firstChapter ? firstChapter.text().match(/(\d+)/) : null;
-            var total = totalMatch ? parseInt(totalMatch[1], 10) : 0;
-            for (var i = 1; i <= total; i++) {
-                list.push({
-                    name: 'Chương ' + i,
-                    url: normalizeLink(url + '/chuong-' + i),
-                    host: BASE_URL
-                });
-            }
-        }
-
-        if (list.length === 0) {
-            return Response.error('Không tìm thấy danh sách chương.');
-        }
-
-        return Response.success(list);
+function buildApiUrl(url, baseUrl) {
+    if (!url) return null;
+    if (url.indexOf('api.ntruyen.biz/novels/') >= 0) return url;
+    var normalized = url;
+    if (normalized.indexOf('http') !== 0) {
+        normalized = baseUrl + normalized;
     }
-    return Response.error('HTTP Error: ' + response.status);
+    normalized = normalized.replace(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img, BASE_URL);
+    var response = fetchPage(normalized);
+    if (!response.ok) return null;
+    var html = response.text();
+    var storyId = extractStoryId(html);
+    if (!storyId) return null;
+    return 'https://api.ntruyen.biz/novels/' + storyId + '/chapters?page=1';
+}
+
+function extractStoryId(html) {
+    var normalized = html.replace(/\\"/g, '"');
+    var patterns = [
+        /"data"\s*:\s*\{"id"\s*:\s*(\d+)/,
+        /"novelId"\s*:\s*(\d+)/
+    ];
+    for (var i = 0; i < patterns.length; i++) {
+        var match = normalized.match(patterns[i]);
+        if (match) return match[1];
+    }
+    return null;
 }

@@ -1,47 +1,34 @@
 load('config.js');
-
-function normalizeLink(href) {
-    if (!href) return '';
-    if (href.indexOf('http') === 0) return href;
-    if (href.charAt(0) === '/') return BASE_URL + href;
-    return BASE_URL + '/' + href;
-}
-
 function execute(key, page) {
-    if (!page) page = '1';
-    var response = fetch(BASE_URL, {
-        method: "GET",
-        queries: {
-            q: key,
-            page: page
-        }
-    });
+    var q = encodeURIComponent(key);
+    var target = BASE_URL + '/tim-kiem?keyword=' + q;
+    if (page && page !== '1') target += '&page=' + page;
+    var response = fetchPage(target);
     if (response.ok) {
         var doc = response.html();
+        var next = null;
+        var nextHref = doc.select("a[aria-label='Go to next page']").attr('href');
+        if (nextHref) {
+            var match = nextHref.match(/page=(\d+)/);
+            if (match) next = match[1];
+        }
+        var el = doc.select("a[itemprop='hasPart']");
         var data = [];
-        doc.select('.list-new .row').forEach(function(e) {
-            var titleEl = e.select('.col-title h3, h3').first();
-            var a = e.select('a').first();
-            var img = e.select('.thumb img, img').first();
-            var desc = e.select('.chapter-text').first();
-
-            var name = titleEl ? titleEl.text().trim() : '';
-            var link = normalizeLink(a ? a.attr('href') : '');
-            var cover = img ? (img.attr('src') || img.attr('data-src') || '') : '';
-            if (cover.indexOf('-thumbw') >= 0) cover = cover.replace('-thumbw', '');
-            if (cover.indexOf('//') === 0) cover = 'https:' + cover;
-
-            if (!name || !link) return;
+        el.forEach(function(e) {
             data.push({
-                name: name,
-                link: link,
-                cover: cover,
-                description: desc ? desc.text().trim() : '',
+                name: e.select("p[itemprop='name']").text(),
+                link: e.attr('href'),
+                cover: e.select("img[itemprop='image']").attr('data-src') || e.select("img[itemprop='image']").attr('src'),
+                description: [
+                    e.select("[itemprop='author'] [itemprop='name']").text(),
+                    e.select("[itemprop='bookFormat']").text(),
+                    e.select("[itemprop='dateModified']").text(),
+                    e.select("[itemprop='genre']").text()
+                ].filter(function(t) { return t && t.length > 0; }).join(' - '),
                 host: BASE_URL
             });
         });
-
-        return Response.success(data);
+        return Response.success(data, next);
     }
     return Response.error('HTTP Error: ' + response.status);
 }

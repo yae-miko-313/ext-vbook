@@ -1,50 +1,27 @@
 load('config.js');
-
-function pickText(el) {
-    return el ? el.text().trim() : '';
-}
-
-function pickAttr(el, key) {
-    return el ? (el.attr(key) || '') : '';
-}
-
 function execute(url) {
-    var response = fetch(url);
-    if (response.ok){
-        var doc = response.html();
-        var titleEl = doc.select('h1.title, h1[itemprop=name]').first();
-        var coverEl = doc.select('.book img, .info-holder img[itemprop=image], img[itemprop=image]').first();
-        var authorEl = doc.select('.info > div').first() || doc.select('a[itemprop=author]').first();
-        var statusEl = doc.select('.info .label, .info span.text-success').first();
-
-        var name = pickText(titleEl);
-        var cover = pickAttr(coverEl, 'src');
-        var author = pickText(authorEl);
-        var description = doc.select('.desc-text, [itemprop=description]').first();
-        var descriptionHtml = description ? description.html() : '';
-        var statusText = pickText(statusEl);
-
-        if (cover.indexOf('//') === 0) {
-            cover = 'https:' + cover;
-        }
-
-        var ongoing = true;
-        var st = statusText.toLowerCase();
-        if (st.indexOf('full') >= 0 || st.indexOf('hoàn') >= 0 || st.indexOf('đã hoàn') >= 0 || st.indexOf('complete') >= 0) {
-            ongoing = false;
-        }
-
-        return Response.success({
-            name: name,
-            cover: cover,
-            author: author,
-            description: descriptionHtml,
-            detail: author + '<br>Trạng thái: ' + statusText,
-            ongoing: ongoing,
-            genres: [],
-            suggests: [],
-            host: BASE_URL
+    url = url.replace(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img, BASE_URL);
+    var response = fetchPage(url);
+    if (!response.ok) return Response.error('HTTP Error: ' + response.status);
+    var doc = response.html();
+    var genres = [];
+    var genresText = [];
+    doc.select("header[itemtype='https://schema.org/Book'] a[itemprop='genre']").forEach(function(e) {
+        var title = e.text();
+        genresText.push(title);
+        genres.push({
+            title: title,
+            input: e.attr('href'),
+            script: 'gen.js'
         });
-    }
-    return Response.error('HTTP Error: ' + response.status);
+    });
+    var description = doc.select("article[itemprop='description'] [itemprop='description']").text();
+    return Response.success({
+        name: doc.select("header[itemtype='https://schema.org/Book'] h1[itemprop='name']").text(),
+        cover: doc.select("header[itemtype='https://schema.org/Book'] img.object-cover.rounded-xl").attr('src'),
+        host: BASE_URL,
+        author: doc.select("header[itemtype='https://schema.org/Book'] [itemprop='author'] [itemprop='name']").text(),
+        description: genresText.join(', ') + (description ? '<br>' + description : ''),
+        genres: genres
+    });
 }

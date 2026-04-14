@@ -1,6 +1,6 @@
 load('config.js');
 function execute(url) {
-    var response = fetch(url);
+    var response = fetchPage(url);
     if (!response.ok) {
         return Response.error('HTTP Error: ' + response.status);
     }
