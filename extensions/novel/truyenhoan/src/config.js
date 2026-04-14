@@ -1,5 +1,12 @@
 var BASE_URL = "https://truyenhoan.com";
 
+try {
+    if (CONFIG_URL) {
+        BASE_URL = CONFIG_URL;
+    }
+} catch (error) {
+}
+
 var CATEGORIES = [
     { title: "Truyện HOT", input: "truyen-hot", slug: "/truyen-hot/" },
     { title: "Truyện Mới Cập Nhật", input: "truyen-moi-cap-nhat", slug: "/truyen-moi-cap-nhat/" },
