@@ -1,23 +1,10 @@
 load('config.js');
-
-function findNextPage(doc) {
-    var last = doc.select('.my-5 nav a').last();
-    if (!last) return null;
-    var href = last.attr('href') || '';
-    var m = href.match(/\d+$/);
-    return m ? m[0] : null;
-}
-
 function execute(key, page) {
     if (!page) page = '1';
-
-    var response = fetch(BASE_URL + '/search', {
-        headers: {
-            'User-Agent': BASE_UA
-        },
+    var response = fetchPage(BASE_URL + '/search?keyword=' + key, {
+        method: 'GET',
         queries: {
-            page: page,
-            keyword: key
+            page: page
         }
     });
 
@@ -26,27 +13,19 @@ function execute(key, page) {
     }
 
     var doc = response.html();
-    var list = [];
-
-    doc.select('.container .mb-3 .mx-auto .flex.transform').forEach(function(e) {
-        var a = e.select('a').first();
-        var img = e.select('img').first();
-        var desc = e.select('p a, p').first();
-
-        var name = a ? a.text().trim() : '';
-        var link = normalizeLink(a ? a.attr('href') : '');
-        var cover = img ? (img.attr('src') || img.attr('data-src') || '') : '';
-        if (cover.indexOf('//') === 0) cover = 'https:' + cover;
-
-        if (!name || !link) return;
-        list.push({
-            name: name,
-            link: link,
-            cover: cover,
-            description: desc ? desc.text().trim() : '',
+    var comiclist = [];
+    var next = doc.select('.my-5 nav a').last().attr('href').match(/\d+$/);
+    if (next != null) {
+        next = next[0];
+    }
+    doc.select('.container .mb-3 .mx-auto .flex').forEach(function(e) {
+        comiclist.push({
+            name: e.select('a').first().text(),
+            link: e.select('a').attr('href'),
+            cover: e.select('img').attr('src') || e.select('img').attr('src'),
+            description: e.select('p a').first().text(),
             host: BASE_URL
         });
     });
-
-    return Response.success(list, findNextPage(doc));
+    return Response.success(comiclist, next);
 }

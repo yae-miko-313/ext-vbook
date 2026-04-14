@@ -1,31 +1,23 @@
 load('config.js');
 
 function execute(url) {
-    var response = fetch(url, {
-        headers: {
-            'User-Agent': BASE_UA
-        }
-    });
-
-    if (!response.ok) {
-        return Response.error('HTTP Error: ' + response.status);
-    }
-
-    var doc = response.html();
-    var list = [];
+    var data = [];
+    var doc = fetchPage(url).html();
+    var chapList = doc.select("a[href*='/chuong-']");
+    var chapListCount = chapList.length;
     var seen = {};
 
-    doc.select('table.w-full.mb-5 tr td a, .w-full.mb-5 a').forEach(function(a) {
-        var name = a.text().trim();
-        var chapterUrl = normalizeLink(a.attr('href') || '');
-        if (!name || !chapterUrl || seen[chapterUrl]) return;
-        seen[chapterUrl] = true;
-        list.push({
-            name: name,
-            url: chapterUrl,
+    for (var j = 0; j < chapListCount; j++) {
+        var element = chapList.get(j);
+        var href = normalizeLink(element.attr('href') || '');
+        if (!href || seen[href]) continue;
+        seen[href] = true;
+        data.push({
+            name: element.text() || href.split('/').pop().replace(/-/g, ' '),
+            url: href,
             host: BASE_URL
         });
-    });
+    }
 
-    return Response.success(list);
+    return Response.success(data);
 }

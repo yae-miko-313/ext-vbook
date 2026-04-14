@@ -1,28 +1,22 @@
 load('config.js');
-
 function execute(url) {
-    var response = fetch(url, {
-        headers: {
-            'User-Agent': BASE_UA
-        }
-    });
-
-    if (!response.ok) {
-        return Response.error('HTTP Error: ' + response.status);
-    }
-
-    var doc = response.html();
-    var matched = doc.toString().match(/"numberOfPages"\s*:\s*(\d+)/);
-    var chapterCount = matched ? parseInt(matched[1], 10) : 0;
-    if (chapterCount <= 0) {
+    var data = [];
+    var doc = fetchPage(url).html();
+    var anchors = doc.select('[role=navigation] a[href*="pagechap="]');
+    if (anchors.length === 0) {
         return Response.success([url]);
     }
-
-    var pages = [];
-    var totalPage = Math.ceil(chapterCount / 50);
-    for (var i = 1; i <= totalPage; i++) {
-        pages.push(url + '?pagechap=' + i);
+    var lastNumber = -1;
+    anchors.forEach(function(anchor) {
+        var href = anchor.attr('href');
+        var match = href.match(/pagechap=(\d+)/);
+        if (match) {
+            var pageNumber = parseInt(match[1], 10);
+            lastNumber = Math.max(lastNumber, pageNumber);
+        }
+    });
+    for (var i = 1; i <= lastNumber; i++) {
+        data.push(url + '?pagechap=' + i);
     }
-
-    return Response.success(pages);
+    return Response.success(data);
 }
