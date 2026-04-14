@@ -2,7 +2,7 @@
   "metadata": {
     "name": "nTruyen",
     "author": "kychi",
-    "version": 2,
+    "version": 3,
     "source": "https://ntruyen.biz/",
     "regexp": "(www.)?ntruyen.biz/[^/]+/?$",
     "description": "Đọc truyện từ ntruyen.biz (fork của B) (đã refactor parser, toc và error handling)",

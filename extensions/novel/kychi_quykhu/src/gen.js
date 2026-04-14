@@ -61,17 +61,28 @@ function execute(url, page) {
     var comiclist = [];
     var next = null;
 
-    var nextHref = doc.select("a[aria-current='page'] + a").attr('href') || doc.select('.my-5 nav a').last().attr('href');
+    var nextHref = doc.select("a[aria-current='page'] + a").attr('href');
+    if (!nextHref) {
+        var nextAnchor = doc.select('.my-5 nav a').last();
+        if (nextAnchor) nextHref = nextAnchor.attr('href');
+    }
     if (nextHref) {
         var nextMatch = nextHref.match(/\d+$/);
         if (nextMatch) next = nextMatch[0];
     }
 
-    doc.select('.container .mb-3 .mx-auto .flex, .container .mb-3 .mx-auto .transform, .list-truyen .row').forEach(function(e) {
+    var cards = doc.select('#postTabsContent a.relative.shrink-0');
+    if (cards.size() === 0) {
+        cards = doc.select('.container .mb-3 .mx-auto .flex, .container .mb-3 .mx-auto .transform, .list-truyen .row');
+    }
+
+    cards.forEach(function(e) {
         var a = e.select('a').first();
+        if (!a) a = e;
         var img = e.select('img').first();
         var desc = e.select('p a, p, .author').first();
-        var name = a ? a.text().trim() : '';
+        var name = a.attr('title') || (a ? a.text().trim() : '');
+        if (!name && img) name = img.attr('alt') || '';
         var link = normalizeLink(a ? a.attr('href') : '');
         var cover = img ? (img.attr('src') || img.attr('data-src') || '') : '';
         if (cover.indexOf('//') === 0) cover = 'https:' + cover;

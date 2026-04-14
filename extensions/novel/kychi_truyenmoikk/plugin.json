@@ -2,7 +2,7 @@
   "metadata": {
     "name": "TruyenMoiKK",
     "author": "kychi",
-    "version": 5,
+    "version": 6,
     "source": "https://truyenmoikk.com/",
     "regexp": "(www.)?truyenmoikk.com/[^/]+/?$",
     "description": "Fork TruyenMoi của HieuDM, đã refactor parser + null guard + tối ưu toc/search/detail",
@@ -13,6 +13,7 @@
   "script": {
     "home": "home.js",
     "genre": "genre.js",
+    "page": "page.js",
     "detail": "detail.js",
     "search": "search.js",
     "toc": "toc.js",

@@ -18,6 +18,44 @@ function normalizeLink(href) {
     return BASE_URL + '/' + href;
 }
 
+function loadDocument(url, timeout) {
+    if (typeof Engine !== 'undefined' && Engine && typeof Engine.newBrowser === 'function') {
+        try {
+            var browser = Engine.newBrowser();
+            var page = browser.launch(url, timeout || 10000);
+            if (browser && typeof browser.close === 'function') {
+                try {
+                    browser.close();
+                } catch (closeError) {
+                }
+            }
+            if (page && typeof page.select === 'function') {
+                return page;
+            }
+            if (page && typeof page.html === 'function') {
+                var htmlDoc = page.html();
+                if (htmlDoc && typeof htmlDoc.select === 'function') {
+                    return htmlDoc;
+                }
+            }
+            return page;
+        } catch (error) {
+        }
+    }
+
+    var response = fetchPage(url);
+    if (!response.ok) return null;
+    return response.html();
+}
+
+function normalizeStatus(text) {
+    if (!text) return '';
+    var lower = String(text).toLowerCase();
+    if (lower.indexOf('hoàn thành') >= 0 || lower.indexOf('đã hoàn') >= 0 || lower.indexOf('full') >= 0) return 'Hoàn thành';
+    if (lower.indexOf('đang ra') >= 0 || lower.indexOf('đang cập nhật') >= 0 || lower.indexOf('đang tiến hành') >= 0) return 'Đang ra';
+    return String(text).trim();
+}
+
 function fetchPage(url, options) {
     if (!options) options = {};
     var headers = {

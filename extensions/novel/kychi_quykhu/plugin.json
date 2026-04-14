@@ -2,7 +2,7 @@
   "metadata": {
     "name": "QuyKhu",
     "author": "kychi",
-    "version": 1,
+    "version": 2,
     "source": "https://quykhu.com/",
     "regexp": "(www\\.)?quykhu\\.com/[^/]+/?$",
     "description": "Đọc truyện từ quykhu.com (migrated từ vozer.io)",

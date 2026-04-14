@@ -1,7 +1,8 @@
 load('config.js');
 function execute(url) {
     var data = [];
-    var doc = fetchPage(url).html();
+    var doc = loadDocument(url, 15000);
+    if (!doc) return Response.error('HTTP Error: Unable to load page');
     var anchors = doc.select('[role=navigation] a[href*="pagechap="]');
     if (anchors.length === 0) {
         return Response.success([url]);

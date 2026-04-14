@@ -2,7 +2,8 @@ load('config.js');
 
 function execute(url) {
     var data = [];
-    var doc = fetchPage(url).html();
+    var doc = loadDocument(url, 15000);
+    if (!doc) return Response.error('HTTP Error: Unable to load page');
     var chapList = doc.select("a[href*='/chuong-']");
     var chapListCount = chapList.length;
     var seen = {};
