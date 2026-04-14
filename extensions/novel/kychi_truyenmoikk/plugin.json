@@ -2,10 +2,10 @@
   "metadata": {
     "name": "TruyenMoiKK",
     "author": "kychi",
-    "version": 4,
+    "version": 5,
     "source": "https://truyenmoikk.com/",
     "regexp": "(www.)?truyenmoikk.com/[^/]+/?$",
-    "description": "Fork từ ext TruyenMoi của HieuDM, fix lỗi title detail và search",
+    "description": "Fork TruyenMoi của HieuDM, đã refactor parser + null guard + tối ưu toc/search/detail",
     "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"
