@@ -18,7 +18,17 @@ function normalizeLink(href) {
     return BASE_URL + '/' + href;
 }
 
-function loadDocument(url, timeout) {
+function loadDocument(url, timeout, requiredSelector) {
+    var response = fetchPage(url);
+    if (response.ok) {
+        var doc = response.html();
+        if (doc && typeof doc.select === 'function') {
+            if (!requiredSelector || doc.select(requiredSelector).length > 0) {
+                return doc;
+            }
+        }
+    }
+
     if (typeof Engine !== 'undefined' && Engine && typeof Engine.newBrowser === 'function') {
         try {
             var browser = Engine.newBrowser();
@@ -30,22 +40,23 @@ function loadDocument(url, timeout) {
                 }
             }
             if (page && typeof page.select === 'function') {
-                return page;
+                if (!requiredSelector || page.select(requiredSelector).length > 0) {
+                    return page;
+                }
             }
             if (page && typeof page.html === 'function') {
                 var htmlDoc = page.html();
                 if (htmlDoc && typeof htmlDoc.select === 'function') {
-                    return htmlDoc;
+                    if (!requiredSelector || htmlDoc.select(requiredSelector).length > 0) {
+                        return htmlDoc;
+                    }
                 }
             }
-            return page;
         } catch (error) {
         }
     }
 
-    var response = fetchPage(url);
-    if (!response.ok) return null;
-    return response.html();
+    return null;
 }
 
 function normalizeStatus(text) {

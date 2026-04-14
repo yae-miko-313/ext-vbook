@@ -7,6 +7,34 @@ function normalizeLink(href) {
     return BASE_URL + '/' + href;
 }
 
+function slugToTitle(slug) {
+    var s = String(slug || '').trim();
+    if (!s) return '';
+    return s.split('-').map(function(part) {
+        if (!part) return '';
+        return part.charAt(0).toUpperCase() + part.substring(1);
+    }).join(' ').trim();
+}
+
+function genreFromListUrl(url) {
+    var m = String(url || '').match(/\/the-loai\/([^\/?#]+)/i);
+    if (!m) return '';
+    return slugToTitle(m[1]);
+}
+
+function extractCardGenre(card, fallbackGenre) {
+    if (!card) return fallbackGenre || '';
+    var genreEl = card.select('a[href*="/the-loai/"]').first();
+    if (genreEl) {
+        var t = genreEl.text().trim();
+        if (t) return t;
+        var href = genreEl.attr('href') || '';
+        var m = href.match(/\/the-loai\/([^\/?#]+)/i);
+        if (m) return slugToTitle(m[1]);
+    }
+    return fallbackGenre || '';
+}
+
 function isArray(value) {
     return value && typeof value === 'object' && typeof value.length === 'number' && typeof value.splice === 'function';
 }
@@ -71,16 +99,20 @@ function execute(url, page) {
         if (nextMatch) next = nextMatch[0];
     }
 
-    var cards = doc.select('#postTabsContent a.relative.shrink-0');
+    var listGenre = genreFromListUrl(url);
+    var cards = doc.select('#postTabsContent .group.flex.items-start');
     if (cards.size() === 0) {
-        cards = doc.select('.container .mb-3 .mx-auto .flex, .container .mb-3 .mx-auto .transform, .list-truyen .row');
+        cards = doc.select('#postTabsContent a.relative.shrink-0, .container .mb-3 .mx-auto .flex, .container .mb-3 .mx-auto .transform, .list-truyen .row');
     }
 
     cards.forEach(function(e) {
         var a = e.select('a').first();
         if (!a) a = e;
         var img = e.select('img').first();
-        var desc = e.select('p a, p, .author').first();
+        var genreText = extractCardGenre(e, listGenre);
+        var authorText = '';
+        var authorEl = e.select('a[href*="/thanh-vien/"]').first();
+        if (authorEl) authorText = authorEl.text().trim();
         var name = a.attr('title') || (a ? a.text().trim() : '');
         if (!name && img) name = img.attr('alt') || '';
         var link = normalizeLink(a ? a.attr('href') : '');
@@ -91,7 +123,7 @@ function execute(url, page) {
             name: name,
             link: link,
             cover: cover,
-            description: desc ? desc.text().trim() : '',
+            description: genreText || authorText || '',
             host: BASE_URL
         });
     });

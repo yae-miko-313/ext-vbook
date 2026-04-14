@@ -1,9 +1,9 @@
 load('config.js');
 function execute(url) {
     var data = [];
-    var doc = loadDocument(url, 15000);
+    var doc = loadDocument(url, 15000, 'nav[aria-label="Phân trang danh sách chương"], #chapter-list-title');
     if (!doc) return Response.error('HTTP Error: Unable to load page');
-    var anchors = doc.select('[role=navigation] a[href*="pagechap="]');
+    var anchors = doc.select('nav[aria-label="Phân trang danh sách chương"] a[href*="pagechap="]');
     if (anchors.length === 0) {
         return Response.success([url]);
     }
