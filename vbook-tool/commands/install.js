@@ -39,23 +39,37 @@ function register(program) {
                     data: {}
                 };
 
+                const { sendModernRequest } = require('../utils');
+                
                 const srcDir = path.join(info.root, 'src');
-                const files = fs.readdirSync(srcDir).filter(f => f.endsWith('.js'));
-                for (const file of files) {
-                    data.data[file] = fs.readFileSync(path.join(srcDir, file), 'utf8');
-                }
-                data.data = JSON.stringify(data.data);
+                const readSourceMapSync = (dir, prefix = '') => {
+                    const output = {};
+                    const entries = fs.readdirSync(dir, { withFileTypes: true });
+                    for (const entry of entries) {
+                        const fp = path.join(dir, entry.name);
+                        const relPath = prefix ? `${prefix}/${entry.name}` : entry.name;
+                        if (entry.isDirectory()) {
+                            Object.assign(output, readSourceMapSync(fp, relPath));
+                        } else {
+                            output[relPath] = fs.readFileSync(fp, 'utf8');
+                        }
+                    }
+                    return output;
+                };
 
-                const base64Data = Buffer.from(JSON.stringify(data)).toString('base64');
-                const headers = buildRequestHeaders({
-                    ip, port, endpoint: 'install', base64Data, connection: 'close'
-                });
+                const srcObject = readSourceMapSync(srcDir);
+                const payload = {
+                    plugin: JSON.stringify(info.json),
+                    icon: `data:image/*;base64,${fs.readFileSync(iconPath).toString('base64')}`,
+                    src: JSON.stringify(srcObject)
+                };
 
-                const result = await sendRequest(ip, port, headers, verbose);
-                if (result.status === 0) {
+                const result = await sendModernRequest(ip, port, 'extension/install', payload, verbose);
+                
+                if (result.code === 200 || result.success || result.status === 200) {
                     console.log(c.success('Extension installed successfully!'));
                 } else {
-                    console.log(c.error(result.message || 'Unknown error'));
+                    console.log(c.error(result.message || result.exception || 'Installation failed'));
                 }
             } catch (error) {
                 console.error(c.error(error.message));

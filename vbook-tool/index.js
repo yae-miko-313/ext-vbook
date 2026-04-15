@@ -30,6 +30,7 @@ program
 
 // Register all commands
 require('./commands/create').register(program);
+require('./commands/create-smart').register(program);
 require('./commands/validate').register(program);
 require('./commands/list').register(program);
 require('./commands/debug').register(program);

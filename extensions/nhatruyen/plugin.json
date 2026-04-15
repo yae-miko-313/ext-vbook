@@ -2,7 +2,7 @@
   "metadata": {
     "name": "nhatruyen",
     "author": "B",
-    "version": 5,
+    "version": 7,
     "source": "https://nhatruyen.site",
     "regexp": "nhatruyen\\\\.site/[^/]+/?$",
     "description": "Đọc truyện trên trang nhatruyen",

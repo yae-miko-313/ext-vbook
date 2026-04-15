@@ -224,35 +224,73 @@ function execute(url) {
 `;
 }
 
-function templateToc(source) {
-    return `// toc.js — Table of contents (chapter list)
-// Contract: execute(url) → [{name*, url*, host?}]
+function templatePage(source) {
+    return `// page.js — Trách nhiệm: Nhận URL của trang detail, trả về mảng URL cho toc.js
+// Contract: execute(url) → [urlString, ...]
+// Nếu không có phân trang mục lục: trả về [url] (chính là url detail)
+// Nếu có phân trang: trả về mảng URL từng trang mục lục
+// toc.js sẽ được gọi lần lượt với từng URL trong mảng này
 function execute(url) {
+    url = url.replace(/^(?:https?:\/\/)?(?:www\.)?([^\/]+)/, "${source}");
+    if (url.slice(-1) === "/") url = url.slice(0, -1);
+    
+    let response = fetch(url);
+    if (!response.ok) return Response.error("Cannot load: " + response.status);
+    
+    let doc = response.html();
+    let pages = [];
+    
+    // TODO: Nếu site có phân trang mục lục, cập nhật selector dưới đây
+    // Ví dụ: ".pagination a", ".page-list a", "a[href*='trang/']"
+    doc.select(".pagination a, .page-list a").forEach(function(el) {
+        let href = el.attr("href") + "";
+        if (href && !href.includes("#")) {
+            if (!href.startsWith("http")) href = "${source}" + href;
+            if (pages.indexOf(href) === -1) pages.push(href);
+        }
+    });
+    
+    // Phân trang không tìm thấy hoặc không có → trả về [url] để toc.js tự parse
+    if (pages.length === 0) return Response.success([url]);
+    
+    return Response.success(pages);
+}
+`;
+}
+
+function templateToc(source) {
+    return `// toc.js — Mục lục chương
+// Contract: execute(url) → [{name*, url*, host?}]
+// NOTE: url nhận từ page.js (mỗi call = 1 trang mục lục)
+// App tổng hợp kết quả từ tất cả các call
+function execute(url) {
+    url = url.replace(/^(?:https?:\/\/)?(?:www\.)?([^\/]+)/, "${source}");
+    if (url.slice(-1) === "/") url = url.slice(0, -1);
+    
     let response = fetch(url);
     if (!response.ok) return Response.error("Cannot load TOC");
     
     let doc = response.html();
     let chapters = [];
     
-    // TODO: Update CSS selectors for chapter list on ${source}
-    doc.select(".chapter-list a, #list-chapter a, .list-chapter a").forEach(function(el) {
-        let name = el.text().trim();
-        let chapUrl = el.attr("href");
+    // TODO: Cập nhật CSS selector danh sách chương cho ${source}
+    doc.select(".chapter-list a, #list-chapter a, .danh-sach-chuong a").forEach(function(el) {
+        let name = el.text() + "";
+        let chapUrl = el.attr("href") + "";
         
         if (!name || !chapUrl) return;
         
-        // Normalize URL
         if (!chapUrl.startsWith("http")) {
-            if (chapUrl.startsWith("/")) {
-                chapUrl = "${source}" + chapUrl;
-            } else {
-                chapUrl = "${source}/" + chapUrl;
-            }
+            chapUrl = chapUrl.startsWith("/") ? "${source}" + chapUrl : "${source}/" + chapUrl;
         }
+        
+        let isPaid = el.select(".vip, .paid, .lock").size() > 0;
         
         chapters.push({
             name: name,
-            url: chapUrl
+            url: chapUrl,
+            host: "${source}",
+            pay: isPaid || undefined
         });
     });
     
@@ -378,7 +416,7 @@ function register(program) {
         .option('-t, --type <type>', 'Extension type', 'novel')
         .option('-l, --locale <locale>', 'Locale code', 'vi_VN')
         .option('--tag <tag>', 'Tag (e.g. nsfw)')
-        .option('--minimal', 'Only create required files (detail, toc, chap)')
+        .option('--minimal', 'Only create required files (detail, page, toc, chap)')
         .action(async (name, options) => {
             try {
                 const extensionsDir = getExtensionsDir();
@@ -394,9 +432,10 @@ function register(program) {
                 const author = getAuthor();
 
                 // Decide which scripts to create
+                // page.js là bắt buộc — luôn tạo, kể cả khi minimal
                 const scripts = options.minimal
-                    ? ['detail.js', 'toc.js', 'chap.js']
-                    : ['home.js', 'gen.js', 'search.js', 'detail.js', 'toc.js', 'chap.js'];
+                    ? ['detail.js', 'page.js', 'toc.js', 'chap.js']
+                    : ['home.js', 'gen.js', 'search.js', 'detail.js', 'page.js', 'toc.js', 'chap.js'];
 
                 console.log(c.bold(`\n🏗️  Creating extension: ${c.cyan(name)}\n`));
 
@@ -419,6 +458,7 @@ function register(program) {
                     'gen.js':    () => templateGen(source),
                     'search.js': () => templateSearch(source),
                     'detail.js': () => templateDetail(source),
+                    'page.js':   () => templatePage(source),
                     'toc.js':    () => templateToc(source),
                     'chap.js':   () => templateChap(source),
                 };

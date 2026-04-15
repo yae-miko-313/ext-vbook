@@ -98,9 +98,30 @@ const TOOLS = [
                 type: { type: 'string', enum: ['novel', 'comic', 'chinese_novel', 'translate', 'tts'], description: 'Extension type' },
                 locale: { type: 'string', description: 'Locale code (vi_VN, zh_CN, en_US)', default: 'vi_VN' },
                 tag: { type: 'string', description: 'Optional tag (e.g. nsfw)' },
-                minimal: { type: 'boolean', description: 'Only create required files (detail, toc, chap)' }
+                minimal: { type: 'boolean', description: 'Only create required files (detail, page, toc, chap)' }
             },
             required: ['name', 'source', 'type']
+        }
+    },
+    {
+        name: 'create_smart',
+        description: 'Smart scaffold — inspects ALL provided URLs on the VBook device first, scores CSS selectors by actual match count, then generates scripts with REAL selectors (no generic placeholders). PREFERRED over create for new extensions.',
+        inputSchema: {
+            type: 'object',
+            properties: {
+                name: { type: 'string', description: 'Extension directory name (no spaces, e.g. truyenfull)' },
+                source: { type: 'string', description: 'Source website URL (e.g. https://truyenfull.io)' },
+                type: { type: 'string', enum: ['novel', 'comic', 'chinese_novel', 'translate', 'tts'], description: 'Extension type' },
+                url_home: { type: 'string', description: 'URL of book list page (for gen.js inspection)' },
+                url_detail: { type: 'string', description: 'URL of a specific book detail page' },
+                url_toc: { type: 'string', description: 'URL of chapter list / table of contents page' },
+                url_chap: { type: 'string', description: 'URL of a chapter reading page' },
+                locale: { type: 'string', description: 'Locale code (vi_VN, zh_CN, en_US)', default: 'vi_VN' },
+                tag: { type: 'string', description: 'Optional tag (e.g. nsfw)' },
+                has_search: { type: 'boolean', description: 'Site has search feature' },
+                has_genre: { type: 'boolean', description: 'Site has genre/category pages' }
+            },
+            required: ['name', 'source', 'type', 'url_home', 'url_detail', 'url_toc', 'url_chap']
         }
     },
     {
@@ -160,6 +181,17 @@ const TOOLS = [
             properties: {
                 extension_path: { type: 'string', description: 'Path to extension directory.' },
                 skip_validate: { type: 'boolean', description: 'Skip validation step' }
+            },
+            required: []
+        }
+    },
+    {
+        name: 'install',
+        description: 'Install (push) an extension directly to the physical VBook device via Modern HTTP API.',
+        inputSchema: {
+            type: 'object',
+            properties: {
+                extension_path: { type: 'string', description: 'Path to extension directory.' }
             },
             required: []
         }
@@ -250,6 +282,28 @@ const TOOLS = [
                 lesson: { type: 'string', description: 'Markdown content to append as new lesson (## Title\\n\\n**Problem:**...\\n\\n**Solution:**... pattern)' }
             },
             required: ['lesson']
+        }
+    },
+    {
+        name: 'update_plugin_version',
+        description: 'Increment the version of a plugin in its plugin.json (or main plugin.json). Use after fixes.',
+        inputSchema: {
+            type: 'object',
+            properties: {
+                extension_name: { type: 'string', description: 'Extension name in extensions/ (e.g. nhatruyen)' }
+            },
+            required: ['extension_name']
+        }
+    },
+    {
+        name: 'get_plugin_info',
+        description: 'Get current plugin info and version. Use to check before updating.',
+        inputSchema: {
+            type: 'object',
+            properties: {
+                extension_name: { type: 'string', description: 'Extension name in extensions/ (e.g. nhatruyen)' }
+            },
+            required: ['extension_name']
         }
     },
     {
@@ -346,6 +400,33 @@ async function executeTool(name, args) {
             return parsed;
         }
 
+        case 'create_smart': {
+            const { smartCreate } = require('./commands/create-smart');
+            const ip = process.env.VBOOK_IP;
+            const port = parseInt(process.env.VBOOK_PORT || '8080');
+            if (!ip) return { success: false, error: 'VBOOK_IP not set in .env. Run check_env first.' };
+            try {
+                const result = await smartCreate({
+                    name: args.name,
+                    source: (args.source || '').replace(/\/$/, ''),
+                    type: args.type || 'novel',
+                    locale: args.locale || 'vi_VN',
+                    tag: args.tag || null,
+                    urlHome:   args.url_home,
+                    urlDetail: args.url_detail,
+                    urlToc:    args.url_toc,
+                    urlChap:   args.url_chap,
+                    hasSearch: !!args.has_search,
+                    hasGenre:  !!args.has_genre,
+                    ip, port,
+                    jsonMode: true
+                });
+                return result;
+            } catch (err) {
+                return { success: false, error: err.message };
+            }
+        }
+
         case 'create': {
             const cliArgs = ['create', args.name, '--source', args.source, '--type', args.type || 'novel'];
             if (args.locale) cliArgs.push('--locale', args.locale);
@@ -433,6 +514,19 @@ async function executeTool(name, args) {
                 success,
                 new_version: versionMatch ? parseInt(versionMatch[1]) : null,
                 registry_count: countMatch ? parseInt(countMatch[1]) : null,
+                output: out.stdout,
+                error: out.stderr || null
+            };
+        }
+
+        case 'install': {
+            const cwd = resolveExtPath(args.extension_path);
+            const cliArgs = ['install'];
+            const out = await runCLI(cliArgs, cwd);
+            const success = !out.exitCode && out.stdout.includes('successfully');
+            
+            return {
+                success,
                 output: out.stdout,
                 error: out.stderr || null
             };
@@ -600,6 +694,38 @@ ${selectorCode}
             const newContent = existing + '\n\n---\n\n' + args.lesson;
             fs.writeFileSync(lessonFile, newContent, 'utf8');
             return { success: true, file: '03_lessons.md' };
+        }
+
+        case 'update_plugin_version': {
+            const extDir = resolveExtDir(args.extension_name);
+            const pluginJsonPath = path.join(extDir, 'plugin.json');
+            if (!fs.existsSync(pluginJsonPath)) {
+                return { error: `plugin.json not found in ${args.extension_name}` };
+            }
+            const pluginJson = JSON.parse(fs.readFileSync(pluginJsonPath, 'utf8'));
+            if (!pluginJson.metadata || !pluginJson.metadata.version) {
+                return { error: `No version found in plugin.json` };
+            }
+            const newVersion = pluginJson.metadata.version + 1;
+            pluginJson.metadata.version = newVersion;
+            fs.writeFileSync(pluginJsonPath, JSON.stringify(pluginJson, null, 2) + '\n', 'utf8');
+            return { success: true, extension: args.extension_name, version: newVersion };
+        }
+
+        case 'get_plugin_info': {
+            const extDir = resolveExtDir(args.extension_name);
+            const pluginJsonPath = path.join(extDir, 'plugin.json');
+            if (!fs.existsSync(pluginJsonPath)) {
+                return { error: `plugin.json not found in ${args.extension_name}` };
+            }
+            const pluginJson = JSON.parse(fs.readFileSync(pluginJsonPath, 'utf8'));
+            return {
+                name: pluginJson.metadata?.name || args.extension_name,
+                version: pluginJson.metadata?.version || '?',
+                source: pluginJson.metadata?.source || '',
+                author: pluginJson.metadata?.author || '',
+                type: pluginJson.metadata?.type || ''
+            };
         }
 
         case 'list_extension_files': {

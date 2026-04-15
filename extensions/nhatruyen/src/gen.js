@@ -11,17 +11,27 @@ function execute(url, page) {
     if (response.ok) {
         var doc = response.html();
         var books = [];
-        doc.select('article, .manga-item').forEach(function(el) {
-            var nameEl = el.select('h2.entry-title a, h3.nt-title a, a[href*="/truyen/"]').first();
+        doc.select('.nt-grid-item, .nt-story-item, .manga-item, .item-manga, .item').forEach(function(el) {
+            var nameEl = el.select('h3.nt-grid-title, h3.nt-story-title, h2.entry-title a, h3.nt-title a, .title a, a[href*="/truyen/"], a').first();
+            var selfHref = el.attr('href') + "";
+            var linkEl = selfHref && selfHref.indexOf('http') > -1 ? el : el.select('a[href*="/truyen/"], a').first();
             var coverEl = el.select('img').first();
-            if (nameEl) {
-                var link = nameEl.attr('href');
-                if (link && link.indexOf(BASE_URL + '/truyen/') > -1) {
+            if (nameEl && linkEl) {
+                var link = linkEl.attr('href') + "";
+                if (link && !link.includes("javascript:")) {
+                    if (!link.startsWith("http")) link = BASE_URL + (link.startsWith("/") ? "" : "/") + link;
+                    
+                    var cover = "";
+                    if (coverEl) {
+                        cover = coverEl.attr('data-src') || coverEl.attr('src') || "";
+                        if (cover && cover.startsWith("//")) cover = "https:" + cover;
+                    }
+
                     books.push({
                         name: nameEl.text().trim(),
                         link: link,
-                        cover: coverEl ? (coverEl.attr('data-src') || coverEl.attr('src')) : '',
-                        description: el.select('.entry-summary, .nt-desc-short').text().trim(),
+                        cover: cover,
+                        description: el.select('.entry-summary, .nt-desc-short, .chapter').text().trim(),
                         host: BASE_URL
                     });
                 }

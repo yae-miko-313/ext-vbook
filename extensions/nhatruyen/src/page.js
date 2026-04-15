@@ -12,7 +12,7 @@ function execute(url) {
     var parentId = match ? match[1] : null;
     
     if (!parentId) {
-        return Response.success([url]);
+        return Response.error("Cannot find parentId");
     }
     
     // Return API URLs for each page

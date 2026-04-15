@@ -17,28 +17,37 @@
 4. Link trang CHI TIẾT một truyện bất kỳ:
 5. Link trang MỤC LỤC chương:
 6. Link trang ĐỌC CHƯƠNG:
-7. Mục lục có phân trang? [A] Có  [B] Không
-8. Có search? [A] Có  [B] Không
-9. Có genres/thể loại? [A] Có  [B] Không
+7. Có search? [A] Có  [B] Không
+8. Có genres/thể loại? [A] Có  [B] Không
 ```
 
 **CHỈ SAU KHI có đủ answers mới tiếp tục bước 1.**
 
+> ℹ️ Không cần hỏi về phân trang mục lục. `page.js` luôn được tạo mặc định.
+> Nếu mục lục không phân trang → page.js chỉ trả về `[url]`.
+
 ---
 
-1. **Scaffold**
+1. **Inspect Website** — TRƯỚC KHI scaffold, inspect TẤT CẢ các URL user cung cấp:
+   ```
+   mcp_vbook_inspect(url_danh_sach)  → selectors: list item, title, link, cover
+   mcp_vbook_inspect(url_chi_tiet)   → selectors: name, author, cover, status, description, genres
+   mcp_vbook_inspect(url_muc_luc)    → selectors: chapter links, pagination (có hay không?)
+   mcp_vbook_inspect(url_doc_chuong) → selectors: chapter content
+   ```
+   **Ghi nhận kết quả. KHÔNG viết code trước bước này.**
+
+2. **Scaffold**
    ```bash
    vbook create "<name>" --source "<url>" --type <novel|comic|chinese_novel>
    ```
    **⚠️ POST-SCAFFOLD CHECK**: Verify `icon.png` is valid image (not HTML/text).
 
-2. **Research Website**
-   - Use browser tools to analyze DOM structure
-   - Identify selectors for: book items, detail, TOC, content
-
-3. **Implement**
-   - Replace TODOs in `src/*.js` with real selectors/logic
+3. **Implement với selectors THỰC TẾ**
+   - Dùng kết quả từ Bước 1 để điền vào `src/*.js`
+   - **NGHIÊM CẤM** dùng generic placeholders: `.book-item`, `.story-item`, `h3 a`, `.title a`, `#content`
    - **CRITICAL**: No async/await, no `?.`, no `??`, no spread
+   - **page.js RULE**: LUÔN tạo `page.js`. Nếu site không phân trang mục lục → `return Response.success([url])`. Nếu có phân trang → trả về mảng URL từng trang. `toc.js` nhận lần lượt từng URL từ mảng này.
 
 4. **Static Check**
    ```bash
@@ -170,4 +179,36 @@ genres: novel.genres.map(genre => ({
 ### VIP Chapters
 ```js
 chapList.push({ name: "...", url: "...", pay: true/false, host: BASE_URL });
+```
+
+### page.js — Quy tắc mặc định
+
+`page.js` là **bắt buộc**. Nhận `url` từ detail, trả về mảng các URL cho `toc.js`.
+
+```js
+// Không có phân trang:
+function execute(url) {
+    url = url.replace(/^(?:https?:\/\/)?(?:www\.)?([^\/]+)/, BASE_URL);
+    if (url.slice(-1) === "/") url = url.slice(0, -1);
+    return Response.success([url]);  // toc.js sẽ nhận chính url này
+}
+
+// Có phân trang:
+function execute(url) {
+    url = url.replace(/^(?:https?:\/\/)?(?:www\.)?([^\/]+)/, BASE_URL);
+    if (url.slice(-1) === "/") url = url.slice(0, -1);
+    let response = fetch(url);
+    if (!response.ok) return Response.error("Cannot load");
+    let doc = response.html();
+    let pages = [];
+    doc.select(".pagination a").forEach(function(el) {
+        let href = el.attr("href") + "";
+        if (href && !href.includes("#")) {
+            if (!href.startsWith("http")) href = BASE_URL + href;
+            pages.push(href);
+        }
+    });
+    if (pages.length === 0) return Response.success([url]);
+    return Response.success(pages);
+}
 ```

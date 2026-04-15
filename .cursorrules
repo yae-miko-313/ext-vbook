@@ -1,33 +1,79 @@
 When asked to create, modify, test or debug a VBook extension, you MUST first read context documents in this order:
 
-1.  **Read Runtime Rules**: `context/01_runtime.md` (Rhino ES6 constraints)
-2.  **Read Workflow**: `context/02_workflow.md` (SOP + best practices)
-3.  **Read Lessons**: `context/03_lessons.md` (common mistakes)
-4.  **Read Demo**: `context/04_demo.md` (code examples)
-5.  **Read Repair**: `context/05_repair.md` (fix guide)
+1. `context/01_runtime.md` — Rhino ES6 constraints and API reference
+2. `context/02_workflow.md` — Development SOP
+3. `context/03_lessons.md` — Common mistakes
+4. `context/04_demo.md` — Code examples and script data flow
 
 Follow their rules exactly, especially the Rhino runtime constraints.
 
-### 🤖 AUTONOMOUS AGENT WORKFLOW:
-You are an autonomous extension developer. Perform these steps without asking for confirmation:
+---
 
-1.  **Read Context**: Read `context/01_runtime.md` → `context/02_workflow.md` → `context/03_lessons.md`
-2.  **QUESTIONNAIRE**: Nếu user yêu cầu tạo extension MỚI → PHẢI HỎI user trước:
-   - Loại? (novel/comic/chinese)
-   - Tag? (thường/18+)
-   - Link danh sách?
-   - Link trang chi tiết?
-   - Link mục lục?
-   - Link đọc chương?
-   - Phân trang? Search? Genres?
-3.  **Setup Environment**: Update `vbook-tool/.env` with `VBOOK_IP` if needed.
-3.  **CLI Tooling**: Use `vbook` CLI or fallback: `node d:/Github/ext-vbook-bi/vbook-tool/index.js`
-4.  **Full Cycle**:
-    - `vbook create` (new) → analyze `src/` (edit)
-    - `vbook validate` (static check)
-    - `vbook debug` (device test)
-    - `vbook test-all` (verify chain)
-    - `vbook publish` (bump + build + registry)
-5.  **Record Lesson**: After fixing, call `append_lesson` MCP tool to record what you learned.
+### 🤖 AUTONOMOUS AGENT WORKFLOW — TẠO EXTENSION MỚI
 
-Do NOT ask user "should I run validate?" — JUST DO IT. Goal: 100% completed, published extension.
+**CRITICAL ORDER — KHÔNG được đảo thứ tự:**
+
+#### BƯỚC 0 — HỎI USER (bắt buộc, chưa có thì DỪNG)
+Cần các link sau trước khi làm bất cứ điều gì:
+- Loại? (novel / comic / chinese_novel)
+- Tag? (thường / nsfw)
+- Link trang DANH SÁCH truyện (home/gen)
+- Link trang CHI TIẾT một truyện
+- Link trang MỤC LỤC chương
+- Link trang ĐỌC một CHƯƠNG
+- Có search? Có genres?
+
+#### BƯỚC 1 — DÙNG `mcp_vbook_create_smart` (PREFERRED — cho mọi model AI)
+Nếu user đã cung cấp đủ 4 URLs → gọi TRỰC TIẾP, không làm gì thêm:
+```
+mcp_vbook_create_smart(
+  name, source, type,
+  url_home, url_detail, url_toc, url_chap,
+  has_search, has_genre
+)
+```
+Tool tự inspect website trên device → score selectors → generate code với real selectors.
+**KHÔNG inspect riêng. KHÔNG create riêng. KHÔNG viết code thủ công.**
+
+#### BƯỚC 1 (fallback) — Nếu `create_smart` lỗi hoặc url_toc = url_detail
+Inspect thủ công từng URL rồi dùng `mcp_vbook_create`:
+```
+inspect(url_danh_sach)   → selectors: list item, title, link, cover
+inspect(url_chi_tiet)    → selectors: name, author, cover, status, description, genres, chapters
+inspect(url_doc_chuong)  → selectors: chapter content
+```
+Viết code với REAL selectors từ kết quả inspect. **NGHIÊM CẤM dùng generic placeholders.**
+
+#### BƯỚC 3 — IMPLEMENT với SELECTORS THỰC TẾ
+Dùng kết quả từ Bước 1 để viết code. **NGHIÊM CẤM dùng generic placeholder selectors** như:
+- ❌ `.book-item, .story-item, .list-item`
+- ❌ `h3 a, .title a`
+- ❌ `#chapter-content, .chapter-c, #content, .chapter-content`
+
+Phải dùng selector thực tế lấy từ kết quả inspect.
+
+#### BƯỚC 4–7 — VALIDATE → DEBUG → TEST-ALL → CLEANUP → PUBLISH
+```bash
+vbook validate
+vbook debug src/detail.js -in "<url>"
+vbook test-all
+```
+**BƯỚC DỌN DẸP BẮT BUỘC:** Trước khi publish, AI PHẢI XÓA toàn bộ các file rác sinh ra trong quá trình test (`temp.html`, `*debug.txt`, `*debug.json`, v.v.). KHÔNG được để lại các file này trong codebase.
+```bash
+vbook publish
+```
+
+---
+
+### 🔧 REPAIR EXTENSION
+1. Đọc code hiện tại (`read_extension`)
+2. Inspect URL thực tế xem có gì thay đổi
+3. Fix với selector thực tế
+4. `vbook validate` → `vbook debug` → `vbook publish`
+
+---
+
+**CLI Fallback:** `node d:/Github/ext-vbook-bi/vbook-tool/index.js`
+**Output:** Luôn dùng `--json` flag.
+**Record Lesson:** Sau khi fix, gọi `append_lesson` MCP tool.
+Goal: 100% completed, published extension.
