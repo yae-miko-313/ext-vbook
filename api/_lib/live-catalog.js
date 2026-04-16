@@ -368,13 +368,18 @@ function getAllowedOrigin(req) {
     return requestOrigin || '*';
 }
 
-function applyCommonHeaders(req, res) {
+function applyCommonHeaders(req, res, customHeaders = {}) {
     const allowedOrigin = getAllowedOrigin(req);
     res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Vary', 'Origin');
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    
+    if (customHeaders['Cache-Control']) {
+        res.setHeader('Cache-Control', customHeaders['Cache-Control']);
+    } else {
+        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    }
 }
 
 function handlePreflight(req, res) {
@@ -404,8 +409,8 @@ function getSourceList() {
     return loadReferenceSourceList(workspaceRoot);
 }
 
-function writeJson(req, res, payload, statusCode = 200) {
-    applyCommonHeaders(req, res);
+function writeJson(req, res, payload, statusCode = 200, customHeaders = {}) {
+    applyCommonHeaders(req, res, customHeaders);
     res.statusCode = statusCode;
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.end(`${JSON.stringify(payload, null, 2)}\n`);
