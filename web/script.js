@@ -1,6 +1,13 @@
+let lockedBodyScrollY = 0;
+/**
+ * CONFIGURATION: Decouple Frontend from Backend
+ * Set this to your Vercel API URL if hosting frontend separately (e.g., GitHub Pages)
+ */
+const API_BASE_URL = 'http://localhost:3000'; // Leave empty if API and Web are on same domain
+
 let currentSearch = '';
 let sourceViewEnabled = false;
-let hideNsfwEnabled = true;
+let hideNsfwEnabled = true; // Default: 18+ is hidden
 let selectedAuthorKeys = new Set();
 let selectedLocales = new Set();
 let selectedTypes = new Set();
@@ -10,7 +17,15 @@ let draftHideNsfwEnabled = true;
 let draftAuthorKeys = new Set();
 let draftLocales = new Set();
 let draftTypes = new Set();
-let lockedBodyScrollY = 0;
+
+let extensionCatalog = {
+    novel: [],
+    comic: [],
+    chinese_novel: [],
+    translate: [],
+    tts: [],
+    _unknown: []
+};
 
 async function copyToClipboard(text) {
     if (!text) {
@@ -69,6 +84,122 @@ function getAllExtensions() {
 function getActiveCatalogSources() {
     const sources = Array.isArray(window.catalogSources) ? window.catalogSources : [];
     return sources.filter((source) => String(source && source.status ? source.status : '').toLowerCase() !== 'error');
+}
+
+/**
+ * NEW: Dynamic API Fetching
+ */
+async function fetchAppData() {
+    renderLoadingState();
+    console.log('[API] Initializing dynamic fetch...');
+    try {
+        // Fetch Catalog and Health in parallel
+        const catalogUrl = `${API_BASE_URL}/api/catalog.json`;
+        const healthUrl = `${API_BASE_URL}/api/health`;
+
+        console.log(`[API] Fetching from ${catalogUrl} and ${healthUrl}`);
+
+        const [catalogRes, healthRes] = await Promise.all([
+            fetch(catalogUrl).then(async r => {
+                if (!r.ok) throw new Error(`Catalog API failed: ${r.status}`);
+                return r.json();
+            }),
+            fetch(healthUrl).then(async r => {
+                if (!r.ok) {
+                    console.warn(`[API] Health API failed: ${r.status}. Proceeding without health data.`);
+                    return { sources: [] };
+                }
+                return r.json();
+            }).catch(e => {
+                console.warn('[API] Health fetch error:', e.message);
+                return { sources: [] };
+            })
+        ]);
+
+        console.log('[API] Success! Processing data...', catalogRes);
+
+        // Process Catalog
+        window.catalogExtensions = catalogRes.plugin?.data || [];
+        window.catalogSources = catalogRes.catalog?.sources || [];
+        window.catalogMeta = {
+            aggregateCopyUrl: catalogRes.plugin?.referenceListUrl || '',
+            loadedCatalogUrl: catalogRes.sourceList?.source || 'API'
+        };
+        window.catalogStatus = catalogRes.catalog?.summary || {};
+
+        // Process Health
+        window.siteHealthByUrl = {};
+        if (healthRes.sources) {
+            healthRes.sources.forEach(s => {
+                const key = normalizeSiteUrlKey(s.url);
+                if (key) window.siteHealthByUrl[key] = s;
+            });
+        }
+
+        // Categorize for stats
+        categorizeExtensions();
+        
+        clearLoadingState();
+        renderDashboard();
+    } catch (error) {
+        console.error('[API] Critical Error:', error);
+
+        // SHOWCASE FALLBACK (UI Tĩnh): Load dummy data if on localhost for verification
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.log('[SHOWCASE] API unreachable. Loading mock data for UI verification.');
+            window.catalogExtensions = [
+                { name: 'Demo Novel Ext', type: 'novel', author: 'kychi', source: 'https://github.com' },
+                { name: 'Demo Comic Ext', type: 'comic', author: 'kychi', source: 'https://github.com' }
+            ];
+            window.catalogStatus = { total: 2, unchanged: 2, errors: 0 };
+            window.siteHealthByUrl = {};
+            categorizeExtensions();
+            clearLoadingState();
+            renderDashboard();
+            showToast('Chế độ xem trước (UI Tĩnh)');
+            return;
+        }
+
+        showToast('Không thể tải dữ liệu từ API. Hãy đảm bảo bạn đang dùng Vercel Dev server.');
+
+        // Final fallback UI for 404
+        const grid = document.getElementById('extensions-grid');
+        if (grid) {
+            grid.innerHTML = `
+                <div style="grid-column: 1/-1; padding: 40px; text-align: center;">
+                    <p style="color: var(--color-accent); font-weight: 700; font-size: 20px;">Lỗi: Không tìm thấy API</p>
+                    <p style="margin-top: 10px;">Bạn đang chạy Server tĩnh (http.server). Hãy chạy <strong>npm run dev</strong> ở thư mục gốc để API hoạt động.</p>
+                </div>
+            `;
+        }
+    }
+}
+
+function categorizeExtensions() {
+    const all = getAllExtensions();
+    // Reset
+    Object.keys(extensionCatalog).forEach(k => extensionCatalog[k] = []);
+
+    all.forEach(ext => {
+        const type = ext.type || '_unknown';
+        if (extensionCatalog[type]) {
+            extensionCatalog[type].push(ext);
+        } else {
+            extensionCatalog._unknown.push(ext);
+        }
+    });
+}
+
+function normalizeSiteUrlKey(rawUrl) {
+    try {
+        const parsed = new URL(String(rawUrl || '').trim());
+        const protocol = parsed.protocol.toLowerCase();
+        const hostname = parsed.hostname.toLowerCase().replace(/^www\./, '');
+        const pathname = parsed.pathname.replace(/\/+$/, '') || '/';
+        return `${protocol}//${hostname}${pathname}`;
+    } catch {
+        return '';
+    }
 }
 
 function normalizeLocaleKey(locale) {
@@ -313,19 +444,22 @@ function clearLoadingState() {
     }
 }
 
-function renderStats() {
-    const all = getAllExtensions();
+function renderStats(extensions = null) {
+    // If no extensions provided, we usually want to show stats for the currently filtered set
+    // However, for initialization we might need all extensions.
+    const all = extensions || filterExtensions();
+
+    // Grouping for counts
+    const novelCount = all.filter(e => e.type === 'novel').length;
+    const comicCount = all.filter(e => e.type === 'comic').length;
+    const chineseCount = all.filter(e => e.type === 'chinese_novel' || e.type === 'chinese').length;
+    
+    const otherCount = all.length - (novelCount + comicCount + chineseCount);
 
     document.getElementById('total-extensions').textContent = all.length;
-    document.getElementById('novel-count').textContent = extensionCatalog.novel.length;
-    document.getElementById('comic-count').textContent = extensionCatalog.comic.length;
-    document.getElementById('chinese-count').textContent = extensionCatalog.chinese_novel.length;
-
-    const otherCount =
-        (extensionCatalog.translate && extensionCatalog.translate.length ? extensionCatalog.translate.length : 0) +
-        (extensionCatalog.tts && extensionCatalog.tts.length ? extensionCatalog.tts.length : 0) +
-        (extensionCatalog._unknown && extensionCatalog._unknown.length ? extensionCatalog._unknown.length : 0);
-
+    document.getElementById('novel-count').textContent = novelCount;
+    document.getElementById('comic-count').textContent = comicCount;
+    document.getElementById('chinese-count').textContent = chineseCount;
     document.getElementById('other-count').textContent = otherCount;
 }
 
@@ -775,7 +909,6 @@ function renderSourceCard(source) {
                 ${previewItems.map(renderSourceExtBadge).join('')}
             </ul>
             ${extItems.length > previewItems.length ? `<p class="source-preview-note">+${extItems.length - previewItems.length} extension khác</p>` : ''}
-            ${detailHtml}
             <div class="source-actions">
                 <button class="source-copy-btn" data-source-url="${escapeHtml(source.url)}">Copy Source</button>
             </div>
@@ -817,14 +950,7 @@ function renderSourceView() {
     grid.innerHTML = sources.map(renderSourceCard).join('');
 }
 
-function renderActiveView() {
-    if (sourceViewEnabled) {
-        renderSourceView();
-        return;
-    }
-
-    renderGrid();
-}
+// Original renderActiveView removed to avoid duplication with the new dynamic stats version.
 
 function getAuthorFilterOptions() {
     const authorGroups = new Map();
@@ -911,7 +1037,7 @@ function openFilterModal() {
     renderFilterChipList('filter-locales', 'locale', getLocaleFilterOptions(), draftLocales);
     renderFilterChipList('filter-types', 'type', getTypeFilterOptions(), draftTypes);
     sourceSwitch.checked = draftSourceViewEnabled;
-    nsfwSwitch.checked = draftHideNsfwEnabled;
+    nsfwSwitch.checked = !draftHideNsfwEnabled; // Checked means "Hiện" (Show), so not hidden
 
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
@@ -941,7 +1067,7 @@ function applyFilterModal() {
     hideNsfwEnabled = draftHideNsfwEnabled;
 
     updateFilterButtonLabel();
-    closeFilterModal();
+    // Do not close modal here, just refresh view
     renderActiveView();
 }
 
@@ -990,10 +1116,12 @@ function setupFilterModal() {
 
     sourceSwitch.addEventListener('change', () => {
         draftSourceViewEnabled = sourceSwitch.checked;
+        applyFilterModal(); // Instant apply
     });
 
     nsfwSwitch.addEventListener('change', () => {
-        draftHideNsfwEnabled = nsfwSwitch.checked;
+        draftHideNsfwEnabled = !nsfwSwitch.checked; // Checked means SHOW (so not hidden)
+        applyFilterModal(); // Instant apply
     });
 
     modal.addEventListener('click', (event) => {
@@ -1015,6 +1143,7 @@ function setupFilterModal() {
         }
 
         toggleDraftFilter(groupName, value);
+        applyFilterModal(); // Instant apply
     });
 
     filterModalBound = true;
@@ -1132,7 +1261,7 @@ function setupBackToTopButton() {
 }
 
 function renderDashboard() {
-    renderStats();
+    renderStats(); // This will now use getFilteredExtensions() internally
     renderCatalogUpdatedTime();
     renderSourceRepoCount();
     renderAggregateButton();
@@ -1140,6 +1269,17 @@ function renderDashboard() {
     renderAuthorAcknowledgement();
     setupFilterModal();
     renderActiveView();
+}
+
+function renderActiveView() {
+    const extensions = filterExtensions();
+    renderStats(extensions); // Keep stats in sync with search and filters
+    
+    if (sourceViewEnabled) {
+        renderSourceView();
+    } else {
+        renderGrid();
+    }
 }
 
 function normalizeAuthorName(author) {
@@ -1299,9 +1439,36 @@ function renderAuthorAcknowledgement() {
     updateAuthorsMobileCollapse();
 }
 
+function setupGuideModal() {
+    const openBtn = document.getElementById('open-guide-btn');
+    const closeBtn = document.getElementById('guide-close-btn');
+    const modal = document.getElementById('guide-modal');
+
+    if (!openBtn || !closeBtn || !modal) return;
+
+    openBtn.addEventListener('click', () => {
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden', 'false');
+    });
+
+    const close = () => {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+    };
+
+    closeBtn.addEventListener('click', close);
+    modal.addEventListener('click', (e) => {
+        if (e.target.dataset.guideClose) close();
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     setupSearch();
     setupCopyActions();
     setupBackToTopButton();
     setupAuthorsMobileToggle();
+    setupGuideModal();
+
+    // Start dynamic fetch
+    fetchAppData();
 });

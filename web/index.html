@@ -15,11 +15,43 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1>Extension VBook</h1>
-            <p class="subtitle">Danh Sách Extension và copy nhanh gọn</p>
-            <p class="subtitle">(Link Tổng chỉ dùng được ở beta version)</p>
-            <button id="copy-aggregate-btn" class="action-btn header-copy-btn" type="button" title="Copy link tổng để thêm nhanh">Copy Link Tổng</button>
+            <h1>VBook Extension Hub</h1>
+            <p class="subtitle">Platform tổng hợp và quản lý VBook Extensions - Cập nhật tự động</p>
+            
+            <div class="header-actions">
+                <button id="copy-aggregate-btn" class="action-btn header-copy-btn" type="button">Copy Link Tổng (Beta)</button>
+                <button id="open-guide-btn" class="action-btn secondary" type="button">Hướng dẫn sử dụng</button>
+            </div>
         </header>
+
+        <!-- Usage Guide Modal (Draft) -->
+        <div id="guide-modal" class="filter-modal" aria-hidden="true">
+            <div class="filter-modal-backdrop" data-guide-close="true"></div>
+            <section class="filter-modal-panel guide-panel" role="dialog" aria-modal="true">
+                <h2 class="filter-modal-title">Hướng Dẫn Sử Dụng</h2>
+                <div class="guide-content">
+                    <div class="step">
+                        <span class="step-num">1</span>
+                        <p><strong>Chọn Extension</strong>: Tìm kiếm và chọn extension bạn muốn cài đặt từ danh sách bên dưới.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">2</span>
+                        <p><strong>Copy Link</strong>: Click vào biểu tượng Copy trên thẻ extension hoặc nút "Copy Link Tổng" để lấy địa chỉ cài đặt.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">3</span>
+                        <p><strong>Cài đặt trong VBook</strong>: Mở App VBook -> Cài đặt -> Extension -> Thêm (Dấu +) -> Dán Link và lưu lại.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">4</span>
+                        <p><strong>Kiểm tra trạng thái</strong>: Các extension có nhãn <span class="ext-health-badge ext-health-dead">Dead</span> hoặc <span class="ext-health-badge ext-health-cloudflare">CF</span> có thể gặp lỗi khi tải chương.</p>
+                    </div>
+                </div>
+                <div class="filter-modal-actions is-single">
+                    <button id="guide-close-btn" class="filter-modal-btn filter-modal-btn-apply" style="width: auto;" type="button">Đã hiểu!</button>
+                </div>
+            </section>
+        </div>
 
         <!-- Stats Section -->
         <section class="stats">
@@ -64,21 +96,6 @@
             <section class="filter-modal-panel" role="dialog" aria-modal="true" aria-labelledby="filter-modal-title">
                 <h2 id="filter-modal-title" class="filter-modal-title">Lọc</h2>
 
-                <div class="filter-modal-group">
-                    <h3 class="filter-modal-group-title">Tác giả</h3>
-                    <div id="filter-authors" class="filter-chip-list"></div>
-                </div>
-
-                <div class="filter-modal-group">
-                    <h3 class="filter-modal-group-title">Ngôn ngữ</h3>
-                    <div id="filter-locales" class="filter-chip-list"></div>
-                </div>
-
-                <div class="filter-modal-group">
-                    <h3 class="filter-modal-group-title">Loại</h3>
-                    <div id="filter-types" class="filter-chip-list"></div>
-                </div>
-
                 <div class="filter-modal-switch-row">
                     <span class="filter-modal-switch-label">Theo nguồn repo</span>
                     <label class="filter-switch">
@@ -87,15 +104,31 @@
                     </label>
                 </div>
 
+                <div class="filter-modal-group">
+                    <h3 class="filter-modal-group-title">Loại</h3>
+                    <div id="filter-types" class="filter-chip-list"></div>
+                </div>
+
+                <div class="filter-modal-group">
+                    <h3 class="filter-modal-group-title">Ngôn ngữ</h3>
+                    <div id="filter-locales" class="filter-chip-list"></div>
+                </div>
+
+                <div class="filter-modal-group">
+                    <h3 class="filter-modal-group-title">Tác giả</h3>
+                    <div id="filter-authors" class="filter-chip-list"></div>
+                </div>
+
                 <div class="filter-modal-switch-row">
-                    <span class="filter-modal-switch-label">Ẩn nội dung NSFW</span>
+                    <span class="filter-modal-switch-label">Hiện nội dung 18+</span>
                     <label class="filter-switch">
-                        <input id="filter-nsfw-switch" type="checkbox" checked>
+                        <input id="filter-nsfw-switch" type="checkbox">
                         <span class="filter-switch-slider"></span>
                     </label>
                 </div>
 
-                <div class="filter-modal-actions">
+                <!-- Instant filtration: Actions are no longer strictly required for apply/cancel -->
+                <div class="filter-modal-actions" style="display: none;">
                     <button id="filter-cancel-btn" class="filter-modal-btn filter-modal-btn-cancel" type="button">Hủy</button>
                     <button id="filter-apply-btn" class="filter-modal-btn filter-modal-btn-apply" type="button">Áp dụng</button>
                 </div>
