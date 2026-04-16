@@ -1,32 +1,27 @@
 {
   "name": "vbook-tool",
-  "version": "2.0.1",
-  "description": "VBook 2-in-1 tool: personal extension repair/build plus community catalog aggregation",
+  "version": "3.0.0",
+  "description": "VBook 3.0: Modular & AI-Agent Ready CLI for Extension Developers",
   "author": "kychi",
   "main": "tools/cli/index.js",
   "bin": {
     "vbook": "./tools/cli/index.js"
   },
   "scripts": {
-    "start": "node tools/cli/index.js",
+    "v3-dev": "npx -y vercel dev --listen 3000 --yes",
+    "vercel-dev": "npx -y vercel dev --listen 3000 --yes",
     "ext:create": "node tools/cli/index.js ext --mode create",
     "ext:edit": "node tools/cli/index.js ext --mode edit --plugin extensions/novel/kychi_ntruyen/plugin.json --dry-run",
     "ext:create:dry": "node tools/cli/index.js ext --mode create --name DemoExt --source https://example.com --author kychi --dry-run",
     "build": "node tools/cli/index.js build --plugin extensions/novel/kychi_ntruyen",
-    "build:catalog": "node tools/cli/index.js build-catalog",
-    "sync:web-catalog": "node -e \"const {buildWebCatalog}=require('./tools/cli/build/sync-web-catalog');console.log(JSON.stringify(buildWebCatalog(process.cwd()), null, 2));\" && npm run sync:health:all",
-    "sync:web-catalog:ci": "node -e \"const {buildWebCatalog}=require('./tools/cli/build/sync-web-catalog');console.log(JSON.stringify(buildWebCatalog(process.cwd()), null, 2));\"",
-    "serve:web-catalog": "node tools/cli/build/serve-web-catalog.js",
-    "serve:web-catalog:sync": "npm run sync:web-catalog && npm run serve:web-catalog",
-    "sync:web-health": "node -e \"const {buildSiteHealth}=require('./tools/cli/build/check-site-health');buildSiteHealth(process.cwd(),{source:'web'}).then((r)=>console.log(JSON.stringify(r,null,2))).catch((e)=>{console.error(e.message);process.exit(1);});\"",
-    "sync:health:web": "node -e \"const {buildSiteHealth}=require('./tools/cli/build/check-site-health');buildSiteHealth(process.cwd(),{source:'web'}).then((r)=>console.log(JSON.stringify(r,null,2))).catch((e)=>{console.error(e.message);process.exit(1);});\"",
-    "sync:health:realtime": "node -e \"const {buildSiteHealth}=require('./tools/cli/build/check-site-health');buildSiteHealth(process.cwd(),{source:'realtime'}).then((r)=>console.log(JSON.stringify(r,null,2))).catch((e)=>{console.error(e.message);process.exit(1);});\"",
-    "sync:health:all": "node -e \"const {buildSiteHealth}=require('./tools/cli/build/check-site-health');buildSiteHealth(process.cwd(),{source:'all'}).then((r)=>console.log(JSON.stringify(r,null,2))).catch((e)=>{console.error(e.message);process.exit(1);});\"",
-    "full-sync": "npm run build:catalog && npm run sync:web-catalog",
-    "full-sync:ci": "npm run build:catalog && npm run sync:web-catalog:ci"
+    "build:catalog": "node tools/cli/index.js build-catalog"
   },
   "dependencies": {
+    "@vercel/kv": "^3.0.0",
+    "acorn": "^8.16.0",
     "archiver": "^7.0.1",
+    "axios": "^1.15.0",
+    "cheerio": "^1.2.0",
     "commander": "^12.1.0",
     "dotenv": "^16.4.5",
     "string-argv": "^0.3.2"
