@@ -502,13 +502,12 @@ function renderSourceRepoCount() {
 
 function renderAggregateButton() {
     const button = document.getElementById('copy-aggregate-btn');
-    if (!button) {
-        return;
-    }
+    if (!button) return;
 
-    const copyUrl = window.catalogMeta && window.catalogMeta.aggregateCopyUrl ? window.catalogMeta.aggregateCopyUrl : '';
-    button.disabled = !copyUrl;
-    button.setAttribute('data-copy-url', copyUrl);
+    // IMPORTANT: For VBook app compatibility, use the plugin.json manifest, not the detailed catalog.json
+    const aggregateUrl = `${API_BASE_URL}/api/plugin.json`;
+    button.dataset.copyUrl = aggregateUrl;
+    button.disabled = !aggregateUrl;
 }
 
 function getRepoDisplayPath(rawUrl) {
@@ -1039,6 +1038,18 @@ function openFilterModal() {
     sourceSwitch.checked = draftSourceViewEnabled;
     nsfwSwitch.checked = !draftHideNsfwEnabled; // Checked means "Hiện" (Show), so not hidden
 
+    const panel = modal.querySelector('.filter-modal-panel');
+    if (panel) {
+        panel.style.transform = ''; // Fix bug: Reset any stale swipe transforms
+        
+        // Explicitly set 70vh on mobile to avoid auto-scaling issues
+        if (window.innerWidth <= 768) {
+            panel.style.height = '70vh';
+        } else {
+            panel.style.height = '';
+        }
+    }
+
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
     lockedBodyScrollY = window.scrollY || window.pageYOffset || 0;
@@ -1145,6 +1156,101 @@ function setupFilterModal() {
         toggleDraftFilter(groupName, value);
         applyFilterModal(); // Instant apply
     });
+
+    const panel = modal.querySelector('.filter-modal-panel');
+
+    let touchStartY = 0;
+    let initialHeight = 0;
+    let isDragging = false;
+    let isBottomSheet = false;
+    let rafId = null;
+
+    if (panel) {
+        panel.addEventListener('touchstart', (e) => {
+            isBottomSheet = window.innerWidth <= 768 && !panel.classList.contains('guide-panel');
+            
+            // Only drag if at the very top of the scroll or on the handle
+            if (panel.scrollTop <= 0 || e.target.closest('.filter-modal-drag-handle')) {
+                touchStartY = e.touches[0].clientY;
+                initialHeight = panel.offsetHeight;
+                isDragging = true;
+                panel.style.transition = 'none';
+            }
+        }, { passive: true });
+
+        panel.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            
+            const currentY = e.touches[0].clientY;
+            const deltaY = currentY - touchStartY;
+
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+                if (isBottomSheet) {
+                    if (deltaY > 0) {
+                        // Dragging down
+                        panel.style.transform = `translateY(${deltaY}px)`;
+                    } else if (deltaY < 0 && panel.style.height !== '100vh') {
+                        // Dragging up (Expanding to full)
+                        const newHeight = Math.min(window.innerHeight, initialHeight - deltaY);
+                        panel.style.height = `${newHeight}px`;
+                        panel.style.transform = 'translateY(0)';
+                    }
+                    if (e.cancelable) e.preventDefault();
+                } else if (deltaY > 0) {
+                    // Simple Card Drag Down
+                    panel.style.transform = `translateY(${deltaY}px)`;
+                    if (e.cancelable) e.preventDefault();
+                }
+            });
+        }, { passive: false });
+
+        panel.addEventListener('touchend', (e) => {
+            if (rafId) cancelAnimationFrame(rafId);
+            if (!isDragging) return;
+            
+            const currentY = e.changedTouches[0].clientY;
+            const deltaY = currentY - touchStartY;
+            
+            isDragging = false;
+            panel.style.transition = 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.3s ease';
+
+            if (isBottomSheet) {
+                if (deltaY < -60) {
+                    // Swipe Up -> Snap to Full
+                    panel.style.height = '100vh';
+                    panel.style.transform = '';
+                } else if (deltaY > 100) {
+                    // Swipe Down -> Close
+                    panel.style.transform = 'translateY(100%)';
+                    setTimeout(closeFilterModal, 200);
+                } else {
+                    // Snapping
+                    panel.style.transform = '';
+                    if (panel.offsetHeight < window.innerHeight * 0.85) {
+                        panel.style.height = '70vh';
+                    } else {
+                        panel.style.height = '100vh';
+                    }
+                }
+            } else {
+                // Simple Card Snap
+                if (deltaY > 100) {
+                    panel.style.transform = 'translateY(100vh)';
+                    setTimeout(() => {
+                        if (modal.id === 'guide-modal') {
+                             modal.classList.remove('show');
+                             modal.setAttribute('aria-hidden', 'true');
+                        } else {
+                             closeFilterModal();
+                        }
+                    }, 200);
+                } else {
+                    panel.style.transform = '';
+                }
+            }
+        });
+    }
 
     filterModalBound = true;
 }
@@ -1447,6 +1553,8 @@ function setupGuideModal() {
     if (!openBtn || !closeBtn || !modal) return;
 
     openBtn.addEventListener('click', () => {
+        const panel = modal.querySelector('.filter-modal-panel');
+        if (panel) panel.style.transform = ''; // Fix reappear bug
         modal.classList.add('show');
         modal.setAttribute('aria-hidden', 'false');
     });

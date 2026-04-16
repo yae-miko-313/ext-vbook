@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="vi" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extension VBook</title>
     <link rel="stylesheet" href="style.css?v=20260413b">
 </head>
+
 <body>
     <!-- Theme Toggle -->
     <button class="theme-toggle" id="theme-toggle" title="Chuyển chế độ sáng/tối">
@@ -15,11 +17,12 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1>VBook Extension Hub</h1>
-            <p class="subtitle">Platform tổng hợp và quản lý VBook Extensions - Cập nhật tự động</p>
-            
+            <h1>VBook Extensions</h1>
+            <p class="subtitle">Danh Sách Nguồn Mở Rộng Vbook</p>
+
             <div class="header-actions">
-                <button id="copy-aggregate-btn" class="action-btn header-copy-btn" type="button">Copy Link Tổng (Beta)</button>
+                <button id="copy-aggregate-btn" class="action-btn header-copy-btn" type="button">Copy Link Tổng
+                    (Beta)</button>
                 <button id="open-guide-btn" class="action-btn secondary" type="button">Hướng dẫn sử dụng</button>
             </div>
         </header>
@@ -32,23 +35,47 @@
                 <div class="guide-content">
                     <div class="step">
                         <span class="step-num">1</span>
-                        <p><strong>Chọn Extension</strong>: Tìm kiếm và chọn extension bạn muốn cài đặt từ danh sách bên dưới.</p>
+                        <div class="step-text">
+                            <h3>Đối với bản Beta</h3>
+                            <p>Chỉ cần Copy Link Tổng là xong.</p>
+                        </div>
                     </div>
                     <div class="step">
                         <span class="step-num">2</span>
-                        <p><strong>Copy Link</strong>: Click vào biểu tượng Copy trên thẻ extension hoặc nút "Copy Link Tổng" để lấy địa chỉ cài đặt.</p>
+                        <div class="step-text">
+                            <h3>Đối với bản thường</h3>
+                            <p>Nhấn Lọc, bật "Theo nguồn repo" và copy thêm từng cái.</p>
+                        </div>
                     </div>
                     <div class="step">
                         <span class="step-num">3</span>
-                        <p><strong>Cài đặt trong VBook</strong>: Mở App VBook -> Cài đặt -> Extension -> Thêm (Dấu +) -> Dán Link và lưu lại.</p>
+                        <div class="step-text">
+                            <h3>Hướng dẫn thêm vào VBook</h3>
+                            <p>Xem chi tiết tại <a
+                                    href="https://vbookapp.gitbook.io/huong-dan-su-dung/nguon-mo-rong/cai-nguon-ban-thuong"
+                                    target="_blank"
+                                    style="color: var(--color-accent); text-decoration: underline;">vbookapp.gitbook.io</a>
+                            </p>
+                        </div>
                     </div>
                     <div class="step">
                         <span class="step-num">4</span>
-                        <p><strong>Kiểm tra trạng thái</strong>: Các extension có nhãn <span class="ext-health-badge ext-health-dead">Dead</span> hoặc <span class="ext-health-badge ext-health-cloudflare">CF</span> có thể gặp lỗi khi tải chương.</p>
+                        <div class="step-text">
+                            <h3>Lưu ý trạng thái</h3>
+                            <p>Nhãn Dead/CF chỉ biểu thị URL site sống hay không, không phản ánh extension.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">5</span>
+                        <div class="step-text">
+                            <h3>Rủi ro Link Tổng</h3>
+                            <p>Có thể gián đoạn khi cập nhật API hoặc bảo trì. Cân nhắc khi dùng.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="filter-modal-actions is-single">
-                    <button id="guide-close-btn" class="filter-modal-btn filter-modal-btn-apply" style="width: auto;" type="button">Đã hiểu!</button>
+                    <button id="guide-close-btn" class="filter-modal-btn filter-modal-btn-apply" style="width: auto;"
+                        type="button">Đã hiểu!</button>
                 </div>
             </section>
         </div>
@@ -80,12 +107,7 @@
         <!-- Filters Section -->
         <section class="filters">
             <div class="filter-group search-group">
-                <input
-                    type="text"
-                    id="search-input"
-                    placeholder="Tìm extension hoặc nguồn..."
-                    class="search-box"
-                >
+                <input type="text" id="search-input" placeholder="Tìm extension hoặc nguồn..." class="search-box">
             </div>
             <button id="open-filter-btn" class="action-btn" type="button">Lọc</button>
             <p id="source-repo-count" class="source-repo-count" aria-live="polite">Repo nguồn: 0</p>
@@ -94,6 +116,7 @@
         <div id="filter-modal" class="filter-modal" aria-hidden="true">
             <div class="filter-modal-backdrop" data-filter-close="true"></div>
             <section class="filter-modal-panel" role="dialog" aria-modal="true" aria-labelledby="filter-modal-title">
+                <div class="filter-modal-drag-handle" aria-hidden="true"></div>
                 <h2 id="filter-modal-title" class="filter-modal-title">Lọc</h2>
 
                 <div class="filter-modal-switch-row">
@@ -120,7 +143,7 @@
                 </div>
 
                 <div class="filter-modal-switch-row">
-                    <span class="filter-modal-switch-label">Hiện nội dung 18+</span>
+                    <span class="filter-modal-switch-label">NSFW</span>
                     <label class="filter-switch">
                         <input id="filter-nsfw-switch" type="checkbox">
                         <span class="filter-switch-slider"></span>
@@ -129,8 +152,10 @@
 
                 <!-- Instant filtration: Actions are no longer strictly required for apply/cancel -->
                 <div class="filter-modal-actions" style="display: none;">
-                    <button id="filter-cancel-btn" class="filter-modal-btn filter-modal-btn-cancel" type="button">Hủy</button>
-                    <button id="filter-apply-btn" class="filter-modal-btn filter-modal-btn-apply" type="button">Áp dụng</button>
+                    <button id="filter-cancel-btn" class="filter-modal-btn filter-modal-btn-cancel"
+                        type="button">Hủy</button>
+                    <button id="filter-apply-btn" class="filter-modal-btn filter-modal-btn-apply" type="button">Áp
+                        dụng</button>
                 </div>
             </section>
         </div>
@@ -143,7 +168,8 @@
         <section class="authors-credits" aria-labelledby="authors-credits-title">
             <h2 id="authors-credits-title">Cảm Ơn Các Tác Giả</h2>
             <p class="authors-note">
-                Dự án tôn trọng quyền tác giả và nguồn đóng góp. Nếu các bạn không thích repo của bạn trên này, mình sẽ lập tức gỡ bỏ.
+                Dự án tôn trọng quyền tác giả và nguồn đóng góp. Nếu các bạn không thích repo của bạn trên này, mình sẽ
+                lập tức gỡ bỏ.
                 Tổng số tác giả đang có: <strong id="authors-count">0</strong>.
             </p>
             <div class="authors-overview" aria-label="Tổng quan tác giả">
@@ -157,25 +183,31 @@
                 </div>
             </div>
             <ul id="authors-list" class="authors-list" aria-label="Danh Sách Tác giả"></ul>
-            <button id="authors-expand-toggle" class="authors-expand-toggle" type="button" aria-expanded="false">xem thêm</button>
+            <button id="authors-expand-toggle" class="authors-expand-toggle" type="button" aria-expanded="false">xem
+                thêm</button>
         </section>
 
         <section class="contribute">
             <div class="contribute-head">
                 <h2>Đóng Góp Và Nguồn Tham Chiếu</h2>
                 <div class="contribute-actions">
-                    <a class="contribute-link" href="https://github.com/kychitoge/vbook-ext/issues/new" target="_blank">Tạo Issue</a>
-                    <a class="contribute-link" href="https://github.com/kychitoge/vbook-ext/pulls" target="_blank">Tạo PR</a>
+                    <a class="contribute-link" href="https://github.com/kychitoge/vbook-ext/issues/new"
+                        target="_blank">Tạo Issue</a>
+                    <a class="contribute-link" href="https://github.com/kychitoge/vbook-ext/pulls" target="_blank">Tạo
+                        PR</a>
                 </div>
             </div>
             <p class="contribute-intro">
-                Mình chỉ tổng hợp lại các repo extension hiện đang rải rác khắp nơi và khó khăn trong việc thêm từng cái một (mệt thì vkl)
+                Mình chỉ tổng hợp lại các repo extension hiện đang rải rác khắp nơi và khó khăn trong việc thêm từng cái
+                một (mệt thì vkl)
             </p>
-            <h3 class="authors-panel-title">Danh Sách Nguồn Tham Chiếu <span id="contribute-source-count" class="source-count">0 nguồn</span></h3>
+            <h3 class="authors-panel-title">Danh Sách Nguồn Tham Chiếu <span id="contribute-source-count"
+                    class="source-count">0 nguồn</span></h3>
             <div id="repo-list" class="repo-list"></div>
             <p class="contribute-footnote">
                 Xem danh sách đầy đủ tại:
-                <a id="reference-list-link" class="repo-link" href="#" target="_blank" style="display:none;">Danh sách ext hiện có</a>
+                <a id="reference-list-link" class="repo-link" href="#" target="_blank" style="display:none;">Danh sách
+                    ext hiện có</a>
             </p>
         </section>
 
@@ -186,7 +218,8 @@
                 <p>Extension VBook Tool v2.0.0 | kychi</p>
                 <div class="contact-cards">
                     <a href="https://github.com/kychitoge" target="_blank" class="contact-card">GitHub: kychitoge</a>
-                    <a href="https://discord.com/users/kyctg" target="_blank" class="contact-card">Discord: Liên hệ qua Discord</a>
+                    <a href="https://discord.com/users/kyctg" target="_blank" class="contact-card">Discord: Liên hệ qua
+                        Discord</a>
                 </div>
             </div>
         </footer>
@@ -196,8 +229,8 @@
 
     <div id="toast" class="toast" aria-live="polite"></div>
 
-    <script src="data.js?v=20260413d"></script>
-    <script src="script.js?v=20260413c"></script>
-    <script src="theme.js?v=20260413b"></script>
+    <script src="script.js?v=20260417"></script>
+    <script src="theme.js?v=20260417"></script>
 </body>
+
 </html>
