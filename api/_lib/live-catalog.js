@@ -296,9 +296,7 @@ async function buildLiveSnapshot(workspaceRoot, options = {}) {
                 fetchedUrl: result.fetchedUrl,
                 status: result.status,
                 itemCount: result.itemCount,
-                content: {
-                    data: result.items
-                },
+                extItems: result.items,
                 error: result.error
             }))
         },

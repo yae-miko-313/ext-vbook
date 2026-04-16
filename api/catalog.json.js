@@ -30,13 +30,20 @@ module.exports = async function handler(req, res) {
         // 2. Cache MISS: Fetch live data
         console.log('[API] Cache MISS (KV). Fetching live...');
         const snapshot = await getSnapshot(req);
-        const catalogData = snapshot.catalog;
+        
+        // Return full snapshot as expected by the frontend (script.js uses .plugin and .catalog)
+        const responseData = {
+            plugin: snapshot.plugin,
+            catalog: snapshot.catalog,
+            sourceList: snapshot.sourceList,
+            catalogStatus: snapshot.catalogStatus // Optional, for safety
+        };
 
-        // 3. Update KV Storage (Async, don't block response if possible, but for MISS we wait)
-        await setCachedCatalog(catalogData);
+        // 3. Update KV Storage
+        await setCachedCatalog(responseData);
 
         // 4. Return with Edge Cache headers
-        writeJson(req, res, catalogData, 200, { 'Cache-Control': SWR_HEADER });
+        writeJson(req, res, responseData, 200, { 'Cache-Control': SWR_HEADER });
     } catch (error) {
         console.error('[API] Error in catalog handler:', error);
         writeJson(req, res, { error: error && error.message ? error.message : 'Internal Server Error' }, 500);

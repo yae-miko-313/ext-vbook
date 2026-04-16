@@ -30,7 +30,14 @@ module.exports = async function handler(req, res) {
         console.log('[API] Revalidate: Building fresh catalog snapshot...');
         
         const snapshot = await getSnapshot(req);
-        await setCachedCatalog(snapshot.catalog);
+        
+        const responseData = {
+            plugin: snapshot.plugin,
+            catalog: snapshot.catalog,
+            sourceList: snapshot.sourceList
+        };
+
+        await setCachedCatalog(responseData);
 
         console.log('[API] Revalidate: Success!');
         
