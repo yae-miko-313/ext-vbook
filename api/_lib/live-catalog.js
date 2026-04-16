@@ -180,15 +180,47 @@ async function fetchSourceCatalog(source, options = {}) {
         const result = await fetchTextWithTimeout(normalizedSource.url, timeoutMs);
         const parsed = parseLenientJson(result.text);
 
-        const items = Array.isArray(parsed.data)
+        // Determine base URL for relative paths (strip filename from URL)
+        let baseUrl = result.finalUrl;
+        try {
+            const tempUrl = new URL(result.finalUrl);
+            const pathParts = tempUrl.pathname.split('/');
+            pathParts.pop(); // Remove "plugin.json"
+            tempUrl.pathname = pathParts.join('/') + '/';
+            baseUrl = tempUrl.toString();
+        } catch {
+            // Fallback: search for last slash
+            const lastSlash = baseUrl.lastIndexOf('/');
+            if (lastSlash !== -1) baseUrl = baseUrl.substring(0, lastSlash + 1);
+        }
+
+        const rawItems = Array.isArray(parsed.data)
             ? parsed.data
             : (Array.isArray(parsed.items)
                 ? parsed.items.flatMap((item) => (Array.isArray(item && item.content && item.content.data) ? item.content.data : []))
                 : []);
 
-        if (!Array.isArray(items)) {
+        if (!Array.isArray(rawItems)) {
             throw new Error('missing data[]');
         }
+
+        // Normalize relative paths/icons for Link Tổng compatibility
+        const items = rawItems.map(item => {
+            if (!item || typeof item !== 'object') return item;
+            const newItem = { ...item };
+            
+            // Normalize path
+            if (newItem.path && !newItem.path.startsWith('http')) {
+                newItem.path = new URL(newItem.path, baseUrl).toString();
+            }
+
+            // Normalize icon
+            if (newItem.icon && !newItem.icon.startsWith('http')) {
+                newItem.icon = new URL(newItem.icon, baseUrl).toString();
+            }
+
+            return newItem;
+        });
 
         return {
             id: normalizedSource.id,
