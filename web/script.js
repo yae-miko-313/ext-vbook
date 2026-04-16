@@ -3,7 +3,7 @@ let lockedBodyScrollY = 0;
  * CONFIGURATION: Decouple Frontend from Backend
  * Set this to your Vercel API URL if hosting frontend separately (e.g., GitHub Pages)
  */
-const API_BASE_URL = 'http://localhost:3000'; // Leave empty if API and Web are on same domain
+const API_BASE_URL = 'https://vbook-ext.vercel.app'; // Production Vercel API
 
 let currentSearch = '';
 let sourceViewEnabled = false;
