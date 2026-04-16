@@ -652,7 +652,7 @@ function renderCard(ext) {
         _unknown: 'KHÔNG RÕ'
     };
 
-    const typeLabel = typeLabels[ext.type] || ext.type;
+    const typeLabel = typeLabels[ext.type] || typeLabels._unknown;
     const description = getDescription(ext);
     const iconUrl = ext.icon || extensionIconFallback(ext.name || 'ext');
     const iconFallback = extensionIconFallback(ext.name || 'ext');
