@@ -1,0 +1,186 @@
+{
+  "sources": [
+    {
+      "id": "darkrai9x-main",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/plugin.json",
+      "targetFile": "references/repos/_remote_raw/darkrai9x-vbook-extensions/plugin.json"
+    },
+    {
+      "id": "darkrai9x-chinese",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/chinese_plugin.json",
+      "targetFile": "references/repos/_remote_raw/darkrai9x-vbook-extensions/chinese_plugin.json"
+    },
+    {
+      "id": "lethituyen-main",
+      "url": "https://raw.githubusercontent.com/lethituyen/vbooks-extension/refs/heads/master/plugin.json",
+      "targetFile": "references/repos/_remote_raw/lethituyen-vbooks-extension/plugin.json"
+    },
+    {
+      "id": "moleys-main",
+      "url": "https://raw.githubusercontent.com/Moleys/vbook-ext/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/moleys-vbook-ext/plugin.json"
+    },
+    {
+      "id": "dat-bi-main",
+      "url": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/dat-bi-ext-vbook/plugin.json"
+    },
+    {
+      "id": "soulgod-nahona-main",
+      "url": "https://raw.githubusercontent.com/SoulGodEve9x9/Vbook-ext/Nahona/plugin.json",
+      "targetFile": "references/repos/_remote_raw/soulgodeve9x9-vbook-ext-nahona/plugin.json"
+    },
+    {
+      "id": "hieunm3103-main",
+      "url": "https://gitlab.com/hieunm3103/vbook-extension/-/raw/main/plugin.json",
+      "avatar": "https://secure.gravatar.com/avatar/6e0a3fc7749a990bf16a618b03bb0891ee61cb1fe2a9efb0478915807f15091b?s=1600&d=identicon",
+      "targetFile": "references/repos/_remote_raw/hieunm3103-vbook-extension/plugin.json"
+    },
+    {
+      "id": "baobao666888-main",
+      "url": "https://raw.githubusercontent.com/BaoBao666888/ext-vbook-w/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/baobao666888-ext-vbook-w/plugin.json"
+    },
+    {
+      "id": "duongden-main",
+      "url": "https://raw.githubusercontent.com/duongden/vbook/refs/heads/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/duongden-vbook/plugin.json"
+    },
+    {
+      "id": "longvuu-main",
+      "url": "https://raw.githubusercontent.com/longvuu/ext/refs/heads/master/plugin.json",
+      "targetFile": "references/repos/_remote_raw/longvuu-ext/plugin.json"
+    },
+    {
+      "id": "tuanhai03-main",
+      "url": "https://raw.githubusercontent.com/TuanHai03/vbook-extensions/refs/heads/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/tuanhai03-vbook-extensions/plugin.json"
+    },
+    {
+      "id": "willsun28-main",
+      "url": "https://raw.githubusercontent.com/WillSun28/vbook-extensions/refs/heads/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/willsun28-vbook-extensions/plugin.json"
+    },
+    {
+      "id": "gh369-639-main",
+      "url": "https://raw.githubusercontent.com/gh369-639/vbook-ext-public/refs/heads/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/gh369-639-vbook-ext-public/plugin.json"
+    },
+    {
+      "id": "mizhm-main",
+      "url": "https://raw.githubusercontent.com/mizhm/vbook-extensions/refs/heads/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/mizhm-vbook-extensions/plugin.json"
+    },
+    {
+      "id": "kur21-main",
+      "url": "https://raw.githubusercontent.com/kur21/vbook-ext/refs/heads/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/kur21-vbook-ext/plugin.json"
+    },
+    {
+      "id": "sonzin-main",
+      "url": "https://raw.githubusercontent.com/sonzin/vbook-extension/refs/heads/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/sonzin-vbook-extension/plugin.json"
+    },
+    {
+      "id": "alexsonxxx-main",
+      "url": "https://raw.githubusercontent.com/alexsonxxx/vbook/refs/heads/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/alexsonxxx-vbook/plugin.json"
+    },
+    {
+      "id": "kychitoge-main",
+      "url": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/kychitoge-vbook-ext/plugin.json"
+    },
+    {
+      "id": "gold2k2k2k-main",
+      "url": "https://raw.githubusercontent.com/Gold2k2k2k/HTri-Vbook-Ext/refs/heads/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/gold2k2k2k-htri-vbook-ext/plugin.json"
+    },
+    {
+      "id": "evamirion-main",
+      "url": "https://raw.githubusercontent.com/Evamirion/vbook-ext/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/evamirion-vbook-ext/plugin.json"
+    },
+    {
+      "id": "hienpro00123-main",
+      "url": "https://raw.githubusercontent.com/hienpro00123/vbook_MeoU/refs/heads/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/hienpro00123-vbook-meou/plugin.json"
+    },
+    {
+      "id": "hieu45666-main",
+      "url": "https://raw.githubusercontent.com/hieu45666/vbook_ext/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/hieu45666-vbook-ext/plugin.json"
+    },
+    {
+      "id": "hishirooo-main",
+      "url": "https://raw.githubusercontent.com/hishirooo/vbook-ext/master/plugin.json",
+      "targetFile": "references/repos/_remote_raw/hishirooo-vbook-ext/plugin.json"
+    },
+    {
+      "id": "hajljnopera-main",
+      "url": "https://raw.githubusercontent.com/hajljnopera/vbook-ext/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/hajljnopera-vbook-ext/plugin.json"
+    },
+    {
+      "id": "bqy-main",
+      "url": "https://raw.githubusercontent.com/BanQuyY/Vbook/main/plugin_vb.json",
+      "targetFile": "references/repos/_remote_raw/BanQuyY-Vbook/plugin_vb.json"
+    },
+    {
+      "id": "bexom-main",
+      "url": "https://raw.githubusercontent.com/B3x0m/vbook-ext/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/B3x0m-vbook-ext/plugin.json"
+    },
+    {
+      "id": "chanhnh-main",
+      "url": "https://raw.githubusercontent.com/Chanhnh/vbook-ext/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/Chanhnh-vbook-ext/plugin.json"
+    },
+    {
+      "id": "aleshaonon-main",
+      "url": "https://raw.githubusercontent.com/seyah24/vbook-exts/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/seyah24-vbook-exts/plugin.json"
+    },
+    {
+      "id": "beast666-main",
+      "url": "https://raw.githubusercontent.com/khoa301020/vbook-ext/master/plugin.json",
+      "targetFile": "references/repos/_remote_raw/khoa301020-vbook-ext/plugin.json"
+    },
+    {
+      "id": "tamchau-main",
+      "url": "https://raw.githubusercontent.com/TamChau/vbook-extensions/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/TamChau-vbook-extensions/plugin.json"
+    },
+    {
+      "id": "springpeachvinh-main",
+      "url": "https://raw.githubusercontent.com/SPRINGPEACHVINH/vbook-ext/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/SPRINGPEACHVINH-vbook-ext/plugin.json"
+    },
+    {
+      "id": "laofun-main",
+      "url": "https://raw.githubusercontent.com/laofun/vbook-extensions-with-filter/master/plugin.json",
+      "targetFile": "references/repos/_remote_raw/laofun-vbook-extensions-with-filter/plugin.json"
+    },
+    {
+      "id": "ivan1hai-main",
+      "url": "https://raw.githubusercontent.com/Ivan1hai/ext/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/ivan1hai-ext/plugin.json"
+    },
+    {
+      "id": "chillguyk5-klein-main",
+      "url": "https://raw.githubusercontent.com/chillguyk5/vbook_Klein/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/chillguyk5-vbook-klein/plugin.json"
+    },
+    {
+      "id": "darkrai9x-translate",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/translate.json",
+      "targetFile": "references/repos/_remote_raw/darkrai9x-vbook-extensions/translate.json"
+    },
+    {
+      "id": "darkrai9x-tts",
+      "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/tts.json",
+      "targetFile": "references/repos/_remote_raw/darkrai9x-vbook-extensions/tts.json"
+    }
+  ],
+  "referenceListUrl": "https://xn--ngc-bmz.vn/i/vbook/extension_list.php#id-22"
+}
