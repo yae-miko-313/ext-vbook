@@ -1,22 +1,25 @@
 const path = require('path');
+const fs = require('fs');
 
 const DEFAULT_CACHE_TTL_MS = Number(process.env.VBOOK_WEB_CACHE_TTL_MS || 10000);
 const DEFAULT_TIMEOUT_MS = Number(process.env.VBOOK_WEB_FETCH_TIMEOUT_MS || 12000);
 
-let bundledSourceList = null;
-let referenceSourceList = null;
-
-try {
-    bundledSourceList = require('../../web/remote-sources.json');
-} catch {
-    bundledSourceList = null;
+function loadJsonConfig(relativePath) {
+    try {
+        // Try Absolute path (best for Vercel/Node)
+        const fullPath = path.join(process.cwd(), relativePath);
+        if (fs.existsSync(fullPath)) {
+            return JSON.parse(fs.readFileSync(fullPath, 'utf8'));
+        }
+        // Fallback to require for local modules
+        return require('../../' + relativePath);
+    } catch (e) {
+        return null;
+    }
 }
 
-try {
-    referenceSourceList = require('../../.private/references/remote-sources.json');
-} catch {
-    referenceSourceList = null;
-}
+let bundledSourceList = loadJsonConfig('web/remote-sources.json');
+let referenceSourceList = loadJsonConfig('.private/references/remote-sources.json');
 
 let liveSnapshotCache = null;
 
