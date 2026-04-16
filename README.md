@@ -1,4 +1,4 @@
-﻿# VBook Tool
+# VBook Tool
 
 Repo này là công cụ 2 trong 1 cho VBook:
 
@@ -7,12 +7,12 @@ Repo này là công cụ 2 trong 1 cho VBook:
 
 ## Mục tiêu hệ thống
 
-- **`.private/references/`**: Danh sách raw URL nguồn cộng đồng (`remote-sources.json`)
-- **`web/`**: Hiển thị extension cộng đồng theo chế độ realtime (fetch trực tiếp từ repo nguồn), đồng thời giữ snapshot fallback
-- **`extensions/`**: Chứa extension cá nhân dạng public trong repo, build thành `.zip` để phân phối
-- **`.private/`**: Chứa extension cá nhân không public source/distribution (đã ignore bởi git)
-- **`tools/cli/`**: Tạo/sửa/build extension cho cá nhân chủ sở hữu
-- **`.private/code-reference/`**: Kho source tham chiếu để học tập, không phải output cuối
+- **`extensions/`**: Thư mục chứa các extensions **CÔNG KHAI** cho cộng đồng. Sau khi thêm/sửa, bắt buộc chạy `build:catalog`.
+- **`.private/extensions/`**: Thư mục chứa các extensions **CÁ NHÂN** không công khai (đã ignore bởi git).
+- **`tools/cli/`**: Bộ công cụ tạo, sửa, và build extension (Version 3 focus).
+- **`web/`**: Giao diện hiển thị, lấy dữ liệu realtime từ Vercel API hoặc repo sources.
+- **`.private/references/`**: Danh sách nguồn raw URL nguồn cộng đồng (`remote-sources.json`).
+- **`.private/code-reference/`**: Kho source tham chiếu để học tập.
 
 ## Bắt đầu nhanh
 
@@ -59,7 +59,7 @@ Quét `extensions/*/` → tái sinh:
 - `extensions/{type}/plugin.json` (per-type manifest)
 - `extensions/plugin.json` (root manifest - all extensions)
 
-Đây là lệnh chính để rebuild catalog cá nhân.
+Đây là lệnh chính để rebuild catalog cộng đồng của bạn. **BẮT BUỘC** chạy sau khi thêm hoặc cập nhật bất kỳ extension nào trong thư mục `extensions/` để đồng bộ `extensions/plugin.json` (root catalog).
 
 ### 5️⃣ Đồng bộ web viewer / community aggregate
 ```bash
@@ -141,15 +141,13 @@ tools/cli/
 .private/references/
 └── remote-sources.json          # Danh sách nguồn raw cho realtime viewer
 
-web/                            # Web viewer (reads aggregate)
-├── index.html                   # Main page
-├── plugin.json                  # AUTO-GENERATED: link tổng (root-like aggregate)
-├── catalog.json                 # AUTO-GENERATED: source sidecar for By Source view
-├── remote-sources.json          # AUTO-GENERATED: realtime source manifest
-├── script.js                    # Load + render catalog
-├── data.js                      # Catalog format parser
+web/                            # Web viewer (Dynamic aggregate)
+├── index.html                   # Giao diện chính
+├── plugin.json                  # [FALLBACK] Aggregate snapshot
+├── catalog.json                 # [FALLBACK] Sidecar snapshot
+├── remote-sources.json          # [SYNCED] Realtime source list
+├── script.js                    # Logic hiển thị
 └── style.css
-
 docs/                           # Documentation
 ├── AI_CODE_EXT_VBOOK.md         # Extension writing contract for AI agents
 ├── CONTRIBUTING.md              # PR checklist + contributing guide

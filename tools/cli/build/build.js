@@ -82,6 +82,48 @@ function buildExtensionZip(workspaceRoot, pluginPath, dryRun = false) {
     });
 }
 
+function checkExtensionZipIntegrity(workspaceRoot, pluginPath) {
+    const resolvedPath = path.resolve(workspaceRoot, pluginPath);
+    const stat = fs.statSync(resolvedPath);
+    let extDir = resolvedPath;
+    if (stat.isFile() && path.basename(resolvedPath) === 'plugin.json') {
+        extDir = path.dirname(resolvedPath);
+    }
+
+    const zipPath = path.join(extDir, 'plugin.zip');
+    if (!fs.existsSync(zipPath)) {
+        return { exists: false, upToDate: false };
+    }
+
+    const zipStat = fs.statSync(zipPath);
+    const filesToCheck = [
+        path.join(extDir, 'plugin.json'),
+        path.join(extDir, 'icon.png')
+    ];
+
+    const srcDir = path.join(extDir, 'src');
+    if (fs.existsSync(srcDir)) {
+        const srcFiles = fs.readdirSync(srcDir);
+        srcFiles.forEach(f => filesToCheck.push(path.join(srcDir, f)));
+    }
+
+    let latestMtime = 0;
+    filesToCheck.forEach(f => {
+        if (fs.existsSync(f)) {
+            const s = fs.statSync(f);
+            if (s.mtimeMs > latestMtime) latestMtime = s.mtimeMs;
+        }
+    });
+
+    return {
+        exists: true,
+        upToDate: zipStat.mtimeMs >= latestMtime,
+        zipMtime: zipStat.mtimeMs,
+        latestMtime
+    };
+}
+
 module.exports = {
-    buildExtensionZip
+    buildExtensionZip,
+    checkExtensionZipIntegrity
 };

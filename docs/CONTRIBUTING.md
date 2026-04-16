@@ -1,16 +1,16 @@
-﻿# Contributing
+# Contributing
 
 Tài liệu đóng góp chính cho repo.
 
 ## Phạm vi
 
-- **Personal extensions**: `extensions/**` - tạo/sửa qua CLI
-- **Private personal extensions**: `.private/extensions/**` - không public, không vào catalog
-- **Code reference**: `.private/code-reference/**` - repos tham khảo từ contributors (read-only)
-- **CLI**: `tools/cli/**` - commands create/edit/build/build-catalog
-- **Web viewer**: `web/**` - catalog viewer + community aggregate loader
-- **Reference data**: `.private/references/remote-sources.json` - danh sách nguồn repo để web fetch realtime
-- **Docs**: `docs/**` - documentation
+- **Public extensions**: `extensions/**` - Chứa các extension công khai cho cộng đồng (phải chạy build:catalog).
+- **Private extensions**: `.private/extensions/**` - Không public, không vào catalog, được ignore bởi git.
+- **Code reference**: `.private/code-reference/**` - Repo tham khảo (read-only).
+- **CLI**: `tools/cli/**` - Công cụ chính (Version 3 focus).
+- **Web viewer**: `web/**` - Giao diện hiển thị cộng đồng (Dynamic).
+- **Reference data**: `.private/references/remote-sources.json` - Danh sách nguồn để API/Web fetch.
+- **Docs**: `docs/**` - Documentation.
 
 ## Prerequisites
 
@@ -56,9 +56,9 @@ Tạo `extensions/novel/my_ext/plugin.zip` sẵn sàng phân phối.
 npm run build:catalog
 npm run sync:web-catalog
 ```
-Tái sinh personal catalog:
+Tái sinh catalog cộng đồng:
 - `extensions/*/plugin.json` (per-type)
-- `extensions/plugin.json` (root)
+- `extensions/plugin.json` (root aggregate) **<-- BẮT BUỘC ĐỂ CỘNG ĐỒNG THẤY EXT CỦA BẠN**
 
 Lưu ý: catalog chỉ quét `extensions/**`. Các ext đặt trong `.private/**` sẽ không xuất hiện trong catalog public.
 
