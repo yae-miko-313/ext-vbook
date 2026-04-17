@@ -353,9 +353,50 @@ async function buildLiveSnapshot(workspaceRoot, options = {}) {
                 extItems: result.items,
                 error: result.error
             })),
-            siteHealth: await buildSiteHealthMap(data, timeoutMs)
+            siteHealth: {} // Site health will be populated in post-processing
         },
         remoteSources: sourceList
+    };
+}
+
+function buildSkeletonSnapshot(workspaceRoot) {
+    const sourceList = loadReferenceSourceList(workspaceRoot);
+    const timestamp = new Date().toISOString();
+    
+    return {
+        sourceList,
+        sourceResults: [],
+        plugin: {
+            metadata: {
+                author: 'kychi',
+                description: 'Community aggregate manifest (Initializing)',
+                generatedAt: timestamp
+            },
+            referenceListUrl: sourceList.referenceListUrl || '',
+            data: []
+        },
+        catalog: {
+            metadata: {
+                author: 'kychi',
+                description: 'Community aggregate manifest (Initializing)',
+                generatedAt: timestamp
+            },
+            summary: {
+                total: sourceList.sources.length,
+                changed: 0,
+                unchanged: 0,
+                errors: 0,
+                mode: 'initializing'
+            },
+            referenceListUrl: sourceList.referenceListUrl || '',
+            sources: sourceList.sources.map(s => ({
+                id: s.id,
+                url: s.url,
+                status: 'pending'
+            })),
+            siteHealth: {}
+        },
+        healthUpdatedAt: timestamp
     };
 }
 
@@ -510,23 +551,14 @@ async function getSnapshot(req) {
         return kvData;
     }
 
-    // Tier 3: Cold Start (Atomic Mini-Scan)
-    // Build catalog first (Fast)
-    console.log('[KV] Cold start. Performing mini-scan for atomic delivery...');
-    const snapshot = await buildLiveSnapshot(workspaceRoot);
+    // Tier 3: Cold Start (Skeleton Mode - ZERO BLOCKING)
+    console.log('[KV] Cold start. Returning skeleton manifest immediately...');
+    const skeleton = buildSkeletonSnapshot(workspaceRoot);
     
-    // Perform a very fast mini-scan of top 50 sites to ensure atomic health tags on first load
-    const miniHealthMap = await buildSiteHealthMap(snapshot.plugin.data.slice(0, 50), SCAN_TIMEOUT_MS);
-    snapshot.catalog.siteHealth = miniHealthMap;
+    // Trigger FULL scan in background (Fetch remote repos + Health)
+    waitUntil(refreshAndCacheSnapshot(workspaceRoot));
     
-    const timestamp = new Date().toISOString();
-    snapshot.catalog.metadata.generatedAt = timestamp;
-    snapshot.healthUpdatedAt = timestamp;
-    
-    // Trigger FULL scan in background to cover all 250+ sites
-    waitUntil(refreshAndCacheSnapshot(workspaceRoot, snapshot));
-    
-    return snapshot;
+    return skeleton;
 }
 
 async function refreshAndCacheSnapshot(workspaceRoot, baseSnapshot = null) {
