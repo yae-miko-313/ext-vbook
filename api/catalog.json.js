@@ -3,9 +3,8 @@ const {
     getSnapshot,
     writeJson
 } = require('./_lib/live-catalog');
-const { getCachedCatalog, setCachedCatalog } = require('./_lib/kv');
 
-const SWR_HEADER = 's-maxage=21600, stale-while-revalidate=21600'; // 6 hours
+const SWR_HEADER = 'public, s-maxage=3600, stale-while-revalidate=86400';
 
 module.exports = async function handler(req, res) {
     if (handlePreflight(req, res)) {
@@ -18,31 +17,18 @@ module.exports = async function handler(req, res) {
     }
 
     try {
-        // 1. Try to get from KV Storage first (Fast Path)
-        const cached = await getCachedCatalog();
-        
-        if (cached) {
-            console.log('[API] Cache HIT (KV)');
-            writeJson(req, res, cached, 200, { 'Cache-Control': SWR_HEADER });
-            return;
-        }
-
-        // 2. Cache MISS: Fetch live data
-        console.log('[API] Cache MISS (KV). Fetching live...');
+        // Use the Tiered-Cached getSnapshot (Memory -> KV -> Background Revalidation)
         const snapshot = await getSnapshot(req);
         
-        // Return full snapshot as expected by the frontend (script.js uses .plugin and .catalog)
+        // Return full snapshot as expected by the frontend
         const responseData = {
             plugin: snapshot.plugin,
             catalog: snapshot.catalog,
-            sourceList: snapshot.sourceList,
-            catalogStatus: snapshot.catalogStatus // Optional, for safety
+            sourceList: snapshot.sourceList
         };
 
-        // 3. Update KV Storage
-        await setCachedCatalog(responseData);
-
-        // 4. Return with Edge Cache headers
+        // Cache Control for Edge
+        const SWR_HEADER = 'public, s-maxage=3600, stale-while-revalidate=86400';
         writeJson(req, res, responseData, 200, { 'Cache-Control': SWR_HEADER });
     } catch (error) {
         console.error('[API] Error in catalog handler:', error);

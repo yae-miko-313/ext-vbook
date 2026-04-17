@@ -475,10 +475,16 @@ async function getSnapshot(req) {
 
     // Tier 2: KV Cache (Fast, global)
     let kvData = null;
-    try {
-        kvData = await kv.get(KV_FULL_SNAPSHOT_KEY);
-    } catch (e) {
-        console.warn('[KV] Error fetching full snapshot:', e.message);
+    const isKvConfigured = process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN;
+    
+    if (isKvConfigured) {
+        try {
+            kvData = await kv.get(KV_FULL_SNAPSHOT_KEY);
+        } catch (e) {
+            console.warn('[KV] Error fetching full snapshot:', e.message);
+        }
+    } else {
+        console.warn('[KV] Required environment variables (KV_REST_API_URL, KV_REST_API_TOKEN) are missing. KV caching is disabled.');
     }
 
     if (kvData) {
@@ -511,8 +517,14 @@ async function refreshAndCacheSnapshot(workspaceRoot) {
         snapshot.catalog.siteHealth = healthMap;
         snapshot.catalog.metadata.generatedAt = new Date().toISOString();
         
-        // Cache to KV
-        await kv.set(KV_FULL_SNAPSHOT_KEY, snapshot, { ex: KV_CACHE_TTL * 4 });
+        // Cache to KV if configured
+        if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+            try {
+                await kv.set(KV_FULL_SNAPSHOT_KEY, snapshot, { ex: KV_CACHE_TTL * 4 });
+            } catch (e) {
+                console.warn('[KV] Error saving snapshot:', e.message);
+            }
+        }
         
         // Update Memory Cache
         liveSnapshotCache = {

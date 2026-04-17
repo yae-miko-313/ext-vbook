@@ -10,28 +10,25 @@ module.exports = async (req, res) => {
 
     try {
         const snapshot = await getSnapshot(req);
-        const { sourceResults } = snapshot;
+        const { catalog } = snapshot;
 
-        // Simplify the output for the health check
+        // Simplify the output for the health check endpoint
         const health = {
             metadata: {
                 timestamp: new Date().toISOString(),
-                totalSources: sourceResults.length,
-                totalSites: Object.keys(snapshot.catalog.siteHealth || {}).length,
-                okSources: sourceResults.filter(s => s.status === 'active').length,
-                errorSources: sourceResults.filter(s => s.status === 'error').length
+                totalSources: catalog.sources.length,
+                totalSites: Object.keys(catalog.siteHealth || {}).length
             },
-            sources: sourceResults.map(s => ({
+            sources: catalog.sources.map(s => ({
                 id: s.id,
                 url: s.url,
                 status: s.status,
+                p: s.p,
+                s: s.s,
                 state: s.state,
-                confidence: s.confidence,
-                evidence: s.evidence,
-                finalHost: s.finalHost,
                 itemCount: s.itemCount
             })),
-            sites: snapshot.catalog.siteHealth || {}
+            sites: catalog.siteHealth || {}
         };
 
         return writeJson(req, res, health);
