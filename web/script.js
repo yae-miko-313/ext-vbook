@@ -99,122 +99,126 @@ function getActiveCatalogSources() {
 /**
  * NEW: Dynamic API Fetching
  */
-async function fetchAppData() {
-    renderLoadingState();
-    console.log('[API] Initializing dynamic fetch...');
+/**
+ * NEW: Dynamic API Fetching with SWR (Silence While Refreshing)
+ */
+async function fetchAppData(isRefresh = false) {
+    if (!isRefresh) renderLoadingState();
+    console.log(`[API] ${isRefresh ? 'Background Refreshing' : 'Initializing dynamic fetch'}...`);
+    
     try {
-        // Fetch Catalog and Health in parallel
         const catalogUrl = `${API_BASE_URL}/api/catalog.json`;
         const healthUrl = `${API_BASE_URL}/api/health`;
 
-        console.log(`[API] Fetching from ${catalogUrl} and ${healthUrl}`);
-
+        // Parallel fetch
         const [catalogRes, healthRes] = await Promise.all([
             fetch(catalogUrl).then(async r => {
                 if (!r.ok) throw new Error(`Catalog API failed: ${r.status}`);
                 return r.json();
             }),
             fetch(healthUrl).then(async r => {
-                if (!r.ok) {
-                    console.warn(`[API] Health API failed: ${r.status}. Proceeding without health data.`);
-                    return { sources: [] };
-                }
+                if (!r.ok) return { sources: [] };
                 return r.json();
-            }).catch(e => {
-                console.warn('[API] Health fetch error:', e.message);
-                return { sources: [] };
-            })
+            }).catch(() => ({ sources: [] }))
         ]);
 
-        console.log('[API] Success! Processing data...', catalogRes);
-
-        // Process Catalog
-        window.catalogExtensions = catalogRes.plugin?.data || [];
-        window.catalogSources = catalogRes.catalog?.sources || [];
-        window.catalogMeta = {
-            aggregateCopyUrl: catalogRes.plugin?.referenceListUrl || '',
-            loadedCatalogUrl: catalogRes.sourceList?.source || 'API'
-        };
-        window.catalogStatus = catalogRes.catalog?.summary || {};
-
-        // Process Health
-        window.siteHealthByUrl = {};
-        
-        // 1. Check if health is already in catalog response (New optimized backend)
-        const embeddedHealth = catalogRes.catalog?.siteHealth;
-        if (embeddedHealth) {
-            console.log('[API] Using embedded site health from catalog.');
-            Object.entries(embeddedHealth).forEach(([url, s]) => {
-                const key = normalizeSiteUrlKey(url);
-                if (key) window.siteHealthByUrl[key] = s;
-            });
-        }
-        
-        // 2. Fallback to healthRes if needed (Old/separate health data)
-        if (healthRes.sources) {
-            healthRes.sources.forEach(s => {
-                const key = normalizeSiteUrlKey(s.url);
-                if (key && !window.siteHealthByUrl[key]) window.siteHealthByUrl[key] = s;
-            });
-        }
-        
-        if (healthRes.sites) {
-            Object.entries(healthRes.sites).forEach(([url, s]) => {
-                const key = normalizeSiteUrlKey(url);
-                if (key && !window.siteHealthByUrl[key]) window.siteHealthByUrl[key] = s;
-            });
-        }
-
-        // Categorize for stats
-        categorizeExtensions();
-        
-        // Reset memoization on new data
-        memoizedFilterOptions = { authors: null, locales: null, types: null };
-        memoizedStats = null;
-
-        clearLoadingState();
-        renderDashboard();
-    } catch (error) {
-        console.error('[API] Critical Error:', error);
-
-        // SHOWCASE FALLBACK (UI Tĩnh): Load dummy data if on localhost for verification
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            console.log('[SHOWCASE] API unreachable. Loading mock data for UI verification.');
-            window.catalogExtensions = [
-                { name: 'Active Extension', type: 'novel', author: 'kychi', source: 'https://active.com' },
-                { name: 'Dead Extension', type: 'novel', author: 'kychi', source: 'https://dead.com' },
-                { name: 'WAF Blocked', type: 'comic', author: 'kychi', source: 'https://waf.com' },
-                { name: 'Moved Site', type: 'translate', author: 'kychi', source: 'https://moved.com' },
-                { name: 'Hijacked Site', type: 'novel', author: 'kychi', source: 'https://hijacked.com' }
-            ];
-            window.catalogStatus = { total: 5, unchanged: 5, errors: 0 };
-            window.siteHealthByUrl = {
-                'https://active.com/': { p: 'LIVE', s: '200' },
-                'https://dead.com/': { p: 'DIE', s: '404', state: 'dead' },
-                'https://waf.com/': { p: 'FAIL', s: 'WAF', state: 'fail' },
-                'https://moved.com/': { p: 'MOVE', s: 'newsite.vn', state: 'move' },
-                'https://hijacked.com/': { p: 'HIJACK', s: 'SHOP', state: 'hijack' }
-            };
-            categorizeExtensions();
-            clearLoadingState();
-            renderDashboard();
-            showToast('Chế độ xem trước (UI Health Check Mock)');
+        if (catalogRes.error) {
+            if (!isRefresh) throw new Error(catalogRes.error);
+            console.warn('[API] Background refresh failed:', catalogRes.error);
             return;
         }
 
-        showToast('Không thể tải dữ liệu từ API. Hãy đảm bảo bạn đang dùng Vercel Dev server.');
+        // Store globally
+        window.catalogExtensions = catalogRes.plugin?.data || [];
+        window.catalogSources = catalogRes.catalog?.sources || [];
+        
+        // Process Health
+        const newHealth = {};
+        const embeddedHealth = catalogRes.catalog?.siteHealth;
+        if (embeddedHealth) {
+            Object.entries(embeddedHealth).forEach(([url, s]) => {
+                const key = normalizeSiteUrlKey(url);
+                if (key) newHealth[key] = s;
+            });
+        }
+        if (healthRes.sources) {
+            healthRes.sources.forEach(s => {
+                const key = normalizeSiteUrlKey(s.url);
+                if (key && !newHealth[key]) newHealth[key] = s;
+            });
+        }
+        if (healthRes.sites) {
+            Object.entries(healthRes.sites).forEach(([url, s]) => {
+                const key = normalizeSiteUrlKey(url);
+                if (key && !newHealth[key]) newHealth[key] = s;
+            });
+        }
+        
+        // First Load
+        window.siteHealthByUrl = newHealth;
+        categorizeExtensions();
+        memoizedFilterOptions = { authors: null, locales: null, types: null };
+        memoizedStats = null;
+        
+        clearLoadingState();
+        renderDashboard();
 
-        // Final fallback UI for 404
-        const grid = document.getElementById('extensions-grid');
-        if (grid) {
-            grid.innerHTML = `
-                <div style="grid-column: 1/-1; padding: 40px; text-align: center;">
-                    <p style="color: var(--color-accent); font-weight: 700; font-size: 20px;">Lỗi: Không tìm thấy API</p>
-                    <p style="margin-top: 10px;">Bạn đang chạy Server tĩnh (http.server). Hãy chạy <strong>npm run dev</strong> ở thư mục gốc để API hoạt động.</p>
-                </div>
-            `;
+        // Trigger silent background refresh to get fresh health data from backend background scan
+        setTimeout(() => fetchAppData(true), 5000);
+
+    } catch (e) {
+        console.error('[API] Fetch Error:', e);
+        if (!isRefresh) {
+            // SHOWCASE FALLBACK (UI Tĩnh): Load dummy data if on localhost for verification
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.log('[SHOWCASE] API unreachable. Loading mock data for UI verification.');
+                window.catalogExtensions = [
+                    { name: 'Active Extension', type: 'novel', author: 'kychi', source: 'https://active.com' },
+                    { name: 'Dead Extension', type: 'novel', author: 'kychi', source: 'https://dead.com' },
+                    { name: 'WAF Blocked', type: 'comic', author: 'kychi', source: 'https://waf.com' },
+                    { name: 'Moved Site', type: 'translate', author: 'kychi', source: 'https://moved.com' },
+                    { name: 'Hijacked Site', type: 'novel', author: 'kychi', source: 'https://hijacked.com' }
+                ];
+                window.catalogStatus = { total: 5, unchanged: 5, errors: 0 };
+                window.siteHealthByUrl = {
+                    'https://active.com/': { p: 'LIVE', s: '200' },
+                    'https://dead.com/': { p: 'DIE', s: '404', state: 'dead' },
+                    'https://waf.com/': { p: 'FAIL', s: 'WAF', state: 'fail' },
+                    'https://moved.com/': { p: 'MOVE', s: 'newsite.vn', state: 'move' },
+                    'https://hijacked.com/': { p: 'HIJACK', s: 'SHOP', state: 'hijack' }
+                };
+                categorizeExtensions();
+                clearLoadingState();
+                renderDashboard();
+                showToast('Chế độ xem trước (UI Health Check Mock)');
+                return;
+            }
+
+            const grid = document.getElementById('extensions-grid');
+            if (grid) {
+                grid.innerHTML = `<div class="error" style="grid-column: 1/-1; padding: 40px; text-align: center; color: var(--color-accent);">L\u1ed7i t\u1ea3i d\u1eef li\u1ec7u: ${e.message}</div>`;
+            }
         }
     }
+}
+
+/**
+ * NEW: Patch only health badges for silent updates
+ */
+function patchHealthBadges() {
+    const cards = document.querySelectorAll('.ext-card');
+    cards.forEach(card => {
+        const sourceUrl = card.getAttribute('data-source-url');
+        if (!sourceUrl) return;
+        
+        const badgeContainer = card.querySelector('.ext-health-badge-container');
+        if (badgeContainer) {
+            const newHtml = renderExtensionSiteHealthBadge(sourceUrl);
+            if (badgeContainer.innerHTML.trim() !== newHtml.trim()) {
+                badgeContainer.innerHTML = newHtml;
+            }
+        }
+    });
 }
 
 function categorizeExtensions() {
@@ -486,23 +490,50 @@ function clearLoadingState() {
     }
 }
 
+/**
+ * NEW: Animated Counter for Stats
+ */
+function animateCounter(id, end) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    
+    const start = parseInt(el.textContent) || 0;
+    if (start === end) return;
+    
+    const duration = 1200; // 1.2s animation
+    const startTime = performance.now();
+    
+    function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Ease out quint animation
+        const ease = 1 - Math.pow(1 - progress, 5);
+        const current = Math.floor(start + (end - start) * ease);
+        
+        el.textContent = current;
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
+    }
+    
+    requestAnimationFrame(update);
+}
+
 function renderStats(extensions = null) {
-    // If no extensions provided, we usually want to show stats for the currently filtered set
-    // However, for initialization we might need all extensions.
     const all = extensions || filterExtensions();
 
-    // Grouping for counts
     const novelCount = all.filter(e => e.type === 'novel').length;
     const comicCount = all.filter(e => e.type === 'comic').length;
     const chineseCount = all.filter(e => e.type === 'chinese_novel' || e.type === 'chinese').length;
-    
     const otherCount = all.length - (novelCount + comicCount + chineseCount);
 
-    document.getElementById('total-extensions').textContent = all.length;
-    document.getElementById('novel-count').textContent = novelCount;
-    document.getElementById('comic-count').textContent = comicCount;
-    document.getElementById('chinese-count').textContent = chineseCount;
-    document.getElementById('other-count').textContent = otherCount;
+    animateCounter('total-extensions', all.length);
+    animateCounter('novel-count', novelCount);
+    animateCounter('comic-count', comicCount);
+    animateCounter('chinese-count', chineseCount);
+    animateCounter('other-count', otherCount);
 }
 
 function renderSourceRepoCount() {
@@ -706,7 +737,7 @@ function renderCard(ext) {
         : '<span class="ext-site-copy-btn ext-site-copy-btn-disabled" aria-hidden="true">🔗</span>';
 
     return `
-        <div class="ext-card reveal-in">
+        <div class="ext-card reveal-in" data-source-url="${escapeHtml(sourceLabel)}">
             <div class="ext-top-row">
                 <div class="ext-type-badge">${escapeHtml(typeLabel)}</div>
                 ${siteCopyButton}
@@ -718,7 +749,9 @@ function renderCard(ext) {
                 <div class="ext-title-wrap">
                     <h3 class="ext-name">${escapeHtml(ext.name || 'Chưa đặt tên')}</h3>
                     <p class="ext-site-url" title="${escapeHtml(sourceLabel || 'Không rõ nguồn')}">${escapeHtml(sourceHost || sourceLabel || 'Không rõ nguồn')}</p>
-                    ${siteHealthBadge ? `<div class="ext-health-row">${siteHealthBadge}</div>` : ''}
+                    <div class="ext-health-badge-container">
+                        ${siteHealthBadge}
+                    </div>
                 </div>
                 <span class="ext-version">v${escapeHtml(ext.version || '0')}</span>
             </div>
@@ -976,44 +1009,49 @@ function renderGrid() {
 
     if (extensions.length === 0) {
         grid.innerHTML = `
-            <div style="grid-column: 1/-1; padding: 40px; text-align: center; color: #666;">
-                <p style="font-size: 18px;">Không tìm thấy extension</p>
-                <p style="font-size: 14px;">Hãy thử đổi từ khóa</p>
+            <div class="empty-state" style="grid-column: 1/-1; padding: 40px; text-align: center; color: var(--color-text-tertiary);">
+                <p style="font-size: 18px; font-weight: 600;">Kh\u00f4ng t\u00ecm th\u1ea5y extension</p>
             </div>
         `;
         return;
     }
 
-    // Incremental Rendering: Batch size of 24
-    const BATCH_SIZE = 24;
-    let renderedCount = 0;
-    
     grid.innerHTML = '';
     
-    function renderNextBatch() {
-        if (version !== gridRenderVersion) return; // Stale render
+    // Waterfall Effect: Render cards one by one
+    let i = 0;
+    const staggerDelay = 25; // 25ms between each card
+    
+    function renderNext() {
+        if (version !== gridRenderVersion) return;
+        if (i >= extensions.length) return;
 
-        const nextBatch = extensions.slice(renderedCount, renderedCount + BATCH_SIZE);
-        if (nextBatch.length === 0) return;
-
-        const fragment = document.createDocumentFragment();
+        const ext = extensions[i];
+        const cardHtml = renderCard(ext);
+        
+        // Create actual element to apply 'is-appearing' class after insertion
         const temp = document.createElement('div');
-        temp.innerHTML = nextBatch.map(renderCard).join('');
+        temp.innerHTML = cardHtml;
+        const cardEl = temp.firstElementChild;
         
-        while (temp.firstChild) {
-            fragment.appendChild(temp.firstChild);
-        }
+        grid.appendChild(cardEl);
         
-        grid.appendChild(fragment);
-        renderedCount += BATCH_SIZE;
+        // Trigger animation in next frame
+        requestAnimationFrame(() => {
+            cardEl.classList.add('is-appearing');
+        });
 
-        if (renderedCount < extensions.length) {
-            // Use requestAnimationFrame for smooth batching
-            requestAnimationFrame(renderNextBatch);
+        i++;
+        
+        // Schedule next card
+        if (i < extensions.length) {
+            // Speed up if too many items (e.g. > 48)
+            const delay = i > 48 ? 10 : staggerDelay;
+            setTimeout(renderNext, delay);
         }
     }
 
-    renderNextBatch();
+    renderNext();
 }
 
 function renderSourceView() {

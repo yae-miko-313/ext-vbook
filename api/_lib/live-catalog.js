@@ -373,11 +373,20 @@ async function buildSiteHealthMap(extensions, timeoutMs) {
         }
     });
 
-    const siteUrls = Array.from(uniqueSites);
-    // Limit to avoid massive timeouts
-    const results = await Promise.all(
-        siteUrls.slice(0, 80).map(url => checkSiteHealth(url, Math.min(timeoutMs, SCAN_TIMEOUT_MS)))
-    );
+    const siteUrls = Array.from(uniqueSites).slice(0, 250);
+    const results = [];
+    
+    // Batching: Process in groups of 50 to avoid congestion
+    const BATCH_SIZE = 50;
+    console.log(`[Health] Starting scan of ${siteUrls.length} sites in batches of ${BATCH_SIZE}...`);
+    
+    for (let i = 0; i < siteUrls.length; i += BATCH_SIZE) {
+        const batch = siteUrls.slice(i, i + BATCH_SIZE);
+        const batchResults = await Promise.all(
+            batch.map(url => checkSiteHealth(url, Math.min(timeoutMs, SCAN_TIMEOUT_MS)))
+        );
+        results.push(...batchResults);
+    }
 
     const map = {};
     results.forEach(res => {
@@ -468,12 +477,12 @@ async function getSnapshot(req) {
     const now = Date.now();
     const workspaceRoot = resolveWorkspaceRoot();
 
-    // Tier 1: Memory Cache (Very fast, expires in 30s)
+    // Tier 1: Memory Cache (Immediate)
     if (liveSnapshotCache && liveSnapshotCache.expiresAt > now) {
         return liveSnapshotCache.data;
     }
 
-    // Tier 2: KV Cache (Fast, global)
+    // Tier 2: KV Cache (Fast)
     let kvData = null;
     const isKvConfigured = process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN;
     
@@ -483,50 +492,64 @@ async function getSnapshot(req) {
         } catch (e) {
             console.warn('[KV] Error fetching full snapshot:', e.message);
         }
-    } else {
-        console.warn('[KV] Required environment variables (KV_REST_API_URL, KV_REST_API_TOKEN) are missing. KV caching is disabled.');
     }
 
     if (kvData) {
-        // Return immediately
         liveSnapshotCache = {
             data: kvData,
-            expiresAt: now + 30000 // 30s memory cache
+            expiresAt: now + 30000 
         };
 
-        // Background revalidation if stale
+        // Background revalidation
         const generatedAt = new Date(kvData.catalog?.metadata?.generatedAt || 0).getTime();
         if (now - generatedAt > KV_CACHE_TTL * 1000) {
-            console.log('[KV] Full snapshot is stale. Revalidating in background...');
-            waitUntil(refreshAndCacheSnapshot(workspaceRoot));
+            console.log('[KV] Refreshing health in background...');
+            waitUntil(refreshAndCacheSnapshot(workspaceRoot, kvData));
         }
 
         return kvData;
     }
 
-    // Tier 3: Cold Start (Slow)
-    console.log('[KV] Cold start. Building fresh snapshot...');
-    return await refreshAndCacheSnapshot(workspaceRoot);
+    // Tier 3: Cold Start (Atomic Mini-Scan)
+    // Build catalog first (Fast)
+    console.log('[KV] Cold start. Performing mini-scan for atomic delivery...');
+    const snapshot = await buildLiveSnapshot(workspaceRoot);
+    
+    // Perform a very fast mini-scan of top 50 sites to ensure atomic health tags on first load
+    const miniHealthMap = await buildSiteHealthMap(snapshot.plugin.data.slice(0, 50), SCAN_TIMEOUT_MS);
+    snapshot.catalog.siteHealth = miniHealthMap;
+    
+    const timestamp = new Date().toISOString();
+    snapshot.catalog.metadata.generatedAt = timestamp;
+    snapshot.healthUpdatedAt = timestamp;
+    
+    // Trigger FULL scan in background to cover all 250+ sites
+    waitUntil(refreshAndCacheSnapshot(workspaceRoot, snapshot));
+    
+    return snapshot;
 }
 
-async function refreshAndCacheSnapshot(workspaceRoot) {
+async function refreshAndCacheSnapshot(workspaceRoot, baseSnapshot = null) {
     try {
-        const snapshot = await buildLiveSnapshot(workspaceRoot);
-        // Add health check
+        const snapshot = baseSnapshot || await buildLiveSnapshot(workspaceRoot);
+        
+        // Batched Health Scan (Background)
         const healthMap = await buildSiteHealthMap(snapshot.plugin.data, SCAN_TIMEOUT_MS);
         snapshot.catalog.siteHealth = healthMap;
-        snapshot.catalog.metadata.generatedAt = new Date().toISOString();
         
-        // Cache to KV if configured
+        const timestamp = new Date().toISOString();
+        snapshot.catalog.metadata.generatedAt = timestamp;
+        snapshot.healthUpdatedAt = timestamp;
+        
         if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
             try {
                 await kv.set(KV_FULL_SNAPSHOT_KEY, snapshot, { ex: KV_CACHE_TTL * 4 });
+                console.log('[Refresh] Background scan complete. KV updated at', timestamp);
             } catch (e) {
-                console.warn('[KV] Error saving snapshot:', e.message);
+                console.warn('[KV] Error saving background snapshot:', e.message);
             }
         }
         
-        // Update Memory Cache
         liveSnapshotCache = {
             data: snapshot,
             expiresAt: Date.now() + 30000
@@ -534,8 +557,7 @@ async function refreshAndCacheSnapshot(workspaceRoot) {
         
         return snapshot;
     } catch (e) {
-        console.error('[Refresh] Failed:', e.message);
-        throw e;
+        console.error('[Refresh] Background background scan failed:', e.message);
     }
 }
 
