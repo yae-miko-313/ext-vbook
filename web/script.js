@@ -238,7 +238,11 @@ function categorizeExtensions() {
     Object.keys(extensionCatalog).forEach(k => extensionCatalog[k] = []);
 
     all.forEach(ext => {
-        const type = ext.type || '_unknown';
+        let type = ext.type || '_unknown';
+        if (type === 'chinese_novel' || type === 'chinese') {
+            type = 'novel';
+        }
+        
         if (extensionCatalog[type]) {
             extensionCatalog[type].push(ext);
         } else {
@@ -283,7 +287,7 @@ function normalizeLocaleKey(locale) {
         return 'global';
     }
 
-    return normalized;
+    return 'global'; // Map everything else to global as requested
 }
 
 function getLocaleDisplayLabel(localeKey) {
@@ -292,22 +296,18 @@ function getLocaleDisplayLabel(localeKey) {
     }
 
     if (localeKey === 'zh') {
-        return '中文';
+        return 'Tiếng Trung';
     }
 
     if (localeKey === 'en') {
-        return 'English';
+        return 'Tiếng Anh';
     }
 
     if (localeKey === 'global') {
-        return 'global';
+        return 'Global';
     }
 
-    if (localeKey === '_unknown') {
-        return 'Không rõ';
-    }
-
-    return localeKey;
+    return 'Global';
 }
 
 function isNsfwExtension(ext) {
@@ -326,7 +326,10 @@ function extensionMatchesStructuredFilters(ext) {
 
     const authorKey = normalizeAuthorKey(ext.author || '');
     const localeValue = normalizeLocaleKey(ext.locale || '_unknown');
-    const typeValue = String(ext.type || '_unknown').trim() || '_unknown';
+    let typeValue = String(ext.type || '_unknown').trim() || '_unknown';
+    if (typeValue === 'chinese_novel' || typeValue === 'chinese') {
+        typeValue = 'novel';
+    }
 
     if (hideNsfwEnabled && isNsfwExtension(ext)) {
         return false;
@@ -463,7 +466,7 @@ function renderLoadingState() {
         `;
     }
 
-    ['total-extensions', 'novel-count', 'comic-count', 'chinese-count', 'other-count'].forEach((id) => {
+    ['total-extensions', 'novel-count', 'comic-count', 'translate-count', 'tts-count'].forEach((id) => {
         const element = document.getElementById(id);
         if (!element) {
             return;
@@ -486,7 +489,7 @@ function renderLoadingState() {
 }
 
 function clearLoadingState() {
-    ['total-extensions', 'novel-count', 'comic-count', 'chinese-count', 'other-count'].forEach((id) => {
+    ['total-extensions', 'novel-count', 'comic-count', 'translate-count', 'tts-count'].forEach((id) => {
         const element = document.getElementById(id);
         if (!element) {
             return;
@@ -535,16 +538,19 @@ function animateCounter(id, end) {
 function renderStats(extensions = null) {
     const all = extensions || filterExtensions();
 
-    const novelCount = all.filter(e => e.type === 'novel').length;
+    const novelCount = all.filter(e => {
+        const type = e.type || '';
+        return type === 'novel' || type === 'chinese_novel' || type === 'chinese';
+    }).length;
     const comicCount = all.filter(e => e.type === 'comic').length;
-    const chineseCount = all.filter(e => e.type === 'chinese_novel' || e.type === 'chinese').length;
-    const otherCount = all.length - (novelCount + comicCount + chineseCount);
+    const translateCount = all.filter(e => e.type === 'translate').length;
+    const ttsCount = all.filter(e => e.type === 'tts').length;
 
     animateCounter('total-extensions', all.length);
     animateCounter('novel-count', novelCount);
     animateCounter('comic-count', comicCount);
-    animateCounter('chinese-count', chineseCount);
-    animateCounter('other-count', otherCount);
+    animateCounter('translate-count', translateCount);
+    animateCounter('tts-count', ttsCount);
 }
 
 function renderSourceRepoCount() {
@@ -729,11 +735,12 @@ function renderContributeSection() {
 function renderCard(ext) {
     const typeLabels = {
         novel: 'TRUYỆN CHỮ',
+        chinese_novel: 'TRUYỆN CHỮ',
+        chinese: 'TRUYỆN CHỮ',
         comic: 'TRUYỆN TRANH',
-        chinese_novel: 'TRUYỆN TRUNG',
         translate: 'DỊCH',
         tts: 'TTS',
-        _unknown: 'KHÔNG RÕ'
+        _unknown: 'KHÁC'
     };
 
     const typeLabel = typeLabels[ext.type] || typeLabels._unknown;
@@ -760,11 +767,11 @@ function renderCard(ext) {
                 <div class="ext-title-wrap">
                     <h3 class="ext-name">${escapeHtml(ext.name || 'Chưa đặt tên')}</h3>
                     <p class="ext-site-url" title="${escapeHtml(sourceLabel || 'Không rõ nguồn')}">${escapeHtml(sourceHost || sourceLabel || 'Không rõ nguồn')}</p>
-                    <div class="ext-health-badge-container">
-                        ${siteHealthBadge}
-                    </div>
                 </div>
                 <span class="ext-version">v${escapeHtml(ext.version || '0')}</span>
+            </div>
+            <div class="ext-health-badge-container">
+                ${siteHealthBadge}
             </div>
             <p class="ext-author">Tác giả: ${escapeHtml(ext.author || 'Không rõ')}</p>
             <p class="ext-description">${escapeHtml(description || 'Chưa có mô tả')}</p>
@@ -774,8 +781,9 @@ function renderCard(ext) {
 
 const SOURCE_TYPE_LABELS = {
     novel: 'Truyện chữ',
+    chinese_novel: 'Truyện chữ',
+    chinese: 'Truyện chữ',
     comic: 'Truyện tranh',
-    chinese_novel: 'Truyện Trung',
     translate: 'Dịch',
     tts: 'TTS',
     _unknown: 'Khác'
@@ -900,16 +908,16 @@ function renderExtensionSiteHealthBadge(sourceUrl) {
         return '';
     }
 
-    const prefix = health.p;
+    const prefix = health.p === 'MOVE' ? 'DIRECT' : health.p;
     const suffix = health.s || '';
     const state = health.state || 'uncertain';
     
     // Title/Tooltip description
     let description = '';
-    if (prefix === 'DIE') description = `Site l\u1ed7i ho\u1eb7c ng\u1eebng ho\u1ea1t \u0111\u1ed9ng (${suffix})`;
-    if (prefix === 'FAIL') description = `Site b\u1ecb ch\u1eb7n b\u1edfi t\u01b0\u1eddng l\u1eeda/WAF (${suffix})`;
-    if (prefix === 'MOVE') description = `Site \u0111\u00e3 chuy\u1ec3n t\u00ean mi\u1ec1n m\u1edbi: ${suffix}`;
-    if (prefix === 'HIJACK') description = `Site b\u1ecb chi\u1ebfm quy\u1ec1n/Ads Redirect (${suffix})`;
+    if (prefix === 'DIE') description = `Site lỗi hoặc ngừng hoạt động (${suffix})`;
+    if (prefix === 'FAIL') description = `Site bị chặn bởi tường lửa/WAF (${suffix})`;
+    if (prefix === 'DIRECT') description = `Site đã chuyển tên miền mới: ${suffix}`;
+    if (prefix === 'HIJACK') description = `Site bị chiếm quyền/Ads Redirect (${suffix})`;
 
     return `
         <span class="ext-health-badge ext-health-${state.toLowerCase()}" title="${escapeHtml(description)}">
@@ -1068,6 +1076,9 @@ function renderGrid() {
 function renderSourceView() {
     const grid = document.getElementById('extensions-grid');
     const sources = filterSources();
+    
+    // Increment grid render version to immediately cease any ongoing renderGrid loops
+    gridRenderVersion++;
 
     if (!sources.length) {
         grid.innerHTML = `
@@ -1129,11 +1140,17 @@ function getTypeFilterOptions() {
 
     const typeSet = new Set();
     getAllExtensions().forEach((ext) => {
-        typeSet.add(String(ext.type || '_unknown').trim() || '_unknown');
+        let type = String(ext.type || '_unknown').trim() || '_unknown';
+        // Group chinese_novel into novel display
+        if (type === 'chinese_novel' || type === 'chinese') {
+            type = 'novel';
+        }
+        typeSet.add(type);
     });
 
     memoizedFilterOptions.types = Array.from(typeSet)
         .map((value) => ({ value, label: getSourceTypeLabel(value) }))
+        .filter(opt => opt.value !== '_unknown') // Hide unknown if empty or not needed
         .sort((a, b) => a.label.localeCompare(b.label, 'vi'));
 
     return memoizedFilterOptions.types;

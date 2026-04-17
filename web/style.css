@@ -969,11 +969,12 @@ body.filter-open {
     text-overflow: ellipsis;
 }
 
-.ext-health-row {
-    margin-top: 6px;
+.ext-health-badge-container {
+    margin-top: 8px;
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
+    min-height: 20px;
 }
 
 .ext-health-badge {
@@ -987,15 +988,21 @@ body.filter-open {
     border: 1px solid transparent;
     text-transform: uppercase;
     overflow: hidden;
+    max-width: 100%; /* Ensure it doesn't overflow parent */
 }
 
 .ext-health-prefix {
     padding: 2px 6px;
     background: rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Prefix stays full */
 }
 
 .ext-health-suffix {
-    padding: 2px 6px;
+    padding: 2px 8px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+    min-width: 0;
 }
 
 .ext-health-dead {
