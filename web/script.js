@@ -153,39 +153,18 @@ async function fetchAppData(isRefresh = false) {
         // Atomic Update: If this is a refresh, only update tags to avoid jumping UI
         if (isRefresh) {
             console.log('[API] Background refresh complete. Patching UI...');
-            
-            // If the current UI is using fallback data (15 items) or is empty,
-            // and we just got the REAL full list (hundreds), we should re-render everything
-            const currentTotal = window.catalogExtensions?.length || 0;
-            const newTotal = catalogRes.plugin?.data?.length || 0;
-            
             window.catalogExtensions = catalogRes.plugin?.data || [];
             window.catalogSources = catalogRes.catalog?.sources || [];
             window.siteHealthByUrl = newHealth;
 
-            if (currentTotal < 20 && newTotal > 20) {
-                console.log('[API] Upgrading from fallback to live data. Re-rendering...');
-                categorizeExtensions();
-                clearLoadingState();
-                renderDashboard();
-            } else {
-                patchHealthBadges();
-            }
+            patchHealthBadges();
             return;
         }
 
-        const isInitializing = catalogRes.catalog?.summary?.mode === 'initializing';
-        
         // Store globally
         window.catalogExtensions = catalogRes.plugin?.data || [];
         window.catalogSources = catalogRes.catalog?.sources || [];
         window.siteHealthByUrl = newHealth;
-
-        if (isInitializing && window.catalogExtensions.length === 0) {
-            console.log('[API] Server is initializing. Keeping loading state...');
-            setTimeout(() => fetchAppData(false), 2000); 
-            return;
-        }
 
         // First Load with data
         categorizeExtensions();

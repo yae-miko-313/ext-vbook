@@ -23,9 +23,8 @@ module.exports = async (req, res) => {
                 id: s.id,
                 url: s.url,
                 status: s.status,
-                p: s.p,
-                s: s.s,
                 state: s.state,
+                evidence: s.evidence,
                 itemCount: s.itemCount
             })),
             sites: catalog.siteHealth || {}
