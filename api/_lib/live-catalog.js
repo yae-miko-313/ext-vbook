@@ -21,6 +21,13 @@ function loadJsonConfig(relativePath) {
 let bundledSourceList = loadJsonConfig('web/remote-sources.json');
 let referenceSourceList = loadJsonConfig('.private/references/remote-sources.json');
 
+const { kv } = require('@vercel/kv');
+const { waitUntil } = require('@vercel/functions');
+
+const KV_HEALTH_KEY = 'vbook:site_health_v3';
+const KV_CACHE_TTL = 30 * 60; // 30 minutes in seconds
+const SCAN_TIMEOUT_MS = 5000;
+
 let liveSnapshotCache = null;
 
 function stripJsonComments(text) {
@@ -367,9 +374,9 @@ async function buildSiteHealthMap(extensions, timeoutMs) {
     });
 
     const siteUrls = Array.from(uniqueSites);
-    // Limit to avoid massive timeouts, although usually unique sites are < 100
+    // Limit to avoid massive timeouts
     const results = await Promise.all(
-        siteUrls.slice(0, 100).map(url => checkSiteHealth(url, Math.min(timeoutMs, 5000)))
+        siteUrls.slice(0, 80).map(url => checkSiteHealth(url, Math.min(timeoutMs, SCAN_TIMEOUT_MS)))
     );
 
     const map = {};
@@ -379,53 +386,145 @@ async function buildSiteHealthMap(extensions, timeoutMs) {
     return map;
 }
 
+const HIJACK_DOMAINS = [
+    'shopee.vn', 'lazada.vn', 'tiki.vn', 'shope.ee', 's.shopee.vn',
+    'sedo.com', 'hugedomains.com', 'namebright.com', 'dan.com', 'afternic.com',
+    'parklogic.com', 'bodis.com'
+];
+
 async function checkSiteHealth(url, timeoutMs) {
     try {
         const result = await fetchTextWithTimeout(url, timeoutMs);
         
-        // Basic detection logic similar to Repo Health
-        let state = 'active';
+        // Advanced Detection Logic (Prefix: p, Suffix: s)
+        let prefix = 'LIVE';
+        let suffix = String(result.status);
         let evidence = [];
-        
-        if (!result.ok) {
-            state = 'dead';
-            evidence.push({ type: 'http_error', value: result.status });
-        }
 
+        // 1. Hijack Detection
         try {
-            const oldHost = new URL(url).hostname.replace(/^www\./, '');
-            const newHost = new URL(result.finalUrl).hostname.replace(/^www\./, '');
-            if (oldHost !== newHost && result.ok) {
-                state = 'redirected';
-                evidence.push({ type: 'http_301_302_host_changed', value: newHost });
+            const finalUrlObj = new URL(result.finalUrl);
+            const finalHost = finalUrlObj.hostname.toLowerCase().replace(/^www\./, '');
+            const originalHost = new URL(url).hostname.toLowerCase().replace(/^www\./, '');
+
+            const isHijacked = HIJACK_DOMAINS.some(d => finalHost.includes(d)) || 
+                             finalUrlObj.pathname.includes('parking') ||
+                             finalUrlObj.pathname.includes('buy-domain');
+
+            if (isHijacked) {
+                prefix = 'HIJACK';
+                suffix = finalHost.includes('shopee') || finalHost.includes('lazada') ? 'SHOP' : 'PARK';
+                evidence.push({ type: 'hijack_detected', value: finalHost });
+            } else if (originalHost !== finalHost && result.ok) {
+                prefix = 'MOVE';
+                suffix = finalHost.length > 12 ? finalHost.substring(0, 10) + '..' : finalHost;
+                evidence.push({ type: 'domain_changed', value: finalHost });
             }
         } catch (e) {}
 
+        // 2. WAF / Cloudflare Detection
         const isCfServer = result.headers['server']?.toLowerCase().includes('cloudflare') || result.headers['cf-ray'];
         if (result.text.includes('cf-browser-verification') || 
             result.text.includes('Cloudflare Ray ID') ||
             (result.status === 403 && isCfServer)) {
-            state = 'cloudflare';
-            evidence.push({ type: 'cloudflare_detect' });
+            prefix = 'FAIL';
+            suffix = 'WAF';
+            evidence.push({ type: 'cloudflare_blocked' });
+        }
+
+        // 3. Status Error
+        if (prefix === 'LIVE' && !result.ok) {
+            prefix = 'DIE';
+            suffix = String(result.status);
+            evidence.push({ type: 'http_error', value: result.status });
         }
 
         return {
             url,
-            state,
+            p: prefix,
+            s: suffix,
+            state: prefix.toLowerCase(),
             evidence,
-            finalHost: state === 'redirected' ? new URL(result.finalUrl).hostname : null,
-            status: result.status
+            status: result.status,
+            finalUrl: result.finalUrl
         };
     } catch (error) {
+        let suffix = 'CONN';
+        if (error.name === 'AbortError') suffix = 'TOUT';
+        
         return {
             url,
+            p: 'DIE',
+            s: suffix,
             state: 'dead',
             error: error.message
         };
     }
 }
 
-async function getLiveSnapshot(workspaceRoot, options = {}) {
+async function getSnapshot(req) {
+    const workspaceRoot = resolveWorkspaceRoot();
+    const now = Date.now();
+
+    // 1. Try to get from KV first for speed
+    let cachedHealth = null;
+    try {
+        cachedHealth = await kv.get(KV_HEALTH_KEY);
+    } catch (e) {
+        console.warn('[KV] Error fetching health:', e.message);
+    }
+
+    // 2. Build live snapshot (logic remains same for catalog structure)
+    // We update the health part specifically
+    const snapshot = await buildLiveSnapshot(workspaceRoot);
+
+    if (cachedHealth) {
+        // Use cached health for immediate response
+        snapshot.catalog.siteHealth = cachedHealth.sites || {};
+        snapshot.healthUpdatedAt = cachedHealth.timestamp;
+
+        // 3. Check if we need to revalidate (Background scan)
+        const lastScan = new Date(cachedHealth.timestamp).getTime();
+        if (now - lastScan > KV_CACHE_TTL * 1000) {
+            console.log('[KV] Health is stale. Triggering background scan...');
+            waitUntil(performBackgroundScanAndCache(snapshot.catalog.siteHealth, snapshot.plugin.data));
+        }
+    } else {
+        // No cache: Perform initial scan (might be slow for first user)
+        console.log('[KV] No cache found. Performing initial scan...');
+        const freshHealth = await buildSiteHealthMap(snapshot.plugin.data, SCAN_TIMEOUT_MS);
+        snapshot.catalog.siteHealth = freshHealth;
+        snapshot.healthUpdatedAt = new Date().toISOString();
+        
+        // Cache it
+        try {
+            await kv.set(KV_HEALTH_KEY, {
+                timestamp: snapshot.healthUpdatedAt,
+                sites: freshHealth
+            }, { ex: KV_CACHE_TTL * 2 }); // Keep in KV longer than revalidation period
+        } catch (e) {}
+    }
+
+    return snapshot;
+}
+
+async function performBackgroundScanAndCache(oldHealth, extensions) {
+    try {
+        console.log('[Background] Starting scan...');
+        const freshHealth = await buildSiteHealthMap(extensions, SCAN_TIMEOUT_MS);
+        const timestamp = new Date().toISOString();
+        
+        await kv.set(KV_HEALTH_KEY, {
+            timestamp,
+            sites: freshHealth
+        }, { ex: KV_CACHE_TTL * 2 });
+        console.log('[Background] Scan completed and cached at', timestamp);
+    } catch (e) {
+        console.error('[Background] Scan failed:', e.message);
+    }
+}
+
+function getLiveSnapshot(workspaceRoot, options = {}) {
     const now = Date.now();
     const ttlMs = Number(options.cacheTtlMs || DEFAULT_CACHE_TTL_MS);
 

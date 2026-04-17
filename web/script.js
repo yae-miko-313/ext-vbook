@@ -172,15 +172,24 @@ async function fetchAppData() {
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
             console.log('[SHOWCASE] API unreachable. Loading mock data for UI verification.');
             window.catalogExtensions = [
-                { name: 'Demo Novel Ext', type: 'novel', author: 'kychi', source: 'https://github.com' },
-                { name: 'Demo Comic Ext', type: 'comic', author: 'kychi', source: 'https://github.com' }
+                { name: 'Active Extension', type: 'novel', author: 'kychi', source: 'https://active.com' },
+                { name: 'Dead Extension', type: 'novel', author: 'kychi', source: 'https://dead.com' },
+                { name: 'WAF Blocked', type: 'comic', author: 'kychi', source: 'https://waf.com' },
+                { name: 'Moved Site', type: 'translate', author: 'kychi', source: 'https://moved.com' },
+                { name: 'Hijacked Site', type: 'novel', author: 'kychi', source: 'https://hijacked.com' }
             ];
-            window.catalogStatus = { total: 2, unchanged: 2, errors: 0 };
-            window.siteHealthByUrl = {};
+            window.catalogStatus = { total: 5, unchanged: 5, errors: 0 };
+            window.siteHealthByUrl = {
+                'https://active.com/': { p: 'LIVE', s: '200' },
+                'https://dead.com/': { p: 'DIE', s: '404', state: 'dead' },
+                'https://waf.com/': { p: 'FAIL', s: 'WAF', state: 'fail' },
+                'https://moved.com/': { p: 'MOVE', s: 'newsite.vn', state: 'move' },
+                'https://hijacked.com/': { p: 'HIJACK', s: 'SHOP', state: 'hijack' }
+            };
             categorizeExtensions();
             clearLoadingState();
             renderDashboard();
-            showToast('Chế độ xem trước (UI Tĩnh)');
+            showToast('Chế độ xem trước (UI Health Check Mock)');
             return;
         }
 
@@ -833,18 +842,28 @@ function buildHealthTooltip(info) {
 }
 
 function renderExtensionSiteHealthBadge(sourceUrl) {
-    const info = getExtensionSiteHealth(sourceUrl);
-    if (!info || !info.state) {
-        return '';
-    }
-    const label = getHealthLabel(info);
-    if (!label) {
+    const health = getExtensionSiteHealth(sourceUrl);
+    if (!health || !health.p || health.p === 'LIVE') {
         return '';
     }
 
-    const badgeClass = getHealthBadgeClass(info);
-    const tooltip = buildHealthTooltip(info);
-    return `<span class="ext-health-badge ${badgeClass}" title="${escapeHtml(tooltip)}">${label}</span>`;
+    const prefix = health.p;
+    const suffix = health.s || '';
+    const state = health.state || 'uncertain';
+    
+    // Title/Tooltip description
+    let description = '';
+    if (prefix === 'DIE') description = `Site l\u1ed7i ho\u1eb7c ng\u1eebng ho\u1ea1t \u0111\u1ed9ng (${suffix})`;
+    if (prefix === 'FAIL') description = `Site b\u1ecb ch\u1eb7n b\u1edfi t\u01b0\u1eddng l\u1eeda/WAF (${suffix})`;
+    if (prefix === 'MOVE') description = `Site \u0111\u00e3 chuy\u1ec3n t\u00ean mi\u1ec1n m\u1edbi: ${suffix}`;
+    if (prefix === 'HIJACK') description = `Site b\u1ecb chi\u1ebfm quy\u1ec1n/Ads Redirect (${suffix})`;
+
+    return `
+        <span class="ext-health-badge ext-health-${state.toLowerCase()}" title="${escapeHtml(description)}">
+            <span class="ext-health-prefix">${escapeHtml(prefix)}</span>
+            <span class="ext-health-suffix">${escapeHtml(suffix)}</span>
+        </span>
+    `;
 }
 
 function summarizeSourceTypes(extItems) {

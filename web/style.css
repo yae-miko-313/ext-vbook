@@ -955,43 +955,57 @@ body.filter-open {
 .ext-health-badge {
     display: inline-flex;
     align-items: center;
-    border-radius: 999px;
-    padding: 3px 8px;
+    border-radius: 6px;
+    padding: 0;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.2px;
     border: 1px solid transparent;
     text-transform: uppercase;
+    overflow: hidden;
+}
+
+.ext-health-prefix {
+    padding: 2px 6px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.ext-health-suffix {
+    padding: 2px 6px;
 }
 
 .ext-health-dead {
-    background: rgba(239, 68, 68, 0.14);
-    border-color: rgba(239, 68, 68, 0.4);
-    color: #b91c1c;
+    background: #fee2e2;
+    border-color: #fecaca;
+    color: #991b1b;
 }
+.ext-health-dead .ext-health-suffix { background: #fee2e2; }
 
-.ext-health-cloudflare {
-    background: rgba(245, 158, 11, 0.16);
-    border-color: rgba(245, 158, 11, 0.42);
-    color: #b45309;
+.ext-health-cloudflare, .ext-health-fail {
+    background: #ffedd5;
+    border-color: #fed7aa;
+    color: #9a3412;
 }
+.ext-health-cloudflare .ext-health-suffix, .ext-health-fail .ext-health-suffix { background: #ffedd5; }
 
-.ext-health-redirected {
-    background: rgba(14, 165, 233, 0.15);
-    border-color: rgba(14, 165, 233, 0.45);
-    color: #0369a1;
+.ext-health-redirected, .ext-health-move {
+    background: #e0f2fe;
+    border-color: #bae6fd;
+    color: #075985;
 }
+.ext-health-redirected .ext-health-suffix, .ext-health-move .ext-health-suffix { background: #e0f2fe; }
+
+.ext-health-hijack {
+    background: #fdf2f8;
+    border-color: #fce7f3;
+    color: #9d174d;
+}
+.ext-health-hijack .ext-health-suffix { background: #fdf2f8; }
 
 .ext-health-uncertain {
-    background: rgba(125, 125, 125, 0.16);
-    border-color: rgba(125, 125, 125, 0.4);
-    color: var(--color-text-secondary);
-}
-
-.ext-health-unknown {
-    background: rgba(125, 125, 125, 0.12);
-    border-color: rgba(125, 125, 125, 0.25);
-    color: var(--color-text-tertiary);
+    background: #f3f4f6;
+    border-color: #e5e7eb;
+    color: #4b5563;
 }
 
 .ext-health-confidence-high {
