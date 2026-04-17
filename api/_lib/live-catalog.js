@@ -158,17 +158,20 @@ async function fetchTextWithTimeout(url, timeoutMs) {
         const response = await fetch(url, {
             signal: controller.signal,
             headers: {
-                accept: 'application/json,text/plain;q=0.9,*/*;q=0.8'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'application/json,text/plain;q=0.9,*/*;q=0.8',
+                'Cache-Control': 'no-cache'
             }
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
-
+        const text = await response.text();
+        
         return {
-            text: await response.text(),
-            finalUrl: response.url || url
+            text,
+            finalUrl: response.url || url,
+            status: response.status,
+            ok: response.ok,
+            headers: Object.fromEntries(response.headers.entries())
         };
     } finally {
         clearTimeout(timeout);
@@ -178,71 +181,111 @@ async function fetchTextWithTimeout(url, timeoutMs) {
 async function fetchSourceCatalog(source, options = {}) {
     const timeoutMs = Number(options.timeoutMs || DEFAULT_TIMEOUT_MS);
     const normalizedSource = normalizeSourceEntry(source, 0);
+    const originalUrl = normalizedSource.url;
 
     try {
-        const result = await fetchTextWithTimeout(normalizedSource.url, timeoutMs);
-        const parsed = parseLenientJson(result.text);
+        const result = await fetchTextWithTimeout(originalUrl, timeoutMs);
+        
+        // Detect detailed health state
+        let state = 'active';
+        let evidence = [];
+        let confidence = 'high';
 
-        // Determine base URL for relative paths (strip filename from URL)
-        let baseUrl = result.finalUrl;
+        // 1. HTTP Error Detect
+        if (!result.ok) {
+            state = 'dead';
+            evidence.push({ type: 'http_error', strength: 'high', value: result.status });
+        }
+
+        // 2. Redirect Detect (Domain Change)
         try {
-            const tempUrl = new URL(result.finalUrl);
-            const pathParts = tempUrl.pathname.split('/');
-            pathParts.pop(); // Remove "plugin.json"
-            tempUrl.pathname = pathParts.join('/') + '/';
-            baseUrl = tempUrl.toString();
-        } catch {
-            // Fallback: search for last slash
-            const lastSlash = baseUrl.lastIndexOf('/');
-            if (lastSlash !== -1) baseUrl = baseUrl.substring(0, lastSlash + 1);
+            const oldHost = new URL(originalUrl).hostname.replace(/^www\./, '');
+            const newHost = new URL(result.finalUrl).hostname.replace(/^www\./, '');
+            if (oldHost !== newHost && result.ok) {
+                state = 'redirected';
+                evidence.push({ type: 'http_301_302_host_changed', strength: 'high', value: newHost });
+            }
+        } catch (e) {}
+
+        // 3. Cloudflare / Bot detection
+        const cfHeaders = ['cf-ray', 'cf-cache-status', 'server'];
+        const isCfServer = result.headers['server']?.toLowerCase().includes('cloudflare') || result.headers['cf-ray'];
+        
+        if (result.text.includes('cf-browser-verification') || 
+            result.text.includes('Cloudflare Ray ID') ||
+            (result.status === 403 && isCfServer)) {
+            state = 'cloudflare';
+            evidence.push({ type: 'cloudflare_detect', strength: 'high' });
         }
 
-        const rawItems = Array.isArray(parsed.data)
-            ? parsed.data
-            : (Array.isArray(parsed.items)
-                ? parsed.items.flatMap((item) => (Array.isArray(item && item.content && item.content.data) ? item.content.data : []))
-                : []);
+        // If dead or cloudflare, we still want to try parsing if there's text, 
+        // but often the data will be invalid.
+        let items = [];
+        let parseError = null;
 
-        if (!Array.isArray(rawItems)) {
-            throw new Error('missing data[]');
-        }
-
-        // Normalize relative paths/icons for Link Tổng compatibility
-        const items = rawItems.map(item => {
-            if (!item || typeof item !== 'object') return item;
-            const newItem = { ...item };
+        try {
+            const parsed = parseLenientJson(result.text);
+            const rawItems = Array.isArray(parsed.data)
+                ? parsed.data
+                : (Array.isArray(parsed.items)
+                    ? parsed.items.flatMap((item) => (Array.isArray(item && item.content && item.content.data) ? item.content.data : []))
+                    : []);
             
-            // Normalize path
-            if (newItem.path && !newItem.path.startsWith('http')) {
-                newItem.path = new URL(newItem.path, baseUrl).toString();
-            }
+            // Normalize items
+            let baseUrl = result.finalUrl;
+            try {
+                const tempUrl = new URL(result.finalUrl);
+                const pathParts = tempUrl.pathname.split('/');
+                pathParts.pop();
+                tempUrl.pathname = pathParts.join('/') + '/';
+                baseUrl = tempUrl.toString();
+            } catch {}
 
-            // Normalize icon
-            if (newItem.icon && !newItem.icon.startsWith('http')) {
-                newItem.icon = new URL(newItem.icon, baseUrl).toString();
+            items = (rawItems || []).map(item => {
+                if (!item || typeof item !== 'object') return item;
+                const newItem = { ...item };
+                if (newItem.path && !newItem.path.startsWith('http')) {
+                    newItem.path = new URL(newItem.path, baseUrl).toString();
+                }
+                if (newItem.icon && !newItem.icon.startsWith('http')) {
+                    newItem.icon = new URL(newItem.icon, baseUrl).toString();
+                }
+                return newItem;
+            });
+        } catch (e) {
+            parseError = e.message;
+            if (state === 'active') {
+                state = 'dead';
+                evidence.push({ type: 'parse_error', strength: 'medium', value: e.message });
             }
-
-            return newItem;
-        });
+        }
 
         return {
             id: normalizedSource.id,
-            url: normalizedSource.url,
+            url: originalUrl,
             avatar: normalizedSource.avatar,
             displayName: normalizedSource.id,
             fetchedUrl: result.finalUrl,
-            status: 'active',
+            status: state === 'dead' ? 'error' : 'active',
+            state,
+            confidence,
+            evidence,
+            finalHost: state === 'redirected' ? new URL(result.finalUrl).hostname : null,
             itemCount: items.length,
-            items
+            items,
+            error: parseError
         };
     } catch (error) {
         return {
             id: normalizedSource.id,
-            url: normalizedSource.url,
+            url: originalUrl,
             avatar: normalizedSource.avatar,
             displayName: normalizedSource.id,
-            fetchedUrl: normalizedSource.url,
+            fetchedUrl: originalUrl,
             status: 'error',
+            state: 'dead',
+            confidence: 'high',
+            evidence: [{ type: 'fetch_failed', strength: 'high', value: error && error.message }],
             itemCount: 0,
             error: error && error.message ? error.message : 'fetch failed',
             items: []
@@ -295,13 +338,91 @@ async function buildLiveSnapshot(workspaceRoot, options = {}) {
                 displayName: result.displayName,
                 fetchedUrl: result.fetchedUrl,
                 status: result.status,
+                state: result.state || (result.status === 'error' ? 'dead' : 'active'),
+                confidence: result.confidence || 'high',
+                evidence: result.evidence || [],
+                finalHost: result.finalHost || null,
                 itemCount: result.itemCount,
                 extItems: result.items,
                 error: result.error
-            }))
+            })),
+            siteHealth: await buildSiteHealthMap(data, timeoutMs)
         },
         remoteSources: sourceList
     };
+}
+
+async function buildSiteHealthMap(extensions, timeoutMs) {
+    const uniqueSites = new Set();
+    (extensions || []).forEach(ext => {
+        if (ext.source) {
+            try {
+                const url = new URL(ext.source);
+                const protocol = url.protocol.toLowerCase();
+                const hostname = url.hostname.toLowerCase().replace(/^www\./, '');
+                const pathname = url.pathname.replace(/\/+$/, '') || '/';
+                uniqueSites.add(`${protocol}//${hostname}${pathname}`);
+            } catch (e) {}
+        }
+    });
+
+    const siteUrls = Array.from(uniqueSites);
+    // Limit to avoid massive timeouts, although usually unique sites are < 100
+    const results = await Promise.all(
+        siteUrls.slice(0, 100).map(url => checkSiteHealth(url, Math.min(timeoutMs, 5000)))
+    );
+
+    const map = {};
+    results.forEach(res => {
+        map[res.url] = res;
+    });
+    return map;
+}
+
+async function checkSiteHealth(url, timeoutMs) {
+    try {
+        const result = await fetchTextWithTimeout(url, timeoutMs);
+        
+        // Basic detection logic similar to Repo Health
+        let state = 'active';
+        let evidence = [];
+        
+        if (!result.ok) {
+            state = 'dead';
+            evidence.push({ type: 'http_error', value: result.status });
+        }
+
+        try {
+            const oldHost = new URL(url).hostname.replace(/^www\./, '');
+            const newHost = new URL(result.finalUrl).hostname.replace(/^www\./, '');
+            if (oldHost !== newHost && result.ok) {
+                state = 'redirected';
+                evidence.push({ type: 'http_301_302_host_changed', value: newHost });
+            }
+        } catch (e) {}
+
+        const isCfServer = result.headers['server']?.toLowerCase().includes('cloudflare') || result.headers['cf-ray'];
+        if (result.text.includes('cf-browser-verification') || 
+            result.text.includes('Cloudflare Ray ID') ||
+            (result.status === 403 && isCfServer)) {
+            state = 'cloudflare';
+            evidence.push({ type: 'cloudflare_detect' });
+        }
+
+        return {
+            url,
+            state,
+            evidence,
+            finalHost: state === 'redirected' ? new URL(result.finalUrl).hostname : null,
+            status: result.status
+        };
+    } catch (error) {
+        return {
+            url,
+            state: 'dead',
+            error: error.message
+        };
+    }
 }
 
 async function getLiveSnapshot(workspaceRoot, options = {}) {

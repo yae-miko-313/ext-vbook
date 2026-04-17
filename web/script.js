@@ -27,6 +27,16 @@ let extensionCatalog = {
     _unknown: []
 };
 
+// Performance Memoization
+let memoizedFilterOptions = {
+    authors: null,
+    locales: null,
+    types: null
+};
+
+let memoizedStats = null;
+let gridRenderVersion = 0;
+
 async function copyToClipboard(text) {
     if (!text) {
         throw new Error('Nothing to copy');
@@ -129,9 +139,19 @@ async function fetchAppData() {
 
         // Process Health
         window.siteHealthByUrl = {};
+        
+        // 1. Repo health (fallback/source view)
         if (healthRes.sources) {
             healthRes.sources.forEach(s => {
                 const key = normalizeSiteUrlKey(s.url);
+                if (key) window.siteHealthByUrl[key] = s;
+            });
+        }
+        
+        // 2. Specific site health (extension view - priority)
+        if (healthRes.sites) {
+            Object.entries(healthRes.sites).forEach(([url, s]) => {
+                const key = normalizeSiteUrlKey(url);
                 if (key) window.siteHealthByUrl[key] = s;
             });
         }
@@ -139,6 +159,10 @@ async function fetchAppData() {
         // Categorize for stats
         categorizeExtensions();
         
+        // Reset memoization on new data
+        memoizedFilterOptions = { authors: null, locales: null, types: null };
+        memoizedStats = null;
+
         clearLoadingState();
         renderDashboard();
     } catch (error) {
@@ -664,7 +688,7 @@ function renderCard(ext) {
         : '<span class="ext-site-copy-btn ext-site-copy-btn-disabled" aria-hidden="true">🔗</span>';
 
     return `
-        <div class="ext-card">
+        <div class="ext-card reveal-in">
             <div class="ext-top-row">
                 <div class="ext-type-badge">${escapeHtml(typeLabel)}</div>
                 ${siteCopyButton}
@@ -894,7 +918,7 @@ function renderSourceCard(source) {
     const fallbackUrl = avatarFallback(fullLabel);
 
     return `
-        <article class="source-card ${expanded ? 'is-expanded' : 'is-collapsed'}" data-source-key="${escapeHtml(key)}">
+        <article class="source-card ${expanded ? 'is-expanded' : 'is-collapsed'} reveal-in" data-source-key="${escapeHtml(key)}">
             <button class="source-toggle-btn" type="button" data-source-toggle="${escapeHtml(key)}" aria-expanded="${expanded ? 'true' : 'false'}" aria-label="${escapeHtml(toggleAria)}">
                 <img class="source-card-avatar" src="${escapeHtml(avatarUrl)}" alt="${escapeHtml(fullLabel)} avatar" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${escapeHtml(fallbackUrl)}'">
                 <h3 class="source-name" title="${escapeHtml(fullLabel)}">${escapeHtml(displayLabel)}</h3>
@@ -917,7 +941,10 @@ function renderSourceCard(source) {
 
 function renderGrid() {
     const grid = document.getElementById('extensions-grid');
+    if (!grid) return;
+
     const extensions = filterExtensions();
+    const version = ++gridRenderVersion;
 
     if (extensions.length === 0) {
         grid.innerHTML = `
@@ -929,7 +956,36 @@ function renderGrid() {
         return;
     }
 
-    grid.innerHTML = extensions.map(renderCard).join('');
+    // Incremental Rendering: Batch size of 24
+    const BATCH_SIZE = 24;
+    let renderedCount = 0;
+    
+    grid.innerHTML = '';
+    
+    function renderNextBatch() {
+        if (version !== gridRenderVersion) return; // Stale render
+
+        const nextBatch = extensions.slice(renderedCount, renderedCount + BATCH_SIZE);
+        if (nextBatch.length === 0) return;
+
+        const fragment = document.createDocumentFragment();
+        const temp = document.createElement('div');
+        temp.innerHTML = nextBatch.map(renderCard).join('');
+        
+        while (temp.firstChild) {
+            fragment.appendChild(temp.firstChild);
+        }
+        
+        grid.appendChild(fragment);
+        renderedCount += BATCH_SIZE;
+
+        if (renderedCount < extensions.length) {
+            // Use requestAnimationFrame for smooth batching
+            requestAnimationFrame(renderNextBatch);
+        }
+    }
+
+    renderNextBatch();
 }
 
 function renderSourceView() {
@@ -952,6 +1008,8 @@ function renderSourceView() {
 // Original renderActiveView removed to avoid duplication with the new dynamic stats version.
 
 function getAuthorFilterOptions() {
+    if (memoizedFilterOptions.authors) return memoizedFilterOptions.authors;
+
     const authorGroups = new Map();
     getAllExtensions().forEach((ext) => {
         const author = normalizeAuthorName(ext.author || '');
@@ -966,32 +1024,42 @@ function getAuthorFilterOptions() {
         authorGroups.get(authorKey).total += 1;
     });
 
-    return Array.from(authorGroups.entries())
+    memoizedFilterOptions.authors = Array.from(authorGroups.entries())
         .map(([value, info]) => ({ value, label: info.label, total: info.total }))
         .sort((a, b) => a.label.localeCompare(b.label, 'vi'));
+    
+    return memoizedFilterOptions.authors;
 }
 
 function getLocaleFilterOptions() {
+    if (memoizedFilterOptions.locales) return memoizedFilterOptions.locales;
+
     const localeMap = new Map();
     getAllExtensions().forEach((ext) => {
         const localeKey = normalizeLocaleKey(ext.locale || '_unknown');
         localeMap.set(localeKey, (localeMap.get(localeKey) || 0) + 1);
     });
 
-    return Array.from(localeMap.entries())
+    memoizedFilterOptions.locales = Array.from(localeMap.entries())
         .map(([value, total]) => ({ value, label: `${getLocaleDisplayLabel(value)} (${total})` }))
         .sort((a, b) => a.label.localeCompare(b.label, 'vi'));
+
+    return memoizedFilterOptions.locales;
 }
 
 function getTypeFilterOptions() {
+    if (memoizedFilterOptions.types) return memoizedFilterOptions.types;
+
     const typeSet = new Set();
     getAllExtensions().forEach((ext) => {
         typeSet.add(String(ext.type || '_unknown').trim() || '_unknown');
     });
 
-    return Array.from(typeSet)
+    memoizedFilterOptions.types = Array.from(typeSet)
         .map((value) => ({ value, label: getSourceTypeLabel(value) }))
         .sort((a, b) => a.label.localeCompare(b.label, 'vi'));
+
+    return memoizedFilterOptions.types;
 }
 
 function renderFilterChipList(containerId, groupName, options, selectedSet) {
@@ -1367,12 +1435,21 @@ function setupBackToTopButton() {
 }
 
 function renderDashboard() {
-    renderStats(); // This will now use getFilteredExtensions() internally
+    renderStats(); 
     renderCatalogUpdatedTime();
     renderSourceRepoCount();
     renderAggregateButton();
     renderContributeSection();
-    renderAuthorAcknowledgement();
+    
+    // Defer expensive but non-critical UI components
+    if (window.requestIdleCallback) {
+        requestIdleCallback(() => {
+            renderAuthorAcknowledgement();
+        });
+    } else {
+        setTimeout(renderAuthorAcknowledgement, 200);
+    }
+
     setupFilterModal();
     renderActiveView();
 }

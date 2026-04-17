@@ -16,17 +16,22 @@ module.exports = async (req, res) => {
         const health = {
             metadata: {
                 timestamp: new Date().toISOString(),
-                total: sourceResults.length,
-                ok: sourceResults.filter(s => s.status === 'active').length,
-                error: sourceResults.filter(s => s.status === 'error').length
+                totalSources: sourceResults.length,
+                totalSites: Object.keys(snapshot.catalog.siteHealth || {}).length,
+                okSources: sourceResults.filter(s => s.status === 'active').length,
+                errorSources: sourceResults.filter(s => s.status === 'error').length
             },
             sources: sourceResults.map(s => ({
                 id: s.id,
                 url: s.url,
                 status: s.status,
-                error: s.error || null,
+                state: s.state,
+                confidence: s.confidence,
+                evidence: s.evidence,
+                finalHost: s.finalHost,
                 itemCount: s.itemCount
-            }))
+            })),
+            sites: snapshot.catalog.siteHealth || {}
         };
 
         return writeJson(req, res, health);

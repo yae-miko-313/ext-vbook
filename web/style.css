@@ -812,10 +812,10 @@ body.filter-open {
 
 @keyframes skeleton-shimmer {
     0% {
-        background-position: 100% 0;
+        background-position: 200% 0;
     }
     100% {
-        background-position: 0 0;
+        background-position: -200% 0;
     }
 }
 
@@ -832,9 +832,24 @@ body.filter-open {
 }
 
 .ext-card:hover {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-4px) scale(1.01);
     box-shadow: var(--shadow-lg), 0 0 0 1px var(--color-accent);
     border-color: transparent;
+}
+
+.reveal-in {
+    animation: reveal-in 0.4s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes reveal-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .ext-type-badge {
