@@ -23,9 +23,11 @@ let referenceSourceList = loadJsonConfig('.private/references/remote-sources.jso
 
 const { kv } = require('@vercel/kv');
 const { waitUntil } = require('@vercel/functions');
+const fallbackData = require('./fallback-data');
 
 const KV_HEALTH_KEY = 'vbook:site_health_v3';
-const KV_CACHE_TTL = 30 * 60; // 30 minutes in seconds
+const KV_STALE_THRESHOLD_SEC = 30 * 60; // 30 minutes
+const KV_PERSIST_TTL_SEC = 7 * 24 * 60 * 60; // 7 days (Keep data even if old)
 const SCAN_TIMEOUT_MS = 5000;
 
 let liveSnapshotCache = null;
@@ -368,33 +370,29 @@ function buildSkeletonSnapshot(workspaceRoot) {
         sourceResults: [],
         plugin: {
             metadata: {
-                author: 'kychi',
-                description: 'Community aggregate manifest (Initializing)',
-                generatedAt: timestamp
+                ...fallbackData.metadata,
+                generatedAt: timestamp,
+                description: 'VBook Aggregate Manifest (Static Fallback)'
             },
             referenceListUrl: sourceList.referenceListUrl || '',
-            data: []
+            data: fallbackData.extensions
         },
         catalog: {
             metadata: {
-                author: 'kychi',
-                description: 'Community aggregate manifest (Initializing)',
-                generatedAt: timestamp
+                ...fallbackData.metadata,
+                generatedAt: timestamp,
+                description: 'VBook Aggregate Manifest (Static Fallback)'
             },
             summary: {
-                total: sourceList.sources.length,
+                total: fallbackData.extensions.length,
                 changed: 0,
-                unchanged: 0,
+                unchanged: fallbackData.extensions.length,
                 errors: 0,
-                mode: 'initializing'
+                mode: 'fallback'
             },
             referenceListUrl: sourceList.referenceListUrl || '',
-            sources: sourceList.sources.map(s => ({
-                id: s.id,
-                url: s.url,
-                status: 'pending'
-            })),
-            siteHealth: {}
+            sources: [],
+            siteHealth: fallbackData.siteHealth || {}
         },
         healthUpdatedAt: timestamp
     };
@@ -541,13 +539,16 @@ async function getSnapshot(req) {
             expiresAt: now + 30000 
         };
 
-        // Background revalidation
+        // Cache-Aside with Stale-While-Revalidate logic
         const generatedAt = new Date(kvData.catalog?.metadata?.generatedAt || 0).getTime();
-        if (now - generatedAt > KV_CACHE_TTL * 1000) {
-            console.log('[KV] Refreshing health in background...');
+        const ageSec = (now - generatedAt) / 1000;
+
+        if (ageSec > KV_STALE_THRESHOLD_SEC) {
+            console.log(`[KV] Data is stale (${Math.floor(ageSec/60)}m old). Refreshing in background...`);
             waitUntil(refreshAndCacheSnapshot(workspaceRoot, kvData));
         }
 
+        // ALWAYS return the existing data (Status: Hit or Stale)
         return kvData;
     }
 
@@ -573,9 +574,10 @@ async function refreshAndCacheSnapshot(workspaceRoot, baseSnapshot = null) {
         snapshot.catalog.metadata.generatedAt = timestamp;
         snapshot.healthUpdatedAt = timestamp;
         
-        if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+        if (isKvConfigured) {
             try {
-                await kv.set(KV_FULL_SNAPSHOT_KEY, snapshot, { ex: KV_CACHE_TTL * 4 });
+                // Set with long TTL to ensure it's always there as fallback
+                await kv.set(KV_FULL_SNAPSHOT_KEY, snapshot, { ex: KV_PERSIST_TTL_SEC });
                 console.log('[Refresh] Background scan complete. KV updated at', timestamp);
             } catch (e) {
                 console.warn('[KV] Error saving background snapshot:', e.message);

@@ -154,14 +154,17 @@ async function fetchAppData(isRefresh = false) {
         if (isRefresh) {
             console.log('[API] Background refresh complete. Patching UI...');
             
-            const wasEmpty = !window.catalogExtensions || window.catalogExtensions.length === 0;
-            const hasData = catalogRes.plugin?.data && catalogRes.plugin.data.length > 0;
+            // If the current UI is using fallback data (15 items) or is empty,
+            // and we just got the REAL full list (hundreds), we should re-render everything
+            const currentTotal = window.catalogExtensions?.length || 0;
+            const newTotal = catalogRes.plugin?.data?.length || 0;
             
             window.catalogExtensions = catalogRes.plugin?.data || [];
             window.catalogSources = catalogRes.catalog?.sources || [];
             window.siteHealthByUrl = newHealth;
 
-            if (wasEmpty && hasData) {
+            if (currentTotal < 20 && newTotal > 20) {
+                console.log('[API] Upgrading from fallback to live data. Re-rendering...');
                 categorizeExtensions();
                 clearLoadingState();
                 renderDashboard();
