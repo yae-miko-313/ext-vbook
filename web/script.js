@@ -128,10 +128,6 @@ async function fetchAppData(isRefresh = false) {
             return;
         }
 
-        // Store globally
-        window.catalogExtensions = catalogRes.plugin?.data || [];
-        window.catalogSources = catalogRes.catalog?.sources || [];
-        
         // Process Health
         const newHealth = {};
         const embeddedHealth = catalogRes.catalog?.siteHealth;
@@ -153,9 +149,42 @@ async function fetchAppData(isRefresh = false) {
                 if (key && !newHealth[key]) newHealth[key] = s;
             });
         }
+
+        // Atomic Update: If this is a refresh, only update tags to avoid jumping UI
+        if (isRefresh) {
+            console.log('[API] Background refresh complete. Patching UI...');
+            
+            const wasEmpty = !window.catalogExtensions || window.catalogExtensions.length === 0;
+            const hasData = catalogRes.plugin?.data && catalogRes.plugin.data.length > 0;
+            
+            window.catalogExtensions = catalogRes.plugin?.data || [];
+            window.catalogSources = catalogRes.catalog?.sources || [];
+            window.siteHealthByUrl = newHealth;
+
+            if (wasEmpty && hasData) {
+                categorizeExtensions();
+                clearLoadingState();
+                renderDashboard();
+            } else {
+                patchHealthBadges();
+            }
+            return;
+        }
+
+        const isInitializing = catalogRes.catalog?.summary?.mode === 'initializing';
         
-        // First Load
+        // Store globally
+        window.catalogExtensions = catalogRes.plugin?.data || [];
+        window.catalogSources = catalogRes.catalog?.sources || [];
         window.siteHealthByUrl = newHealth;
+
+        if (isInitializing && window.catalogExtensions.length === 0) {
+            console.log('[API] Server is initializing. Keeping loading state...');
+            setTimeout(() => fetchAppData(false), 2000); 
+            return;
+        }
+
+        // First Load with data
         categorizeExtensions();
         memoizedFilterOptions = { authors: null, locales: null, types: null };
         memoizedStats = null;
