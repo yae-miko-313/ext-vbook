@@ -25,19 +25,21 @@ let memCache = null;
 // ---------------------------------------------------------------------------
 // Source list loading
 // ---------------------------------------------------------------------------
-function loadJsonFile(relativePath) {
+function loadSourceListConfig() {
     try {
-        const fullPath = path.join(process.cwd(), relativePath);
-        if (fs.existsSync(fullPath)) {
-            return JSON.parse(fs.readFileSync(fullPath, 'utf8'));
+        // Use explicit literal require() so Vercel's node-file-trace (nft) 
+        // can statically analyze and bundle these JSON files.
+        return require('../../web/remote-sources.json');
+    } catch (e1) {
+        try {
+            return require('../../.private/references/remote-sources.json');
+        } catch (e2) {
+            return null;
         }
-    } catch (_) {}
-    return null;
+    }
 }
 
-const bundledSourceList =
-    loadJsonFile('web/remote-sources.json') ||
-    loadJsonFile('.private/references/remote-sources.json');
+const bundledSourceList = loadSourceListConfig();
 
 function loadReferenceSourceList() {
     if (!bundledSourceList || !Array.isArray(bundledSourceList.sources)) {
