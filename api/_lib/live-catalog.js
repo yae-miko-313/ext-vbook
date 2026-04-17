@@ -462,89 +462,72 @@ async function checkSiteHealth(url, timeoutMs) {
     }
 }
 
+const KV_FULL_SNAPSHOT_KEY = 'vbook:full_snapshot_v3';
+
 async function getSnapshot(req) {
+    const now = Date.now();
     const workspaceRoot = resolveWorkspaceRoot();
-    const now = Date.now();
 
-    // 1. Try to get from KV first for speed
-    let cachedHealth = null;
-    try {
-        cachedHealth = await kv.get(KV_HEALTH_KEY);
-    } catch (e) {
-        console.warn('[KV] Error fetching health:', e.message);
+    // Tier 1: Memory Cache (Very fast, expires in 30s)
+    if (liveSnapshotCache && liveSnapshotCache.expiresAt > now) {
+        return liveSnapshotCache.data;
     }
 
-    // 2. Build live snapshot (logic remains same for catalog structure)
-    // We update the health part specifically
-    const snapshot = await buildLiveSnapshot(workspaceRoot);
+    // Tier 2: KV Cache (Fast, global)
+    let kvData = null;
+    try {
+        kvData = await kv.get(KV_FULL_SNAPSHOT_KEY);
+    } catch (e) {
+        console.warn('[KV] Error fetching full snapshot:', e.message);
+    }
 
-    if (cachedHealth) {
-        // Use cached health for immediate response
-        snapshot.catalog.siteHealth = cachedHealth.sites || {};
-        snapshot.healthUpdatedAt = cachedHealth.timestamp;
+    if (kvData) {
+        // Return immediately
+        liveSnapshotCache = {
+            data: kvData,
+            expiresAt: now + 30000 // 30s memory cache
+        };
 
-        // 3. Check if we need to revalidate (Background scan)
-        const lastScan = new Date(cachedHealth.timestamp).getTime();
-        if (now - lastScan > KV_CACHE_TTL * 1000) {
-            console.log('[KV] Health is stale. Triggering background scan...');
-            waitUntil(performBackgroundScanAndCache(snapshot.catalog.siteHealth, snapshot.plugin.data));
+        // Background revalidation if stale
+        const generatedAt = new Date(kvData.catalog?.metadata?.generatedAt || 0).getTime();
+        if (now - generatedAt > KV_CACHE_TTL * 1000) {
+            console.log('[KV] Full snapshot is stale. Revalidating in background...');
+            waitUntil(refreshAndCacheSnapshot(workspaceRoot));
         }
-    } else {
-        // No cache: Perform initial scan (might be slow for first user)
-        console.log('[KV] No cache found. Performing initial scan...');
-        const freshHealth = await buildSiteHealthMap(snapshot.plugin.data, SCAN_TIMEOUT_MS);
-        snapshot.catalog.siteHealth = freshHealth;
-        snapshot.healthUpdatedAt = new Date().toISOString();
-        
-        // Cache it
-        try {
-            await kv.set(KV_HEALTH_KEY, {
-                timestamp: snapshot.healthUpdatedAt,
-                sites: freshHealth
-            }, { ex: KV_CACHE_TTL * 2 }); // Keep in KV longer than revalidation period
-        } catch (e) {}
+
+        return kvData;
     }
 
-    return snapshot;
+    // Tier 3: Cold Start (Slow)
+    console.log('[KV] Cold start. Building fresh snapshot...');
+    return await refreshAndCacheSnapshot(workspaceRoot);
 }
 
-async function performBackgroundScanAndCache(oldHealth, extensions) {
+async function refreshAndCacheSnapshot(workspaceRoot) {
     try {
-        console.log('[Background] Starting scan...');
-        const freshHealth = await buildSiteHealthMap(extensions, SCAN_TIMEOUT_MS);
-        const timestamp = new Date().toISOString();
+        const snapshot = await buildLiveSnapshot(workspaceRoot);
+        // Add health check
+        const healthMap = await buildSiteHealthMap(snapshot.plugin.data, SCAN_TIMEOUT_MS);
+        snapshot.catalog.siteHealth = healthMap;
+        snapshot.catalog.metadata.generatedAt = new Date().toISOString();
         
-        await kv.set(KV_HEALTH_KEY, {
-            timestamp,
-            sites: freshHealth
-        }, { ex: KV_CACHE_TTL * 2 });
-        console.log('[Background] Scan completed and cached at', timestamp);
+        // Cache to KV
+        await kv.set(KV_FULL_SNAPSHOT_KEY, snapshot, { ex: KV_CACHE_TTL * 4 });
+        
+        // Update Memory Cache
+        liveSnapshotCache = {
+            data: snapshot,
+            expiresAt: Date.now() + 30000
+        };
+        
+        return snapshot;
     } catch (e) {
-        console.error('[Background] Scan failed:', e.message);
+        console.error('[Refresh] Failed:', e.message);
+        throw e;
     }
 }
 
-function getLiveSnapshot(workspaceRoot, options = {}) {
-    const now = Date.now();
-    const ttlMs = Number(options.cacheTtlMs || DEFAULT_CACHE_TTL_MS);
 
-    if (ttlMs <= 0) {
-        return buildLiveSnapshot(workspaceRoot, options);
-    }
-
-    if (liveSnapshotCache && liveSnapshotCache.workspaceRoot === workspaceRoot && liveSnapshotCache.expiresAt > now) {
-        return liveSnapshotCache.promise;
-    }
-
-    const promise = buildLiveSnapshot(workspaceRoot, options);
-    liveSnapshotCache = {
-        workspaceRoot,
-        expiresAt: now + ttlMs,
-        promise
-    };
-
-    return promise;
-}
 
 function resolveWorkspaceRoot() {
     return path.resolve(__dirname, '..', '..');
@@ -552,14 +535,8 @@ function resolveWorkspaceRoot() {
 
 function normalizeOriginValue(value) {
     const raw = String(value || '').trim();
-    if (!raw) {
-        return '';
-    }
-
-    if (raw === '*') {
-        return '*';
-    }
-
+    if (!raw) return '';
+    if (raw === '*') return '*';
     try {
         return new URL(raw).origin;
     } catch {
@@ -568,18 +545,9 @@ function normalizeOriginValue(value) {
 }
 
 function originMatchesRule(origin, rule) {
-    if (!origin || !rule) {
-        return false;
-    }
-
-    if (rule === '*') {
-        return true;
-    }
-
-    if (origin === rule) {
-        return true;
-    }
-
+    if (!origin || !rule) return false;
+    if (rule === '*') return true;
+    if (origin === rule) return true;
     if (rule.startsWith('*.')) {
         try {
             const host = new URL(origin).hostname;
@@ -589,7 +557,6 @@ function originMatchesRule(origin, rule) {
             return false;
         }
     }
-
     return false;
 }
 
@@ -598,26 +565,12 @@ function getAllowedOrigin(req) {
     const explicit = String(process.env.VBOOK_ALLOWED_ORIGIN || '').trim();
 
     if (explicit) {
-        const rules = explicit
-            .split(',')
-            .map((item) => normalizeOriginValue(item))
-            .filter(Boolean);
-
-        if (!rules.length) {
-            return requestOrigin || '*';
-        }
-
-        if (!requestOrigin) {
-            return rules[0];
-        }
-
-        if (rules.some((rule) => originMatchesRule(requestOrigin, rule))) {
-            return requestOrigin;
-        }
-
+        const rules = explicit.split(',').map((item) => normalizeOriginValue(item)).filter(Boolean);
+        if (!rules.length) return requestOrigin || '*';
+        if (!requestOrigin) return rules[0];
+        if (rules.some((rule) => originMatchesRule(requestOrigin, rule))) return requestOrigin;
         return rules[0];
     }
-
     return requestOrigin || '*';
 }
 
@@ -636,25 +589,11 @@ function applyCommonHeaders(req, res, customHeaders = {}) {
 }
 
 function handlePreflight(req, res) {
-    if (req.method !== 'OPTIONS') {
-        return false;
-    }
-
+    if (req.method !== 'OPTIONS') return false;
     applyCommonHeaders(req, res);
     res.statusCode = 204;
     res.end();
     return true;
-}
-
-async function getSnapshot(req) {
-    const workspaceRoot = resolveWorkspaceRoot();
-    const timeoutMs = Number(process.env.VBOOK_WEB_FETCH_TIMEOUT_MS || 12000);
-    const cacheTtlMs = Number(process.env.VBOOK_WEB_CACHE_TTL_MS || 0);
-
-    return getLiveSnapshot(workspaceRoot, {
-        timeoutMs,
-        cacheTtlMs
-    });
 }
 
 function getSourceList() {

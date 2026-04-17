@@ -140,19 +140,28 @@ async function fetchAppData() {
         // Process Health
         window.siteHealthByUrl = {};
         
-        // 1. Repo health (fallback/source view)
-        if (healthRes.sources) {
-            healthRes.sources.forEach(s => {
-                const key = normalizeSiteUrlKey(s.url);
+        // 1. Check if health is already in catalog response (New optimized backend)
+        const embeddedHealth = catalogRes.catalog?.siteHealth;
+        if (embeddedHealth) {
+            console.log('[API] Using embedded site health from catalog.');
+            Object.entries(embeddedHealth).forEach(([url, s]) => {
+                const key = normalizeSiteUrlKey(url);
                 if (key) window.siteHealthByUrl[key] = s;
             });
         }
         
-        // 2. Specific site health (extension view - priority)
+        // 2. Fallback to healthRes if needed (Old/separate health data)
+        if (healthRes.sources) {
+            healthRes.sources.forEach(s => {
+                const key = normalizeSiteUrlKey(s.url);
+                if (key && !window.siteHealthByUrl[key]) window.siteHealthByUrl[key] = s;
+            });
+        }
+        
         if (healthRes.sites) {
             Object.entries(healthRes.sites).forEach(([url, s]) => {
                 const key = normalizeSiteUrlKey(url);
-                if (key) window.siteHealthByUrl[key] = s;
+                if (key && !window.siteHealthByUrl[key]) window.siteHealthByUrl[key] = s;
             });
         }
 
