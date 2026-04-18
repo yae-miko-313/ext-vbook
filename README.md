@@ -119,18 +119,6 @@ docs/                           # Tài liệu tham khảo của Repo
 
 _Tham khảo thêm chi tiết triển khai Cloud trong `docs/DEPLOY_VERCEL_GITHUB.md`_
 
-## Hỗ trợ VBook Bản Thường (Legacy Stable)
-
-Đối với các bạn đang sử dụng bản VBook "Stable" trên Play Store hoặc bản không hỗ trợ JSON Contract V4 mới nhất, hãy sử dụng Link Tổng dành riêng cho bản Legacy.
-
-Link này đã được tối ưu về cấu trúc JSON (`metadata`/`data`) và Header (`text/plain`) để tương thích 100% với trình quản lý nguồn cũ của app:
-
-```text
-https://vbook-ext.vercel.app/api/vbook.json
-```
-
----
-
 ## Tài liệu
 
 - [docs/AI_CODE_EXT_VBOOK.md](docs/AI_CODE_EXT_VBOOK.md): Hướng dẫn viết hàm parse JS cho AI Agent/Dev.
