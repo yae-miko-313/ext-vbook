@@ -6,7 +6,7 @@ const {
 
 /**
  * API for VBook Stable (legacy)
- * Mimics GitHub's structure and includes "slim" mode to handle large catalogs.
+ * Supports pagination (paging) to handle the 199-item limit discovered for stable VBook.
  */
 module.exports = async function handler(req, res) {
     if (handlePreflight(req, res)) {
@@ -19,7 +19,7 @@ module.exports = async function handler(req, res) {
     }
 
     try {
-        const { slim, limit } = req.query;
+        const { slim, limit, page } = req.query;
         const snapshot = await getSnapshot(req);
         
         // 1. Clean up Metadata
@@ -29,21 +29,27 @@ module.exports = async function handler(req, res) {
         };
 
         // 2. Determine limits
-        // If ?slim=true, return 10. Otherwise default to 50 (max working known size)
-        let maxItems = 50;
+        // User tested and found the max limit for stable VBook is 199.
+        const STABLE_MAX_LIMIT = 199;
+        
+        let maxItems = STABLE_MAX_LIMIT;
         if (slim === 'true') {
             maxItems = 10;
         } else if (limit) {
-            maxItems = parseInt(limit, 10) || 50;
+            maxItems = Math.min(parseInt(limit, 10) || STABLE_MAX_LIMIT, STABLE_MAX_LIMIT);
         }
 
-        // 3. Process Data
-        let extensions = snapshot.plugin.data || [];
+        // 3. Handle Pagination
+        const pageNum = Math.max(parseInt(page, 10) || 1, 1);
         
-        // Apply limit
-        const limitedExtensions = extensions.slice(0, maxItems);
+        // 4. Process Data
+        let allExtensions = snapshot.plugin.data || [];
+        
+        const start = (pageNum - 1) * maxItems;
+        const end = start + maxItems;
+        const pagedExtensions = allExtensions.slice(start, end);
 
-        const cleanData = limitedExtensions.map(item => {
+        const cleanData = pagedExtensions.map(item => {
             const out = { ...item };
             if (out.path && !out.link) {
                 out.link = out.path;
@@ -52,13 +58,21 @@ module.exports = async function handler(req, res) {
         });
 
         const responseData = {
-            metadata: cleanMetadata,
+            metadata: {
+                ...cleanMetadata,
+                // Helpful hints for the user (not used by VBook app)
+                _totalItems: allExtensions.length,
+                _currentPage: pageNum,
+                _totalPages: Math.ceil(allExtensions.length / maxItems),
+                _itemsPerPage: maxItems
+            },
             data: cleanData
         };
 
-        // Header for debugging
-        res.setHeader('X-Total-Items', extensions.length);
-        res.setHeader('X-Returned-Items', cleanData.length);
+        // Headers for debugging
+        res.setHeader('X-Total-Items', allExtensions.length);
+        res.setHeader('X-Current-Page', pageNum);
+        res.setHeader('X-Items-Per-Page', maxItems);
 
         const SWR_HEADER = 'public, s-maxage=3600, stale-while-revalidate=86400';
         writeJson(req, res, responseData, 200, { 'Cache-Control': SWR_HEADER });
