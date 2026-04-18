@@ -10,3 +10,4 @@ duplicate_sources_report.json
 .private/
 code-reference/
 .vercel
+.apk/
