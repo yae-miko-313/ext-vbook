@@ -117,17 +117,19 @@ docs/                           # Tài liệu tham khảo của Repo
 └── DEPLOY_VERCEL_GITHUB.md      
 ```
 
-## Web viewer & Vercel API
-
-Từ kiến trúc V4, Web Viewer tại `web/index.html` KHÔNG CÒN dựa vào các file json tĩnh tự gen. Toàn bộ Dữ liệu Aggregate (Tổng hợp) được cấu hình trên kho `api/` và trỏ lên **Vercel API** để chạy ngầm và cung cấp:
-- **Tốc độ siêu nhanh**: Tiered Cache Edge + Vercel KV phản hồi dưới `< 50ms`. 
-- **Quản lý Health ngầm**: Các URL truyện tranh bị die hoặc gắn Cloudflare được tự động quét ngầm (`waitUntil`), giao diện chỉ fetch và đắp thêm sau đó mà không cản trở luồng hiển thị.
-
-Chỉ cần thêm tham số `?catalog=<VERCEL_DOMAIN>`:
-```text
-http://127.0.0.1:8080/web/?catalog=http://127.0.0.1:3000/api/plugin.json
-```
 _Tham khảo thêm chi tiết triển khai Cloud trong `docs/DEPLOY_VERCEL_GITHUB.md`_
+
+## Hỗ trợ VBook Bản Thường (Legacy Stable)
+
+Đối với các bạn đang sử dụng bản VBook "Stable" trên Play Store hoặc bản không hỗ trợ JSON Contract V4 mới nhất, hãy sử dụng Link Tổng dành riêng cho bản Legacy.
+
+Link này đã được tối ưu về cấu trúc JSON (`metadata`/`data`) và Header (`text/plain`) để tương thích 100% với trình quản lý nguồn cũ của app:
+
+```text
+https://vbook-ext.vercel.app/api/vbook.json
+```
+
+---
 
 ## Tài liệu
 
