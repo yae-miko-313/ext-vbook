@@ -18,8 +18,8 @@ function getHash(str) {
 }
 
 /**
- * Minimalist API for VBook Stable (legacy)
- * Matches GitHub's raw format as closely as possible.
+ * Final VBook Stable Aggregate API
+ * Strict Header (text/plain) and Strict 106KB limit.
  */
 module.exports = async function handler(req, res) {
     if (handlePreflight(req, res)) return;
@@ -35,14 +35,12 @@ module.exports = async function handler(req, res) {
         const shardIdx = parseInt(shard, 10) || 0;
         const totalShards = Math.max(parseInt(total, 10) || 1, 1);
 
-        // 1. Minimalist Metadata (Absolute basic strings, no special symbols)
         const cleanMetadata = {
             author: "kychi",
             description: "VBook Aggregate Part " + (shardIdx + 1)
         };
 
-        // 2. Strict Sharding and Size Capping
-        const MAX_BYTES = 100 * 1024; // 100KB
+        const MAX_BYTES = 104 * 1024; // 104KB safety cap (limit is 106KB)
         const allExtensions = snapshot.plugin.data || [];
         
         const shardPool = allExtensions.filter(item => {
@@ -52,12 +50,11 @@ module.exports = async function handler(req, res) {
 
         let finalData = [];
         for (const item of shardPool) {
-            // Releasing the exact fields from the working plugin.json
             const cleanItem = {
                 name: String(item.name || ''),
                 author: String(item.author || 'Anonymous'),
-                path: String(item.path || ''), // Use 'path' not 'link'
-                version: Number(item.version || 1),
+                path: String(item.path || ''), // Use 'path' for stable compatibility
+                version: Math.floor(Number(item.version || 1)), // Strict Integer
                 source: String(item.source || ''),
                 icon: String(item.icon || ''),
                 description: String(item.description || ''),
@@ -78,11 +75,16 @@ module.exports = async function handler(req, res) {
             data: finalData
         };
 
-        // Cache for 1 hour, revalidate for 1 day
         const SWR_HEADER = 'public, s-maxage=3600, stale-while-revalidate=86400';
-        writeJson(req, res, responseData, 200, { 'Cache-Control': SWR_HEADER });
+        
+        // CRITICAL: Stable app requires text/plain header to parse correctly
+        writeJson(req, res, responseData, 200, { 
+            'Cache-Control': SWR_HEADER,
+            'Content-Type': 'text/plain; charset=utf-8' 
+        });
+
     } catch (error) {
-        console.error('[API] Minimalist error:', error);
+        console.error('[API] Final fix error:', error);
         writeJson(req, res, { error: 'Internal Error' }, 500);
     }
 };
