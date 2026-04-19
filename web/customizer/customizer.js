@@ -1,7 +1,8 @@
 'use strict';
 
 // Shared state
-const API_BASE = '/api';
+// Decoupled API Base for GitHub Pages hosting compatibility
+const API_BASE = 'https://vbook-ext.vercel.app/api';
 let allExtensions = [];
 let selectedIds = new Set();
 let currentTab = 'builder';
@@ -212,7 +213,8 @@ async function handleSave() {
                 localStorage.setItem('vbook_my_shelves', JSON.stringify(myShelves));
             }
 
-            const url = `${window.location.origin}/api/registry/${result.data.slug}.json`;
+            // Generate URL using the Production API Domain, not the current frontend origin
+            const url = `https://vbook-ext.vercel.app/api/registry/${result.data.slug}.json`;
             document.getElementById('generated-url').value = url;
             hideSaveModal();
             document.getElementById('success-modal').classList.add('show');
@@ -229,7 +231,7 @@ async function handleSave() {
 }
 
 async function copyShelfUrl(slug, id) {
-    const url = `${window.location.origin}/api/registry/${slug}.json`;
+    const url = `https://vbook-ext.vercel.app/api/registry/${slug}.json`;
     await copyToClipboard(url);
     showToast('Đã copy link vào bộ nhớ tạm!');
     
