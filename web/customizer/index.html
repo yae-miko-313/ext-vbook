@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="vi" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VBook Registry - Integrated Platform</title>
-    <link rel="stylesheet" href="../style.css?v=20260419">
+    <title>VBook Registry - Integrated Platform Beta</title>
+    <link rel="stylesheet" href="../style.css?v=20260419d">
     <style>
-        /* Specific Platform Styling */
-        .tab-nav {
+        /* Modern Tab Navigation - Integrates with VBook Design */
+        .platform-tabs {
             display: flex;
-            gap: 12px;
-            margin: 24px 0;
-            padding: 4px;
+            gap: 10px;
+            margin-bottom: 25px;
+            padding: 5px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             backdrop-filter: blur(10px);
         }
-        .tab-btn {
+        .platform-tab {
             flex: 1;
             padding: 12px;
             border: none;
@@ -26,86 +27,83 @@
             font-weight: 600;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            font-size: 14px;
         }
-        .tab-btn.active {
+        .platform-tab.active {
             background: var(--color-accent);
             color: white;
             box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
         }
-        
-        .view-section { display: none; margin-top: 20px; animation: fadeIn 0.4s ease; }
-        .view-section.active { display: block; }
 
-        /* Cart Bar */
+        /* Cart Bar - Premium Floating Experience */
         .cart-bar {
             position: fixed;
-            bottom: 24px;
+            bottom: 30px;
             left: 50%;
-            transform: translateX(-50%) translateY(120%);
-            width: 90%;
-            max-width: 600px;
+            transform: translateX(-50%) translateY(150%);
+            width: calc(100% - 40px);
+            max-width: 500px;
             background: var(--color-bg-elevated);
             border: 1px solid var(--color-accent);
-            border-radius: 50px;
+            border-radius: 24px;
+            padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            z-index: 1000;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            z-index: 1100;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(20px);
         }
         .cart-bar.visible { transform: translateX(-50%) translateY(0); }
-        .cart-info { font-weight: 600; color: var(--color-text-primary); }
-        .cart-actions { display: flex; gap: 12px; }
+        .cart-count { font-weight: bold; color: var(--color-accent); }
+        
+        /* Unified View Management */
+        .tab-view { display: none; animation: viewFadeIn 0.4s ease; }
+        .tab-view.active { display: block; }
+        @keyframes viewFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Plus Button and Card Adjustments */
+        /* Integrated Builder Button on Cards */
         .ext-card { position: relative; }
-        .add-btn {
+        .ext-add-btn {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 32px;
-            height: 32px;
-            border-radius: 10px;
+            top: 15px;
+            right: 15px;
+            width: 36px;
+            height: 36px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
+            border-radius: 10px;
             color: var(--color-accent);
+            font-size: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            z-index: 5;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10;
         }
-        .add-btn:hover { transform: scale(1.1); background: var(--color-accent); color: white; }
-        .ext-card.selected .add-btn { background: var(--color-accent); color: white; }
+        .ext-add-btn:hover { transform: scale(1.1); background: var(--color-accent); color: white; }
+        .ext-card.is-selected .ext-add-btn { background: var(--color-accent); color: white; }
 
-        /* Marketplace Cards */
-        .market-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
+        /* Market Styles */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         .market-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 24px;
+            padding: 24px;
             transition: all 0.3s ease;
         }
         .market-card:hover { transform: translateY(-5px); border-color: var(--color-accent); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
+
 <body>
     <!-- Theme Toggle -->
     <button class="theme-toggle" id="theme-toggle" title="Chuyển chế độ sáng/tối">
@@ -113,28 +111,32 @@
     </button>
 
     <div class="container">
-        <!-- Home Link -->
-        <div style="position: absolute; top: 20px; left: 24px;">
-            <a href="../" class="action-btn secondary" style="min-width: unset; padding: 8px 12px; font-size: 11px;">← Link Tổng</a>
-        </div>
-
+        <!-- Header -->
         <header class="header">
-            <h1>VBook Platform</h1>
-            <p class="subtitle">Registry & Customizer Beta</p>
-            
-            <nav class="tab-nav">
-                <button class="tab-btn active" onclick="switchTab('extensions')">🧩 Extensions</button>
-                <button class="tab-btn" onclick="switchTab('sources')">📁 Nguồn Repos</button>
-                <button class="tab-btn" onclick="switchTab('market')">🛒 Kệ Sách</button>
-            </nav>
+            <div style="position: absolute; top: 15px; left: 0;">
+                <a href="../" class="action-btn secondary" style="min-width: unset; padding: 6px 12px; font-size: 11px;">← Link Tổng</a>
+            </div>
+            <h1>VBook Extensions</h1>
+            <p class="subtitle">Nền tảng Tùy biến & Chia sẻ Kệ sách</p>
+
+            <div class="header-actions">
+                <button class="action-btn" type="button" onclick="showSaveModal()">Lưu Kệ Cá Nhân</button>
+            </div>
         </header>
 
-        <!-- VIEW: EXTENSIONS -->
-        <main id="view-extensions" class="view-section active">
+        <!-- Platform Tabs -->
+        <nav class="platform-tabs">
+            <button class="platform-tab active" data-tab="extensions">🧩 Extensions</button>
+            <button class="platform-tab" data-tab="sources">📁 Nguồn Repo</button>
+            <button class="platform-tab" data-tab="market">🛒 Kệ Sách</button>
+        </nav>
+
+        <!-- VIEW 1: EXTENSIONS (Cloned from index.html) -->
+        <div id="view-extensions" class="tab-view active">
             <section class="stats">
                 <div class="stat-card">
-                    <div class="stat-number" id="total-count">0</div>
-                    <div class="stat-label">Tổng số</div>
+                    <div class="stat-number" id="total-extensions">0</div>
+                    <div class="stat-label">Tổng</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number" id="novel-count">0</div>
@@ -144,102 +146,120 @@
                     <div class="stat-number" id="comic-count">0</div>
                     <div class="stat-label">Truyện Tranh</div>
                 </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="translate-count">0</div>
+                    <div class="stat-label">Dịch</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="tts-count">0</div>
+                    <div class="stat-label">TTS</div>
+                </div>
             </section>
 
             <section class="filters">
                 <div class="filter-group search-group">
-                    <input type="text" id="ext-search" placeholder="Tìm kiếm extension..." class="search-box">
+                    <input type="text" id="search-input" placeholder="Tìm extension hoặc nguồn..." class="search-box">
                 </div>
-                <button id="open-filter-btn" class="action-btn">Lọc</button>
+                <button id="open-filter-btn" class="action-btn" type="button">Lọc</button>
+                <p id="source-repo-count" class="source-repo-count">Repo nguồn: 0</p>
             </section>
 
-            <div id="builder-grid" class="extensions-grid">
-                <!-- Cards will be injected -->
-            </div>
-        </main>
+            <section class="extensions">
+                <div id="extensions-grid" class="extensions-grid"></div>
+            </section>
+        </div>
 
-        <!-- VIEW: SOURCES -->
-        <main id="view-sources" class="view-section">
-            <div id="repo-list" class="repo-list">
-                <!-- Sources will be injected -->
-            </div>
-        </main>
+        <!-- VIEW 2: SOURCES -->
+        <div id="view-sources" class="tab-view">
+             <section class="contribute">
+                <h3 class="authors-panel-title">Danh Sách Nguồn Tham Chiếu</h3>
+                <div id="repo-list" class="repo-list"></div>
+            </section>
+        </div>
 
-        <!-- VIEW: MARKETPLACE -->
-        <main id="view-market" class="view-section">
+        <!-- VIEW 3: MARKETPLACE -->
+        <div id="view-market" class="tab-view">
             <div id="market-grid" class="market-grid">
-                <!-- Shelf cards will be injected -->
+                <!-- Market Cards -->
             </div>
-        </main>
+        </div>
 
+        <!-- Footer -->
         <footer class="footer">
-            <p>VBook Tool Platform v4.1.0 Beta</p>
+            <div class="footer-content">
+                <p>VBook Tool Platform v4.2.0 Beta | kychi</p>
+            </div>
         </footer>
     </div>
 
     <!-- Floating Cart Bar -->
     <div id="cart-bar" class="cart-bar">
-        <div class="cart-info">✨ <span id="selected-count">0</span> extension đã chọn</div>
-        <div class="cart-actions">
-            <button class="action-btn secondary" onclick="clearSelection()">Xóa</button>
-            <button class="action-btn" onclick="showSaveModal()">Lưu & Lấy link</button>
+        <div style="font-size: 15px; color: var(--color-text-secondary);">
+            Đã chọn <span class="cart-count" id="cart-count">0</span> extension
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button class="action-btn secondary" style="min-width: unset; padding: 10px 15px;" onclick="clearCart()">Xóa</button>
+            <button class="action-btn" style="min-width: unset; padding: 10px 20px;" onclick="showSaveModal()">Lưu Kệ</button>
         </div>
     </div>
 
     <!-- MODALS -->
     
-    <!-- Filter Modal (Ported from Main Site) -->
+    <!-- Filter Modal (Placeholder for logic) -->
     <div id="filter-modal" class="filter-modal">
-        <div class="filter-modal-backdrop" onclick="closeFilterModal()"></div>
-        <div class="filter-modal-panel">
-            <h2 class="filter-modal-title">Bộ lọc</h2>
+        <div class="filter-modal-backdrop" data-filter-close="true"></div>
+        <section class="filter-modal-panel">
+            <h2 class="filter-modal-title">Lọc</h2>
             <div class="filter-modal-group">
-                <h3 class="filter-modal-group-title">Thể loại</h3>
-                <select id="type-filter" class="search-box">
-                    <option value="all">Tất cả</option>
-                    <option value="novel">Truyện Chữ</option>
-                    <option value="comic">Truyện Tranh</option>
-                    <option value="translate">Dịch</option>
-                    <option value="tts">TTS</option>
-                </select>
+                <h3 class="filter-modal-group-title">Loại</h3>
+                <div id="filter-types" class="filter-chip-list"></div>
             </div>
-            <button class="action-btn" style="width: 100%; margin-top: 12px;" onclick="closeFilterModal()">Áp dụng</button>
-        </div>
+            <div class="filter-modal-group">
+                <h3 class="filter-modal-group-title">Ngôn ngữ</h3>
+                <div id="filter-locales" class="filter-chip-list"></div>
+            </div>
+            <div class="filter-modal-actions">
+                <button class="filter-modal-btn filter-modal-btn-apply" data-filter-close="true">Đóng</button>
+            </div>
+        </section>
     </div>
 
     <!-- Save Modal -->
     <div id="save-modal" class="filter-modal">
         <div class="filter-modal-backdrop" onclick="hideSaveModal()"></div>
-        <div class="filter-modal-panel">
-            <h2 class="filter-modal-title">Lưu Kệ Sách</h2>
-            <div style="display: flex; flex-direction: column; gap: 12px;">
-                <input type="text" id="shelf-title" placeholder="Tên kệ sách (vd: Kệ của Kỳ)" class="search-box">
-                <input type="text" id="shelf-author" placeholder="Tên tác giả" class="search-box">
-                <textarea id="shelf-desc" placeholder="Mô tả kệ (không bắt buộc)" class="search-box" style="height: 80px;"></textarea>
-                <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--color-text-secondary);">
+        <section class="filter-modal-panel">
+            <h2 class="filter-modal-title">Tạo Kệ Sách Cá Nhân</h2>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+                <input type="text" id="shelf-title" placeholder="Tên kệ sách của bạn..." class="search-box">
+                <input type="text" id="shelf-author" placeholder="Tên tác giả..." class="search-box">
+                <textarea id="shelf-desc" placeholder="Mô tả kệ (không bắt buộc)..." class="search-box" style="height: 80px;"></textarea>
+                <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--color-text-secondary); cursor: pointer;">
                     <input type="checkbox" id="shelf-public" checked> Công khai trên Marketplace
                 </label>
-                <div id="save-error" style="color: #e11d48; font-size: 13px; display: none;"></div>
-                <button id="final-save-btn" class="action-btn" onclick="handleSave()">Lưu & Lấy link</button>
+                <div id="save-error" style="color: var(--color-error); font-size: 13px; display: none; text-align: center;"></div>
+                <button id="final-save-btn" class="action-btn" style="width: 100%;" onclick="handleSave()">Lưu & Lấy link</button>
             </div>
-        </div>
+        </section>
     </div>
 
     <!-- Success Modal -->
     <div id="success-modal" class="filter-modal">
         <div class="filter-modal-backdrop" onclick="hideSuccessModal()"></div>
-        <div class="filter-modal-panel" style="text-align: center;">
-            <h2 class="filter-modal-title">🎉 Đã tạo kệ thành công!</h2>
-            <p style="font-size: 14px; margin-bottom: 20px;">Dán link này vào VBook để sử dụng kệ cá nhân của bạn.</p>
-            <input type="text" id="generated-url" readonly class="search-box" style="text-align: center; margin-bottom: 12px;">
-            <button class="action-btn" onclick="copyToClipboard(document.getElementById('generated-url').value); showToast('Đã copy!');">Copy Link</button>
-            <button class="action-btn secondary" style="margin-top: 12px;" onclick="hideSuccessModal()">Đóng</button>
-        </div>
+        <section class="filter-modal-panel" style="text-align: center;">
+            <h2 class="filter-modal-title">🎉 Chúc mừng!</h2>
+            <p style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: 20px;">Kệ sách cá nhân của ông đã sẵn sàng.</p>
+            <input type="text" id="generated-url" readonly class="search-box" style="text-align: center; margin-bottom: 12px; font-family: monospace;">
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button class="action-btn" onclick="copyGeneratedLink()">Copy Link</button>
+                <button class="action-btn secondary" onclick="hideSuccessModal()">Đóng</button>
+            </div>
+        </section>
     </div>
 
     <div id="toast" class="toast"></div>
 
     <script src="../theme.js"></script>
-    <script src="customizer.js?v=20260419c"></script>
+    <script src="customizer.js?v=20260419e"></script>
 </body>
+
 </html>
