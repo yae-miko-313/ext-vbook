@@ -1,71 +1,82 @@
 'use strict';
 
-// Shared state
-// Decoupled API Base for GitHub Pages hosting compatibility
+/**
+ * VBook Platform JS (Unified V4 Beta)
+ * Located in /web/customizer/
+ */
+
 const API_BASE = 'https://vbook-ext.vercel.app/api';
 let allExtensions = [];
+let allSources = [];
 let selectedIds = new Set();
-let currentTab = 'builder';
+let currentTab = 'extensions';
 let marketplaceShelves = [];
 
-// Entry point
+// --- INITIALIZATION ---
+
 async function init() {
     try {
-        await Promise.all([
-            fetchCatalog(),
-            loadMarketplace()
-        ]);
-        
-        // Restore existing session if possible (optional future feature)
-        renderBuilder();
-        setupFilters();
+        await fetchCatalog();
+        loadMarketplace();
+        switchTab('extensions'); // Default view
+        setupEventListeners();
+        loadSavedSelection();
     } catch (err) {
-        console.error('Init failed:', err);
+        console.error('Platform Init Error:', err);
     }
 }
-
-// --- DATA FETCHING ---
 
 async function fetchCatalog() {
     try {
         const res = await fetch(`${API_BASE}/plugin.json`);
+        if (!res.ok) throw new Error('API 404');
         const result = await res.json();
-        // Extract plain extensions list
-        allExtensions = result.data || result.plugin?.data || [];
+        
+        // Extract data
+        const snapshot = result.data || result;
+        allExtensions = snapshot.plugin?.data || snapshot.data || [];
+        allSources = snapshot.catalog?.sources || [];
+        
+        updateStats(allExtensions);
     } catch (err) {
-        showToast('Không thể tải kho extension');
+        showToast('Không thể tải dữ liệu từ Vercel...');
     }
 }
+
 async function loadMarketplace() {
     try {
         const res = await fetch(`${API_BASE}/registry/market`);
-        const result = await res.json();
-        marketplaceShelves = result.data || [];
-        if (currentTab === 'market') renderMarket();
-    } catch (err) {
-        console.error('Market fetch failed:', err);
-    }
+        if (res.ok) {
+            const result = await res.json();
+            marketplaceShelves = result.data || [];
+        }
+    } catch (e) {}
 }
 
-// --- RENDERING ---
+// --- STATE MANAGEMENT ---
 
 function switchTab(tab) {
     currentTab = tab;
+    
+    // Update UI Buttons
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`.tab-btn[onclick*="${tab}"]`).classList.add('active');
+    const activeBtn = document.querySelector(`.tab-btn[onclick*="${tab}"]`);
+    if (activeBtn) activeBtn.classList.add('active');
 
-    if (tab === 'builder') {
-        document.getElementById('view-builder').style.display = 'grid';
-        document.getElementById('view-market').style.display = 'none';
-        renderBuilder();
-    } else {
-        document.getElementById('view-builder').style.display = 'none';
-        document.getElementById('view-market').style.display = 'grid';
-        renderMarket();
-    }
+    // Update Views
+    document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
+    const targetView = document.getElementById(`view-${tab}`);
+    if (targetView) targetView.classList.add('active');
+
+    // Tab-specific rendering
+    if (tab === 'extensions') renderExtensions();
+    if (tab === 'sources') renderSources();
+    if (tab === 'market') renderMarket();
 }
 
-function renderBuilder() {
+// --- RENDERING: EXTENSIONS ---
+
+function renderExtensions() {
     const grid = document.getElementById('builder-grid');
     const searchTerm = document.getElementById('ext-search').value.toLowerCase();
     const typeFilter = document.getElementById('type-filter').value;
@@ -79,16 +90,18 @@ function renderBuilder() {
     });
 
     if (filtered.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--color-text-tertiary); padding: 40px;">Không tìm thấy extension nào...</div>`;
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px;">Không tìm thấy extension nào...</div>`;
         return;
     }
 
     grid.innerHTML = filtered.map(ext => {
-        const isSelected = selectedIds.has(ext.path || ext.name);
+        const id = ext.path || ext.name;
+        const isSelected = selectedIds.has(id);
         return `
-            <div class="ext-card selectable ${isSelected ? 'selected' : ''}" onclick="toggleExtension('${ext.path || ext.name}')">
+            <div class="ext-card ${isSelected ? 'selected' : ''}">
+                <button class="add-btn" onclick="toggleExtension('${id}')">${isSelected ? '✓' : '+'}</button>
                 <div class="ext-card-header">
-                    <img class="ext-icon" src="${ext.icon || '../assets/default-icon.png'}" onerror="this.src='../assets/default-icon.png'" loading="lazy">
+                    <img class="ext-icon" src="${secureUrl(ext.icon) || '../assets/default-icon.png'}" onerror="this.src='../assets/default-icon.png'" loading="lazy">
                     <div class="ext-info">
                         <div class="ext-name">${escapeHtml(ext.name)}</div>
                         <div class="ext-author">${escapeHtml(ext.author)}</div>
@@ -106,6 +119,29 @@ function renderBuilder() {
     }).join('');
 }
 
+// --- RENDERING: SOURCES ---
+
+function renderSources() {
+    const container = document.getElementById('repo-list');
+    if (allSources.length === 0) {
+        container.innerHTML = `<div style="text-align: center; padding: 40px;">Chưa có dữ liệu nguồn...</div>`;
+        return;
+    }
+
+    container.innerHTML = allSources.map(source => `
+        <div class="market-card" style="margin-bottom: 12px; display: flex; align-items: center; gap: 15px;">
+            <img src="${source.avatar || '../assets/default-icon.png'}" style="width: 40px; height: 40px; border-radius: 50%;">
+            <div style="flex: 1;">
+                <h3 style="margin: 0; font-size: 16px;">${escapeHtml(source.displayName || source.id)}</h3>
+                <div style="font-size: 12px; color: var(--color-text-tertiary);">${source.url}</div>
+            </div>
+            <button class="action-btn secondary" style="padding: 8px 12px;" onclick="copyToClipboard('${source.url}'); showToast('Đã copy!');">Copy Link</button>
+        </div>
+    `).join('');
+}
+
+// --- RENDERING: MARKETPLACE ---
+
 function renderMarket() {
     const grid = document.getElementById('market-grid');
     if (marketplaceShelves.length === 0) {
@@ -116,18 +152,18 @@ function renderMarket() {
     grid.innerHTML = marketplaceShelves.map(shelf => `
         <div class="market-card">
             <h3 style="font-size: 18px; margin: 0;">${escapeHtml(shelf.title)}</h3>
-            <div style="font-size: 13px; color: var(--color-text-secondary);">tác giả: <b>${escapeHtml(shelf.author)}</b></div>
-            <p style="font-size: 14px; margin: 4px 0;">${escapeHtml(shelf.description || '')}</p>
-            <div class="market-stats">
-                <span class="market-use-count">🔥 ${shelf.usage_count} lượt dùng</span>
+            <div style="font-size: 13px; color: var(--color-text-secondary);">bởi <b>${escapeHtml(shelf.author)}</b></div>
+            <p style="font-size: 14px; margin: 10px 0;">${escapeHtml(shelf.description || '')}</p>
+            <div style="font-size: 12px; display: flex; justify-content: space-between; align-items: center; color: var(--color-text-tertiary);">
+                <span>🔥 ${shelf.usage_count} lượt dùng</span>
                 <span>📅 ${new Date(shelf.updated_at).toLocaleDateString()}</span>
             </div>
-            <button class="action-btn" style="width: 100%; margin-top: 8px;" onclick="copyShelfUrl('${shelf.slug}', '${shelf.id}')">Lấy link</button>
+            <button class="action-btn" style="width: 100%; margin-top: 15px;" onclick="useShelf('${shelf.slug}', '${shelf.id}')">Dùng kệ này</button>
         </div>
     `).join('');
 }
 
-// --- LOGIC ---
+// --- BUILDER LOGIC ---
 
 function toggleExtension(id) {
     if (selectedIds.has(id)) {
@@ -135,18 +171,13 @@ function toggleExtension(id) {
     } else {
         selectedIds.add(id);
     }
-    updateShelfBar();
-    renderBuilder();
+    saveSelection();
+    updateCartBar();
+    renderExtensions();
 }
 
-function clearSelection() {
-    selectedIds.clear();
-    updateShelfBar();
-    renderBuilder();
-}
-
-function updateShelfBar() {
-    const bar = document.getElementById('shelf-bar');
+function updateCartBar() {
+    const bar = document.getElementById('cart-bar');
     const countEl = document.getElementById('selected-count');
     countEl.textContent = selectedIds.size;
     
@@ -157,17 +188,26 @@ function updateShelfBar() {
     }
 }
 
-function showSaveModal() {
-    document.getElementById('save-modal').classList.add('show');
+function clearSelection() {
+    selectedIds.clear();
+    saveSelection();
+    updateCartBar();
+    renderExtensions();
 }
 
-function hideSaveModal() {
-    document.getElementById('save-modal').classList.remove('show');
+function saveSelection() {
+    localStorage.setItem('v4_selected_ids', JSON.stringify(Array.from(selectedIds)));
 }
 
-function hideSuccessModal() {
-    document.getElementById('success-modal').classList.remove('show');
+function loadSavedSelection() {
+    const saved = localStorage.getItem('v4_selected_ids');
+    if (saved) {
+        selectedIds = new Set(JSON.parse(saved));
+        updateCartBar();
+    }
 }
+
+// --- SAVING SHELF ---
 
 async function handleSave() {
     const title = document.getElementById('shelf-title').value.trim();
@@ -185,16 +225,13 @@ async function handleSave() {
 
     btn.disabled = true;
     btn.textContent = 'Đang lưu...';
-    errorEl.style.display = 'none';
 
     try {
         const res = await fetch(`${API_BASE}/registry/save`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                title,
-                author,
-                description: desc,
+                title, author, description: desc,
                 extension_ids: Array.from(selectedIds),
                 is_public: isPublic
             })
@@ -202,25 +239,11 @@ async function handleSave() {
 
         const result = await res.json();
         if (result.success) {
-            // CRITICAL: Save ownership token to localStorage so user can edit later
-            if (result.data.secret_token) {
-                const myShelves = JSON.parse(localStorage.getItem('vbook_my_shelves') || '{}');
-                myShelves[result.data.slug] = {
-                    id: result.data.id,
-                    token: result.data.secret_token,
-                    created_at: new Date().toISOString()
-                };
-                localStorage.setItem('vbook_my_shelves', JSON.stringify(myShelves));
-            }
-
-            // Generate URL using the Production API Domain, not the current frontend origin
             const url = `https://vbook-ext.vercel.app/api/registry/${result.data.slug}.json`;
             document.getElementById('generated-url').value = url;
             hideSaveModal();
             document.getElementById('success-modal').classList.add('show');
-        } else {
-            throw new Error(result.error);
-        }
+        } else { throw new Error(result.error); }
     } catch (err) {
         errorEl.textContent = 'Lỗi: ' + err.message;
         errorEl.style.display = 'block';
@@ -230,19 +253,47 @@ async function handleSave() {
     }
 }
 
-async function copyShelfUrl(slug, id) {
+async function useShelf(slug, id) {
     const url = `https://vbook-ext.vercel.app/api/registry/${slug}.json`;
     await copyToClipboard(url);
-    showToast('Đã copy link vào bộ nhớ tạm!');
+    showToast('Đã copy link kệ sách!');
     
-    // Call usage API
-    try {
-        fetch(`${API_BASE}/registry/use`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id })
-        });
-    } catch (e) {}
+    // Usage tracking
+    fetch(`${API_BASE}/registry/use`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+    }).catch(()=>{});
+}
+
+// --- HELPERS ---
+
+function updateStats(exts) {
+    document.getElementById('total-count').textContent = exts.length;
+    document.getElementById('novel-count').textContent = exts.filter(e => e.type === 'novel').length;
+    document.getElementById('comic-count').textContent = exts.filter(e => e.type === 'comic').length;
+}
+
+function setupEventListeners() {
+    document.getElementById('ext-search').addEventListener('input', renderExtensions);
+    document.getElementById('type-filter').addEventListener('change', renderExtensions);
+}
+
+function showSaveModal() { document.getElementById('save-modal').classList.add('show'); }
+function hideSaveModal() { document.getElementById('save-modal').classList.remove('show'); }
+function hideSuccessModal() { document.getElementById('success-modal').classList.remove('show'); }
+function openFilterModal() { document.getElementById('filter-modal').classList.add('show'); }
+function closeFilterModal() { document.getElementById('filter-modal').classList.remove('show'); }
+
+function secureUrl(url) {
+    if (!url) return '';
+    return url.replace(/^http:\/\//i, 'https://');
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 async function copyToClipboard(text) {
@@ -254,17 +305,6 @@ function showToast(message) {
     toast.textContent = message;
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3000);
-}
-
-function setupFilters() {
-    document.getElementById('ext-search').addEventListener('input', renderBuilder);
-    document.getElementById('type-filter').addEventListener('change', renderBuilder);
-}
-
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
 }
 
 // Start

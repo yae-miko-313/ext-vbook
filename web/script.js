@@ -745,7 +745,10 @@ function renderCard(ext) {
 
     const typeLabel = typeLabels[ext.type] || typeLabels._unknown;
     const description = getDescription(ext);
-    const iconUrl = ext.icon || extensionIconFallback(ext.name || 'ext');
+    let iconUrl = ext.icon || extensionIconFallback(ext.name || 'ext');
+    if (typeof iconUrl === 'string') {
+        iconUrl = iconUrl.replace(/^http:\/\//i, 'https://');
+    }
     const iconFallback = extensionIconFallback(ext.name || 'ext');
     const sourceLabel = ext.source || '';
     const sourceHost = sourceLabel ? getSourceHost(sourceLabel) : '';
