@@ -60,6 +60,16 @@
         .market-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
         .market-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 20px; transition: all 0.3s; display: flex; flex-direction: column; gap: 10px; }
         .market-card:hover { border-color: var(--color-accent); transform: translateY(-4px); }
+
+        /* Skeleton Shimmer */
+        .skeleton-card { background: var(--glass-bg); padding: 20px; border-radius: 20px; border: 1px solid var(--glass-border); overflow: hidden; position: relative; }
+        .skeleton-card::after { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent); animation: shimmer 1.5s infinite; content: ''; }
+        @keyframes shimmer { 100% { transform: translateX(100%); } }
+        .skeleton-line { height: 10px; background: rgba(0,0,0,0.05); margin-bottom: 10px; border-radius: 4px; }
+        [data-theme="dark"] .skeleton-line { background: rgba(255,255,255,0.05); }
+        .skeleton-line-sm { width: 40%; }
+        .skeleton-line-md { width: 70%; }
+        .skeleton-line-lg { width: 100%; }
     </style>
 </head>
 
@@ -163,12 +173,18 @@
             <div class="filter-modal-backdrop" data-filter-close="true"></div>
             <section class="filter-modal-panel">
                 <h2 class="filter-modal-title">Lọc</h2>
+                <div class="filter-modal-drag-handle"></div>
                 <div class="filter-modal-group"><div id="filter-types" class="filter-chip-list"></div></div>
                 <div class="filter-modal-group"><div id="filter-locales" class="filter-chip-list"></div></div>
                 <div class="filter-modal-group"><div id="filter-authors" class="filter-chip-list"></div></div>
                 <div class="filter-modal-switch-row">
-                    <span class="filter-modal-switch-label">NSFW</span>
+                    <span class="filter-modal-switch-label">Hiện NSFW</span>
                     <label class="filter-switch"><input id="filter-nsfw-switch" type="checkbox"><span class="filter-switch-slider"></span></label>
+                </div>
+                <!-- Action Buttons from Stable -->
+                <div class="filter-modal-actions">
+                    <button id="filter-cancel-btn" class="filter-modal-btn filter-modal-btn-cancel" type="button">Hủy</button>
+                    <button id="filter-apply-btn" class="filter-modal-btn filter-modal-btn-apply" type="button">Áp dụng</button>
                 </div>
             </section>
         </div>
