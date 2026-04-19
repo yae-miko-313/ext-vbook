@@ -28,13 +28,23 @@
         .source-ext-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-            padding: 20px;
-            background: rgba(0,0,0,0.03);
+            gap: 20px;
+            padding: 0;
+            background: rgba(0,0,0,0.02);
             border-radius: 0 0 16px 16px;
+            width: 100%; box-sizing: border-box;
+            max-height: 0; overflow: hidden; opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        [data-theme="dark"] .source-ext-grid { background: rgba(255,255,255,0.03); }
-        .source-card.is-expanded { margin-bottom: 25px; border-color: var(--color-accent); overflow: hidden; }
+        .source-card.is-expanded .source-ext-grid { max-height: 5000px; opacity: 1; padding: 24px; border-top: 1px solid var(--glass-border); }
+        [data-theme="dark"] .source-ext-grid { background: rgba(255,255,255,0.02); }
+        .source-card { transition: all 0.3s ease; border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; margin-bottom: 12px; }
+        .source-card.is-expanded { margin-bottom: 25px; border-color: var(--color-accent); box-shadow: var(--shadow-lg); }
+        .source-card-avatar { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; background: var(--glass-bg); flex-shrink: 0; border: 1px solid var(--glass-border); }
+        .source-desc { font-size: 13px; opacity: 0.7; margin-top: 4px; line-height: 1.4; text-align: left; }
+        .source-badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+        .source-type-pill { font-size: 10px; padding: 2px 8px; border-radius: 6px; background: rgba(0,0,0,0.05); border: 1px solid var(--glass-border); opacity: 0.8; font-weight: 600; text-transform: uppercase; }
+        [data-theme="dark"] .source-type-pill { background: rgba(255,255,255,0.05); }
         
         /* Integrated Builder Button */
         .ext-add-btn {
@@ -70,6 +80,65 @@
         .skeleton-line-sm { width: 40%; }
         .skeleton-line-md { width: 70%; }
         .skeleton-line-lg { width: 100%; }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .platform-tabs { margin: 10px; width: auto; overflow-x: auto; white-space: nowrap; flex-wrap: nowrap; justify-content: flex-start; }
+            .platform-tab { flex: 0 0 auto; min-width: 120px; padding: 10px; }
+            .source-ext-grid { grid-template-columns: 1fr; padding: 15px; }
+            .ext-card { width: 100%; }
+        }
+        /* Toast Styles */
+        .toast {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: rgba(0,0,0,0.85); color: white; padding: 12px 24px; border-radius: 99px;
+            font-weight: 600; font-size: 14px; z-index: 2000; transition: transform 0.3s ease;
+            pointer-events: none; backdrop-filter: blur(10px);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* Card Elements */
+        .ext-site-copy-btn { background: transparent; border: none; font-size: 16px; cursor: pointer; opacity: 0.5; transition: opacity 0.2s; }
+        .ext-site-copy-btn:hover { opacity: 1; color: var(--color-accent); }
+        .repo-chip-img { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; border: 1px solid var(--glass-border); }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .platform-tabs { margin: 10px; width: auto; overflow-x: auto; white-space: nowrap; flex-wrap: nowrap; justify-content: flex-start; }
+            .platform-tab { flex: 0 0 auto; min-width: 120px; padding: 10px; }
+            .source-ext-grid { grid-template-columns: 1fr; padding: 15px; }
+            .ext-card { width: 100%; }
+            .cart-bar { width: calc(100% - 20px); bottom: 10px; }
+        }
+        /* Toast Styles */
+        .toast {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: rgba(0,0,0,0.85); color: white; padding: 12px 24px; border-radius: 99px;
+            font-weight: 600; font-size: 14px; z-index: 2000; transition: transform 0.3s ease;
+            pointer-events: none; backdrop-filter: blur(10px);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* Card Elements */
+        .ext-site-copy-btn { background: transparent; border: none; font-size: 16px; cursor: pointer; opacity: 0.5; transition: opacity 0.2s; padding: 4px; }
+        .ext-site-copy-btn:hover { opacity: 1; color: var(--color-accent); transform: scale(1.1); }
+        .repo-chip-img { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; border: 1px solid var(--glass-border); }
+
+        /* Step Guide Styling */
+        .step { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; }
+        .step-num { flex-shrink: 0; width: 24px; height: 24px; background: var(--color-accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+        .step-text h3 { font-size: 14px; margin-bottom: 4px; color: var(--color-text-primary); }
+        .step-text p { font-size: 12px; opacity: 0.7; line-height: 1.4; }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .container { padding-bottom: 80px; }
+            .platform-tabs { margin: 10px; width: auto; overflow-x: auto; white-space: nowrap; flex-wrap: nowrap; justify-content: flex-start; }
+            .platform-tab { flex: 0 0 auto; min-width: 120px; padding: 10px; }
+            .source-ext-grid { grid-template-columns: 1fr; padding: 15px; }
+            .ext-card { width: 100%; }
+            .cart-bar { width: calc(100% - 20px); bottom: 10px; }
+        }
     </style>
 </head>
 
@@ -89,7 +158,7 @@
             <p class="subtitle">Platform Beta: Customizer & Registry</p>
 
             <div class="header-actions">
-                <button id="copy-aggregate-btn" class="action-btn header-copy-btn" type="button">Copy Link Tổng</button>
+                <button id="open-filter-btn" class="action-btn header-copy-btn" type="button">Lọc</button>
                 <button id="open-guide-btn" class="action-btn secondary" type="button">Hướng dẫn sử dụng</button>
             </div>
         </header>
@@ -106,15 +175,15 @@
             <section class="stats">
                 <div class="stat-card">
                     <div class="stat-number" id="total-extensions">0</div>
-                    <div class="stat-label">Tổng</div>
+                    <div class="stat-label">Tổng số Extension</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number" id="novel-count">0</div>
-                    <div class="stat-label">Truyện Chữ</div>
+                    <div class="stat-label">Truyện chữ</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number" id="comic-count">0</div>
-                    <div class="stat-label">Truyện Tranh</div>
+                    <div class="stat-label">Truyện tranh</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number" id="translate-count">0</div>
@@ -128,9 +197,8 @@
 
             <section class="filters">
                 <div class="filter-group search-group">
-                    <input type="text" id="ext-search-input" placeholder="Tìm extension..." class="search-box">
+                    <input type="text" id="ext-search-input" placeholder="Tìm tên extension hoặc tác giả..." class="search-box">
                 </div>
-                <button id="open-filter-btn" class="action-btn" type="button">Lọc</button>
             </section>
 
             <section class="extensions">
@@ -168,20 +236,54 @@
             <div id="market-grid" class="market-grid"></div>
         </div>
 
+        <!-- GLOBAL SECTIONS -->
+        <section class="authors-credits" style="padding: 40px 20px; border-top: 1px solid var(--glass-border); margin-top: 60px; text-align: center;">
+            <h2>Cảm Ơn Các Tác Giả</h2>
+            <p class="authors-note" style="max-width: 800px; margin: 10px auto; opacity: 0.8; font-size: 14px;">
+                Dự án tôn trọng quyền tác giả và nguồn đóng góp. Nếu bạn không muốn repo của mình xuất hiện, mình sẽ gỡ bỏ ngay lập tức.
+                Tổng số tác giả đang đóng góp: <strong id="authors-count-credits">0</strong>.
+            </p>
+        </section>
+
+        <section class="contribute">
+            <div class="contribute-head">
+                <h2>Đóng Góp Và Nguồn Tham Chiếu</h2>
+                <div class="contribute-actions">
+                    <a class="contribute-link" href="https://github.com/kychitoge/vbook-ext/issues/new" target="_blank">Tạo Issue</a>
+                    <a class="contribute-link" href="https://github.com/kychitoge/vbook-ext/pulls" target="_blank">Tạo PR</a>
+                </div>
+            </div>
+            <p class="contribute-intro">
+                Tổng hợp các repo extension để cộng đồng dễ dàng sử dụng và đóng góp.
+            </p>
+            <h3 class="authors-panel-title">Nguồn Tham Chiếu <span id="contribute-source-count" class="source-count">0 nguồn</span></h3>
+            <div id="repo-list" class="repo-list"></div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>Extension VBook Tool v4.2.5 Platform Beta | kychi</p>
+                <div class="contact-cards">
+                    <a href="https://github.com/kychitoge" target="_blank" class="contact-card">GitHub: kychitoge</a>
+                    <a href="https://discord.com/users/kyctg" target="_blank" class="contact-card">Discord: Liên hệ qua Discord</a>
+                </div>
+            </div>
+        </footer>
+
         <!-- MODALS (Global) -->
         <div id="filter-modal" class="filter-modal" aria-hidden="true">
             <div class="filter-modal-backdrop" data-filter-close="true"></div>
             <section class="filter-modal-panel">
                 <h2 class="filter-modal-title">Lọc</h2>
                 <div class="filter-modal-drag-handle"></div>
-                <div class="filter-modal-group"><div id="filter-types" class="filter-chip-list"></div></div>
-                <div class="filter-modal-group"><div id="filter-locales" class="filter-chip-list"></div></div>
-                <div class="filter-modal-group"><div id="filter-authors" class="filter-chip-list"></div></div>
+                <div id="filter-types" class="filter-chip-list" style="margin-bottom: 12px;"></div>
+                <div id="filter-locales" class="filter-chip-list" style="margin-bottom: 12px;"></div>
+                <div id="filter-authors" class="filter-chip-list" style="margin-bottom: 12px;"></div>
                 <div class="filter-modal-switch-row">
                     <span class="filter-modal-switch-label">Hiện NSFW</span>
                     <label class="filter-switch"><input id="filter-nsfw-switch" type="checkbox"><span class="filter-switch-slider"></span></label>
                 </div>
-                <!-- Action Buttons from Stable -->
                 <div class="filter-modal-actions">
                     <button id="filter-cancel-btn" class="filter-modal-btn filter-modal-btn-cancel" type="button">Hủy</button>
                     <button id="filter-apply-btn" class="filter-modal-btn filter-modal-btn-apply" type="button">Áp dụng</button>
@@ -192,10 +294,10 @@
         <div id="save-modal" class="filter-modal">
             <div class="filter-modal-backdrop" onclick="document.getElementById('save-modal').classList.remove('show')"></div>
             <section class="filter-modal-panel">
-                <h2 class="filter-modal-title">Tạo Kệ Sách Cá Nhân</h2>
+                <h2 class="filter-modal-title">Tạo Kệ Sách</h2>
                 <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
                     <input type="text" id="shelf-title" placeholder="Tên kệ sách..." class="search-box">
-                    <input type="text" id="shelf-author" placeholder="Tác giả..." class="search-box">
+                    <input type="text" id="shelf-author" placeholder="Tên bạn..." class="search-box">
                     <button class="action-btn" style="width: 100%;" onclick="handleSaveShelf()">Lưu & Lấy Link</button>
                 </div>
             </section>
@@ -209,16 +311,6 @@
                 <button class="action-btn" onclick="navigator.clipboard.writeText(document.getElementById('generated-url').value); showToast('Đã copy!')">Copy Link Registry</button>
             </section>
         </div>
-
-        <!-- STABLE: Lower Components -->
-        <section class="contribute">
-            <h3 class="authors-panel-title">Nguồn Tham Chiếu <span id="contribute-source-count" class="source-count">0</span></h3>
-            <div id="repo-list" class="repo-list"></div>
-        </section>
-
-        <footer class="footer">
-            <div class="footer-content"><p>Extension VBook Platform v4.2.3 Beta | kychi</p></div>
-        </footer>
     </div>
 
     <!-- Floating UI -->
@@ -230,8 +322,34 @@
     <button id="back-to-top" class="back-to-top">↑</button>
     <div id="toast" class="toast"></div>
 
-    <script src="../theme.js"></script>
-    <script src="customizer.js?v=20260419_core"></script>
-</body>
+        <div id="guide-modal" class="filter-modal">
+            <div class="filter-modal-backdrop" onclick="document.getElementById('guide-modal').classList.remove('show')"></div>
+            <section class="filter-modal-panel">
+                <h2 class="filter-modal-title">Hướng Dẫn</h2>
+                <div style="max-height: 400px; overflow-y: auto; padding-right: 10px; text-align: left;">
+                    <div class="step">
+                        <span class="step-num">1</span>
+                        <div class="step-text"><h3>Khám phá & Chọn</h3><p>Tìm extension ưng ý, bấm "+" để thêm vào kệ sách cá nhân.</p></div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">2</span>
+                        <div class="step-text"><h3>Tạo Kệ</h3><p>Bấm "Lưu Kệ" ở thanh dưới cùng, đặt tên và lấy link registry.</p></div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">3</span>
+                        <div class="step-text"><h3>Cài vào VBook</h3><p>Copy link và dán vào phần "Cài nguồn bản thường" trong App VBook.</p></div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">4</span>
+                        <div class="step-text"><h3>Link Tổng</h3><p>Dùng "Link Tổng" nếu bạn muốn có bộ sưu tập đầy đủ (Cập nhật tự động).</p></div>
+                    </div>
+                </div>
+                <button class="action-btn" style="width: 100%; margin-top: 15px;" onclick="document.getElementById('guide-modal').classList.remove('show')">Đã hiểu!</button>
+            </section>
+        </div>
+
+        <script src="../theme.js"></script>
+        <script src="customizer.js?v=20260419_core"></script>
+    </body>
 
 </html>

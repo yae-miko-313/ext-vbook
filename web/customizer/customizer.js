@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * VBook Platform Unified Script (V4.2.3 Restoration & Enhancement)
- * This version inherits 100% of Stable Logic and enhances with Platform features.
+ * VBook Platform Unified Script (V4.2.5 Symmetry Restoration)
+ * Restored 100% stable card logic and repository summaries.
  */
 
 const API_BASE_URL = 'https://vbook-ext.vercel.app'; 
@@ -14,7 +14,6 @@ let selectedAuthorKeys = new Set();
 let selectedLocales = new Set();
 let selectedTypes = new Set();
 
-// Drafts for Modal
 let draftAuthorKeys = new Set();
 let draftLocales = new Set();
 let draftTypes = new Set();
@@ -23,13 +22,11 @@ let draftHideNsfwEnabled = true;
 let extensionCatalog = { novel: [], comic: [], chinese_novel: [], translate: [], tts: [], _unknown: [] };
 let memoizedFilterOptions = { authors: null, locales: null, types: null };
 
-// Platform State
 let currentTab = 'extensions';
 let selectedExtIds = new Set();
 let marketplaceData = [];
-let lockedBodyScrollY = 0;
 
-// --- HELPERS (Safe-Audited Version) ---
+// --- HELPERS (Full Parity) ---
 
 function escapeHtml(value) {
     return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
@@ -47,6 +44,10 @@ function normalizeSiteUrlKey(rawUrl) {
         const parsed = new URL(String(rawUrl || '').trim());
         return `${parsed.protocol.toLowerCase()}//${parsed.hostname.toLowerCase().replace(/^www\./, '')}${parsed.pathname.replace(/\/+$/, '') || '/'}`;
     } catch { return ''; }
+}
+
+function getSourceHost(url) {
+    try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; }
 }
 
 function normalizeAuthorName(name) { return String(name || '').normalize('NFKC').trim().replace(/\s+/g, ' ') || 'Không rõ'; }
@@ -67,6 +68,30 @@ function getLocaleDisplayLabel(key) {
     return 'Global';
 }
 
+function extensionIconFallback(extName) {
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(extName || 'ext')}&background=f1f1f1&color=333333`;
+}
+
+function avatarFromRawUrl(rawUrl) {
+    try {
+        const parsed = new URL(rawUrl);
+        const parts = parsed.pathname.split('/').filter(Boolean);
+        if (parsed.hostname.includes('githubusercontent.com') && parts.length >= 1) {
+            return `https://avatars.githubusercontent.com/${parts[0]}?size=80`;
+        }
+        return `https://ui-avatars.com/api/?name=${encodeURIComponent(parts[0] || 'repo')}&background=f1f1f1&color=333333`;
+    } catch { return 'https://ui-avatars.com/api/?name=repo&background=f1f1f1&color=333333'; }
+}
+
+function avatarFallback(label) {
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(label || 'repo')}&background=f1f1f1&color=333333`;
+}
+
+function getSourceAvatarUrl(source) {
+    if (source?.avatar) return source.avatar;
+    return avatarFromRawUrl(source?.url || '');
+}
+
 function findDominantAuthor(exts) {
     if (!exts || exts.length === 0) return 'Không rõ';
     const counts = {};
@@ -77,7 +102,18 @@ function findDominantAuthor(exts) {
     return Object.entries(counts).sort((a,b) => b[1] - a[1])[0][0];
 }
 
-// --- DATA FETCHING (with SWR Inheritance) ---
+function summarizeSourceTypes(items) {
+    const counts = new Map();
+    items.forEach(ext => {
+        let t = ext.type || 'novel';
+        if (t === 'chinese_novel' || t === 'chinese') t = 'novel';
+        counts.set(t, (counts.get(t) || 0) + 1);
+    });
+    const labels = { novel: 'Truyện chữ', comic: 'Truyện tranh', translate: 'Dịch', tts: 'TTS' };
+    return Array.from(counts.entries()).map(([t, count]) => `<span class="source-type-pill">${count} ${labels[t] || t}</span>`).join('');
+}
+
+// --- DATA FETCHING ---
 
 async function fetchAppData(isRefresh = false) {
     if (!isRefresh) renderLoadingState();
@@ -88,27 +124,19 @@ async function fetchAppData(isRefresh = false) {
 
         window.catalogExtensions = catalogRes.plugin?.data || [];
         window.catalogSources = catalogRes.catalog?.sources || [];
+        window.siteHealthByUrl = catalogRes.catalog?.siteHealth || {};
         
         categorizeExtensions();
-        memoizedFilterOptions = { authors: null, locales: null, types: null }; // Reset cache
+        memoizedFilterOptions = { authors: null, locales: null, types: null };
         
-        clearLoadingState();
         renderDashboard();
         
         if (!isRefresh) {
             loadSavedSelection();
             fetchMarketplace();
-            // Stable SWR: Periodic health refresh can be added here if backend supports.
-            setTimeout(() => fetchAppData(true), 300000); // 5 min refresh
+            setTimeout(() => fetchAppData(true), 300000);
         }
-    } catch (e) { 
-        console.error('[API] Error:', e);
-        if (!isRefresh) {
-            document.querySelectorAll('.extensions-grid').forEach(g => {
-                g.innerHTML = `<div class="error" style="grid-column:1/-1; padding:40px; text-align:center; color:var(--color-accent);">Lỗi tải dữ liệu. Vui lòng thử lại sau.</div>`;
-            });
-        }
-    }
+    } catch (e) { console.error('[API] Error:', e); }
 }
 
 function categorizeExtensions() {
@@ -122,7 +150,7 @@ function categorizeExtensions() {
     });
 }
 
-// --- FILTER CORE (Stable Symmetry) ---
+// --- FILTER CORE ---
 
 function extensionMatchesFilters(ext) {
     if (!ext) return false;
@@ -130,13 +158,104 @@ function extensionMatchesFilters(ext) {
     const localeKey = normalizeLocaleKey(ext.locale);
     let typeValue = ext.type || '_unknown';
     if (typeValue === 'chinese_novel' || typeValue === 'chinese') typeValue = 'novel';
-
     if (hideNsfwEnabled && (ext.tag || '').toLowerCase() === 'nsfw') return false;
     if (selectedAuthorKeys.size > 0 && !selectedAuthorKeys.has(authorKey)) return false;
     if (selectedLocales.size > 0 && !selectedLocales.has(localeKey)) return false;
     if (selectedTypes.size > 0 && !selectedTypes.has(typeValue)) return false;
-    
     return true;
+}
+
+// --- UI COMPONENTS ---
+
+function renderExtensionSiteHealthBadge(url) {
+    const key = normalizeSiteUrlKey(url);
+    const health = window.siteHealthByUrl?.[key];
+    if (!health || !health.p || health.p === 'LIVE') return '';
+    const status = (health.p === 'MOVE' ? 'DIRECT' : health.p).toUpperCase();
+    const suffix = health.s || '';
+    return `<span class="ext-health-badge ext-health-uncertain" title="Site status: ${status}"><span class="ext-health-prefix">${escapeHtml(status)}</span><span class="ext-health-suffix">${escapeHtml(suffix)}</span></span>`;
+}
+
+function renderCard(ext) {
+    const id = ext.path || ext.name;
+    const isSelected = selectedExtIds.has(id);
+    const iconUrl = (ext.icon || '').replace(/^http:\/\//i, 'https://');
+    const fallback = extensionIconFallback(ext.name);
+    const sourceLabel = ext.source || '';
+    const sourceHost = getSourceHost(sourceLabel);
+
+    return `
+        <div class="ext-card reveal-in ${isSelected ? 'is-selected' : ''}" data-ext-id="${escapeHtml(id)}">
+            <button class="ext-add-btn" onclick="toggleSelection('${escapeHtml(id)}')" title="Thêm vào kệ">
+                ${isSelected ? '✓' : '+'}
+            </button>
+            <div class="ext-top-row">
+                <div class="ext-type-badge">${escapeHtml((ext.type || 'unknown').toUpperCase())}</div>
+                <button class="ext-site-copy-btn" onclick="navigator.clipboard.writeText('${escapeHtml(sourceLabel)}'); showToast('Đã copy URL site!')" title="Copy URL site">🔗</button>
+            </div>
+            <div class="ext-header">
+                <div class="ext-icon-wrap"><img class="ext-icon" src="${escapeHtml(iconUrl)}" onerror="this.src='${escapeHtml(fallback)}'" loading="lazy"></div>
+                <div class="ext-title-wrap">
+                    <h3 class="ext-name">${escapeHtml(ext.name || 'Chưa đặt tên')}</h3>
+                    <p class="ext-site-url" title="${escapeHtml(sourceLabel)}">${escapeHtml(sourceHost || 'Không rõ nguồn')}</p>
+                </div>
+                <span class="ext-version">v${escapeHtml(ext.version || '0')}</span>
+            </div>
+            <div class="ext-health-badge-container">${renderExtensionSiteHealthBadge(sourceLabel)}</div>
+            <p class="ext-author">Tác giả: ${escapeHtml(ext.author)}</p>
+            <p class="ext-description">${escapeHtml(getDescription(ext))}</p>
+        </div>
+    `;
+}
+
+function renderSourceCard(source) {
+    const items = source.extItems || [];
+    const expanded = window.catalogSourceExpandedState?.[source.id || source.url];
+    const avatar = getSourceAvatarUrl(source);
+    const fallback = avatarFallback(source.dominantAuthor);
+    const description = source.description || 'Chưa có mô tả cho nguồn này.';
+    
+    return `
+        <div class="source-card ${expanded ? 'is-expanded' : 'is-collapsed'} reveal-in" data-source-key="${escapeHtml(source.id || source.url)}">
+            <button class="source-toggle-btn" data-source-toggle="${escapeHtml(source.id || source.url)}">
+                <img class="source-card-avatar" src="${escapeHtml(avatar)}" onerror="this.src='${escapeHtml(fallback)}'">
+                <div style="flex:1; text-align:left; overflow:hidden;">
+                    <h3 class="source-name">${escapeHtml(source.dominantAuthor)}</h3>
+                    <div class="source-desc">${escapeHtml(description)}</div>
+                    <div class="source-badge-row">${summarizeSourceTypes(items)}</div>
+                </div>
+                <div class="source-toggle-meta">
+                    <span class="source-total-pill">${items.length} ext</span>
+                    <span class="source-toggle-icon">${expanded ? '−' : '+'}</span>
+                </div>
+            </button>
+            <div class="source-ext-grid">${expanded ? items.map(renderCard).join('') : ''}</div>
+        </div>
+    `;
+}
+
+function renderDashboard() {
+    const allFiltered = getAllExtensions().filter(extensionMatchesFilters);
+    
+    if (currentTab === 'extensions') {
+        renderStats();
+        document.getElementById('extensions-grid').innerHTML = filterExtensions().map(renderCard).join('');
+    } else if (currentTab === 'sources') {
+        renderSourceStats();
+        document.getElementById('sources-grid').innerHTML = filterSources().map(renderSourceCard).join('');
+    }
+    
+    const authorsCount = new Set(allFiltered.map(e => normalizeAuthorKey(e.author))).size;
+    const authorCreditEl = document.getElementById('authors-count-credits');
+    if (authorCreditEl) authorCreditEl.textContent = authorsCount;
+
+    const repoList = document.getElementById('repo-list');
+    if (repoList) {
+        const active = getActiveCatalogSources();
+        repoList.innerHTML = active.map(s => `<div class="repo-chip"><img src="${escapeHtml(getSourceAvatarUrl(s))}" onerror="this.src='${escapeHtml(avatarFallback(s.displayName))}'" style="width:20px;height:20px;border-radius:50%;margin-right:8px;"><span>${escapeHtml(s.displayName||s.id)}</span></div>`).join('');
+        document.getElementById('contribute-source-count').textContent = active.length;
+    }
+    updateFilterButtonLabel();
 }
 
 function filterExtensions() {
@@ -152,20 +271,15 @@ function filterExtensions() {
 function filterSources() {
     let sources = Array.isArray(window.catalogSources) ? window.catalogSources : [];
     const search = currentSourceSearch.toLowerCase();
-    
     return sources.map(source => {
         const items = (source.extItems || []).filter(extensionMatchesFilters);
         const dominantAuthor = findDominantAuthor(items);
-        
         const matchesSearch = dominantAuthor.toLowerCase().includes(search) || (source.url||'').toLowerCase().includes(search);
         const filteredItems = items.filter(e => (e.name||'').toLowerCase().includes(search) || (e.author||'').toLowerCase().includes(search));
-        
         const finalItems = filteredItems.length > 0 ? filteredItems : (matchesSearch ? items : []);
         return { ...source, extItems: finalItems, dominantAuthor };
     }).filter(s => s.extItems.length > 0);
 }
-
-// --- UI COMPONENTS ---
 
 function renderStats() {
     const all = filterExtensions();
@@ -178,79 +292,12 @@ function renderStats() {
 
 function renderSourceStats() {
     const filteredSources = filterSources();
-    const allFilteredExts = filteredSources.flatMap(s => s.extItems);
-    const authorsCount = new Set(allFilteredExts.map(e => normalizeAuthorKey(e.author))).size;
-    
+    const authorsCount = new Set(filteredSources.flatMap(s => s.extItems).map(e => normalizeAuthorKey(e.author))).size;
     document.getElementById('total-authors-count').textContent = authorsCount;
     document.getElementById('total-source-repos').textContent = filteredSources.length;
 }
 
-function renderCard(ext) {
-    const id = ext.path || ext.name;
-    const isSelected = selectedExtIds.has(id);
-    const iconUrl = (ext.icon || '').replace(/^http:\/\//i, 'https://');
-    const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(ext.name || 'ext')}&background=f1f1f1&color=333333`;
-    
-    return `
-        <div class="ext-card reveal-in ${isSelected ? 'is-selected' : ''}" data-ext-id="${escapeHtml(id)}">
-            <button class="ext-add-btn" onclick="toggleSelection('${escapeHtml(id)}')" title="Thêm vào kệ">
-                ${isSelected ? '✓' : '+'}
-            </button>
-            <div class="ext-top-row"><div class="ext-type-badge">${escapeHtml((ext.type || 'unknown').toUpperCase())}</div></div>
-            <div class="ext-header">
-                <div class="ext-icon-wrap"><img class="ext-icon" src="${escapeHtml(iconUrl)}" onerror="this.src='${escapeHtml(fallback)}'" loading="lazy"></div>
-                <div class="ext-title-wrap">
-                    <h3 class="ext-name">${escapeHtml(ext.name)}</h3>
-                    <p class="ext-site-url">${escapeHtml(ext.author)}</p>
-                </div>
-            </div>
-            <p class="ext-description">${escapeHtml(getDescription(ext))}</p>
-        </div>
-    `;
-}
-
-function renderSourceCard(source) {
-    const items = source.extItems || [];
-    const expanded = window.catalogSourceExpandedState?.[source.id || source.url];
-    const avatar = source.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(source.dominantAuthor)}&background=f1f1f1&color=333333`;
-    
-    return `
-        <div class="source-card ${expanded ? 'is-expanded' : 'is-collapsed'} reveal-in" data-source-key="${escapeHtml(source.id || source.url)}">
-            <button class="source-toggle-btn" data-source-toggle="${escapeHtml(source.id || source.url)}">
-                <img class="source-card-avatar" src="${escapeHtml(avatar)}">
-                <div style="flex:1; text-align:left;">
-                    <h3 class="source-name">${escapeHtml(source.dominantAuthor)}</h3>
-                    <div style="font-size:11px; opacity:0.6; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:300px;">${escapeHtml(source.url)}</div>
-                </div>
-                <div class="source-toggle-meta">
-                    <span class="source-total-pill">${items.length} ext</span>
-                    <span class="source-toggle-icon">${expanded ? '−' : '+'}</span>
-                </div>
-            </button>
-            ${expanded ? `<div class="source-ext-grid">${items.map(renderCard).join('')}</div>` : ''}
-        </div>
-    `;
-}
-
-function renderDashboard() {
-    if (currentTab === 'extensions') {
-        renderStats();
-        document.getElementById('extensions-grid').innerHTML = filterExtensions().map(renderCard).join('');
-    } else if (currentTab === 'sources') {
-        renderSourceStats();
-        document.getElementById('sources-grid').innerHTML = filterSources().map(renderSourceCard).join('');
-    }
-    
-    const repoList = document.getElementById('repo-list');
-    if (repoList) {
-        const active = getActiveCatalogSources();
-        repoList.innerHTML = active.map(s => `<div class="repo-chip"><span>${escapeHtml(s.displayName||s.id)}</span></div>`).join('');
-        document.getElementById('contribute-source-count').textContent = active.length;
-    }
-    updateFilterButtonLabel();
-}
-
-// --- MODAL & FILTERS RESTORATION (Stable Sync) ---
+// --- MODAL & FILTERS ---
 
 function getAuthorFilterOptions() {
     if (memoizedFilterOptions.authors) return memoizedFilterOptions.authors;
@@ -304,12 +351,10 @@ function openFilterModal() {
     draftLocales = new Set(selectedLocales);
     draftTypes = new Set(selectedTypes);
     draftHideNsfwEnabled = hideNsfwEnabled;
-
     renderFilterChipList('filter-authors', 'author', getAuthorFilterOptions(), draftAuthorKeys);
     renderFilterChipList('filter-locales', 'locale', getLocaleFilterOptions(), draftLocales);
     renderFilterChipList('filter-types', 'type', getTypeFilterOptions(), draftTypes);
     document.getElementById('filter-nsfw-switch').checked = !draftHideNsfwEnabled;
-
     modal.classList.add('show');
 }
 
@@ -321,7 +366,7 @@ function applyFilterModal() {
     renderDashboard();
 }
 
-// --- SYSTEM & UX ---
+// --- SYSTEM ---
 
 function renderLoadingState() {
     const skeleton = `<div class="skeleton-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:20px;">
@@ -329,8 +374,6 @@ function renderLoadingState() {
     </div>`;
     document.querySelectorAll('.extensions-grid').forEach(g => g.innerHTML = skeleton);
 }
-
-function clearLoadingState() {}
 
 function setupTabs() {
     document.querySelectorAll('.platform-tab').forEach(btn => {
@@ -399,10 +442,11 @@ async function handleSaveShelf() {
 function showToast(m) { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2000); }
 
 document.addEventListener('DOMContentLoaded', () => {
-    setupTabs();
-    fetchAppData();
-    
-    // Search bindings
+    // Global actions
+    document.getElementById('copy-aggregate-btn')?.addEventListener('click', () => {
+        navigator.clipboard.writeText('https://vbook-ext.vercel.app/api/catalog.json');
+        showToast('Đã copy Link Tổng!');
+    });
     ['ext-search-input', 'source-search-input'].forEach(id => {
         document.getElementById(id)?.addEventListener('input', (e) => {
             if (id === 'ext-search-input') currentExtSearch = e.target.value;
@@ -410,8 +454,6 @@ document.addEventListener('DOMContentLoaded', () => {
             renderDashboard();
         });
     });
-
-    // Global click listeners (Expansion & Filters)
     document.addEventListener('click', (e) => {
         const toggle = e.target.closest('[data-source-toggle]');
         if (toggle) {
@@ -421,7 +463,6 @@ document.addEventListener('DOMContentLoaded', () => {
             renderDashboard();
             return;
         }
-
         const chip = e.target.closest('.filter-chip');
         if (chip) {
             const grp = chip.getAttribute('data-filter-group');
@@ -430,7 +471,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (val === '__all') target.clear();
             else if (target.has(val)) target.delete(val);
             else target.add(val);
-            // Re-render modal chips
             renderFilterChipList('filter-authors', 'author', getAuthorFilterOptions(), draftAuthorKeys);
             renderFilterChipList('filter-locales', 'locale', getLocaleFilterOptions(), draftLocales);
             renderFilterChipList('filter-types', 'type', getTypeFilterOptions(), draftTypes);
@@ -438,18 +478,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Modal Bindings
     document.getElementById('open-filter-btn')?.addEventListener('click', openFilterModal);
     document.getElementById('filter-apply-btn')?.addEventListener('click', () => document.getElementById('filter-modal').classList.remove('show'));
     document.getElementById('filter-cancel-btn')?.addEventListener('click', () => document.getElementById('filter-modal').classList.remove('show'));
     document.querySelectorAll('.filter-modal-backdrop').forEach(b => b.addEventListener('click', () => document.querySelectorAll('.filter-modal').forEach(m => m.classList.remove('show'))));
     document.getElementById('filter-nsfw-switch')?.addEventListener('change', (e) => { draftHideNsfwEnabled = !e.target.checked; applyFilterModal(); });
-    
-    // Back to top
     const btt = document.getElementById('back-to-top');
     window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 300));
     btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // Guide Modal
-    document.getElementById('open-guide-btn')?.addEventListener('click', () => showToast('Đang phát triển hướng dẫn...'));
+    document.getElementById('open-guide-btn')?.addEventListener('click', () => {
+        document.getElementById('guide-modal').classList.add('show');
+    });
 });

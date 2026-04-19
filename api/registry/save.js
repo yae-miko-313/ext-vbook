@@ -76,7 +76,7 @@ module.exports = async (req, res) => {
         // --- CREATE FLOW ---
         // Generate a human-friendly slug
         const randomStr = crypto.randomBytes(4).toString('hex'); // 8 chars
-        const slug = `vbook-${randomStr}`;
+        const slug = `vbook-${randomStr}`.replace(/\s+/g, '-');
         const newSecret = crypto.randomUUID();
 
         const { data, error } = await supabase
