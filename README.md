@@ -46,7 +46,7 @@ Update `plugin.json` metadata (author, version, description, source, vv).
 
 ### 3️⃣ Build extension thành ZIP
 ```bash
-npm run build -- --plugin extensions/novel/my_ext
+npm run build:ext -- --plugin extensions/novel/my_ext
 ```
 Pack `src/` + `icon.png` vào chung `plugin.zip` để đem đi cài đặt trực tiếp.
 
@@ -78,7 +78,7 @@ Quét `extensions/*/` và build lại danh mục:
 ### NPM scripts (aliases)
 ```bash
 npm run vercel-dev              # Chạy local dev server (FE+BE)
-npm run build                   # build --plugin
+npm run build:ext               # build --plugin (Build Extension)
 npm run build:catalog           # build-catalog
 ```
 

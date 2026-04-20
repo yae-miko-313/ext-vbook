@@ -36,7 +36,7 @@ Tham khảo [AI_CODE_EXT_VBOOK.md](AI_CODE_EXT_VBOOK.md) để hiểu contract.
 
 ### Step 3: Build extension ZIP
 ```bash
-npm run build -- --plugin extensions/novel/my_ext
+npm run build:ext -- --plugin extensions/novel/my_ext
 ```
 Tạo `extensions/novel/my_ext/plugin.zip` sẵn sàng phân phối.
 
@@ -57,7 +57,7 @@ Truy cập `http://localhost:3000/`
 
 - [ ] Extension scaffold tạo bằng CLI (`npm run ext:create`)
 - [ ] Code tham khảo `docs/AI_CODE_EXT_VBOOK.md` contract
-- [ ] Extension đã build zip (`npm run build`)
+- [ ] Extension đã build zip (`npm run build:ext`) ✓ CRITICAL
 - [ ] **Personal catalog đã rebuild** (`npm run build:catalog`) ✓ CRITICAL
 - [ ] Đã test hiển thị trên Unified Dev Server (`npm run vercel-dev`)
 - [ ] Không commit runtime reports (`tools/cli/reports/`)
