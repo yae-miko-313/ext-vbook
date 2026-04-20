@@ -33,49 +33,60 @@ VBOOK_AUTHOR=tên_của_bạn
 ## Workflow chính (4 Bước)
 
 ### 1️⃣ Tạo extension mới
+
 ```bash
 npm run ext:create -- --name MyExtension --source https://example.com
 ```
+
 Scaffold thư mục + plugin.json template. Hint: Tham khảo `docs/AI_CODE_EXT_VBOOK.md` cho contract khi viết extension.
 
 ### 2️⃣ Sửa metadata extension
+
 ```bash
 npm run ext:edit -- --plugin extensions/novel/my_ext --description "Mô tả mới"
 ```
+
 Update `plugin.json` metadata (author, version, description, source, vv).
 
 ### 3️⃣ Build extension thành ZIP
+
 ```bash
 npm run build:ext -- --plugin extensions/novel/my_ext
 ```
+
 Pack `src/` + `icon.png` vào chung `plugin.zip` để đem đi cài đặt trực tiếp.
 
 ### 4️⃣ Rebuild catalog manifests
+
 ```bash
 npm run build:catalog
 ```
+
 Quét `extensions/*/` và build lại danh mục:
-- `extensions/{type}/plugin.json` 
-- `extensions/plugin.json` 
+- `extensions/{type}/plugin.json`
+- `extensions/plugin.json`
 
 **BẮT BUỘC** chạy sau khi thêm/sửa extension cá nhân.
 
 ## Lệnh CLI chi tiết
 
 ### Extension commands
+
 | Lệnh | Mô tả |
-|------|-------|
+| :--- | :--- |
 | `vbook ext --mode create --name NAME --source URL` | Scaffold extension mới |
 | `vbook ext --mode edit --plugin PATH --description TEXT` | Update extension metadata |
 
-### Build commands  
+### Build commands
+
 | Lệnh | Mô tả |
-|------|-------|
+| :--- | :--- |
 | `vbook build --plugin PATH` | Package extension thành plugin.zip |
 | `vbook build --plugin PATH --dry-run` | Preview (không tạo file) |
 | `vbook build-catalog` | Rebuild local catalog files |
 
 ### NPM scripts (aliases)
+
 ```bash
 npm run vercel-dev              # Chạy local dev server (FE+BE)
 npm run build:ext               # build --plugin (Build Extension)
@@ -122,4 +133,3 @@ _Tham khảo thêm chi tiết triển khai Cloud trong [docs/DEPLOY_VERCEL.md](d
 - [docs/AI_CODE_EXT_VBOOK.md](docs/AI_CODE_EXT_VBOOK.md): Hướng dẫn viết hàm parse JS cho AI Agent/Dev.
 - [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md): PR checklist, build/test steps.
 - [docs/DEPLOY_VERCEL.md](docs/DEPLOY_VERCEL.md): Deploy guide Unified (FE+BE) + cấu trúc Backend API Vercel V4.
-

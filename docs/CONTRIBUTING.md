@@ -27,27 +27,33 @@ VBOOK_AUTHOR=tên_của_bạn
 ## Workflow: Extension contribution
 
 ### Step 1: Tạo extension mới
+
 ```bash
 npm run ext:create -- --name MyExtension --source https://example.com
 ```
 
 ### Step 2: Viết extension code
+
 Tham khảo [AI_CODE_EXT_VBOOK.md](AI_CODE_EXT_VBOOK.md) để hiểu contract.
 
 ### Step 3: Build extension ZIP
+
 ```bash
 npm run build:ext -- --plugin extensions/novel/my_ext
 ```
 Tạo `extensions/novel/my_ext/plugin.zip` sẵn sàng phân phối.
 
 ### Step 4: Rebuild personal catalog
+
 ```bash
 npm run build:catalog
 ```
 Tái sinh catalog cộng đồng local cho personal extensions.
 
 ### Step 5: Verify locally with Unified Server
+
 Mở web viewer để kiểm tra extension xuất hiện trong view:
+
 ```bash
 npm run vercel-dev
 ```
@@ -74,7 +80,7 @@ Truy cập `http://localhost:3000/`
 ## Troubleshooting
 
 | Issue | Cause | Solution |
-|-------|-------|----------|
+| :--- | :--- | :--- |
 | Extension không xuất hiện trong web | API Backend không fetch được source | Kiểm tra `web/remote-sources.json`, chạy lại `vercel dev` |
 | Author count = 0 | Missing `author` field | Edit `extensions/*/plugin.json` thêm author |
 
@@ -88,7 +94,7 @@ Truy cập `http://localhost:3000/`
 
 ## File structure recap
 
-```
+```text
 extensions/                 # Chỉ edit qua CLI
 ├── novel/
 │   ├── my_ext/
@@ -99,9 +105,9 @@ extensions/                 # Chỉ edit qua CLI
 └── plugin.json              # Root catalog (auto-generated)
 
 web/                        # Giao diện Frontend
-├── index.html              
+├── index.html
 ├── remote-sources.json      # Danh sách nguồn cho Backend
-├── script.js                
+├── script.js
 └── style.css
 
 api/                        # Vercel Backend API
