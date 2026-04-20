@@ -1,14 +1,20 @@
 {
   "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
-    {
-      "source": "/vbook-ext/:path*",
-      "destination": "/:path*",
-      "permanent": true
-    },
     {
       "source": "/vbook-ext",
       "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/vbook-ext/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/vbook-ext/:path*",
+      "destination": "/:path*",
       "permanent": true
     }
   ],
