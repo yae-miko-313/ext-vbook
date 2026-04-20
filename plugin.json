@@ -283,7 +283,7 @@
             "name": "nhatruyen",
             "author": "B",
             "path": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/nhatruyen/plugin.zip",
-            "version": 7,
+            "version": 8,
             "source": "https://nhatruyen.site",
             "icon": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/nhatruyen/icon.png",
             "description": "Đọc truyện trên trang nhatruyen",
