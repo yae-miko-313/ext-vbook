@@ -155,6 +155,29 @@
             "tag": "nsfw"
         },
         {
+            "name": "HentaiZBot",
+            "author": "B",
+            "path": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/hentaizbot/plugin.zip",
+            "version": 2,
+            "source": "https://hentaiz.bot",
+            "icon": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/hentaizbot/icon.png",
+            "description": "Xem Hentai Vietsub tại HentaiZ.bot",
+            "type": "video",
+            "locale": "vi_VN",
+            "tag": "nsfw"
+        },
+        {
+            "name": "HHTQ Vietsub",
+            "author": "vBook",
+            "path": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/HHTQ/plugin.zip",
+            "version": 1,
+            "source": "https://hhtqvietsub.cc",
+            "icon": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/HHTQ/icon.png",
+            "description": "Xem phim hoạt hình Trung Quốc trên HHTQ Vietsub",
+            "type": "video",
+            "locale": "vi_VN"
+        },
+        {
             "name": "kanshuwu",
             "author": "B",
             "path": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/kanshuwu/plugin.zip",
@@ -244,6 +267,17 @@
             "type": "comic",
             "locale": "vi_VN",
             "tag": "nsfw"
+        },
+        {
+            "name": "NguonC",
+            "author": "Moleys",
+            "path": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/nguoc/plugin.zip",
+            "version": 1,
+            "source": "https://phim.nguonc.com",
+            "icon": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/nguoc/icon.png",
+            "description": "Xem phim trên NguonC",
+            "type": "video",
+            "locale": "vi_VN"
         },
         {
             "name": "nhatruyen",
@@ -489,28 +523,6 @@
             "description": "Xem đánh giá truyện trên trang https://www.tuishujun.com/",
             "type": "chinese_novel",
             "locale": "zh_CN"
-        },
-        {
-            "name": "DEMO_COMIC",
-            "author": "TODO_AUTHOR",
-            "path": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/_demo_comic/plugin.zip",
-            "version": 1,
-            "source": "https://TODO_DOMAIN.net",
-            "icon": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/_demo_comic/icon.png",
-            "description": "Demo comic extension template",
-            "type": "comic",
-            "locale": "vi_VN"
-        },
-        {
-            "name": "DEMO_NOVEL",
-            "author": "TODO_AUTHOR",
-            "path": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/_demo_novel/plugin.zip",
-            "version": 1,
-            "source": "https://TODO_DOMAIN.net",
-            "icon": "https://raw.githubusercontent.com/dat-bi/ext-vbook/main/extensions/_demo_novel/icon.png",
-            "description": "Demo novel extension template",
-            "type": "novel",
-            "locale": "vi_VN"
         },
         {
             "name": "Độc giả số 1",

@@ -43,6 +43,7 @@ function register(program) {
         .description('Build extension + update plugin list (replaces update_plugin_list.js)')
         .option('--all', 'Rebuild ALL extensions')
         .option('--list-only', 'Only regenerate root plugin.json (no build)')
+        .option('--my', 'Build only extensions matching the author in .env')
         .option('--skip-validate', 'Skip validation')
         .action(async (options) => {
             const projectRoot = getProjectRoot();
@@ -66,12 +67,25 @@ function register(program) {
                     return;
                 }
 
-                if (options.all) {
-                    // Mode 2: Build all extensions + regenerate list
-                    console.log(c.bold('\n🔨 Building ALL extensions...\n'));
+                if (options.all || options.my) {
+                    // Mode 2: Build all/my extensions + regenerate list
+                    console.log(c.bold(`\n🔨 Building ${options.my ? 'YOUR' : 'ALL'} extensions...\n`));
                     
-                    const extensions = scanExtensions();
-                    let built = 0, failed = 0;
+                    let extensions = scanExtensions();
+                    if (options.my) {
+                        const envAuthor = process.env.author || process.env.AUTHOR || '';
+                        if (!envAuthor) throw new Error("Author not set in .env");
+                        extensions = extensions.filter(ext => ext.metadata.author === envAuthor);
+                        console.log(c.dim(`Found ${extensions.length} extensions by author: ${envAuthor}`));
+                    }
+
+                    let built = 0, failed = 0, skipped = 0;
+
+                    let rootPlugins = [];
+                    try {
+                        const rootJson = JSON.parse(fs.readFileSync(path.join(projectRoot, 'plugin.json'), 'utf8'));
+                        if (rootJson.data) rootPlugins = rootJson.data;
+                    } catch(e) {}
 
                     for (const ext of extensions) {
                         const extRoot = path.join(getExtensionsDir(), ext.dirName);
@@ -79,6 +93,13 @@ function register(program) {
                         
                         if (!fs.existsSync(srcDir)) {
                             console.log(c.dim(`  ⏭ ${ext.metadata.name} (no src/)`));
+                            continue;
+                        }
+
+                        const rootRecord = rootPlugins.find(p => p.name === ext.metadata.name);
+                        if (rootRecord && ext.metadata.version <= rootRecord.version) {
+                            console.log(c.dim(`  ⏭ ${ext.metadata.name} (v${ext.metadata.version} <= root v${rootRecord.version})`));
+                            skipped++;
                             continue;
                         }
 
@@ -103,7 +124,7 @@ function register(program) {
                         }
                     }
 
-                    console.log(c.bold(`\n  Built: ${built}, Failed: ${failed}\n`));
+                    console.log(c.bold(`\n  Built: ${built}, Failed: ${failed}, Skipped: ${skipped}\n`));
 
                     // Regenerate plugin list
                     const result = writePluginList();

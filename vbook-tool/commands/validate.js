@@ -71,7 +71,7 @@ const RHINO_CHECKS = [
     }
 ];
 
-const VALID_TYPES = ['novel', 'comic', 'chinese_novel', 'translate', 'tts'];
+const VALID_TYPES = ['novel', 'comic', 'chinese_novel', 'translate', 'tts', 'video'];
 const VALID_LOCALES = ['vi_VN', 'zh_CN', 'zh-CN', 'en_US'];
 const REQUIRED_SCRIPTS = ['detail.js', 'toc.js', 'chap.js'];
 

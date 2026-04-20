@@ -33,6 +33,7 @@ function scanExtensions(opts) {
     for (const entry of entries) {
         if (!entry.isDirectory()) continue;
         if (skipDirs.has(entry.name)) continue;
+        if (entry.name.startsWith('_')) continue; // Skip templates/demos starting with _
 
         const pluginJsonPath = path.join(extensionsDir, entry.name, 'plugin.json');
         if (!fs.existsSync(pluginJsonPath)) continue;

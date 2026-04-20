@@ -1,13 +1,17 @@
-# Extension Demo Template
+# Extension Mẫu (Novel Template)
 
-Copy this folder to create a new novel extension.
+Đây là bản mẫu chuẩn dành cho các tiện ích đọc truyện chữ (Novel). 
 
-## Usage
+> [!TIP]
+> **KHÔNG CẦN COPY THỦ CÔNG**: Hãy sử dụng lệnh `vbook create <name> -t novel` để tự động tạo một extension mới dựa trên bản mẫu này.
 
-1. Copy to new folder: `cp -r extensions/_demo_novel extensions/<your_name>`
-2. Edit `plugin.json` — replace `TODO_` values
-3. Edit `src/config.js` — set BASE_URL
-4. Test: `vbook validate && vbook debug`
+## Quy trình phát triển
+
+1.  **Khởi tạo**: `vbook create my-extension -s https://site.com -t novel`
+2.  **Cấu hình**: Chỉnh sửa các selectors trong thư mục `src/` (Title, Cover, Content...).
+3.  **Kiểm tra**: Sử dụng `vbook validate` để check lỗi cú pháp Rhino.
+4.  **Chạy thử**: `vbook debug src/detail.js -in "https://site.com/truyen-1"`
+5.  **Phát hành**: `vbook publish --my`
 
 ## Files
 

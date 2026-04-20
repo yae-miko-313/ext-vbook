@@ -1,4 +1,5 @@
 // home.js (Comic)
+// có link thì mới thêm vào
 // Contract: execute() → [{ title, input, script }]
 function execute() {
     // TODO: Thay PATH phù hợp với cấu trúc URL của site

@@ -16,6 +16,7 @@ ext-name/
 │   ├── page.js*    (required — intermediary between detail and toc)
 │   ├── toc.js*     (required)
 │   ├── chap.js*    (required)
+│   ├── track.js*    (required if type is video)
 │   ├── home.js     (optional)
 │   ├── genre.js    (optional)
 │   ├── gen.js      (optional — generic list script for home/genre)
@@ -37,7 +38,7 @@ ext-name/
     "description": "Description",
     "locale": "vi_VN",
     "language": "javascript",
-    "type": "novel",
+    "type": "novel", //video, comic, chinese_novel
     "tag": "nsfw"
   },
   "script": {
@@ -467,6 +468,73 @@ function execute(url) {
     });
 
     return Response.success(container.html() + "");
+}
+```
+
+---
+
+## chap.js (Video — returns an array of tracks/servers)
+```js
+// Video: returns tracks (stream servers/iframes), VBook uses track.js to process them further
+// Contract: execute(url) → [{ title*, data* }]
+function execute(url) {
+    url = url.replace(/^(?:https?:\/\/)?(?:www\.)?([^\/]+)/, BASE_URL);
+
+    var res = fetch(url);
+    if (!res.ok) return Response.error("Cannot load: " + res.status);
+    var doc = res.html();
+    var tracks = [];
+
+    // TODO: Selector for the video iframe or stream link
+    // e.g., ".server-list a", "iframe.player"
+    doc.select("SELECTOR_VIDEO_STREAM").forEach(function(el) {
+        var link = (el.attr("data-src") || el.attr("src") || "") + "";
+        var title = el.text().trim() || "Server";
+        if (link) {
+            tracks.push({ title: title, data: normalizeUrl(link) });
+        }
+    });
+
+    if (tracks.length === 0) return Response.error("No tracks found");
+    return Response.success(tracks);
+}
+```
+
+---
+
+## track.js (Video Only — resolves final playback URL)
+```js
+// track.js receives `data` (from chosen track in chap.js) and returns final stream
+// Contract: execute(url) → { data*, type*, headers?:Object, host?:string, timeSkip?:[{startTime, endTime}] }
+// type: "native" (for direct mp4/m3u8), "auto" (for webview extraction of iframe logic)
+function execute(url) {
+    url = url.replace(/^(?:https?:\/\/)?(?:www\.)?([^\/]+)/, BASE_URL);
+
+    // If it's a direct media link, use "native" player
+    if (url.indexOf(".mp4") !== -1 || url.indexOf(".m3u8") !== -1) {
+        return Response.success({
+            data: url,
+            type: "native",
+            headers: {
+                "User-Agent": "Mozilla/5.0",
+                "Referer": BASE_URL + "/"
+            },
+            host: BASE_URL,
+            timeSkip: []
+        });
+    }
+
+    // If it relies on JS/iframe to decode the stream, use "auto" to let WebView intercept media requests
+    return Response.success({
+        data: url,
+        type: "auto",
+        headers: {
+            "User-Agent": "Mozilla/5.0",
+            "Referer": BASE_URL + "/"
+        },
+        host: BASE_URL,
+        timeSkip: []
+    });
 }
 ```
 

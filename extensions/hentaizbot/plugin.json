@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "HentaiZBot",
+    "author": "B",
+    "version": 2,
+    "source": "https://hentaiz.bot",
+    "regexp": "(www\\.)?hentaiz\\.bot/.*",
+    "description": "Xem Hentai Vietsub tại HentaiZ.bot",
+    "locale": "vi_VN",
+    "type": "video",
+    "language": "javascript",
+    "tag": "nsfw"
+  },
+  "script": {
+    "home": "home.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  }
+}

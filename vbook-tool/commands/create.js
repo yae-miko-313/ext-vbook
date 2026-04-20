@@ -406,6 +406,61 @@ function createPlaceholderIcon(destPath) {
     fs.writeFileSync(destPath, pngHeader);
 }
 
+/**
+ * Copy all files from a demo template directory to the target extension directory.
+ * Replaces placeholders in the process.
+ */
+function copyFromDemo(demoName, targetDir, context) {
+    const demoDir = path.join(getExtensionsDir(), demoName);
+    if (!fs.existsSync(demoDir)) return false;
+
+    // Recursive copy
+    function copyDir(src, dest) {
+        fs.mkdirSync(dest, { recursive: true });
+        const entries = fs.readdirSync(src, { withFileTypes: true });
+
+        for (const entry of entries) {
+            const srcPath = path.join(src, entry.name);
+            const destPath = path.join(dest, entry.name);
+
+            if (entry.isDirectory()) {
+                copyDir(srcPath, destPath);
+            } else {
+                let content = fs.readFileSync(srcPath, 'utf8');
+
+                // Substitution logic
+                if (entry.name === 'plugin.json') {
+                    const json = JSON.parse(content);
+                    json.metadata.name = context.name;
+                    json.metadata.author = context.author;
+                    json.metadata.source = context.source;
+                    json.metadata.version = 1;
+                    // Recompute regexp
+                    json.metadata.regexp = context.source.replace(/https?:\/\//, '').replace(/\./g, '\\\\.').replace(/\/$/, '') + '/[^/]+/?$';
+                    content = JSON.stringify(json, null, 2);
+                } else if (entry.name.endsWith('.js')) {
+                    // Replace placeholders
+                    content = content
+                        .replace(/DEMO_NOVEL|DEMO_COMIC|DEMO_VIDEO/g, context.name)
+                        .replace(/TODO_AUTHOR/g, context.author)
+                        .replace(/https:\/\/TODO_DOMAIN\.net/g, context.source)
+                        .replace(/TODO_DOMAIN/g, context.domain);
+                    
+                    // Inject BASE_URL if used but not defined (simple check)
+                    if (content.includes('BASE_URL') && !content.includes('var BASE_URL')) {
+                        content = `var BASE_URL = "${context.source}";\n\n` + content;
+                    }
+                }
+
+                fs.writeFileSync(destPath, content);
+            }
+        }
+    }
+
+    copyDir(demoDir, targetDir);
+    return true;
+}
+
 // ─── Command Registration ───────────────────────────────────────────────────
 
 function register(program) {
@@ -429,45 +484,55 @@ function register(program) {
                 }
 
                 const source = options.source.replace(/\/$/, ''); // Remove trailing slash
+                const domain = new URL(source).host;
                 const author = getAuthor();
-
-                // Decide which scripts to create
-                // page.js là bắt buộc — luôn tạo, kể cả khi minimal
-                const scripts = options.minimal
-                    ? ['detail.js', 'page.js', 'toc.js', 'chap.js']
-                    : ['home.js', 'gen.js', 'search.js', 'detail.js', 'page.js', 'toc.js', 'chap.js'];
 
                 console.log(c.bold(`\n🏗️  Creating extension: ${c.cyan(name)}\n`));
 
-                // Create directories
-                fs.mkdirSync(srcDir, { recursive: true });
-                console.log(c.dim(`  📁 extensions/${name}/`));
-                console.log(c.dim(`  📁 extensions/${name}/src/`));
+                const demoFolderName = `_demo_${options.type}`;
+                const hasDemo = copyFromDemo(demoFolderName, extDir, { name, author, source, domain, type: options.type });
 
-                // Create plugin.json
-                const pluginContent = templatePluginJson({
-                    name, source, type: options.type, locale: options.locale,
-                    author, tag: options.tag, scripts
-                });
-                fs.writeFileSync(path.join(extDir, 'plugin.json'), pluginContent);
-                console.log(c.green(`  ✅ plugin.json`));
+                if (hasDemo) {
+                    console.log(c.green(`  ✨ Using template from: ${demoFolderName}`));
+                    console.log(c.dim(`  📁 extensions/${name}/`));
+                } else {
+                    // Fallback to legacy hardcoded templates
+                    // Decide which scripts to create
+                    // page.js là bắt buộc — luôn tạo, kể cả khi minimal
+                    const scripts = options.minimal
+                        ? ['detail.js', 'page.js', 'toc.js', 'chap.js']
+                        : ['home.js', 'gen.js', 'search.js', 'detail.js', 'page.js', 'toc.js', 'chap.js'];
 
-                // Create script files
-                const templateMap = {
-                    'home.js':   () => templateHome(source),
-                    'gen.js':    () => templateGen(source),
-                    'search.js': () => templateSearch(source),
-                    'detail.js': () => templateDetail(source),
-                    'page.js':   () => templatePage(source),
-                    'toc.js':    () => templateToc(source),
-                    'chap.js':   () => templateChap(source),
-                };
+                    // Create directories
+                    fs.mkdirSync(srcDir, { recursive: true });
+                    console.log(c.dim(`  📁 extensions/${name}/`));
+                    console.log(c.dim(`  📁 extensions/${name}/src/`));
 
-                for (const s of scripts) {
-                    const templateFn = templateMap[s];
-                    if (templateFn) {
-                        fs.writeFileSync(path.join(srcDir, s), templateFn());
-                        console.log(c.green(`  ✅ src/${s}`));
+                    // Create plugin.json
+                    const pluginContent = templatePluginJson({
+                        name, source, type: options.type, locale: options.locale,
+                        author, tag: options.tag, scripts
+                    });
+                    fs.writeFileSync(path.join(extDir, 'plugin.json'), pluginContent);
+                    console.log(c.green(`  ✅ plugin.json`));
+
+                    // Create script files
+                    const templateMap = {
+                        'home.js':   () => templateHome(source),
+                        'gen.js':    () => templateGen(source),
+                        'search.js': () => templateSearch(source),
+                        'detail.js': () => templateDetail(source),
+                        'page.js':   () => templatePage(source),
+                        'toc.js':    () => templateToc(source),
+                        'chap.js':   () => templateChap(source),
+                    };
+
+                    for (const s of scripts) {
+                        const templateFn = templateMap[s];
+                        if (templateFn) {
+                            fs.writeFileSync(path.join(srcDir, s), templateFn());
+                            console.log(c.green(`  ✅ src/${s}`));
+                        }
                     }
                 }
 

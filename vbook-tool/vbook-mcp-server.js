@@ -161,6 +161,16 @@ const TOOLS = [
                 extension_path: { type: 'string', description: 'Path to extension directory.' },
                 skip_validate: { type: 'boolean', description: 'Skip validation step' }
             },
+        }
+    },
+    {
+        name: 'publish_my_extensions',
+        description: 'Build and publish bulk extensions that match the author specified in vbook-tool/.env. Extremely useful to update the registry specifically for your own extensions.',
+        inputSchema: {
+            type: 'object',
+            properties: {
+                skip_validate: { type: 'boolean', description: 'Skip validation step' }
+            },
             required: []
         }
     },
@@ -492,6 +502,25 @@ async function executeTool(name, args) {
             return {
                 success,
                 new_version: versionMatch ? parseInt(versionMatch[1]) : null,
+                registry_count: countMatch ? parseInt(countMatch[1]) : null,
+                output: out.stdout,
+                error: out.stderr || null
+            };
+        }
+
+        case 'publish_my_extensions': {
+            const cliArgs = ['publish', '--my'];
+            if (args.skip_validate) cliArgs.push('--skip-validate');
+            // Execute from project root since it scans all extensions
+            const out = await runCLI(cliArgs, PROJECT_ROOT);
+            const success = !out.exitCode;
+
+            const builtMatch = out.stdout.match(/Built: (\d+)/);
+            const countMatch = out.stdout.match(/Updated .* with (\d+) extensions/);
+
+            return {
+                success,
+                built_count: builtMatch ? parseInt(builtMatch[1]) : 0,
                 registry_count: countMatch ? parseInt(countMatch[1]) : null,
                 output: out.stdout,
                 error: out.stderr || null

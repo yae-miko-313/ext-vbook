@@ -1,18 +1,21 @@
-# Comic Extension Demo Template
+# Comic Extension Mẫu (Comic Template)
 
-Copy this folder to create a new comic extension.
+Bản mẫu chuẩn dành cho các tiện ích đọc truyện tranh (Comic).
 
-## Differences from Novel
+> [!TIP]
+> **KHÔNG CẦN COPY THỦ CÔNG**: Hãy sử dụng lệnh `vbook create <name> -t comic` để tự động tạo một extension mới dựa trên bản mẫu này.
 
-| Aspect | Novel | Comic |
-|--------|-------|-------|
-| `chap.js` | HTML text | Image URLs |
-| TOC | Flat list | May have volumes |
-| Cover size | Smaller | Larger |
+## Khác biệt so với Novel
 
-## Usage
+| Tính chất | Novel (Truyện chữ) | Comic (Truyện tranh) |
+|:---|:---|:---|
+| **Dữ liệu chap** | HTML (văn bản) | Mảng chứa URL ảnh |
+| **Mục lục** | Danh sách phẳng | Có thể chia theo Volume/Server |
+| **Kích thước ảnh** | Nhỏ (Portrait) | Lớn (Full width) |
 
-1. Copy: `cp -r extensions/_demo_comic extensions/<your_name>`
-2. Edit `plugin.json` — replace `TODO_` values
-3. Edit `src/config.js` — set BASE_URL
-4. Test: `vbook validate && vbook debug`
+## Quy trình phát triển
+
+1.  **Khởi tạo**: `vbook create my-comic -s https://manga-site.com -t comic`
+2.  **Cấu hình**: Chỉnh sửa selectors trong `src/` (Tập trung vào phần lấy list ảnh trong `chap.js`).
+3.  **Kiểm tra**: `vbook validate && vbook debug`
+4.  **Phát hành**: `vbook publish --my`
