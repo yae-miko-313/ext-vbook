@@ -3,7 +3,7 @@ let lockedBodyScrollY = 0;
  * CONFIGURATION: Decouple Frontend from Backend
  * Set this to your Vercel API URL if hosting frontend separately (e.g., GitHub Pages)
  */
-const API_BASE_URL = 'https://vbook-ext.vercel.app'; // Production Vercel API
+const API_BASE_URL = window.location.origin; // Dynamically use the same domain for API calls
 
 let currentSearch = '';
 let sourceViewEnabled = false;
@@ -326,10 +326,8 @@ function extensionMatchesStructuredFilters(ext) {
 
     const authorKey = normalizeAuthorKey(ext.author || '');
     const localeValue = normalizeLocaleKey(ext.locale || '_unknown');
-    let typeValue = String(ext.type || '_unknown').trim() || '_unknown';
-    if (typeValue === 'chinese_novel' || typeValue === 'chinese') {
-        typeValue = 'novel';
-    }
+    let typeValues = String(ext.type || '_unknown').trim().split(',').map(t => t.trim().toLowerCase());
+    typeValues = typeValues.map(t => (t === 'chinese_novel' || t === 'chinese') ? 'novel' : t);
 
     if (hideNsfwEnabled && isNsfwExtension(ext)) {
         return false;
@@ -343,8 +341,9 @@ function extensionMatchesStructuredFilters(ext) {
         return false;
     }
 
-    if (selectedTypes.size > 0 && !selectedTypes.has(typeValue)) {
-        return false;
+    if (selectedTypes.size > 0) {
+        const hasMatchingType = typeValues.some(tv => selectedTypes.has(tv));
+        if (!hasMatchingType) return false;
     }
 
     return true;
@@ -1143,12 +1142,13 @@ function getTypeFilterOptions() {
 
     const typeSet = new Set();
     getAllExtensions().forEach((ext) => {
-        let type = String(ext.type || '_unknown').trim() || '_unknown';
-        // Group chinese_novel into novel display
-        if (type === 'chinese_novel' || type === 'chinese') {
-            type = 'novel';
-        }
-        typeSet.add(type);
+        let types = String(ext.type || '_unknown').trim().split(',').map(t => t.trim().toLowerCase());
+        types.forEach(type => {
+            if (type === 'chinese_novel' || type === 'chinese') {
+                type = 'novel';
+            }
+            typeSet.add(type);
+        });
     });
 
     memoizedFilterOptions.types = Array.from(typeSet)

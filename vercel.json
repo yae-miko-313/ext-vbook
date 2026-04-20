@@ -1,32 +1,24 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": null,
-  "buildCommand": "",
   "cleanUrls": true,
   "functions": {
     "api/**/*.js": {
-      "includeFiles": ".private/references/remote-sources.json",
+      "includeFiles": "web/remote-sources.json",
       "maxDuration": 60
     }
   },
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/web/index.html"
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
     },
     {
-      "source": "/(style.css|script.js|theme.js|favicon.ico)",
+      "source": "/((?!api/).*)",
       "destination": "/web/$1"
     },
     {
-      "source": "/assets/(.*)",
-      "destination": "/web/assets/$1"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "source": "/",
+      "destination": "/web/index.html"
     }
   ]
 }
