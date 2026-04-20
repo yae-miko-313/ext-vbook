@@ -1,5 +1,12 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/vbook-ext/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    }
+  ],
   "functions": {
     "api/**/*.js": {
       "includeFiles": "web/remote-sources.json",
