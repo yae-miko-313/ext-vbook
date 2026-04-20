@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "redirects": [
     {
-      "source": "/vbook-ext/:path*",
+      "source": "/vbook-ext:path*",
       "destination": "/:path*",
       "permanent": true
     }
