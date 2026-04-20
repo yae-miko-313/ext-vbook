@@ -2,8 +2,13 @@
   "cleanUrls": true,
   "redirects": [
     {
-      "source": "/vbook-ext:path*",
+      "source": "/vbook-ext/:path*",
       "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/vbook-ext",
+      "destination": "/",
       "permanent": true
     }
   ],
@@ -19,8 +24,8 @@
       "destination": "/api/:path*"
     },
     {
-      "source": "/:path*",
-      "destination": "/web/:path*"
+      "source": "/((?!web|api).*)",
+      "destination": "/web/$1"
     }
   ]
 }
