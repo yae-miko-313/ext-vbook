@@ -13,7 +13,7 @@
     "ext:create": "node tools/cli/index.js ext --mode create",
     "ext:edit": "node tools/cli/index.js ext --mode edit --plugin extensions/novel/kychi_ntruyen/plugin.json --dry-run",
     "ext:create:dry": "node tools/cli/index.js ext --mode create --name DemoExt --source https://example.com --author kychi --dry-run",
-    "build": "node tools/cli/index.js build --plugin extensions/novel/kychi_ntruyen",
+    "build:ext": "node tools/cli/index.js build --plugin extensions/novel/kychi_ntruyen",
     "build:catalog": "node tools/cli/index.js build-catalog"
   },
   "dependencies": {
