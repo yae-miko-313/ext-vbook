@@ -1,33 +1,27 @@
-# VBook Tool
+# VBook Tool - Extension Manager & CLI
 
-Repo này là công cụ 2 trong 1 cho VBook:
+Bộ công cụ quản lý, đóng gói và đồng bộ hóa extension cho hệ sinh thái VBook. Hỗ trợ cả quản lý local qua CLI và hiển thị cộng đồng qua Unified Web Server trên Vercel.
 
-- **Phân vùng cộng đồng**: Một project duy nhất trên Vercel phục vụ cả Giao diện (`web/`) và API Aggregate (`api/`) siêu tốc tại domain tùy chỉnh (VD: `vbookext.me`).
-- **Phân vùng cá nhân**: `extensions/` + `tools/cli/` để bạn có thể tự thân tạo, sửa, và đóng gói extension của riêng mình trước khi ném lên app.
+## Tính năng chính
 
-## Mục tiêu hệ thống
+- **CLI Management**: Tạo, sửa metadata, và đóng gói extension (`plugin.json`, `src/`, `icon.png`).
+- **Unified Vercel Hosting**: Giao diện và API chạy chung 1 dự án Vercel tại `vbookext.me`.
+- **Tiered Cache Backend**: API tự động đồng bộ từ nhiều nguồn GitHub (Community) và ưu tiên hiển thị Extension cá nhân (Local).
+- **Personal Catalog**: Tự động build manifest cho extension bạn đang phát triển để hiển thị tức thì trên web viewer.
 
-- **`extensions/`**: Thư mục chứa các extensions cá nhân công khai. Sau khi thêm/sửa, bắt buộc chạy `npm run build:catalog`.
-- **`.private/extensions/`**: Thư mục chứa các extensions cá nhân không công khai.
-- **`tools/cli/`**: Bộ công cụ tạo, sửa, và build extension (CLI Tool Version 3).
-- **`web/`**: Giao diện hiển thị web (Frontend) - Được serve trực tiếp từ Vercel.
-- **`api/`**: Mã nguồn Vercel SDK phục vụ API Tiered Cache API (Backend) - Chạy song song trên cùng domain.
-- **`web/remote-sources.json`**: File quan trọng nhất cấu hình danh sách các kho extensions trên Github/Gitlab của các nhóm khác.
-
-## Bắt đầu nhanh
-
-Cài đặt các gói phụ thuộc (cần thiết để sử dụng bộ công cụ):
+## Cài đặt
 
 ```bash
+git clone https://github.com/kychitoge/vbook-ext.git
+cd vbook-ext
 npm install
 ```
 
-Tạo file `.env` tại thư mục gốc (không bắt buộc nếu chỉ code ext):
+Thiết lập `.env` (Tùy chọn cho CLI):
 
 ```env
-VBOOK_IP=192.168.1.100
-LOCAL_PORT=3000
-VBOOK_AUTHOR=tên_của_bạn
+VBOOK_IP=192.168.1.100       # IP máy chạy VBook app (để sync wifi)
+VBOOK_AUTHOR=tên_của_bạn      # Tác giả mặc định khi tạo ext
 ```
 
 ## Workflow chính (4 Bước)
@@ -63,12 +57,13 @@ npm run build:catalog
 ```
 
 Quét `extensions/*/` và build lại danh mục:
+
 - `extensions/{type}/plugin.json`
 - `extensions/plugin.json`
 
 **BẮT BUỘC** chạy sau khi thêm/sửa extension cá nhân.
 
-## Lệnh CLI chi tiết
+## Hướng dẫn lệnh (Reference)
 
 ### Extension commands
 
@@ -102,27 +97,27 @@ extensions/                     # Nơi chứa config và raw JS của ext
 │       ├── src/
 │       ├── icon.png
 │       └── plugin.json
-└── plugin.json                  
+└── plugin.json
 
 .private/                       # Extension tự dùng, không công khai
 └── extensions/
-   
+
 tools/cli/
 ├── index.js                    # Core CLI
 └── ...
 
 web/                            # Giao diện hiển thị extension cộng đồng
-├── index.html                   
+├── index.html
 ├── remote-sources.json         # Danh sách URL manifest cộng đồng
-├── script.js                    
+├── script.js
 └── style.css
 
 api/                            # Vercel Backend Cache & Sync (V4)
 └── ...
 
 docs/                           # Tài liệu tham khảo của Repo
-├── AI_CODE_EXT_VBOOK.md         
-├── CONTRIBUTING.md              
+├── AI_CODE_EXT_VBOOK.md
+├── CONTRIBUTING.md
 └── DEPLOY_VERCEL.md            # Tài liệu triển khai Unified Vercel
 ```
 

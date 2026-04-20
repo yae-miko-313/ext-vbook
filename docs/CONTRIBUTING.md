@@ -41,6 +41,7 @@ Tham khảo [AI_CODE_EXT_VBOOK.md](AI_CODE_EXT_VBOOK.md) để hiểu contract.
 ```bash
 npm run build:ext -- --plugin extensions/novel/my_ext
 ```
+
 Tạo `extensions/novel/my_ext/plugin.zip` sẵn sàng phân phối.
 
 ### Step 4: Rebuild personal catalog
@@ -48,7 +49,8 @@ Tạo `extensions/novel/my_ext/plugin.zip` sẵn sàng phân phối.
 ```bash
 npm run build:catalog
 ```
-Tái sinh catalog cộng đồng local cho personal extensions.
+
+**BẮT BUỘC** cập nhật personal catalog mỗi khi thêm extension mới.
 
 ### Step 5: Verify locally with Unified Server
 
@@ -57,7 +59,8 @@ Mở web viewer để kiểm tra extension xuất hiện trong view:
 ```bash
 npm run vercel-dev
 ```
-Truy cập `http://localhost:3000/`
+
+Mở `http://localhost:3000` để test.
 
 ## Pull Request Checklist
 
@@ -87,10 +90,10 @@ Truy cập `http://localhost:3000/`
 ## Docs update policy
 
 - Khi thay đổi:
-- CLI commands → update `../README.md` + `docs/CONTRIBUTING.md`
-- Deployment → update `docs/DEPLOY_VERCEL.md`
-- Web structure → update `web/README.md`
-- Extension template → update `docs/AI_CODE_EXT_VBOOK.md`
+  - CLI commands → update `../README.md` + `docs/CONTRIBUTING.md`
+  - Deployment → update `docs/DEPLOY_VERCEL.md`
+  - Web structure → update `web/README.md`
+  - Extension template → update `docs/AI_CODE_EXT_VBOOK.md`
 
 ## File structure recap
 
@@ -118,22 +121,9 @@ tools/cli/
 └── ...
 ```
 
-web/
-├── plugin.json              # AUTO-GENERATED snapshot fallback aggregate
-├── catalog.json             # AUTO-GENERATED snapshot fallback sidecar
-└── remote-sources.json      # AUTO-GENERATED realtime source manifest
-
-tools/cli/
-├── index.js                 # Main entrypoint
-└── build/
-    ├── build.js             # buildExtensionZip()
-    └── build-catalog.js     # buildCatalog()
-```
-
 ## Notes
 
 - Cá nhân extensions chỉ qua CLI - đảm bảo consistency + track changes
 - Catalog rebuild/sync bắt buộc để web artifacts luôn nhất quán
 - Author credits động từ data - không hardcode
 - Sync script có dedupe theo path để tránh double-count community items
-
