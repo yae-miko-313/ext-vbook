@@ -1,13 +1,27 @@
 load('config.js');
 
+function parseGalleryImagesFromText(raw, out, seen) {
+  var text = (raw || '') + '';
+  var regex = /(?:https?:)?\/\/[^"'\s<>]+\.(?:jpeg|jpg|png|webp|gif)(?:\?[^"'\s<>]*)?/ig;
+  var match;
+  while ((match = regex.exec(text)) !== null) {
+    var src = toAbsoluteUrl(match[0]);
+    if (!isGalleryImage(src)) continue;
+    if (!seen[src]) {
+      seen[src] = true;
+      out.push(src);
+    }
+  }
+}
+
 function pagePath(aid, page) {
   if (page === 1) return '/photos-index-aid-' + aid + '.html';
   return '/photos-index-page-' + page + '-aid-' + aid + '.html';
 }
 
-function getTotalPages(firstDoc) {
+function totalPages(doc) {
   var maxPage = 1;
-  firstDoc.select('.bot_toolbar .paginator a, .f_left.paginator a').forEach(function(a) {
+  doc.select('.bot_toolbar .paginator a, .f_left.paginator a').forEach(function(a) {
     var t = textOf(a).trim();
     var n = parseInt(t, 10);
     if (!isNaN(n) && n > maxPage) maxPage = n;
@@ -24,9 +38,9 @@ function getTotalPages(firstDoc) {
   return maxPage;
 }
 
-function extractImages(doc, out, seen) {
+function parseImagesFromDoc(doc, out, seen) {
   doc.select('img').forEach(function(img) {
-    var src = toAbsoluteUrl(firstAttr(img, ['data-original', 'data-src', 'src']));
+    var src = toAbsoluteUrl(firstAttr(img, ['src', 'data-original', 'data-src']));
     if (!isGalleryImage(src)) return;
     if (!seen[src]) {
       seen[src] = true;
@@ -35,30 +49,20 @@ function extractImages(doc, out, seen) {
   });
 }
 
-function extractImagesFromBrowser(path, out, seen) {
+function parseWithBrowser(url, out, seen) {
   var b = Engine.newBrowser();
   try {
     b.setUserAgent(UserAgent.android);
-    b.launchAsync(BASE_URL + path);
-    sleep(3200);
-
-    for (var i = 0; i < 4; i++) {
-      b.callJs('window.scrollTo(0, document.body.scrollHeight);', 900);
-      sleep(900);
-    }
+    b.launch(url, 14000);
 
     var html = b.html();
-    if (html) {
-      var doc = Html.parse((html || '') + '');
-      extractImages(doc, out, seen);
-    }
+    parseGalleryImagesFromText(html, out, seen);
 
     var urls = b.urls() || [];
     urls.forEach(function(u) {
       u = (u || '') + '';
-      if (u.indexOf('/data/t/') === -1) return;
+      if (!isGalleryImage(u)) return;
       var src = toAbsoluteUrl(u);
-      if (!isGalleryImage(src)) return;
       if (!seen[src]) {
         seen[src] = true;
         out.push(src);
@@ -76,28 +80,31 @@ function execute(url) {
   var images = [];
   var seen = {};
 
-  var firstRes = fetch(BASE_URL + pagePath(aid, 1), { method: 'GET' });
-  if (firstRes.ok) {
-    var firstDoc = firstRes.html();
-    extractImages(firstDoc, images, seen);
+  var detailUrl = BASE_URL + '/photos-index-aid-' + aid + '.html';
+  var galleryUrl = detailUrl.replace('-index-', '-gallery-');
 
-    var totalPages = getTotalPages(firstDoc);
-    for (var page = 2; page <= totalPages; page++) {
-      var response = fetch(BASE_URL + pagePath(aid, page), { method: 'GET' });
-      if (!response.ok) break;
-      var doc = response.html();
-      extractImages(doc, images, seen);
+  var galleryRes = fetch(galleryUrl, { method: 'GET' });
+  if (galleryRes.ok) {
+    parseGalleryImagesFromText(galleryRes.text(), images, seen);
+  }
+
+  if (images.length === 0) {
+    var firstRes = fetch(detailUrl, { method: 'GET' });
+    if (firstRes.ok) {
+      var firstDoc = firstRes.html();
+      parseImagesFromDoc(firstDoc, images, seen);
+
+      var maxPage = totalPages(firstDoc);
+      for (var p = 2; p <= maxPage; p++) {
+        var pageRes = fetch(BASE_URL + pagePath(aid, p), { method: 'GET' });
+        if (!pageRes.ok) break;
+        parseImagesFromDoc(pageRes.html(), images, seen);
+      }
     }
   }
 
-  if (images.length < 5) {
-    extractImagesFromBrowser('/photos-slist-aid-' + aid + '.html', images, seen);
-  }
-  if (images.length < 5) {
-    extractImagesFromBrowser('/photos-list-aid-' + aid + '.html', images, seen);
-  }
-  if (images.length < 5) {
-    extractImagesFromBrowser('/photos-slide-aid-' + aid + '.html', images, seen);
+  if (images.length === 0) {
+    parseWithBrowser(galleryUrl, images, seen);
   }
 
   if (images.length === 0) return Response.error('No images');

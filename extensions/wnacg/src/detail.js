@@ -3,7 +3,8 @@ load('config.js');
 function parseGenres(doc) {
   var genres = [];
   var seen = {};
-  doc.select('.bread a[href*="albums-index-cate-"]').forEach(function(a) {
+
+  doc.select('a.tagshow, .bread a[href*="albums-index-cate-"]').forEach(function(a) {
     var title = textOf(a).trim();
     var href = normalizePathOrUrl(firstAttr(a, ['href']));
     if (!title || !href) return;
@@ -12,14 +13,15 @@ function parseGenres(doc) {
     seen[key] = true;
     genres.push({ title: title, input: href, script: 'gen.js' });
   });
+
   return genres;
 }
 
-function normalizeTitle(name) {
-  name = cleanInlineTags((name || '') + '').trim();
-  name = name.replace(/\s*-\s*紳士漫畫.*$/i, '').trim();
-  name = name.replace(/\s*\|\s*邪惡漫畫.*$/i, '').trim();
-  return name;
+function normalizeTitle(v) {
+  v = cleanInlineTags((v || '') + '').trim();
+  v = v.replace(/\s*-\s*紳士漫畫.*$/i, '').trim();
+  v = v.replace(/\s*\|\s*邪惡漫畫.*$/i, '').trim();
+  return v;
 }
 
 function execute(url) {
@@ -32,28 +34,30 @@ function execute(url) {
 
   var doc = response.html();
 
-  var name = textOf(doc.select('#bodywrap h2').first()).trim();
-  if (!name) name = textOf(doc.select('.asTB h2').first()).trim();
-  if (!name) name = textOf(doc.select('title').first()).trim();
-  name = normalizeTitle(name);
-  if (!name) return Response.error('Cannot parse title');
+  var title = textOf(doc.select('h2').first()).trim();
+  if (!title) title = textOf(doc.select('title').first()).trim();
+  title = normalizeTitle(title);
+  if (!title) return Response.error('Cannot parse title');
 
-  var cover = toAbsoluteUrl(firstAttr(doc.select('.uwthumb img').first(), ['data-original', 'data-src', 'src']));
-  if (!cover) cover = toAbsoluteUrl(firstAttr(doc.select('img[src*="/data/t/"]').first(), ['src', 'data-src', 'data-original']));
-
-  var author = textOf(doc.select('a[href*="f=user_nicename"]').first()).trim();
+  var author = textOf(doc.select('a[href*="f=user_nicename"] p').first()).trim();
+  if (!author) author = textOf(doc.select('div.uwuinfo p').first()).trim();
   if (!author) author = 'Unknown';
 
-  var description = textOf(doc.select('.uwconn p').first()).trim();
-  if (!description) description = textOf(doc.select('.uwconn .asTB').first()).trim();
+  var cover = toAbsoluteUrl(firstAttr(doc.select('div.uwthumb img').first(), ['src', 'data-src', 'data-original']));
+  if (!cover || cover.indexOf('/data/t/') === -1) {
+    cover = toAbsoluteUrl(firstAttr(doc.select('img[src*="/data/t/"]').first(), ['src', 'data-src', 'data-original']));
+  }
+
+  var description = textOf(doc.select('div.uwconn p').first()).trim();
+  if (!description) description = textOf(doc.select('div.asTBcell p').first()).trim();
 
   var data = {
-    name: name,
+    name: title,
     cover: cover,
     author: author,
     description: description,
     host: BASE_URL,
-    ongoing: true
+    ongoing: false
   };
 
   var genres = parseGenres(doc);
