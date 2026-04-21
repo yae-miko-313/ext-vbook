@@ -377,10 +377,10 @@ function extensionMatchesStructuredFilters(ext) {
     return true;
 }
 
-function filterExtensions() {
+function filterExtensions(ignoreSearch = false) {
     let all = getAllExtensions().filter(extensionMatchesStructuredFilters);
 
-    if (currentSearch) {
+    if (currentSearch && !ignoreSearch) {
         const search = currentSearch.toLowerCase();
         all = all.filter((ext) =>
             (ext.name || '').toLowerCase().includes(search) ||
@@ -1970,7 +1970,7 @@ function renderSourceView() {
     const grid = document.getElementById('sources-grid');
     if (!grid) return;
 
-    const extensions = filterExtensions();
+    const extensions = filterExtensions(true);
     const sSearch = (document.getElementById('source-search-input')?.value || '').toLowerCase();
     const sources = getActiveCatalogSources();
 
@@ -2001,8 +2001,7 @@ function renderSourceView() {
                 }
             }
 
-            const threshold = extItems.length * 0.8;
-            if (maxCount >= threshold) {
+            if (topAuthor && maxCount >= threshold) {
                 resolvedAuthor = topAuthor;
             } else {
                 // If no author has >80% majority, use the Repo Name or "Nhiều tác giả"
@@ -2405,14 +2404,26 @@ async function handleImportShelf(slug) {
             html += '<p style="font-size: 13px; color: var(--color-text-tertiary);">Kệ mở rộng trống.</p>';
         } else {
             // Show first 10 items
+            const allExts = getAllExtensions();
             const displayItems = items.slice(0, 10);
             displayItems.forEach(item => {
+                // Try to find full metadata in local catalog
+                const localExt = allExts.find(e => 
+                    (e.path || e.id || e.source || e.name) === (item.path || item.id || item.source || item.name)
+                );
+                
+                const displayName = localExt ? localExt.name : (item.name || 'Unknown');
+                const displayAuthor = localExt ? localExt.author : (item.author || '');
+                const displayIcon = localExt ? localExt.icon : '';
+
                 html += `
                     <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--color-bg-primary); border-radius: 8px; border: 1px solid var(--color-border);">
-                        <span style="font-size: 14px;">📦</span>
+                        <div style="width: 32px; height: 32px; flex-shrink: 0; background: #eee; border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                            ${displayIcon ? `<img src="${displayIcon}" style="width: 100%; height: 100%; object-fit: cover;">` : '<span style="font-size: 14px;">📦</span>'}
+                        </div>
                         <div style="flex: 1; min-width: 0;">
-                            <div style="font-size: 13px; font-weight: 600; color: var(--color-text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(item.name || 'Unknown')}</div>
-                            ${item.source ? `<div style="font-size: 11px; color: var(--color-text-tertiary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(item.source)}</div>` : ''}
+                            <div style="font-size: 13px; font-weight: 600; color: var(--color-text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(displayName)}</div>
+                            <div style="font-size: 11px; color: var(--color-text-tertiary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(displayAuthor || item.source || '')}</div>
                         </div>
                     </div>
                 `;
@@ -2470,12 +2481,24 @@ async function useCurrentPreviewShelf() {
 
     // API returns { metadata, data: [...] }
     const items = currentPreviewShelf.data || currentPreviewShelf.items || [];
+    const allExtensions = getAllExtensions();
     let addedCount = 0;
 
     items.forEach(item => {
-        const id = item.path || item.id || item.source || item.name;
-        if (id) {
-            selectedExtIds.add(id);
+        // Try to find the most stable ID by checking if it exists in our catalog
+        const itemId = item.path || item.id || item.source || item.name;
+        
+        // Broad search to match the same logic as saveConfirmBtn
+        const matchedExt = allExtensions.find(e => 
+            (e.path || e.id || e.source || e.name) === itemId
+        );
+
+        if (matchedExt) {
+            selectedExtIds.add(matchedExt.path || matchedExt.id || matchedExt.source || matchedExt.name);
+            addedCount++;
+        } else if (itemId) {
+            // Fallback for items not in local catalog
+            selectedExtIds.add(itemId);
             addedCount++;
         }
     });
