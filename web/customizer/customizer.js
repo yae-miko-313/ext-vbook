@@ -80,12 +80,6 @@ function getShelfCredential(id) {
     return getOwnedShelves().find(s => s.id === id);
 }
 
-function refreshIcons() {
-    if (window.lucide) {
-        window.lucide.createIcons();
-    }
-}
-
 async function copyToClipboard(text) {
     if (!text) {
         throw new Error('Nothing to copy');
@@ -1840,36 +1834,51 @@ function renderMarket() {
                         ${escapeHtml(m.title)}
                         ${isOwned ? '<span class="market-owned-badge">Của bạn</span>' : ''}
                     </h3>
-                    <span class="market-usage" title="${usageCount} lượt sử dụng">${usageCount} <i data-lucide="flame" style="width:12px;height:12px;display:inline-block;vertical-align:middle;margin-left:2px;"></i></span>
+                    <span class="market-usage" title="${usageCount} lượt sử dụng">${usageCount} 🔥</span>
                 </div>
                 <div class="market-tags" onclick="handleImportShelf('${m.slug}')">
-                    <span class="market-tag author-tag" title="Tác giả"><i data-lucide="user" style="width:10px;height:10px;display:inline-block;vertical-align:middle;margin-right:3px;"></i> ${escapeHtml(m.author || 'Ẩn danh')}</span>
+                    <span class="market-tag author-tag" title="Tác giả">👤 ${escapeHtml(m.author || 'Ẩn danh')}</span>
                 </div>
                 ${m.description ? `<div class="market-description" title="${escapeHtml(m.description)}" onclick="handleImportShelf('${m.slug}')">${escapeHtml(m.description)}</div>` : ''}
                 
                 <div class="market-actions">
                     ${isOwned ? `
                         <button class="market-btn" onclick="handleEditShelf('${m.slug}')" title="Chỉnh sửa nội dung kệ">
-                            <i data-lucide="edit-3"></i> Sửa
+                            ✏️ Sửa
                         </button>
                         <button class="market-btn danger" onclick="handleDeleteShelf('${m.id}', '${m.slug}')" title="Xóa kệ này khỏi hệ thống">
-                            <i data-lucide="trash-2"></i> Xóa
+                            🗑️ Xóa
                         </button>
                     ` : `
                         <button class="market-btn primary" onclick="handleImportShelf('${m.slug}')" title="Thêm extension từ kệ này vào lựa chọn của bạn">
-                            <i data-lucide="download"></i> Sử dụng
+                            📥 Sử dụng
                         </button>
                     `}
-                    <button class="market-btn" onclick="copyToClipboard('${API_BASE_URL}/api/registry/${m.slug}.json'); showToast('Đã copy link kệ!')" title="Copy link để dán vào VBook">
-                        <i data-lucide="link"></i> Copy
+                    <button class="market-btn" onclick="handleCopyMarketLink('${m.slug}')" title="Copy link để dán vào VBook">
+                        🔗 Copy
                     </button>
                 </div>
             </div>
         </article>
         `;
     }).join('');
+}
 
-    refreshIcons();
+async function handleCopyMarketLink(slug) {
+    const url = `${API_BASE_URL}/api/registry/${slug}.json`;
+    try {
+        await copyToClipboard(url);
+        showToast('Đã copy link kệ!');
+        
+        // Use increment (Silent)
+        fetch(`${API_BASE_URL}/api/registry/use`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ slug: slug })
+        }).catch(e => console.error('Usage increment failed:', e));
+    } catch (err) {
+        showToast('Lỗi: ' + err.message);
+    }
 }
 
 async function handleEditShelf(slug) {
@@ -1935,23 +1944,25 @@ async function handleDeleteShelf(id, slug) {
 
     try {
         showToast('Đang xóa...');
-        const res = await fetch(`${API_BASE_URL}/api/registry/delete.js`, {
+        const res = await fetch(`${API_BASE_URL}/api/registry/delete`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id, secret_token: creds.secret_token })
         });
         
-        const result = await res.json();
-        if (result.success) {
+        const result = await res.json().catch(() => ({ error: 'Phản hồi từ server không hợp lệ' }));
+
+        if (res.ok && result.success) {
             showToast('Đã xóa kệ thành công!');
             removeOwnedShelf(id);
             // Refresh market
-            fetchMarketplace();
+            if (typeof fetchMarketplace === 'function') fetchMarketplace();
         } else {
-            showToast('Lỗi: ' + (result.error || 'Không thể xóa'));
+            showToast('Lỗi: ' + (result.error || 'Không thể xóa kệ'));
         }
     } catch (e) {
-        showToast('Lỗi: ' + e.message);
+        console.error('[Delete Shelf Error]', e);
+        showToast('Lỗi kết nối: ' + e.message);
     }
 }
 
@@ -2015,19 +2026,17 @@ function renderSourceView() {
                     </div>
                 </div>
                 <div class="source-right-group">
-                    <span class="source-stat-badge"><i data-lucide="package" style="width:12px;height:12px;display:inline-block;vertical-align:middle;margin-right:2px;"></i> ${g.extensions.length} ext</span>
+                    <span class="source-stat-badge">📦 ${g.extensions.length} ext</span>
                     <span class="source-toggle-icon">▼</span>
                 </div>
             </div>
             <div class="source-details">
-                <div class="extensions-grid" style="padding: 10px 0;">
+                <div class="extensions-grid" style="padding: 10px 0; min-width: 0;">
                     ${g.extensions.map(renderCard).join('')}
                 </div>
             </div>
         </article>
     `}).join('');
-
-    refreshIcons();
 }
 
 // Convert repo URL to raw JSON URL
@@ -2272,52 +2281,36 @@ if (saveConfirmBtn) {
                 body: JSON.stringify(payload)
             });
 
-            if (!res.ok) {
-                const errorText = await res.text();
-                throw new Error(`Server error ${res.status}: ${errorText}`);
-            }
+            const result = await res.json().catch(() => ({ error: 'Phản hồi từ server không hợp lệ' }));
 
-            const result = await res.json();
-            if (result.success && result.data) {
+            if (res.ok && result.success && result.data) {
                 const shelfUrl = `${API_BASE_URL}/api/registry/${result.data.slug}.json`;
 
-                // If creation, add to owned shelves
-                if (!currentEditingShelf) {
-                    addOwnedShelf({
-                        id: result.data.id,
-                        slug: result.data.slug,
-                        secret_token: result.data.secret_token,
-                        title: title
-                    });
-                } else {
-                    // Update current entry in owned shelves if needed
-                    addOwnedShelf({
-                        id: currentEditingShelf.id,
-                        slug: currentEditingShelf.slug,
-                        secret_token: currentEditingShelf.secret_token,
-                        title: title
-                    });
-                }
+                // Sync local storage
+                addOwnedShelf({
+                    id: result.data.id || (currentEditingShelf && currentEditingShelf.id),
+                    slug: result.data.slug,
+                    secret_token: result.data.secret_token || (currentEditingShelf && currentEditingShelf.secret_token),
+                    title: title
+                });
 
                 closeSaveModal();
                 showSuccessModal(shelfUrl);
                 selectedExtIds.clear();
-                currentEditingShelf = null; // Important: Clear edit state after success
+                currentEditingShelf = null; 
                 updateSelectionUI();
                 
                 // Clear inputs
-                if (titleInput) titleInput.value = '';
-                if (authorInput) authorInput.value = '';
-                if (descInput) descInput.value = '';
+                [titleInput, authorInput, descInput].forEach(el => { if (el) el.value = ''; });
                 
                 // Refresh market to show changes
-                fetchMarketplace();
+                if (typeof fetchMarketplace === 'function') fetchMarketplace();
             } else {
-                showToast('Lỗi: ' + (result.error || 'Không nhận được link kệ mở rộng'));
+                showToast('Lỗi: ' + (result.error || 'Không thể lưu kệ'));
             }
         } catch (e) {
             console.error('[Save Shelf Error]', e);
-            showToast('Lỗi: ' + e.message);
+            showToast('Lỗi kết nối: ' + e.message);
         } finally {
             saveConfirmBtn.disabled = false;
             saveConfirmBtn.textContent = 'Xác nhận';
@@ -2434,10 +2427,20 @@ function closeMarketPreviewModal() {
     currentPreviewShelf = null;
 }
 
-function useCurrentPreviewShelf() {
+async function useCurrentPreviewShelf() {
     if (!currentPreviewShelf) {
         showToast('Không có dữ liệu kệ mở rộng để sử dụng!');
         return;
+    }
+
+    // Call API to increment usage (silent)
+    const shelfId = currentPreviewShelf.metadata?.id || currentPreviewShelf.id;
+    if (shelfId) {
+        fetch(`${API_BASE_URL}/api/registry/use`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: shelfId })
+        }).catch(e => console.error('Usage increment failed:', e));
     }
 
     // API returns { metadata, data: [...] }
@@ -2654,9 +2657,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupBackToTopButton();
     setupAuthorsMobileToggle();
     setupGuideModal();
-
-    // Init Icons
-    refreshIcons();
 
     // Start dynamic fetch
     fetchAppData();
