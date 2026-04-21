@@ -1577,7 +1577,7 @@ function setupSearch() {
         input.addEventListener('input', (e) => {
             searchStates[key] = e.target.value.trim();
             if (view === 'extensions') {
-                renderExtensionGrid();
+                renderGrid();
                 renderStats();
             } else if (view === 'sources') {
                 renderSourceView();
