@@ -615,14 +615,14 @@ function renderStats(extensions = null) {
         return type === 'novel' || type === 'chinese_novel' || type === 'chinese';
     }).length;
     const comicCount = all.filter(e => e.type === 'comic').length;
-    const translateCount = all.filter(e => e.type === 'translate').length;
-    const ttsCount = all.filter(e => e.type === 'tts').length;
+    const videoCount = all.filter(e => e.type === 'video').length;
+    const toolsCount = all.filter(e => e.type === 'tts' || e.type === 'translate').length;
 
     animateCounter('total-extensions', all.length);
     animateCounter('novel-count', novelCount);
     animateCounter('comic-count', comicCount);
-    animateCounter('translate-count', translateCount);
-    animateCounter('tts-count', ttsCount);
+    animateCounter('video-count', videoCount);
+    animateCounter('tools-count', toolsCount);
 }
 
 function renderSourceRepoCount() {
@@ -810,8 +810,9 @@ function renderCard(ext) {
         chinese_novel: 'TRUYỆN CHỮ',
         chinese: 'TRUYỆN CHỮ',
         comic: 'TRUYỆN TRANH',
-        translate: 'DỊCH',
-        tts: 'TTS',
+        video: 'PHIM',
+        tts: 'CÔNG CỤ',
+        translate: 'CÔNG CỤ',
         _unknown: 'KHÁC'
     };
 
@@ -939,6 +940,7 @@ const SOURCE_TYPE_LABELS = {
     chinese_novel: 'Truyện chữ',
     chinese: 'Truyện chữ',
     comic: 'Truyện tranh',
+    video: 'Phim',
     translate: 'Dịch',
     tts: 'TTS',
     _unknown: 'Khác'
@@ -1407,6 +1409,8 @@ function applyFilterModal() {
     hideNsfwEnabled = draftHideNsfwEnabled;
 
     updateFilterButtonLabel();
+    // Update stats to reflect NSFW filter change
+    renderStats();
     // Do not close modal here, just refresh view
     renderActiveView();
 }
