@@ -1566,8 +1566,8 @@ function setupModalDrag(modalId, closeFn) {
 function setupSearch() {
     const handlers = [
         { id: 'search-input', key: 'extensions', view: 'extensions' },
-        { id: 'source-search-input', key: 'sources', view: 'sources' },
-        { id: 'market-search-input', key: 'market', view: 'market' }
+        { id: 'source-search-input', key: 'sources', view: 'sources' }
+        // NOTE: market search is handled separately in renderActiveView() with its own marketSearch variable
     ];
 
     handlers.forEach(({ id, key, view }) => {
@@ -1581,8 +1581,6 @@ function setupSearch() {
                 renderStats();
             } else if (view === 'sources') {
                 renderSourceView();
-            } else if (view === 'market') {
-                fetchMarketplace(false);
             }
         });
     });
@@ -2019,7 +2017,10 @@ async function handleDeleteShelf(id, slug) {
         if (res.ok && result.success) {
             showToast('Đã xóa kệ thành công!');
             removeOwnedShelf(id);
-            // Refresh market
+            // Remove from marketplaceData immediately (avoid waiting for cache)
+            marketplaceData = marketplaceData.filter(m => m.id !== id);
+            renderMarket();
+            // Refresh market to get fresh data from server
             if (typeof fetchMarketplace === 'function') fetchMarketplace();
         } else {
             showToast('Lỗi: ' + (result.error || 'Không thể xóa kệ'));
@@ -2384,10 +2385,12 @@ if (saveConfirmBtn) {
 
             if (res.ok && result.success && result.data) {
                 const shelfUrl = `${API_BASE_URL}/api/registry/${result.data.slug}.json`;
+                // Capture shelf ID before clearing editing state
+                const shelfId = result.data.id || (currentEditingShelf && currentEditingShelf.id);
 
                 // Sync local storage
                 addOwnedShelf({
-                    id: result.data.id || (currentEditingShelf && currentEditingShelf.id),
+                    id: shelfId,
                     slug: result.data.slug,
                     secret_token: result.data.secret_token || (currentEditingShelf && currentEditingShelf.secret_token),
                     title: title
@@ -2402,7 +2405,28 @@ if (saveConfirmBtn) {
                 // Clear inputs
                 [titleInput, authorInput, descInput].forEach(el => { if (el) el.value = ''; });
                 
-                // Refresh market to show changes
+                // Add new shelf to marketplaceData immediately (avoid waiting for cache)
+                if (shelfId) {
+                    const now = new Date().toISOString();
+                    const newMarketItem = {
+                        id: shelfId,
+                        slug: result.data.slug,
+                        title: title,
+                        author: author,
+                        description: description,
+                        ext_count: extension_ids.length,
+                        usage_count: 0,
+                        tags: [],
+                        created_at: now,
+                        updated_at: now
+                    };
+                    // Remove existing item if editing, then add new one at top
+                    marketplaceData = marketplaceData.filter(m => m.id !== shelfId);
+                    marketplaceData.unshift(newMarketItem);
+                    renderMarket();
+                }
+                
+                // Refresh market to get fresh data from server
                 if (typeof fetchMarketplace === 'function') fetchMarketplace();
             } else {
                 showToast('Lỗi: ' + (result.error || 'Không thể lưu kệ'));
