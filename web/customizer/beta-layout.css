@@ -431,6 +431,19 @@ body {
     position: relative;
     cursor: pointer;
     align-items: flex-start;
+    overflow: hidden; 
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.ext-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
 }
 
 .ext-card:hover {
@@ -516,6 +529,7 @@ body {
 /* Source URL + Version line with health icon */
 .ext-source-line {
     display: flex;
+    flex-wrap: wrap; /* Allow link to wrap to next line if too long */
     align-items: center;
     gap: 6px;
     font-size: 12px;
@@ -536,8 +550,7 @@ body {
 .ext-source-link {
     color: var(--color-text-secondary);
     cursor: pointer;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    word-break: break-all; /* Ensure long URLs wrap */
     transition: all 0.15s ease;
     border-bottom: 1px dashed transparent;
 }
@@ -1405,6 +1418,22 @@ body {
     text-overflow: ellipsis;
 }
 
+/* Source View URL wrap fix */
+.source-raw-url {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    word-break: break-all;
+    white-space: normal;
+    line-height: 1.4;
+    margin-top: 2px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.source-raw-url:hover {
+    color: var(--color-accent);
+}
+
 .repo-chip-special {
     width: 100%;
 }
@@ -1805,6 +1834,8 @@ body {
 
     .extensions-grid {
         grid-template-columns: 1fr;
+        min-width: 0;
+        overflow: hidden;
     }
     
     .authors-overview {
@@ -1927,6 +1958,14 @@ body {
 
     .source-name {
         font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .source-info {
+        flex: 1;
+        min-width: 0;
     }
 
     .source-stat-badge {
