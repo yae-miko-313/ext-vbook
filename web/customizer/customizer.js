@@ -80,6 +80,12 @@ function getShelfCredential(id) {
     return getOwnedShelves().find(s => s.id === id);
 }
 
+function refreshIcons() {
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
+}
+
 async function copyToClipboard(text) {
     if (!text) {
         throw new Error('Nothing to copy');
@@ -216,6 +222,7 @@ async function fetchAppData(isRefresh = false) {
 
         clearLoadingState();
         renderDashboard();
+        refreshIcons();
 
         // Trigger silent background refresh to get fresh health data from backend background scan
         setTimeout(() => fetchAppData(true), 5000);
@@ -228,7 +235,7 @@ async function fetchAppData(isRefresh = false) {
             if (grid) {
                 grid.innerHTML = `
                     <div class="error-state" style="grid-column: 1/-1; padding: 60px 20px; text-align: center;">
-                        <div style="font-size: 40px; margin-bottom: 20px;">📡</div>
+                        <div style="font-size: 40px; margin-bottom: 20px; color: var(--color-accent);"><i data-lucide="wifi-off" style="width: 48px; height: 48px;"></i></div>
                         <h3 style="color: var(--color-text); margin-bottom: 10px;">Không thể kết nối máy chủ</h3>
                         <p style="color: var(--color-text-tertiary); margin-bottom: 24px; font-size: 14px;">${e.message}</p>
                         <button onclick="fetchAppData()" class="btn-primary" style="padding: 10px 24px;">Thử lại</button>
@@ -236,6 +243,8 @@ async function fetchAppData(isRefresh = false) {
                 `;
             }
         }
+    } finally {
+        refreshIcons();
     }
 }
 
@@ -1831,34 +1840,36 @@ function renderMarket() {
                         ${escapeHtml(m.title)}
                         ${isOwned ? '<span class="market-owned-badge">Của bạn</span>' : ''}
                     </h3>
-                    <span class="market-usage" title="${usageCount} lượt sử dụng">${usageCount} 🔥</span>
+                    <span class="market-usage" title="${usageCount} lượt sử dụng">${usageCount} <i data-lucide="flame" style="width:12px;height:12px;display:inline-block;vertical-align:middle;margin-left:2px;"></i></span>
                 </div>
                 <div class="market-tags" onclick="handleImportShelf('${m.slug}')">
-                    <span class="market-tag author-tag" title="Tác giả">${escapeHtml(m.author || 'Ẩn danh')}</span>
+                    <span class="market-tag author-tag" title="Tác giả"><i data-lucide="user" style="width:10px;height:10px;display:inline-block;vertical-align:middle;margin-right:3px;"></i> ${escapeHtml(m.author || 'Ẩn danh')}</span>
                 </div>
                 ${m.description ? `<div class="market-description" title="${escapeHtml(m.description)}" onclick="handleImportShelf('${m.slug}')">${escapeHtml(m.description)}</div>` : ''}
                 
                 <div class="market-actions">
                     ${isOwned ? `
                         <button class="market-btn" onclick="handleEditShelf('${m.slug}')" title="Chỉnh sửa nội dung kệ">
-                            ✏️ Sửa
+                            <i data-lucide="edit-3"></i> Sửa
                         </button>
                         <button class="market-btn danger" onclick="handleDeleteShelf('${m.id}', '${m.slug}')" title="Xóa kệ này khỏi hệ thống">
-                            🗑️ Xóa
+                            <i data-lucide="trash-2"></i> Xóa
                         </button>
                     ` : `
                         <button class="market-btn primary" onclick="handleImportShelf('${m.slug}')" title="Thêm extension từ kệ này vào lựa chọn của bạn">
-                            📥 Sử dụng
+                            <i data-lucide="download"></i> Sử dụng
                         </button>
                     `}
                     <button class="market-btn" onclick="copyToClipboard('${API_BASE_URL}/api/registry/${m.slug}.json'); showToast('Đã copy link kệ!')" title="Copy link để dán vào VBook">
-                        🔗 Copy
+                        <i data-lucide="link"></i> Copy
                     </button>
                 </div>
             </div>
         </article>
         `;
     }).join('');
+
+    refreshIcons();
 }
 
 async function handleEditShelf(slug) {
@@ -2004,7 +2015,7 @@ function renderSourceView() {
                     </div>
                 </div>
                 <div class="source-right-group">
-                    <span class="source-stat-badge">${g.extensions.length} ext</span>
+                    <span class="source-stat-badge"><i data-lucide="package" style="width:12px;height:12px;display:inline-block;vertical-align:middle;margin-right:2px;"></i> ${g.extensions.length} ext</span>
                     <span class="source-toggle-icon">▼</span>
                 </div>
             </div>
@@ -2015,6 +2026,8 @@ function renderSourceView() {
             </div>
         </article>
     `}).join('');
+
+    refreshIcons();
 }
 
 // Convert repo URL to raw JSON URL
@@ -2641,6 +2654,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setupBackToTopButton();
     setupAuthorsMobileToggle();
     setupGuideModal();
+
+    // Init Icons
+    refreshIcons();
 
     // Start dynamic fetch
     fetchAppData();

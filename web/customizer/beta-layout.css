@@ -256,6 +256,14 @@ body {
     letter-spacing: 0.3px;
 }
 
+.stat-icon {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 6px;
+    color: var(--color-accent);
+    opacity: 0.8;
+}
+
 /* ============================================
    FILTERS - Compact
    ============================================ */
@@ -315,6 +323,12 @@ body {
     background: var(--color-accent-hover);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(204, 17, 17, 0.25);
+}
+
+.action-btn i, .market-btn i, .cart-btn i {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
 }
 
 .action-btn.secondary {
