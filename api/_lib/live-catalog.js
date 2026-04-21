@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const { kv } = require('@vercel/kv');
 const { waitUntil } = require('@vercel/functions');
+const { getStorageProvider } = require('./catalog-storage');
 
 // ---------------------------------------------------------------------------
 // Config
@@ -374,10 +375,11 @@ async function buildSiteHealthMap(extensions) {
 // ---------------------------------------------------------------------------
 // Background: refresh + health + save to KV
 // ---------------------------------------------------------------------------
-async function runBackgroundRefresh(baseSnapshot) {
+async function runBackgroundRefresh(baseSnapshot, req = null) {
     try {
         console.log('[Refresh] Starting background health scan...');
         const snapshot = baseSnapshot || await buildLiveSnapshot();
+        const storage = getStorageProvider(req);
 
         const healthMap = await buildSiteHealthMap(snapshot.plugin.data);
         snapshot.catalog.siteHealth = healthMap;
@@ -386,13 +388,11 @@ async function runBackgroundRefresh(baseSnapshot) {
         snapshot.catalog.metadata.generatedAt = ts;
         snapshot.healthUpdatedAt = ts;
 
-        if (isKvConfigured) {
-            try {
-                await kv.set(KV_FULL_SNAPSHOT_KEY, snapshot, { ex: KV_PERSIST_TTL_SEC });
-                console.log('[Refresh] KV updated at', ts);
-            } catch (e) {
-                console.error('[Refresh] KV save failed:', e.message);
-            }
+        try {
+            await storage.set(snapshot);
+            console.log(`[Refresh] ${storage === kv ? 'KV' : 'Supabase'} updated at`, ts);
+        } catch (e) {
+            console.error('[Refresh] Storage save failed:', e.message);
         }
 
         memCache = { data: snapshot, expiresAt: Date.now() + 60_000 };
@@ -408,40 +408,42 @@ async function runBackgroundRefresh(baseSnapshot) {
 // Tier 2: KV         (<50ms)
 // Tier 3: live fetch from GitHub (~1-2s, no health, triggers bg refresh)
 // ---------------------------------------------------------------------------
-async function getSnapshot() {
+async function getSnapshot(req = null) {
     const now = Date.now();
+    const storage = getStorageProvider(req);
 
-    if (memCache && memCache.expiresAt > now) {
+    // Tier 1: Memory (Only for Stable to keep it blazing fast)
+    const isBeta = req === true || (req && (req.query?.v === 'beta' || req.headers?.referer?.includes('/customizer')));
+    if (!isBeta && memCache && memCache.expiresAt > now) {
         return memCache.data;
     }
 
-    if (isKvConfigured) {
-        try {
-            const cached = await kv.get(KV_FULL_SNAPSHOT_KEY);
-            if (cached) {
-                memCache = { data: cached, expiresAt: now + 60_000 };
+    // Tier 2: Storage (KV or Supabase)
+    try {
+        const cached = await storage.get();
+        if (cached) {
+            if (!isBeta) memCache = { data: cached, expiresAt: now + 60_000 };
 
-                const age = (now - new Date(cached.catalog?.metadata?.generatedAt || 0).getTime()) / 1000;
-                if (age > KV_STALE_THRESHOLD_SEC) {
-                    console.log(`[KV] Stale (${Math.floor(age / 60)}m). Revalidating in background...`);
-                    waitUntil(runBackgroundRefresh(null));
-                }
-
-                return cached;
+            const age = (now - new Date(cached.catalog?.metadata?.generatedAt || 0).getTime()) / 1000;
+            if (age > KV_STALE_THRESHOLD_SEC) {
+                console.log(`[Storage] Stale (${Math.floor(age / 60)}m). Revalidating in background...`);
+                waitUntil(runBackgroundRefresh(null, req));
             }
-            console.log('[KV] Cache miss.');
-        } catch (e) {
-            console.error('[KV] Read error:', e.message);
+
+            return cached;
         }
+        console.log(`[Storage] ${isBeta ? 'Supabase' : 'KV'} cache miss.`);
+    } catch (e) {
+        console.error(`[Storage] ${isBeta ? 'Supabase' : 'KV'} read error:`, e.message);
     }
 
-    // Cold start: fetch raw from GitHub (fast, no health scan)
+    // Tier 3: Cold start: fetch raw from GitHub (fast, no health scan)
     console.log('[Cold Start] Fetching from GitHub...');
     const snapshot = await buildLiveSnapshot();
-    memCache = { data: snapshot, expiresAt: now + 60_000 };
+    if (!isBeta) memCache = { data: snapshot, expiresAt: now + 60_000 };
 
-    // Run health + save KV in background – user never waits for this
-    waitUntil(runBackgroundRefresh(snapshot));
+    // Run health + save in background
+    waitUntil(runBackgroundRefresh(snapshot, req));
 
     return snapshot;
 }

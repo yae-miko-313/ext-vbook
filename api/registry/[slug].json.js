@@ -2,7 +2,13 @@
  * api/registry/[slug].json.js
  * The real-time resolver that converts a custom shelf ID into a VBook-compatible manifest.
  */
+'use strict';
+
+const { supabase } = require('../_lib/supabase');
+const { getSnapshot, handlePreflight } = require('../_lib/live-catalog');
+
 module.exports = async (req, res) => {
+    if (handlePreflight(req, res)) return;
     // Vercel serverless handles [slug] in req.query
     const { slug } = req.query;
 
@@ -39,8 +45,8 @@ module.exports = async (req, res) => {
             .update({ last_accessed_at: new Date().toISOString() })
             .eq('id', manifest.id);
 
-        // 3. Fetch current live catalog
-        const snapshot = await getSnapshot();
+        // 3. Fetch current live catalog (Force Beta/Supabase)
+        const snapshot = await getSnapshot(true);
         const allExtensions = snapshot.plugin?.data || [];
         
         // 4. Filter and Project
