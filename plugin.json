@@ -68,7 +68,7 @@
             "name": "TruyenDich.AI",
             "author": "hieu05",
             "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/truyendich.ai/plugin.zip",
-            "version": 2,
+            "version": 3,
             "source": "https://truyendich.ai",
             "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/truyendich.ai/icon.png",
             "description": "Đọc truyện trên TruyenDich.AI",

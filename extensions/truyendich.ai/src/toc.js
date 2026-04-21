@@ -1,27 +1,17 @@
 load("config.js");
 
 function buildChapterName(element) {
-  var title = element.select("span").first();
-  if (!title) return cleanText(element.text());
+  var spans = element.select("span");
+  if (!spans || spans.size() === 0) return cleanText(element.text());
 
-  var fullText = cleanText(title.text());
-  var spans = title.select("span");
-  if (!spans || spans.size() === 0) return fullText;
+  var chapterLabel = cleanText(spans.first().text());
+  if (!chapterLabel) return cleanText(element.text());
 
-  var subtitle = spans.get(spans.size() - 1);
-  if (!subtitle) return fullText;
+  var subtitle = cleanText(spans.last().text());
+  if (!subtitle || subtitle === chapterLabel) return chapterLabel;
+  if (subtitle.indexOf(chapterLabel) === 0) return subtitle;
 
-  var subtitleText = cleanText(subtitle.text());
-  if (!subtitleText || subtitleText === fullText) return fullText;
-
-  if (fullText.slice(fullText.length - subtitleText.length) === subtitleText) {
-    var prefix = cleanText(
-      fullText.slice(0, fullText.length - subtitleText.length),
-    );
-    return prefix ? prefix + " " + subtitleText : subtitleText;
-  }
-
-  return fullText;
+  return chapterLabel + " " + subtitle;
 }
 
 function execute(url) {
@@ -37,21 +27,24 @@ function execute(url) {
   var response = fetch(buildAbsoluteUrl(tocUrl));
   if (!response.ok) return null;
 
-  var data = [];
-  response
-    .html()
-    .select("a[href*=/chuong-]")
-    .forEach(function (element) {
-      var chapterRoute = parseRoute(element.attr("href"));
-      if (!chapterRoute || chapterRoute.kind !== "chapter") return;
-      chapterRoute.edition = route.edition;
+  var doc = response.html();
+  var chapterSection = doc.select("section:has(h2:contains(Danh sách chương))").first();
+  var chapterElements = chapterSection
+    ? chapterSection.select("a[href*=/chuong-]")
+    : doc.select("a[href*=/chuong-]");
 
-      data.push({
-        name: buildChapterName(element),
-        url: buildRoute(chapterRoute),
-        host: BASE_URL,
-      });
+  var data = [];
+  chapterElements.forEach(function (element) {
+    var chapterRoute = parseRoute(element.attr("href"));
+    if (!chapterRoute || chapterRoute.kind !== "chapter") return;
+    chapterRoute.edition = route.edition;
+
+    data.push({
+      name: buildChapterName(element),
+      url: buildRoute(chapterRoute),
+      host: BASE_URL,
     });
+  });
 
   return Response.success(data);
 }
