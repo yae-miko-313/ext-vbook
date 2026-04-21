@@ -7,6 +7,52 @@ const API_BASE_URL = window.location.origin; // Dynamically use the same domain 
 
 let currentSearch = '';
 let hideNsfwEnabled = true; // Default: 18+ is hidden
+
+/**
+ * Robust Extension Finder: Handles absolute vs relative paths, case variations, etc.
+ */
+/**
+ * Robust Extension Finder: Handles absolute vs relative paths, case variations, etc.
+ * Now supports author matching to disambiguate extensions with the same name.
+ */
+function findExtensionById(id, catalog, author = null) {
+    if (!id || !catalog) return null;
+    const searchId = String(id).toLowerCase().trim();
+    const searchAuthor = author ? String(author).toLowerCase().trim() : null;
+    
+    // 1. Primary: Match by PATH (Unique)
+    let found = catalog.find(e => e.path && e.path.toLowerCase() === searchId);
+    if (found) return found;
+
+    // 2. Secondary: Match by NAME + AUTHOR (To handle duplicate names)
+    if (searchAuthor) {
+        found = catalog.find(e => {
+            const eName = String(e.name || '').toLowerCase();
+            const eAuthor = String(e.author || '').toLowerCase();
+            return eName === searchId && eAuthor.includes(searchAuthor);
+        });
+        if (found) return found;
+    }
+
+    // 3. Tertiary: Direct ID or Name match
+    found = catalog.find(e => 
+        (e.id && String(e.id).toLowerCase() === searchId) ||
+        (e.name && e.name.toLowerCase() === searchId)
+    );
+    if (found) return found;
+
+    // 4. Base filename match (Fallback)
+    const searchBase = searchId.split('/').pop();
+    if (searchBase && searchBase.includes('.js')) {
+        found = catalog.find(e => {
+            const ePath = String(e.path || '').toLowerCase();
+            return ePath === searchBase || ePath.endsWith('/' + searchBase);
+        });
+    }
+
+    return found;
+}
+
 let selectedAuthorKeys = new Set();
 let selectedLocales = new Set();
 let selectedTypes = new Set();
@@ -1912,8 +1958,12 @@ async function handleEditShelf(slug) {
         // Populate selections
         selectedExtIds.clear();
         (shelfData.data || []).forEach(item => {
-            const id = item.path || item.id || item.source;
-            if (id) selectedExtIds.add(id);
+            const ext = findExtensionById(item.path || item.id || item.source || item.name, getAllExtensions(), item.author);
+            if (ext) {
+                selectedExtIds.add(ext.path || ext.id || ext.name);
+            } else if (item.path || item.id) {
+                selectedExtIds.add(item.path || item.id);
+            }
         });
 
         updateSelectionUI();
@@ -2001,6 +2051,7 @@ function renderSourceView() {
                 }
             }
 
+            const threshold = extItems.length * 0.8;
             if (topAuthor && maxCount >= threshold) {
                 resolvedAuthor = topAuthor;
             } else {
@@ -2283,7 +2334,7 @@ if (saveConfirmBtn) {
         try {
             const extensions = getAllExtensions();
             const extension_ids = Array.from(selectedExtIds).map(id => {
-                const ext = extensions.find(e => (e.path || e.id || e.source || e.name) === id);
+                const ext = findExtensionById(id, extensions);
                 return ext ? (ext.path || ext.id || ext.name) : null;
             }).filter(Boolean);
 
@@ -2389,52 +2440,47 @@ async function handleImportShelf(slug) {
         const itemCount = meta.totalItems || items.length;
 
         let html = `
-            <div style="margin-bottom: 15px; padding: 12px; background: var(--color-bg-secondary); border-radius: 10px;">
-                <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">${escapeHtml(meta.name || 'Kệ mở rộng')}</h3>
-                <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px;">
-                    👤 ${escapeHtml(meta.author || 'Ẩn danh')} • 📦 ${itemCount} extension
-                </p>
-                ${meta.description ? `<p style="font-size: 12px; color: var(--color-text-tertiary); margin-top: 8px;">${escapeHtml(meta.description)}</p>` : ''}
+            <div style="margin-bottom: 20px; padding: 16px; background: var(--color-bg-secondary); border-radius: 12px; border: 1px solid var(--color-border);">
+                <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px; color: var(--color-text-primary);">${escapeHtml(meta.name || 'Kệ mở rộng')}</h3>
+                <div style="display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--color-text-secondary);">
+                    <span>👤 ${escapeHtml(meta.author || 'Ẩn danh')}</span>
+                    <span style="color: var(--color-border);">|</span>
+                    <span>📦 ${itemCount} extension</span>
+                </div>
+                ${meta.description ? `<p style="font-size: 13px; color: var(--color-text-tertiary); margin-top: 10px; line-height: 1.5; border-top: 1px solid var(--color-border); padding-top: 10px;">${escapeHtml(meta.description)}</p>` : ''}
             </div>
-            <p style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--color-text-primary);">Danh mở rộng extension:</p>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
+            <p style="font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--color-text-primary); border-left: 4px solid var(--color-accent); padding-left: 10px;">Danh sách Extension trong kệ:</p>
         `;
 
         if (items.length === 0) {
-            html += '<p style="font-size: 13px; color: var(--color-text-tertiary);">Kệ mở rộng trống.</p>';
+            html += '<div class="empty-state" style="padding: 20px;">Kệ mở rộng này hiện đang trống.</div>';
         } else {
-            // Show first 10 items
+            // Show extensions using the standard full card for premium feel
+            html += '<div class="extensions-grid" style="grid-template-columns: 1fr; gap: 12px; padding: 4px 0; max-height: 60vh; overflow-y: auto; overflow-x: hidden;">';
+            
             const allExts = getAllExtensions();
-            const displayItems = items.slice(0, 10);
-            displayItems.forEach(item => {
-                // Try to find full metadata in local catalog
-                const localExt = allExts.find(e => 
-                    (e.path || e.id || e.source || e.name) === (item.path || item.id || item.source || item.name)
-                );
+            items.forEach(item => {
+                const itemId = item.path || item.id || item.source || item.name;
+                const localExt = findExtensionById(itemId, allExts, item.author);
                 
-                const displayName = localExt ? localExt.name : (item.name || 'Unknown');
-                const displayAuthor = localExt ? localExt.author : (item.author || '');
-                const displayIcon = localExt ? localExt.icon : '';
+                // Construct full extension object for renderCard
+                const ext = {
+                    name: item.name || (localExt ? localExt.name : 'Unknown'),
+                    author: item.author || (localExt ? localExt.author : ''),
+                    description: item.description || (localExt ? localExt.description : ''),
+                    icon: item.icon || (localExt ? localExt.icon : ''),
+                    source: item.source || (localExt ? localExt.source : ''),
+                    type: item.type || (localExt ? localExt.type : 'novel'),
+                    version: item.version || (localExt ? localExt.version : ''),
+                    locale: item.locale || (localExt ? localExt.locale : 'vi'),
+                    path: item.path || (localExt ? localExt.path : '')
+                };
 
-                html += `
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--color-bg-primary); border-radius: 8px; border: 1px solid var(--color-border);">
-                        <div style="width: 32px; height: 32px; flex-shrink: 0; background: #eee; border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                            ${displayIcon ? `<img src="${displayIcon}" style="width: 100%; height: 100%; object-fit: cover;">` : '<span style="font-size: 14px;">📦</span>'}
-                        </div>
-                        <div style="flex: 1; min-width: 0;">
-                            <div style="font-size: 13px; font-weight: 600; color: var(--color-text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(displayName)}</div>
-                            <div style="font-size: 11px; color: var(--color-text-tertiary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(displayAuthor || item.source || '')}</div>
-                        </div>
-                    </div>
-                `;
+                html += renderCard(ext);
             });
-
-            if (items.length > 10) {
-                html += `<p style="font-size: 12px; color: var(--color-text-tertiary); text-align: center; margin-top: 8px;">... và ${items.length - 10} extension khác</p>`;
-            }
+            html += '</div>';
         }
 
-        html += '</div>';
         content.innerHTML = html;
         if (importBtn) importBtn.disabled = false;
 
@@ -2485,19 +2531,13 @@ async function useCurrentPreviewShelf() {
     let addedCount = 0;
 
     items.forEach(item => {
-        // Try to find the most stable ID by checking if it exists in our catalog
         const itemId = item.path || item.id || item.source || item.name;
-        
-        // Broad search to match the same logic as saveConfirmBtn
-        const matchedExt = allExtensions.find(e => 
-            (e.path || e.id || e.source || e.name) === itemId
-        );
+        const matchedExt = findExtensionById(itemId, allExtensions, item.author);
 
         if (matchedExt) {
             selectedExtIds.add(matchedExt.path || matchedExt.id || matchedExt.source || matchedExt.name);
             addedCount++;
         } else if (itemId) {
-            // Fallback for items not in local catalog
             selectedExtIds.add(itemId);
             addedCount++;
         }
