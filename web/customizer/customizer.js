@@ -41,6 +41,44 @@ let memoizedFilterOptions = {
 
 let memoizedStats = null;
 let gridRenderVersion = 0;
+let currentEditingShelf = null; // { id, slug, secret_token, title, author, description }
+
+/**
+ * OWNERSHIP MANAGER: Tracks shelves created by this user in LocalStorage
+ */
+const OWNED_SHELVES_KEY = 'vbook_shelf_creds';
+
+function getOwnedShelves() {
+    try {
+        return JSON.parse(localStorage.getItem(OWNED_SHELVES_KEY)) || [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function addOwnedShelf(shelf) {
+    const owned = getOwnedShelves();
+    // Prevent duplicates
+    const filtered = owned.filter(s => s.id !== shelf.id);
+    filtered.unshift({
+        id: shelf.id,
+        slug: shelf.slug,
+        secret_token: shelf.secret_token,
+        title: shelf.title,
+        updated_at: new Date().toISOString()
+    });
+    localStorage.setItem(OWNED_SHELVES_KEY, JSON.stringify(filtered.slice(0, 100)));
+}
+
+function removeOwnedShelf(id) {
+    const owned = getOwnedShelves();
+    const filtered = owned.filter(s => s.id !== id);
+    localStorage.setItem(OWNED_SHELVES_KEY, JSON.stringify(filtered));
+}
+
+function getShelfCredential(id) {
+    return getOwnedShelves().find(s => s.id === id);
+}
 
 async function copyToClipboard(text) {
     if (!text) {
@@ -1716,7 +1754,7 @@ function renderActiveView() {
 // MARKETPLACE LOGIC
 async function fetchMarketplace() {
     const grid = document.getElementById('market-grid');
-    if (grid) grid.innerHTML = '<div class="market-loading">Đang tải kệ sách cộng đồng...</div>';
+    if (grid) grid.innerHTML = '<div class="market-loading">Đang tải kệ mở rộng cộng đồng...</div>';
 
     try {
         const res = await fetch(`${API_BASE_URL}/api/registry/market`);
@@ -1769,33 +1807,141 @@ function renderMarket() {
     }
 
     if (filtered.length === 0) {
-        grid.innerHTML = '<div class="empty-state">Chưa có kệ sách nào phù hợp.</div>';
+        grid.innerHTML = '<div class="empty-state">Chưa có kệ mở rộng nào phù hợp.</div>';
         return;
     }
+
+    const ownedList = getOwnedShelves();
+    const ownedIds = new Set(ownedList.map(s => s.id));
 
     grid.innerHTML = filtered.map(m => {
         const usageCount = m.usage_count || 0;
         const extCount = m.ext_count || 0;
+        const isOwned = ownedIds.has(m.id);
 
         return `
-        <article class="market-card" onclick="handleImportShelf('${m.slug}')" role="button" tabindex="0">
-            <div class="market-count-badge" title="${extCount} extension">
+        <article class="market-card" role="button" tabindex="0">
+            <div class="market-count-badge" title="${extCount} extension" onclick="handleImportShelf('${m.slug}')">
                 <span class="market-count-number">${extCount}</span>
                 <span class="market-count-label">ext</span>
             </div>
             <div class="market-body">
-                <div class="market-top-row">
-                    <h3 class="market-title" title="${escapeHtml(m.title)}">${escapeHtml(m.title)}</h3>
+                <div class="market-top-row" onclick="handleImportShelf('${m.slug}')">
+                    <h3 class="market-title" title="${escapeHtml(m.title)}">
+                        ${escapeHtml(m.title)}
+                        ${isOwned ? '<span class="market-owned-badge">Của bạn</span>' : ''}
+                    </h3>
                     <span class="market-usage" title="${usageCount} lượt sử dụng">${usageCount} 🔥</span>
                 </div>
-                <div class="market-tags">
+                <div class="market-tags" onclick="handleImportShelf('${m.slug}')">
                     <span class="market-tag author-tag" title="Tác giả">${escapeHtml(m.author || 'Ẩn danh')}</span>
                 </div>
-                ${m.description ? `<div class="market-description" title="${escapeHtml(m.description)}">${escapeHtml(m.description)}</div>` : ''}
+                ${m.description ? `<div class="market-description" title="${escapeHtml(m.description)}" onclick="handleImportShelf('${m.slug}')">${escapeHtml(m.description)}</div>` : ''}
+                
+                <div class="market-actions">
+                    ${isOwned ? `
+                        <button class="market-btn" onclick="handleEditShelf('${m.slug}')" title="Chỉnh sửa nội dung kệ">
+                            ✏️ Sửa
+                        </button>
+                        <button class="market-btn danger" onclick="handleDeleteShelf('${m.id}', '${m.slug}')" title="Xóa kệ này khỏi hệ thống">
+                            🗑️ Xóa
+                        </button>
+                    ` : `
+                        <button class="market-btn primary" onclick="handleImportShelf('${m.slug}')" title="Thêm extension từ kệ này vào lựa chọn của bạn">
+                            📥 Sử dụng
+                        </button>
+                    `}
+                    <button class="market-btn" onclick="copyToClipboard('${API_BASE_URL}/api/registry/${m.slug}.json'); showToast('Đã copy link kệ!')" title="Copy link để dán vào VBook">
+                        🔗 Copy
+                    </button>
+                </div>
             </div>
         </article>
         `;
     }).join('');
+}
+
+async function handleEditShelf(slug) {
+    try {
+        showToast('Đang tải dữ liệu kệ để chỉnh sửa...');
+        const res = await fetch(`${API_BASE_URL}/api/registry/${slug}.json`);
+        if (!res.ok) throw new Error('Không thể tải dữ liệu kệ');
+        const shelfData = await res.json();
+        
+        // Find credentials
+        // We might need to look by slug if ID isn't returned by register/.json yet
+        // But our market.js returns ID.
+        const marketItem = marketplaceData.find(m => m.slug === slug);
+        if (!marketItem) throw new Error('Không tìm thấy thông tin kệ trong Market');
+        
+        const creds = getShelfCredential(marketItem.id);
+        if (!creds) {
+            showToast('Lỗi: Bạn không có quyền chỉnh sửa kệ này.');
+            return;
+        }
+
+        // Set editing state
+        currentEditingShelf = {
+            id: marketItem.id,
+            slug: slug,
+            secret_token: creds.secret_token,
+            title: marketItem.title,
+            author: marketItem.author,
+            description: marketItem.description
+        };
+
+        // Populate selections
+        selectedExtIds.clear();
+        (shelfData.data || []).forEach(item => {
+            const id = item.path || item.id || item.source;
+            if (id) selectedExtIds.add(id);
+        });
+
+        updateSelectionUI();
+        
+        // Switch to extensions tab
+        handleTabSwitch('extensions', true);
+        
+        // Open save modal to show "Updating" state
+        openSaveShelfModal();
+        
+        showToast(`Đang chỉnh sửa kệ: ${marketItem.title}`);
+    } catch (e) {
+        showToast('Lỗi: ' + e.message);
+    }
+}
+
+async function handleDeleteShelf(id, slug) {
+    const creds = getShelfCredential(id);
+    if (!creds) {
+        showToast('Lỗi: Bạn không có quyền xóa kệ này.');
+        return;
+    }
+
+    if (!confirm('Bạn có chắc chắn muốn XÓA kệ mở rộng này? Hành động này không thể hoàn tác.')) {
+        return;
+    }
+
+    try {
+        showToast('Đang xóa...');
+        const res = await fetch(`${API_BASE_URL}/api/registry/delete.js`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, secret_token: creds.secret_token })
+        });
+        
+        const result = await res.json();
+        if (result.success) {
+            showToast('Đã xóa kệ thành công!');
+            removeOwnedShelf(id);
+            // Refresh market
+            fetchMarketplace();
+        } else {
+            showToast('Lỗi: ' + (result.error || 'Không thể xóa'));
+        }
+    } catch (e) {
+        showToast('Lỗi: ' + e.message);
+    }
 }
 
 // SOURCE TAB: AUTHOR GROUPING
@@ -1985,7 +2131,9 @@ document.addEventListener('click', async (e) => {
     // Cart Actions
     if (e.target.closest('#cart-clear-btn')) {
         selectedExtIds.clear();
+        currentEditingShelf = null; // Reset editing state
         updateSelectionUI();
+        showToast('Đã xóa danh sách lựa chọn');
         return;
     }
     if (e.target.closest('#cart-save-btn') || e.target.closest('#open-save-btn')) {
@@ -2004,6 +2152,24 @@ document.addEventListener('click', async (e) => {
 function openSaveModal() {
     const modal = document.getElementById('save-modal');
     if (modal) {
+        const titleInput = document.getElementById('shelf-title-input');
+        const authorInput = document.getElementById('shelf-author-input');
+        const descInput = document.getElementById('shelf-desc-input');
+        const modalTitle = modal.querySelector('.filter-modal-title');
+        const confirmBtn = document.getElementById('save-confirm-btn');
+
+        if (currentEditingShelf) {
+            if (titleInput) titleInput.value = currentEditingShelf.title || '';
+            if (authorInput) authorInput.value = currentEditingShelf.author || '';
+            if (descInput) descInput.value = currentEditingShelf.description || '';
+            if (modalTitle) modalTitle.textContent = 'Cập Nhật Kệ Mở Rộng';
+            if (confirmBtn) confirmBtn.textContent = 'Cập nhật';
+        } else {
+            // Only clear if not editing
+            if (modalTitle) modalTitle.textContent = 'Lưu Kệ Mở Rộng';
+            if (confirmBtn) confirmBtn.textContent = 'Xác nhận';
+        }
+
         const panel = modal.querySelector('.filter-modal-panel');
         if (panel) {
             panel.style.transform = '';
@@ -2021,6 +2187,7 @@ function closeSaveModal() {
         modal.classList.remove('show');
         modal.setAttribute('aria-hidden', 'true');
     }
+    // We don't clear currentEditingShelf here to allow re-opening the modal
 }
 
 function closeSuccessModal() {
@@ -2056,7 +2223,7 @@ if (saveConfirmBtn) {
 
         // Validate minimum length
         if (title.length < 3) {
-            showToast('Tên kệ sách quá ngắn (tối thiểu 3 ký tự)!');
+            showToast('Tên kệ mở rộng quá ngắn (tối thiểu 3 ký tự)!');
             return;
         }
         if (author.length < 2) {
@@ -2080,10 +2247,16 @@ if (saveConfirmBtn) {
                 return;
             }
 
+            const payload = { title, author, description, extension_ids };
+            if (currentEditingShelf) {
+                payload.id = currentEditingShelf.id;
+                payload.secret_token = currentEditingShelf.secret_token;
+            }
+
             const res = await fetch(`${API_BASE_URL}/api/registry/save`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title, author, description, extension_ids })
+                body: JSON.stringify(payload)
             });
 
             if (!res.ok) {
@@ -2094,14 +2267,38 @@ if (saveConfirmBtn) {
             const result = await res.json();
             if (result.success && result.data) {
                 const shelfUrl = `${API_BASE_URL}/api/registry/${result.data.slug}.json`;
+
+                // If creation, add to owned shelves
+                if (!currentEditingShelf) {
+                    addOwnedShelf({
+                        id: result.data.id,
+                        slug: result.data.slug,
+                        secret_token: result.data.secret_token,
+                        title: title
+                    });
+                } else {
+                    // Update current entry in owned shelves if needed
+                    addOwnedShelf({
+                        id: currentEditingShelf.id,
+                        slug: currentEditingShelf.slug,
+                        secret_token: currentEditingShelf.secret_token,
+                        title: title
+                    });
+                }
+
                 closeSaveModal();
                 showSuccessModal(shelfUrl);
                 selectedExtIds.clear();
+                currentEditingShelf = null; // Important: Clear edit state after success
                 updateSelectionUI();
+                
                 // Clear inputs
                 if (titleInput) titleInput.value = '';
                 if (authorInput) authorInput.value = '';
                 if (descInput) descInput.value = '';
+                
+                // Refresh market to show changes
+                fetchMarketplace();
             } else {
                 showToast('Lỗi: ' + (result.error || 'Không nhận được link kệ mở rộng'));
             }
@@ -2144,7 +2341,7 @@ async function handleImportShelf(slug) {
     }
 
     // Show modal with loading
-    content.innerHTML = '<div class="market-loading">Đang tải thông tin kệ sách...</div>';
+    content.innerHTML = '<div class="market-loading">Đang tải thông tin kệ mở rộng...</div>';
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
     if (importBtn) importBtn.disabled = true;
@@ -2169,12 +2366,12 @@ async function handleImportShelf(slug) {
                 </p>
                 ${meta.description ? `<p style="font-size: 12px; color: var(--color-text-tertiary); margin-top: 8px;">${escapeHtml(meta.description)}</p>` : ''}
             </div>
-            <p style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--color-text-primary);">Danh sách extension:</p>
+            <p style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--color-text-primary);">Danh mở rộng extension:</p>
             <div style="display: flex; flex-direction: column; gap: 8px;">
         `;
 
         if (items.length === 0) {
-            html += '<p style="font-size: 13px; color: var(--color-text-tertiary);">Kệ sách trống.</p>';
+            html += '<p style="font-size: 13px; color: var(--color-text-tertiary);">Kệ mở rộng trống.</p>';
         } else {
             // Show first 10 items
             const displayItems = items.slice(0, 10);
@@ -2204,7 +2401,7 @@ async function handleImportShelf(slug) {
         content.innerHTML = `
             <div style="text-align: center; padding: 20px;">
                 <p style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: 15px;">
-                    ❌ Không thể tải thông tin kệ sách.
+                    ❌ Không thể tải thông tin kệ mở rộng.
                 </p>
                 <p style="font-size: 12px; color: var(--color-text-tertiary);">${escapeHtml(e.message)}</p>
                 <button onclick="window.open('${API_BASE_URL}/api/registry/${slug}.json', '_blank')" class="filter-modal-btn filter-modal-btn-apply" style="margin-top: 15px;">
