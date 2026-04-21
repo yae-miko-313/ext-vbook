@@ -1,112 +1,96 @@
 load('config.js');
 
-function parseGalleryImagesFromText(raw, out, seen) {
-  var text = (raw || '') + '';
-  var regex = /(?:https?:)?\/\/[^"'\s<>]+\.(?:jpeg|jpg|png|webp|gif)(?:\?[^"'\s<>]*)?/ig;
-  var match;
-  while ((match = regex.exec(text)) !== null) {
-    var src = toAbsoluteUrl(match[0]);
-    if (!isGalleryImage(src)) continue;
-    if (!seen[src]) {
-      seen[src] = true;
-      out.push(src);
-    }
-  }
+function pad2(n) {
+  n = parseInt(n, 10);
+  if (isNaN(n) || n < 0) n = 0;
+  var s = n + '';
+  while (s.length < 2) s = '0' + s;
+  return s;
 }
 
-function pagePath(aid, page) {
-  if (page === 1) return '/photos-index-aid-' + aid + '.html';
-  return '/photos-index-page-' + page + '-aid-' + aid + '.html';
+function albumPathFromAid(aid) {
+  var aidNum = parseInt(aid, 10);
+  if (isNaN(aidNum) || aidNum < 1) return '';
+  return '/data/' + Math.floor(aidNum / 100) + '/' + pad2(aidNum % 100) + '/';
 }
 
-function totalPages(doc) {
-  var maxPage = 1;
-  doc.select('.bot_toolbar .paginator a, .f_left.paginator a').forEach(function(a) {
-    var t = textOf(a).trim();
-    var n = parseInt(t, 10);
-    if (!isNaN(n) && n > maxPage) maxPage = n;
-
-    var href = firstAttr(a, ['href']);
-    var m = (href || '').match(/page-(\d+)-aid-/i);
-    if (m) {
-      var x = parseInt(m[1], 10);
-      if (!isNaN(x) && x > maxPage) maxPage = x;
-    }
-  });
-  if (maxPage < 1) maxPage = 1;
-  if (maxPage > 120) maxPage = 120;
-  return maxPage;
+function toHttps(url) {
+  url = (url || '') + '';
+  return url.replace(/^http:\/\//i, 'https://');
 }
 
-function parseImagesFromDoc(doc, out, seen) {
-  doc.select('img').forEach(function(img) {
-    var src = toAbsoluteUrl(firstAttr(img, ['src', 'data-original', 'data-src']));
-    if (!isGalleryImage(src)) return;
-    if (!seen[src]) {
-      seen[src] = true;
-      out.push(src);
-    }
-  });
+function pushImage(url, albumPath, out, seen) {
+  url = ((url || '') + '').replace(/\\\//g, '/');
+  if (!url) return;
+
+  url = toAbsoluteUrl(url);
+  if (!/^https?:\/\/(?:img|t)\d+\.qy0\.ru\/data\/\d+\/\d+\/\d+\.(?:jpe?g|png|webp|gif)(?:\?[^#]*)?$/i.test(url)) return;
+  if (albumPath && url.indexOf(albumPath) === -1) return;
+
+  url = toHttps(url);
+  if (seen[url]) return;
+  seen[url] = true;
+  out.push(url);
 }
 
-function parseWithBrowser(url, out, seen) {
-  var b = Engine.newBrowser();
-  try {
-    b.setUserAgent(UserAgent.android);
-    b.launch(url, 14000);
+function parseFromItemResponse(raw, albumPath, out, seen) {
+  raw = (raw || '') + '';
 
-    var html = b.html();
-    parseGalleryImagesFromText(html, out, seen);
-
-    var urls = b.urls() || [];
-    urls.forEach(function(u) {
-      u = (u || '') + '';
-      if (!isGalleryImage(u)) return;
-      var src = toAbsoluteUrl(u);
-      if (!seen[src]) {
-        seen[src] = true;
-        out.push(src);
+  var jsonMatch = raw.match(/initData\((\{[\s\S]*\})\)\s*;?/i);
+  if (jsonMatch) {
+    try {
+      var initData = JSON.parse(jsonMatch[1]);
+      var pageUrls = initData && initData.page_url ? initData.page_url : null;
+      if (pageUrls && pageUrls.length) {
+        pageUrls.forEach(function(u) { pushImage(u, albumPath, out, seen); });
       }
-    });
-  } finally {
-    b.close();
+    } catch (e) {}
   }
+
+  if (out.length > 0) return;
+
+  var re = /(?:https?:)?\/\/(?:img|t)\d+\.qy0\.ru\/data\/\d+\/\d+\/\d+\.(?:jpe?g|png|webp|gif)(?:\?[^"'\s<>]*)?/ig;
+  var m;
+  while ((m = re.exec(raw)) !== null) {
+    pushImage(m[0], albumPath, out, seen);
+  }
+}
+
+function pageNo(url) {
+  var m = ((url || '') + '').match(/\/(\d{4})\.(?:jpe?g|png|webp|gif)(?:\?|$)/i);
+  if (!m) return 99999;
+  var n = parseInt(m[1], 10);
+  return isNaN(n) ? 99999 : n;
+}
+
+function removeLeadingPageZero(images) {
+  if (!images || images.length < 2) return images;
+  var first = pageNo(images[0]);
+  var second = pageNo(images[1]);
+  if (first === 0 && second === 1) return images.slice(1);
+  return images;
 }
 
 function execute(url) {
   var aid = parseAid(url);
   if (!aid) return Response.error('Invalid chapter url');
 
+  var itemUrl = BASE_URL + '/photos-item-aid-' + aid + '.html';
+  var itemRes = fetch(itemUrl, { method: 'GET' });
+  if (!itemRes.ok) return Response.error('Cannot load item data');
+
+  var albumPath = albumPathFromAid(aid);
   var images = [];
   var seen = {};
 
-  var detailUrl = BASE_URL + '/photos-index-aid-' + aid + '.html';
-  var galleryUrl = detailUrl.replace('-index-', '-gallery-');
-
-  var galleryRes = fetch(galleryUrl, { method: 'GET' });
-  if (galleryRes.ok) {
-    parseGalleryImagesFromText(galleryRes.text(), images, seen);
-  }
-
-  if (images.length === 0) {
-    var firstRes = fetch(detailUrl, { method: 'GET' });
-    if (firstRes.ok) {
-      var firstDoc = firstRes.html();
-      parseImagesFromDoc(firstDoc, images, seen);
-
-      var maxPage = totalPages(firstDoc);
-      for (var p = 2; p <= maxPage; p++) {
-        var pageRes = fetch(BASE_URL + pagePath(aid, p), { method: 'GET' });
-        if (!pageRes.ok) break;
-        parseImagesFromDoc(pageRes.html(), images, seen);
-      }
-    }
-  }
-
-  if (images.length === 0) {
-    parseWithBrowser(galleryUrl, images, seen);
-  }
+  parseFromItemResponse(itemRes.text(), albumPath, images, seen);
 
   if (images.length === 0) return Response.error('No images');
+
+  images.sort(function(a, b) {
+    return pageNo(a) - pageNo(b);
+  });
+  images = removeLeadingPageZero(images);
+
   return Response.success(images);
 }
