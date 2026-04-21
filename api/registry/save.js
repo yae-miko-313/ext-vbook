@@ -26,8 +26,8 @@ module.exports = async (req, res) => {
             is_public
         } = req.body || {};
 
-        if (!title || !author || !Array.isArray(extension_ids)) {
-            return writeJson(req, res, { error: 'Missing required fields: title, author, extension_ids' }, 400);
+        if (!title || !author || !Array.isArray(extension_ids) || extension_ids.length === 0) {
+            return writeJson(req, res, { error: 'Missing required fields: title, author, or extension_ids' }, 400);
         }
 
         const now = new Date().toISOString();
