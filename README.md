@@ -1,4 +1,10 @@
 # 📚 VBook Extensions Hub
+97729
+```link
+https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/plugin.json
+```
+
+FORK FROM [https://github.com/dat-bi/ext-vbook](https://github.com/dat-bi/ext-vbook)
 
 Chào mừng bạn đến với kho lưu trữ tiện ích mở rộng (extensions) dành cho ứng dụng **VBook**. Đây là trung tâm quản lý các plugin cho Truyện chữ, Truyện tranh và các nguồn nội dung từ Trung Quốc/Quốc tế.
 
@@ -11,7 +17,7 @@ Dự án này được xây dựng và quản lý bằng quy chuẩn chuyên ngh
 Để cài đặt các tiện ích này vào ứng dụng VBook trên điện thoại:
 
 1. Copy địa chỉ URL của danh sách plugin (registry):
-   `https://raw.githubusercontent.com/dat-bi/ext-vbook/main/plugin.json`
+   `https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/plugin.json`
 2. Mở ứng dụng **VBook** → **Cài đặt** → **Kho tiện ích**.
 3. Nhấn **Thêm kho** và dán URL vào.
 4. Làm mới danh sách và bắt đầu cài đặt các tiện ích bạn muốn!
