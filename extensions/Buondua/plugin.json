@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "Buondua",
+    "author": "hieu05",
+    "version": 3.1,
+    "source": "https://buondua.com/",
+    "regexp": "https://buondua.com/.+",
+    "description": "Tập Hợp Album của Xiuren...",
+    "locale": "zh_CN",
+    "tag": "nsfw",
+    "type": "comic",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "search": "search.js"
+  }
+}

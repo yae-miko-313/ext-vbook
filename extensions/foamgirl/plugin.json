@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "Foamgirl",
+    "author": "hieu05",
+    "version": 1.3,
+    "source": "https://foamgirl.net/",
+    "regexp": "https://foamgirl.net/.+",
+    "description": "Share Pictures Sexy Girl...",
+    "locale": "zh_CN",
+    "tag": "nsfw",
+    "type": "comic",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "search": "search.js"
+  }
+}

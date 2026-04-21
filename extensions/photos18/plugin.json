@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "Photos18",
+    "author": "hieu05",
+    "version": 1.4,
+    "source": "https://www.photos18.com/",
+    "regexp": "https://www.photos18.com/.+",
+    "description": "Girl photos",
+    "locale": "zh_CN",
+    "tag": "nsfw",
+    "type": "comic",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}
