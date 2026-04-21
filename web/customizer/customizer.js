@@ -1922,7 +1922,7 @@ async function handleEditShelf(slug) {
         handleTabSwitch('extensions', true);
         
         // Open save modal to show "Updating" state
-        openSaveShelfModal();
+        openSaveModal();
         
         showToast(`Đang chỉnh sửa kệ: ${marketItem.title}`);
     } catch (e) {
@@ -2284,7 +2284,7 @@ if (saveConfirmBtn) {
         try {
             const extensions = getAllExtensions();
             const extension_ids = Array.from(selectedExtIds).map(id => {
-                const ext = extensions.find(e => (e.id || e.source || e.name) === id);
+                const ext = extensions.find(e => (e.path || e.id || e.source || e.name) === id);
                 return ext ? (ext.path || ext.id || ext.name) : null;
             }).filter(Boolean);
 
