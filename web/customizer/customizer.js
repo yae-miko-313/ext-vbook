@@ -5,7 +5,11 @@ let lockedBodyScrollY = 0;
  */
 const API_BASE_URL = window.location.origin; // Dynamically use the same domain for API calls
 
-let currentSearch = '';
+const searchStates = {
+    extensions: '',
+    sources: '',
+    market: ''
+};
 let hideNsfwEnabled = true; // Default: 18+ is hidden
 
 /**
@@ -426,13 +430,13 @@ function extensionMatchesStructuredFilters(ext) {
 function filterExtensions(ignoreSearch = false) {
     let all = getAllExtensions().filter(extensionMatchesStructuredFilters);
 
-    if (currentSearch && !ignoreSearch) {
-        const search = currentSearch.toLowerCase();
+    const searchStr = searchStates.extensions.toLowerCase();
+    if (searchStr && !ignoreSearch) {
         all = all.filter((ext) =>
-            (ext.name || '').toLowerCase().includes(search) ||
-            (ext.author || '').toLowerCase().includes(search) ||
-            (ext.source || '').toLowerCase().includes(search) ||
-            getDescription(ext).toLowerCase().includes(search)
+            (ext.name || '').toLowerCase().includes(searchStr) ||
+            (ext.author || '').toLowerCase().includes(searchStr) ||
+            (ext.source || '').toLowerCase().includes(searchStr) ||
+            getDescription(ext).toLowerCase().includes(searchStr)
         );
     }
 
@@ -442,8 +446,8 @@ function filterExtensions(ignoreSearch = false) {
 
 function filterSources() {
     let sources = Array.isArray(window.catalogSources) ? window.catalogSources.slice() : [];
-    const hasSearch = Boolean(currentSearch);
-    const search = currentSearch.toLowerCase();
+    const searchStr = searchStates.sources.toLowerCase();
+    const hasSearch = Boolean(searchStr);
 
     return sources
         .map((source) => {
@@ -459,14 +463,14 @@ function filterSources() {
             }
 
             const sourceMatch =
-                (source.displayName || '').toLowerCase().includes(search) ||
-                (source.url || '').toLowerCase().includes(search);
+                (source.displayName || '').toLowerCase().includes(searchStr) ||
+                (source.url || '').toLowerCase().includes(searchStr);
 
             const searchedItems = structuredItems.filter((ext) =>
-                (ext.name || '').toLowerCase().includes(search) ||
-                (ext.author || '').toLowerCase().includes(search) ||
-                (ext.source || '').toLowerCase().includes(search) ||
-                getDescription(ext).toLowerCase().includes(search)
+                (ext.name || '').toLowerCase().includes(searchStr) ||
+                (ext.author || '').toLowerCase().includes(searchStr) ||
+                (ext.source || '').toLowerCase().includes(searchStr) ||
+                getDescription(ext).toLowerCase().includes(searchStr)
             );
 
             const visibleItems = searchedItems.length > 0 ? searchedItems : (sourceMatch ? structuredItems : []);
@@ -824,7 +828,7 @@ function renderCard(ext) {
         : '<span class="ext-site-copy-btn ext-site-copy-btn-disabled" aria-hidden="true">🔗</span>';
 
     // Selection State
-    const extId = ext.id || ext.source || ext.name;
+    const extId = ext.path || ext.id || ext.source || ext.name;
     const isSelected = selectedExtIds.has(extId);
 
     // Build source info with health icon
@@ -1560,17 +1564,28 @@ function setupModalDrag(modalId, closeFn) {
 }
 
 function setupSearch() {
-    const searchInput = document.getElementById('search-input');
-    if (!searchInput || searchInput.dataset.bound === 'true') {
-        return;
-    }
+    const handlers = [
+        { id: 'search-input', key: 'extensions', view: 'extensions' },
+        { id: 'source-search-input', key: 'sources', view: 'sources' },
+        { id: 'market-search-input', key: 'market', view: 'market' }
+    ];
 
-    searchInput.addEventListener('input', (event) => {
-        currentSearch = event.target.value || '';
-        renderActiveView();
+    handlers.forEach(({ id, key, view }) => {
+        const input = document.getElementById(id);
+        if (!input) return;
+
+        input.addEventListener('input', (e) => {
+            searchStates[key] = e.target.value.trim();
+            if (view === 'extensions') {
+                renderExtensionGrid();
+                renderStats();
+            } else if (view === 'sources') {
+                renderSourceView();
+            } else if (view === 'market') {
+                fetchMarketplace(false);
+            }
+        });
     });
-
-    searchInput.dataset.bound = 'true';
 }
 
 function setupCopyActions() {
@@ -2021,7 +2036,7 @@ function renderSourceView() {
     if (!grid) return;
 
     const extensions = filterExtensions(true);
-    const sSearch = (document.getElementById('source-search-input')?.value || '').toLowerCase();
+    const sSearch = searchStates.sources.toLowerCase();
     const sources = getActiveCatalogSources();
 
     // Map authors to repos
@@ -2173,7 +2188,7 @@ function updateSelectionUI() {
         if (previewList) {
             const extensions = getAllExtensions();
             const selectedData = extensions.filter(e => {
-                const id = e.id || e.source || e.name;
+                const id = e.path || e.id || e.source || e.name;
                 return selectedExtIds.has(id);
             });
             previewList.innerHTML = selectedData.map(e => `
@@ -2334,13 +2349,22 @@ if (saveConfirmBtn) {
         try {
             const extensions = getAllExtensions();
             const extension_ids = Array.from(selectedExtIds).map(id => {
+                // Standardize: try to find the full extension metadata
                 const ext = findExtensionById(id, extensions);
-                return ext ? (ext.path || ext.id || ext.name) : null;
-            }).filter(Boolean);
+                // IF found, use its path (preferred) or name.
+                // IF NOT found (safety net), use the ID itself as it was selected from the UI.
+                if (ext) {
+                    return ext.path || ext.id || ext.name;
+                }
+                // Falling back to raw ID if findExtensionById failed (unlikely but possible during async loads)
+                return id;
+            }).filter(id => id && String(id).trim().length > 0);
 
             // Check if extension_ids is empty after filtering
             if (extension_ids.length === 0) {
-                showToast('Không tìm thấy extension hợp lệ để lưu!');
+                showToast('Chưa chọn extension hợp lệ! Hãy thử tải lại trang.');
+                saveConfirmBtn.disabled = false;
+                saveConfirmBtn.textContent = 'Lưu Kệ Mở Rộng';
                 return;
             }
 
