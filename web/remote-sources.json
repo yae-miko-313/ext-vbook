@@ -32,8 +32,7 @@
     },
     {
       "id": "hieunm3103-main",
-      "url": "https://gitlab.com/hieunm3103/vbook-extension/-/raw/main/plugin.json",
-      "avatar": "https://secure.gravatar.com/avatar/6e0a3fc7749a990bf16a618b03bb0891ee61cb1fe2a9efb0478915807f15091b?s=1600&d=identicon",
+      "url": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/plugin.json",
       "targetFile": "references/repos/_remote_raw/hieunm3103-vbook-extension/plugin.json"
     },
     {
