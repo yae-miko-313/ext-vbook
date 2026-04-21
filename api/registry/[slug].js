@@ -14,7 +14,8 @@ module.exports = async (req, res) => {
 
     if (!slug) {
         res.statusCode = 400;
-        return res.end('Manifest slug required');
+        res.setHeader('Content-Type', 'application/json');
+        return res.end(JSON.stringify({ error: 'Manifest slug required' }));
     }
 
     try {
@@ -28,14 +29,14 @@ module.exports = async (req, res) => {
 
         if (dbError || !manifest) {
             res.statusCode = 404;
-            res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-            return res.end(`VBook Error: Manifest "${cleanSlug}" not found or deleted.`);
+            res.setHeader('Content-Type', 'application/json');
+            return res.end(JSON.stringify({ error: `Manifest "${cleanSlug}" not found or deleted.` }));
         }
 
         if (manifest.status === 'frozen') {
             res.statusCode = 403;
-            res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-            return res.end(`VBook Error: Manifest "${cleanSlug}" is frozen due to inactivity. Reactivate it at the dashboard.`);
+            res.setHeader('Content-Type', 'application/json');
+            return res.end(JSON.stringify({ error: `Manifest "${cleanSlug}" is frozen due to inactivity.` }));
         }
 
         // 2. Atomic update: last_accessed_at (keep it alive)

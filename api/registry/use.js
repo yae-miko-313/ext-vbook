@@ -5,7 +5,7 @@ const { handlePreflight, writeJson } = require('../_lib/live-catalog');
 
 /**
  * api/registry/use.js
- * Increments the usage_count for a manifest when a user copies the link.
+ * Increments the usage_count for a shelf when a user 'clones' or 'uses' it.
  */
 module.exports = async (req, res) => {
     if (handlePreflight(req, res)) return;
@@ -15,35 +15,30 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const { id } = req.body || {};
+        const { slug, id } = req.body || {};
 
-        if (!id) {
-            return writeJson(req, res, { error: 'Manifest ID required' }, 400);
+        if (!slug && !id) {
+            return writeJson(req, res, { error: 'Slug or ID is required' }, 400);
         }
 
-        // Atomic increment using RPC is better, but since we are simple:
-        // We use the postgres increment syntax.
-        const { data, error } = await supabase.rpc('increment_usage', { manifest_id: id });
+        const query = supabase.from('manifests').select('id, usage_count');
+        if (id) query.eq('id', id);
+        else query.eq('slug', slug);
 
-        // If RPC isn't available, we fallback to a simple update (less safe but works)
-        if (error) {
-            console.warn('[Usage API] RPC increment_usage failed, falling back to read-write:', error.message);
-            
-            const { data: current } = await supabase
-                .from('manifests')
-                .select('usage_count')
-                .eq('id', id)
-                .single();
-            
-            if (current) {
-                await supabase
-                    .from('manifests')
-                    .update({ usage_count: (current.usage_count || 0) + 1 })
-                    .eq('id', id);
-            }
+        const { data: existing, error: fetchError } = await query.single();
+
+        if (fetchError || !existing) {
+            return writeJson(req, res, { error: 'Shelf not found' }, 404);
         }
 
-        return writeJson(req, res, { success: true });
+        const { error: updateError } = await supabase
+            .from('manifests')
+            .update({ usage_count: (existing.usage_count || 0) + 1 })
+            .eq('id', existing.id);
+
+        if (updateError) throw updateError;
+
+        return writeJson(req, res, { success: true, new_usage: (existing.usage_count || 0) + 1 });
 
     } catch (err) {
         console.error('[API Registry Use] Error:', err.message);
