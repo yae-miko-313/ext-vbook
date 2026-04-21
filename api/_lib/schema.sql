@@ -71,3 +71,26 @@ $$ LANGUAGE plpgsql;
 --    UPDATE manifests SET status = 'frozen' WHERE status = 'active' AND last_accessed_at < NOW() - INTERVAL '30 days';
 -- 2. If it remains frozen for another 7 days without the owner editing/unfreezing it -> Delete it
 --    DELETE FROM manifests WHERE status = 'frozen' AND last_accessed_at < NOW() - INTERVAL '37 days';
+
+-- V1.2: App Cache (For Beta Catalog Snapshots)
+CREATE TABLE IF NOT EXISTS public.app_cache (
+    key TEXT PRIMARY KEY,
+    value JSONB NOT NULL,
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    expires_at TIMESTAMPTZ
+);
+
+-- Optimization indexes
+CREATE INDEX IF NOT EXISTS idx_manifests_slug ON public.manifests(slug);
+CREATE INDEX IF NOT EXISTS idx_manifests_status ON public.manifests(status);
+
+-- Automatic updated_at trigger for app_cache
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+CREATE TRIGGER update_app_cache_updated_at BEFORE UPDATE ON public.app_cache FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
