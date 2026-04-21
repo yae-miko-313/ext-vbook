@@ -42,16 +42,37 @@ function loadSourceListConfig() {
 
 const bundledSourceList = loadSourceListConfig();
 
-function loadReferenceSourceList() {
-    if (!bundledSourceList || !Array.isArray(bundledSourceList.sources)) {
+// For realtime beta: load fresh config every time
+function loadSourceListConfigRealtime() {
+    try {
+        // Clear require cache to get fresh file
+        const configPath = require.resolve('../../web/remote-sources.json');
+        delete require.cache[configPath];
+        return require('../../web/remote-sources.json');
+    } catch (e1) {
+        try {
+            const privatePath = require.resolve('../../.private/references/remote-sources.json');
+            delete require.cache[privatePath];
+            return require('../../.private/references/remote-sources.json');
+        } catch (e2) {
+            return null;
+        }
+    }
+}
+
+function loadReferenceSourceList(isRealtime = false) {
+    // Use fresh load for realtime mode, cached for normal mode
+    const sourceList = isRealtime ? loadSourceListConfigRealtime() : bundledSourceList;
+    
+    if (!sourceList || !Array.isArray(sourceList.sources)) {
         throw new Error(
             'web/remote-sources.json or .private/references/remote-sources.json is missing or invalid'
         );
     }
     return {
         generatedAt: new Date().toISOString(),
-        referenceListUrl: bundledSourceList.referenceListUrl || '',
-        sources: bundledSourceList.sources
+        referenceListUrl: sourceList.referenceListUrl || '',
+        sources: sourceList.sources
             .map((s, i) => ({
                 id: String(s.id || `source-${i + 1}`).trim(),
                 url: String(s.url || '').trim(),
@@ -246,8 +267,8 @@ async function fetchSourceCatalog(source) {
 // ---------------------------------------------------------------------------
 // Build full snapshot (no health) - fast (~1-2s on cold start)
 // ---------------------------------------------------------------------------
-async function buildLiveSnapshot() {
-    const sourceList = loadReferenceSourceList();
+async function buildLiveSnapshot(isRealtime = false) {
+    const sourceList = loadReferenceSourceList(isRealtime);
 
     const sourceResults = await Promise.all(
         sourceList.sources.map(s => fetchSourceCatalog(s))
@@ -438,8 +459,9 @@ async function getSnapshot(req = null) {
     }
 
     // Tier 3: Cold start: fetch raw from GitHub (fast, no health scan)
-    console.log('[Cold Start] Fetching from GitHub...');
-    const snapshot = await buildLiveSnapshot();
+    // For beta: use realtime mode (fresh config load), for stable: use cached config
+    console.log(`[Cold Start] Fetching from GitHub... (realtime=${isBeta})`);
+    const snapshot = await buildLiveSnapshot(isBeta);
     if (!isBeta) memCache = { data: snapshot, expiresAt: now + 60_000 };
 
     // Run health + save in background

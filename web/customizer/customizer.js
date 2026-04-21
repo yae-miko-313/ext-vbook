@@ -615,12 +615,14 @@ function renderStats(extensions = null) {
         return type === 'novel' || type === 'chinese_novel' || type === 'chinese';
     }).length;
     const comicCount = all.filter(e => e.type === 'comic').length;
-    const toolsCount = all.filter(e => e.type === 'tts' || e.type === 'translate').length;
+    const translateCount = all.filter(e => e.type === 'translate').length;
+    const ttsCount = all.filter(e => e.type === 'tts').length;
 
     animateCounter('total-extensions', all.length);
     animateCounter('novel-count', novelCount);
     animateCounter('comic-count', comicCount);
-    animateCounter('tools-count', toolsCount);
+    animateCounter('translate-count', translateCount);
+    animateCounter('tts-count', ttsCount);
 }
 
 function renderSourceRepoCount() {
