@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VBook Customizer - Beta</title>
     <link rel="stylesheet" href="/customizer/beta-layout.css?v=20260420b">
-    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
     <!-- Theme Toggle -->
     <button class="theme-toggle" id="theme-toggle" title="Chuyển chế độ sáng/tối">
-        <i data-lucide="moon" id="theme-icon"></i>
+        <span id="theme-icon">☾</span>
     </button>
 
     <div class="container">
@@ -22,26 +21,16 @@
             <p class="subtitle">Tùy Chỉnh Bộ Sưu Tập Extensions</p>
 
             <div class="header-actions">
-                <button id="copy-aggregate-btn" class="action-btn header-copy-btn" type="button">
-                    <i data-lucide="share-2"></i>Copy Link Tổng
-                </button>
-                <button id="open-guide-btn" class="action-btn secondary" type="button">
-                    <i data-lucide="help-circle"></i>Hướng dẫn
-                </button>
+                <button id="copy-aggregate-btn" class="action-btn header-copy-btn" type="button">Copy Link Tổng</button>
+                <button id="open-guide-btn" class="action-btn secondary" type="button">Hướng dẫn</button>
             </div>
         </header>
 
         <!-- Beta Navigation - Simple Horizontal Tabs -->
         <nav class="beta-tabs">
-            <button class="beta-tab active" data-tab="extensions">
-                <i data-lucide="layers"></i>Phần Mở Rộng
-            </button>
-            <button class="beta-tab" data-tab="sources">
-                <i data-lucide="database"></i>Nguồn Mở Rộng
-            </button>
-            <button class="beta-tab" data-tab="market">
-                <i data-lucide="shopping-bag"></i>Kệ Mở Rộng
-            </button>
+            <button class="beta-tab active" data-tab="extensions">Phần Mở Rộng</button>
+            <button class="beta-tab" data-tab="sources">Nguồn Mở Rộng</button>
+            <button class="beta-tab" data-tab="market">Kệ Mở Rộng</button>
         </nav>
 
         <!-- Usage Guide Modal -->
@@ -84,22 +73,18 @@
             <!-- Stats Section -->
             <section class="stats" id="ext-stats">
                 <div class="stat-card">
-                    <i data-lucide="package" class="stat-icon"></i>
                     <div class="stat-number" id="total-extensions">0</div>
                     <div class="stat-label">Tổng</div>
                 </div>
                 <div class="stat-card">
-                    <i data-lucide="file-text" class="stat-icon"></i>
                     <div class="stat-number" id="novel-count">0</div>
                     <div class="stat-label">Truyện Chữ</div>
                 </div>
                 <div class="stat-card">
-                    <i data-lucide="image" class="stat-icon"></i>
                     <div class="stat-number" id="comic-count">0</div>
                     <div class="stat-label">Truyện Tranh</div>
                 </div>
                 <div class="stat-card">
-                    <i data-lucide="wrench" class="stat-icon"></i>
                     <div class="stat-number" id="tools-count">0</div>
                     <div class="stat-label">Công Cụ</div>
                 </div>
