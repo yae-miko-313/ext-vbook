@@ -1,89 +1,91 @@
 {
     "metadata": {
         "author": "hieu05",
-        "description": "🌸🦊⛩️"
+        "description": "📛🔻📛"
     },
     "data": [
         {
-					"name": "Buondua",
-					"author": "hieu05",
-					"path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/Buondua/plugin.zip",
-					"version": 3,
-					"source": "https://buondua.com/",
-					"icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/Buondua/icon.png",
-					"description": "Tập Hợp Album của Xiuren...",
-					"type": "comic",
-					"locale": "vi_VN",
-					"tag": "nsfw"
-				},
-				{
-					"name": "Foamgirl",
-					"author": "hieu05",
-					"path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/foamgirl/plugin.zip",
-					"version": 1.3,
-					"source": "https://foamgirl.net/",
-					"icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/foamgirl/icon.png",
-					"description": "Share Pictures Sexy Girl...",
-					"type": "comic",
-					"locale": "vi_VN",
-					"tag": "nsfw"
-				},
-				{
-					"name": "Photos18",
-					"author": "hieu05",
-					"path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/photos18/plugin.zip",
-					"version": 1.3,
-					"source": "https://www.photos18.com/",
-					"icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/photos18/icon.png",
-					"description": "Girl photos",
-					"type": "comic",
-					"locale": "vi_VN",
-					"tag": "nsfw"
-				},
-				{
-					"name": "TruyenDich.AI",
-					"author": "hieu05",
-					"path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/truyendich.ai/plugin.zip",
-					"version": 2,
-					"source": "https://truyendich.ai",
-					"icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/truyendich.ai/icon.png",
-					"description": "Đọc truyện trên TruyenDich.AI",
-					"type": "novel",
-					"locale": "vi_VN"
-				},
-				{
-					"name": "18mh",
-					"author": "hieu05",
-					"path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/18mh/plugin.zip",
-					"version": 1,
-					"source": "https://18mh.net/",
-					"icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/18mh/icon.png",
-					"description": "Đọc truyện trên trang 18mh",
-					"type": "chinese_novel",
-					"locale": "zh_CN"
-				},
-				{
-					"name": "Cool18 Novel",
-					"author": "hieu05",
-					"path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/cool18-novel/plugin.zip",
-					"version": 1,
-					"source": "https://www.cool18.com/bbs4/",
-					"icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/cool18-novel/icon.png",
-					"description": "Đọc truyện trên trang Cool18 (hiện chỉ hỗ trợ search và đọc từ search)",
-					"type": "chinese_novel",
-					"locale": "zh_CN"
-				},
-				{
-					"name": "Cosplaytele",
-					"author": "hieu05",
-					"path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/cosplaytele/plugin.zip",
-					"version": 2.0,
-					"source": "https://cosplaytele.com/",
-					"icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/cosplaytele/icon.png",
-					"description": "Cosplay photo galleries",
-					"type": "comic",
-					"locale": "en_US",
-					"tag": "nsfw"
-				}
+            "name": "Buondua",
+            "author": "hieu05",
+            "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/Buondua/plugin.zip",
+            "version": 3.1,
+            "source": "https://buondua.com/",
+            "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/Buondua/icon.png",
+            "description": "Tập Hợp Album của Xiuren...",
+            "type": "comic",
+            "locale": "zh_CN",
+            "tag": "nsfw"
+        },
+        {
+            "name": "Cool18 Novel",
+            "author": "hieu05",
+            "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/cool18-novel/plugin.zip",
+            "version": 1,
+            "source": "https://www.cool18.com/bbs4/",
+            "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/cool18-novel/icon.png",
+            "description": "Đọc truyện trên trang Cool18",
+            "type": "chinese_novel",
+            "locale": "zh_CN",
+            "tag": "nsfw"
+        },
+        {
+            "name": "Cosplaytele",
+            "author": "hieu05",
+            "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/cosplaytele/plugin.zip",
+            "version": 2,
+            "source": "https://cosplaytele.com",
+            "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/cosplaytele/icon.png",
+            "description": "Cosplay photo galleries",
+            "type": "comic",
+            "locale": "en_US",
+            "tag": "nsfw"
+        },
+        {
+            "name": "Foamgirl",
+            "author": "hieu05",
+            "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/foamgirl/plugin.zip",
+            "version": 1.3,
+            "source": "https://foamgirl.net/",
+            "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/foamgirl/icon.png",
+            "description": "Share Pictures Sexy Girl...",
+            "type": "comic",
+            "locale": "zh_CN",
+            "tag": "nsfw"
+        },
+        {
+            "name": "Photos18",
+            "author": "hieu05",
+            "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/photos18/plugin.zip",
+            "version": 1.4,
+            "source": "https://www.photos18.com/",
+            "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/photos18/icon.png",
+            "description": "Girl photos",
+            "type": "comic",
+            "locale": "zh_CN",
+            "tag": "nsfw"
+        },
+        {
+            "name": "TruyenDich.AI",
+            "author": "hieu05",
+            "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/truyendich.ai/plugin.zip",
+            "version": 2,
+            "source": "https://truyendich.ai",
+            "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/truyendich.ai/icon.png",
+            "description": "Đọc truyện trên TruyenDich.AI",
+            "type": "novel",
+            "locale": "vi_VN"
+        },
+        {
+            "name": "WNACG",
+            "author": "hieu05",
+            "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/wnacg/plugin.zip",
+            "version": 1,
+            "source": "https://www.wnacg.com/",
+            "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/wnacg/icon.png",
+            "description": "Image galleries: home, genre, search, detail, ranking",
+            "type": "comic",
+            "locale": "zh_CN",
+            "tag": "nsfw"
+        }
     ]
 }

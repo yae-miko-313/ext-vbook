@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "WNACG",
+    "author": "hieu05",
+    "version": 1.0,
+    "source": "https://www.wnacg.com/",
+    "regexp": "https?:\\/\\/(?:www\\.)?wnacg\\.com\\/photos-index-aid-\\d+\\.html\\/?$",
+    "description": "Image galleries: home, genre, search, detail, ranking",
+    "locale": "zh_CN",
+    "tag": "nsfw",
+    "type": "comic",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "page": "page.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}
