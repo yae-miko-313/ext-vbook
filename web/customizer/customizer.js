@@ -216,7 +216,6 @@ async function fetchAppData(isRefresh = false) {
 
         clearLoadingState();
         renderDashboard();
-        refreshIcons();
 
         // Trigger silent background refresh to get fresh health data from backend background scan
         setTimeout(() => fetchAppData(true), 5000);
@@ -229,7 +228,7 @@ async function fetchAppData(isRefresh = false) {
             if (grid) {
                 grid.innerHTML = `
                     <div class="error-state" style="grid-column: 1/-1; padding: 60px 20px; text-align: center;">
-                        <div style="font-size: 40px; margin-bottom: 20px; color: var(--color-accent);"><i data-lucide="wifi-off" style="width: 48px; height: 48px;"></i></div>
+                        <div style="font-size: 40px; margin-bottom: 20px; color: var(--color-accent);">📡</div>
                         <h3 style="color: var(--color-text); margin-bottom: 10px;">Không thể kết nối máy chủ</h3>
                         <p style="color: var(--color-text-tertiary); margin-bottom: 24px; font-size: 14px;">${e.message}</p>
                         <button onclick="fetchAppData()" class="btn-primary" style="padding: 10px 24px;">Thử lại</button>
@@ -238,7 +237,7 @@ async function fetchAppData(isRefresh = false) {
             }
         }
     } finally {
-        refreshIcons();
+        // No-op
     }
 }
 
@@ -1982,14 +1981,40 @@ function renderSourceView() {
         const extItems = (src.extItems || []).filter(e => extensions.some(fe => fe.source === e.source));
         if (extItems.length === 0 && !sSearch) return;
 
-        // Try to find author from extensions
-        const author = src.author || (extItems.length > 0 ? extItems[0].author : 'Không rõ');
-        const searchStr = `${author} ${src.displayName} ${src.url}`.toLowerCase();
+        // --- Improved Author Resolution Logic (>80% Rule) ---
+        let resolvedAuthor = src.author || 'Không rõ';
+        
+        if (extItems.length > 0) {
+            const authorCounts = {};
+            extItems.forEach(item => {
+                const a = item.author || 'Ẩn danh';
+                authorCounts[a] = (authorCounts[a] || 0) + 1;
+            });
 
+            // Find top author
+            let topAuthor = '';
+            let maxCount = 0;
+            for (const [a, count] of Object.entries(authorCounts)) {
+                if (count > maxCount) {
+                    maxCount = count;
+                    topAuthor = a;
+                }
+            }
+
+            const threshold = extItems.length * 0.8;
+            if (maxCount >= threshold) {
+                resolvedAuthor = topAuthor;
+            } else {
+                // If no author has >80% majority, use the Repo Name or "Nhiều tác giả"
+                resolvedAuthor = src.displayName || 'Nhiều tác giả';
+            }
+        }
+
+        const searchStr = `${resolvedAuthor} ${src.displayName} ${src.url}`.toLowerCase();
         if (sSearch && !searchStr.includes(sSearch)) return;
 
         repoGroups.push({
-            author: author,
+            author: resolvedAuthor,
             displayName: src.displayName,
             url: src.url,
             avatar: getSourceAvatarUrl(src),
