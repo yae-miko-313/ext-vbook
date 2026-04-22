@@ -41,6 +41,18 @@
             "tag": "nsfw"
         },
         {
+            "name": "Cosplaytele Video",
+            "author": "hieu05",
+            "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/cosplaytele-video/plugin.zip",
+            "version": 1,
+            "source": "https://cosplaytele.com",
+            "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/cosplaytele-video/icon.png",
+            "description": "Cosplay video posts from category video-cosplayy",
+            "type": "video",
+            "locale": "en_US",
+            "tag": "nsfw"
+        },
+        {
             "name": "Foamgirl",
             "author": "hieu05",
             "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/foamgirl/plugin.zip",

@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "Cosplaytele Video",
+    "author": "hieu05",
+    "version": 1,
+    "source": "https://cosplaytele.com",
+    "regexp": "https?:\\/\\/(?:www\\.)?cosplaytele\\.com\\/[a-zA-Z0-9-]+\\/?$",
+    "description": "Cosplay video posts from category video-cosplayy",
+    "locale": "en_US",
+    "tag": "nsfw",
+    "type": "video",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  }
+}
