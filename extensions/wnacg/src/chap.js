@@ -24,7 +24,7 @@ function pushImage(url, albumPath, out, seen) {
   if (!url) return;
 
   url = toAbsoluteUrl(url);
-  if (!/^https?:\/\/(?:img|t)\d+\.qy0\.ru\/data\/\d+\/\d+\/\d+\.(?:jpe?g|png|webp|gif)(?:\?[^#]*)?$/i.test(url)) return;
+  if (!/^https?:\/\/(?:img|t)\d+\.qy0\.ru\/data\/\d+\/\d+\/\d+(?:_[^\/.?#]+)?\.(?:jpe?g|png|webp|gif)(?:\?[^#]*)?$/i.test(url)) return;
   if (albumPath && url.indexOf(albumPath) === -1) return;
 
   url = toHttps(url);
@@ -36,20 +36,24 @@ function pushImage(url, albumPath, out, seen) {
 function parseFromItemResponse(raw, albumPath, out, seen) {
   raw = (raw || '') + '';
 
-  var jsonMatch = raw.match(/initData\((\{[\s\S]*\})\)\s*;?/i);
+  var jsonMatch = raw.match(/initData\((\{[\s\S]*?\})\)\s*;?/i);
   if (jsonMatch) {
     try {
-      var initData = JSON.parse(jsonMatch[1]);
+      var jsonText = jsonMatch[1].replace(/,\s*([}\]])/g, '$1');
+      var initData = JSON.parse(jsonText);
       var pageUrls = initData && initData.page_url ? initData.page_url : null;
       if (pageUrls && pageUrls.length) {
-        pageUrls.forEach(function(u) { pushImage(u, albumPath, out, seen); });
+        pageUrls.forEach(function(u) {
+          pushImage(u, albumPath, out, seen);
+        });
       }
-    } catch (e) {}
+    } catch (e) {
+    }
   }
 
   if (out.length > 0) return;
 
-  var re = /(?:https?:)?\/\/(?:img|t)\d+\.qy0\.ru\/data\/\d+\/\d+\/\d+\.(?:jpe?g|png|webp|gif)(?:\?[^"'\s<>]*)?/ig;
+  var re = /(?:https?:)?\/\/(?:img|t)\d+\.qy0\.ru\/data\/\d+\/\d+\/\d+(?:_[^\/.?#]+)?\.(?:jpe?g|png|webp|gif)(?:\?[^"'\s<>]*)?/ig;
   var m;
   while ((m = re.exec(raw)) !== null) {
     pushImage(m[0], albumPath, out, seen);
@@ -57,7 +61,7 @@ function parseFromItemResponse(raw, albumPath, out, seen) {
 }
 
 function pageNo(url) {
-  var m = ((url || '') + '').match(/\/(\d{4})\.(?:jpe?g|png|webp|gif)(?:\?|$)/i);
+  var m = ((url || '') + '').match(/\/(\d+)(?:_[^\/.?#]+)?\.(?:jpe?g|png|webp|gif)(?:\?|$)/i);
   if (!m) return 99999;
   var n = parseInt(m[1], 10);
   return isNaN(n) ? 99999 : n;
