@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const archiver = require('archiver');
 const { getPluginInfo } = require('../lib/plugin-info');
+const { writePluginList } = require('../lib/plugin-list');
 const { runValidation } = require('./validate');
 const c = require('../lib/colors');
 
@@ -55,6 +56,15 @@ function register(program) {
                                 console.log(c.dim(`  src/${f}`));
                             });
                         }
+
+                        // Keep root registry in sync after each successful build.
+                        try {
+                            const listResult = writePluginList();
+                            console.log(c.step('BUILD', `Updated registry: ${c.bold(listResult.path)} (${listResult.count} plugin(s))`));
+                        } catch (listError) {
+                            console.log(c.warn(`Built zip but failed to update root plugin.json: ${listError.message}`));
+                        }
+
                         resolve();
                     });
 
