@@ -7,6 +7,37 @@ const fs = require('fs');
 const EXTENSIONS_DIR = 'extensions';
 
 /**
+ * Resolve user input to a likely extension directory.
+ * Supports:
+ * - Absolute/relative paths
+ * - Extension short name when running from project root (e.g. "wnacg")
+ * - Direct "extensions/<name>" paths
+ * @param {string} targetPath
+ * @returns {string}
+ */
+function resolvePluginTarget(targetPath) {
+    const rawTarget = targetPath || '.';
+    const resolved = path.resolve(rawTarget);
+    if (fs.existsSync(resolved)) {
+        return resolved;
+    }
+
+    const projectRoot = getProjectRoot();
+    const candidates = [
+        path.join(projectRoot, rawTarget),
+        path.join(projectRoot, EXTENSIONS_DIR, rawTarget)
+    ];
+
+    for (const candidate of candidates) {
+        if (fs.existsSync(candidate)) {
+            return candidate;
+        }
+    }
+
+    return resolved;
+}
+
+/**
  * Get the extensions directory path.
  * @returns {string}
  */
@@ -21,7 +52,7 @@ function getExtensionsDir() {
  * @returns {{ root: string, name: string, json: object }}
  */
 function getPluginInfo(targetPath) {
-    let currentDir = path.resolve(targetPath || '.');
+    let currentDir = resolvePluginTarget(targetPath);
     let pluginJsonPath = path.join(currentDir, 'plugin.json');
 
     // If plugin.json not found, check parent directories

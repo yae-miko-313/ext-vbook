@@ -35,7 +35,7 @@ GITHUB_REPO=user/repo       # Repo GitHub để gen link tải plugin.zip
 | `vbook debug` | Chạy thử 1 file script duy nhất lên máy thật | `vbook debug src/toc.js` |
 | `vbook test-all` | Chạy chuỗi kiểm thử tự động (Home -> Chap) | `vbook test-all` |
 | `vbook install` | Cài đặt nóng extension đang sửa lên máy | `vbook install` |
-| `vbook build` | Nén extension thành file `plugin.zip` | `vbook build --bump` |
+| `vbook build [plugin]` | Nén extension thành file `plugin.zip` | `vbook build wnacg --bump` |
 | `vbook publish` | Build và cập nhật danh sách Registry tổng | `vbook publish --my` |
 
 ---

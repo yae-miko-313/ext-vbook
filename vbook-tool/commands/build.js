@@ -11,11 +11,12 @@ const c = require('../lib/colors');
 function register(program) {
     program.command('build')
         .description('Package the extension into a zip file')
+        .argument('[plugin]', 'Extension name or path (e.g. wnacg or extensions/wnacg)')
         .option('--bump', 'Auto-increment version number')
         .option('--skip-validate', 'Skip validation before build')
-        .action(async (options) => {
+        .action(async (plugin, options) => {
             try {
-                const info = getPluginInfo();
+                const info = getPluginInfo(plugin || '.');
                 
                 // Validate first (unless skipped)
                 if (!options.skipValidate) {
