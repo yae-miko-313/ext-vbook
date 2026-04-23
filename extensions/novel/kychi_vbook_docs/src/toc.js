@@ -12,12 +12,20 @@ function execute(url) {
         var title = match[1];
         var path = match[2];
         
-        // Extract category from path: /huong-dan-su-dung/category/page.md
+        // Normalize path to absolute URL if it's relative
+        var fullUrl = path;
+        if (fullUrl.indexOf('http') === -1) {
+            if (fullUrl.indexOf('/') !== 0) fullUrl = '/' + fullUrl;
+            fullUrl = "https://vbookapp.gitbook.io" + fullUrl;
+        }
+
+        // Extract relative path from root for category parsing
+        var relPath = fullUrl.replace("https://vbookapp.gitbook.io", "");
         var category = "";
-        var parts = path.split('/');
+        var parts = relPath.split('/'); // ["", "huong-dan-su-dung", "category", "page.md"]
+        
         if (parts.length > 3) {
             var catKey = parts[2].toLowerCase();
-            // Category mapping
             var catMap = {
                 "giao-dien-app": "App",
                 "truyen-chu": "Truyện chữ",
@@ -36,7 +44,7 @@ function execute(url) {
         
         data.push({
             name: displayTitle,
-            url: "https://vbookapp.gitbook.io" + path,
+            url: fullUrl,
             host: "https://vbookapp.gitbook.io"
         });
         index++;

@@ -27,8 +27,8 @@ function renderMarkdown(md) {
         if (line.indexOf('{% embed') !== -1) {
             var vUrl = line.match(/url="(.*?)"/);
             if (vUrl) {
-                var cleanUrl = vUrl[1].replace(/&#x26;/g, '&');
-                result.push('<br><div align=\"center\"><b>🎞️ VIDEO</b><br><a href=\"' + cleanUrl + '\"><u>XEM TẠI ĐÂY</u></a></div><br>');
+                var cleanUrl = vUrl[1].replace(/[<>\s\n\r]+/g, "").replace(/&#x26;/g, '&').trim();
+                result.push('<br><center><a href=\"' + cleanUrl + '\"><u>BẤM VÀO ĐÂY ĐỂ XEM VIDEO</u></a></center><br>');
             }
             continue;
         }
@@ -75,7 +75,10 @@ function renderMarkdown(md) {
             processed = processed
                 .replace(/\*\*([\s\S]*?)\*\*/g, '<b>$1</b>')
                 .replace(/\*([\s\S]*?)\*/g, '<i>$1</i>')
-                .replace(/\[(.*?)\]\((.*?)\)/g, '<a href=\"$2\"><u>$1</u></a>')
+                .replace(/\[(.*?)\]\((.*?)\)/g, function(m, t, l) {
+                    var cleanL = l.replace(/[<>]/g, "").trim();
+                    return '<a href=\"' + cleanL + '\"><u>' + t + '</u></a>';
+                })
                 .replace(/<mark[\s\S]*?>/g, '<b>')
                 .replace(/<\/mark>/g, '</b>');
         }
