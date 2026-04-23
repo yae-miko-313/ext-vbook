@@ -58,6 +58,17 @@
       "description": "Hướng dẫn sử dụng Vbook. Đóng góp bởi ngatngay, duongden",
       "type": "novel",
       "locale": "vi_VN"
+    },
+    {
+      "name": "HHHTQ",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhhtq/plugin.zip",
+      "version": 1,
+      "source": "https://hhhtq.team",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhhtq/icon.png",
+      "description": "Xem hoạt hình Trung Quốc vietsub trên HHHTQ.TEAM",
+      "type": "video",
+      "locale": "vi_VN"
     }
   ]
 }
