@@ -114,5 +114,29 @@
   "comic": [],
   "chinese_novel": [],
   "translate": [],
-  "tts": []
+  "tts": [],
+  "video": [
+    {
+      "folder": "kychi_hhhtq",
+      "name": "HHHTQ",
+      "author": "kychi",
+      "description": "Xem hoạt hình Trung Quốc vietsub trên HHHTQ.TEAM",
+      "source": "https://hhhtq.team",
+      "version": 1,
+      "type": "video",
+      "locale": "vi_VN",
+      "relativePath": "extensions/video/kychi_hhhtq",
+      "metadata": {
+        "name": "HHHTQ",
+        "author": "kychi",
+        "version": 1,
+        "source": "https://hhhtq.team",
+        "regexp": "(www\\.)?hhhtq\\.team/(phim|xem)/.*",
+        "description": "Xem hoạt hình Trung Quốc vietsub trên HHHTQ.TEAM",
+        "locale": "vi_VN",
+        "type": "video",
+        "language": "javascript"
+      }
+    }
+  ]
 }

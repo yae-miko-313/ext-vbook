@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "HHHTQ",
+    "author": "kychi",
+    "version": 1,
+    "source": "https://hhhtq.team",
+    "regexp": "(www\\.)?hhhtq\\.team/(phim|xem)/.*",
+    "description": "Xem hoạt hình Trung Quốc vietsub trên HHHTQ.TEAM",
+    "locale": "vi_VN",
+    "type": "video",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  }
+}
