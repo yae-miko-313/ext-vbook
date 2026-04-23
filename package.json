@@ -1,6 +1,6 @@
 {
   "name": "vbook-tool",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "VBook 3.0: Modular & AI-Agent Ready CLI for Extension Developers",
   "author": "kychi",
   "main": "tools/cli/index.js",
@@ -14,7 +14,8 @@
     "ext:edit": "node tools/cli/index.js ext --mode edit --plugin extensions/novel/kychi_ntruyen/plugin.json --dry-run",
     "ext:create:dry": "node tools/cli/index.js ext --mode create --name DemoExt --source https://example.com --author kychi --dry-run",
     "build:ext": "node tools/cli/index.js build --plugin extensions/novel/kychi_ntruyen",
-    "build:catalog": "node tools/cli/index.js build-catalog"
+    "build:catalog": "node tools/cli/index.js build-catalog",
+    "ref:sync": "node tools/cli/index.js sync-ref"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.103.3",

@@ -3,7 +3,7 @@ const path = require('path');
 
 function buildCatalog(workspaceRoot) {
     const extRoot = path.join(workspaceRoot, 'extensions');
-    const types = ['novel', 'comic', 'chinese_novel', 'translate', 'tts'];
+    const types = ['novel', 'comic', 'chinese_novel', 'translate', 'tts', 'video'];
     
     function safeReadJson(filePath) {
         try {

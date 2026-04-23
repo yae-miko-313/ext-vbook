@@ -4,6 +4,7 @@ Bộ công cụ quản lý, đóng gói và đồng bộ hóa extension cho hệ
 
 ## Tính năng chính
 
+- **vBook VSCode Tester**: A dedicated VS Code extension for rapid testing and deployment of extension payloads against local or remote APIs.
 - **CLI Management**: Tạo, sửa metadata, và đóng gói extension (`plugin.json`, `src/`, `icon.png`).
 - **Unified Vercel Hosting**: Giao diện và API chạy chung 1 dự án Vercel tại `vbookext.me`.
 - **Tiered Cache Backend**: API tự động đồng bộ từ nhiều nguồn GitHub (Community) và ưu tiên hiển thị Extension cá nhân (Local).
@@ -126,5 +127,5 @@ _Tham khảo thêm chi tiết triển khai Cloud trong [docs/DEPLOY_VERCEL.md](d
 ## Tài liệu
 
 - [docs/AI_CODE_EXT_VBOOK.md](docs/AI_CODE_EXT_VBOOK.md): Hướng dẫn viết hàm parse JS cho AI Agent/Dev.
-- [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md): PR checklist, build/test steps.
+- See [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for details on setting up your environment. For the VS Code Tester, refer to [docs/VSCODE_TESTER.md](docs/VSCODE_TESTER.md).
 - [docs/DEPLOY_VERCEL.md](docs/DEPLOY_VERCEL.md): Deploy guide Unified (FE+BE) + cấu trúc Backend API Vercel V4.

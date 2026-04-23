@@ -16,6 +16,8 @@ const { handleValidateCommand } = require('./commands/validate');
 const { handleAnalyzeCommand } = require('./commands/analyze');
 const { handlePublishCommand } = require('./commands/publish');
 const { handleCheckEnvCommand } = require('./commands/check-env');
+const { handleSyncRefCommand } = require('./commands/sync-ref');
+
 
 const WORKSPACE_ROOT = path.resolve(__dirname, '..', '..');
 require('dotenv').config({ path: path.join(WORKSPACE_ROOT, '.env') });
@@ -113,6 +115,15 @@ program.command('check-env')
         const success = await handleCheckEnvCommand(options, WORKSPACE_ROOT);
         if (!success) process.exitCode = 1;
     });
+
+program.command('sync-ref')
+    .description('Sync community repos and merge extensions into .private/code-reference')
+    .option('--json', 'Output as JSON')
+    .action(async (options) => {
+        const success = await handleSyncRefCommand(options, WORKSPACE_ROOT);
+        if (!success) process.exitCode = 1;
+    });
+
 
 program.command('device')
     .description('Debug/install extension on VBook device (TCP bridge)')

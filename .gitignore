@@ -11,3 +11,4 @@ duplicate_sources_report.json
 code-reference/
 .vercel
 .apk/
+.vscode
