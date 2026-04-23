@@ -12,42 +12,53 @@
 vbook ext --mode create|edit
 vbook build --plugin PATH
 vbook build-catalog
+vbook sync-ref
 ```
 
 ## Personal Workflow
 
 ### 1. Create extension
+
 ```bash
 npm run ext:create -- --name MyExtension --source https://example.com
 ```
+
 - Scaffold extension folder
 - Generate `plugin.json`, `src/`, `icon.png`
 
 ### 2. Edit metadata
+
 ```bash
 npm run ext:edit -- --plugin extensions/novel/my_ext --description "Updated"
 ```
+
 - Update metadata only
 - Keep code and assets intact
 
 ### 3. Build ZIP
+
 ```bash
 npm run build -- --plugin extensions/novel/my_ext
 ```
+
 - Package `src/` + `icon.png` into `plugin.zip`
 - Use `--dry-run` when previewing
 
 ### 4. Rebuild catalog
+
 ```bash
 npm run build:catalog
 ```
+
 - Rebuild `extensions/{type}/plugin.json`
 - Rebuild `extensions/plugin.json`
 
 ### 5. Sync community web catalog
+
 ```bash
 npm run sync:web-catalog
 ```
+
 - Generate `web/plugin.json` (snapshot fallback)
 - Generate `web/catalog.json` (snapshot source sidecar fallback)
 - Generate `web/remote-sources.json` (realtime source manifest)
@@ -60,7 +71,8 @@ npm run sync:web-catalog
 - `web/plugin.json` is snapshot fallback file for By Extension.
 - `web/catalog.json` is snapshot fallback file for By Source.
 - `build:catalog` is for personal manifests.
-- `sync:web-catalog` is for community viewer sync.
+- `sync-ref` is to sync community repos and merge them into `.private/code-reference`.
+- `sync:web-catalog` is for community viewer sync (DEPRECATED/MANUAL).
 
 ## Important Rules
 
