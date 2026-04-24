@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "NguonC",
+    "author": "hieu05",
+    "version": 1,
+    "source": "https://phim.nguonc.com",
+    "regexp": "https?:\\/\\/(?:www\\.)?phim\\.nguonc\\.com\\/phim\\/[a-zA-Z0-9-]+\\/?$",
+    "description": "Video extension for NguonC API",
+    "locale": "vi_VN",
+    "tag": "normal",
+    "type": "video",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  }
+}
