@@ -2,13 +2,14 @@
   "metadata": {
     "name": "Cosplaytele",
     "author": "hieu05",
-    "version": 2.0,
+    "version": 4,
     "source": "https://cosplaytele.com",
     "regexp": "cosplaytele\\.com",
     "description": "Cosplay photo galleries",
     "locale": "en_US",
     "tag": "nsfw",
-    "type": "comic"
+    "type": "comic",
+    "language": "javascript"
   },
   "script": {
     "home": "home.js",

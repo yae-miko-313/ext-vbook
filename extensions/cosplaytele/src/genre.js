@@ -205,7 +205,5 @@ function execute() {
       script: "gen.js",
     },
   ];
-  Console.log(genres.length);
-
   return Response.success(genres);
 }
