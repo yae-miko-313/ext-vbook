@@ -1,0 +1,86 @@
+{
+  "name": "vbook-vscode-tester",
+  "displayName": "vBook Tester",
+  "description": "Test, build, and install vBook extensions from VS Code.",
+  "version": "0.0.4",
+  "icon": "icon.png",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.88.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vbook-dev-abcxyz/vbook-vscode-tester.git"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:vbookTester.openPanel",
+    "onView:vbook-tester-view"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "vBook Tester",
+      "properties": {
+        "vbookTester.showTerminalOnRun": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically show the output terminal when running tests or builds."
+        },
+        "vbookTester.maxHistory": {
+          "type": "integer",
+          "default": 15,
+          "description": "Maximum number of recent runs to keep in history."
+        },
+        "vbookTester.defaultServerUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8080",
+          "description": "Default vBook server URL used by the tester panel."
+        }
+      }
+    },
+    "viewsContainers": {
+      "secondarySidebar": [
+        {
+          "id": "vbook-tester",
+          "title": "vBook Tester",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "vbook-tester": [
+        {
+          "type": "webview",
+          "id": "vbook-tester-view",
+          "name": "vBook Tester"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "vbookTester.openPanel",
+        "title": "vBook: Open Tester",
+        "icon": {
+          "light": "media/icon-light.svg",
+          "dark": "media/icon-dark.svg"
+        }
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "vbookTester.openPanel",
+          "group": "navigation@100",
+          "when": "resourceLangId == javascript || resourceLangId == javascriptreact || resourceLangId == typescript || resourceLangId == typescriptreact"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "echo No lint configured"
+  },
+  "dependencies": {}
+}
