@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "HentaiVietsub",
+    "author": "hieu05",
+    "version": 4,
+    "source": "https://hentaivietsub.com",
+    "regexp": "https?:\\/\\/(?:www\\.)?hentaivietsub\\.com\\/hentai\\/[a-zA-Z0-9-]+\\/?$",
+    "description": "Video extension for HentaiVietsub (not supported yet)",
+    "locale": "vi_VN",
+    "tag": "nsfw",
+    "type": "video",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  }
+}

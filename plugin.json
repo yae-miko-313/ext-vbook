@@ -65,6 +65,18 @@
             "tag": "nsfw"
         },
         {
+            "name": "HentaiVietsub",
+            "author": "hieu05",
+            "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/hentaivietsub/plugin.zip",
+            "version": 4,
+            "source": "https://hentaivietsub.com",
+            "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/hentaivietsub/icon.png",
+            "description": "Video extension for HentaiVietsub (not supported yet)",
+            "type": "video",
+            "locale": "vi_VN",
+            "tag": "nsfw"
+        },
+        {
             "name": "Photos18",
             "author": "hieu05",
             "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/photos18/plugin.zip",
