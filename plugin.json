@@ -63,10 +63,10 @@
       "name": "HHHTQ",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhhtq/plugin.zip",
-      "version": 1,
+      "version": 2,
       "source": "https://hhhtq.team",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhhtq/icon.png",
-      "description": "Xem hoạt hình Trung Quốc vietsub trên HHHTQ.TEAM",
+      "description": "Xem hoạt hình Trung Quốc vietsub. Lưu ý: Chỉ hỗ trợ 1 số server/phim (DU server/muxed sources).",
       "type": "video",
       "locale": "vi_VN"
     }

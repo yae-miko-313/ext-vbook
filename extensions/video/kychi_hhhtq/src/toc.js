@@ -53,8 +53,12 @@ function execute(url) {
                         host: BASE_URL
                     });
                 });
-                // Reverse để tập 1, 2, 3... thay vì 20, 19, 18...
-                epArray.reverse();
+                // Sort theo số tập tăng dần (tập 1, 2, 3...)
+                epArray.sort(function(a, b) {
+                    var numA = (a.url.match(/-ep(\d+)/) || [0,0])[1];
+                    var numB = (b.url.match(/-ep(\d+)/) || [0,0])[1];
+                    return parseInt(numA, 10) - parseInt(numB, 10);
+                });
                 for (var k = 0; k < epArray.length; k++) {
                     list.push(epArray[k]);
                 }
@@ -95,8 +99,12 @@ function execute(url) {
             var sv = serverOrder[i];
             list.push({ name: sv, type: "section" });
             var eps = serverMap[sv];
-            // Reverse episodes để tập 1, 2, 3... thay vì ngược
-            eps.reverse();
+            // Sort theo số tập tăng dần
+            eps.sort(function(a, b) {
+                var numA = (a.url.match(/-ep(\d+)/) || [0,0])[1];
+                var numB = (b.url.match(/-ep(\d+)/) || [0,0])[1];
+                return parseInt(numA, 10) - parseInt(numB, 10);
+            });
             for (var j = 0; j < eps.length; j++) {
                 list.push({ name: eps[j].name, url: eps[j].url, host: BASE_URL });
             }
