@@ -1,5 +1,5 @@
 // detail.js — Thông tin chi tiết một phim/video
-// Contract: execute(url) → { name*, cover, host, author, description, ongoing:bool*,
+// Contract: execute(url) → { name*, cover, host, author, detail, description, ongoing:bool*,
 //                             genres?:[{title,input,script}], suggests?:[{title,input,script}],
 //                             comments?:[{title,input,script}] }
 function execute(url) {
@@ -36,6 +36,10 @@ function execute(url) {
                && status.indexOf("Full") === -1
                && status.indexOf("完结") === -1;
 
+		// TODO: Selector chi tiết: ví dụ như lượt xem, tác giả, ngày đăng, ...
+		var detailEl = doc.select("SELECTOR_DETAIL").first();
+		var detail = (detailEl ? detailEl.html() : "") + "";
+
     // Bước 6: Mô tả — selector container chứa tóm tắt, lấy html() để giữ định dạng
     var descEl = doc.select("SELECTOR_DESCRIPTION").first();
     var description = (descEl ? descEl.html() : "") + "";
@@ -65,6 +69,7 @@ function execute(url) {
         cover:       cover,
         host:        BASE_URL,
         author:      author,
+				detail:      detail,
         description: description,
         ongoing:     ongoing,
         format:      "series", // Định dạng "series" dành cho web có nhiều tập, nếu phim lẻ có thể bỏ hoặc để khác

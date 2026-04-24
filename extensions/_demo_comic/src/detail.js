@@ -1,5 +1,5 @@
 // detail.js — Thông tin chi tiết một bộ truyện tranh
-// Contract: execute(url) → { name*, cover, host, author, description, ongoing:bool*,
+// Contract: execute(url) → { name*, cover, host, author, detail, description, ongoing:bool*,
 //                             genres?:[{title,input,script}], suggests?:[{title,input,script}] }
 function execute(url) {
     url = url.replace(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img, BASE_URL);
@@ -34,6 +34,10 @@ function execute(url) {
                && status.indexOf("Completed") === -1
                && status.indexOf("Full") === -1;
 
+		// TODO: Selector chi tiết: ví dụ như lượt xem, tác giả, ngày đăng, ...
+		var detailEl = doc.select("SELECTOR_DETAIL").first();
+		var detail = (detailEl ? detailEl.html() : "") + "";
+
     // TODO: Selector container mô tả / tóm tắt
     var descEl = doc.select("SELECTOR_DESCRIPTION").first();
     var description = (descEl ? descEl.html() : "") + "";
@@ -58,6 +62,7 @@ function execute(url) {
         cover:       cover,
         host:        BASE_URL,
         author:      author,
+				detail:      detail,
         description: description,
         ongoing:     ongoing,
         genres:      genres.length > 0 ? genres : undefined,

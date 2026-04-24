@@ -1,5 +1,5 @@
 // detail.js — Thông tin chi tiết một truyện
-// Contract: execute(url) → { name*, cover, host, author, description, ongoing:bool*,
+// Contract: execute(url) → { name*, cover, host, author, detail, description, ongoing:bool*,
 //                             genres?:[{title,input,script}], suggests?:[{title,input,script}],
 //                             comments?:[{title,input,script}] }
 function execute(url) {
@@ -23,6 +23,10 @@ function execute(url) {
         if (cover.startsWith("//")) cover = "https:" + cover;
         if (cover && !cover.startsWith("http")) cover = BASE_URL + cover;
     }
+
+		// TODO: Selector chi tiết: ví dụ như lượt đọc, tác giả, ngày đăng, ...
+		var detailEl = doc.select("SELECTOR_DETAIL").first();
+		var detail = (detailEl ? detailEl.html() : "") + "";
 
     // Bước 4: Tác giả — selector link hoặc text tác giả
     var authorEl = doc.select("SELECTOR_AUTHOR").first();
@@ -65,6 +69,7 @@ function execute(url) {
         cover:       cover,
         host:        BASE_URL,
         author:      author,
+				detail:      detail,
         description: description,
         ongoing:     ongoing,
         genres:      genres.length > 0 ? genres : undefined,
