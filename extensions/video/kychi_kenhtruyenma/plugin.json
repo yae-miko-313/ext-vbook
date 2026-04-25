@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "Kenh Truyen Ma",
+    "author": "kychi",
+    "version": 1,
+    "source": "https://kenhtruyenma.com",
+    "regexp": "(www\\.)?kenhtruyenma\\.com/(audio|truyen-).*",
+    "description": "Nghe truyện ma, truyện audio, sách nói online miễn phí. (Chưa hỗ trợ tạm dừng và tua nhanh)",
+    "locale": "vi_VN",
+    "type": "video",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "gen": "gen.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  }
+}

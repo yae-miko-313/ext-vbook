@@ -69,6 +69,17 @@
       "description": "Xem hoạt hình Trung Quốc vietsub. Lưu ý: Chỉ hỗ trợ 1 số server/phim (DU server/muxed sources).",
       "type": "video",
       "locale": "vi_VN"
+    },
+    {
+      "name": "Kenh Truyen Ma",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_kenhtruyenma/plugin.zip",
+      "version": 1,
+      "source": "https://kenhtruyenma.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_kenhtruyenma/icon.png",
+      "description": "Nghe truyện ma, truyện audio, sách nói online miễn phí. (Chưa hỗ trợ tạm dừng và tua nhanh)",
+      "type": "video",
+      "locale": "vi_VN"
     }
   ]
 }
