@@ -22,6 +22,28 @@
     }
   },
   {
+    "folder": "kychi_hhkungfu",
+    "name": "HHKUNGFU",
+    "author": "kychi",
+    "description": "Xem phim hoạt hình 3D Trung Quốc Vietsub. Lưu ý: không xem được đâu, đầu hàng ",
+    "source": "https://hhkungfu.ee",
+    "version": 1,
+    "type": "video",
+    "locale": "vi_VN",
+    "relativePath": "extensions/video/kychi_hhkungfu",
+    "metadata": {
+      "name": "HHKUNGFU",
+      "author": "kychi",
+      "version": 1,
+      "source": "https://hhkungfu.ee",
+      "regexp": "(www\\.)?hhkungfu\\.ee/.*",
+      "description": "Xem phim hoạt hình 3D Trung Quốc Vietsub. Lưu ý: không xem được đâu, đầu hàng ",
+      "locale": "vi_VN",
+      "type": "video",
+      "language": "javascript"
+    }
+  },
+  {
     "folder": "kychi_kenhtruyenma",
     "name": "Kenh Truyen Ma",
     "author": "kychi",

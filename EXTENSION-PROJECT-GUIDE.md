@@ -18,7 +18,7 @@ Tài liệu này tổng hợp từ `docs/AI_CODE_EXT_VBOOK.md` và `docs/VIDEO_E
 
 ## 2. Cấu trúc thư mục
 
-```
+```text
 extensions/{category}/{author}_{name}/
 ├── plugin.json          # Metadata
 ├── icon.png             # Icon extension
@@ -37,12 +37,14 @@ extensions/{category}/{author}_{name}/
 
 ## 3. Rhino Runtime Contract (ES5 only)
 
-### Được dùng:
+### Được dùng
+
 - `var`, `function`, `if/else`, `for`, `while`, `try/catch`
 - Regex, `JSON.parse/stringify`, `Array.forEach/map/filter`
 - `load("config.js")`
 
-### Không dùng:
+### Không dùng
+
 - `import/export`
 - `async/await`, `Promise`
 - Optional chaining `?.`, nullish `??`
@@ -54,7 +56,7 @@ extensions/{category}/{author}_{name}/
 ## 4. Script Contract
 
 | Script | Input | Output |
-|--------|-------|--------|
+| :--- | :--- | :--- |
 | `home.js` / `genre.js` | - | `[{ title, input, script }]` |
 | `gen.js` / `search.js` | keyword, page | `Response.success(list, next?)` |
 | `detail.js` | URL | Object detail |
@@ -67,6 +69,7 @@ extensions/{category}/{author}_{name}/
 ## 5. Code Pattern mẫu
 
 ### config.js (Bắt buộc)
+
 ```javascript
 var BASE_URL = "https://example.com";
 
@@ -95,6 +98,7 @@ var Response = {
 ```
 
 ### home.js
+
 ```javascript
 load('config.js');
 
@@ -119,6 +123,7 @@ function execute() {
 ```
 
 ### search.js
+
 ```javascript
 load('config.js');
 
@@ -150,6 +155,7 @@ function execute(input) {
 ```
 
 ### detail.js
+
 ```javascript
 load('config.js');
 
@@ -176,6 +182,7 @@ function execute(url) {
 ```
 
 ### toc.js
+
 ```javascript
 load('config.js');
 
@@ -210,6 +217,7 @@ function execute(url) {
 ```
 
 ### chap.js (Video - Server Picker)
+
 ```javascript
 load('config.js');
 
@@ -252,6 +260,7 @@ function execute(url) {
 ```
 
 ### track.js (Video)
+
 ```javascript
 load('config.js');
 
@@ -319,17 +328,18 @@ function execute(input) {
 }
 ```
 
-**Lưu ý quan trọng**:
+**Lưu ý quan trọng**
+
 - `metadata.source`: URL gốc của nguồn
 - `metadata.author`: Giữ nguyên attribution
 - `script` map đến tên file trong `src/`
 
 ---
 
-## 7. Phân vùng Repo
+### Phân vùng Repo
 
 | Phân vùng | Mục đích |
-|-----------|----------|
+| :--- | :--- |
 | `extensions/` + `tools/cli/` | Phân vùng cá nhân (tạo/sửa extension) |
 | `.private/extensions/` | Private, gitignored, không lên catalog |
 | `ref/` + `web/` | Phân vùng cộng đồng |
@@ -344,7 +354,8 @@ function execute(input) {
 
 **Luồng riêng**: `Home -> Detail -> TOC -> Chap (Servers) -> Track (Stream)`
 
-**Track output**:
+#### Track output
+
 ```javascript
 {
   data: "https://.../video.mp4",     // URL stream
@@ -358,14 +369,15 @@ function execute(input) {
 }
 ```
 
-**Type luồng**:
+#### Type luồng
+
 - `native`: Link trực tiếp `.m3u8` hoặc `.mp4`. Player vBook tự xử lý.
 - `iframe`: Nhúng trình phát của site vào webview.
 - `auto`: Để hệ thống tự nhận diện.
 
 ---
 
-## 9. Debug Checklist
+### Debug Checklist
 
 - [ ] Lỗi parse HTML: Kiểm tra selector đã đổi trên site
 - [ ] Lỗi page next: `next` nên trả về string
@@ -388,9 +400,9 @@ function execute(input) {
 
 - `docs/AI_CODE_EXT_VBOOK.md` - Agent guide chi tiết
 - `docs/VIDEO_EXTENSION_GUIDE.md` - Video extension chi tiết
+- `docs/JSBRIDGE_REFERENCE.md` - Tra cứu hàm API JSBridge
 - `docs/CONTRIBUTING.md` - Contributing guidelines
-- `.private/code-reference/` - Code mẫu tham khảo
 
 ---
 
-*Guide tổng hợp từ docs/ cho agent mới tạo extension*
+_Guide tổng hợp từ docs/ cho agent mới tạo extension_

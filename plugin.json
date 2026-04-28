@@ -80,6 +80,17 @@
       "description": "Nghe truyện ma, truyện audio, sách nói online miễn phí. (Chưa hỗ trợ tạm dừng và tua nhanh)",
       "type": "video",
       "locale": "vi_VN"
+    },
+    {
+      "name": "HHKUNGFU",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhkungfu/plugin.zip",
+      "version": 1,
+      "source": "https://hhkungfu.ee",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhkungfu/icon.png",
+      "description": "Xem phim hoạt hình 3D Trung Quốc Vietsub. Lưu ý: không xem được đâu, đầu hàng",
+      "type": "video",
+      "locale": "vi_VN"
     }
   ]
 }
