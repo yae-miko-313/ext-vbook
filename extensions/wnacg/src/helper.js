@@ -22,7 +22,7 @@ function pushImage(url, albumPath, out, seen) {
   if (!url) return;
 
   url = toAbsoluteUrl(url);
-  if (!/^https?:\/\/(?:img|t)\d+\.qy0\.ru\/data\/\d+\/\d+\/\d+(?:_[^\/.?#]+)?\.(?:jpe?g|png|webp|gif)(?:\?[^#]*)?$/i.test(url)) return;
+  if (!/^https?:\/\/(?:img|t)\d+\.qy0\.ru\/data\/\d+\/\d+\/[^\/?#]+\.(?:jpe?g|png|webp|gif)(?:\?[^#]*)?$/i.test(url)) return;
   if (albumPath && url.indexOf(albumPath) === -1) return;
 
   url = toHttps(url);
@@ -51,7 +51,7 @@ function parseFromItemResponse(raw, albumPath, out, seen) {
 
   if (out.length > 0) return;
 
-  var re = /(?:https?:)?\/\/(?:img|t)\d+\.qy0\.ru\/data\/\d+\/\d+\/\d+(?:_[^\/.?#]+)?\.(?:jpe?g|png|webp|gif)(?:\?[^"'\s<>]*)?/ig;
+  var re = /(?:https?:)?\/\/(?:img|t)\d+\.qy0\.ru\/data\/\d+\/\d+\/[^"'\s<>?#]+\.(?:jpe?g|png|webp|gif)(?:\?[^"'\s<>#]*)?/ig;
   var m;
   while ((m = re.exec(raw)) !== null) {
     pushImage(m[0], albumPath, out, seen);
