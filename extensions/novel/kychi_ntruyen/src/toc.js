@@ -2,68 +2,57 @@ load('config.js');
 
 function execute(url) {
     var apiUrl = buildApiUrl(url, BASE_URL);
-    if (!apiUrl) return Response.error('Không lấy được API chương');
+    if (!apiUrl) return null;
+    var listchapter = [];
+    var response = fetchPage(apiUrl);
 
-    var allChapters = [];
-    var page = 1;
-    var maxPages = 1000;
-
-    while (page <= maxPages) {
-        var pageUrl = apiUrl.replace(/\?page=\d+$/, '') + '?page=' + page;
-        var response = fetchPage(pageUrl);
-
-        if (!response.ok) {
-            if (allChapters.length > 0) break;
-            return Response.error('HTTP Error: ' + response.status);
-        }
-
-        var json;
-        try {
-            json = JSON.parse(response.text());
-        } catch (e) {
-            if (allChapters.length > 0) break;
-            return Response.error('Lỗi parse JSON');
-        }
-
-        var chapters = json.chapters || [];
-
-        // Stop when no more chapters
-        if (chapters.length === 0) break;
-
-        chapters.forEach(function(e) {
-            allChapters.push({
-                name: e.name,
-                url: '/doc-truyen/' + e.slug + '-' + e.id,
-                host: BASE_URL
-            });
-        });
-
-        // Check if API explicitly indicates no more pages
-        if (json.hasNextPage === false || json.next_page === false || json.next_page === null) break;
-
-        // If chapters.length < 20, likely last page unless API says otherwise
-        if (chapters.length < 20 && json.hasNextPage !== true && json.next_page !== true) break;
-
-        page++;
+    if (!response.ok) {
+        // Return empty if fetch fails, don't block other pages
+        return Response.success(listchapter);
     }
 
-    return Response.success(allChapters);
+    var json;
+    try {
+        json = JSON.parse(response.text());
+    } catch (e) {
+        // Return empty if parse fails
+        return Response.success(listchapter);
+    }
+
+    var chapters = json.chapters || [];
+
+    chapters.forEach(function(e) {
+        listchapter.push({
+            name: e.name,
+            url: "/doc-truyen/" + e.slug + "-" + e.id,
+            host: BASE_URL
+        });
+    });
+
+    return Response.success(listchapter);
 }
 
 function buildApiUrl(url, baseUrl) {
     if (!url) return null;
+    // If already API URL, return as-is (preserve page number)
     if (url.indexOf('api.ntruyen.biz/novels/') >= 0) return url;
     var normalized = url;
     if (normalized.indexOf('http') !== 0) {
         normalized = baseUrl + normalized;
     }
-    normalized = normalized.replace(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img, BASE_URL);
+    normalized = normalized.replace(
+        /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img,
+        BASE_URL
+    );
     var response = fetchPage(normalized);
     if (!response.ok) return null;
     var html = response.text();
     var storyId = extractStoryId(html);
     if (!storyId) return null;
-    return 'https://api.ntruyen.biz/novels/' + storyId + '/chapters?page=1';
+    // Extract page number from URL if present
+    var pageMatch = url.match(/[?&]page=(\d+)/);
+    var pageNum = pageMatch ? pageMatch[1] : '1';
+    return 'https://api.ntruyen.biz/novels/' + storyId + '/chapters?page=' + pageNum;
 }
 
 function extractStoryId(html) {

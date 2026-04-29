@@ -8,10 +8,10 @@
       "name": "nTruyen",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_ntruyen/plugin.zip",
-      "version": 6,
+      "version": 8,
       "source": "https://ntruyen.biz/",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_ntruyen/icon.png",
-      "description": "Đọc truyện từ ntruyen.biz (fork của B) - Đã fix: lấy nội dung chương, load đầy đủ TOC (1000 trang), thêm suggest cùng tác giả/thể loại",
+      "description": "Đọc truyện từ ntruyen.biz (fork của B). update detail suggest",
       "type": "novel",
       "locale": "vi_VN"
     },
