@@ -112,7 +112,30 @@
     }
   ],
   "comic": [],
-  "chinese_novel": [],
+  "chinese_novel": [
+    {
+      "folder": "kychi_cachua",
+      "name": "Cà Chua Xào Trứng",
+      "author": "kychi",
+      "description": "Nguồn truyện chữ Trung Quốc từ Fanqie (Proxy by Rose Novel)",
+      "source": "https://fanqienovel.com",
+      "version": 1,
+      "type": "chinese_novel",
+      "locale": "vi_VN",
+      "relativePath": "extensions/chinese_novel/kychi_cachua",
+      "metadata": {
+        "name": "Cà Chua Xào Trứng",
+        "author": "kychi",
+        "version": 1,
+        "source": "https://fanqienovel.com",
+        "regexp": "(fanqienovel\\.com/page/|rose\\.novel\\.lzink\\.icu/api/detail\\?bookId=)\\d+",
+        "description": "Nguồn truyện chữ Trung Quốc từ Fanqie (Proxy by Rose Novel)",
+        "locale": "vi_VN",
+        "type": "chinese_novel",
+        "language": "javascript"
+      }
+    }
+  ],
   "translate": [],
   "tts": [],
   "video": [

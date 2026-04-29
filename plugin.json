@@ -91,6 +91,17 @@
       "description": "Xem phim hoạt hình 3D Trung Quốc Vietsub. Lưu ý: không xem được đâu, đầu hàng",
       "type": "video",
       "locale": "vi_VN"
+    },
+    {
+      "name": "Cà Chua Sói Xám",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/kychi_cachua/plugin.zip",
+      "version": 1,
+      "source": "https://fanqienovel.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/kychi_cachua/icon.png",
+      "description": "Nguồn truyện chữ Trung Quốc từ Fanqie Novel (sói xám to version) - chỉ đọc không tải (Ngoại trừ VIP/SVIP).",
+      "type": "chinese_novel",
+      "locale": "vi_VN"
     }
   ]
 }
