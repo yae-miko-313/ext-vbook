@@ -12,7 +12,9 @@ function execute(url) {
     var cover = doc.select('meta[property="og:image"]').attr('content');
     if (!cover) cover = doc.select('img[alt]').first().attr('src');
 
-    var author = doc.select('a[href*="/tac-gia/"]').first().text().trim();
+    var authorEl = doc.select('a[href*="/tac-gia/"]').first();
+    var author = authorEl ? authorEl.text().trim() : '';
+    var authorUrl = authorEl ? authorEl.attr('href') : '';
     if (!author) author = doc.select('meta[name="author"]').attr('content');
     if (!author) author = doc.select('[itemprop="author"]').text().trim();
     if (!author) author = 'Đang cập nhật';
@@ -43,7 +45,13 @@ function execute(url) {
 
     if (!statusText) statusText = 'Đang ra';
     statusText = normalizeStatus(statusText);
-    var ongoing = statusText !== 'Hoàn thành';
+
+    // Check ongoing based on status indicators
+    var lowerStatus = statusText.toLowerCase();
+    var ongoing = lowerStatus.indexOf('hoàn thành') === -1 &&
+                  lowerStatus.indexOf('đã hoàn') === -1 &&
+                  lowerStatus.indexOf('full') === -1 &&
+                  lowerStatus.indexOf('complete') === -1;
 
     var detailParts = [];
     detailParts.push('<p><strong>Tác giả:</strong> ' + author + '</p>');
@@ -52,14 +60,35 @@ function execute(url) {
     if (genreTexts.length > 0) detailParts.push('<p><strong>Thể loại:</strong> ' + genreTexts.join(', ') + '</p>');
 
     var genres = [];
+    var firstGenreUrl = '';
     doc.select("header[itemtype='https://schema.org/Book'] a[itemprop='genre']").forEach(function(e) {
         var title = e.text();
+        var href = e.attr('href') || '';
         genres.push({
             title: title,
-            input: e.attr('href'),
+            input: href,
             script: 'gen.js'
         });
+        if (href && !firstGenreUrl) {
+            firstGenreUrl = href;
+        }
     });
+
+    var suggests = [];
+    if (authorUrl) {
+        suggests.push({
+            title: 'Truyện cùng tác giả',
+            input: authorUrl,
+            script: 'gen.js'
+        });
+    }
+    if (firstGenreUrl) {
+        suggests.push({
+            title: 'Truyện cùng thể loại',
+            input: firstGenreUrl,
+            script: 'gen.js'
+        });
+    }
 
     var description = doc.select('article[itemprop="description"] [itemprop="description"]').html();
     if (!description) description = doc.select('.p-3 .inline-block  p').html();
@@ -72,7 +101,8 @@ function execute(url) {
         description: description,
         detail: detailParts.join('<br>'),
         ongoing: ongoing,
-        genres: genres
+        genres: genres,
+        suggests: suggests
     });
 }
 
@@ -88,7 +118,7 @@ function splitGenres(text) {
 function normalizeStatus(text) {
     if (!text) return '';
     var lower = String(text).toLowerCase();
-    if (lower.indexOf('hoàn thành') >= 0 || lower.indexOf('đã hoàn') >= 0 || lower.indexOf('full') >= 0) return 'Hoàn thành';
+    if (lower.indexOf('hoàn thành') >= 0 || lower.indexOf('đã hoàn') >= 0 || lower.indexOf('full') >= 0 || lower.indexOf('complete') >= 0) return 'Hoàn thành';
     if (lower.indexOf('đang ra') >= 0 || lower.indexOf('đang tiến hành') >= 0) return 'Đang ra';
     return String(text).trim();
 }

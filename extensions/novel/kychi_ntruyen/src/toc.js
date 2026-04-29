@@ -1,20 +1,54 @@
 load('config.js');
+
 function execute(url) {
     var apiUrl = buildApiUrl(url, BASE_URL);
     if (!apiUrl) return Response.error('Không lấy được API chương');
-    var listchapter = [];
-    var response = fetchPage(apiUrl);
-    if (!response.ok) return Response.error('HTTP Error: ' + response.status);
-    var json = JSON.parse(response.text());
-    var chapters = json.chapters || [];
-    chapters.forEach(function(e) {
-        listchapter.push({
-            name: e.name,
-            url: '/doc-truyen/' + e.slug + '-' + e.id,
-            host: BASE_URL
+
+    var allChapters = [];
+    var page = 1;
+    var maxPages = 100;
+
+    while (page <= maxPages) {
+        var pageUrl = apiUrl.replace(/\?page=\d+$/, '') + '?page=' + page;
+        var response = fetchPage(pageUrl);
+
+        if (!response.ok) {
+            if (allChapters.length > 0) break;
+            return Response.error('HTTP Error: ' + response.status);
+        }
+
+        var json;
+        try {
+            json = JSON.parse(response.text());
+        } catch (e) {
+            if (allChapters.length > 0) break;
+            return Response.error('Lỗi parse JSON');
+        }
+
+        var chapters = json.chapters || [];
+
+        // Stop when no more chapters
+        if (chapters.length === 0) break;
+
+        chapters.forEach(function(e) {
+            allChapters.push({
+                name: e.name,
+                url: '/doc-truyen/' + e.slug + '-' + e.id,
+                host: BASE_URL
+            });
         });
-    });
-    return Response.success(listchapter);
+
+        // Check if there's a next page from API
+        var hasMore = json.hasNextPage || json.next_page || json.next_page_url;
+        if (hasMore === false || hasMore === null) break;
+
+        // Also stop if we got fewer chapters than typical page size
+        if (chapters.length < 20) break;
+
+        page++;
+    }
+
+    return Response.success(allChapters);
 }
 
 function buildApiUrl(url, baseUrl) {
