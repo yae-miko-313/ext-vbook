@@ -1,7 +1,50 @@
 load('config.js');
 
+function getFavTags() {
+  var raw = '';
+  try {
+    raw = localStorage.getItem('fav-tags') || '';
+    if (!raw) {
+      raw = '3d, NTR';
+      localStorage.setItem('fav-tags', raw);
+    }
+  } catch (e) {
+    raw = '';
+  }
+
+  var tags = [];
+  var seen = {};
+  raw.split(/[,\r\n]+/).forEach(function(tag) {
+    tag = ((tag || '') + '').trim();
+    if (!tag) return;
+    var key = tag.toLowerCase();
+    if (seen[key]) return;
+    seen[key] = true;
+    tags.push(tag);
+  });
+  return tags;
+}
+
+function appendFavTags(genres) {
+  var seen = {};
+  genres.forEach(function(genre) {
+    seen[((genre.title || '') + '').toLowerCase()] = true;
+  });
+
+  getFavTags().forEach(function(tag) {
+    var key = tag.toLowerCase();
+    if (seen[key]) return;
+    seen[key] = true;
+    genres.push({ 
+			title: tag, 
+			input: 'albums-index-tag-' + encodeURIComponent(tag) + '.html',
+			script: 'gen.js'
+		});
+  });
+}
+
 function execute() {
-  return Response.success([
+  var genres = [
     { title: '更新', input: '/albums-index-page-1.html', script: 'gen.js' },
     { title: '同人志', input: '/albums-index-cate-5.html', script: 'gen.js' },
     { title: '同人志-汉化', input: '/albums-index-cate-1.html', script: 'gen.js' },
@@ -24,5 +67,7 @@ function execute() {
     { title: '3D&漫画-其他', input: '/albums-index-cate-24.html', script: 'gen.js' },
     { title: 'AI图集', input: '/albums-index-cate-37.html', script: 'gen.js' },
     { title: '未分類相冊', input: '/albums-index-cate-0.html', script: 'gen.js' }
-  ]);
+  ];
+  appendFavTags(genres);
+  return Response.success(genres);
 }

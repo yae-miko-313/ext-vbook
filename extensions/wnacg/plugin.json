@@ -2,7 +2,7 @@
   "metadata": {
     "name": "WNACG",
     "author": "hieu05",
-    "version": 6,
+    "version": 7,
     "source": "https://www.wnacg.com/",
     "regexp": "https?:\\/\\/(?:www\\.)?wnacg\\.com\\/photos-index-aid-\\d+\\.html\\/?$",
     "description": "Image galleries: home, genre, search, detail, ranking",
