@@ -2,10 +2,10 @@
   "metadata": {
     "name": "nTruyen",
     "author": "kychi",
-    "version": 5,
+    "version": 6,
     "source": "https://ntruyen.biz/",
     "regexp": "(www.)?ntruyen.biz/[^/]+/?$",
-    "description": "Đọc truyện từ ntruyen.biz (fork của B) - Đã fix: lấy nội dung chương, load đầy đủ TOC, thêm suggest cùng thể loại",
+    "description": "Đọc truyện từ ntruyen.biz (fork của B) - Đã fix: lấy nội dung chương, load đầy đủ TOC (1000 trang), thêm suggest cùng tác giả/thể loại",
     "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"

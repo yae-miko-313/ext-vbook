@@ -6,7 +6,7 @@ function execute(url) {
 
     var allChapters = [];
     var page = 1;
-    var maxPages = 100;
+    var maxPages = 1000;
 
     while (page <= maxPages) {
         var pageUrl = apiUrl.replace(/\?page=\d+$/, '') + '?page=' + page;
