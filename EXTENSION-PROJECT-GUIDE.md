@@ -402,6 +402,7 @@ function execute(input) {
 - `docs/VIDEO_EXTENSION_GUIDE.md` - Video extension chi tiết
 - `docs/JSBRIDGE_REFERENCE.md` - Tra cứu hàm API JSBridge
 - `docs/CONTRIBUTING.md` - Contributing guidelines
+- `.private/code-reference/` - Code mẫu tham khảo
 
 ---
 
