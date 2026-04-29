@@ -38,12 +38,11 @@ function execute(url) {
             });
         });
 
-        // Check if there's a next page from API
-        var hasMore = json.hasNextPage || json.next_page || json.next_page_url;
-        if (hasMore === false || hasMore === null) break;
+        // Check if API explicitly indicates no more pages
+        if (json.hasNextPage === false || json.next_page === false || json.next_page === null) break;
 
-        // Also stop if we got fewer chapters than typical page size
-        if (chapters.length < 20) break;
+        // If chapters.length < 20, likely last page unless API says otherwise
+        if (chapters.length < 20 && json.hasNextPage !== true && json.next_page !== true) break;
 
         page++;
     }
