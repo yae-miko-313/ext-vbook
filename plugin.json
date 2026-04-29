@@ -16,12 +16,12 @@
       "locale": "vi_VN"
     },
     {
-      "name": "TruyenMoiKK",
+      "name": "Truyện Mới",
       "author": "kychi",
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmoikk/plugin.zip",
-      "version": 6,
-      "source": "https://truyenmoikk.com/",
-      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmoikk/icon.png",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmoi/plugin.zip",
+      "version": 7,
+      "source": "https://truyenmoiqq.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmoi/icon.png",
       "description": "Fork TruyenMoi của HieuDM, đã refactor parser + null guard + tối ưu toc/search/detail",
       "type": "novel",
       "locale": "vi_VN"

@@ -1,10 +1,10 @@
 {
   "metadata": {
-    "name": "TruyenMoiKK",
+    "name": "Truyện Mới",
     "author": "kychi",
-    "version": 6,
-    "source": "https://truyenmoikk.com/",
-    "regexp": "(www.)?truyenmoikk.com/[^/]+/?$",
+    "version": 7,
+    "source": "https://truyenmoiqq.com/",
+    "regexp": "(www.)?truyenmoiqq.com/[^/]+/?$",
     "description": "Fork TruyenMoi của HieuDM, đã refactor parser + null guard + tối ưu toc/search/detail",
     "locale": "vi_VN",
     "language": "javascript",
