@@ -6,10 +6,18 @@ function pad2(n) {
   return s;
 }
 
+function pad4(n) {
+  n = parseInt(n, 10);
+  if (isNaN(n) || n < 0) n = 0;
+  var s = n + '';
+  while (s.length < 4) s = '0' + s;
+  return s;
+}
+
 function albumPathFromAid(aid) {
   var aidNum = parseInt(aid, 10);
   if (isNaN(aidNum) || aidNum < 1) return '';
-  return '/data/' + Math.floor(aidNum / 100) + '/' + pad2(aidNum % 100) + '/';
+  return '/data/' + pad4(Math.floor(aidNum / 100)) + '/' + pad2(aidNum % 100) + '/';
 }
 
 function toHttps(url) {
