@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "CRXS",
+    "author": "hieu05",
+    "version": 1,
+    "source": "https://crxs.me",
+    "regexp": "https?:\\/\\/(?:www\\.)?crxs\\.me\\/fiction\\/id-[a-zA-Z0-9=_-]+\\.html\\/?$",
+    "description": "Đọc truyện chữ Trung Quốc trên CRXS",
+    "locale": "zh_CN",
+    "tag": "nsfw",
+    "type": "chinese_novel",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "page": "page.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}

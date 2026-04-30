@@ -86,7 +86,19 @@
       "type": "comic",
       "locale": "zh_CN",
       "tag": "nsfw"
-    }
+    },
+		{
+			"name": "Crxs.me",
+			"author": "hieu05",
+			"path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/crxs.me/plugin.zip",
+			"version": 1,
+			"source": "https://crxs.me",
+			"icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/crxs.me/icon.png",
+			"description": "Read Chinese novels on Crxs.me",
+			"type": "chinese_novel",
+			"locale": "zh_CN",
+			"tag": "nsfw"
+		}
   ]
 }
 
