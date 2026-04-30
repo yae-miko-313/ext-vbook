@@ -98,6 +98,18 @@
 			"type": "chinese_novel",
 			"locale": "zh_CN",
 			"tag": "nsfw"
+		},
+		{
+			"name": "AliceSW",
+			"author": "hieu05",
+			"path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/alicesw/plugin.zip",
+			"version": 1,
+			"source": "https://alicesw.com",
+			"icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/alicesw/icon.png",
+			"description": "Read Chinese novels on AliceSW (Fork from B)",
+			"type": "chinese_novel",
+			"locale": "zh_CN",
+			"tag": "nsfw"
 		}
   ]
 }
