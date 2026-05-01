@@ -184,6 +184,11 @@
       "id": "darkrai9x-video",
       "url": "https://raw.githubusercontent.com/Darkrai9x/vbook-extensions/refs/heads/master/video_plugin.json",
       "targetFile": "references/repos/_remote_raw/darkrai9x-vbook-extensions/video_plugin.json"
+    },
+    {
+      "id": "giaays-main",
+      "url": "https://raw.githubusercontent.com/giaays/Vbook-Ext/main/plugin.json",
+      "targetFile": "references/repos/_remote_raw/giaays-vbook-ext/plugin.json"
     }
   ],
   "referenceListUrl": "https://xn--ngc-bmz.vn/i/vbook/extension_list.php#id-22"
