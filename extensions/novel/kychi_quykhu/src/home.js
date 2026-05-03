@@ -1,5 +1,8 @@
 load('config.js');
 
+/**
+ * Main: Get home menu items
+ */
 function execute() {
     return Response.success([
         { title: 'Nổi bật', input: BASE_URL + '/', script: 'gen.js' },

@@ -2,10 +2,10 @@
   "metadata": {
     "name": "QuyKhu",
     "author": "kychi",
-    "version": 3,
+    "version": 4,
     "source": "https://quykhu.com/",
-    "regexp": "(www\\.)?quykhu\\.com/[^/]+/?$",
-    "description": "Đọc truyện từ quykhu.com (migrated từ vozer.io)",
+    "regexp": "(www\\.)?quykhu\\.com/.*",
+    "description": "Đọc truyện từ quykhu.com (vozer.io) - chỉ vbook beta",
     "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"
@@ -17,7 +17,6 @@
     "search": "search.js",
     "page": "page.js",
     "toc": "toc.js",
-    "chap": "chap.js",
-    "gen": "gen.js"
+    "chap": "chap.js"
   }
 }

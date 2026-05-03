@@ -1,104 +1,95 @@
 load('config.js');
-function execute(url) {
-    var doc = loadDocument(url, 15000, 'h1, #content #ct-p, #chapter-list-title');
-    if (!doc) return Response.error('HTTP Error: Unable to load page');
 
-    var name = doc.select('meta[property="og:title"]').attr('content');
-    if (!name) name = doc.select('h1').text().trim();
-    if (!name) name = doc.select('.story-title').text().trim();
-    name = cleanTitle(name);
+function execute(url) {
+    url = normalizeUrl(url);
+    var res = fetchPage(url);
+    if (!res.ok) return Response.error('Không thể tải trang: ' + res.status);
+
+    var doc = res.html();
+    if (!doc) return Response.error('Không thể parse nội dung trang');
+
+    var name = cleanText(doc.select('h1').text());
+    if (!name) name = doc.select('meta[property="og:title"]').attr('content');
 
     var cover = doc.select('meta[property="og:image"]').attr('content');
-    if (!cover) cover = doc.select('.p-3 img').first().attr('src');
-    if (!cover) cover = doc.select('img[alt]').first().attr('src');
+    if (!cover) {
+        var coverImg = doc.select('img[style*="aspect-ratio"]').first();
+        if (coverImg) cover = coverImg.attr('src');
+    }
 
-    var author = extractMetaValue(doc, 'Tác giả');
-    if (!author) author = doc.select('a[href*="/thanh-vien/"]').first().text().trim();
-    if (!author) author = doc.select('[itemprop="author"]').text().trim();
-
-    var description = doc.select('#content #ct-p').html();
-    if (!description) description = doc.select('meta[property="og:description"]').attr('content');
-    if (!description) description = doc.select('.p-3 .inline-block  p').html();
-    if (!description) description = doc.select('.prose').html();
-
-    var statusText = normalizeStatus(extractStatusText(doc));
-    var ongoing = statusText !== 'Hoàn thành';
-
-    var categoryText = extractCategories(doc);
-    var updateText = extractMetaValue(doc, 'Cập nhật');
-    var publishText = extractMetaValue(doc, 'Ngày đăng');
-    var editorText = extractMetaValue(doc, 'Biên tập');
-
+    var author = 'Đang cập nhật';
+    var statusText = 'Đang ra';
+    var genres = [];
     var detailParts = [];
-    if (author) detailParts.push('<p><strong>Tác giả:</strong> ' + author + '</p>');
-    if (categoryText) detailParts.push('<p><strong>Thể loại:</strong> ' + categoryText + '</p>');
-    if (statusText) detailParts.push('<p><strong>Trạng thái:</strong> ' + statusText + '</p>');
-    if (updateText) detailParts.push('<p><strong>Cập nhật:</strong> ' + updateText + '</p>');
-    if (publishText) detailParts.push('<p><strong>Ngày đăng:</strong> ' + publishText + '</p>');
-    if (editorText) detailParts.push('<p><strong>Biên tập:</strong> ' + editorText + '</p>');
-    var detail = detailParts.join('<br>');
+    var authorUrl = '';
+
+    // Parse info rows
+    var infoRows = doc.select('div.flex.items-center');
+    var rowCount = getSize(infoRows);
+    
+    for (var i = 0; i < rowCount; i++) {
+        var row = getElement(infoRows, i);
+        if (!row) continue;
+        
+        var label = row.select('span.text-gray-500').text().trim();
+        if (!label) continue;
+
+        var valEl = row.select('strong, a, span:not(.text-gray-500)').first();
+        if (!valEl) continue;
+        var val = valEl.text().trim();
+
+        if (label.indexOf('Tác giả') >= 0) {
+            author = val;
+            authorUrl = valEl.attr('href');
+            detailParts.push('<b>Tác giả:</b> ' + val);
+        } else if (label.indexOf('Trạng thái') >= 0) {
+            statusText = normalizeStatus(val);
+            detailParts.push('<b>Trạng thái:</b> ' + statusText);
+        } else if (label.indexOf('Thể loại') >= 0) {
+            var genreLinks = row.select('a');
+            var gCount = getSize(genreLinks);
+            var genreTexts = [];
+            for (var j = 0; j < gCount; j++) {
+                var g = getElement(genreLinks, j);
+                var gTitle = g.text().trim();
+                var gUrl = g.attr('href');
+                if (gTitle && gUrl) {
+                    genres.push({
+                        title: gTitle,
+                        input: normalizeUrl(gUrl),
+                        script: 'gen.js'
+                    });
+                    genreTexts.push(gTitle);
+                }
+            }
+            if (genreTexts.length > 0) detailParts.push('<b>Thể loại:</b> ' + genreTexts.join(', '));
+        } else if (label.indexOf('Cập nhật') >= 0 || label.indexOf('Ngày đăng') >= 0) {
+            detailParts.push('<b>' + label + '</b> ' + val);
+        }
+    }
+
+    var description = doc.select('#ct-p').html() || doc.select('.chap').html() || "";
+    var ongoing = statusText.indexOf('Hoàn thành') === -1;
+
+    var suggests = [];
+    if (authorUrl) {
+        suggests.push({
+            title: 'Truyện cùng tác giả',
+            input: normalizeUrl(authorUrl),
+            script: 'gen.js'
+        });
+    }
 
     return Response.success({
         name: name,
-        cover: cover,
+        cover: normalizeUrl(cover),
+        host: BASE_URL,
         author: author,
         description: description,
-        detail: detail,
-        category: categoryText,
+        detail: detailParts.join('<br>'),
         ongoing: ongoing,
-        host: BASE_URL
+        genres: genres,
+        suggests: suggests,
+        link: url
     });
-}
-
-function cleanTitle(title) {
-    if (!title) return '';
-    return String(title).replace(/^Truyện:\s*/i, '').trim();
-}
-
-function extractStatusText(doc) {
-    var text = normalizeStatus(extractMetaValue(doc, 'Trạng thái'));
-    if (text) return text;
-    doc.select('p, span, li').forEach(function(el) {
-        if (text) return;
-        var value = el.text().trim();
-        if (!value) return;
-        var lower = value.toLowerCase();
-        if (lower.indexOf('hoàn thành') >= 0 || lower.indexOf('đã hoàn') >= 0 || lower.indexOf('đang ra') >= 0 || lower.indexOf('full') >= 0) {
-            text = value;
-        }
-    });
-    return text;
-}
-
-function extractMetaValue(doc, label) {
-    var expected = String(label || '').toLowerCase();
-    var result = '';
-    doc.select('div.flex.items-center').forEach(function(row) {
-        if (result) return;
-        var labelEl = row.select('span.font-medium').first();
-        if (!labelEl) return;
-        var labelText = labelEl.text().trim().toLowerCase();
-        if (labelText.indexOf(expected) !== 0) return;
-        row.select('strong, a, span').forEach(function(node) {
-            if (result) return;
-            if (node === labelEl) return;
-            var value = node.text().trim();
-            if (!value || value === ':' || value.toLowerCase() === labelText) return;
-            if (value.indexOf(':') === 0) value = value.substring(1).trim();
-            if (value) result = value;
-        });
-    });
-    return result;
-}
-
-function extractCategories(doc) {
-    var categories = [];
-    var seen = {};
-    doc.select('a[href*="/the-loai/"]').forEach(function(a) {
-        var text = a.text().trim();
-        if (!text || seen[text]) return;
-        seen[text] = true;
-        categories.push(text);
-    });
-    return categories.join(', ');
 }

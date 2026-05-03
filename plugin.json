@@ -41,10 +41,10 @@
       "name": "QuyKhu",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_quykhu/plugin.zip",
-      "version": 3,
+      "version": 4,
       "source": "https://quykhu.com/",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_quykhu/icon.png",
-      "description": "Đọc truyện từ quykhu.com (migrated từ vozer.io)",
+      "description": "Đọc truyện từ quykhu.com (vozer.io) - chỉ vbook beta",
       "type": "novel",
       "locale": "vi_VN"
     },
@@ -101,7 +101,7 @@
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/kychi_cachua/icon.png",
       "description": "Nguồn truyện chữ Trung Quốc từ Fanqie Novel (sói xám to version) - chỉ đọc không tải (Ngoại trừ VIP/SVIP).",
       "type": "chinese_novel",
-      "locale": "vi_VN"
+      "locale": "zh_CN"
     }
   ]
 }

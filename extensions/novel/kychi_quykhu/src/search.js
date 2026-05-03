@@ -1,12 +1,5 @@
 load('config.js');
 
-function normalizeLink(href) {
-    if (!href) return '';
-    if (href.indexOf('http') === 0) return href;
-    if (href.charAt(0) === '/') return BASE_URL + href;
-    return BASE_URL + '/' + href;
-}
-
 function slugToTitle(slug) {
     var s = String(slug || '').trim();
     if (!s) return '';
@@ -29,37 +22,44 @@ function extractCardGenre(card) {
     return '';
 }
 
-function execute(key, page) {
-    if (!page) page = '1';
-    var response = fetchPage(BASE_URL + '/search?keyword=' + key, {
+function execute(input, page) {
+    var key = input;
+    var p = page || '1';
+    
+    // Handle array input (legacy vBook)
+    if (typeof input !== 'string' && getSize(input) >= 1) {
+        key = getElement(input, 0);
+        p = getElement(input, 1) || '1';
+    }
+
+    var response = fetchPage(BASE_URL + '/search?keyword=' + encodeURIComponent(key), {
         method: 'GET',
-        queries: {
-            page: page
-        }
+        queries: { page: p }
     });
 
-    if (!response.ok) {
-        return Response.error('HTTP Error: ' + response.status);
-    }
+    if (!response.ok) return Response.error('HTTP Error: ' + response.status);
 
     var doc = response.html();
     var comiclist = [];
     var next = null;
+
     var nextAnchor = doc.select('.my-5 nav a').last();
     if (nextAnchor) {
         var nextHref = nextAnchor.attr('href') || '';
         var nextMatch = nextHref.match(/\d+$/);
-        if (nextMatch != null) {
-            next = nextMatch[0];
-        }
+        if (nextMatch) next = nextMatch[0];
     }
 
     var cards = doc.select('#postTabsContent .group.flex.items-start');
-    if (cards.size() === 0) {
+    if (getSize(cards) === 0) {
         cards = doc.select('#postTabsContent a.relative.shrink-0, .container .mb-3 .mx-auto .flex');
     }
 
-    cards.forEach(function(e) {
+    var cardCount = getSize(cards);
+    for (var i = 0; i < cardCount; i++) {
+        var e = getElement(cards, i);
+        if (!e) continue;
+
         var a = e.select('a').first();
         if (!a) a = e;
         var img = e.select('img').first();
@@ -67,19 +67,22 @@ function execute(key, page) {
         var authorText = '';
         var authorEl = e.select('a[href*="/thanh-vien/"]').first();
         if (authorEl) authorText = authorEl.text().trim();
+        
         var name = a.attr('title') || (a ? a.text().trim() : '');
         if (!name && img) name = img.attr('alt') || '';
-        var link = normalizeLink(a ? a.attr('href') : '');
+        var link = normalizeUrl(a ? a.attr('href') : '');
         var cover = img ? (img.attr('src') || img.attr('data-src') || '') : '';
-        if (cover.indexOf('//') === 0) cover = 'https:' + cover;
-        if (!name || !link) return;
+        
+        if (!name || !link || link === BASE_URL || link === BASE_URL + '/') continue;
+
         comiclist.push({
             name: name,
             link: link,
-            cover: cover,
+            cover: normalizeUrl(cover),
             description: genreText || authorText || '',
             host: BASE_URL
         });
-    });
+    }
     return Response.success(comiclist, next);
 }
+

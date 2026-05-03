@@ -1,114 +1,147 @@
 load('config.js');
+try { load('crypto.js'); } catch (e) {}
 
+/**
+ * Main executor: Lấy nội dung chương từ quykhu.com
+ */
 function execute(url) {
-    var response = fetchPage(url);
-    if (!response.ok) return Response.error('HTTP Error: ' + response.status);
+    url = String(url || '').trim();
+    if (!url) return Response.error('URL chương không hợp lệ.');
 
-    var doc = response.html();
-    var content = doc.select('.smiley').html() || '';
-    if (content && content.indexOf('window.__loadXorContent') === -1) {
+    var doc = null;
+    if (typeof Engine !== 'undefined' && Engine && typeof Engine.newBrowser === 'function') {
+        try {
+            var browser = Engine.newBrowser();
+            doc = browser.launch(url, 15000);
+            if (browser.close) try { browser.close(); } catch(e) {}
+        } catch (e) {}
+    }
+
+    if (!doc) {
+        var resp = fetchPage(url);
+        if (resp.ok) doc = resp.html();
+    }
+
+    if (!doc) return Response.error('Không tải được nội dung trang.');
+
+    var rawHTML = '';
+    try { rawHTML = doc.html(); } catch (e) { rawHTML = ''; }
+
+    var content = '';
+    var contentEls = doc.select('.smiley, #content, .chapter-content, #chapter-content');
+    if (getSize(contentEls) > 0) {
+        content = getElement(contentEls, 0).html();
+    }
+
+    if (!content || content.indexOf('window.__loadXorContent') !== -1 || content.length < 50) {
+        content = manualXorDecrypt(doc, rawHTML) || content;
+    }
+
+    if (!content || content.length < 50) {
+        var m = rawHTML.match(/<div[^>]*class=["']?smiley["']?[^>]*>([\s\S]*?)<\/div>/i);
+        if (m && m[1]) content = m[1];
+    }
+
+    if (content && content.length > 50) {
         return Response.success(cleanContent(content));
     }
 
+    return Response.error('Không tìm thấy nội dung chương hoặc giải mã thất bại.');
+}
+
+function manualXorDecrypt(doc, rawHTML) {
     var endpoint = '';
-    doc.select('script').forEach(function(s) {
-        if (endpoint) return;
-        var t = s.html() || '';
-        var m = t.match(/https?:\/\/[^"']+\/r\/c\/(\d+)/) || t.match(/['"](\/r\/c\/\d+)['"]/);
-        if (m) {
-            endpoint = m[0].indexOf('/r/c/') >= 0 && m[0].indexOf('http') === 0 ? m[0] : (BASE_URL + m[1]);
-        }
-    });
+    var xorKey = '';
+
+    var m = rawHTML.match(/fetch\s*\(\s*["'](\/r\/c\/(\d+))/);
+    if (m && m[1]) endpoint = normalizeUrl(m[1]);
+    
     if (!endpoint) {
-        var idMatch = String(url).match(/\/chuong-(\d+)/i);
-        if (idMatch) endpoint = BASE_URL + '/r/c/' + idMatch[1];
+        var m2 = rawHTML.match(/\/r\/c\/(\d+)/);
+        if (m2) endpoint = normalizeUrl(m2[0]);
     }
-    if (!endpoint) return Response.error('Không tìm được endpoint nội dung chương.');
 
-    var payloadResp = fetchPage(endpoint, {
-        headers: {
-            'Accept': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest'
+    var keyMatch = rawHTML.match(/(?:window\.__xorKey|__key|xor_?key)\s*=\s*["']([^"']+)["']/i);
+    if (keyMatch) xorKey = keyMatch[1];
+    
+    if (!xorKey) {
+        var scripts = doc.select('script');
+        var scriptCount = getSize(scripts);
+        for (var i = 0; i < scriptCount; i++) {
+            var st = getElement(scripts, i).html();
+            var km = st.match(/(?:__xorKey|__key|xor_?key)\s*=\s*["']([^"']+)["']/i);
+            if (km) { xorKey = km[1]; break; }
         }
-    });
-    if (!payloadResp.ok) return Response.error('HTTP Error: ' + payloadResp.status);
-
-    var payload = payloadResp.json();
-    if (!payload || !payload.d || !payload.k) {
-        return Response.error('Payload chương không hợp lệ.');
     }
 
-    var decoded = xorDecode(payload.d, payload.k);
-    if (!decoded) return Response.error('Giải mã nội dung thất bại.');
-    return Response.success(cleanContent(decoded));
+    if (endpoint && xorKey) {
+        var payloadResp = fetchPage(endpoint, {
+            headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+        });
+        if (payloadResp.ok) {
+            try {
+                var payload = JSON.parse(payloadResp.text());
+                var data = payload.d || (payload.data && payload.data.d) || (typeof payload.data === 'string' ? payload.data : '');
+                var key = payload.k || (payload.data && payload.data.k) || xorKey;
+                
+                if (data && key) {
+                    return xorDecode(data, key);
+                }
+            } catch (e) {}
+        }
+    }
+    return '';
 }
 
 function xorDecode(base64Text, key) {
     try {
-        var bytes = base64ToBytes(String(base64Text || ''));
-        var keyStr = String(key || '');
-        if (!keyStr || !bytes.length) return '';
-
-        var decodedBytes = [];
-        for (var i = 0; i < bytes.length; i++) {
-            var k = keyStr.charCodeAt(i % keyStr.length) & 255;
-            decodedBytes.push(bytes[i] ^ k);
+        if (!base64Text || !key) return '';
+        
+        var raw;
+        var hasCrypto = false;
+        try { hasCrypto = (typeof CryptoJS !== 'undefined'); } catch(e) {}
+        
+        if (hasCrypto) {
+            var wa = CryptoJS.enc.Base64.parse(base64Text);
+            raw = CryptoJS.enc.Latin1.stringify(wa);
+        } else {
+            if (typeof atob === 'function') {
+                raw = atob(base64Text);
+            } else {
+                return '';
+            }
         }
 
-        return utf8DecodeBytes(decodedBytes);
+        var result = [];
+        var keyLen = key.length;
+        for (var i = 0; i < raw.length; i++) {
+            result.push(String.fromCharCode(raw.charCodeAt(i) ^ key.charCodeAt(i % keyLen)));
+        }
+        var decoded = result.join('');
+
+        try {
+            return decodeURIComponent(escape(decoded));
+        } catch (e) {
+            return decoded;
+        }
     } catch (e) {
         return '';
     }
 }
 
-function base64ToBytes(input) {
-    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-    var str = String(input || '').replace(/[^A-Za-z0-9\+\/\=]/g, '');
-    var out = [];
-    var i = 0;
-
-    while (i < str.length) {
-        var enc1 = chars.indexOf(str.charAt(i++));
-        var enc2 = chars.indexOf(str.charAt(i++));
-        var enc3 = chars.indexOf(str.charAt(i++));
-        var enc4 = chars.indexOf(str.charAt(i++));
-
-        var chr1 = (enc1 << 2) | (enc2 >> 4);
-        var chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-        var chr3 = ((enc3 & 3) << 6) | enc4;
-
-        out.push(chr1 & 255);
-        if (enc3 !== 64) out.push(chr2 & 255);
-        if (enc4 !== 64) out.push(chr3 & 255);
-    }
-
-    return out;
-}
-
-function utf8DecodeBytes(bytes) {
-    var out = '';
-    var i = 0;
-    while (i < bytes.length) {
-        var c = bytes[i++];
-        if (c < 128) {
-            out += String.fromCharCode(c);
-        } else if (c > 191 && c < 224) {
-            var c2 = bytes[i++] || 0;
-            out += String.fromCharCode((c & 31) << 6 | c2 & 63);
-        } else {
-            var c2b = bytes[i++] || 0;
-            var c3 = bytes[i++] || 0;
-            out += String.fromCharCode((c & 15) << 12 | (c2b & 63) << 6 | (c3 & 63));
-        }
-    }
-    return out;
-}
-
 function cleanContent(content) {
-    return String(content || '')
-        .replace(/\n/gm, '<br>')
-        .replace(/&(nbsp|amp|quot|lt|gt|bp|emsp);/g, ' ')
-        .replace(/(<br\s*\/?>(\s|&nbsp;)*){2,}/g, '<br>')
-        .replace(/<img[^>]*>/gi, '')
-        .replace(/<\/?p[^>]*>/gi, '');
+    if (!content) return '';
+    var result = String(content);
+    
+    result = result.replace(/<script[\s\S]*?<\/script>/gi, '');
+    result = result.replace(/<style[\s\S]*?<\/style>/gi, '');
+    result = result.replace(/window\.__loadXorContent[\s\S]*?<\/script>/gi, '');
+    result = result.replace(/&nbsp;/g, ' ');
+    result = result.replace(/<(?!br|p|\/p|img)[^>]+>/gi, '');
+    result = result.replace(/\n/gm, '<br>');
+    result = result.replace(/(?:<br\s*\/?>\s*)+/gi, '<br>');
+    
+    return result.trim();
 }
+
+
