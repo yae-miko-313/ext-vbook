@@ -1,0 +1,22 @@
+{
+    "metadata": {
+        "name": "PhimFun",
+        "author": "kychi",
+        "version": 1,
+        "source": "https://phimfun.net",
+        "regexp": "phimfun\\.net/(phim|xem-phim)/.*",
+        "description": "Xem phim trên PhimFun",
+        "locale": "vi_VN",
+        "language": "javascript",
+        "type": "video"
+    },
+    "script": {
+        "home": "home.js",
+        "genre": "genre.js",
+        "detail": "detail.js",
+        "search": "search.js",
+        "toc": "toc.js",
+        "chap": "chap.js",
+        "track": "track.js"
+    }
+}

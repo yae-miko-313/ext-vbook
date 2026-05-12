@@ -108,5 +108,27 @@
       "language": "javascript",
       "type": "video"
     }
+  },
+  {
+    "folder": "kychi_phimfun",
+    "name": "PhimFun",
+    "author": "kychi",
+    "description": "Xem phim trên PhimFun",
+    "source": "https://phimfun.net",
+    "version": 1,
+    "type": "video",
+    "locale": "vi_VN",
+    "relativePath": "extensions/video/kychi_phimfun",
+    "metadata": {
+      "name": "PhimFun",
+      "author": "kychi",
+      "version": 1,
+      "source": "https://phimfun.net",
+      "regexp": "phimfun\\.net/(phim|xem-phim)/.*",
+      "description": "Xem phim trên PhimFun",
+      "locale": "vi_VN",
+      "language": "javascript",
+      "type": "video"
+    }
   }
 ]
