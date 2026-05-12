@@ -64,5 +64,27 @@
       "type": "video",
       "language": "javascript"
     }
+  },
+  {
+    "folder": "kychi_ophim",
+    "name": "OPhim",
+    "author": "kychi",
+    "description": "Xem Phim trên OPhim",
+    "source": "https://ophim17.cc",
+    "version": 1,
+    "type": "video",
+    "locale": "vi_VN",
+    "relativePath": "extensions/video/kychi_ophim",
+    "metadata": {
+      "name": "OPhim",
+      "author": "kychi",
+      "version": 1,
+      "source": "https://ophim17.cc",
+      "regexp": "ophim17.cc/phim/.*|ophim1.com/phim/.*",
+      "description": "Xem Phim trên OPhim",
+      "locale": "vi_VN",
+      "language": "javascript",
+      "type": "video"
+    }
   }
 ]

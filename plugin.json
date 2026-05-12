@@ -102,6 +102,17 @@
       "description": "Nguồn truyện chữ Trung Quốc từ Fanqie Novel (sói xám to version) - chỉ đọc không tải (Ngoại trừ VIP/SVIP).",
       "type": "chinese_novel",
       "locale": "zh_CN"
+    },
+    {
+      "name": "OPhim",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_ophim/plugin.zip",
+      "version": 1,
+      "source": "https://ophim17.cc",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_ophim/icon.png",
+      "description": "Xem phim Online miễn phí chất lượng cao tại OPhim. Hỗ trợ đầy đủ Vietsub/Thuyết Minh qua API chính thức.",
+      "type": "video",
+      "locale": "vi_VN"
     }
   ]
 }
