@@ -113,6 +113,17 @@
       "description": "Xem phim Online miễn phí chất lượng cao tại OPhim. Hỗ trợ đầy đủ Vietsub/Thuyết Minh qua API chính thức.",
       "type": "video",
       "locale": "vi_VN"
+    },
+    {
+      "name": "NguonC",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_nguonc/plugin.zip",
+      "version": 1,
+      "source": "https://phim.nguonc.com",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_nguonc/icon.png",
+      "description": "Xem phim từ NguonC",
+      "type": "video",
+      "locale": "vi_VN"
     }
   ]
 }

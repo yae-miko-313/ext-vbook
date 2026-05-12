@@ -66,6 +66,28 @@
     }
   },
   {
+    "folder": "kychi_nguonc",
+    "name": "NguonC",
+    "author": "kychi",
+    "description": "Xem phim từ NguonC API",
+    "source": "https://phim.nguonc.com",
+    "version": 1,
+    "type": "video",
+    "locale": "vi_VN",
+    "relativePath": "extensions/video/kychi_nguonc",
+    "metadata": {
+      "name": "NguonC",
+      "author": "kychi",
+      "version": 1,
+      "source": "https://phim.nguonc.com",
+      "regexp": "(www\\.)?phim\\.nguonc\\.com/phim/.*",
+      "description": "Xem phim từ NguonC API",
+      "locale": "vi_VN",
+      "type": "video",
+      "language": "javascript"
+    }
+  },
+  {
     "folder": "kychi_ophim",
     "name": "OPhim",
     "author": "kychi",
