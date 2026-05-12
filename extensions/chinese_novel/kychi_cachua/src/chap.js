@@ -1,20 +1,25 @@
 load('config.js');
 
 function execute(url) {
-    // URL format: {BASE_URL}/content?item_id=...&book_id=...
     var itemIdMatch = url.match(/item_id=([^&]+)/);
     var bookIdMatch = url.match(/book_id=([^&]+)/);
 
     var itemId = itemIdMatch ? itemIdMatch[1] : null;
     var bookId = bookIdMatch ? bookIdMatch[1] : null;
 
-    if (!itemId || !bookId) {
-        return Response.error("Không tìm thấy ID chương hoặc ID truyện trong URL: " + url);
+    if (!itemId) {
+        // Fallback for direct original links if provided
+        var m = url.match(/(\d+)/);
+        itemId = m ? m[1] : null;
+    }
+
+    if (!itemId) {
+        return Response.error("Không tìm thấy ID chương trong URL: " + url);
     }
 
     var body = {
         item_id: itemId,
-        book_id: bookId,
+        book_id: bookId || "",
         source: "番茄",
         tab: "小说",
         version: '5.3.2',
@@ -42,10 +47,12 @@ function execute(url) {
             var json = SafeJson(response);
             var content = "";
 
-            if (json && json.content) {
-                content = json.content;
-            } else if (json && json.data && json.data.content) {
-                content = json.data.content;
+            if (json) {
+                if (json.data && (json.data.content || json.data.text)) {
+                    content = json.data.content || json.data.text;
+                } else if (json.content || json.text) {
+                    content = json.content || json.text;
+                }
             }
 
             if (content) {

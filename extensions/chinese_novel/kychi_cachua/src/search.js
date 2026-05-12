@@ -2,27 +2,26 @@ load('config.js');
 
 function execute(key, page) {
     if (!page) page = 1;
-    var url = BASE_URL + "/api/search?keywords=" + encodeURIComponent(key) + "&page=" + page;
+    var url = BASE_URL + "/search?title=" + encodeURIComponent(key) + "&tab=小说&source=番茄&page=" + page;
     
     var response = fetchWithUA(url);
     if (response.ok) {
-        var json = response.json();
+        var json = SafeJson(response);
         var list = [];
-        
-        // Use the same robust finder as gen.js
         var bookList = findBookList(json);
 
         if (bookList && Array.isArray(bookList)) {
             bookList.forEach(function(item) {
-                var name = item.book_name || item.title || item.bookName;
-                if (name) {
+                var bookId = item.book_id || item.bookId || item.id;
+                var name = item.book_name || item.title;
+                if (name && bookId) {
                     list.push({
-                        name: name,
-                        cover: replaceCover(item.book_cover || item.thumb_url || item.thumbUri),
-                        author: item.book_author || item.author,
-                        description: item.book_abstract || item.abstract,
-                        detail: (item.book_sort || item.category || "") + " | " + (item.book_word_count || item.word_number || "") + " 字",
-                        link: BASE_URL + "/api/detail?bookId=" + (item.book_id || item.bookId),
+                        name: decodeText(name),
+                        cover: replaceCover(item.book_cover || item.thumb_url),
+                        author: decodeText(item.book_author || item.author),
+                        description: decodeText(item.book_abstract || item.abstract),
+                        detail: (item.book_sort || item.category || "") + " | " + (item.score || "") + "分",
+                        link: getOriginalLink(bookId), // ★ Numeric link
                         host: BASE_URL
                     });
                 }
@@ -32,20 +31,19 @@ function execute(key, page) {
         var next = (list.length >= 10) ? (parseInt(page, 10) + 1).toString() : null;
         return Response.success(list, next);
     }
-
-    return Response.error("Lỗi tìm kiếm (HTTP " + response.status + ")");
+    return Response.error("Lỗi HTTP " + response.status);
 }
 
 function findBookList(obj) {
     if (!obj) return null;
     if (Array.isArray(obj)) return obj;
-    var keys = ["request_result", "data", "book_list", "list", "ret_data"];
+    var keys = ["data", "book_list", "list", "ret_data", "result"];
     for (var i = 0; i < keys.length; i++) {
         var k = keys[i];
         if (obj[k]) {
             if (Array.isArray(obj[k])) return obj[k];
             var sub = findBookList(obj[k]);
-            if (sub && Array.isArray(sub) && sub.length > 0) return sub;
+            if (sub) return sub;
         }
     }
     return null;

@@ -340,13 +340,13 @@ function execute(input) {
 
 | Phân vùng | Mục đích |
 | :--- | :--- |
-| `extensions/` + `tools/cli/` | Phân vùng cá nhân (tạo/sửa extension) |
-| `.private/extensions/` | Private, gitignored, không lên catalog |
-| `ref/` + `web/` | Phân vùng cộng đồng |
+| `extensions/` + `tools/cli/` | Phân vùng cốt lõi (Core) - Quản lý & Build Extension |
+| `.private/extensions/` | Phân vùng cá nhân private |
+| `vbook-web-service/` | Phân vùng Web & API Portal (chuẩn bị tách repo) |
 | `.private/code-reference/` | Code reference cho agent |
 | `docs/` | Tài liệu hướng dẫn |
 
-**Khi viết extension**: Chỉ quan tâm tới `extensions/`. Catalog cộng đồng được xử lý bởi workflow riêng.
+**Khi viết extension**: Chỉ quan tâm tới `extensions/`. Việc hiển thị lên web portal được xử lý bởi API trong folder web service.
 
 ---
 

@@ -1,29 +1,30 @@
 load('config.js');
 
 function execute(url) {
-    var bookIdMatch = url.match(/(?:bookId=|page\/|detail\/)([a-zA-Z0-9_-]+)/);
-    var bookId = bookIdMatch ? bookIdMatch[1] : null;
-    
-    if (!bookId) {
-        return Response.error("Không tìm thấy Book ID trong URL: " + url);
-    }
+    var bookId = extractBookId(url);
+    if (!bookId) return Response.error('Không tìm thấy Book ID');
 
-    var apiUrl = BASE_URL + "/catalog?book_id=" + bookId + "&source=番茄&tab=小说";
+    var apiUrl = BASE_URL + '/catalog?book_id=' + bookId + '&source=番茄&tab=小说';
     var response = fetchWithUA(apiUrl);
     
     if (response.ok) {
         var json = SafeJson(response);
         var chapters = [];
-        var chapterList = json.data;
+        var chapterList = (json && json.data) ? json.data : json;
 
         if (chapterList && Array.isArray(chapterList)) {
             chapterList.forEach(function(item) {
+                var itemId = item.item_id || item.id;
                 chapters.push({
-                    name: decodeText(item.title),
-                    url: BASE_URL + "/content?item_id=" + item.item_id + "&book_id=" + bookId + "&source=番茄&tab=小说",
+                    name: decodeText(item.title || item.name || ""),
+                    url: BASE_URL + "/content?item_id=" + itemId + "&book_id=" + bookId + "&source=番茄&tab=小说",
                     host: BASE_URL
                 });
             });
+        }
+
+        if (chapters.length === 0) {
+            return Response.error("Mục lục trống hoặc sai cấu trúc dữ liệu.");
         }
 
         return Response.success(chapters);

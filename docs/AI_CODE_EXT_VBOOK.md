@@ -1,4 +1,4 @@
-﻿# Agent Guide — VBook Extension
+# Agent Guide — VBook Extension
 
 Tài liệu này dành cho agent và contributor khi viết/sửa extension ở phân vùng cá nhân của repo.
 
@@ -60,10 +60,10 @@ Nếu ext không muốn public, đặt toàn bộ trong `.private/extensions/**`
 
 ## 7. Phân vùng repo
 
-- `extensions/` và `tools/cli/` là phân vùng cá nhân.
-- `.private/extensions/` là phân vùng cá nhân private, không lên catalog public.
-- `ref/` và `web/` là phân vùng cộng đồng.
-- Khi viết extension, chỉ quan tâm tới phân vùng cá nhân; catalog cộng đồng được xử lý bởi workflow riêng.
+- `extensions/` và `tools/cli/` là phân vùng cốt lõi (Core Repo).
+- `.private/extensions/` là phân vùng cá nhân private.
+- `vbook-web-service/` là phân vùng cổng thông tin Web & API (chuẩn bị tách repo riêng).
+- Khi viết extension, chỉ quan tâm tới phân vùng cá nhân; việc hiển thị lên web được xử lý bởi API trong folder web service.
 
 ## 8. Đọc thêm
 

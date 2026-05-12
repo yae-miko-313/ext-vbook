@@ -5,7 +5,7 @@ const { execSync } = require('child_process');
 async function handleSyncRefCommand(options, workspaceRoot) {
     const reposDir = path.join(workspaceRoot, '.private', 'references', 'repos');
     const codeRefDir = path.join(workspaceRoot, '.private', 'code-reference');
-    const remoteSourcesPath = path.join(workspaceRoot, 'web', 'remote-sources.json');
+    const remoteSourcesPath = path.join(workspaceRoot, 'vbook-web-service', 'web', 'remote-sources.json');
 
     if (!fs.existsSync(reposDir)) fs.mkdirSync(reposDir, { recursive: true });
     if (!fs.existsSync(codeRefDir)) fs.mkdirSync(codeRefDir, { recursive: true });
@@ -15,7 +15,7 @@ async function handleSyncRefCommand(options, workspaceRoot) {
 
     // 1. Load remote sources
     if (!fs.existsSync(remoteSourcesPath)) {
-        console.error('[ERROR] web/remote-sources.json not found.');
+        console.error(`[ERROR] ${remoteSourcesPath} not found.`);
         return false;
     }
 

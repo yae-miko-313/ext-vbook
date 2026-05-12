@@ -6,9 +6,9 @@ Tài liệu đóng góp chính cho repo.
 
 - **Public extensions**: `extensions/**` - Chứa các extension công khai cho cộng đồng (phải chạy build:catalog).
 - **Private extensions**: `.private/extensions/**` - Không public, không vào catalog, được ignore bởi git.
-- **Code reference**: `.private/code-reference/**` - **CLI**: `tools/cli/**` - Công cụ chính (Version 3 focus).
-- **Web viewer**: `web/**` - Giao diện hiển thị cộng đồng (Served directly by Vercel).
-- **Docs**: `docs/**` - Documentation.
+- **Gitea Private extensions**: `.tea-ext/**` - Chứa các extension upload lên Gitea (private).
+- **CLI & Tools**: `tools/cli/**` - Công cụ quản lý chính.
+- **Docs**: `docs/**` - Tài liệu hướng dẫn.
 
 ## Prerequisites
 
@@ -52,15 +52,10 @@ npm run build:catalog
 
 **BẮT BUỘC** cập nhật personal catalog mỗi khi thêm extension mới.
 
-### Step 5: Verify locally with Unified Server
+### Step 5: Verify locally
+Bạn có thể dùng VSCode Tester hoặc các công cụ debug trong `tools/cli/` để kiểm tra extension.
 
-Mở web viewer để kiểm tra extension xuất hiện trong view:
-
-```bash
-npm run vercel-dev
-```
-
-Mở `http://localhost:3000` để test.
+Đối với việc hiển thị trên Web Viewer, vui lòng tham khảo [vbook-web-service/README.md](../vbook-web-service/README.md) để chạy local portal.
 
 ## Pull Request Checklist
 
@@ -68,7 +63,6 @@ Mở `http://localhost:3000` để test.
 - [ ] Code tham khảo `docs/AI_CODE_EXT_VBOOK.md` contract
 - [ ] Extension đã build zip (`npm run build:ext`) ✓ CRITICAL
 - [ ] **Personal catalog đã rebuild** (`npm run build:catalog`) ✓ CRITICAL
-- [ ] Đã test hiển thị trên Unified Dev Server (`npm run vercel-dev`)
 - [ ] Không commit runtime reports (`tools/cli/reports/`)
 - [ ] README + docs cập nhật nếu có thay đổi workflow
 
@@ -84,8 +78,8 @@ Mở `http://localhost:3000` để test.
 
 | Issue | Cause | Solution |
 | :--- | :--- | :--- |
-| Extension không xuất hiện trong web | API Backend không fetch được source | Kiểm tra `web/remote-sources.json`, chạy lại `vercel dev` |
-| Author count = 0 | Missing `author` field | Edit `extensions/*/plugin.json` thêm author |
+| Lỗi build ZIP | Folder thiếu `plugin.json` hoặc `src/` | Kiểm tra lại cấu trúc folder extension |
+| Lỗi catalog | Không tìm thấy extension sau khi thêm | Đảm bảo đã chạy `npm run build:catalog` |
 
 ## Docs update policy
 
@@ -106,15 +100,6 @@ extensions/                 # Chỉ edit qua CLI
 │   │   └── plugin.json      # Metadata
 │   └── plugin.json          # Type catalog (auto-generated)
 └── plugin.json              # Root catalog (auto-generated)
-
-web/                        # Giao diện Frontend
-├── index.html
-├── remote-sources.json      # Danh sách nguồn cho Backend
-├── script.js
-└── style.css
-
-api/                        # Vercel Backend API
-└── ...
 
 tools/cli/
 ├── index.js                 # Main entrypoint
