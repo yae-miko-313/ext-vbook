@@ -66,6 +66,28 @@
     }
   },
   {
+    "folder": "kychi_motchill",
+    "name": "Motchill",
+    "author": "kychi",
+    "description": "Xem phim trên Motchill - Phim hay, phim mới HD Vietsub",
+    "source": "https://envasion.net",
+    "version": 1,
+    "type": "video",
+    "locale": "vi_VN",
+    "relativePath": "extensions/video/kychi_motchill",
+    "metadata": {
+      "name": "Motchill",
+      "author": "kychi",
+      "version": 1,
+      "source": "https://envasion.net",
+      "regexp": "envasion\\.net/(phim-|xem-phim/|the-loai/|quoc-gia/).*",
+      "description": "Xem phim trên Motchill - Phim hay, phim mới HD Vietsub",
+      "locale": "vi_VN",
+      "language": "javascript",
+      "type": "video"
+    }
+  },
+  {
     "folder": "kychi_nguonc",
     "name": "NguonC",
     "author": "kychi",

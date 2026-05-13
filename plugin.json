@@ -126,6 +126,17 @@
       "locale": "vi_VN"
     },
     {
+      "name": "Motchill",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_motchill/plugin.zip",
+      "version": 1,
+      "source": "https://envasion.net",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_motchill/icon.png",
+      "description": "Xem phim trên Motchill - Phim hay, phim mới HD Vietsub",
+      "type": "video",
+      "locale": "vi_VN"
+    },
+    {
       "name": "NguonC",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_nguonc/plugin.zip",

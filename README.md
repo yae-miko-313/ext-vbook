@@ -24,6 +24,7 @@ https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhkungfu/icon.png" width="40"> | **HHKUNGFU** | [hhkungfu.ee](https://hhkungfu.ee) | 1 | video | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_ophim/icon.png" width="40"> | **OPhim** | [ophim17.cc](https://ophim17.cc) | 1 | video | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_phimfun/icon.png" width="40"> | **PhimFun** | [phimfun.net](https://phimfun.net) | 1 | video | vi_VN |
+| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_motchill/icon.png" width="40"> | **Motchill** | [envasion.net](https://envasion.net) | 1 | video | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_nguonc/icon.png" width="40"> | **NguonC** | [phim.nguonc.com](https://phim.nguonc.com) | 1 | video | vi_VN |
 
 ---
