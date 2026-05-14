@@ -24,7 +24,6 @@ Khác với Novel/Comic, Video Extension có quy trình lấy dữ liệu qua 2 
 
 Bắt buộc trường `type` phải là `"video"`.
 
-
 ```json
 {
   "metadata": {
@@ -59,7 +58,6 @@ Cần lưu ý trường `format` để App hiển thị giao diện phù hợp.
 - `format: "series"`: Hiển thị danh sách tập (phim bộ).
 - `format: "movie"`: Hiển thị nút "Xem ngay" (phim lẻ).
 
-
 ```javascript
 function execute(url) {
     // ... fetch dữ liệu từ url ...
@@ -80,7 +78,6 @@ function execute(url) {
 
 Trả về danh sách các tập phim. Có thể phân chia theo Server bằng `type: "section"`.
 
-
 ```javascript
 function execute(url) {
     let list = [];
@@ -97,7 +94,6 @@ function execute(url) {
 
 Đóng vai trò là **Server Picker**. Khi user nhấn vào 1 tập, app sẽ gọi script này để lấy danh sách các nguồn phát.
 
-
 ```javascript
 function execute(url) {
     // url là link tập phim từ toc.js
@@ -112,7 +108,6 @@ function execute(url) {
 ### D. Track Script (`track.js`)
 
 Đây là bước cuối cùng. App sẽ lấy `data` từ `chap.js` đưa vào đây để lấy link stream thực tế.
-
 
 ```javascript
 function execute(data) {
@@ -136,9 +131,8 @@ function execute(data) {
 ## 4. Các loại luồng Video (`type` trong `track.js`)
 
 1. **`native`**: Dùng cho link trực tiếp `.m3u8` hoặc `.mp4`. Player của vBook sẽ tự xử lý.
-2. **`iframe`**: Dùng khi web phim bắt buộc dùng trình phát của họ. vBook sẽ nhúng link vào một webview.
+2. **`iframe`**: Dùng khi web phim bắt buộc dùng trình phát của họ. vBook sẽ nhúng link vào một webview.// KHÔNG CÓ IFRAME ĐÂU, DÙNG AUTO CHO CÁC LINK EMBED
 3. **`auto`**: Để hệ thống tự nhận diện dựa trên header `Content-Type`.
-
 
 ---
 

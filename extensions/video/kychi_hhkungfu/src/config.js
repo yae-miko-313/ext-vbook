@@ -2,23 +2,15 @@ var BASE_URL = "https://hhkungfu.ee";
 
 function normalizeUrl(url) {
     if (!url) return BASE_URL;
-    if (typeof url !== "string") {
-        if (Array.isArray(url) && url.length > 0) {
-            url = url[0];
-        } else {
-            return BASE_URL;
-        }
-    }
+    if (typeof url !== "string") return BASE_URL;
     
-    // Nếu đã có http, giữ nguyên
+    if (url.indexOf("//") === 0) return "https:" + url;
     if (url.indexOf("http") === 0) return url;
     
-    // Thêm BASE_URL vào đầu
-    if (url.indexOf("/") === 0) url = BASE_URL + url;
-    else url = BASE_URL + "/" + url;
-    
-    return url;
+    if (url.indexOf("/") === 0) return BASE_URL + url;
+    return BASE_URL + "/" + url;
 }
+
 
 function cleanText(text) {
     if (!text) return "";

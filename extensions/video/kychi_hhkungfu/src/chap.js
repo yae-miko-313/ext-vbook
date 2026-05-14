@@ -2,70 +2,72 @@ load('config.js');
 
 function execute(url) {
     url = normalizeUrl(url);
-    
-    // Fetch trực tiếp
     var response = fetch(url, {
         headers: {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Accept-Language": "vi-VN,vi;q=0.9,en;q=0.7"
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         }
     });
     
     if (!response.ok) return Response.success([]);
-    
     var doc = response.html();
-    if (!doc) return Response.success([]);
     
     var servers = [];
+    var serverBlocks = doc.select(".halim-server");
     
-    // Parse quality/server options from page if available
-    var qualityButtons = doc.select(".get-eps.play-listsv");
-    if (qualityButtons.size() > 0) {
-        qualityButtons.forEach(function(btn) {
-            var type = btn.attr("data-type") || "";
-            var title = cleanText(btn.text()) || type;
-            if (!title) title = "Server " + type;
-            
-            servers.push({
-                title: title,
-                data: url + "#" + type
-            });
-        });
+    // Find current episode name to match across servers
+    var currentEp = "";
+    var activeItem = doc.select(".halim-episode li a.active").first();
+    if (activeItem) {
+        currentEp = activeItem.attr("data-ep");
     }
     
-    // Luôn thêm các server mặc định bằng cách thay đổi sv trong URL
-    // Ví dụ: .../tap-1-sv2.html -> .../tap-1-sv1.html
-    var svList = [
-        { id: "1", name: "Vietsub (SV1)" },
-        { id: "2", name: "Thuyết Minh (SV2)" },
-        { id: "3", name: "Dự phòng (SV3)" }
-    ];
-    
-    svList.forEach(function(sv) {
-        var newUrl = url;
-        if (url.indexOf("-sv") > 0) {
-            newUrl = url.replace(/-sv\d+/, "-sv" + sv.id);
-        } else {
-            newUrl = url.replace(/\.html$/, "-sv" + sv.id + ".html");
-        }
+    serverBlocks.forEach(function(block) {
+        var serverName = cleanText(block.select(".halim-server-name").text()).replace(/[:#]/g, "").trim();
+        var episodeLink = currentEp ? block.select("a[data-ep='" + currentEp + "']").first() : block.select(".halim-episode a").first();
         
-        // Tránh trùng lặp với các server đã parse được
-        var isDuplicate = false;
-        for (var i = 0; i < servers.length; i++) {
-            if (servers[i].title.indexOf(sv.id) >= 0) {
-                isDuplicate = true;
-                break;
-            }
-        }
-        
-        if (!isDuplicate) {
-            servers.push({
-                title: sv.name,
-                data: newUrl
-            });
+        if (episodeLink) {
+            var postId = episodeLink.attr("data-post-id");
+            var ep = episodeLink.attr("data-ep");
+            var sv = episodeLink.attr("data-sv");
+            
+            // Perform AJAX immediately to get the RAW EMBED URL
+            try {
+                var ajaxResp = fetch(BASE_URL + "/wp-admin/admin-ajax.php", {
+                    method: "POST",
+                    headers: {
+                        "Referer": url,
+                        "X-Requested-With": "XMLHttpRequest",
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: "action=dox_ajax_player&post_id=" + postId + "&chapter_st=" + encodeURIComponent(ep) + "&sv=" + sv + "&type=pro"
+                });
+
+                if (ajaxResp.ok) {
+                    var html = ajaxResp.text();
+                    var embedMatch = html.match(/src="([^"]+)"/i);
+                    if (embedMatch) {
+                        var embedUrl = embedMatch[1].replace(/&amp;/g, "&");
+                        
+                        // Ensure absolute URL
+                        if (embedUrl.indexOf("/") === 0 && embedUrl.indexOf("//") !== 0) {
+                            embedUrl = BASE_URL + embedUrl;
+                        } else if (embedUrl.indexOf("//") === 0) {
+                            embedUrl = "https:" + embedUrl;
+                        }
+
+                        servers.push({
+                            title: serverName,
+                            data: JSON.stringify({
+                                embedUrl: embedUrl,
+                                url: url
+                            })
+                        });
+                    }
+                }
+            } catch (e) {}
         }
     });
     
     return Response.success(servers);
 }
+

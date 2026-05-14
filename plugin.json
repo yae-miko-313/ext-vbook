@@ -85,7 +85,7 @@
       "name": "HHKUNGFU",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhkungfu/plugin.zip",
-      "version": 1,
+      "version": 2,
       "source": "https://hhkungfu.ee",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhkungfu/icon.png",
       "description": "Xem phim hoạt hình 3D Trung Quốc Vietsub. Lưu ý: không xem được đâu, đầu hàng",
@@ -146,6 +146,17 @@
       "description": "Xem phim từ NguonC",
       "type": "video",
       "locale": "vi_VN"
+    },
+    {
+      "name": "AnimeVsub",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_animevsub/plugin.zip",
+      "version": 1,
+      "source": "https://animevsub.app",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_animevsub/icon.png",
+      "description": "Xem anime Vietsub HD miễn phí trên AnimeVsub - kho anime lớn nhất",
+      "type": "video",
+      "locale": "vi_VN"
     }
   ]
-}
+}

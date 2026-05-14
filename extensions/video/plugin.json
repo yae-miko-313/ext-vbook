@@ -1,5 +1,27 @@
 [
   {
+    "folder": "kychi_animevsub",
+    "name": "AnimeVsub",
+    "author": "kychi",
+    "description": "Xem Anime Vietsub HD miễn phí trên AnimeVsub - kho anime Vietsub lớn nhất",
+    "source": "https://animevsub.app",
+    "version": 1,
+    "type": "video",
+    "locale": "vi_VN",
+    "relativePath": "extensions/video/kychi_animevsub",
+    "metadata": {
+      "name": "AnimeVsub",
+      "author": "kychi",
+      "version": 1,
+      "source": "https://animevsub.app",
+      "regexp": "(www\\.)?animevsub\\.app/.*",
+      "description": "Xem Anime Vietsub HD miễn phí trên AnimeVsub - kho anime Vietsub lớn nhất",
+      "locale": "vi_VN",
+      "type": "video",
+      "language": "javascript"
+    }
+  },
+  {
     "folder": "kychi_hhhtq",
     "name": "HHHTQ",
     "author": "kychi",
