@@ -162,12 +162,12 @@
       "name": "Yêu Anime",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_yeuanime/plugin.zip",
-      "version": 1,
+      "version": 2,
       "source": "https://yeuanime.net",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_yeuanime/icon.png",
-      "description": "Xem Anime Vietsub, Hoạt Hình FullHD, 4K Miễn Phí",
+      "description": "Xem Anime Vietsub/Thuyết Minh, Hoạt Hình TRung Quốc FullHD, 4K Miễn Phí. Lưu ý: Không hỗ trợ server ENCloud (Eng Sub)",
       "type": "video",
       "locale": "vi_VN"
     }
   ]
-}
+}

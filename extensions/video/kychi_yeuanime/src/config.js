@@ -158,6 +158,34 @@ function parseMovies(nextData) {
     return list;
 }
 
+function cleanTag(text, lang) {
+    var combined = ((text || '') + ' ' + (lang || '')).toLowerCase();
+    var tags = [];
+    
+    var epNum = '';
+    var epSource = text || '';
+    var epMatch = epSource.match(/\d+/);
+    if (epMatch) {
+        epNum = epMatch[0];
+    }
+    
+    if (combined.indexOf('vietsub') !== -1 || combined.indexOf('viet sub') !== -1 || combined.indexOf('vs') !== -1) {
+        tags.push('VS' + epNum);
+    }
+    if (combined.indexOf('thuyết minh') !== -1 || combined.indexOf('thuyet minh') !== -1 || combined.indexOf('tm') !== -1) {
+        tags.push('TM' + epNum);
+    }
+    
+    if (tags.length === 0) {
+        if (epNum) {
+            return 'Tập ' + epNum;
+        }
+        return text || lang || '';
+    }
+    
+    return tags.join(' ');
+}
+
 function addMovieToList(movie, list) {
     if (!movie.slug || !movie.name) return;
     var name = cleanMovieName(movie.name);
@@ -168,11 +196,16 @@ function addMovieToList(movie, list) {
         if (list[i].link === link) return;
     }
     
+    var rawTag = movie.episode_current || movie.display_status || movie.status || '';
+    var rawLang = (movie.language && movie.language !== 'Đang cập nhật') ? movie.language : '';
+    var tag = cleanTag(rawTag, rawLang);
+    
     list.push({
         name: name,
         link: link,
         cover: normalizeUrl(cover),
         description: '',
+        tag: tag,
         host: BASE_URL
     });
 }

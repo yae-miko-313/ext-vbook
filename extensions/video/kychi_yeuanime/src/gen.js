@@ -34,10 +34,20 @@ function execute(url, page) {
                     }
                 }
                 if (!exists) {
+                    var tag = "";
+                    var tagEl = a.select('.episode, .status, .badge, span.absolute, div.absolute, [class*="absolute"], [class*="badge"]').first();
+                    if (tagEl) {
+                        var rawTag = cleanText(tagEl.text());
+                        if (rawTag && name && (rawTag === name || rawTag.indexOf(name) !== -1 || name.indexOf(rawTag) !== -1)) {
+                            rawTag = "";
+                        }
+                        tag = cleanTag(rawTag);
+                    }
                     list.push({
                         name: name,
                         link: link,
                         cover: normalizeUrl(cover),
+                        tag: tag,
                         host: BASE_URL
                     });
                 }

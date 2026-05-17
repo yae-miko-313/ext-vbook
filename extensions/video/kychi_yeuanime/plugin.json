@@ -2,10 +2,10 @@
   "metadata": {
     "name": "Yêu Anime",
     "author": "kychi",
-    "version": 1,
+    "version": 2,
     "source": "https://yeuanime.net",
     "regexp": "yeuanime.net/(phim|xem-phim|the-loai|quoc-gia|chu-de)/.*",
-    "description": "Xem Anime Vietsub, Hoạt Hình FullHD, 4K Miễn Phí",
+    "description": "Xem Anime Vietsub/Thuyết Minh, Hoạt Hình TRung Quốc FullHD, 4K Miễn Phí. Lưu ý: Không hỗ trợ server ENCloud (Eng Sub)",
     "locale": "vi_VN",
     "type": "video",
     "language": "javascript"
