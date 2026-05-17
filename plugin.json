@@ -157,6 +157,17 @@
       "description": "Xem anime Vietsub HD miễn phí trên AnimeVsub - kho anime lớn nhất",
       "type": "video",
       "locale": "vi_VN"
+    },
+    {
+      "name": "Yêu Anime",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_yeuanime/plugin.zip",
+      "version": 1,
+      "source": "https://yeuanime.net",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_yeuanime/icon.png",
+      "description": "Xem Anime Vietsub, Hoạt Hình FullHD, 4K Miễn Phí",
+      "type": "video",
+      "locale": "vi_VN"
     }
   ]
 }

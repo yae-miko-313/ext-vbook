@@ -3,7 +3,7 @@
     "folder": "kychi_animevsub",
     "name": "AnimeVsub",
     "author": "kychi",
-    "description": "Xem Anime Vietsub HD miễn phí trên AnimeVsub - kho anime Vietsub lớn nhất",
+    "description": "Xem anime Vietsub HD miễn phí trên AnimeVsub - kho anime lớn nhất",
     "source": "https://animevsub.app",
     "version": 1,
     "type": "video",
@@ -15,10 +15,10 @@
       "version": 1,
       "source": "https://animevsub.app",
       "regexp": "(www\\.)?animevsub\\.app/.*",
-      "description": "Xem Anime Vietsub HD miễn phí trên AnimeVsub - kho anime Vietsub lớn nhất",
+      "description": "Xem anime Vietsub HD miễn phí trên AnimeVsub - kho anime lớn nhất",
       "locale": "vi_VN",
-      "type": "video",
-      "language": "javascript"
+      "language": "javascript",
+      "type": "video"
     }
   },
   {
@@ -47,19 +47,19 @@
     "folder": "kychi_hhkungfu",
     "name": "HHKUNGFU",
     "author": "kychi",
-    "description": "Xem phim hoạt hình 3D Trung Quốc Vietsub. Lưu ý: không xem được đâu, đầu hàng ",
+    "description": "Xem phim hoạt hình 3D Trung Quốc Vietsub chất lượng cao. Lưu y: chịu đấy khong xem được đầu hàng rồi ",
     "source": "https://hhkungfu.ee",
-    "version": 1,
+    "version": 2,
     "type": "video",
     "locale": "vi_VN",
     "relativePath": "extensions/video/kychi_hhkungfu",
     "metadata": {
       "name": "HHKUNGFU",
       "author": "kychi",
-      "version": 1,
+      "version": 2,
       "source": "https://hhkungfu.ee",
       "regexp": "(www\\.)?hhkungfu\\.ee/.*",
-      "description": "Xem phim hoạt hình 3D Trung Quốc Vietsub. Lưu ý: không xem được đâu, đầu hàng ",
+      "description": "Xem phim hoạt hình 3D Trung Quốc Vietsub chất lượng cao. Lưu y: chịu đấy khong xem được đầu hàng rồi ",
       "locale": "vi_VN",
       "type": "video",
       "language": "javascript"
@@ -173,6 +173,48 @@
       "locale": "vi_VN",
       "language": "javascript",
       "type": "video"
+    }
+  },
+  {
+    "folder": "kychi_test_video",
+    "name": "Video Test",
+    "author": "kychi",
+    "description": "Extension chuyên dụng để kiểm tra luồng phát ext video",
+    "source": "https://example.com",
+    "version": 0.1,
+    "type": "video",
+    "locale": "vi_VN",
+    "relativePath": "extensions/video/kychi_test_video",
+    "metadata": {
+      "name": "Video Test",
+      "author": "kychi",
+      "version": "0.1",
+      "source": "https://example.com",
+      "type": "video",
+      "description": "Extension chuyên dụng để kiểm tra luồng phát ext video",
+      "icon": "https://i.ibb.co/B59c82qz/vbooks.png"
+    }
+  },
+  {
+    "folder": "kychi_yeuanime",
+    "name": "Yêu Anime",
+    "author": "kychi",
+    "description": "Xem Anime Vietsub, Hoạt Hình FullHD, 4K Miễn Phí",
+    "source": "https://yeuanime.net",
+    "version": 1,
+    "type": "video",
+    "locale": "vi_VN",
+    "relativePath": "extensions/video/kychi_yeuanime",
+    "metadata": {
+      "name": "Yêu Anime",
+      "author": "kychi",
+      "version": 1,
+      "source": "https://yeuanime.net",
+      "regexp": "yeuanime.net/(phim|xem-phim|the-loai|quoc-gia|chu-de)/.*",
+      "description": "Xem Anime Vietsub, Hoạt Hình FullHD, 4K Miễn Phí",
+      "locale": "vi_VN",
+      "type": "video",
+      "language": "javascript"
     }
   }
 ]

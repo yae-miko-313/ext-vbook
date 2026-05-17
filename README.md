@@ -29,6 +29,7 @@ https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_motchill/icon.png" width="40"> | **Motchill** | [envasion.net](https://envasion.net) | 1 | video | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_nguonc/icon.png" width="40"> | **NguonC** | [phim.nguonc.com](https://phim.nguonc.com) | 1 | video | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_animevsub/icon.png" width="40"> | **AnimeVsub** | [animevsub.app](https://animevsub.app) | 1 | video | vi_VN |
+| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_yeuanime/icon.png" width="40"> | **Yêu Anime** | [yeuanime.net](https://yeuanime.net) | 1 | video | vi_VN |
 
 ---
 

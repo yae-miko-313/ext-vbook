@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "Yêu Anime",
+    "author": "kychi",
+    "version": 1,
+    "source": "https://yeuanime.net",
+    "regexp": "yeuanime.net/(phim|xem-phim|the-loai|quoc-gia|chu-de)/.*",
+    "description": "Xem Anime Vietsub, Hoạt Hình FullHD, 4K Miễn Phí",
+    "locale": "vi_VN",
+    "type": "video",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "gen": "gen.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js",
+    "search": "search.js"
+  }
+}
