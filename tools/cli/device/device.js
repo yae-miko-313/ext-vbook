@@ -50,15 +50,16 @@ function startFileServer(pluginInfo, options = {}) {
     const server = http.createServer((req, res) => {
         const url = new URL(req.url, `http://${req.headers.host}`);
         const fileName = url.searchParams.get('file');
-        const rootName = url.searchParams.get('root');
 
-        if (!fileName || !rootName) {
+        if (!fileName) {
             res.writeHead(400);
-            return res.end('Missing params');
+            return res.end('Missing file param');
         }
 
-        const workspaceRoot = path.dirname(pluginInfo.root);
-        const requestedPath = path.join(workspaceRoot, rootName, fileName);
+        let requestedPath = path.join(pluginInfo.root, fileName);
+        if (!fs.existsSync(requestedPath)) {
+            requestedPath = path.join(pluginInfo.root, 'src', fileName);
+        }
 
         if (fs.existsSync(requestedPath)) {
             const content = fs.readFileSync(requestedPath);

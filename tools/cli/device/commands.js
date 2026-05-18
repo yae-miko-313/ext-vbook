@@ -45,7 +45,7 @@ async function runDeviceDebug(scriptPath, options) {
     }
 
     const pluginInfo = getPluginInfo(path.dirname(resolvedScriptPath));
-    const rootName = `${pluginInfo.name}\\src`;
+    const rootName = `${pluginInfo.name}/src`;
 
     const { content: scriptContent } = readScriptFile(pluginInfo.root, path.relative(pluginInfo.root, resolvedScriptPath));
 
@@ -128,7 +128,7 @@ async function runDeviceTestAll(pluginPath, options) {
     const { deviceIp, devicePort, verbose, timeoutMs } = resolveDeviceOptions(options);
 
     const pluginInfo = getPluginInfo(pluginPath || '.');
-    const rootName = `${pluginInfo.name}\\src`;
+    const rootName = `${pluginInfo.name}/src`;
 
     const serverInfo = await startFileServer(pluginInfo, {
         localPort: Number(process.env.LOCAL_PORT || 8080)
