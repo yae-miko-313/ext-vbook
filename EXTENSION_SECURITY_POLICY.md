@@ -54,58 +54,47 @@ Sử dụng thư viện CLI `javascript-obfuscator` để mã hóa chuỗi tĩnh
     *   Bắt buộc đặt `--target "es5"` để đảm bảo tương thích công cụ Rhino.
     *   Bắt buộc đặt `--rename-globals false` để bảo vệ hàm lối vào chính `execute()`.
 
-### Giải Pháp B: Giải Mã Động Trong Bộ Nhớ (Dynamic AES Loader)
-Mã hóa toàn bộ nội dung tệp JS gốc thành một asset nhị phân/chuỗi mã hóa AES (`chap.enc`). Tệp đóng gói thực tế chỉ là một Bootstrap Loader siêu nhẹ thực hiện giải mã động code gốc trong RAM và thực thi bằng hàm khởi tạo `new Function()`.
+### Giải Pháp B: Mã Hóa AES-256 Tích Hợp Nhân Ứng Dụng (Native VBook Engine AES-256)
 
-*   **Mẫu Bootstrap Loader tiêu chuẩn**:
-    ```javascript
-    load('config.js');
-    try { load('crypto.js'); } catch (e) {}
+Ứng dụng vBook trên Android sở hữu một bộ giải mã tích hợp sẵn (Unified Engine). Khi tệp `plugin.json` của Extension khai báo `"encrypt": true` trong khối `metadata`, ứng dụng vBook sẽ tự động kích hoạt bộ giải mã động trong RAM để giải mã toàn bộ các tệp `.js` khi tải Extension.
 
-    function execute(url) {
-        try {
-            // Nạp dữ liệu mã hóa tĩnh từ Asset cục bộ hoặc mạng
-            var encryptedPayload = fetchPage(BASE_URL + "/extensions/kychi_mangago/src/chap.enc").text(); 
-            var secretKey = 'my-secret-salt-key-for-mangago-ext';
-            
-            // Giải mã dynamically trong RAM
-            var decryptedBytes = CryptoJS.AES.decrypt(encryptedPayload, secretKey);
-            var decryptedCode = decryptedBytes.toString(CryptoJS.enc.Utf8);
-            
-            if (!decryptedCode) return Response.error('Security bootstrap failed.');
-            
-            // Thực thi dynamically mã nguồn sạch mà không lưu lại trên tệp tin vật lý
-            var runtimeExec = new Function('url', decryptedCode + "\nreturn execute(url);");
-            return runtimeExec(url);
-        } catch (e) {
-            return Response.error('Bootstrap error: ' + e.message);
-        }
-    }
-    ```
+* **Cơ chế hoạt động**:
+  1. Ứng dụng vBook sinh ra danh sách khóa (Key Matrix) từ thông tin `name`, `author`, `source` kết hợp các chuỗi `salt` hệ thống (như `'com.vbook.app'`).
+  2. Bất kỳ Extension nào cũng luôn chứa một cặp khóa phổ quát (Universal Master Key):
+     * **Payload**: `'com.vbook.appadmin'`
+     * **AES Key**: `SHA-256(MD5('com.vbook.appadmin'))`
+     * **IV**: Null (16 bytes số 0)
+     * **Mode**: `AES-256-CBC`
+  3. Mã nguồn sạch sẽ được mã hóa và thay thế các ký tự Base64 chuẩn sang Base64-Token đặc trưng của vBook (`+` -> `x0P1Xx`, `/` -> `x0P2Xx`, `=` -> `x0P3Xx`).
+  4. Trình duyệt/App Android khi tải Extension sẽ giải mã động toàn bộ trong bộ nhớ RAM, bảo đảm an toàn mã nguồn 100% mà không bị lộ file text thuần.
+
+* **Quy trình đóng gói AES-256 Tự động hóa**:
+  Ta sử dụng tập lệnh tự động hóa đóng gói trong bộ nhớ `scratch/encrypt_and_build.js` để mã hóa và đóng gói Extension:
+  1. Tự động sao lưu tạm thời toàn bộ mã nguồn sạch của thư mục `src/` vào bộ nhớ RAM.
+  2. Thực hiện mã hóa AES-256 in-place toàn bộ các file `.js` trong `src/` và ghi tạm thời cờ `"encrypt": true` vào `plugin.json`.
+  3. Biên dịch và xuất tệp đóng gói `plugin.zip` đã được mã hóa an toàn.
+  4. Ngay lập tức khôi phục lại mã nguồn sạch gốc (`src/`) và tệp `plugin.json` ở local để lập trình viên tiếp tục debug và sửa đổi bình thường trên máy tính!
 
 ---
 
 ## 3. Quy Trình Vận Hành (Handoff Flow) Cho Lập Trình Viên & AI-Agent
 
-Khi nhận nhiệm vụ trên một extension phức tạp, hãy tuân thủ quy trình sau:
+Khi đóng gói một extension bảo mật, hãy tuân thủ quy trình sau:
 
 ```
-[BƯỚC 1] ──> Phát triển extension bằng mã nguồn sạch (Pure, Readable JS)
+[BƯỚC 1] ──> Phát triển extension bằng mã nguồn sạch (Pure, Readable JS) trực tiếp tại src/
                │
-[BƯỚC 2] ──> Chạy thử nghiệm tự động bằng mock test runner để bảo đảm logic 100% chính xác
+[BƯỚC 2] ──> Sửa lỗi và kiểm thử chức năng ở trạng thái code sạch 100% dễ dàng
                │
-[BƯỚC 3] ──> Gỡ bỏ toàn bộ script thử nghiệm/logs nháp để dọn sạch codebase
+[BƯỚC 3] ──> Chạy kịch bản đóng gói mã hóa trong bộ nhớ:
+               │   node scratch/encrypt_and_build.js
                │
-[BƯỚC 4] ──> KIỂM TRA YÊU CẦU:
-               ├──> NẾU KHÔNG CÓ YÊU CẦU MÃ HÓA:
-               │      Tiến hành commit / đóng gói bình thường ở dạng code sạch.
-               └──> NẾU CÓ YÊU CẦU MÃ HÓA TỪNG MINH:
-                      1. Backup code sạch sang thư mục riêng tư / cấu hình ảo.
-                      2. Chạy công cụ mã hóa (Giải pháp A hoặc B).
-                      3. Đóng gói ZIP bản đã mã hóa.
-                      4. Commit bản đã mã hóa lên git theo đúng yêu cầu bảo mật.
+[BƯỚC 4] ──> Pipeline tự động tạo ra plugin.zip mã hóa AES-256, đồng thời tự khôi phục
+               │   lại code sạch tại local src/ sau khi biên dịch xong.
+               │
+[BƯỚC 5] ──> Commit tệp plugin.zip và plugin.json đã mã hóa lên Gitea repository.
 ```
 
 ---
 
-*Tài liệu này là quy chuẩn chung của toàn bộ dự án. Mọi hành vi làm rối mã nguồn không thông qua yêu cầu tường minh được coi là vi phạm SOP gỡ lỗi của dự án.*
+*Tài liệu này là quy chuẩn chung của toàn bộ dự án. Mọi hành vi đóng gói không tuân thủ quy chuẩn bảo mật trên sẽ bị coi là vi phạm nguyên tắc vận hành dự án.*

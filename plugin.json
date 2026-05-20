@@ -5,6 +5,17 @@
   },
   "data": [
     {
+      "name": "Truyện Mơ",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmo/plugin.zip",
+      "version": 1,
+      "source": "https://www.truyenmo.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmo/icon.png",
+      "description": "Đọc truyện từ Truyện Mơ \n\nNgày xưa ngựa xe đi rất chậm\nThư gửi cũng rất chậm\n Cả đời chỉ đủ yêu một người",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "nTruyen",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_ntruyen/plugin.zip",

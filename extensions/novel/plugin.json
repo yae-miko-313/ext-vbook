@@ -44,6 +44,28 @@
     }
   },
   {
+    "folder": "kychi_truyenmo",
+    "name": "Truyện Mơ",
+    "author": "kychi",
+    "description": "Đọc truyện từ Truyện Mơ \n\nNgày xưa ngựa xe đi rất chậm\nThư gửi cũng rất chậm\n Cả đời chỉ đủ yêu một người",
+    "source": "https://www.truyenmo.com/",
+    "version": 1,
+    "type": "novel",
+    "locale": "vi_VN",
+    "relativePath": "extensions/novel/kychi_truyenmo",
+    "metadata": {
+      "name": "Truyện Mơ",
+      "author": "kychi",
+      "version": 1,
+      "source": "https://www.truyenmo.com/",
+      "regexp": "(?:www\\.)?truyenmo\\.com/.*",
+      "description": "Đọc truyện từ Truyện Mơ \n\nNgày xưa ngựa xe đi rất chậm\nThư gửi cũng rất chậm\n Cả đời chỉ đủ yêu một người",
+      "locale": "vi_VN",
+      "language": "javascript",
+      "type": "novel"
+    }
+  },
+  {
     "folder": "kychi_truyenmoi",
     "name": "Truyện Mới",
     "author": "kychi",
