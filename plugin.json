@@ -190,6 +190,17 @@
       "description": "Xem Anime Hay - miễn phí chất lượng cao với phụ đề Tiếng Việt, Thuyết Minh, Lồng Tiếng. Website có hơn +10.000 phim Anime mới nhất và cập nhật liên tục, kho phim đa dạng từ các thể loại 3D Trung Quốc, Anime Nhật Bản.. \n\n Lưu Ý: Không search được do web không search được",
       "type": "video",
       "locale": "vi_VN"
+    },
+    {
+      "name": "FPT AI TTS",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/fpt_ai_tts/plugin.zip",
+      "version": 1,
+      "source": "https://console.fpt.ai/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/fpt_ai_tts/icon.png",
+      "description": "Nghe truyện bằng FPT AI Text-to-Speech. Hỗ trợ 7 giọng Bắc/Trung/Nam chất lượng cao.\n\nMIỄN PHÍ 100.000 ký tự/tháng cho mỗi project. Một tài khoản có thể tạo nhiều project.\n\nHƯỚNG DẪN: Vào console.fpt.ai → Tạo project → Lấy API Key → Dán vào cài đặt extension.",
+      "type": "tts",
+      "locale": "vi_VN"
     }
   ]
 }

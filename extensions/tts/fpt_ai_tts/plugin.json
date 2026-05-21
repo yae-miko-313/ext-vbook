@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "name": "FPT AI TTS",
+    "author": "kychi",
+    "version": 1,
+    "source": "https://console.fpt.ai/",
+    "description": "Nghe truyện bằng FPT AI Text-to-Speech. Hỗ trợ giọng Bắc/Trung/Nam.\n\n FREE 100.000 KÍ TỰ/THÁNG/project. Một acc có thể có nhiều project\n\nHƯỚNG DẪN LẤY API KEY:\n\n 1. Vào trang nguồn đăng nhập\n 2. Tạo project + tạo api key \n 3. copy api key dán vào cấu hình ext ",
+    "type": "tts",
+    "locale": "vi_VN"
+  },
+  "script": {
+    "voice": "voice.js",
+    "tts": "tts.js"
+  },
+  "config": {
+    "preload_size": 2,
+    "max_length": 500,
+    "required_api_key": true,
+    "support_url": "https://docs.fpt.ai/docs/en/speech/api/text-to-speech/",
+    "api_keys": {
+      "title": "FPT AI API Key (mỗi dòng 1 key)",
+      "mode": "input",
+      "format": "multiline"
+    }
+  }
+}

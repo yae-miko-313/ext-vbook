@@ -159,7 +159,28 @@
     }
   ],
   "translate": [],
-  "tts": [],
+  "tts": [
+    {
+      "folder": "fpt_ai_tts",
+      "name": "FPT AI TTS",
+      "author": "kychi",
+      "description": "Nghe truyện bằng FPT AI Text-to-Speech. Hỗ trợ giọng Bắc/Trung/Nam.\n FREE 100.000 KÍ TỰ/THÁNG vối mỗi project. Một acc có thể có nhiều project\nHƯỚNG DẪN LẤY API KEY:\n 1. Vào trang nguồn đăng nhập\n 2. Tạo project + tạo api key \n 3. copy api key dán vào cấu hình ext ",
+      "source": "https://console.fpt.ai/",
+      "version": 1,
+      "type": "tts",
+      "locale": "vi_VN",
+      "relativePath": "extensions/tts/fpt_ai_tts",
+      "metadata": {
+        "name": "FPT AI TTS",
+        "author": "kychi",
+        "version": 1,
+        "source": "https://console.fpt.ai/",
+        "description": "Nghe truyện bằng FPT AI Text-to-Speech. Hỗ trợ giọng Bắc/Trung/Nam.\n FREE 100.000 KÍ TỰ/THÁNG vối mỗi project. Một acc có thể có nhiều project\nHƯỚNG DẪN LẤY API KEY:\n 1. Vào trang nguồn đăng nhập\n 2. Tạo project + tạo api key \n 3. copy api key dán vào cấu hình ext ",
+        "type": "tts",
+        "locale": "vi_VN"
+      }
+    }
+  ],
   "video": [
     {
       "folder": "kychi_animehay",
