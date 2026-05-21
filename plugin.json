@@ -201,6 +201,17 @@
       "description": "Nghe truyện bằng FPT AI Text-to-Speech. Hỗ trợ 7 giọng Bắc/Trung/Nam chất lượng cao.\n\nMIỄN PHÍ 100.000 ký tự/tháng cho mỗi project. Một tài khoản có thể tạo nhiều project.\n\nHƯỚNG DẪN: Vào console.fpt.ai → Tạo project → Lấy API Key → Dán vào cài đặt extension.",
       "type": "tts",
       "locale": "vi_VN"
+    },
+    {
+      "name": "Viettel AI TTS",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/viettelai_tts/plugin.zip",
+      "version": 1,
+      "source": "https://viettelai.vn/dashboard/token",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/viettelai_tts/icon.png",
+      "description": "Nghe truyện bằng Viettel AI Text-to-Speech. 16 giọng Bắc/Trung/Nam đa dạng.\n\nMIỄN PHÍ 50.000 ký tự tháng đầu, gia hạn 20K/50K ký tự mỗi tháng.\n\nHƯỚNG DẪN: Vào viettelai.vn → Đăng nhập → Dashboard/Token → Dán vào cài đặt extension.",
+      "type": "tts",
+      "locale": "vi_VN"
     }
   ]
 }

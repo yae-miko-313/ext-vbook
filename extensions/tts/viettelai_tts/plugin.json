@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "name": "Viettel AI TTS",
+    "author": "kychi",
+    "version": 1,
+    "source": "https://viettelai.vn/dashboard/token",
+    "description": "Nghe truyện bằng Viettel AI Text-to-Speech. 16 giọng Bắc/Trung/Nam đa dạng.\n\nMIỄN PHÍ 50.000 ký tự tháng đầu, gia hạn 20K/50K ký tự mỗi tháng.\n\nHƯỚNG DẪN: Vào trang nguồn → Đăng nhập → Vào Dashboard/Token → Copy token dán vào cài đặt ext.",
+    "type": "tts",
+    "locale": "vi_VN"
+  },
+  "script": {
+    "voice": "voice.js",
+    "tts": "tts.js"
+  },
+  "config": {
+    "preload_size": 2,
+    "max_length": 500,
+    "required_api_key": true,
+    "support_url": "https://viettelai.vn/dashboard/token",
+    "api_keys": {
+      "title": "Viettel AI Token (mỗi dòng 1 token)",
+      "mode": "input",
+      "format": "multiline"
+    }
+  }
+}

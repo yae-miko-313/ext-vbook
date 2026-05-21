@@ -33,6 +33,7 @@ https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_yeuanime/icon.png" width="40"> | **Yêu Anime** | [yeuanime.net](https://yeuanime.net) | 2 | video | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_animehay/icon.png" width="40"> | **Anime Hay** | [animehay.fm](https://animehay.fm) | 1 | video | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/fpt_ai_tts/icon.png" width="40"> | **FPT AI TTS** | [console.fpt.ai](https://console.fpt.ai/) | 1 | tts | vi_VN |
+| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/viettelai_tts/icon.png" width="40"> | **Viettel AI TTS** | [viettelai.vn](https://viettelai.vn/dashboard/token) | 1 | tts | vi_VN |
 
 ---
 
