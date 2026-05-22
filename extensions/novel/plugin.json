@@ -110,6 +110,28 @@
     }
   },
   {
+    "folder": "kychi_vivutruyen",
+    "name": "Vivu Truyện",
+    "author": "kychi",
+    "description": "Trang đọc truyện online - vivutruyen",
+    "source": "https://vivutruyen.net/",
+    "version": 1,
+    "type": "novel",
+    "locale": "vi_VN",
+    "relativePath": "extensions/novel/kychi_vivutruyen",
+    "metadata": {
+      "name": "Vivu Truyện",
+      "author": "kychi",
+      "version": 1,
+      "source": "https://vivutruyen.net/",
+      "regexp": "(?:www\\.)?vivutruyen\\.net/[^/]+/?$",
+      "description": "Trang đọc truyện online - vivutruyen",
+      "locale": "vi_VN",
+      "language": "javascript",
+      "type": "novel"
+    }
+  },
+  {
     "folder": "truyenhoan",
     "name": "Truyện Hoàn",
     "author": "kychi",
