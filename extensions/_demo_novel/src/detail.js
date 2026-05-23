@@ -61,8 +61,8 @@ function execute(url) {
         suggests.push({ title: "Cùng tác giả: " + author, input: author, script: "search.js" });
     }
 
-    // Bước 9: Bình luận — chỉ thêm nếu site có API comment (Q9=Có)
-    // var comments = [{ title: "Bình luận", input: API_URL + "?page={{page}}", script: "comment.js" }];
+    // Bước 9: Bình luận — chỉ thêm nếu site có comment trong HTML hoặc endpoint comment
+    // var comments = [{ title: "Bình luận", input: COMMENT_URL + "?page={{page}}", script: "comment.js" }];
 
     return Response.success({
         name:        name,

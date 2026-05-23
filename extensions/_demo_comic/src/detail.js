@@ -1,6 +1,7 @@
 // detail.js — Thông tin chi tiết một bộ truyện tranh
 // Contract: execute(url) → { name*, cover, host, author, detail, description, ongoing:bool*,
-//                             genres?:[{title,input,script}], suggests?:[{title,input,script}] }
+//                             genres?:[{title,input,script}], suggests?:[{title,input,script}],
+//                             comments?:[{title,input,script}] }
 function execute(url) {
     url = url.replace(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img, BASE_URL);
     if (url.slice(-1) === "/") url = url.slice(0, -1);
@@ -57,6 +58,9 @@ function execute(url) {
         suggests.push({ title: "Cùng tác giả: " + author, input: author, script: "search.js" });
     }
 
+    // Bình luận — chỉ thêm nếu site có comment trong HTML hoặc endpoint comment
+    // var comments = [{ title: "Bình luận", input: COMMENT_URL + "?page={{page}}", script: "comment.js" }];
+
     return Response.success({
         name:        name,
         cover:       cover,
@@ -67,5 +71,6 @@ function execute(url) {
         ongoing:     ongoing,
         genres:      genres.length > 0 ? genres : undefined,
         suggests:    suggests.length > 0 ? suggests : undefined
+        // comments: comments  // bỏ comment dòng này nếu có comment.js
     });
 }

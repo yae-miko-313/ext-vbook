@@ -340,6 +340,64 @@ function execute(url) {
 }
 ```
 
+
+---
+
+## comment.js (optional)
+
+Use `comment.js` only when the detail page can expose comments from fetched HTML or a comment endpoint that the site itself uses. Wire it from `detail.js` via the optional `comments` field.
+
+### detail.js wiring
+```js
+var comments = [{
+    title: "Bình luận",
+    input: COMMENT_URL + "?page={{page}}",
+    script: "comment.js"
+}];
+
+return Response.success({
+    name: name,
+    cover: cover,
+    host: BASE_URL,
+    author: author,
+    description: description,
+    ongoing: ongoing,
+    comments: comments
+});
+```
+
+`input` may be a normal page URL, a comment URL, or a template containing `{{page}}`. The runtime passes the current pagination token as `next`.
+
+### Contract
+```js
+function execute(input, next) {
+    var page = next || "1";
+    var url = input.replace("{{page}}", page);
+
+    var res = fetch(url);
+    if (!res.ok) return Response.error("Cannot load comments: " + res.status);
+
+    var doc = res.html();
+    var data = [];
+    doc.select("SELECTOR_COMMENT_ITEM").forEach(function(el) {
+        var name = el.select("SELECTOR_AUTHOR").text() + "";
+        var content = el.select("SELECTOR_CONTENT").html() + "";
+        var description = el.select("SELECTOR_TIME_OR_META").text() + "";
+        if (content) data.push({ name: name, content: content, description: description });
+    });
+
+    var hasNext = doc.select("SELECTOR_NEXT_PAGE").size() > 0;
+    return Response.success(data, hasNext ? String(parseInt(page) + 1) : null);
+}
+```
+
+Return items use:
+- `name`: commenter display name.
+- `content`: comment body; use `html()` when formatting should be preserved.
+- `description`: optional metadata such as date, chapter, likes, or reply count.
+
+`next` must be a string or `null`, never a number.
+
 ---
 
 ## page.js ← CRITICAL RULE
