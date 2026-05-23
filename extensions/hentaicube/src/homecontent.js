@@ -2,9 +2,8 @@ load("config.js");
 
 function execute(url, page) {
     var p = page ? parseInt(page) : 1;
-    var fetchUrl = BASE_URL + "/read/page/" + p + "/";
-
-    var res = fetchRetry(fetchUrl);
+    var fetchUrl = BASE_URL + "/" + url + "/page/" + p + "/";
+    var res = fetch(fetchUrl, FETCH_OPTIONS);
     if (!res || !res.ok) return Response.success([], null);
     var doc = res.html();
     if (!doc) return Response.success([], null);

@@ -19,16 +19,6 @@ function resolveUrl(url) {
     if (url.indexOf("http") === 0) return url;
     return BASE_URL + (url.charAt(0) === "/" ? url : "/" + url);
 }
-
-function fetchRetry(url) {
-    var res = fetch(url, FETCH_OPTIONS);
-    if (!res) return res;
-    if (!res.ok && !(res.status >= 400 && res.status < 500)) {
-        res = fetch(url, FETCH_OPTIONS);
-    }
-    return res;
-}
-
 // Lấy ảnh chất lượng đầy đủ bằng cách bỏ hậu tố kích thước -NxN
 function stripSizeSuffix(src) {
     if (!src) return "";

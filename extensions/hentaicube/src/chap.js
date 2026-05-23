@@ -2,8 +2,10 @@ load("config.js");
 
 function execute(url) {
     var chapUrl = resolveUrl(url);
-    var doc = Html.parse(browserHtml(chapUrl));
-    if (!doc) return Response.error("Không đọc được nội dung chương");
+    var res = fetch(chapUrl, FETCH_OPTIONS);
+    if (!res || !res.ok) return Response.error("Không tải được trang truyện");
+    var doc = res.html();
+    if (!doc) return Response.error("Không đọc được nội dung trang");
 
     // Ảnh chương nằm trong .page-break img — CDN cdn.hentaicube.xyz
     var imgs = doc.select(".page-break img[src], .reading-content img[src]");

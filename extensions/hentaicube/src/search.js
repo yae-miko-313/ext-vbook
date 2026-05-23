@@ -3,8 +3,7 @@ load("config.js");
 function execute(keyword, page) {
     var q = encodeURIComponent(keyword);
     var fetchUrl = BASE_URL + "/?s=" + q + "&post_type=wp-manga";
-
-    var res = fetchRetry(fetchUrl);
+    var res = fetch(fetchUrl, FETCH_OPTIONS);
     if (!res || !res.ok) return Response.success([], null);
     var doc = res.html();
     if (!doc) return Response.success([], null);
