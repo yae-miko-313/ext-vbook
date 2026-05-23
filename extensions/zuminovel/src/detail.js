@@ -22,7 +22,7 @@ function execute(url) {
         author: cleanText(book.author && book.author.name ? book.author.name : ""),
         description: ((book.description || "") + "").replace(/\n/g, "<br>"),
         detail: "Số chương: " + cleanText(book.numberOfPages || ""),
-        ongoing: true,
+        ongoing: cleanText(book.status || "") !== "completed",
         genres: genres
     });
 }

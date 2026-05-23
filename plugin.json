@@ -115,7 +115,7 @@
             "name": "ZumiNovel",
             "author": "hieu05",
             "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/zuminovel/plugin.zip",
-            "version": 1,
+            "version": 2,
             "source": "https://zuminovel.com",
             "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/zuminovel/icon.png",
             "description": "Đọc truyện trên ZumiNovel",

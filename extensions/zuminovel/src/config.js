@@ -74,14 +74,72 @@ function parseJsonObject(raw) {
     try { return JSON.parse(raw); } catch (e) { return null; }
 }
 
+function extractJsonAt(text, start) {
+    var depth = 0;
+    var inString = false;
+    var escape = false;
+    for (var i = start; i < text.length; i++) {
+        var ch = text.charAt(i);
+        if (escape) {
+            escape = false;
+            continue;
+        }
+        if (ch === "\\") {
+            escape = true;
+            continue;
+        }
+        if (ch === '"') {
+            inString = !inString;
+            continue;
+        }
+        if (inString) continue;
+        if (ch === "{") depth++;
+        if (ch === "}") {
+            depth--;
+            if (depth === 0) return text.substring(start, i + 1);
+        }
+    }
+    return "";
+}
+
 function extractBookJson(html) {
+    var book = extractBookJsonFromText(html);
+    if (book) return book;
     html = decodeFlightText(html);
-    var start = html.indexOf('{"@context":"https://schema.org","@type":"Book"');
+    book = extractBookJsonFromText(html);
+    if (book) return book;
+    return extractInitialNovelJson(html);
+}
+
+function extractBookJsonFromText(text) {
+    var marker = '{"@context":"https://schema.org","@type":"Book"';
+    var start = text.indexOf(marker);
+    while (start >= 0) {
+        var raw = extractJsonAt(text, start);
+        var book = parseJsonObject(raw);
+        if (book && book["@type"] === "Book") return book;
+        start = text.indexOf(marker, start + marker.length);
+    }
+    return null;
+}
+
+function extractInitialNovelJson(html) {
+    var marker = '"initialNovel":';
+    var start = html.indexOf(marker);
     if (start < 0) return null;
-    var end = html.indexOf(',"datePublished"', start);
-    if (end < 0) return null;
-    var raw = html.substring(start, end) + "}";
-    return parseJsonObject(raw);
+    start = html.indexOf("{", start + marker.length);
+    if (start < 0) return null;
+    var novel = parseJsonObject(extractJsonAt(html, start));
+    if (!novel) return null;
+    return {
+        name: novel.title,
+        image: novel.coverUrl,
+        author: { name: novel.author },
+        description: novel.description,
+        genre: novel.genres || [],
+        numberOfPages: novel.chapters ? novel.chapters.length : "",
+        status: novel.status
+    };
 }
 
 function extractSlug(url) {
@@ -154,4 +212,12 @@ function apiListUrl(page) {
 
 function apiSearchUrl(key, page) {
     return BASE_URL + "/api/novels?search=" + encodeURIComponent((key || "") + "") + "&page=" + encodeURIComponent((page || "1") + "");
+}
+
+function checkLoginFromRes(res) {
+    var authCookie = res.request.headers.cookie;
+    var hasAuthToken = /(?:^|;\s*)auth_token=([^;]+)/.test(authCookie || "");
+    if (!hasAuthToken) return Response.error("Vui lòng đăng nhập");
+    // do nothing, just return null to continue
+    return null;
 }

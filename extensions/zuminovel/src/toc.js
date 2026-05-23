@@ -2,7 +2,7 @@ load("config.js");
 
 function execute(url) {
     url = normalizeUrl(url);
-    var res = getHtml(url);
+    var res = fetch(url);
     var loginError = loginErrorIfNeeded(res);
     if (loginError) return loginError;
     if (!res.ok) return Response.error("Cannot load: " + res.status);
