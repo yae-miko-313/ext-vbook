@@ -16,6 +16,17 @@
       "locale": "vi_VN"
     },
     {
+      "name": "Zumi Novel",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/zuminovel/plugin.zip",
+      "version": 1,
+      "source": "https://zuminovel.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/zuminovel/icon.png",
+      "description": "Đọc tiểu thuyết từ zuminovel",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "[APP] Cơm Nguội Novel",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/comnguoi_novel/plugin.zip",

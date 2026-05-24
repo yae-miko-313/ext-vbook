@@ -175,5 +175,27 @@
       "language": "javascript",
       "type": "novel"
     }
+  },
+  {
+    "folder": "zuminovel",
+    "name": "Zumi Novel",
+    "author": "kychi",
+    "description": "Đọc tiểu thuyết từ zuminovel.com",
+    "source": "https://zuminovel.com/",
+    "version": 1,
+    "type": "novel",
+    "locale": "vi_VN",
+    "relativePath": "extensions/novel/zuminovel",
+    "metadata": {
+      "name": "Zumi Novel",
+      "author": "kychi",
+      "version": 1,
+      "source": "https://zuminovel.com/",
+      "regexp": "(www.)?zuminovel.com/novel/[^/]+/?$",
+      "description": "Đọc tiểu thuyết từ zuminovel.com",
+      "locale": "vi_VN",
+      "language": "javascript",
+      "type": "novel"
+    }
   }
 ]

@@ -22,6 +22,7 @@ https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_quykhu/icon.png" width="40"> | **QuyKhu** | [quykhu.com](https://quykhu.com/) | 4 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_vivutruyen/icon.png" width="40"> | **Vivu Truyện** | [vivutruyen.net](https://vivutruyen.net/) | 1 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/comnguoi_novel/icon.png" width="40"> | **Cơm Nguội Novel** | [truyendichmienphi.com](https://truyendichmienphi.com/) | 1 | novel | vi_VN |
+| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/zuminovel/icon.png" width="40"> | **Zumi Novel** | [zuminovel.com](https://zuminovel.com/) | 1 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_vbook_docs/icon.png" width="40"> | **vBook Docs** | [gitbook.io](https://vbookapp.gitbook.io/huong-dan-su-dung) | 6 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/kychi_cachua/icon.png" width="40"> | **Cà Chua Sói Xám** | [fanqienovel.com](https://fanqienovel.com) | 3 | chinese_novel | zh_CN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhhtq/icon.png" width="40"> | **HHHTQ** | [hhhtq.team](https://hhhtq.team) | 2 | video | vi_VN |
