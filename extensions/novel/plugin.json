@@ -1,5 +1,28 @@
 [
   {
+    "folder": "comnguoi_novel",
+    "name": "[APP] Cơm Nguội Novel",
+    "author": "kychi",
+    "description": "Đọc truyện trên app Cơm Nguội Novel\n Đọc chậm, không tải \n\n HƯỚNG DẪN CÀI CONFIG: \n Không hướng dẫn, ib để hỗ trợ",
+    "source": "https://truyendichmienphi.com",
+    "version": 1,
+    "type": "novel",
+    "locale": "vi_VN",
+    "relativePath": "extensions/novel/comnguoi_novel",
+    "metadata": {
+      "name": "[APP] Cơm Nguội Novel",
+      "author": "kychi",
+      "version": 1,
+      "icon": "icon.png",
+      "source": "https://truyendichmienphi.com",
+      "regexp": "(www\\.)?truyendichmienphi\\.com/.*",
+      "description": "Đọc truyện trên app Cơm Nguội Novel\n Đọc chậm, không tải \n\n HƯỚNG DẪN CÀI CONFIG: \n Không hướng dẫn, ib để hỗ trợ",
+      "locale": "vi_VN",
+      "language": "javascript",
+      "type": "novel"
+    }
+  },
+  {
     "folder": "kychi_ntruyen",
     "name": "nTruyen",
     "author": "kychi",
