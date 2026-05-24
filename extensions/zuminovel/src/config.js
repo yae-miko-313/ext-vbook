@@ -104,11 +104,51 @@ function extractJsonAt(text, start) {
 
 function extractBookJson(html) {
     var book = extractBookJsonFromText(html);
-    if (book) return book;
-    html = decodeFlightText(html);
-    book = extractBookJsonFromText(html);
-    if (book) return book;
-    return extractInitialNovelJson(html);
+    var decoded = decodeFlightText(html);
+    var initial = extractInitialNovelJson(decoded);
+    if (!book) book = extractBookJsonFromText(decoded);
+    if (book && initial) book = mergeBookJson(book, initial);
+    book = book || initial;
+    if (book) book = enrichBookStatsFromHtml(book, html);
+    return book;
+}
+
+function mergeBookJson(book, initial) {
+    for (var key in initial) {
+        if (initial.hasOwnProperty(key) && (book[key] === undefined || book[key] === null || book[key] === "")) book[key] = initial[key];
+    }
+    book.wordCount = initial.wordCount;
+    book.views = initial.views;
+    book.likes = initial.likes;
+    book.followers = initial.followers;
+    book.nominations = initial.nominations;
+    book.status = initial.status;
+    return book;
+}
+
+function enrichBookStatsFromHtml(book, html) {
+    var text = decodeFlightText(html);
+    book.wordCount = pickNumber(text, 'wordCount');
+    book.views = pickNumber(text, 'views');
+    book.likes = pickNumber(text, 'likes');
+    if (!book.likes) book.likes = pickNumber(text, 'bookmarks');
+    book.followers = pickNumber(text, 'followers');
+    book.nominations = pickNumber(text, 'nominations');
+    var status = pickString(text, 'status');
+    if (status) book.status = status;
+    return book;
+}
+
+function pickNumber(text, key) {
+    var re = new RegExp('"' + key + '"\s*:\s*([0-9]+)');
+    var m = text.match(re);
+    return m && m[1] ? parseInt(m[1], 10) : 0;
+}
+
+function pickString(text, key) {
+    var re = new RegExp('"' + key + '"\s*:\s*"([^"]*)"');
+    var m = text.match(re);
+    return m && m[1] ? m[1] + "" : "";
 }
 
 function extractBookJsonFromText(text) {
@@ -126,6 +166,10 @@ function extractBookJsonFromText(text) {
 function extractInitialNovelJson(html) {
     var marker = '"initialNovel":';
     var start = html.indexOf(marker);
+    if (start < 0) {
+        marker = 'initialNovel';
+        start = html.indexOf(marker);
+    }
     if (start < 0) return null;
     start = html.indexOf("{", start + marker.length);
     if (start < 0) return null;
@@ -138,8 +182,40 @@ function extractInitialNovelJson(html) {
         description: novel.description,
         genre: novel.genres || [],
         numberOfPages: novel.chapters ? novel.chapters.length : "",
-        status: novel.status
+        status: novel.status,
+        wordCount: novel.wordCount,
+        views: novel.views,
+        likes: novel.likes || novel.bookmarks,
+        followers: novel.followers,
+        nominations: novel.nominations
     };
+}
+
+function formatNumber(n) {
+    if (n === undefined || n === null || n === "") return "0";
+    n = parseInt(n, 10);
+    if (isNaN(n)) return "0";
+    if (n >= 1000000) return Math.round(n / 100000) / 10 + "M";
+    if (n >= 1000) return Math.round(n / 100) / 10 + "K";
+    return n + "";
+}
+
+function statusText(status) {
+    status = cleanText(status).toLowerCase();
+    if (status === "completed" || status === "complete" || status === "finished") return "Hoàn thành";
+    return "Đang tiến hành";
+}
+
+function buildNovelDetail(book) {
+    var lines = [];
+    lines.push("Trạng thái: " + statusText(book.status));
+    lines.push("Số chương: " + cleanText(book.numberOfPages || ""));
+    lines.push("Số từ: " + formatNumber(book.wordCount));
+    lines.push("Lượt xem: " + formatNumber(book.views));
+    lines.push("Thích: " + formatNumber(book.likes));
+    lines.push("Theo dõi: " + formatNumber(book.followers));
+    lines.push("Đề cử: " + formatNumber(book.nominations));
+    return lines.join("<br>");
 }
 
 function extractSlug(url) {

@@ -21,7 +21,7 @@ function execute(url) {
         host: BASE_URL,
         author: cleanText(book.author && book.author.name ? book.author.name : ""),
         description: ((book.description || "") + "").replace(/\n/g, "<br>"),
-        detail: "Số chương: " + cleanText(book.numberOfPages || ""),
+        detail: buildNovelDetail(book),
         ongoing: cleanText(book.status || "") !== "completed",
         genres: genres
     });

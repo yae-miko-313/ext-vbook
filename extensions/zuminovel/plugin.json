@@ -2,7 +2,7 @@
   "metadata": {
     "name": "ZumiNovel",
     "author": "hieu05",
-    "version": 2,
+    "version": 3,
     "source": "https://zuminovel.com",
     "regexp": "https?:\\/\\/(?:www\\.)?zuminovel\\.com\\/novel\\/[a-zA-Z0-9-]+\\/?(?:\\?.*)?$",
     "description": "Đọc truyện trên ZumiNovel",

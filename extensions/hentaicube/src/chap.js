@@ -2,22 +2,20 @@ load("config.js");
 
 function execute(url) {
     var chapUrl = resolveUrl(url);
-    var res = fetch(chapUrl, FETCH_OPTIONS);
-    if (!res || !res.ok) return Response.error("Không tải được trang truyện");
-    var doc = res.html();
-    if (!doc) return Response.error("Không đọc được nội dung trang");
-
-    // Ảnh chương nằm trong .page-break img — CDN cdn.hentaicube.xyz
-    var imgs = doc.select(".page-break img[src], .reading-content img[src]");
-    if (imgs.size() === 0) return Response.error("Không có ảnh trong chương");
+	var browser = Engine.newBrowser();
+	browser.setUserAgent(UserAgent.android()); // Tùy chỉnh user agent
+	var doc = browser.launch(chapUrl, 15000);
+	browser.close();
+	var imgs = doc.select('img[src*="cdn."]');
+	if (imgs.size() === 0) return Response.error("Mở browser lên mà verify Cloudflare đi bạn ơi");
 
     var data = [];
     for (var i = 0; i < imgs.size(); i++) {
         var src = imgs.get(i).attr("src") || "";
         if (!src || src.indexOf("http") !== 0) continue;
-        data.push({ link: src });
+        data.push(src);
     }
 
-    if (data.length === 0) return Response.error("Không có ảnh trong chương");
+    if (data.length === 0) return Response.error("Không có ảnh trong chương (liên hệ tác giả)");
     return Response.success(data);
 }

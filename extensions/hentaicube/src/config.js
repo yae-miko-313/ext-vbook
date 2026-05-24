@@ -51,16 +51,3 @@ function parseListItems(doc) {
     }
     return result;
 }
-
-
-function browserHtml(url) {
-    var b = Engine.newBrowser();
-    try {
-        b.setUserAgent(UserAgent.android);
-        b.block(["*.woff", "*.woff2", "*.ttf", "*.css", "*.js", "*.gif", "*.mp4", "*.webm"]);
-        b.launch(resolveUrl(url), 15000);
-        return b.html();
-    } finally {
-        b.close();
-    }
-}

@@ -3,7 +3,7 @@ load("config.js");
 function execute(url) {
     var storyUrl = resolveUrl(url);
     var res = fetch(storyUrl, FETCH_OPTIONS);
-    if (!res || !res.ok) return Response.error("Không tải được trang truyện");
+    if (!res || !res.ok) return Response.error("Mở browser lên mà verify Cloudflare đi bạn ơi");
     var doc = res.html();
     if (!doc) return Response.error("Không đọc được nội dung trang");
 
