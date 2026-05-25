@@ -21,7 +21,8 @@ https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenhoan/icon.png" width="40"> | **Truyện Hoàn** | [truyenhoan.com](https://truyenhoan.com/) | 9 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_quykhu/icon.png" width="40"> | **QuyKhu** | [quykhu.com](https://quykhu.com/) | 4 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_vivutruyen/icon.png" width="40"> | **Vivu Truyện** | [vivutruyen.net](https://vivutruyen.net/) | 1 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/comnguoi_novel/icon.png" width="40"> | **Cơm Nguội Novel** | [truyendichmienphi.com](https://truyendichmienphi.com/) | 1 | novel | vi_VN |
+| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/comnguoi_novel/icon.png" width="40"> | **[APP]Cơm Nguội Novel** | [truyendichmienphi.com](https://truyendichmienphi.com/) | 1 | novel | vi_VN |
+| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyencv/icon.png" width="40"> | **[APP]TruyệnCV** | [truyencv.io](https://truyencv.io) | 1 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/zuminovel/icon.png" width="40"> | **Zumi Novel** | [zuminovel.com](https://zuminovel.com/) | 1 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_vbook_docs/icon.png" width="40"> | **vBook Docs** | [gitbook.io](https://vbookapp.gitbook.io/huong-dan-su-dung) | 6 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/kychi_cachua/icon.png" width="40"> | **Cà Chua Sói Xám** | [fanqienovel.com](https://fanqienovel.com) | 3 | chinese_novel | zh_CN |
@@ -37,6 +38,7 @@ https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_animehay/icon.png" width="40"> | **Anime Hay** | [animehay.fm](https://animehay.fm) | 1 | video | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/fpt_ai_tts/icon.png" width="40"> | **FPT AI TTS** | [console.fpt.ai](https://console.fpt.ai/) | 1 | tts | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/viettelai_tts/icon.png" width="40"> | **Viettel AI TTS** | [viettelai.vn](https://viettelai.vn/dashboard/token) | 1 | tts | vi_VN |
+
 
 
 ---

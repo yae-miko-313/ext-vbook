@@ -245,6 +245,17 @@
       "description": "Nghe truyện bằng Viettel AI Text-to-Speech. 16 giọng Bắc/Trung/Nam đa dạng.\n\nMIỄN PHÍ 50.000 ký tự tháng đầu, gia hạn 20K/50K ký tự mỗi tháng.\n\nHƯỚNG DẪN: Vào viettelai.vn → Đăng nhập → Dashboard/Token → Dán vào cài đặt extension.",
       "type": "tts",
       "locale": "vi_VN"
+    },
+    {
+      "name": "[APP] Truyện CV",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyencv/plugin.zip",
+      "version": 1,
+      "source": "https://truyencv.io",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyencv/icon.png",
+      "description": "Đọc truyện từ App TruyenCV.\n\n HUONG DAN SU DUNG:\n khong huong dan, ib de ho tro",
+      "type": "novel",
+      "locale": "vi_VN"
     }
   ]
 }

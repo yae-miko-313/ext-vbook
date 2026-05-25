@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "name": "[APP] Truyện CV",
+    "author": "kychi",
+    "version": 1,
+    "source": "https://truyencv.io",
+    "regexp": "(www\\.)?truyencv\\.io/.*",
+    "description": "Đọc truyện từ App TruyenCV.\n\n HUONG DAN SU DUNG:\n khong huong dan, ib de ho tro",
+    "locale": "vi_VN",
+    "language": "javascript",
+    "type": "novel"
+  },
+  "script": {
+    "home": "home.js",
+    "gen": "gen.js",
+    "genre": "genre.js",
+    "search": "search.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  },
+  "config": {
+    "USER_TOKEN": {
+      "title": "Auth Token TruyenCV (Bearer ...)",
+      "mode": "input",
+      "format": "multiline"
+    }
+  }
+}
