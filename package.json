@@ -13,7 +13,11 @@
     "ext:create:dry": "node tools/cli/index.js ext --mode create --name DemoExt --source https://example.com --author kychi --dry-run",
     "build:ext": "node tools/cli/index.js build --plugin extensions/novel/kychi_ntruyen",
     "build:catalog": "node tools/cli/index.js build-catalog",
-    "ref:sync": "node tools/cli/index.js sync-ref"
+    "ref:sync": "node tools/cli/index.js sync-ref",
+    "encrypt:obfuscate": "node tools/encrypt/obfuscate.js",
+    "encrypt:aes": "node tools/encrypt/encrypt.js",
+    "encrypt:pipeline": "node tools/encrypt/pipeline.js",
+    "encrypt:truyencv": "node tools/encrypt/pipeline.js extensions/novel/kychi_truyencv"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
@@ -25,7 +29,9 @@
     "commander": "^12.1.0",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
+    "javascript-obfuscator": "^4.1.2",
     "playwright": "^1.60.0",
-    "string-argv": "^0.3.2"
+    "string-argv": "^0.3.2",
+    "terser": "^5.48.0"
   }
 }
