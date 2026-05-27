@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "name": "TruyenTv",
+    "author": "kychi",
+    "version": 1,
+    "source": "https://www.tvtruyen.co.uk",
+    "regexp": "(www\\.)?tvtruyen\\.co\\.uk/.*",
+    "description": "Đọc truyện từ TruyenTv.",
+    "locale": "vi_VN",
+    "language": "javascript",
+    "type": "novel"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "gen": "gen.js",
+    "search": "search.js",
+    "detail": "detail.js",
+    "page": "page.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "comment": "comment.js"
+  }
+}

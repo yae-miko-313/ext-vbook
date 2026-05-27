@@ -16,6 +16,7 @@ https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json
 | Icon | Tên | Nguồn | Phiên bản | Loại | Ngôn ngữ |
 | :---: | :--- | :--- | :---: | :---: | :---: |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmo/icon.png" width="40"> | **Truyện Mơ** | [truyenmo.com](https://www.truyenmo.com/) | 1 | novel | vi_VN |
+| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyentv/icon.png" width="40"> | **Truyện TV** | [tvtruyen.co.uk](https://www.tvtruyen.co.uk) | 1 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_ntruyen/icon.png" width="40"> | **nTruyen** | [ntruyen.biz](https://ntruyen.biz/) | 8 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmoi/icon.png" width="40"> | **Truyện Mới** | [truyenmoiqq.com](https://truyenmoiqq.com/) | 7 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenhoan/icon.png" width="40"> | **Truyện Hoàn** | [truyenhoan.com](https://truyenhoan.com/) | 9 | novel | vi_VN |

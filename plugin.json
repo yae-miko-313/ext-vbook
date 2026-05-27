@@ -38,6 +38,17 @@
       "locale": "vi_VN"
     },
     {
+      "name": "TruyenTv",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyentv/plugin.zip",
+      "version": 1,
+      "source": "https://www.tvtruyen.co.uk",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyentv/icon.png",
+      "description": "Đọc truyện từ TruyenTv",
+      "type": "novel",
+      "locale": "vi_VN"
+    },{
+    
       "name": "Truyện Mơ",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmo/plugin.zip",
