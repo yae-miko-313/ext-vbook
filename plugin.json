@@ -27,17 +27,6 @@
       "locale": "vi_VN"
     },
     {
-      "name": "[APP] Cơm Nguội Novel",
-      "author": "kychi",
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/comnguoi_novel/plugin.zip",
-      "version": 1,
-      "source": "https://truyendichmienphi.com",
-      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/comnguoi_novel/icon.png",
-      "description": "Đọc truyện trên app Cơm Nguội Novel\n Đọc chậm, không tải \n\n HƯỚNG DẪN CÀI CONFIG: \n Không hướng dẫn, ib để hỗ trợ",
-      "type": "novel",
-      "locale": "vi_VN"
-    },
-    {
       "name": "Truyện Mơ",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmo/plugin.zip",
