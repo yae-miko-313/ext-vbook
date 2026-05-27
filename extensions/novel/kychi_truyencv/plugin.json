@@ -2,28 +2,39 @@
   "metadata": {
     "name": "[APP] Truyện CV",
     "author": "kychi",
-    "version": 1,
+    "version": 2,
     "source": "https://truyencv.io",
     "regexp": "(www\\.)?truyencv\\.io/.*",
-    "description": "Đọc truyện từ App TruyenCV.\n\n HUONG DAN SU DUNG:\n khong huong dan, ib de ho tro",
+    "description": "Đọc truyện từ App TruyenCV.\n\n HƯỚNG DẪN SỬ DỤNG :\n Nhập tài khoản mật khẩu ở setting để login. (không login cũng được) \n\n Trong trường hợp TruyenCv không muốn ext này tồn tại, vui lòng liên hệ, mình cam kết tiếp nhận và gỡ bỏ trong 24h làm việc. \n\n Hoan hỷ nhé :)))))",
     "locale": "vi_VN",
     "language": "javascript",
-    "type": "novel"
+    "type": "novel",
+    "encrypt": true
   },
   "script": {
-    "home": "home.js",
-    "gen": "gen.js",
-    "genre": "genre.js",
-    "search": "search.js",
-    "detail": "detail.js",
-    "toc": "toc.js",
-    "chap": "chap.js"
+    "home": "home.bundle.js",
+    "gen": "gen.bundle.js",
+    "genre": "genre.bundle.js",
+    "search": "search.bundle.js",
+    "detail": "detail.bundle.js",
+    "page": "page.bundle.js",
+    "toc": "toc.bundle.js",
+    "chap": "chap.bundle.js"
   },
   "config": {
+    "USER_EMAIL": {
+      "title": "Email đăng nhập",
+      "mode": "input"
+    },
+    "USER_PASSWORD": {
+      "title": "Mật khẩu",
+      "mode": "input"
+    },
     "USER_TOKEN": {
-      "title": "Auth Token TruyenCV (Bearer ...)",
+      "title": "Auth Token (nhập thủ công - không bắt buộc)",
       "mode": "input",
-      "format": "multiline"
+      "format": "multiline",
+      "default": ""
     }
   }
 }
