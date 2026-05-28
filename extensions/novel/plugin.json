@@ -1,25 +1,24 @@
 [
   {
-    "folder": "comnguoi_novel",
-    "name": "[APP] Cơm Nguội Novel",
+    "folder": "kychi_kyhuyen",
+    "name": "Kỳ Huyễn",
     "author": "kychi",
-    "description": "Đọc truyện trên app Cơm Nguội Novel\n Đọc chậm, không tải \n\n HƯỚNG DẪN CÀI CONFIG: \n Không hướng dẫn, ib để hỗ trợ",
-    "source": "https://truyendichmienphi.com",
-    "version": 1,
+    "description": "",
+    "source": "https://kyhuyen.com/",
+    "version": 2,
     "type": "novel",
     "locale": "vi_VN",
-    "relativePath": "extensions/novel/comnguoi_novel",
+    "relativePath": "extensions/novel/kychi_kyhuyen",
     "metadata": {
-      "name": "[APP] Cơm Nguội Novel",
+      "name": "Kỳ Huyễn",
       "author": "kychi",
-      "version": 1,
-      "icon": "icon.png",
-      "source": "https://truyendichmienphi.com",
-      "regexp": "(www\\.)?truyendichmienphi\\.com/.*",
-      "description": "Đọc truyện trên app Cơm Nguội Novel\n Đọc chậm, không tải \n\n HƯỚNG DẪN CÀI CONFIG: \n Không hướng dẫn, ib để hỗ trợ",
+      "version": 2,
+      "source": "https://kyhuyen.com/",
+      "regexp": "kyhuyen\\.com/[^/]+/?$",
+      "description": "",
       "locale": "vi_VN",
-      "language": "javascript",
-      "type": "novel"
+      "type": "novel",
+      "language": "javascript"
     }
   },
   {
@@ -67,6 +66,29 @@
     }
   },
   {
+    "folder": "kychi_truyencv",
+    "name": "[APP] Truyện CV",
+    "author": "kychi",
+    "description": "Đọc truyện từ App TruyenCV.\n\n HƯỚNG DẪN SỬ DỤNG :\n Nhập tài khoản mật khẩu ở setting để login. (không login cũng được) \n\n Trong trường hợp TruyenCv không muốn ext này tồn tại, vui lòng liên hệ, mình cam kết tiếp nhận và gỡ bỏ trong 24h làm việc. \n\n Hoan hỷ nhé :)))))",
+    "source": "https://truyencv.io",
+    "version": 2,
+    "type": "novel",
+    "locale": "vi_VN",
+    "relativePath": "extensions/novel/kychi_truyencv",
+    "metadata": {
+      "name": "[APP] Truyện CV",
+      "author": "kychi",
+      "version": 2,
+      "source": "https://truyencv.io",
+      "regexp": "(www\\.)?truyencv\\.io/.*",
+      "description": "Đọc truyện từ App TruyenCV.\n\n HƯỚNG DẪN SỬ DỤNG :\n Nhập tài khoản mật khẩu ở setting để login. (không login cũng được) \n\n Trong trường hợp TruyenCv không muốn ext này tồn tại, vui lòng liên hệ, mình cam kết tiếp nhận và gỡ bỏ trong 24h làm việc. \n\n Hoan hỷ nhé :)))))",
+      "locale": "vi_VN",
+      "language": "javascript",
+      "type": "novel",
+      "encrypt": true
+    }
+  },
+  {
     "folder": "kychi_truyenmo",
     "name": "Truyện Mơ",
     "author": "kychi",
@@ -105,6 +127,28 @@
       "source": "https://truyenmoiqq.com/",
       "regexp": "(www.)?truyenmoiqq.com/[^/]+/?$",
       "description": "Fork TruyenMoi của HieuDM, đã refactor parser + null guard + tối ưu toc/search/detail",
+      "locale": "vi_VN",
+      "language": "javascript",
+      "type": "novel"
+    }
+  },
+  {
+    "folder": "kychi_truyentv",
+    "name": "TruyenTv",
+    "author": "kychi",
+    "description": "Đọc truyện từ TruyenTv.",
+    "source": "https://www.tvtruyen.co.uk",
+    "version": 1,
+    "type": "novel",
+    "locale": "vi_VN",
+    "relativePath": "extensions/novel/kychi_truyentv",
+    "metadata": {
+      "name": "TruyenTv",
+      "author": "kychi",
+      "version": 1,
+      "source": "https://www.tvtruyen.co.uk",
+      "regexp": "(www\\.)?tvtruyen\\.co\\.uk/.*",
+      "description": "Đọc truyện từ TruyenTv.",
       "locale": "vi_VN",
       "language": "javascript",
       "type": "novel"

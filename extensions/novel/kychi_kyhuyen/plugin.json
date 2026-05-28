@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "Kỳ Huyễn",
+    "author": "kychi",
+    "version": 1,
+    "source": "https://kyhuyen.com/",
+    "regexp": "kyhuyen\\.com/[^/]+/?$",
+    "description": "Kỳ Chi đọc truyện trên Kỳ Huyễn\n\n Hỗ trợ bản beta, bản thường không dùng được thì tìm ext của B",
+    "locale": "vi_VN",
+    "type": "novel",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "page": "page.js",
+    "gen": "gen.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "search": "search.js"
+  }
+}
