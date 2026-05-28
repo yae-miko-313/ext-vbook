@@ -1,114 +1,89 @@
-# Contributing
+# 🤝 Hướng dẫn Đóng góp (Contributing Guidelines)
 
-Tài liệu đóng góp chính cho repo.
+Chào mừng bạn đến với Kho lưu trữ công cụ phát triển extension của VBook. Tài liệu này hướng dẫn các nhà phát triển cách cấu hình môi trường, quy trình đóng góp mã nguồn (Pull Request) và quy chuẩn làm việc thống nhất.
 
-## Phạm vi
+---
 
-- **Public extensions**: `extensions/**` - Chứa các extension công khai cho cộng đồng (phải chạy build:catalog).
-- **Private extensions**: `.private/extensions/**` - Không public, không vào catalog, được ignore bởi git.
-- **Gitea Private extensions**: `.tea-ext/**` - Chứa các extension upload lên Gitea (private).
-- **CLI & Tools**: `tools/cli/**` - Công cụ quản lý chính.
-- **Docs**: `docs/**` - Tài liệu hướng dẫn.
+## 📂 1. Phạm vi phân vùng thư mục
 
-## Prerequisites
+Dự án này là công cụ kết hợp 2-trong-1: quản lý phát triển extension cho nhà quản trị và cung cấp chỉ mục tham khảo cho cộng đồng.
 
+* **Công khai (Public extensions)**: Nằm trong thư mục `extensions/**` - Chứa các extension công khai cho cộng đồng (Bắt buộc chạy `build:catalog` để hiển thị).
+* **Cá nhân (Private extensions)**: Nằm trong thư mục `.private/extensions/**` - Không công khai, bị bỏ qua bởi git, an toàn để thử nghiệm hoặc dùng cá nhân.
+* **Đóng gói Gitea (Gitea Private extensions)**: Nằm trong thư mục `.tea-ext/**`. Được sử dụng để chứa các extension private được đóng gói để tải lên hệ thống server Gitea riêng của bạn.
+  - `.tea-ext/plugin.json`: Quản lý danh mục các extension trong thư mục này.
+  - `.tea-ext/extensions/`: Chứa mã nguồn của từng extension private tương ứng.
+* **Bộ công cụ (CLI Tools)**: Nằm trong thư mục `tools/cli/**` - Chứa mã nguồn của CLI.
+* **Tài liệu (Docs)**: Nằm trong thư mục `docs/**` và `.agent/`.
+
+---
+
+## 🛠️ 2. Cài đặt môi trường phát triển (Prerequisites)
+
+### Cài đặt dependencies
 ```bash
 npm install
 ```
 
-Tạo `.env` tại root (xem [../README.md](../README.md)):
-
+### Thiết lập tệp cấu hình môi trường (`.env`)
+Tạo tệp tin `.env` tại thư mục gốc của dự án với nội dung mẫu sau:
 ```env
-VBOOK_IP=192.168.1.100
-LOCAL_PORT=3000
-VBOOK_AUTHOR=tên_của_bạn
+VBOOK_IP=192.168.1.100       # Địa chỉ IP của thiết bị chạy app vBook để debug
+LOCAL_PORT=3000              # Port chạy local server để test
+VBOOK_AUTHOR=tên_của_bạn     # Tên tác giả hiển thị mặc định trên extension của bạn
 ```
 
-## Workflow: Extension contribution
+---
 
-### Step 1: Tạo extension mới
+## 🔄 3. Quy trình Đóng góp Extension tiêu chuẩn
 
+Để đóng góp một extension mới hoặc cập nhật một extension có sẵn, bạn bắt buộc phải tuân theo 5 bước sau:
+
+### Bước 1: Tạo mới Extension thông qua CLI
 ```bash
 npm run ext:create -- --name MyExtension --source https://example.com
 ```
+* > [!WARNING]
+  > **Không tạo thư mục bằng tay**. Sử dụng CLI để sinh khung dữ liệu chuẩn xác nhất.
 
-### Step 2: Viết extension code
+### Bước 2: Lập trình Mã nguồn
+* Tham khảo hướng dẫn [docs/EXTENSION_DEVELOPMENT_GUIDE.md](file:///d:/My%20Code/vbook-tool/docs/EXTENSION_DEVELOPMENT_GUIDE.md) để viết mã nguồn đúng chuẩn Rhino (ES5).
 
-Tham khảo [AI_CODE_EXT_VBOOK.md](AI_CODE_EXT_VBOOK.md) để hiểu contract.
-
-### Step 3: Build extension ZIP
-
+### Bước 3: Đóng gói tệp ZIP
 ```bash
 npm run build:ext -- --plugin extensions/novel/my_ext
 ```
+* Tạo ra tệp `plugin.zip` sẵn sàng cài đặt.
 
-Tạo `extensions/novel/my_ext/plugin.zip` sẵn sàng phân phối.
-
-### Step 4: Rebuild personal catalog
-
+### Bước 4: Tái tạo danh mục tổng (Bắt buộc)
 ```bash
 npm run build:catalog
 ```
+* Cập nhật danh sách catalog tổng hợp tại `extensions/plugin.json` để App/Viewer nhận diện được extension mới của bạn.
 
-**BẮT BUỘC** cập nhật personal catalog mỗi khi thêm extension mới.
+### Bước 5: Kiểm tra xác thực (Verify)
+* Kiểm thử bằng VSCode Tester hoặc chạy local server để cài đặt trực tiếp lên app vBook qua địa chỉ IP đã cấu hình trong `.env`.
 
-### Step 5: Verify locally
-Bạn có thể dùng VSCode Tester hoặc các công cụ debug trong `tools/cli/` để kiểm tra extension.
+---
 
-Đối với việc hiển thị trên Web Viewer, vui lòng tham khảo [vbook-web-service/README.md](../vbook-web-service/README.md) để chạy local portal.
+## 📋 4. Pull Request Checklist (Dành cho Dev & Agent)
 
-## Pull Request Checklist
+Trước khi thực hiện commit mã nguồn hoặc tạo Pull Request, vui lòng kiểm tra kỹ danh sách sau:
 
-- [ ] Extension scaffold tạo bằng CLI (`npm run ext:create`)
-- [ ] Code tham khảo `docs/AI_CODE_EXT_VBOOK.md` contract
-- [ ] Extension đã build zip (`npm run build:ext`) ✓ CRITICAL
-- [ ] **Personal catalog đã rebuild** (`npm run build:catalog`) ✓ CRITICAL
-- [ ] Không commit runtime reports (`tools/cli/reports/`)
-- [ ] README + docs cập nhật nếu có thay đổi workflow
+- [ ] **Lệnh CLI**: Thư mục extension và metadata được tạo/chỉnh sửa thông qua CLI.
+- [ ] **Không chỉnh sửa catalog bằng tay**: Không chỉnh sửa trực tiếp các file `plugin.json` tổng hợp ở gốc.
+- [ ] **Quy tắc Rhino**: Không chứa bất kỳ cú pháp ES6+ nào (không dùng `let`, `const`, `arrow function`, `async/await`).
+- [ ] **Đóng gói ZIP**: Extension đã được chạy lệnh build ra tệp tin `plugin.zip` thành công.
+- [ ] **Catalog Rebuilt**: Đã chạy lệnh `npm run build:catalog` và có thay đổi trong danh mục tổng.
+- [ ] **Dọn dẹp log**: Không commit các tệp tin log sinh ra từ `tools/cli/reports/` lên git.
+- [ ] **Thông tin nhạy cảm**: Không commit thông tin mật khẩu, token cấu hình Gitea cá nhân lên git.
 
-## Constraints
+---
 
-- **Không thủ công tạo folder**: Dùng CLI `npm run ext:create`
-- **Không edit trực tiếp plugin.json**: Dùng CLI `npm run ext:edit`
-- **Không skip build-catalog**: Bắt buộc để cập nhật personal manifests
-- **Không copy-paste code mù**: Verify live site trước
-- **Ext private không được để trong `extensions/`**: đặt tại `.private/extensions/**` để tránh public
+## 🆘 5. Khắc phục sự cố thường gặp (Troubleshooting)
 
-## Troubleshooting
-
-| Issue | Cause | Solution |
+| Vấn đề gặp phải | Nguyên nhân phổ biến | Cách xử lý |
 | :--- | :--- | :--- |
-| Lỗi build ZIP | Folder thiếu `plugin.json` hoặc `src/` | Kiểm tra lại cấu trúc folder extension |
-| Lỗi catalog | Không tìm thấy extension sau khi thêm | Đảm bảo đã chạy `npm run build:catalog` |
-
-## Docs update policy
-
-- Khi thay đổi:
-  - CLI commands → update `../README.md` + `docs/CONTRIBUTING.md`
-  - Deployment → update `docs/DEPLOY_VERCEL.md`
-  - Web structure → update `web/README.md`
-  - Extension template → update `docs/AI_CODE_EXT_VBOOK.md`
-
-## File structure recap
-
-```text
-extensions/                 # Chỉ edit qua CLI
-├── novel/
-│   ├── my_ext/
-│   │   ├── src/             # Extension code
-│   │   ├── icon.png
-│   │   └── plugin.json      # Metadata
-│   └── plugin.json          # Type catalog (auto-generated)
-└── plugin.json              # Root catalog (auto-generated)
-
-tools/cli/
-├── index.js                 # Main entrypoint
-└── ...
-```
-
-## Notes
-
-- Cá nhân extensions chỉ qua CLI - đảm bảo consistency + track changes
-- Catalog rebuild/sync bắt buộc để web artifacts luôn nhất quán
-- Author credits động từ data - không hardcode
-- Sync script có dedupe theo path để tránh double-count community items
+| **Lỗi đóng gói ZIP** | Thư mục thiếu file `plugin.json` ở gốc hoặc thiếu thư mục `src/` | Kiểm tra lại cấu trúc folder, đảm bảo có đủ các file yêu cầu |
+| **Không tìm thấy extension mới** | Chưa chạy build catalog hoặc extension nằm trong folder private | Chạy lệnh `npm run build:catalog` và kiểm tra extension có nằm đúng thư mục `extensions/` hay không |
+| **Lỗi giải mã sau khi mã hóa** | Tác giả hoặc Nguồn (Source) trong `plugin.json` bị lệch ký tự | Đảm bảo trường `source` và `author` khớp chính xác 100% với cấu hình lúc chạy lệnh mã hóa |
