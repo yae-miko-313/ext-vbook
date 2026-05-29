@@ -115,6 +115,17 @@
       "locale": "vi_VN"
     },
     {
+      "name": "Mê Đọc Truyện",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_medoctruyen/plugin.zip",
+      "version": 1,
+      "source": "https://medoctruyen.vn",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_medoctruyen/icon.png",
+      "description": "Mê Đọc Truyện\nĐắm mình trong bốn mùa thư hương",
+      "type": "novel",
+      "locale": "vi_VN"
+    },
+    {
       "name": "Hướng dẫn sử dụng VBook",
       "author": "ngatngay,duongden - repo kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_vbook_docs/plugin.zip",
@@ -267,17 +278,7 @@
       "description": "Nghe truyện bằng Viettel AI Text-to-Speech. 16 giọng Bắc/Trung/Nam đa dạng.\n\nMIỄN PHÍ 50.000 ký tự tháng đầu, gia hạn 20K/50K ký tự mỗi tháng.\n\nHƯỚNG DẪN: Vào viettelai.vn → Đăng nhập → Dashboard/Token → Dán vào cài đặt extension.",
       "type": "tts",
       "locale": "vi_VN"
-    },
-    {
-      "name": "Kỳ Huyễn",
-      "author": "kychi",
-      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_kyhuyen/plugin.zip",
-      "version": 2,
-      "source": "https://kyhuyen.com/",
-      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_kyhuyen/icon.png",
-      "description": "Đọc truyện chữ online Kỳ Huyễn - kyhuyen.com",
-      "type": "novel",
-      "locale": "vi_VN"
     }
-  ]
+    
+      ]
 }

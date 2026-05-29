@@ -4,22 +4,44 @@
       "folder": "kychi_kyhuyen",
       "name": "Kỳ Huyễn",
       "author": "kychi",
-      "description": "",
+      "description": "Kỳ Chi đọc truyện trên Kỳ Huyễn\n\n Hỗ trợ bản beta, bản thường không dùng được thì tìm ext của B",
       "source": "https://kyhuyen.com/",
-      "version": 2,
+      "version": 1,
       "type": "novel",
       "locale": "vi_VN",
       "relativePath": "extensions/novel/kychi_kyhuyen",
       "metadata": {
         "name": "Kỳ Huyễn",
         "author": "kychi",
-        "version": 2,
+        "version": 1,
         "source": "https://kyhuyen.com/",
         "regexp": "kyhuyen\\.com/[^/]+/?$",
-        "description": "",
+        "description": "Kỳ Chi đọc truyện trên Kỳ Huyễn\n\n Hỗ trợ bản beta, bản thường không dùng được thì tìm ext của B",
         "locale": "vi_VN",
         "type": "novel",
         "language": "javascript"
+      }
+    },
+    {
+      "folder": "kychi_medoctruyen",
+      "name": "Mê Đọc Truyện",
+      "author": "kychi",
+      "description": "Generated extension for https://medoctruyen.vn",
+      "source": "https://medoctruyen.vn",
+      "version": 1,
+      "type": "novel",
+      "locale": "vi_VN",
+      "relativePath": "extensions/novel/kychi_medoctruyen",
+      "metadata": {
+        "name": "Mê Đọc Truyện",
+        "author": "kychi",
+        "version": 1,
+        "source": "https://medoctruyen.vn",
+        "regexp": "medoctruyen\\.vn/[^/]+/?$",
+        "description": "Generated extension for https://medoctruyen.vn",
+        "locale": "vi_VN",
+        "language": "javascript",
+        "type": "novel"
       }
     },
     {
