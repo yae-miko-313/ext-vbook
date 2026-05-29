@@ -2,7 +2,7 @@
   "metadata": {
     "name": "Mê Đọc Truyện",
     "author": "kychi",
-    "version": 2,
+    "version": 1,
     "source": "https://medoctruyen.vn",
     "regexp": "medoctruyen\\.vn/[^/]+/?$",
     "description": "Mê Đọc Truyện\nĐắm mình trong bốn mùa thư hương",

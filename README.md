@@ -26,7 +26,7 @@ https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyencv/icon.png" width="40"> | **[APP]TruyệnCV** | [truyencv.io](https://truyencv.io) | 2 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/zuminovel/icon.png" width="40"> | **Zumi Novel** | [zuminovel.com](https://zuminovel.com/) | 1 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_vbook_docs/icon.png" width="40"> | **vBook Docs** | [gitbook.io](https://vbookapp.gitbook.io/huong-dan-su-dung) | 6 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_medoctruyen/icon.png" width="40"> | **Mê Đọc Truyện** | [medoctruyen.vn](https://medoctruyen.vn) | 2 | novel | vi_VN |
+| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_medoctruyen/icon.png" width="40"> | **Mê Đọc Truyện** | [medoctruyen.vn](https://medoctruyen.vn) | 1 | novel | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/kychi_cachua/icon.png" width="40"> | **Cà Chua Sói Xám** | [fanqienovel.com](https://fanqienovel.com) | 3 | chinese_novel | zh_CN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhhtq/icon.png" width="40"> | **HHHTQ** | [hhhtq.team](https://hhhtq.team) | 2 | video | vi_VN |
 | <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_kenhtruyenma/icon.png" width="40"> | **Kênh Truyện Ma** | [kenhtruyenma.com](https://kenhtruyenma.com) | 1 | video | vi_VN |
