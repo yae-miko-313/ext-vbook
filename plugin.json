@@ -98,7 +98,7 @@
             "description": "HentaiCube - Truyện Hentai Online 18+ (forked from Meo)",
             "type": "comic",
             "locale": "vi_VN",
-            "tag": "nsfw"
+            "tag": "NSFW"
         },
         {
             "name": "Photos18",
@@ -121,6 +121,17 @@
             "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/truyendich.ai/icon.png",
             "description": "Đọc truyện trên TruyenDich.AI",
             "type": "novel",
+            "locale": "vi_VN"
+        },
+        {
+            "name": "Truyện QQ",
+            "author": "hieu05",
+            "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/truyenqq/plugin.zip",
+            "version": 24,
+            "source": "https://truyenqqko.com",
+            "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/truyenqq/icon.png",
+            "description": "Đọc truyện trên trang Truyện QQ (forked from vBook)",
+            "type": "comic",
             "locale": "vi_VN"
         },
         {
