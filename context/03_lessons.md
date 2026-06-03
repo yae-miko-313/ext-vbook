@@ -97,3 +97,11 @@ Using generic selectors like `article` or `div` can lead to the "1-item bug" whe
 ```javascript
 var title = el.select("SELECTOR").text() + "";
 ```
+
+---
+
+## TruyenDich.AI TOC pagination now derives from chapter ranges
+
+**Problem:** `page.js` cũ dựa vào link `a[title=Trang cuối]`/`trang-*`, nhưng HTML mới không còn link pagination dạng anchor mà chuyển sang dải button `1 - 200`, `201 - 400`, ... nên chỉ trả 1 trang và khiến TOC thiếu chương.
+
+**Solution:** Ở `page.js`, parse section `Danh sách chương`, lấy tổng chương từ badge/range button, lấy page size từ số chapter link đang render (thực tế là 50), rồi tính `totalPages = ceil(totalChapters / pageSize)` để tạo danh sách `/trang-N`. Đồng thời cập nhật `toc.js` để parse trong block `Danh sách chương` và ghép tên chương + phụ đề từ 2 span.
