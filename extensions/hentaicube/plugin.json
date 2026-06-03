@@ -5,7 +5,7 @@
     "version": 12,
     "source": "https://hentaicube.xyz",
     "regexp": "hentaicube\\.xyz\\/read\\/[^\\/]+\\/?$",
-    "description": "HentaiCube - Truyện Hentai Online 18+ (fork from Meo)",
+    "description": "HentaiCube - Truyện Hentai Online 18+ (forked from Meo)",
     "locale": "vi_VN",
     "tag": "NSFW",
     "type": "comic"

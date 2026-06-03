@@ -23,7 +23,7 @@
             "version": 1,
             "source": "https://www.uaa.com",
             "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/Uaa/icon.png",
-            "description": "Fork from Nanoha, just add comments",
+            "description": "Forked from Nanoha, with comment support",
             "type": "chinese_novel",
             "locale": "zh_CN",
             "tag": "nsfw"
@@ -35,7 +35,7 @@
             "version": 1,
             "source": "http://alicesw.com",
             "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/alicesw/icon.png",
-            "description": "Read Chinese novels on AliceSW (Fork from B)",
+            "description": "Read Chinese novels on AliceSW (forked from B)",
             "type": "chinese_novel",
             "locale": "zh_CN",
             "tag": "nsfw"
@@ -95,7 +95,7 @@
             "version": 12,
             "source": "https://hentaicube.xyz",
             "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/hentaicube/icon.png",
-            "description": "HentaiCube - Truyện Hentai Online 18+ (fork from Meo)",
+            "description": "HentaiCube - Truyện Hentai Online 18+ (forked from Meo)",
             "type": "comic",
             "locale": "vi_VN",
             "tag": "nsfw"
