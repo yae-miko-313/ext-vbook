@@ -5,7 +5,7 @@
     "version": 1,
     "source": "http://alicesw.com",
     "regexp": "(https://|http://)(www|.m)?.alicesw.com/.*?/\\d+.html",
-    "description": "Read Chinese novels on AliceSW (Fork from B)",
+    "description": "Read Chinese novels on AliceSW (forked from B)",
     "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel",
