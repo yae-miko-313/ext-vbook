@@ -20,7 +20,7 @@
             "name": "Uaa",
             "author": "hieu05",
             "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/Uaa/plugin.zip",
-            "version": 1,
+            "version": 2,
             "source": "https://www.uaa.com",
             "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/Uaa/icon.png",
             "description": "Forked from Nanoha, with comment support",

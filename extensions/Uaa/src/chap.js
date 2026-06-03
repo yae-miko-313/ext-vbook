@@ -1,24 +1,43 @@
+load('config.js');
+
 function execute(url) {
-    const BASE_COOKIE = "_ga_4BC3P9JVX3=GS1.1.1733504363.1.0.1733504363.60.0.1941970943; _ga=GA1.1.1575844443.1733504364; _ga_EDY4YZ85BM=GS1.1.1733504364.1.0.1733504365.0.0.0; token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAzMzA5NTA4MDEyNDIyMzQ4OCwidHlwZSI6ImN1c3RvbWVyIiwidGltZXN0YW1wIjoxNzMzNTA0NDMyMTE0LCJleHAiOjE3MzQxMDkyMzJ9.D6Q8g6FlQ8ivByJpPUWrtldU-vU1hNb-5Dv9Bu0R3h4";
-    let body = {
-        method: "POST",
+    var cfMessage = "Mở browser lên mà verify Cloudflare đi bạn ơi";
+    var chapterUrl = normalizeUrl(url);
+    var response = fetch(chapterUrl, {
         headers: {
-            "cookie": BASE_COOKIE,
+            "Referer": BASE_URL + "/",
             "User-Agent": UserAgent.android()
         }
-    };
+    });
 
-    let response = fetch(url, body);
+    if (!response || !response.ok) return Response.error(cfMessage);
 
-    if (response.ok) {
-        let doc = response.html();
-        let content = "";
-        console.log(doc);
-        doc.select(".line").forEach(e => {
-            content += e.text() + "<br>";
-        });
+    var doc = response.html();
+    if (isCloudflare(doc)) return Response.error(cfMessage);
 
-        return Response.success(content);
+    var content = "";
+    var lines = doc.select(".chapter_box .line, .line");
+    for (var i = 0; i < lines.size(); i++) {
+        var text = cleanText(lines.get(i).text() + "");
+        if (text) content += text + "<br>";
     }
-    return null;
+
+    if (!content) return Response.error("Không đọc được nội dung chương");
+    return Response.success(content);
+}
+
+function normalizeUrl(url) {
+    url = ((url || "") + "").trim();
+    if (url.indexOf("//") === 0) return "https:" + url;
+    if (/^https?:\/\//i.test(url)) return url;
+    if (url.charAt(0) === "/") return BASE_URL + url;
+    return BASE_URL + "/" + url;
+}
+
+function isCloudflare(doc) {
+    return doc.select("#cf-error-details, .cf-browser-verification, #challenge-form, #challenge-error-text").size() > 0;
+}
+
+function cleanText(text) {
+    return ((text || "") + "").replace(/\s+/g, " ").trim();
 }

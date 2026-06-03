@@ -1,10 +1,15 @@
 load('config.js');
 
 function execute(url) {
+    var cfMessage = "Mở browser lên mà verify Cloudflare đi bạn ơi";
     var response = fetch(url);
-    if (!response.ok) return Response.error("Cannot load detail: " + response.status);
+    if (!response || !response.ok) return Response.error(cfMessage);
 
     var doc = response.html();
+    if (doc.select("#cf-error-details, .cf-browser-verification, #challenge-form").size() > 0) {
+        return Response.error(cfMessage);
+    }
+
     var book = doc.select(".main_box .content_box .left_box");
     var detail = "";
     book.select(".info_box div").forEach(function(e) {
