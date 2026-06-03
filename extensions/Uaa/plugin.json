@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "Uaa",
+    "author": "hieu05",
+    "version": 1,
+    "source": "https://www.uaa.com",
+    "regexp": "(www.|m.)?uaa.com/novel/(chapter|intro)[?]id=\\d+",
+    "description": "Fork from Nanoha, just add comments",
+    "locale": "zh_CN",
+    "language": "javascript",
+    "type": "chinese_novel",
+    "tag": "nsfw"
+  },
+  "script": {
+    "home": "home.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "genre": "genre.js",
+    "chap": "chap.js",
+    "comment": "comment.js"
+  }
+}

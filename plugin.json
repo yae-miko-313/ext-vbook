@@ -17,6 +17,18 @@
             "tag": "nsfw"
         },
         {
+            "name": "Uaa",
+            "author": "hieu05",
+            "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/Uaa/plugin.zip",
+            "version": 1,
+            "source": "https://www.uaa.com",
+            "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/Uaa/icon.png",
+            "description": "Fork from Nanoha, just add comments",
+            "type": "chinese_novel",
+            "locale": "zh_CN",
+            "tag": "nsfw"
+        },
+        {
             "name": "alicesw",
             "author": "hieu05",
             "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/alicesw/plugin.zip",
