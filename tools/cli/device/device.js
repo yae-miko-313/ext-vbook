@@ -104,7 +104,7 @@ function buildDeviceTestRequest({
     const base64Data = Buffer.from(JSON.stringify(requestData)).toString('base64');
 
     return (
-        `GET /test HTTP/1.1\r\n` +
+        `GET /extension/test HTTP/1.1\r\n` +
         `Host: ${deviceIp}:${devicePort}\r\n` +
         `Connection: close\r\n` +
         `User-Agent: okhttp/3.12.6\r\n` +
@@ -121,7 +121,7 @@ function buildDeviceInstallRequest({
     const base64Data = Buffer.from(JSON.stringify(payload)).toString('base64');
 
     return (
-        `GET /install HTTP/1.1\r\n` +
+        `GET /extension/install HTTP/1.1\r\n` +
         `Host: ${deviceIp}:${devicePort}\r\n` +
         `Connection: close\r\n` +
         `data: ${base64Data}\r\n\r\n`

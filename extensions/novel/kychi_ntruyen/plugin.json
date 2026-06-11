@@ -2,10 +2,10 @@
   "metadata": {
     "name": "nTruyen",
     "author": "kychi",
-    "version": 8,
-    "source": "https://ntruyen.biz/",
-    "regexp": "(www.)?ntruyen.biz/[^/]+/?$",
-    "description": "Đọc truyện từ ntruyen.biz (fork của B)",
+    "version": 9,
+    "source": "https://ntruyen.xyz/",
+    "regexp": "(www.)?ntruyen.xyz/[^/]+/?$",
+    "description": "Đọc truyện từ ntruyen.xyz (fork của B)",
     "locale": "vi_VN",
     "language": "javascript",
     "type": "novel"

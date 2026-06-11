@@ -90,9 +90,10 @@ function execute(url) {
         });
     }
 
-    var description = doc.select('article[itemprop="description"] [itemprop="description"]').html();
-    if (!description) description = doc.select('.p-3 .inline-block  p').html();
-
+    var description = doc.select('div[itemprop="description"] p[itemprop="description"]').html();
+    if (!description) description = doc.select('[itemprop="description"] p').html();
+    if (!description) description = doc.select('[itemprop="description"]').html();
+    
     return Response.success({
         name: name,
         cover: cover,

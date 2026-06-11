@@ -6,7 +6,7 @@ function execute(url) {
     var html = response.text();
     var storyId = extractStoryId(html);
     if (!storyId) return null;
-    var apiBase = 'https://api.ntruyen.biz/novels/' + storyId + '/chapters?page=';
+    var apiBase = 'https://api.ntruyen.xyz/novels/' + storyId + '/chapters?page=';
     var apiResponse = fetchPage(apiBase + '1');
     if (!apiResponse.ok) return null;
     var json = JSON.parse(apiResponse.text());

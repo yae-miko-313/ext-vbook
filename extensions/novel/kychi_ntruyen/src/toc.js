@@ -35,7 +35,7 @@ function execute(url) {
 function buildApiUrl(url, baseUrl) {
     if (!url) return null;
     // If already API URL, return as-is (preserve page number)
-    if (url.indexOf('api.ntruyen.biz/novels/') >= 0) return url;
+    if (url.indexOf('api.ntruyen.xyz/novels/') >= 0) return url;
     var normalized = url;
     if (normalized.indexOf('http') !== 0) {
         normalized = baseUrl + normalized;
@@ -52,7 +52,7 @@ function buildApiUrl(url, baseUrl) {
     // Extract page number from URL if present
     var pageMatch = url.match(/[?&]page=(\d+)/);
     var pageNum = pageMatch ? pageMatch[1] : '1';
-    return 'https://api.ntruyen.biz/novels/' + storyId + '/chapters?page=' + pageNum;
+    return 'https://api.ntruyen.xyz/novels/' + storyId + '/chapters?page=' + pageNum;
 }
 
 function extractStoryId(html) {
