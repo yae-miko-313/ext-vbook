@@ -184,10 +184,21 @@
       "name": "[NEW] Cà Chua",
       "author": "kychi",
       "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/new_cachua/plugin.zip",
-      "version": 1,
+      "version": 2,
       "source": "https://fanqienovel.com",
       "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/new_cachua/icon.png",
       "description": "Tomato viết ngược lại vẫn là Tomato. Có đảo ngược thế nào thì cà chua cũng vẫn là cà chua",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "[QQ] Cánh Cụt",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/canhcut/plugin.zip",
+      "version": 1,
+      "source": "https://book.qq.com/",
+      "icon": "https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/canhcut/icon.png",
+      "description": "QQ阅读 - Thư viện truyện chữ Trung Quốc khổng lồ từ Tencent",
       "type": "chinese_novel",
       "locale": "zh_CN"
     },
