@@ -10,9 +10,8 @@ function execute() {
         { title: "Thể loại 2", input: BASE_URL + "/DUONG_DAN_HOT/{{page}}",    script: "gen.js" },
     ]);
 }
-// có thể lấy nhanh bằng cách này console.log(Array.prototype.slice.call(document.querySelectorAll('body > div.logo2 > div:nth-child(39) a')).map(function(e) { return '{title: "' + e.innerText + '", input: "' + e.href.replace(/^(?:\\/\\/|[^/]+)*/, '') + '", script: "gen.js"},'; }).join('\n'));
-*/
-
+// có thể lấy nhanh bằng cách này : 
+// '''console.log(Array.prototype.slice.call(document.querySelectorAll('body > div.logo2 > div:nth-child(39) a')).map(function(e) { return '{title: "' + e.innerText + '", input: "' + e.href.replace(/^(?:\\/\\/|[^/]+)*/, '') + '", script: "gen.js"},'; }).join('\n'));'''
 // Cách 2: Gọi request động từ website nguồn
 function execute() {
     // TODO: Thay PATH_THELOAI bằng URL trang thể loại thực tế

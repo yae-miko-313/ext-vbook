@@ -2,9 +2,9 @@
   "metadata": {
     "name": "TruyenTv",
     "author": "kychi",
-    "version": 2,
-    "source": "https://www.tvtruyen.ink/",
-    "regexp": "(www\\.)?tvtruyen\\.ink/.*",
+    "version": 3,
+    "source": "https://www.tvtruyen.us/",
+    "regexp": "(www\\.)?tvtruyen\\.us/.*",
     "description": "Đọc truyện từ TruyenTv.",
     "locale": "vi_VN",
     "language": "javascript",
