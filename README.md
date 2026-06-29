@@ -1,56 +1,73 @@
-# vBook Extensions Repository - kychi
+# 📚 VBook Extensions Hub
 
-Nguồn mở rộng (extensions) của **vBook**
----
-
-### 1. Link Nguồn Mở Rộng
-
-```bash
-https://raw.githubusercontent.com/kychitoge/vbook-ext/main/plugin.json
+```link
+https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/plugin.json
 ```
 
----
+Chào mừng bạn đến với kho lưu trữ tiện ích mở rộng (extensions) dành cho ứng dụng **VBook**. Đây là trung tâm quản lý các plugin cho Truyện chữ, Truyện tranh và các nguồn nội dung từ Trung Quốc/Quốc tế.
 
-### 2. Danh sách Extension
-
-| Icon | Tên | Nguồn | Phiên bản | Loại | Ngôn ngữ |
-| :---: | :--- | :--- | :---: | :---: | :---: |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyencv/icon.png" width="40"> | **[APP] Truyện CV** | [truyencv.io](https://truyencv.io) | 2 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_vivutruyen/icon.png" width="40"> | **Vivu Truyện** | [vivutruyen.net](https://vivutruyen.net/) | 1 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/zuminovel/icon.png" width="40"> | **Zumi Novel** | [zuminovel.com](https://zuminovel.com/) | 1 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyentv/icon.png" width="40"> | **TruyenTv** | [tvtruyen.us](https://www.tvtruyen.us/) | 3 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmo/icon.png" width="40"> | **Truyện Mơ** | [truyenmo.com](https://www.truyenmo.com/) | 1 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_ntruyen/icon.png" width="40"> | **nTruyen** | [ntruyen.xyz](https://ntruyen.xyz/) | 9 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_truyenmoi/icon.png" width="40"> | **Truyện Mới** | [truyenmoiqq.com](https://truyenmoiqq.com/) | 7 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/truyenhoan/icon.png" width="40"> | **Truyện Hoàn** | [truyenhoan.com](https://truyenhoan.com/) | 9 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_quykhu/icon.png" width="40"> | **QuyKhu** | [quykhu.com](https://quykhu.com/) | 4 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_kyhuyen/icon.png" width="40"> | **Kỳ Huyễn** | [kyhuyen.com](https://kyhuyen.com/) | 1 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_medoctruyen/icon.png" width="40"> | **Mê Đọc Truyện** | [medoctruyen.vn](https://medoctruyen.vn) | 1 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/novel/kychi_vbook_docs/icon.png" width="40"> | **Hướng dẫn sử dụng VBook** | [vbookapp.gitbook.io](https://vbookapp.gitbook.io/huong-dan-su-dung) | 6 | novel | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhhtq/icon.png" width="40"> | **HHHTQ** | [hhhtq.team](https://hhhtq.team) | 2 | video | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_kenhtruyenma/icon.png" width="40"> | **Kenh Truyen Ma** | [kenhtruyenma.com](https://kenhtruyenma.com) | 1 | video | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_hhkungfu/icon.png" width="40"> | **HHKUNGFU** | [hhkungfu.ee](https://hhkungfu.ee) | 2 | video | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/kychi_cachua/icon.png" width="40"> | **Cà Chua Sói Xám** | [fanqienovel.com](https://fanqienovel.com) | 3 | chinese_novel | zh_CN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/new_cachua/icon.png" width="40"> | **[NEW] Cà Chua** | [fanqienovel.com](https://fanqienovel.com) | 2 | chinese_novel | zh_CN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/chinese_novel/canhcut/icon.png" width="40"> | **[QQ] Cánh Cụt** | [book.qq.com](https://book.qq.com/) | 1 | chinese_novel | zh_CN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_ophim/icon.png" width="40"> | **OPhim** | [ophim17.cc](https://ophim17.cc) | 1 | video | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_phimfun/icon.png" width="40"> | **PhimFun** | [phimfun.net](https://phimfun.net) | 1 | video | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_motchill/icon.png" width="40"> | **Motchill** | [envasion.net](https://envasion.net) | 1 | video | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_nguonc/icon.png" width="40"> | **NguonC** | [phim.nguonc.com](https://phim.nguonc.com) | 1 | video | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_animevsub/icon.png" width="40"> | **AnimeVsub** | [animevsub.app](https://animevsub.app) | 1 | video | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_yeuanime/icon.png" width="40"> | **Yêu Anime** | [yeuanime.net](https://yeuanime.net) | 2 | video | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/video/kychi_animehay/icon.png" width="40"> | **Anime Hay** | [animehay.fm](https://animehay.fm) | 1 | video | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/fpt_ai_tts/icon.png" width="40"> | **FPT AI TTS** | [console.fpt.ai](https://console.fpt.ai/) | 1 | tts | vi_VN |
-| <img src="https://raw.githubusercontent.com/kychitoge/vbook-ext/main/extensions/tts/viettelai_tts/icon.png" width="40"> | **Viettel AI TTS** | [viettelai.vn](https://viettelai.vn/dashboard/token) | 1 | tts | vi_VN |
-
-### 3. Hướng dẫn cài đặt
-
-Nếu bạn là người dùng mới, hãy tham khảo hướng dẫn chi tiết tại đây:
-[Hướng dẫn cài đặt nguồn bản thường](https://vbookapp.gitbook.io/huong-dan-su-dung/nguon-mo-rong/cai-nguon-ban-thuong)
+Dự án này được xây dựng và quản lý bằng quy chuẩn chuyên nghiệp, đi kèm với các công cụ hỗ trợ phát triển tối ưu cho AI và lập trình viên.
 
 ---
 
-### 4. Nguồn Cộng đồng
+## 📲 Cách sử dụng trên ứng dụng VBook
 
-Khám phá thêm các extension khác được chia sẻ bởi cộng đồng vBook:
-[vBookExt.me - Tổng hợp nguồn vBook](https://www.vbookext.me/)
+Để cài đặt các tiện ích này vào ứng dụng VBook trên điện thoại:
+
+1. Copy địa chỉ URL của danh sách plugin (registry):
+   `https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/plugin.json`
+2. Mở ứng dụng **VBook** → **Cài đặt** → **Kho tiện ích**.
+3. Nhấn **Thêm kho** và dán URL vào.
+4. Làm mới danh sách và bắt đầu cài đặt các tiện ích bạn muốn!
+
+---
+
+## 📂 Cấu trúc dự án
+
+- **[`/extensions`](file:///d:/github/ext-vbookb/extensions)**: Thành phần cốt lõi của dự án. Chứa mã nguồn của tất cả các tiện ích đã hỗ trợ. Mỗi tiện ích bao gồm các script tối ưu: Trang chủ (Home), Chi tiết (Detail), Mục lục (TOC), và Nội dung chương (Chap).
+- **[`/vbook-tool`](file:///d:/github/ext-vbookb/vbook-tool)**: Bộ công cụ CLI chuyên nghiệp cho lập trình viên (và AI). Bao gồm các tính năng tự động tạo khung (scaffold), kiểm tra tương thích Rhino, và đồng bộ kiểm tra trên thiết bị thật.
+- **[`plugin.json`](file:///d:/github/ext-vbookb/plugin.json)**: Danh sách tổng hợp toàn bộ tiện ích, giúp đồng bộ hóa dữ liệu với ứng dụng di động.
+
+---
+
+## 🛠 Dành cho nhà phát triển (Developers)
+
+Chúng tôi sử dụng quy trình phát triển hỗ trợ bởi AI để đảm bảo các tiện ích luôn hoạt động ổn định và chính xác.
+
+### Bắt đầu nhanh
+
+1. **Cài đặt công cụ**:
+
+   ```bash
+   cd vbook-tool
+   npm install
+   npm link
+   ```
+
+2. **Cấu hình**:
+   Copy `.env.example` (hoặc tạo file `.env`) trong thư mục `vbook-tool/` và thiết lập `VBOOK_IP` theo địa chỉ IP hiển thị tại tab "Web Server" trên ứng dụng VBook.
+
+3. **Tìm hiểu quy trình**:
+   Vui lòng đọc kỹ [Quy trình làm việc tiêu chuẩn](file:///d:/github/ext-vbookb/context/02_workflow.md) và [Các ràng buộc Rhino Runtime](file:///d:/github/ext-vbookb/context/01_runtime.md) trước khi đóng góp.
+
+Để xem chi tiết các lệnh CLI, hãy tham khảo [VBook Tool README](file:///d:/github/ext-vbookb/vbook-tool/README.md).
+
+---
+
+## 🛡️ Tiêu chuẩn phát triển
+
+Tất cả tiện ích trong kho lưu trữ này phải tuân thủ các tiêu chuẩn chất lượng:
+
+- **Tương thích Rhino**: Không sử dụng `async/await`, optional chaining (`?.`), hoặc nullish coalescing (`??`).
+- **An toàn dữ liệu (Null-Safety)**: Luôn chuẩn hóa dữ liệu sau khi parse bằng Java-string (`+ ""`).
+- **Hợp đồng dữ liệu**: Đảm bảo kết quả trả về từ hàm `execute()` đúng định dạng yêu cầu của hệ thống.
+
+---
+
+## 🤝 Đóng góp
+
+Chúng tôi luôn hoan nghênh các tiện ích mới! Vui lòng sử dụng lệnh `vbook create` để tạo khung dự án mới, đảm bảo tiện ích của bạn khớp với cấu trúc và tiêu chuẩn chất lượng của dự án.
+
+---
+
+_Được quản lý bởi **B** — Dành cho cộng đồng VBook._
