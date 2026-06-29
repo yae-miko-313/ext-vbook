@@ -1,0 +1,17 @@
+load("config.js");
+
+function execute(url, page) {
+    var p = page ? parseInt(page) : 1;
+    var fetchUrl = resolveUrl(url);
+    if (fetchUrl.charAt(fetchUrl.length - 1) !== "/") fetchUrl += "/";
+    if (p > 1) fetchUrl += "page/" + p + "/";
+
+    var res = fetch(fetchUrl, FETCH_OPTIONS);
+    if (!res || !res.ok) return Response.success([], null);
+    var doc = res.html();
+    if (!doc) return Response.success([], null);
+
+    var items = parseListItems(doc);
+    var next = items.length > 0 ? String(p + 1) : null;
+    return Response.success(items, next);
+}

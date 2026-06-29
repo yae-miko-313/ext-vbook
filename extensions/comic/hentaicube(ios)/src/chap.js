@@ -3,7 +3,7 @@ load("config.js");
 function execute(url) {
   var chapUrl = resolveUrl(url);
   var browser = Engine.newBrowser();
-  browser.setUserAgent(UserAgent.android()); // Tùy chỉnh user agent
+  browser.setUserAgent(UserAgent.ios()); // Tùy chỉnh user agent
   var doc = browser.launch(chapUrl, 15000);
   browser.close();
   var imgs = doc.select('img[src*="cdn."]');

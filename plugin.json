@@ -101,6 +101,18 @@
       "tag": "NSFW"
     },
     {
+      "name": "HentaiCube -18+ (iOS)",
+      "author": "hieu05",
+      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/hentaicube(ios)/plugin.zip",
+      "version": 14,
+      "source": "https://hentaicube.xyz",
+      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/hentaicube(ios)/icon.png",
+      "description": "HentaiCube - Truyện Hentai Online 18+ (forked from Meo)",
+      "type": "comic",
+      "locale": "vi_VN",
+      "tag": "NSFW"
+    },
+    {
       "name": "Photos18",
       "author": "hieu05",
       "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/photos18/plugin.zip",
