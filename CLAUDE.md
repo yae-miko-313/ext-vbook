@@ -87,6 +87,7 @@ Script của extension chạy trên môi trường **Rhino (ES5)**.
 * **CẤM DÙNG**: `let`, `const`, arrow functions (`=>`), `async/await`, `Promise`, optional chaining (`?.`), nullish coalescing (`??`), import/export.
 
 ### 📚 Key Documentation Paths
+* **Project Lessons**: [docs/lesson.md](docs/lesson.md) — bắt buộc đọc cùng các tài liệu/quy tắc khác trước khi agent viết hoặc sửa code.
 * **Master Dev Guide**: [docs/EXTENSION_DEVELOPMENT_GUIDE.md](file:///d:/My%20Code/vbook-tool/docs/EXTENSION_DEVELOPMENT_GUIDE.md)
 * **JSBridge & Crypto APIs**: [docs/JSBRIDGE_REFERENCE.md](file:///d:/My%20Code/vbook-tool/docs/JSBRIDGE_REFERENCE.md)
 * **Decryption Knowledge Base**: [docs/DECRYPTION_PATTERNS.md](file:///d:/My%20Code/vbook-tool/docs/DECRYPTION_PATTERNS.md)

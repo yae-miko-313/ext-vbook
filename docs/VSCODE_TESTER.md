@@ -6,16 +6,16 @@
 
 ## 🚀 Key Features
 
-* **Integrated Sidebar Container**: Access all testing tools from a dedicated, compact view in the VS Code Activity Bar.
-* **Smart Workspace Detection**: Automatically identifies valid extension folders (containing `plugin.json` and a `src/` directory).
-* **Dynamic Script Selection**: Parses your `plugin.json` to let you pick which script to test (home, toc, chap, etc.).
-* **Flexible Arguments**: Enter varargs easily with a one-line-per-argument input field.
-* **Persistent History**: Remembers your recent server URLs, argument sets, and test runs for rapid iteration.
-* **Real-time Feedback**: Streams request context and full API responses into a dedicated VS Code terminal for deep debugging.
-* **Core Workflow Integration**: Direct calls to:
-  * `/extension/test`: Validate logic and output.
-  * `/extension/build`: Package the extension for distribution.
-  * `/extension/install`: Deploy directly to a connected test device.
+- **Integrated Sidebar Container**: Access all testing tools from a dedicated, compact view in the VS Code Activity Bar.
+- **Smart Workspace Detection**: Automatically identifies valid extension folders (containing `plugin.json` and a `src/` directory).
+- **Dynamic Script Selection**: Parses your `plugin.json` to let you pick which script to test (home, toc, chap, etc.).
+- **Flexible Arguments**: Enter varargs easily with a one-line-per-argument input field.
+- **Persistent History**: Remembers your recent server URLs, argument sets, and test runs for rapid iteration.
+- **Real-time Feedback**: Streams request context and full API responses into a dedicated VS Code terminal for deep debugging.
+- **Core Workflow Integration**: Direct calls to:
+  - `/extension/test`: Validate logic and output.
+  - `/extension/build`: Package the extension for distribution.
+  - `/extension/install`: Deploy directly to a connected test device.
 
 ---
 
@@ -37,9 +37,9 @@
 
 The tester treats a folder as a valid extension if it contains:
 
-* `plugin.json`: The extension manifest.
-* `src/`: The directory containing your JavaScript logic.
-* *Optional*: `icon.png` (will be sent as part of the payload if present).
+- `plugin.json`: The extension manifest.
+- `src/`: The directory containing your JavaScript logic.
+- _Optional_: `icon.png` (will be sent as part of the payload if present).
 
 ### 2. Testing Logic
 
@@ -52,8 +52,8 @@ The tester treats a folder as a valid extension if it contains:
 
 ## 📝 Notes
 
-* Ensure your local vBook API server is running before executing tests.
-* The tester sends the entire source code of the extension to the `/test` endpoint for server-side evaluation.
+- Ensure your local vBook API server is running before executing tests.
+- The tester sends the entire source code of the extension to the `/test` endpoint for server-side evaluation.
 
 ---
 
