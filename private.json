@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "author": "hieu05",
+    "description": "Kho riêng - không nằm trong danh sách chung"
+  },
+  "data": [
+    {
+      "name": "Viet69 -18+",
+      "author": "hieu05",
+      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/viet69/plugin.zip",
+      "version": 5,
+      "source": "https://viet69.be",
+      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/viet69/icon.png",
+      "description": "Viet69 - Phim sex Việt Nam, video 18+",
+      "type": "video",
+      "locale": "vi",
+      "tag": "nsfw"
+    }
+  ]
+}

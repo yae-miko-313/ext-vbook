@@ -2,7 +2,7 @@
   "metadata": {
     "name": "Viet69 -18+",
     "author": "hieu05",
-    "version": 2,
+    "version": 5,
     "source": "https://viet69.be",
     "description": "Viet69 - Phim sex Việt Nam, video 18+",
     "locale": "vi",
@@ -13,7 +13,6 @@
   },
   "script": {
     "home": "home.js",
-    "explore": "explore.js",
     "genre": "genre.js",
     "search": "search.js",
     "detail": "detail.js",
