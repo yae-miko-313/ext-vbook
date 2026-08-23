@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "name": "Viet69 -18+",
+    "author": "hieu05",
+    "version": 2,
+    "source": "https://viet69.be",
+    "description": "Viet69 - Phim sex Việt Nam, video 18+",
+    "locale": "vi",
+    "regexp": "viet69\\.[a-z]+/(?:bai-viet/)?[^/]+/?$",
+    "type": "video",
+    "nsfw": true,
+    "encrypt": true
+  },
+  "script": {
+    "home": "home.js",
+    "explore": "explore.js",
+    "genre": "genre.js",
+    "search": "search.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js",
+    "track": "track.js"
+  },
+  "config": {
+    "DOMAIN": {
+      "title": "Domain",
+      "subtitle": "Đổi khi tên miền bị chặn",
+      "default": "https://viet69.be",
+      "mode": "input",
+      "format": "text"
+    }
+  }
+}
