@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "name": "[Fanqie] Cà Chua C2",
+    "author": "kychi",
+    "version": 4,
+    "source": "https://fanqienovel.com",
+    "regexp": "fanqienovel\\.com/page/[0-9]+",
+    "description": "Nguồn truyện chữ từ Fanqie Novel (番茄小说). Dùng proxy mirror để đọc nội dung.\n\nLỌC GIỚI TÍNH\n(beta kéo ngay xuống dưới)\n\n-1=All\n1=Nam\n0=Nữ",
+    "locale": "zh_CN",
+    "type": "chinese_novel",
+    "language": "javascript"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "page": "page.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  },
+  "config": {
+    "CONFIG_GENDER": {
+      "title": "Lọc giới tính (-1=Tất cả | 1=Nam | 0=Nữ)",
+      "mode": "select",
+      "values": [
+       "-1=Xem tất cả",
+       "1=Lọc genre nam",
+       "0=Lọc genre nữ"
+     ],
+      "default": "-1"
+    }
+  }
+}
