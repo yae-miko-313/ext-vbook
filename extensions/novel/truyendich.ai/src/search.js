@@ -1,4 +1,4 @@
-load("config.js");
+load('config.js');
 
 function buildDescription(card) {
   var box = card.select("div:has(> span:contains(Chương))").last();
@@ -15,7 +15,7 @@ function execute(key, page) {
   var response = fetch(
     BASE_URL + "/tim-kiem?q=" + encodeURIComponent(key) + "&page=" + pageNo,
   );
-  if (!response.ok) return null;
+  if (!response.ok) return Response.error("HTTP " + response.status);
 
   var doc = response.html();
   var nextHref = doc.select("main a:contains(Trang sau)").attr("href");

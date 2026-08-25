@@ -1,4 +1,4 @@
-load("config.js");
+load('config.js');
 
 const PAGE_SIZE = 20;
 
@@ -60,7 +60,7 @@ function execute(input, page) {
   if (!apiUrl) return Response.error("Input không hợp lệ.");
 
   var response = fetch(apiUrl);
-  if (!response.ok) return null;
+  if (!response.ok) return Response.error("HTTP " + response.status);
 
   var payload = response.json();
   var items = payload && payload.items ? payload.items : [];

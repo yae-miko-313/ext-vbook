@@ -1,4 +1,4 @@
-load("config.js");
+load('config.js');
 
 function textFromFirst(element) {
   return element ? cleanText(element.text()) : "";
@@ -55,11 +55,11 @@ function buildDetailText(route, chapterCount, updatedAt, status) {
 
 function execute(url) {
   var route = parseRoute(url);
-  if (!route) return null;
+  if (!route) return Response.error("URL truyện không hợp lệ.");
 
   var detailUrl = buildDetailRoute(route);
   var response = fetch(buildAbsoluteUrl(detailUrl));
-  if (!response.ok) return null;
+  if (!response.ok) return Response.error("HTTP " + response.status);
 
   var doc = response.html();
   var chapterCount = readInfoValue(doc, "Số chương");
@@ -73,8 +73,16 @@ function execute(url) {
     author: readInfoValue(doc, "Tác giả"),
     description: htmlFromFirst(doc.select("section .prose").first()),
     detail: buildDetailText(route, chapterCount, updatedAt, status),
+    url: buildAbsoluteUrl(detailUrl),
+    type: "novel",
+    format: "novel",
     ongoing: status.indexOf("Đang ra") >= 0,
-    genres: extractGenres(doc),
+    nsfw: false,
+    locale: "vi_VN",
+    tags: extractGenres(doc),
+    genres: [],
     suggests: extractSuggests(doc, route),
+    reviews: [],
+    comments: [],
   });
 }

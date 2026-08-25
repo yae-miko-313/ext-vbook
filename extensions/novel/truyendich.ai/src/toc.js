@@ -1,4 +1,4 @@
-load("config.js");
+load('config.js');
 
 function buildChapterName(element) {
   var spans = element.select("span");
@@ -16,7 +16,7 @@ function buildChapterName(element) {
 
 function execute(url) {
   var route = parseRoute(url);
-  if (!route) return null;
+  if (!route) return Response.error("URL truyện không hợp lệ.");
 
   var tocUrl = buildRoute({
     edition: route.edition,
@@ -25,7 +25,7 @@ function execute(url) {
     pageNo: route.pageNo || 1,
   });
   var response = fetch(buildAbsoluteUrl(tocUrl));
-  if (!response.ok) return null;
+  if (!response.ok) return Response.error("HTTP " + response.status);
 
   var doc = response.html();
   var chapterSection = doc.select("section:has(h2:contains(Danh sách chương))").first();

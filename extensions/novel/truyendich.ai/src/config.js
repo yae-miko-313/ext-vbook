@@ -1,4 +1,8 @@
-const BASE_URL = "https://truyendich.ai";
+let BASE_URL = "https://truyendich.store";
+try {
+  if (DOMAIN) BASE_URL = DOMAIN;
+} catch (error) {
+}
 
 function safeString(value) {
   return value == null ? "" : String(value).trim();

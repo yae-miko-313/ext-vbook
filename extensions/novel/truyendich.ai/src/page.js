@@ -1,4 +1,4 @@
-load("config.js");
+load('config.js');
 
 function toNumber(value) {
   var digits = cleanText(value).replace(/[^0-9]/g, "");
@@ -49,11 +49,11 @@ function getTotalPages(doc) {
 
 function execute(url) {
   var route = parseRoute(url);
-  if (!route) return null;
+  if (!route) return Response.error("URL truyện không hợp lệ.");
 
   var detailUrl = buildDetailRoute(route);
   var response = fetch(buildAbsoluteUrl(detailUrl));
-  if (!response.ok) return null;
+  if (!response.ok) return Response.error("HTTP " + response.status);
 
   var totalPages = getTotalPages(response.html());
   var pages = [];

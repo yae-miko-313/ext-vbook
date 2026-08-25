@@ -1,4 +1,4 @@
-load("config.js");
+load('config.js');
 
 function textFromFirst(element) {
   return element ? cleanText(element.text()) : "";
@@ -24,10 +24,10 @@ function buildEditionItems(doc, currentRoute) {
 
 function execute(input) {
   var route = parseRoute(input);
-  if (!route) return null;
+  if (!route) return Response.error("URL truyện không hợp lệ.");
 
   var response = fetch(buildAbsoluteUrl(buildDetailRoute(route)));
-  if (!response.ok) return null;
+  if (!response.ok) return Response.error("HTTP " + response.status);
 
   return Response.success(buildEditionItems(response.html(), route));
 }

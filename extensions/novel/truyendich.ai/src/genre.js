@@ -1,4 +1,4 @@
-load("config.js");
+load('config.js');
 
 const FALLBACK_GENRES = [
   ["Tiên Hiệp", "tien-hiep"],
