@@ -15,6 +15,28 @@
       "type": "video",
       "locale": "vi",
       "tag": "nsfw"
+    },
+    {
+      "name": "[Fanqie] Cà Chua C2",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/kychi-cachua-c2/plugin.zip",
+      "version": 4,
+      "source": "https://fanqienovel.com",
+      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/kychi-cachua-c2/icon.png",
+      "description": "Nguồn truyện chữ từ Fanqie Novel (番茄小说). Dùng proxy mirror để đọc nội dung.",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "NguonC",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/nguonc/plugin.zip",
+      "version": 2,
+      "source": "https://phim.nguonc.com",
+      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/nguonc/icon.png",
+      "description": "Xem phim từ NguonC - dùng proxy",
+      "type": "video",
+      "locale": "vi_VN"
     }
   ]
 }
