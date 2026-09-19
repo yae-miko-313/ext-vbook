@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "name": "书本书 Shubenshu",
+    "author": "hieu05",
+    "version": 1,
+    "source": "https://www.shubenshu.com",
+    "description": "Đọc truyện chữ Trung Quốc trên 书本书 (shubenshu.com)",
+    "locale": "zh_CN",
+    "regexp": "shubenshu\\.com/l[A-Za-z0-9]+/?$",
+    "type": "chinese_novel",
+    "language": "javascript",
+    "nsfw": false,
+    "encrypt": true
+  },
+  "script": {
+    "home": "home.js",
+    "explore": "explore.js",
+    "genre": "genre.js",
+    "search": "search.js",
+    "detail": "detail.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  },
+  "config": {
+    "DOMAIN": {
+      "title": "Domain",
+      "default": "https://www.shubenshu.com",
+      "mode": "input",
+      "format": "text"
+    }
+  }
+}

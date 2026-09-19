@@ -77,6 +77,17 @@
       "tag": "nsfw"
     },
     {
+      "name": "书本书 Shubenshu",
+      "author": "hieu05",
+      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/shubenshu/plugin.zip",
+      "version": 1,
+      "source": "https://www.shubenshu.com",
+      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/shubenshu/icon.png",
+      "description": "Đọc truyện chữ Trung Quốc trên 书本书 (shubenshu.com)",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
       "name": "Foamgirl",
       "author": "hieu05",
       "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/foamgirl/plugin.zip",
