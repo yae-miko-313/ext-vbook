@@ -2,7 +2,7 @@
   "metadata": {
     "name": "书本书 Shubenshu",
     "author": "hieu05",
-    "version": 1,
+    "version": 2,
     "source": "https://www.shubenshu.com",
     "description": "Đọc truyện chữ Trung Quốc trên 书本书 (shubenshu.com)",
     "locale": "zh_CN",
@@ -14,7 +14,6 @@
   },
   "script": {
     "home": "home.js",
-    "explore": "explore.js",
     "genre": "genre.js",
     "search": "search.js",
     "detail": "detail.js",
