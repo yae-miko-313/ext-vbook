@@ -5,78 +5,6 @@
   },
   "data": [
     {
-      "name": "Buondua",
-      "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/Buondua/plugin.zip",
-      "version": 3.1,
-      "source": "https://buondua.com/",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/Buondua/icon.png",
-      "description": "Tập Hợp Album của Xiuren...",
-      "type": "comic",
-      "locale": "zh_CN",
-      "tag": "nsfw"
-    },
-    {
-      "name": "Uaa",
-      "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/Uaa/plugin.zip",
-      "version": 2,
-      "source": "https://www.uaa.com",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/Uaa/icon.png",
-      "description": "Forked from Nanoha, with comment support",
-      "type": "chinese_novel",
-      "locale": "zh_CN",
-      "tag": "nsfw"
-    },
-    {
-      "name": "alicesw",
-      "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/alicesw/plugin.zip",
-      "version": 1,
-      "source": "http://alicesw.com",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/alicesw/icon.png",
-      "description": "Read Chinese novels on AliceSW (forked from B)",
-      "type": "chinese_novel",
-      "locale": "zh_CN",
-      "tag": "nsfw"
-    },
-    {
-      "name": "Cool18 Novel",
-      "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/cool18-novel/plugin.zip",
-      "version": 1,
-      "source": "https://www.cool18.com/bbs4/",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/cool18-novel/icon.png",
-      "description": "Đọc truyện trên trang Cool18",
-      "type": "chinese_novel",
-      "locale": "zh_CN",
-      "tag": "nsfw"
-    },
-    {
-      "name": "Cosplaytele",
-      "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/cosplaytele/plugin.zip",
-      "version": 4,
-      "source": "https://cosplaytele.com",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/cosplaytele/icon.png",
-      "description": "Cosplay photo galleries",
-      "type": "comic",
-      "locale": "en_US",
-      "tag": "nsfw"
-    },
-    {
-      "name": "CRXS",
-      "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/crxs.me/plugin.zip",
-      "version": 1,
-      "source": "https://crxs.me",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/crxs.me/icon.png",
-      "description": "Đọc truyện chữ Trung Quốc trên CRXS",
-      "type": "chinese_novel",
-      "locale": "zh_CN",
-      "tag": "nsfw"
-    },
-    {
       "name": "书本书 Shubenshu",
       "author": "hieu05",
       "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/shubenshu/plugin.zip",
@@ -86,54 +14,6 @@
       "description": "Đọc truyện chữ Trung Quốc trên 书本书 (shubenshu.com)",
       "type": "chinese_novel",
       "locale": "zh_CN"
-    },
-    {
-      "name": "Foamgirl",
-      "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/foamgirl/plugin.zip",
-      "version": 1.3,
-      "source": "https://foamgirl.net/",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/foamgirl/icon.png",
-      "description": "Share Pictures Sexy Girl...",
-      "type": "comic",
-      "locale": "zh_CN",
-      "tag": "nsfw"
-    },
-    {
-      "name": "HentaiCube -18+",
-      "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/hentaicube/plugin.zip",
-      "version": 13,
-      "source": "https://hentaicube.xyz",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/hentaicube/icon.png",
-      "description": "HentaiCube - Truyện Hentai Online 18+ (forked from Meo)",
-      "type": "comic",
-      "locale": "vi_VN",
-      "tag": "NSFW"
-    },
-    {
-      "name": "HentaiCube -18+ (iOS)",
-      "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/hentaicube(ios)/plugin.zip",
-      "version": 14,
-      "source": "https://hentaicube.xyz",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/hentaicube(ios)/icon.png",
-      "description": "HentaiCube - Truyện Hentai Online 18+ (forked from Meo)",
-      "type": "comic",
-      "locale": "vi_VN",
-      "tag": "NSFW"
-    },
-    {
-      "name": "Photos18",
-      "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/photos18/plugin.zip",
-      "version": 3,
-      "source": "https://www.photos18.com/",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/photos18/icon.png",
-      "description": "Girl photos",
-      "type": "comic",
-      "locale": "zh_CN",
-      "tag": "nsfw"
     },
     {
       "name": "TruyenDich.AI",
@@ -158,18 +38,6 @@
       "locale": "vi_VN"
     },
     {
-      "name": "WNACG",
-      "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/wnacg/plugin.zip",
-      "version": 9,
-      "source": "https://www.wnacg.com/",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/wnacg/icon.png",
-      "description": "Image galleries: home, genre, search, detail, ranking",
-      "type": "comic",
-      "locale": "zh_CN",
-      "tag": "nsfw"
-    },
-    {
       "name": "ZumiNovel",
       "author": "hieu05",
       "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/novel/zuminovel/plugin.zip",
@@ -180,6 +48,28 @@
       "type": "novel",
       "locale": "vi_VN",
       "tag": "normal"
+    },
+    {
+      "name": "[Fanqie] Cà Chua C2",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/kychi-cachua-c2/plugin.zip",
+      "version": 4,
+      "source": "https://fanqienovel.com",
+      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/kychi-cachua-c2/icon.png",
+      "description": "Nguồn truyện chữ từ Fanqie Novel (番茄小说). Dùng proxy mirror để đọc nội dung.",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
+    },
+    {
+      "name": "NguonC",
+      "author": "hieu05",
+      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/nguonc/plugin.zip",
+      "version": 3,
+      "source": "https://phim.nguonc.com",
+      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/nguonc/icon.png",
+      "description": "Xem phim từ NguonC",
+      "type": "video",
+      "locale": "vi_VN"
     }
   ]
 }
