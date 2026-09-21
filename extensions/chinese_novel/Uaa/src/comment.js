@@ -30,7 +30,7 @@ function execute(input, next) {
 
     var currentPage = parseInt(json.currentPage || page, 10);
     var totalPage = parseInt(json.totalPage || 0, 10);
-    var nextPage = totalPage > currentPage ? String(currentPage + 1) : null;
+    var nextPage = totalPage > currentPage ? String(currentPage + 1) : "";
     return Response.success(data, nextPage);
 }
 

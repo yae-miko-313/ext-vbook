@@ -1,27 +1,15 @@
 load('config.js');
-// https://www.uaa.com/novel/list?searchType=1&keyword=18%2B
-// https://www.uaa.com/novel/list?keyword=M&searchType=1&author=&category=&finished=&space=&source=&tag=&sort=0&page=2
+
 function execute(key, page) {
     if (!page) page = '1';
-    let response = fetch(BASE_URL + "/novel/list?&keyword=" + key + "&searchType=1&author=&category=&finished=&space=&source=&tag=&sort=0&page=" + page);
-    if (response.ok) {
-        let doc= response.html();
-        
-        const data = [];
-        
-        doc.select(".main_box .novel_list_box ul li").forEach(e => {
-            console.log(e)
-            data.push({
-                name: e.select(".title").text(),
-                link: e.select(".cover_box a").attr('href'),
-                cover: e.select(".cover_box a img").attr('src'),
-                description: e.select(".info_box a").first().text(),
-                
-                host: BASE_URL
-            });
-        });
-        let next = (parseInt(page) + 1).toString();
-        return Response.success(data, next);
+    let response = fetch(BASE_URL + "/novel/list?keyword=" + encodeURIComponent(key) + "&searchType=1&page=" + page);
+    if (!response.ok) return Response.error(CF_MESSAGE);
+
+    let doc = response.html();
+    if (isCloudflare(doc)) return Response.error(CF_MESSAGE);
+    // Guests get the unfiltered list back: the server drops the keyword and flags the wall.
+    if (doc.select("#wall").attr("data-search-guest") === "1") {
+        return Response.error("UAA yêu cầu đăng nhập để tìm kiếm. Mở browser đăng nhập uaa.com rồi thử lại");
     }
-    return null;
+    return Response.success(parseCards(doc), nextPage(doc, page));
 }
