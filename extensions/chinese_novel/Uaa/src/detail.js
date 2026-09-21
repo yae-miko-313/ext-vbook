@@ -17,18 +17,17 @@ function execute(url) {
         detail.push(stats.map(function (e) { return e.text(); }).join(" · "));
     }
 
+    var genres = [];
+    doc.select(".nd-info a.nd-meta__lk[href*=category=]").forEach(function (e) {
+        genres.push({ title: e.text(), input: e.attr("href"), script: "updates.js" });
+    });
+
     // Pill text glues the vote count onto the name ("#NTR10"), so read the tag from the href.
-    var tags = [];
     doc.select(".nd-tagline a.nd-pill").forEach(function (e) {
         var m = String(e.attr("href")).match(/[?&]tag=([^&]+)/);
         if (!m) return;
         var tag = decodeURIComponent(m[1]);
-        tags.push({ title: tag, input: tag, script: "cate.js" });
-    });
-
-    var genres = [];
-    doc.select(".nd-info a.nd-meta__lk[href*=category=]").forEach(function (e) {
-        genres.push({ title: e.text(), input: e.attr("href"), script: "updates.js" });
+        genres.push({ title: tag, input: tag, script: "cate.js" });
     });
 
     var novelId = getNovelId(url);
@@ -50,7 +49,6 @@ function execute(url) {
         ongoing: doc.select(".nd-cover__st").text().indexOf("完结") < 0,
         host: BASE_URL,
         genres: genres,
-        tags: tags,
         comments: comments
     });
 }
