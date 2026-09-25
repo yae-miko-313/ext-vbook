@@ -1,5 +1,6 @@
 function execute() {
     return Response.success([
+        { title: "Kho truyện V2", input: "/kho-truyen-v2/", script: "search.js" },
         { title: "Convert thô", input: "/brand/convert-tho/", script: "search.js" },
         { title: "Đề cử", input: "/category/de-cu/", script: "search.js" },
         { title: "Sáng tác", input: "/brand/truyen-sang-tac/", script: "search.js" },
