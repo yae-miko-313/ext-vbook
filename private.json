@@ -147,6 +147,18 @@
       "type": "video",
       "locale": "vi",
       "tag": "nsfw"
+    },
+    {
+      "name": "Sắc Hiệp Viện",
+      "author": "hieu05",
+      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/novel/sachiepvien/plugin.zip",
+      "version": 1,
+      "source": "https://sachiepvien.net",
+      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/novel/sachiepvien/icon.png",
+      "description": "Kho truyện sắc hiệp - đọc phần Trích đoạn cảnh sắc",
+      "type": "novel",
+      "locale": "vi",
+      "tag": "nsfw"
     }
   ]
 }
