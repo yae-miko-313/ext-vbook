@@ -34,7 +34,11 @@ function execute(url) {
         author: author ? author.text() : "",
         cover: cover,
         description: article.html(),
-        detail: "Lượt xem: " + views + " - Bình luận: " + (commentCount || "0") + " - Cập nhật: " + updated,
+        // `detail` is rendered as HTML, so line breaks need <br>, not \n alone.
+        detail: "Tên truyện: " + name + "<br>\n" +
+            "Lượt xem: " + views + "<br>\n" +
+            "Bình luận: " + (commentCount || "0") + "<br>\n" +
+            "Cập nhật: " + updated,
         url: url,
         type: "novel",
         format: "novel",
