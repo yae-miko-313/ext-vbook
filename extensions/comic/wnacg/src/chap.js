@@ -3,7 +3,7 @@ load('helper.js');
 
 function parsePart(url) {
   var m = ((url || '') + '').match(/[?&]part=(\d+)/i);
-  if (!m) return 1;
+  if (!m) return 0;
   var part = parseInt(m[1], 10);
   return isNaN(part) || part < 1 ? 1 : part;
 }
@@ -17,6 +17,8 @@ function execute(url) {
   if (images.length === 0) return Response.error('No images');
 
   var part = parsePart(url);
+  // Chương của hợp tập không có ?part: trả toàn bộ ảnh của 話 đó
+  if (part === 0) return Response.success(images);
   var start = (part - 1) * 50;
   if (start >= images.length) return Response.error('Invalid chapter part');
   var end = start + 50;

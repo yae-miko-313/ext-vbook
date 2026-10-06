@@ -128,7 +128,7 @@
       "name": "WNACG",
       "author": "hieu05",
       "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/wnacg/plugin.zip",
-      "version": 9,
+      "version": 10,
       "source": "https://www.wnacg.com/",
       "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/comic/wnacg/icon.png",
       "description": "Image galleries: home, genre, search, detail, ranking",

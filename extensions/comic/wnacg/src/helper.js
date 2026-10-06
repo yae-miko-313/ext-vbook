@@ -1,25 +1,3 @@
-function pad2(n) {
-  n = parseInt(n, 10);
-  if (isNaN(n) || n < 0) n = 0;
-  var s = n + '';
-  while (s.length < 2) s = '0' + s;
-  return s;
-}
-
-function pad4(n) {
-  n = parseInt(n, 10);
-  if (isNaN(n) || n < 0) n = 0;
-  var s = n + '';
-  while (s.length < 4) s = '0' + s;
-  return s;
-}
-
-function albumPathFromAid(aid) {
-  var aidNum = parseInt(aid, 10);
-  if (isNaN(aidNum) || aidNum < 1) return '';
-  return '/data/' + pad4(Math.floor(aidNum / 100)) + '/' + pad2(aidNum % 100) + '/';
-}
-
 function toHttps(url) {
   url = (url || '') + '';
   return url.replace(/^http:\/\//i, 'https://');
@@ -39,7 +17,8 @@ function pushImage(url, albumPath, out, seen) {
   out.push(url);
 }
 
-function parseFromItemResponse(raw, albumPath, out, seen) {
+function parseFromItemResponse(raw, out, seen) {
+  var albumPath = '';
   raw = (raw || '') + '';
 
   var jsonMatch = raw.match(/initData\((\{[\s\S]*?\})\)\s*;?/i);
@@ -50,7 +29,7 @@ function parseFromItemResponse(raw, albumPath, out, seen) {
       var pageUrls = initData && initData.page_url ? initData.page_url : null;
       if (pageUrls && pageUrls.length) {
         pageUrls.forEach(function(u) {
-          pushImage(u, albumPath, out, seen);
+          pushImage(u, '', out, seen);
         });
       }
     } catch (e) {
@@ -62,6 +41,11 @@ function parseFromItemResponse(raw, albumPath, out, seen) {
   var re = /(?:https?:)?\/\/(?:img|t)\d+\.qy0\.ru\/data\/\d+\/\d+\/[^"'\s<>?#]+\.(?:jpe?g|png|webp|gif)(?:\?[^"'\s<>#]*)?/ig;
   var m;
   while ((m = re.exec(raw)) !== null) {
+    // Thư mục album không suy ra được từ aid, lấy theo ảnh đầu tiên để loại ảnh của album khác
+    if (!albumPath) {
+      var dir = m[0].match(/\/data\/\d+\/\d+\//);
+      if (dir) albumPath = dir[0];
+    }
     pushImage(m[0], albumPath, out, seen);
   }
 }
@@ -86,10 +70,9 @@ function getImages(aid) {
   var itemRes = fetch(itemUrl, { method: 'GET' });
   if (!itemRes.ok) return null;
 
-  var albumPath = albumPathFromAid(aid);
   var images = [];
   var seen = {};
-  parseFromItemResponse(itemRes.text(), albumPath, images, seen);
+  parseFromItemResponse(itemRes.text(), images, seen);
 
   images.sort(function(a, b) {
     return pageNo(a) - pageNo(b);
