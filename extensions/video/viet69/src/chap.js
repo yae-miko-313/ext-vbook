@@ -21,6 +21,22 @@ function execute(url) {
 
     if (sources.length === 0) return Response.error("Không tìm thấy nguồn phát");
 
+    // Type 12 (Blogger) và 20 (Download, seaporn.net) đa số đã chết -> đẩy xuống cuối
+    // để không thành server mặc định
+    let alive = [];
+    let dead = [];
+    sources.forEach(function (s) {
+        if (/\|12$/.test(s.handle)) {
+            s.label = s.label + " (Blogger)";
+            dead.push(s);
+        } else if (/\|20$/.test(s.handle)) {
+            dead.push(s);
+        } else {
+            alive.push(s);
+        }
+    });
+    sources = alive.concat(dead);
+
     let servers = [];
     sources.forEach(function (s) {
         servers.push({ title: s.label + " · M3U8", data: "native|" + s.handle });

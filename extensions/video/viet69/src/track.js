@@ -51,6 +51,32 @@ function pickStreamUrl(embedUrl) {
     return "";
 }
 
+// URL chỉ gồm ký tự ASCII nên giải base64 thủ công là đủ
+function decodeBase64(text) {
+    let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    let out = "";
+    let buffer = 0;
+    let bits = 0;
+    text = text.replace(/-/g, "+").replace(/_/g, "/").replace(/[^A-Za-z0-9+\/]/g, "");
+    for (let i = 0; i < text.length; i++) {
+        buffer = (buffer << 6) | chars.indexOf(text.charAt(i));
+        bits += 6;
+        if (bits >= 8) {
+            bits -= 8;
+            out += String.fromCharCode((buffer >> bits) & 0xff);
+        }
+    }
+    return out;
+}
+
+// Video cũ (type 22): iframe là /player/...?video=<base64 link m3u8>
+function decodePlayerVideo(embedUrl) {
+    let match = embedUrl.match(/[?&]video=([^&]+)/);
+    if (!match) return "";
+    let link = decodeBase64(decodeURIComponent(match[1]));
+    return /^https?:\/\//.test(link) ? link : "";
+}
+
 function execute(data) {
     let mode = "native";
     let handle = data;
@@ -64,9 +90,14 @@ function execute(data) {
     let embedUrl = handle;
     if (handle.indexOf("http") !== 0) {
         let parts = handle.split("|");
-        embedUrl = fetchEmbedUrl(parts[0], parts[1] || "25");
+        let type = parts[1] || "25";
+        // Type 19 phát qua chatvl.net (đã chết); cùng movie_id gọi type 22 ra link cd-vs còn sống
+        if (type === "19") type = "22";
+        embedUrl = fetchEmbedUrl(parts[0], type);
         if (!embedUrl) return Response.error("Không lấy được trình phát");
     }
+    if (embedUrl.indexOf("//") === 0) embedUrl = "https:" + embedUrl;
+    else if (embedUrl.indexOf("/") === 0) embedUrl = BASE_URL + embedUrl;
 
     if (mode === "web") {
         return Response.success({
@@ -88,7 +119,7 @@ function execute(data) {
         });
     }
 
-    let stream = pickStreamUrl(embedUrl);
+    let stream = decodePlayerVideo(embedUrl) || pickStreamUrl(embedUrl);
     if (!stream) {
         return Response.success({
             type: "auto",
