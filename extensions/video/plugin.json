@@ -1,0 +1,47 @@
+[
+  {
+    "folder": "nguonc",
+    "name": "NguonC",
+    "author": "hieu05",
+    "description": "Xem phim từ NguonC",
+    "source": "https://phim.nguonc.com",
+    "version": 3,
+    "type": "video",
+    "locale": "vi_VN",
+    "relativePath": "extensions/video/nguonc",
+    "metadata": {
+      "name": "NguonC",
+      "author": "hieu05",
+      "version": 3,
+      "source": "https://phim.nguonc.com",
+      "regexp": "(www\\.)?phim\\.nguonc\\.com/phim/.*",
+      "description": "Xem phim từ NguonC",
+      "locale": "vi_VN",
+      "type": "video",
+      "language": "javascript"
+    }
+  },
+  {
+    "folder": "viet69",
+    "name": "Viet69 -18+",
+    "author": "hieu05",
+    "description": "Viet69 - Phim sex Việt Nam, video 18+",
+    "source": "https://viet69.be",
+    "version": 5,
+    "type": "video",
+    "locale": "vi",
+    "relativePath": "extensions/video/viet69",
+    "metadata": {
+      "name": "Viet69 -18+",
+      "author": "hieu05",
+      "version": 5,
+      "source": "https://viet69.be",
+      "description": "Viet69 - Phim sex Việt Nam, video 18+",
+      "locale": "vi",
+      "regexp": "viet69\\.[a-z]+/(?:bai-viet/)?[^/]+/?$",
+      "type": "video",
+      "nsfw": true,
+      "encrypt": true
+    }
+  }
+]
