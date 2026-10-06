@@ -32,7 +32,7 @@
       "name": "alicesw",
       "author": "hieu05",
       "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/alicesw/plugin.zip",
-      "version": 1,
+      "version": 3,
       "source": "http://alicesw.com",
       "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/alicesw/icon.png",
       "description": "Read Chinese novels on AliceSW (forked from B)",

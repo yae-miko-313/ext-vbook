@@ -1,6 +1,10 @@
 load('config.js');
 function execute(key, page) {
     if (!page) page = 1;
+    // Link tag chứa chữ Trung chưa encode (q=妈妈), fetch sẽ lỗi
+    key = key.replace(/([?&]q=)([^&]*)/, function (m, prefix, value) {
+        return prefix + encodeURIComponent(decodeURIComponent(value));
+    });
     let response = fetch( key + "&p=" + page, {
         headers: {
             "user-agent": UserAgent.chrome()        

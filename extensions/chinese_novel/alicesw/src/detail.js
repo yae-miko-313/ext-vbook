@@ -13,8 +13,8 @@ function execute(url) {
         doc.select(".novel_info p:nth-child(2) a").forEach(e => {
             genres.push({
                 title: e.text(),
-                input: BASE_URL + e.attr("href"),
-                script: "suggest1.js"
+                input: e.attr("href"),
+                script: "gen.js"
             });
         });
 
@@ -43,6 +43,13 @@ function execute(url) {
                     title: "Đề cử",
                     input: doc.select(".ui-ranking .ranking-list").html(),
                     script: "suggest.js"
+                }
+            ],
+            comments: [
+                {
+                    title: "Bình luận",
+                    input: BASE_URL + "/index.php?s=/Home/comment/lists/id/" + url.match(/\/(\d+)\.html/)[1] + "/type/novel/limit/5/size/12",
+                    script: "comment.js"
                 }
             ],
             host: BASE_URL
