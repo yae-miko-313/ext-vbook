@@ -208,6 +208,8 @@ function statusText(status) {
 
 function buildNovelDetail(book) {
     var lines = [];
+    lines.push("Tên truyện: " + cleanText(book.name));
+    lines.push("Tác giả: " + (cleanText(book.author && book.author.name ? book.author.name : "") || "Không rõ"));
     lines.push("Trạng thái: " + statusText(book.status));
     lines.push("Số chương: " + cleanText(book.numberOfPages || ""));
     lines.push("Số từ: " + formatNumber(book.wordCount));

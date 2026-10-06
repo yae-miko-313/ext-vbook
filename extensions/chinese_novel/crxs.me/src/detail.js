@@ -38,20 +38,22 @@ function executeDirect(url, doc) {
   var description = metaContent(doc, "og:description");
   if (!description) description = readFirstText(doc, ".content-box.fiction-content .fiction-body p");
 
+  var author = readFirstText(doc, ".content-box.fiction-content .sub-title a[href*='/fictions/keyword-']") || "佚名";
+
   return Response.success({
     name: name,
     cover: metaContent(doc, "og:image"),
     host: BASE_URL,
-    author: readFirstText(doc, ".content-box.fiction-content .sub-title a[href*='/fictions/keyword-']") || "佚名",
+    author: author,
     description: description,
-    detail: "单章全文",
+    detail: "书名：" + name + "<br>作者：" + author + "<br>单章全文",
     ongoing: false,
     genres: extractDirectGenres(doc),
   });
 }
 
-function extractDetail(doc) {
-  var parts = [];
+function extractDetail(doc, name, author) {
+  var parts = ["书名：" + name, "作者：" + author];
   doc.select(".fiction-overview-info-item.word-count, .fiction-overview-info-item.chapter-count, .fiction-completion-read").forEach(function (element) {
     var text = cleanText(element.text() + "");
     if (text) parts.push(text);
@@ -67,14 +69,15 @@ function execute(url) {
   var description = readFirstText(doc, ".fiction-overview-brief").replace(/^导读：\s*/, "");
   var name = readFirstText(doc, ".fiction-overview-info-item.title");
   if (!name) name = readFirstText(doc, "meta[property=og:title]");
+  var author = readFirstText(doc, ".fiction-overview-info-item.tags:contains(作者) span") || "佚名";
 
   return Response.success({
     name: name,
     cover: cover,
     host: BASE_URL,
-    author: readFirstText(doc, ".fiction-overview-info-item.tags:contains(作者) span") || "佚名",
+    author: author,
     description: description,
-    detail: extractDetail(doc),
+    detail: extractDetail(doc, name, author),
     ongoing: true,
     genres: extractGenres(doc),
   });

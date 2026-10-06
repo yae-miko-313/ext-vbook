@@ -29,6 +29,7 @@ function execute(url) {
             cover: cover,
             author: 'Unknown',
             description: description,
+            detail: "Title: " + name + "<br>Author: Unknown",
             host: BASE_URL
         });
     }

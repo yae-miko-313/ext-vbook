@@ -29,14 +29,17 @@ function execute(url) {
 
         // Lấy tên tác giả từ dòng đầu tiên trong novel_info
         let author = doc.select(".novel_info p:nth-child(1) a").text();
+        let name = doc.select(".novel_title").text().trim();
+        // Dòng 作者 của site đã có ở đầu detail, bỏ để không trùng
+        doc.select(".novel_info p:nth-child(1)").remove();
 
         return Response.success({
-            name: doc.select(".novel_title").text().trim(),
+            name: name,
             cover: doc.select(".lazyload_book_cover").attr("data-src"),
             author: author,
             description: doc.select(".jianjie p").text().trim(),
             // Phần detail lấy toàn bộ bảng thông tin novel_info
-            detail: doc.select(".novel_info").html(),
+            detail: "书名：" + name + "<br>作者：" + (author || "未知") + "<br>" + doc.select(".novel_info").html(),
             genres: genres,
             suggests: [
                 {

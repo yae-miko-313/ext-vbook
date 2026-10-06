@@ -8,7 +8,9 @@ function execute(url) {
     var doc = response.html();
     if (isCloudflare(doc)) return Response.error(CF_MESSAGE);
 
-    var detail = [];
+    var name = doc.select(".nd-t2").text();
+    var author = doc.select(".nd-author__lk").text();
+    var detail = ["书名：" + name, "作者：" + (author || "未知")];
     doc.select(".nd-info .nd-meta, .nd-info .nd-latest").forEach(function (e) {
         detail.push(e.text());
     });
@@ -41,9 +43,9 @@ function execute(url) {
     }
 
     return Response.success({
-        name: doc.select(".nd-t2").text(),
+        name: name,
         cover: doc.select(".nd-cover img").attr("src"),
-        author: doc.select(".nd-author__lk").text(),
+        author: author,
         description: doc.select(".nd-synopsis").html(),
         detail: detail.join("<br>"),
         ongoing: doc.select(".nd-cover__st").text().indexOf("完结") < 0,

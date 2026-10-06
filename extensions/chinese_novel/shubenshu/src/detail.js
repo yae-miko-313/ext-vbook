@@ -14,8 +14,8 @@ function execute(url) {
     let statsText = stats ? stats.text() : "";
     let category = doc.select(".con_top a[href^=/list_]").first();
 
-    let detail = [];
-    if (authorEl) detail.push("作者：" + authorEl.text());
+    let name = info.select("h1").text();
+    let detail = ["书名：" + name, "作者：" + (authorEl ? authorEl.text() : "未知")];
     if (category) detail.push("类别：" + category.text());
     info.select("p.hidden-xs").forEach(function (el) {
         detail.push(el.text());
@@ -31,7 +31,7 @@ function execute(url) {
     if (authorEl) suggests.push({ title: "Cùng tác giả", input: authorEl.attr("href"), script: "search.js" });
 
     return Response.success({
-        name: info.select("h1").text(),
+        name: name,
         author: authorEl ? authorEl.text() : "",
         cover: absUrl(doc.select("#fmimg img").attr("data-original")),
         description: doc.select("#intro").html(),

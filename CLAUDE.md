@@ -73,6 +73,11 @@ This section merges VBook's codebase architecture and developer workflow instruc
 2. **Luôn luôn dọn dẹp log** và xóa bỏ các testcase thừa sau khi thực hiện chạy thử nghiệm.
 3. **Luôn luôn hỏi ý kiến xác nhận** của User trước khi commit hoặc push code lên GitHub.
 4. **Luôn luôn nâng version** trong `plugin.json` lên thêm 1 phiên bản trước khi chuẩn bị commit.
+5. **Trường `detail` của mọi extension truyện (chữ/tranh) luôn mở đầu bằng 2 dòng: tên truyện, rồi tác giả**, ngắt dòng bằng `<br>`. Nhãn theo ngôn ngữ của extension (`metadata.locale`), toàn bộ `detail` dùng một ngôn ngữ, không trộn:
+   - Tiếng Việt: `Tên truyện: abc<br>Tác giả: xyz` (không rõ tác giả → `Không rõ`)
+   - Tiếng Trung: `书名：abc<br>作者：xyz` (dấu `：` full-width; không rõ → `未知`)
+   - Tiếng Anh: `Title: abc<br>Author: xyz` (không rõ → `Unknown`)
+   - Các dòng thông tin khác (nếu có) nối tiếp phía sau, cùng ngôn ngữ đó.
 
 ### 💻 Official Admin CLI Commands (Official REST-API CLI)
 * **Kết nối server app**: `node .claude/skills/vbook-extensions/scripts/vbook.js connect` (hoặc `npm run vbook:connect`)

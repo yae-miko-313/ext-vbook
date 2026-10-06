@@ -32,6 +32,8 @@ A prior engine version used a different contract (flat `code:200/403`, no `explo
 
 8. **Normalize the incoming `url`'s host to `BASE_URL` before fetching, in every `url`-receiving script** (`detail`/`toc`/`chap`/`page` in the `novel`/`comic` templates): `url = normalizeUrl(url);` — the function lives once in `config.js` (`load('config.js');` required), not repeated per script. The incoming url may carry an old/mirror/www-prefixed host (from a stale library entry, a redirect, or a config-selected mirror) — rewriting the host to `BASE_URL` before `fetch()` keeps requests on the currently-configured domain regardless of where the url came from.
 
+9. **`detail.js`'s `detail` field always starts with two lines — title, then author — joined with `<br>`, in the extension's language (`metadata.locale`); the whole `detail` stays in that one language, never mixed.** Vietnamese: `Tên truyện: abc<br>Tác giả: xyz` (unknown → `Không rõ`). Chinese: `书名：abc<br>作者：xyz` (full-width `：`; unknown → `未知`). English: `Title: abc<br>Author: xyz` (unknown → `Unknown`). Any other info lines follow after, in the same language. Applies to every text/comic extension (`novel`, `chinese_novel`, `comic`).
+
 ## JS engine & HTML parser (Rhino / jsoup)
 
 Engine: Rhino `1.8.1`, `languageVersion = Context.VERSION_ES6`, `initSafeStandardObjects()`. HTML: jsoup `Document`/`Elements`/`Element` behind `Html`/`fetch(...).html()`.

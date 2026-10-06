@@ -8,14 +8,15 @@ function normalizeCover(url) {
     return url;
 }
 
-function buildDetail(doc) {
-    var lines = [];
+function buildDetail(doc, name, author) {
+    var lines = ["Tên truyện: " + name, "Tác giả: " + (author || "Không rõ")];
     doc.select(".book_info .list-info li").forEach(function (item) {
         var label = item.select(".name").text().replace(/\s+/g, " ").trim();
         var valueNode = item.select("p").last();
         var value = valueNode.html().replace(/\s+/g, " ").trim();
 
-        if (!label || !value || label === valueNode.text().replace(/\s+/g, " ").trim()) {
+        // Tác giả đã có ở dòng đầu
+        if (!label || !value || label === "Tác giả" || label === valueNode.text().replace(/\s+/g, " ").trim()) {
             return;
         }
 
@@ -44,13 +45,15 @@ function execute(url) {
     if (doc) {
         var cover = normalizeCover(doc.select(".book_avatar img").first().attr("src"));
         var status = doc.select(".book_info .status").text().replace(/\s+/g, " ").trim();
+        var name = doc.select("h1[itemprop=name]").text();
+        var author = doc.select(".book_info .author a.org").first().text();
         return Response.success({
-            name: doc.select("h1[itemprop=name]").text(),
+            name: name,
             cover: cover,
             host: BASE_URL,
-            author: doc.select(".book_info .author a.org").first().text(),
+            author: author,
             description: doc.select("div.story-detail-info").html(),
-            detail: buildDetail(doc),
+            detail: buildDetail(doc, name, author),
             ongoing: status.indexOf("Hoàn Thành") === -1,
             genres: getGenres(doc),
             comments: getComments(doc, url)

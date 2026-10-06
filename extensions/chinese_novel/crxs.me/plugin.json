@@ -2,7 +2,7 @@
   "metadata": {
     "name": "CRXS",
     "author": "hieu05",
-    "version": 1,
+    "version": 2,
     "source": "https://crxs.me",
     "regexp": "https?:\\/\\/(?:www\\.)?crxs\\.me\\/fiction\\/id-[a-zA-Z0-9=_-]+\\.html\\/?$",
     "description": "Đọc truyện chữ Trung Quốc trên CRXS",

@@ -44,8 +44,8 @@ function extractSuggests(doc, currentRoute) {
   ];
 }
 
-function buildDetailText(route, chapterCount, updatedAt, status) {
-  var lines = [];
+function buildDetailText(route, name, author, chapterCount, updatedAt, status) {
+  var lines = ["Tên truyện: " + name, "Tác giả: " + (author || "Không rõ")];
   if (chapterCount) lines.push("Số chương: " + chapterCount);
   if (updatedAt) lines.push("Cập nhật: " + updatedAt);
   if (status) lines.push("Trạng thái: " + status);
@@ -65,14 +65,16 @@ function execute(url) {
   var chapterCount = readInfoValue(doc, "Số chương");
   var updatedAt = readInfoValue(doc, "Cập nhật");
   var status = readInfoValue(doc, "Trạng thái");
+  var name = textFromFirst(doc.select("main header h1").first());
+  var author = readInfoValue(doc, "Tác giả");
 
   return Response.success({
-    name: textFromFirst(doc.select("main header h1").first()),
+    name: name,
     cover: buildAbsoluteUrl(doc.select("main header img").attr("src")),
     host: BASE_URL,
-    author: readInfoValue(doc, "Tác giả"),
+    author: author,
     description: htmlFromFirst(doc.select("section .prose").first()),
-    detail: buildDetailText(route, chapterCount, updatedAt, status),
+    detail: buildDetailText(route, name, author, chapterCount, updatedAt, status),
     url: buildAbsoluteUrl(detailUrl),
     type: "novel",
     format: "novel",

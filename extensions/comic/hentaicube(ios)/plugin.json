@@ -2,7 +2,7 @@
   "metadata": {
     "name": "HentaiCube -18+ (iOS)",
     "author": "hieu05",
-    "version": 14,
+    "version": 15,
     "source": "https://hentaicube.xyz",
     "regexp": "hentaicube\\.xyz\\/read\\/[^\\/]+\\/?$",
     "description": "HentaiCube - Truyện Hentai Online 18+ (forked from Meo)",

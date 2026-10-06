@@ -29,7 +29,8 @@ function execute(url) {
   if (!aid) return Response.error('Invalid detail url');
 
   var detailUrl = BASE_URL + '/photos-index-aid-' + aid + '.html';
-  var response = fetch(detailUrl, { method: 'GET' });
+  // UA mặc định của app nhận bản mobile, thiếu khối thông tin/簡介
+  var response = fetch(detailUrl, { method: 'GET', headers: { 'user-agent': UserAgent.chrome() } });
   if (!response.ok) return Response.error('Cannot load detail page');
 
   var doc = response.html();
@@ -48,14 +49,23 @@ function execute(url) {
     cover = toAbsoluteUrl(firstAttr(doc.select('img[src*="/data/t/"]').first(), ['src', 'data-src', 'data-original']));
   }
 
-  var description = textOf(doc.select('div.uwconn p').first()).trim();
+  var descEl = doc.select('div.uwconn > p').first();
+  var description = descEl ? ((descEl.html() || '') + '').replace(/^\s*簡介：/, '').trim() : '';
   if (!description) description = textOf(doc.select('div.asTBcell p').first()).trim();
+
+  // `detail` render dạng HTML nên ngắt dòng bằng <br>
+  var info = ['书名：' + title, '作者：' + (author !== 'Unknown' ? author : '未知')];
+  doc.select('div.uwconn > label').forEach(function(label) {
+    var text = textOf(label).trim();
+    if (text) info.push(text);
+  });
 
   var data = {
     name: title,
     cover: cover,
     author: author,
     description: description,
+    detail: info.join('<br>\n'),
     host: BASE_URL,
     ongoing: false
   };

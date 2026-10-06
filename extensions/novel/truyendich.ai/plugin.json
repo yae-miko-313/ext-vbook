@@ -2,7 +2,7 @@
   "metadata": {
     "name": "TruyenDich.AI",
     "author": "hieu05",
-    "version": 4,
+    "version": 5,
     "source": "https://truyendich.store",
     "regexp": "https?://truyendich\\.(?:ai|store)/doc-truyen(?:/(?:ai|cv))?/.*",
     "description": "Đọc truyện trên TruyenDich.AI",

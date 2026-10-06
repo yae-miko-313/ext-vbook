@@ -5,6 +5,7 @@ Shared verification standard for CREATE / FIX / TEST / REFACTOR modes. After a s
 - **Every documented field present, right type.** No field silently empty/null that shouldn't be.
 - **`link`/`url`/`cover` are real usable URLs** — absolute, or a `host` field set; not `undefined`, not a lazy-load stub.
 - **Values match the live page** — `name` matches the real title, `cover` points to the real image, list order is correct, `description`/`detail` is real content, not nav/ad boilerplate.
+- **`detail` (text/comic extensions) opens with the title line then the author line** in the extension's language — `Tên truyện:`/`Tác giả:`, `书名：`/`作者：`, or `Title:`/`Author:` — and nothing in `detail` mixes languages.
 - **Arrays have the expected count** — 1 item when the page lists 20 is still a failure.
 - **No silent domain move** — if `link`/`cover`/`href` come back on a **different host** than `plugin.json.metadata.source`, the site has moved even though the request returned `code:0`. Flag it even on an otherwise-passing script (see FIX mode's Domain swap).
 

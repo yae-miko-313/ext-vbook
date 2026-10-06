@@ -80,8 +80,9 @@ function execute(url) {
         suggests.push({ title: "Cùng tác giả: " + author, input: authorHref, script: "authorcontent.js" });
     }
 
-    var detail = description;
-    if (status) detail = (detail ? detail + "\n" : "") + "Tình trạng: " + status;
+    var detail = "Tên truyện: " + name + "<br>Tác giả: " + (author !== "HentaiCube" ? author : "Không rõ");
+    if (description) detail += "<br>" + description;
+    if (status) detail += "<br>Tình trạng: " + status;
 
     return Response.success({
         name: name,
