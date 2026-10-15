@@ -61,24 +61,13 @@
       "locale": "zh_CN"
     },
     {
-      "name": "NguonC (iPhone)",
+      "name": "NguonC",
       "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/nguonc-iphone/plugin.zip",
-      "version": 5,
+      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/nguonc/plugin.zip",
+      "version": 6,
       "source": "https://phim.nguonc.com",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/nguonc-iphone/icon.png",
-      "description": "Xem phim từ NguonC. Bản dành cho iPhone: player iOS tải thẳng playlist qua HTTP/2. Trên Android dùng bản NguonC (Android).",
-      "type": "video",
-      "locale": "vi_VN"
-    },
-    {
-      "name": "NguonC (Android)",
-      "author": "hieu05",
-      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/nguonc-android/plugin.zip",
-      "version": 2,
-      "source": "https://phim.nguonc.com",
-      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/nguonc-android/icon.png",
-      "description": "Xem phim từ NguonC trên Android",
+      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/nguonc/icon.png",
+      "description": "Xem phim từ NguonC",
       "type": "video",
       "locale": "vi_VN"
     }

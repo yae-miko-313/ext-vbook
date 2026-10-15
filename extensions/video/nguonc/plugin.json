@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "name": "NguonC (iPhone)",
+    "name": "NguonC",
     "author": "hieu05",
-    "version": 5,
+    "version": 6,
     "source": "https://phim.nguonc.com",
     "regexp": "(www\\.)?phim\\.nguonc\\.com/phim/.*",
-    "description": "Xem phim từ NguonC. Bản dành cho iPhone: player iOS tải thẳng playlist qua HTTP/2. Trên Android dùng bản NguonC (Android).",
+    "description": "Xem phim từ NguonC",
     "locale": "vi_VN",
     "type": "video",
     "language": "javascript"

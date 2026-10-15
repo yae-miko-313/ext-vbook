@@ -43,8 +43,9 @@ function execute(data) {
     var playlist = json && json.preissued && json.preissued.playlist;
     if (!playlist) return Response.error("Không tìm thấy link phát video");
 
-    // Segment đầu (streamaaa0000.png) luôn bị Cloudflare chặn 403 khiến player dừng ngay,
-    // nên tự tải playlist, bỏ segment đầu (~2 giây) rồi đưa cho player dưới dạng data URI
+    // Tự tải playlist rồi đưa cho player dưới dạng data URI vì:
+    // - host embed chặn HTTP/1.1 (403) mà player Android dùng; segment ở host khác nên vẫn tải thẳng
+    // - segment đầu (streamaaa0000.png) luôn bị Cloudflare chặn 403 khiến player dừng ngay, nên bỏ đi (~2 giây)
     var playlistResponse = fetch(playlist, {
         headers: {
             "User-Agent": UserAgent.chrome(),
