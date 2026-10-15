@@ -73,5 +73,13 @@ function execute(url) {
   var genres = parseGenres(doc);
   if (genres.length > 0) data.genres = genres;
 
+  // Danh sách truyện của người đăng (上傳者)
+  var uploaderHref = firstAttr(doc.select('div.uwuinfo a[href*="/albums-user-uid-"]').first(), ['href']);
+  if (uploaderHref) {
+    data.suggests = [{ title: '上傳者作品', input: normalizePathOrUrl(uploaderHref), script: 'gen.js' }];
+  }
+
+  data.comments = [{ title: '評論', input: aid, script: 'comment.js' }];
+
   return Response.success(data);
 }
