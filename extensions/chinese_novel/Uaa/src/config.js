@@ -26,11 +26,27 @@ function parseCards(doc) {
             name: e.select(".cn-lcard__t").text(),
             link: normalizeUrl(e.attr("href")),
             cover: e.select(".cn-lcard__cv img").attr("src"),
-            description: e.select(".cn-lcard__byname").text().replace(/\s*著$/, ""),
+            description: (e.select(".cn-lcard__byname").text() || e.select(".cn-lcard__by").text()).replace(/\s*著$/, ""),
+            host: BASE_URL
+        });
+    });
+    // Video list uses poster cards instead of the novel/comic list cards.
+    doc.select("a.cn-poster").forEach(function (e) {
+        data.push({
+            name: e.select(".cn-poster__fb").text(),
+            link: normalizeUrl(e.attr("href")),
+            cover: e.select("img").attr("src"),
+            description: "",
             host: BASE_URL
         });
     });
     return data;
+}
+
+// "comic" / "video" / "novel" from the site path (/comic/..., /video/..., /novel/...).
+function urlKind(url) {
+    var m = String(url || "").match(/\/(comic|video)\//);
+    return m ? m[1] : "novel";
 }
 
 // Next page from the wall's server-rendered pager attributes; "" when on the last page.

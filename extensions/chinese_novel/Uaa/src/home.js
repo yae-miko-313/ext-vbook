@@ -5,5 +5,7 @@ function execute() {
         {title: "收藏量", input: "/novel/list?sort=4", script: "updates.js"},
         {title: "评分", input: "/novel/list?sort=5", script: "updates.js"},
         {title: "小说排行榜", input: "/novel/rank", script: "updates.js"},
+        {title: "漫画最新", input: "/comic/list?sort=2", script: "updates.js"},
+        {title: "视频最新", input: "/video/list?sort=2", script: "updates.js"},
     ]);
 }

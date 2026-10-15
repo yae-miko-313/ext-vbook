@@ -2,7 +2,7 @@
   "metadata": {
     "name": "Uaa",
     "author": "hieu05",
-    "version": 5,
+    "version": 6,
     "source": "https://www.uaa.com",
     "regexp": "(www.|m.)?uaa.com/novel/(chapter|intro)[?]id=\\d+",
     "description": "Forked from Nanoha, with comment support",
@@ -18,6 +18,8 @@
     "toc": "toc.js",
     "genre": "genre.js",
     "chap": "chap.js",
+    "page": "page.js",
+    "track": "track.js",
     "comment": "comment.js"
   }
 }

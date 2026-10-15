@@ -1,6 +1,9 @@
 load('config.js');
 
 function execute(url) {
+    // Video: one server whose handle is the intro page; track.js resolves the m3u8.
+    if (urlKind(url) === "video") return Response.success([{ title: "UAA", data: url }]);
+
     var response = fetch(normalizeUrl(url), {
         headers: {
             "Referer": BASE_URL + "/"

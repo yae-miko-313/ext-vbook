@@ -8,7 +8,38 @@ function execute(url) {
     var doc = response.html();
     if (isCloudflare(doc)) return Response.error(CF_MESSAGE);
 
-    var name = doc.select(".nd-t2").text();
+    var kind = urlKind(url);
+    if (kind === "comic") {
+        var comicName = doc.select(".cd-t4").text();
+        var comicAuthor = doc.select(".cd-meta__author").first().text().replace(/\s*绘$/, "");
+        return Response.success({
+            name: comicName,
+            cover: doc.select("[class^=cd-] img").attr("src"),
+            author: comicAuthor,
+            description: doc.select(".cd-syn").html(),
+            detail: "书名：" + comicName + "<br>作者：" + (comicAuthor || "未知"),
+            type: "comic",
+            format: "comic",
+            host: BASE_URL
+        });
+    }
+    if (kind === "video") {
+        var videoName = doc.select(".vd-title").text();
+        var cast = doc.select("a.vd-cast__item").map(function (e) { return e.text(); });
+        return Response.success({
+            name: videoName,
+            cover: doc.select("#uaaVideo").attr("poster"),
+            author: cast.length ? cast[0] : "",
+            description: doc.select(".vd-synopsis").html(),
+            detail: "书名：" + videoName + "<br>作者：" + (cast.length ? cast.join(", ") : "未知"),
+            type: "video",
+            format: "clip",
+            ongoing: false,
+            host: BASE_URL
+        });
+    }
+
+    var name = doc.select(".nd-t3").text();
     var author = doc.select(".nd-author__lk").text();
     var detail = ["书名：" + name, "作者：" + (author || "未知")];
     doc.select(".nd-info .nd-meta, .nd-info .nd-latest").forEach(function (e) {
