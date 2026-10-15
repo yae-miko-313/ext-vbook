@@ -33,7 +33,7 @@ function execute(url) {
             description: doc.select(".vd-synopsis").html(),
             detail: "书名：" + videoName + "<br>作者：" + (cast.length ? cast.join(", ") : "未知"),
             type: "video",
-            format: "clip",
+            format: "series",
             ongoing: false,
             host: BASE_URL
         });

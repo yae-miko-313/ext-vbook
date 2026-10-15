@@ -14,6 +14,16 @@ function execute(url) {
     var doc = response.html();
     if (isCloudflare(doc)) return Response.error(CF_MESSAGE);
 
+    // Comic chapter: an array of image URLs (the app treats an array as comic pages).
+    if (urlKind(url) === "comic") {
+        var images = [];
+        doc.select("img.creader-img").forEach(function (e) {
+            images.push(e.attr("src"));
+        });
+        if (images.length === 0) return Response.error("Không đọc được ảnh chương");
+        return Response.success(images);
+    }
+
     var content = "";
     var locked = false;
     var lines = doc.select(".reader-body > p");
