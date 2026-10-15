@@ -42,6 +42,19 @@ function execute(data) {
     var json = response.json();
     var playlist = json && json.preissued && json.preissued.playlist;
     if (!playlist) return Response.error("Không tìm thấy link phát video");
+
+    // Segment đầu (streamaaa0000.png) luôn bị Cloudflare chặn 403 khiến player dừng ngay,
+    // nên tự tải playlist, bỏ segment đầu (~2 giây) rồi đưa cho player dưới dạng data URI
+    var playlistResponse = fetch(playlist, {
+        headers: {
+            "User-Agent": UserAgent.chrome(),
+            "Referer": embedOrigin + "/"
+        }
+    });
+    if (playlistResponse.ok) {
+        var m3u8 = playlistResponse.text().replace(/#EXTINF:[^\n]*\n[^\n]*0000\.png[^\n]*\n/, "");
+        playlist = "data:application/x-mpegURL;base64," + base64Ascii(m3u8);
+    }
 
     // Playlist và các segment (.png ngụy trang TS) đều bắt buộc Referer của host embed
     return Response.success({
@@ -54,4 +67,18 @@ function execute(data) {
             "Referer": embedOrigin + "/"
         }
     });
-}
+}
+
+// Playlist chỉ chứa ký tự ASCII nên mã hóa thẳng từng byte
+function base64Ascii(str) {
+    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    var out = "";
+    for (var i = 0; i < str.length; i += 3) {
+        var a = str.charCodeAt(i), b = str.charCodeAt(i + 1), c = str.charCodeAt(i + 2);
+        var n = (a << 16) | ((b || 0) << 8) | (c || 0);
+        out += chars.charAt(n >> 18 & 63) + chars.charAt(n >> 12 & 63)
+            + (i + 1 < str.length ? chars.charAt(n >> 6 & 63) : "=")
+            + (i + 2 < str.length ? chars.charAt(n & 63) : "=");
+    }
+    return out;
+}
