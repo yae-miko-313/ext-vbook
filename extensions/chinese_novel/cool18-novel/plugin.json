@@ -2,10 +2,10 @@
   "metadata": {
     "name": "Cool18 Novel",
     "author": "hieu05",
-    "version": 2,
+    "version": 3,
     "source": "https://www.cool18.com/bbs4/",
-    "regexp": "https://www.cool18.com/bbs4/.+",
-    "description": "Đọc truyện trên trang Cool18",
+    "regexp": "cool18\\.com/bbs4/index\\.php\\?.*tid=\\d+",
+    "description": "Đọc truyện trên trang Cool18 (禁忌书屋)",
     "locale": "zh_CN",
     "tag": "nsfw",
     "type": "chinese_novel",
@@ -18,5 +18,13 @@
     "toc": "toc.js",
     "chap": "chap.js",
     "search": "search.js"
+  },
+  "config": {
+    "DOMAIN": {
+      "title": "Domain",
+      "default": "https://www.cool18.com/bbs4",
+      "mode": "input",
+      "format": "text"
+    }
   }
 }

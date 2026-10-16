@@ -44,10 +44,10 @@
       "name": "Cool18 Novel",
       "author": "hieu05",
       "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/cool18-novel/plugin.zip",
-      "version": 2,
+      "version": 3,
       "source": "https://www.cool18.com/bbs4/",
       "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/cool18-novel/icon.png",
-      "description": "Đọc truyện trên trang Cool18",
+      "description": "Đọc truyện trên trang Cool18 (禁忌书屋)",
       "type": "chinese_novel",
       "locale": "zh_CN",
       "tag": "nsfw"
