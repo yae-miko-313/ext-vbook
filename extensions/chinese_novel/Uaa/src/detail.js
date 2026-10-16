@@ -39,7 +39,8 @@ function execute(url) {
         });
     }
 
-    var name = doc.select(".nd-t3").text();
+    // The heading class keeps changing (nd-t3 -> nd-t1), so select by tag and fall back to <title>.
+    var name = doc.select(".nd-info h1").text() || doc.select("title").text().replace(/\s+-\s+[^-]*$/, "");
     var author = doc.select(".nd-author__lk").text();
     var detail = ["书名：" + name, "作者：" + (author || "未知")];
     doc.select(".nd-info .nd-meta, .nd-info .nd-latest").forEach(function (e) {
