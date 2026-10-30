@@ -3,18 +3,18 @@ function execute(url) {
     url = url.replace('/novel/', '/other/chapters/id/')
     let response = fetch(url, {
         headers: {
-            "user-agent": UserAgent.chrome()        
+            "user-agent": MOBILE_UA
         }
     });
     if (response.ok) {
         let doc = response.html();
-        let el = doc.select(".mulu_list li")
+        let el = doc.select(".section-list li a")
         const data = [];
         for (let i = 0; i < el.size(); i++) {
             var e = el.get(i);
             data.push({
-                name: e.select("a").text(),
-                url: BASE_URL + e.select("a").attr("href"),
+                name: e.text(),
+                url: BASE_URL + e.attr("href"),
                 host: BASE_URL
             })
         }

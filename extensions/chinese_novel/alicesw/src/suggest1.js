@@ -7,7 +7,7 @@ function execute(key, page) {
     });
     let response = fetch( key + "&p=" + page, {
         headers: {
-            "user-agent": UserAgent.chrome()        
+            "user-agent": MOBILE_UA        
         }
     });
     if (response) {

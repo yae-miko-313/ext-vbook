@@ -4,7 +4,7 @@ function execute(key, page) {
     if (!page) page = 1;
     let response = fetch(BASE_URL + "/search.html?q=" + key + "&p=" + page, {
         headers: {
-            "user-agent": UserAgent.chrome()        
+            "user-agent": MOBILE_UA        
         }
     });
     if (response) {

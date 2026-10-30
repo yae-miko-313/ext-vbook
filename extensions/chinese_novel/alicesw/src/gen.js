@@ -3,22 +3,22 @@ function execute(url, page) {
     if (!page) page = 1;
     let response = fetch(BASE_URL + url + "?page=" + page, {
         headers: {
-            'user-agent':  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0",
+            'user-agent': MOBILE_UA,
         }
     })
     if (response.ok) {
         let doc = response.html();
         const data = [];
-        doc.select(".clearfix.rec_rboxone > div ul").forEach(e => {
+        doc.select(".txt-list li").forEach(e => {
             data.push({
-                name: e.select(".two").first().text(),
+                name: e.select(".s2 a").text().replace(e.select(".fenleibt").text(), "").trim(),
                 cover: "https://i.postimg.cc/T2WtdmBM/5BdXa90.webp",
-                link: e.select(".two a").attr("href"),
-                description: e.select(".four").first().text(),
+                link: e.select(".s2 a").attr("href"),
+                description: e.select(".s5").text(),
                 host: BASE_URL
             })
         });
-        let next = parseInt(page) + 1;
+        let next = doc.select(".pager a:contains(下一页)").size() ? (parseInt(page) + 1).toString() : "";
         return Response.success(data, next)
     }
     return null;

@@ -2,19 +2,19 @@ load('config.js');
 function execute(url) {
     let response = fetch(BASE_URL + url, {
         headers: {
-            'user-agent':  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0",
+            'user-agent': MOBILE_UA,
         }
     });
     
     if (response.ok) {
         let doc = response.html();
         const data = [];
-        doc.select(".clearfix.rec_rboxone > div ul").forEach(e => {
+        doc.select(".txt-list li").forEach(e => {
             data.push({
-                name: e.select(".two").first().text(),
+                name: e.select(".s2 a").text().replace(e.select(".fenleibt").text(), "").trim(),
                 cover: "https://i.postimg.cc/T2WtdmBM/5BdXa90.webp",
-                link: e.select(".two a").attr("href"),
-                description: e.select(".sev").first().text() + " " + e.select(".five").first().text(),
+                link: e.select(".s2 a").attr("href"),
+                description: e.select(".s5").text() + " " + e.select(".five").text(),
                 host: BASE_URL
             })
         });

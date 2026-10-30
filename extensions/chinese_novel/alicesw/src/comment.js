@@ -3,7 +3,7 @@ load('config.js');
 function execute(input, next) {
     var response = fetch(input, {
         headers: {
-            "user-agent": UserAgent.chrome(),
+            "user-agent": MOBILE_UA,
             "Referer": BASE_URL
         }
     });

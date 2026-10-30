@@ -2,52 +2,52 @@ load('config.js');
 function execute(url) {
     let response = fetch(url, {
         headers: {
-            "user-agent": UserAgent.chrome()        // Đặt user agent trong header - Thêm vào request header
+            "user-agent": MOBILE_UA
         }
     });
     if (response.ok) {
         let doc = response.html();
-        // console.log(doc);
         var genres = [];
-        // Lấy thể loại chính từ dòng "Phân loại"
-        doc.select(".novel_info p:nth-child(2) a").forEach(e => {
-            genres.push({
-                title: e.text(),
-                input: e.attr("href"),
-                script: "gen.js"
-            });
+        var info = [];
+        var author = "";
+        doc.select(".detail-box .info .fix p.xs-show").forEach(e => {
+            var text = e.text();
+            if (text.indexOf("作者") === 0) {
+                author = e.select("a").text();
+                return;
+            }
+            if (text.indexOf("分类") === 0) {
+                e.select("a").forEach(a => {
+                    genres.push({
+                        title: a.text(),
+                        input: a.attr("href"),
+                        script: "gen.js"
+                    });
+                });
+            }
+            info.push(e.html());
         });
 
-        // Lấy thêm các thẻ (tags) ở phía dưới
-        doc.select(".tags_list a").forEach(e => {
+        doc.select(".tags .tg a").forEach(e => {
             genres.push({
-                title: e.text().replace("#", ""), // Loại bỏ dấu # nếu có
+                title: e.text().replace("#", ""),
                 input: BASE_URL + e.attr("href"),
                 script: "suggest1.js"
             });
         });
 
-        // Lấy tên tác giả từ dòng đầu tiên trong novel_info
-        let author = doc.select(".novel_info p:nth-child(1) a").text();
-        let name = doc.select(".novel_title").text().trim();
-        // Dòng 作者 của site đã có ở đầu detail, bỏ để không trùng
-        doc.select(".novel_info p:nth-child(1)").remove();
+        let name = doc.select(".detail-box h1").text().trim();
+        let cover = doc.select(".detail-box .imgbox img").attr("src");
+        if (cover.indexOf("/") === 0) cover = BASE_URL + cover;
 
         return Response.success({
             name: name,
-            cover: doc.select(".lazyload_book_cover").attr("data-src"),
+            cover: cover,
             author: author,
-            description: doc.select(".jianjie p").text().trim(),
-            // Phần detail lấy toàn bộ bảng thông tin novel_info
-            detail: "书名：" + name + "<br>作者：" + (author || "未知") + "<br>" + doc.select(".novel_info").html(),
+            description: doc.select(".jianjie").text().trim(),
+            detail: "书名：" + name + "<br>作者：" + (author || "未知") + "<br>" + info.join("<br>"),
+            ongoing: doc.select(".detail-box .info").text().indexOf("已完结") < 0,
             genres: genres,
-            suggests: [
-                {
-                    title: "Đề cử",
-                    input: doc.select(".ui-ranking .ranking-list").html(),
-                    script: "suggest.js"
-                }
-            ],
             comments: [
                 {
                     title: "Bình luận",
