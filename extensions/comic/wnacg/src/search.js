@@ -100,11 +100,15 @@ function parseItems(doc) {
 
 function parseNext(doc) {
   var nextEl = doc.select('span.thispage + a').first();
-  if (!nextEl) nextEl = doc.select('.paginator .next a').first();
-  if (!nextEl) return null;
+  if (!nextEl) nextEl = doc.select('.paginator .next a, .paginator a.next').first();
+  if (!nextEl) return '';
 
-  var href = normalizePathOrUrl(firstAttr(nextEl, ['href']));
-  return href || null;
+  var raw = firstAttr(nextEl, ['href']).trim();
+  if (!raw || raw === '#' || raw.indexOf('javascript:') === 0) return '';
+
+  var href = normalizePathOrUrl(raw);
+  if (!href || href === '/') return '';
+  return href;
 }
 
 function execute(key, page) {
@@ -115,5 +119,5 @@ function execute(key, page) {
   var doc = response.html();
   var data = parseItems(doc);
   var next = parseNext(doc);
-  return Response.success(data, next);
+  return Response.success(data, next || '');
 }

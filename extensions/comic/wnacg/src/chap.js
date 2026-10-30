@@ -9,6 +9,7 @@ function parsePart(url) {
 }
 
 function execute(url) {
+  url = normalizeUrl(url);
   var aid = parseAid(url);
   if (!aid) return Response.error('Invalid chapter url');
 

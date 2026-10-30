@@ -25,6 +25,7 @@ function normalizeTitle(v) {
 }
 
 function execute(url) {
+  url = normalizeUrl(url);
   var aid = parseAid(url);
   if (!aid) return Response.error('Invalid detail url');
 
@@ -66,6 +67,9 @@ function execute(url) {
     author: author,
     description: description,
     detail: info.join('<br>\n'),
+    url: detailUrl,
+    type: 'comic',
+    format: 'comic',
     host: BASE_URL,
     ongoing: false
   };

@@ -41,6 +41,7 @@ function getSeriesChapters(aid) {
 }
 
 function execute(url) {
+  url = normalizeUrl(url);
   var aid = parseAid(url);
   if (!aid) return Response.error('Invalid detail url');
 

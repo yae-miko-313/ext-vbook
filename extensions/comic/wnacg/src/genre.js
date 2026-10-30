@@ -37,7 +37,7 @@ function appendFavTags(genres) {
     seen[key] = true;
     genres.push({ 
 			title: tag, 
-			input: 'albums-index-tag-' + encodeURIComponent(tag) + '.html',
+			input: '/albums-index-tag-' + encodeURIComponent(tag) + '.html',
 			script: 'gen.js'
 		});
   });

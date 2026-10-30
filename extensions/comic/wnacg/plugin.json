@@ -2,12 +2,13 @@
   "metadata": {
     "name": "WNACG",
     "author": "hieu05",
-    "version": 12,
-    "source": "https://www.wnacg.com/",
-    "regexp": "https?:\\/\\/(?:www\\.)?wnacg\\.com\\/photos-index-aid-\\d+\\.html\\/?$",
+    "version": 13,
+    "source": "https://www.wnacg.com",
+    "regexp": "https?:\\/\\/(?:www\\.)?wnacg\\.(?:com|ru)\\/photos-index-aid-\\d+\\.html\\/?$",
     "description": "Image galleries: home, genre, search, detail, ranking",
     "locale": "zh_CN",
     "tag": "nsfw",
+    "nsfw": true,
     "type": "comic",
     "language": "javascript"
   },
@@ -16,8 +17,15 @@
     "genre": "genre.js",
     "detail": "detail.js",
     "search": "search.js",
-    "page": "page.js",
     "toc": "toc.js",
     "chap": "chap.js"
+  },
+  "config": {
+    "DOMAIN": {
+      "title": "Domain",
+      "default": "https://www.wnacg.com",
+      "mode": "input",
+      "format": "text"
+    }
   }
 }

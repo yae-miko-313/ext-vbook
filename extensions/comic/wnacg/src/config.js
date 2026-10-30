@@ -1,5 +1,11 @@
 let BASE_URL = "https://www.wnacg.com";
-try { if (CONFIG_URL) BASE_URL = CONFIG_URL; } catch (e) {}
+try { if (DOMAIN) BASE_URL = DOMAIN; } catch (e) {
+  try { if (CONFIG_URL) BASE_URL = CONFIG_URL; } catch (e2) {}
+}
+
+function normalizeUrl(url) {
+  return (url || '').replace(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img, BASE_URL);
+}
 
 function toAbsoluteUrl(u) {
   u = (u || "") + "";

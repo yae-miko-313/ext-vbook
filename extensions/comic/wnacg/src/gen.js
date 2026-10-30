@@ -14,13 +14,22 @@ function resolveReqPath(url, page) {
   var mPageCate = url.match(/^(.*)-page-(\d+)(-cate-\d+\.html)$/i);
   if (mPageCate) return mPageCate[1] + '-page-' + page + mPageCate[3];
 
+  var mPageTag = url.match(/^(.*)-page-(\d+)(-tag-.+\.html)$/i);
+  if (mPageTag) return mPageTag[1] + '-page-' + page + mPageTag[3];
+
   var mPage = url.match(/^(.*)-page-(\d+)(\.html)$/i);
   if (mPage) return mPage[1] + '-page-' + page + mPage[3];
 
   var mCate = url.match(/\/albums-index-cate-(\d+)\.html/i);
   if (mCate) return '/albums-index-page-' + page + '-cate-' + mCate[1] + '.html';
 
-  var mRank = url.match(/\/albums-favorite_ranking-type-([a-z]+)\.html/i);
+  var mTag = url.match(/\/albums-index-tag-(.+)\.html/i);
+  if (mTag) return '/albums-index-page-' + page + '-tag-' + mTag[1] + '.html';
+
+  var mUser = url.match(/\/albums-user-(?:page-\d+-)?uid-(\d+)\.html/i);
+  if (mUser) return '/albums-user-page-' + page + '-uid-' + mUser[1] + '.html';
+
+  var mRank = url.match(/\/albums-favorite_ranking-(?:page-\d+-)?type-([a-z]+)\.html/i);
   if (mRank) return '/albums-favorite_ranking-page-' + page + '-type-' + mRank[1] + '.html';
 
   return url;
@@ -116,11 +125,15 @@ function parseItems(doc) {
 
 function parseNext(doc) {
   var nextEl = doc.select('span.thispage + a').first();
-  if (!nextEl) nextEl = doc.select('.paginator .next a').first();
-  if (!nextEl) return null;
+  if (!nextEl) nextEl = doc.select('.paginator .next a, .paginator a.next').first();
+  if (!nextEl) return '';
 
-  var href = normalizePathOrUrl(firstAttr(nextEl, ['href']));
-  return href || null;
+  var raw = firstAttr(nextEl, ['href']).trim();
+  if (!raw || raw === '#' || raw.indexOf('javascript:') === 0) return '';
+
+  var href = normalizePathOrUrl(raw);
+  if (!href || href === '/') return '';
+  return href;
 }
 
 function execute(url, page) {
@@ -131,5 +144,5 @@ function execute(url, page) {
   var doc = response.html();
   var data = parseItems(doc);
   var next = parseNext(doc);
-  return Response.success(data, next);
+  return Response.success(data, next || '');
 }
