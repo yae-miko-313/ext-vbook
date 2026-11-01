@@ -277,6 +277,28 @@
       }
     },
     {
+      "folder": "nguonc-proxy",
+      "name": "NguonC (Proxy)",
+      "author": "kychi",
+      "description": "Xem phim từ NguonC - dùng proxy",
+      "source": "https://phim.nguonc.com",
+      "version": 1,
+      "type": "video",
+      "locale": "vi_VN",
+      "relativePath": "extensions/video/nguonc-proxy",
+      "metadata": {
+        "name": "NguonC (Proxy)",
+        "author": "kychi",
+        "version": 1,
+        "source": "https://phim.nguonc.com",
+        "regexp": "(www\\.)?phim\\.nguonc\\.com/phim/.*",
+        "description": "Xem phim từ NguonC - dùng proxy",
+        "locale": "vi_VN",
+        "type": "video",
+        "language": "javascript"
+      }
+    },
+    {
       "folder": "viet69",
       "name": "Viet69 -18+",
       "author": "hieu05",

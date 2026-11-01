@@ -72,6 +72,17 @@
       "locale": "vi_VN"
     },
     {
+      "name": "NguonC (Proxy)",
+      "author": "kychi",
+      "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/nguonc-proxy/plugin.zip",
+      "version": 1,
+      "source": "https://phim.nguonc.com",
+      "icon": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/video/nguonc-proxy/icon.png",
+      "description": "Xem phim từ NguonC - dùng proxy",
+      "type": "video",
+      "locale": "vi_VN"
+    },
+    {
       "name": "Sfacg 💰",
       "author": "Moleys",
       "path": "https://raw.githubusercontent.com/yae-miko-313/ext-vbook/main/extensions/chinese_novel/sfacg/plugin.zip",
