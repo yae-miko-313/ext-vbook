@@ -2,7 +2,7 @@
   "metadata": {
     "name": "[Fanqie] Cà Chua C2",
     "author": "kychi",
-    "version": 4,
+    "version": 5,
     "source": "https://fanqienovel.com",
     "regexp": "fanqienovel\\.com/page/[0-9]+",
     "description": "Nguồn truyện chữ từ Fanqie Novel (番茄小说). Dùng proxy mirror để đọc nội dung.\n\nLỌC GIỚI TÍNH\n(beta kéo ngay xuống dưới)\n\n-1=All\n1=Nam\n0=Nữ",

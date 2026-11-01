@@ -24,13 +24,13 @@ function execute(url) {
     if (statusVal === undefined || statusVal === null || statusVal === "") ongoing = true;
 
     // Chỉ hiện: điểm, số từ, lượt xem, chương mới nhất — toàn tiếng Trung
-    var infoLines = [];
+    var infoLines = ["\u4E66\u540D\uFF1A" + decodeText(b.book_name || ""), "\u4F5C\u8005\uFF1A" + (decodeText(b.author || "") || "\u672A\u77E5")];
     if (b.score)             infoLines.push("评分: " + b.score);
     if (b.word_number)       infoLines.push("\u5B57\u6570: " + formatNum(b.word_number) + "\u5B57");
     if (b.read_count)        infoLines.push("\u9605\u8BFB: " + formatNum(b.read_count));
     if (b.last_chapter_title) infoLines.push("\u6700\u65B0: " + decodeText(b.last_chapter_title));
 
-    var detailStr = infoLines.join("\n");
+    var detailStr = infoLines.join("<br>");
 
     // Genre tags — lấy từ pure_category_tags (CSV)
     var genres = [];
@@ -48,11 +48,21 @@ function execute(url) {
     }
     if (genres.length > 6) genres = genres.slice(0, 6);
 
+    var authorName = decodeText(b.author || "");
+    var suggests = [];
+    if (authorName) {
+        suggests.push({
+            title: "\u540C\u4F5C\u8005\u4F5C\u54C1",
+            input: authorName + "|" + bookId,
+            script: "similar.js"
+        });
+    }
+
     return Response.success({
         name:        decodeText(b.book_name || ""),
         cover:       b.thumb_url || "",
         host:        BASE_URL,
-        author:      decodeText(b.author || ""),
+        author:      authorName,
         description: decodeText(cleanText(b.abstract || "")),
         ongoing:     ongoing,
         detail:      detailStr,
@@ -62,7 +72,7 @@ function execute(url) {
         locale:      "zh-CN",
         tags:        genres,
         genres:      [],
-        suggests:    [],
+        suggests:    suggests,
         reviews:     [],
         comments:    []
     });
